@@ -1,0 +1,38 @@
+# screen init file on Arch GNU/Linux
+
+vbell off                         # no bell
+autodetach on                     # detach on hangup
+startup_message off               # don't display the copyright page
+defutf8 on                        # utf-8 encoding
+defscrollback 10000                # change default scrollback value for new windows
+bufferfile $HOME/.screen_exchange # the file to use for "readbuf" ('<') and  "writebuf" ('>'):
+shell -$SHELL                     # make the shell in every window a login shell
+termcapinfo rxvt* ti@:te@:XT      # improve mouse scrolling
+#terminfo rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' # fix 256 colors for uxrvt
+shelltitle '$ |bash'
+#termcapinfo xterm "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+#termcapinfo xterm-color "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+#terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+#terminfo rxvt-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# keybindings
+bindkey "^[[23~" prev # f11
+bindkey "^[[24~" next # f12
+#bindkey "[1;3D" prev # alt-right
+#bindkey "[1;3C" next # alt-left
+bindkey "^[^[[D" next # alt-right  ...doesn't work
+bindkey "^[^[[C" next # alt-left  ...doesn't work
+bindkey "^k" eval "copy" "stuff ^b"  # enter copy mode and move up one page
+bindkey "^j" eval "stuff ^b"  # when in copy mode, move down one page
+#bindkey "^k" eval "copy" "stuff k"    # enter copy mode and move up one line
+
+
+# startup windows
+
+# change hardstatus settings to show a window list at the bottom of the
+# screen, with the current window highlighted and hostname on both ends
+hardstatus alwayslastline "%{G}[ %{Y}%H %{G}][%{w}%?%-Lw%?%{G}(%{W}%n*%f%t%?(%u)%?%{G})%{w}%?%+Lw%?%?%= %{G}][%{Y} %H %{G}][ Updates: %1` %2`%%][ %C ]"
+sorendition     Wk
+backtick 50 0 0 hostname
+backtick 1 60 60 sh /home/jon/bin/get_updates.sh
+backtick 2 0 0 sh /home/jon/bin/cpuusage.sh

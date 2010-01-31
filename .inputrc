@@ -1,0 +1,11 @@
+"\e[A":history-search-backward
+"\e[B":history-search-forward
+# vi keybindings (though I think the editing-mode sets the keymap as well..)
+set editing-mode vi
+set keymap vi-insert
+# ignore case for bash tab completion
+set completion-ignore-case On
+# no annoying beep
+set bell-style none
+set blink-matching-paren on
+set visible-stats on

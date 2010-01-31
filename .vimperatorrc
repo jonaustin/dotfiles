@@ -1,0 +1,45 @@
+" 1.2 (created: 2008/08/16 18:51:52)
+" Mappings
+
+" Options
+" Window title (Vimperator by default)
+set titlestring=Firefox
+
+" Editor, C-i invokes it in text fields (replaces "It's All Text")
+set editor=vim
+
+" Command line and search patterns history
+set history=10000
+
+" Show the toolbar on startup (I keep all bars in one)
+set go+=m
+" add numbers to tabs
+set go+=n
+
+" Show the tab bar only if more then one tab is open
+set showtabline=1
+
+" Show destination links in 1=status line, 2=command line
+set showstatuslinks=1
+
+" Show completions and use AwesomeBar (+search plugins)
+set complete=sl
+"set wildoptions=auto
+
+" Ex commands output in a new tab by default (prefs, addons...)
+set newtab=all
+
+" Hilight previous search pattern matches
+set hlsearch
+
+" Default search engine is ignored, plugins are used, place yubnub in there and do:
+" set ds=yubnub
+
+colo clearlooks
+
+" Abbreviations
+
+source! ~/.vimperatorrc.local
+
+" vim: set ft=vimperator:
+

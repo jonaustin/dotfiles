@@ -1,0 +1,18 @@
+xmodmap -e "keysym Print = F21"
+xmodmap -e "keysym Scroll_Lock = F22"
+xmodmap -e "keysym Pause = F23"
+xmodmap -e "remove Lock = Caps_Lock"
+
+# for Model M
+#xmodmap -e "keysym Caps_Lock = Super_L"
+##############
+#xmodmap -e "remove Control = Super_L"
+#xmodmap -e "keycode 66 = Super_L"
+
+# for Filco
+#xmodmap -e 'remove mod4 = Hyper_L'
+#xmodmap -e 'add Control = Hyper_L'
+#xmodmap -e "keysym Caps_Lock = Hyper_L"
+#xmodmap -e 'remove Lock = Caps_Lock'
+xmodmap -e 'keysym Caps_Lock = Control_L'
+xmodmap -e 'add Control = Control_L'
