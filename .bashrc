@@ -291,6 +291,7 @@ alias work_proxy='ssh -D 8080 -f -C -q -N jon@barracuda-ext.cmdpdx.com'
 alias work_rdc='ssh jon@barracuda-ext.cmdpdx.com -L 10000:jaustin.cmdpdx.com:3389' # tunnel rdc connection to localhost:10000
 
 alias syn='synergyc 192.168.0.123'
+alias ssyn='ssh -f -N -L12345:10.10.10.155:24800 barracuda-ext.cmdpdx.com; synergyc localhost:12345'
 alias ksyn="killall synergyc"
 
 ##apps
@@ -320,8 +321,9 @@ alias fixres="xrandr --size 1920x1200"    # reset resolution
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
 
-alias dvd="sudo mount /dev/sr0 /media/dvd"
-alias ejectdvd="sudo eject /media/cdrom"
+alias dvd="sudo mount /dev/sr0 /media/dvd; cd /media/dvd"
+alias ejectdvd="sudo eject /media/dvd"
+alias udvd="sudo eject /media/dvd"
 alias movie="vlc -f $1"
 alias v='vlc -f $1'
 

@@ -1,3 +1,4 @@
-
 Align.vba: call delete('/home/jon/.vim/plugin/AlignPlugin.vim')|call delete('/home/jon/.vim/plugin/AlignMapsPlugin.vim')|call delete('/home/jon/.vim/plugin/cecutil.vim')|call delete('/home/jon/.vim/doc/Align.txt')|call delete('/home/jon/.vim/autoload/Align.vim')|call delete('/home/jon/.vim/autoload/AlignMaps.vim')
 cecutil.vba: call delete('/home/jon/.vim/plugin/cecutil.vim')|call delete('/home/jon/.vim/doc/cecutil.txt')
+supertab.vba: call delete('/home/jon/.vim/doc/supertab.txt')|call delete('/home/jon/.vim/plugin/supertab.vim')
+getscript.vba: call delete('/home/jon/.vim/plugin/getscriptPlugin.vim')|call delete('/home/jon/.vim/autoload/getscript.vim')|call delete('/home/jon/.vim/GetLatest/GetLatestVimScripts.dist')|call delete('/home/jon/.vim/doc/pi_getscript.txt')

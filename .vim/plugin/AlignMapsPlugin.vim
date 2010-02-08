@@ -29,11 +29,6 @@
 "
 " Note: these maps all use <Align.vim>.
 "
-" Romans 1:20 For the invisible things of Him since the creation of the {{{1
-" world are clearly seen, being perceived through the things that are
-" made, even His everlasting power and divinity; that they may be
-" without excuse.
-
 " ---------------------------------------------------------------------
 " Load Once: {{{1
 if &cp || exists("g:loaded_AlignMapsPlugin")

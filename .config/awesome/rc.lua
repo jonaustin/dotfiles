@@ -255,6 +255,7 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     -- {{{ Applications
     awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("firefox", false) end),
+    awful.key({ modkey }, "y", function () awful.util.spawn("firefox", false) end),
     awful.key({ modkey }, "w", function () awful.util.spawn("vimprobable", false) end),
     awful.key({ modkey }, "q", function () awful.util.spawn("vimprobable", false) end),
     -- awful.key({ modkey }, "F1",    function () awful.util.spawn("urxvt", false) end),

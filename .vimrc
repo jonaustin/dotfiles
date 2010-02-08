@@ -16,6 +16,7 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
 endif
 
 " Enable loading filetype and indentation plugins
+filetype on
 filetype plugin on
 filetype indent on
 
@@ -109,6 +110,10 @@ set ruler< "turn on rule (status info) at the bottom of screen
 
 runtime ftplugin/man.vim "turn on man pages :Man
 
+
+
+""" Compilers
+compiler ruby         " Enable compiler support for ruby
 
 
 
