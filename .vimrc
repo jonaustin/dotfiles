@@ -217,6 +217,8 @@ autocmd BufEnter * cd %:p:h
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"
 
+" Closetag for html/x[ms]l
+au Filetype html,xml,xsl source ~/.vim/plugin/closetag.vim 
 
 
 """ File types
@@ -227,7 +229,13 @@ augroup END
 au FileType text setlocal tw=150
 
 
-
+" Supertab settings
+" supertab + eclim == java win
+"let g:SuperTabDefaultCompletionTypeDiscovery = [
+"\ "&completefunc:<c-x><c-u>",
+"\ "&omnifunc:<c-x><c-o>",
+"\ ]
+"let g:SuperTabLongestHighlight = 1
 
 
 

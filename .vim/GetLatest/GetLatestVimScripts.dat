@@ -1,16 +1,36 @@
 ScriptID SourceID Filename
 --------------------------
-642 8136 GetLatestVimScripts.vim
-42 12104 bufexplorer.vim
-1152 3688 debugger.tgz
-1658 11834 NERD_tree.zip
-729 3477 sudo.vim
-237 7701 taglist.zip
-1643 11853 supertab.vim
+2551 11523 :AutoInstall: vicle.vim
+2440 9500 :AutoInstall: tagmgr.vim
+729 3477 :AutoInstall: sudo.vim
+39 8196 :AutoInstall: matchit.zip
+1929 7285 :AutoInstall: debugger.zip
+356 11341 :AutoInstall: dbext.zip
+13 1 :AutoInstall: closetag.vim
+1431 1 :AutoInstall: checksyntax.vba.gz
+1953 1 :AutoInstall: vimpress.tar.gz
+1506 9277 :AutoInstall: LargeFile.vba.gz
+273 7701 :AutoInstall: taglist.zip
+642 8136 :AutoInstall: getscript.vim
+1567 11920 :AutoInstall: rails.vim
+2440 9500 :AutoInstall: snipMate.zip
+42 12363 :AutoInstall: bufexplorer.vim
+1152 3688 :AutoInstall: debugger.tgz
+1658 11834 :AutoInstall: NERD_tree.zip
+1218 10318 :AutoInstall: NERD_commenter.zip
+237 7701 :AutoInstall: taglist.zip
+1643 11853 :AutoInstall: supertab.vim
 1697 8283 :AutoInstall: surround.vim
 294 10110 :AutoInstall: Align.vim
 1066 7618 :AutoInstall: cecutil.vim
-1984 11852 :AutoInstall: fuzzyfinder.vim
-1567 11920 :AutoInstall: rails.vim
-1984 11769 :AutoInstall: FuzzyFinder
-642 1 :AutoInstall: getscript.vim
+1984 11852 :AutoInstall: FuzzyFinder
+884 7510 :AutoInstall: AutoAlign.vim
+2332 12116 :AutoInstall: pathogen.vim
+1849 10873 :AutoInstall: autoclose.vim
+2973 12382 :AutoInstall: cucumber.zip
+1433 11498 :AutoInstall: haml.zip
+2386 9299 :AutoInstall: endwise.vim
+1590 12237 :AutoInstall: unimpaired.vim
+1545 11499 :AutoInstall: abolish.vim
+2136 8206 :AutoInstall: repeat.vim
+1506 1 :AutoInstall: LargeFile.vim

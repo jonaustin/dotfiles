@@ -28,7 +28,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
-altkey = "Alt_L"
+altkey = "Alt_L" -- this doesn't appear to work..
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
@@ -260,7 +260,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "q", function () awful.util.spawn("vimprobable", false) end),
     -- awful.key({ modkey }, "F1",    function () awful.util.spawn("urxvt", false) end),
     awful.key({ modkey }, "grave", function () teardrop.toggle("urxvt") end),
-    awful.key({ altkey }, "grave", function () teardrop.toggle("urxvt") end),
+    --awful.key({ altkey }, "grave", function () teardrop.toggle("urxvt") end),
     awful.key({ modkey }, "F1", function () teardrop.toggle("urxvt") end),
     awful.key({ modkey }, "a", function ()
         awful.util.spawn("urxvt -title Alpine -e alpine_exp", false)

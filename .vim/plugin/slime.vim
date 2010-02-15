@@ -1,3 +1,4 @@
+" http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

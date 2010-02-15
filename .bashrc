@@ -226,6 +226,7 @@ alias droidmount='sudo mount /dev/disk/by-uuid/1054-C987 /media/usb; cd /media/u
 alias ri='ri -T' # don't use a pager
 alias xevgrep="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
 alias x2='xinit ~/.xinitrc2 -- :1'
+alias acroread='acroread -openInNewWindow'
 
 
 # dir shortcuts
@@ -235,6 +236,9 @@ alias books='cd /media/ext/books/'
 alias noo='cd /media/ext/nootropic/'
 alias tor='cd /media/filez/torrents/'
 alias docs='cd /media/MORGOTH/documents'
+alias code='cd /media/MORGOTH/documents/code'
+alias codeo='cd /media/MORGOTH/documents/code_others'
+alias rdir='cd /media/MORGOTH/documents/code/ruby'
 alias d='cd ~/documents/'
 alias simpsons="cd /media/extbak/tv/Simpsons/"
 alias home='cd /home/jon'
