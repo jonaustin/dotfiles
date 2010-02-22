@@ -159,7 +159,6 @@ nmap <F1> <Esc>
 " so it’s great!
 inoremap jj <ESC>
 
-
 " use shift <F6> to toggle line numbers
 "nmap <silent> <F6> :set number!<CR>
 
@@ -177,6 +176,12 @@ nmap <C-Down> <PageDown>
 nmap <C-Up> <PageUp>
 nmap <C-Space> <PageUp>
 
+
+" " in __normal mode__ (nmap) F2 will save the file
+" nmap <F2> :w<CR>
+" " in __insert__ (imap) mode F2 will exit insert, save, enters insert again
+" imap <F2> <ESC>:w<CR>i
+" so just 'map' must mean that the mapping is global - i.e. both insert and normal/command mode
 
 
 """ MAPPINGS (that i don't really understand)
@@ -207,7 +212,7 @@ map <S-t> :TlistToggle<cr>
 
 " GetLatestVimScripts
 let g:GetLatestVimScripts_allowautoinstall=1
-
+"
 " auto switch to folder where editing file
 autocmd BufEnter * cd %:p:h
 
@@ -227,7 +232,12 @@ augroup mkd
 augroup END
 
 au FileType text setlocal tw=150
+autocmd FileType php set ft=php.php_cakephp_bundle
 
+" vimpress
+if !exists('*Wordpress_vim')
+    runtime vimblog.vim
+endif
 
 " Supertab settings
 " supertab + eclim == java win
@@ -259,10 +269,11 @@ au FileType text setlocal tw=150
 
 """ CODING """
 
-if !exists('*Wordpress_vim')
-    runtime vimblog.vim
-endif
-
+" PHP specific fixes
+""highlights interpolated variables in sql strings and does sql-syntax highlighting. yay
+autocmd FileType php let php_sql_query=1
+" does exactly that. highlights html inside of php strings
+autocmd FileType php let php_htmlInStrings=1
 
 
 """ Source

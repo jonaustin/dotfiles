@@ -214,7 +214,6 @@ alias ht='htop'
 alias tw='twidge update '
 alias tu='twidge update '
 #alias irb='irb --readline -r irb/completion'
-alias wmatoogg='for i in *.wma; do ffmpeg -i $i -acodec vorbis -aq 100 ${i}.ogg; done'
 alias fortune='echo && fortune tao && echo'
 #alias hv='cd ~/ && vi $1 && cd -'   #this doesnt work
 alias mtr='mtr --curses '
@@ -227,6 +226,9 @@ alias ri='ri -T' # don't use a pager
 alias xevgrep="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
 alias x2='xinit ~/.xinitrc2 -- :1'
 alias acroread='acroread -openInNewWindow'
+# media conversion
+alias wma2ogg='for i in *.wma; do ffmpeg -i $i -acodec vorbis -aq 100 ${i}.ogg; done'
+alias ogv2avi='for n in `ls *`; do mencoder $n -ovc lavc -oac mp3lame -o $(echo $n | cut -d "." -f 1).avi; done'
 
 
 # dir shortcuts
