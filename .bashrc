@@ -3,16 +3,16 @@
 # outputting anything in those cases.
 
 # note: this is usually autodetected -- but IS needed for rsync, and probably some other utils (scp,rcp...?)
-if [[ $- != *i* ]] ; then
+#if [[ $- != *i* ]] ; then
 	# Shell is non-interactive.  Be done now!
-	return
-fi
+#	return
+#fi
 
 
 
 
 ## ENV
-export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts:/usr/local/bin:/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools"
+export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts:/usr/local/bin:/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/home/jon/bin/ruby"
 export EDITOR='vim'
 export BROWSER='elinks'
 export PAGER='less'
@@ -66,11 +66,12 @@ shopt -s histappend     # Enable history appending instead of overwriting.  #139
 #shopt -s progcomp    # Programmable completion is FUN
 shopt -u mailwarn
 unset MAILCHECK        # I dont want my shell to warn me of incoming mail
+export MAIL=/var/spool/mail/jon
 
 
 #silence the beep
 setterm -blength 0
-xset -b
+#xset -b
 
 # BASH COLOR CODES (for reference)
 #Black       0;30     Dark Gray     1;30
@@ -147,13 +148,6 @@ alias mkdir='mkdir -p'
 alias grep="grep --color"
 alias nautilus="nautilus --no-desktop --browser"
 alias screen='TERM=xterm-256color screen -T $TERM' 
-alias sc='screen -dr'
-alias scs='screen -Sx screen'
-alias sccs='screen -c /home/jon/.screenrcs/screen -S screen'
-alias scsr='screen -c /home/jon/.screenrcs/rivo -S rivo'
-alias sccr='screen -Sx rivo'
-alias scc='screen -c /home/jon/.screenrcs/coding -S code'
-alias scx='screen -Sx code'
 alias wget='wget -c' #auto continue files
 alias df='df -Th'
 alias free='free -m'
@@ -217,19 +211,54 @@ alias tu='twidge update '
 alias fortune='echo && fortune tao && echo'
 #alias hv='cd ~/ && vi $1 && cd -'   #this doesnt work
 alias mtr='mtr --curses '
-alias gems='cd /usr/lib/ruby/gems/1.9.1/gem'
 alias sabn='sudo /etc/rc.d/sabnzbd start'
-alias fri='fri -L' # ruby fastri -- always bind to local as net stuff doesn't work
 alias droidbackup='rsync -avz /media/usb/ /media/MORGOTH/documents/backup/droid/'
 alias droidmount='sudo mount /dev/disk/by-uuid/1054-C987 /media/usb; cd /media/usb'
 alias ri='ri -T' # don't use a pager
 alias xevgrep="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
 alias x2='xinit ~/.xinitrc2 -- :1'
 alias acroread='acroread -openInNewWindow'
+alias pgoo='ping -c5 google.com' 
+alias sabn='su - sabnzbd -c python /opt/sabnzbd/SABnzbd.py -f /opt/sabnzbd/sabnzbd.ini -s 192.168.0.166:8081 -d -s /bin/sh'
+alias h='head ' 
+fs() { find $1 -iname '*'$2'*'; }
+alias jack='cd ~/Jack/'
+alias nyxd='cd ~/Jack/sandbox/nyx'
+
+### ruby
+alias fri='fri -L' # ruby fastri -- always bind to local as net stuff doesn't work
+alias create_ri_rdoc_for_gems='gem rdoc --all --overwrite'
+alias ris='ri --system '
+alias rri='/usr/bin/ri -T'  # god this is fucking retarded... rvm's 1.8.7 `gem rdoc ...' only install *.ri versions of ri docs, instead of the *.yaml versions that are needed (AFAIK) because 1.8.7's `ri` version is 1.0.1 whereas 1.9.1's version is 2.3.5 ... fucking jesus fucking christ.
+alias wr='which ruby'
+alias gems='gem search -r '
+alias gspec='gem spec -r '
+alias gdep='gem dep -r '
+alias cdgem='cd /home/jon/.rvm/gems/ruby-1.8.7-p249/gems/'
+alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server.sh'
+alias qlg='gem contents '
+alias glq='gem contents '
+
+### awesome
+alias vac='vim ~/.config/awesome/rc.lua'
+
 # media conversion
 alias wma2ogg='for i in *.wma; do ffmpeg -i $i -acodec vorbis -aq 100 ${i}.ogg; done'
 alias ogv2avi='for n in `ls *`; do mencoder $n -ovc lavc -oac mp3lame -o $(echo $n | cut -d "." -f 1).avi; done'
+alias ogv2mp4="mencoder out.ogg -of lavf -lavfopts format=mp4 -oac mp3lame -lameopts cbr:br=128 -ovc x264 -x264encopts bitrate=1000 -o final.mp4"
+alias ogv23gp='for n in `ls *.ogv`; do sudo ffmpeg -i $n -r 15 -b 64kb -ac 1 -s 176x132 -padtop 6 -padbottom 6 -ar 16000 -ab 32kb -acodec libfaac -vcodec h263 $(echo $n | cut -d "." -f 1).3gp; done'
 
+# terminal window
+alias vr='for n in 1 2 3 4  5 6 7 8 9 0; do for n in 1 2 3 4 5 6 7 8 9; do echo; done; done'
+
+### screen
+alias sc='screen -dr'
+alias scs='screen -Sx screen'
+alias sccs='screen -c /home/jon/.screenrcs/screen -S screen'
+alias scsr='screen -c /home/jon/.screenrcs/rivo -S rivo'
+alias sccr='screen -Sx rivo'
+alias scc='screen -c /home/jon/.screenrcs/coding -S code'
+alias scx='screen -Sx code'
 
 # dir shortcuts
 alias tv='cd /media/extbak/tv/'
@@ -244,6 +273,7 @@ alias rdir='cd /media/MORGOTH/documents/code/ruby'
 alias d='cd ~/documents/'
 alias simpsons="cd /media/extbak/tv/Simpsons/"
 alias home='cd /home/jon'
+alias nyx='cd ~/Jack/sandbox/nyx'
 #alias frm='find . -iname "*$1*" -print0 |xargs -0 rm' #egh put in function, otherwise with no arg deletes everything! 
 alias cd..='cd ..'
 alias ..='cd ..'
@@ -259,9 +289,9 @@ alias rivo='cd /media/MORGOTH/documents/code/ruby/rails/tv_updater/railer'
 
 h='/home/jon/'
 
-function sx () {
-  startx /usr/bin/${1} -- :1
-}
+#function sx () {
+#  startx /usr/bin/${1} -- :1
+#}
 
 function smallprompt () {
   export PS1='\A [\W]$ '
@@ -283,8 +313,7 @@ function fr () { # find random file *1*
 railcat='/media/MORGOTH/documents/code/ruby/railcat/'
 
 ##configs
-alias rc='source ~/bashrc'
-alias source='source /home/jon/.bashrc'
+alias rc='source ~/.bashrc'
 
 ##network
 #ssh
@@ -540,7 +569,7 @@ note ()
 scr ()
 {
   if [[ $1 ]]; then
-    screen -dRR -S $HOSTNAME.$1
+    screen -Sx $1
   else
     screen -ls
   fi
@@ -672,13 +701,13 @@ function ctag(){
 
 ### Arch ###
 #pacman
-alias pi="sudo powerpill -S $1"
-alias pag="sudo powerpill -S $1"
-alias ag="sudo pacman -S $1"
-alias s="pacman -Ss $1"
-alias i="pacman -Si $1"
-alias ql="pacman -Ql $1"
-alias r="sudo pacman -R $1"
+alias pi="sudo powerpill -S "
+alias pag="sudo powerpill -S "
+alias ag="sudo pacman -S "
+alias s="pacman -Ss "
+alias i="pacman -Si "
+alias ql="pacman -Ql "
+alias r="sudo pacman -R "
 alias agu='sudo pacman -Syu; yaourt -Syu'
 alias pagu="sudo powerpill -Syu"
 alias psizes="LANG=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
@@ -710,3 +739,4 @@ rl=$(runlevel | grep -o [0-9])
 case $rl in
     4) TERM=screen; exec /usr/bin/screen;;
 esac
+

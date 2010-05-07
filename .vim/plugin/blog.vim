@@ -53,9 +53,9 @@ import urllib , urllib2 , vim , xml.dom.minidom , xmlrpclib , sys , string , re
 #####################
 
 enable_tags = 1
-blog_username = 'login'
-blog_password = 'password'
-blog_url = 'http://patth.to.your.blog/xmlrpc.php'  
+blog_username = 'admin'
+blog_password = '$tr@ng3r'
+blog_url = 'http://localhost/sandbox/xmlrpc.php'  
 
 #####################
 # Do not edit below #
