@@ -259,9 +259,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "w", function () awful.util.spawn("vimprobable", false) end),
     awful.key({ modkey }, "q", function () awful.util.spawn("vimprobable", false) end),
     -- awful.key({ modkey }, "F1",    function () awful.util.spawn("urxvt", false) end),
-    awful.key({ modkey }, "grave", function () teardrop.toggle("urxvt") end),
+    awful.key({ modkey }, "grave", function () teardrop.toggle('urxvt','top','center',0.99999,0.3) end),
     --awful.key({ altkey }, "grave", function () teardrop.toggle("urxvt") end),
-    awful.key({ modkey }, "F1", function () teardrop.toggle("urxvt") end),
+    awful.key({ modkey }, "F1", function () teardrop.toggle('urxvt','top','center',0.99999,0.3) end),
     awful.key({ modkey }, "a", function ()
         awful.util.spawn("urxvt -title Alpine -e alpine_exp", false)
     end),

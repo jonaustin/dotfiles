@@ -51,13 +51,30 @@ IRB.conf[:AUTO_INDENT]  = true
 
 
 # load libraries
-#require 'rubygems' rescue nil
+require 'rubygems' rescue nil
 require 'wirble'
 #require 'looksee/shortcuts'
 
 # load wirble
 Wirble.init
 Wirble.colorize
+
+# Boson
+# can run any boson command (i.e. `commands`)
+require 'boson'; Boson.start
+
+
+# awesome_print all return values
+require 'ap'
+module IRB
+  class Irb
+    def output_value
+      ap @context.last_value
+    end
+  end
+end
+
+
 
 
 class Object
@@ -89,6 +106,8 @@ def copy_history
   copy content
 end
 
+
+
 =begin
 def copy(str)
   IO.popen('pbcopy', 'w') { |f| f << str.to_s }
@@ -100,4 +119,3 @@ end
 =end
 
 
-require 'rubygems'  # for 1.8.7

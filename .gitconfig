@@ -3,5 +3,8 @@
 	email = jonaustin@jonaustin.org
 [github]
 	token = 93d49b6e93fe6b3b1ff4f9c901352de2
+	user = jonaustin
 [color]
 	ui = auto
+[core]
+	editor = vim

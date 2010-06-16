@@ -35,21 +35,21 @@ ttable.1.5 0.5
 pcm.softvol {
 type softvol
 slave {
-pcm “dmix6″
+pcm "dmix6"
 }
 control {
-name “softMaster”
+name "softMaster"
 card 0
 count 2
 }
 }
 pcm.duplex {
 type asym
-playback.pcm “ch51dup”
-capture.pcm “hw:0″
+playback.pcm "ch51dup"
+capture.pcm "hw:0"
 }
 
 pcm.!default {
 type plug
-slave.pcm “duplex”
+slave.pcm "duplex"
 }

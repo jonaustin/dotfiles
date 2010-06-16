@@ -16,8 +16,11 @@ export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts:/usr/local/bin:/usr/X11R6/
 export EDITOR='vim'
 export BROWSER='elinks'
 export PAGER='less'
+export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr' # --LINE-NUMBERS --quit-if-one-screen'
 export DISPLAY=:0
 export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
+export TERM=xterm-256color    # no idea why I didn't add this before
+
 export HISTFILESIZE=10000
 export HISTSIZE=10000
 export OOO_FORCE_DESKTOP=gnome
@@ -28,6 +31,10 @@ export OPCODEDIR64=/lib/csound/plugins64  # for csound5
 
 export SURFRAW_graphical_browser="vimprobable"
 export SURFRAW_browser="vimprobable"
+
+### woohoo! use for paths -- i.e. cd ${msx}/Mew -- even works with Tab completion!
+export msx='/media/MORGOTH/musix/musix/'
+
 
 #export RAILS_GEM_VERSION=2.3.5
 
@@ -195,6 +202,7 @@ alias vol="alsamixer"
 alias am="alsamixer"
 alias sv='sudo vim'
 alias vrc='vim ~/.bashrc'
+alias v='vr'
 alias vvc='vim ~/.vimrc'
 alias c='clear'
 alias e='exit; clear'
@@ -214,6 +222,8 @@ alias mtr='mtr --curses '
 alias sabn='sudo /etc/rc.d/sabnzbd start'
 alias droidbackup='rsync -avz /media/usb/ /media/MORGOTH/documents/backup/droid/'
 alias droidmount='sudo mount /dev/disk/by-uuid/1054-C987 /media/usb; cd /media/usb'
+alias sfdroid='sshfs root@192.168.0.6:/ /media/droid'
+alias stdroid='ssh root@localhost -p2222'
 alias ri='ri -T' # don't use a pager
 alias xevgrep="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
 alias x2='xinit ~/.xinitrc2 -- :1'
@@ -223,21 +233,30 @@ alias sabn='su - sabnzbd -c python /opt/sabnzbd/SABnzbd.py -f /opt/sabnzbd/sabnz
 alias h='head ' 
 fs() { find $1 -iname '*'$2'*'; }
 alias jack='cd ~/Jack/'
+alias sand='cd ~/Jack/sandbox'
 alias nyxd='cd ~/Jack/sandbox/nyx'
+alias lsg='ls *|grep -i '
+alias vbl='vim -c BlogList'
+alias games='cd /media/ext3/Warez/Games/'
+export games='/media/ext3/Warez/Games/'
+alias lsgames='echo Civ4; echo Quake4; echo Portal; echo Warhammer; echo Freedom Force;'
 
 ### ruby
 alias fri='fri -L' # ruby fastri -- always bind to local as net stuff doesn't work
 alias create_ri_rdoc_for_gems='gem rdoc --all --overwrite'
 alias ris='ri --system '
 alias rri='/usr/bin/ri -T'  # god this is fucking retarded... rvm's 1.8.7 `gem rdoc ...' only install *.ri versions of ri docs, instead of the *.yaml versions that are needed (AFAIK) because 1.8.7's `ri` version is 1.0.1 whereas 1.9.1's version is 2.3.5 ... fucking jesus fucking christ.
+#alias ri='/usr/bin/ri -T'  # fuck it - the 1.8.x ri`s are just useless
 alias wr='which ruby'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-alias cdgem='cd /home/jon/.rvm/gems/ruby-1.8.7-p249/gems/'
+alias cdgem='cd /home/jon/.rvm/gems/ruby-1.8.6-p399/gems/'
 alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server.sh'
 alias qlg='gem contents '
 alias glq='gem contents '
+alias rtags='rtags -vi' # vi compatible rtags (default is emacs)
+gwhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
 
 ### awesome
 alias vac='vim ~/.config/awesome/rc.lua'
@@ -258,10 +277,10 @@ alias sccs='screen -c /home/jon/.screenrcs/screen -S screen'
 alias scsr='screen -c /home/jon/.screenrcs/rivo -S rivo'
 alias sccr='screen -Sx rivo'
 alias scc='screen -c /home/jon/.screenrcs/coding -S code'
-alias scx='screen -Sx code'
+alias scx='screen -Sx '
 
 # dir shortcuts
-alias tv='cd /media/extbak/tv/'
+alias tv='cd /media/ext3/tv/'
 alias mov='cd /media/ext/Movies'
 alias books='cd /media/ext/books/'
 alias noo='cd /media/ext/nootropic/'
@@ -274,20 +293,20 @@ alias d='cd ~/documents/'
 alias simpsons="cd /media/extbak/tv/Simpsons/"
 alias home='cd /home/jon'
 alias nyx='cd ~/Jack/sandbox/nyx'
+alias fixtape='cd ~/documents/code/ruby/rails/musix'
 #alias frm='find . -iname "*$1*" -print0 |xargs -0 rm' #egh put in function, otherwise with no arg deletes everything! 
 alias cd..='cd ..'
 alias ..='cd ..'
 alias newz='cd /media/filez/usenet/newzbin'
 alias msx='cd /media/MORGOTH/musix'
 alias mmsx='cd /media/MORGOTH/musix/musix'
+h='/home/jon/'
 
 # syncing
 alias async='sudo rsync -avz /media/ext/books_epub/ /media/usb/eBooks/;  sudo rsync -avz /media/ext/books_epub/ /media/usb/Books/; ' 
 
 #temporary
-alias rivo='cd /media/MORGOTH/documents/code/ruby/rails/tv_updater/railer'
 
-h='/home/jon/'
 
 #function sx () {
 #  startx /usr/bin/${1} -- :1
@@ -310,7 +329,7 @@ function fr () { # find random file *1*
 }
 
 # code dirs #
-railcat='/media/MORGOTH/documents/code/ruby/railcat/'
+alias rivo='cd /media/MORGOTH/documents/code/ruby/rails/tv_updater/railer'
 
 ##configs
 alias rc='source ~/.bashrc'
@@ -340,9 +359,9 @@ alias killspkr='sudo modprobe -r pcspkr'
 
 ### shortcut-TRICKS
 alias igrep='grep -i'
-alias pg='ps aux | grep -v grep | grep'
+alias pg='ps aux | grep -v grep | grep -i '
 alias g="grep -ir"
-alias hist='history | grep $1'
+alias hist='history | grep -i '
 
 #NETWORK TOOLS
 
@@ -357,10 +376,11 @@ alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | 
 alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
 
 alias dvd="sudo mount /dev/sr0 /media/dvd; cd /media/dvd"
+alias dvd2="sudo mount /dev/sr1 /media/dvd; cd /media/dvd"
 alias ejectdvd="sudo eject /media/dvd"
 alias udvd="sudo eject /media/dvd"
 alias movie="vlc -f $1"
-alias v='vlc -f $1'
+#alias v='vlc -f $1'
 
 alias tx='tar zxvf'
 alias tj='tar jxvf'
@@ -412,6 +432,7 @@ LC_ALL=en_US.UTF-8;        export LC_ALL
 # for testing if we have a command - i.e. `have less`
 have() { type "$1" &> /dev/null; }
 ###
+rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
 
 
 ### FUNCTIONS ###
@@ -707,6 +728,7 @@ alias ag="sudo pacman -S "
 alias s="pacman -Ss "
 alias i="pacman -Si "
 alias ql="pacman -Ql "
+alias pq="pacman -Q|grep -i "
 alias r="sudo pacman -R "
 alias agu='sudo pacman -Syu; yaourt -Syu'
 alias pagu="sudo powerpill -Syu"
@@ -739,4 +761,13 @@ rl=$(runlevel | grep -o [0-9])
 case $rl in
     4) TERM=screen; exec /usr/bin/screen;;
 esac
+
+### Wine Games ###
+alias civ="cd /home/jon/.wine/drive_c/Program\ Files/2K\ Games/Firaxis\ Games/Sid\ Meier\'s\ Civilization\ 4\ Complete/; wine Civilization4.exe";
+alias heroes5='cd "/home/jon/.PlayOnLinux/wineprefix/HOMM5/drive_c/Program Files/Ubisoft/Heroes of Might and Magic V/bin"; WINEPREFIX=/home/jon/.PlayOnLinux/wineprefix/HOMM5 wine H5_Game.exe'
+alias cdheroes5='cd "/home/jon/.PlayOnLinux/wineprefix/HOMM5/drive_c/Program Files/Ubisoft/Heroes of Might and Magic V/bin";'
+alias fallout='cd "/home/jon/.wine/drive_c/Program Files/Interplay/Fallout 1.3.4"; wine Falloutw.exe'
+alias fallout2='cd "/home/jon/.wine/drive_c/Program Files/Interplay/Fallout 2 1.02.25"; wine FALLOUT2.EXE'
+alias fallouttactics='cd "/home/jon/.wine/drive_c/Program Files/Interplay/Fallout Tactics"; wine BOS.EXE'
+alias ra3='cd "/home/jon/.PlayOnLinux/wineprefix/RA3U/drive_c/Program Files/Electronic Arts/Red Alert 3"; WINEPREFIX=/home/jon/.PlayOnLinux/wineprefix/RA3U/ wine RA3.exe'
 

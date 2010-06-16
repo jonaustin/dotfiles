@@ -6,4 +6,4 @@
 - http://rubygems.org/
 :update_sources: true
 :verbose: true
-#rdoc: --inline-source --line-numbers --format=html --template=hanna
+rdoc: --inline-source --line-numbers --format=html --template=hanna

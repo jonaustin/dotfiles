@@ -8,7 +8,7 @@
 ## set it in order to make tag editor and renaming files work properly
 #
 #mpd_music_dir = "/media/gandalf/musix/"
-mpd_music_dir = "/media/sdb1/musix/"
+mpd_music_dir = "/media/MORGOTH/musix/"
 #
 #mpd_connection_timeout = "5"
 #

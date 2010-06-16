@@ -226,13 +226,22 @@ let g:snippetsEmu_key = "<S-Tab>"
 au Filetype html,xml,xsl source ~/.vim/plugin/closetag.vim 
 
 
+
+
+
 """ File types
 augroup mkd
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
 augroup END
 
+" Text
 au FileType text setlocal tw=150
+
+" PHP
 autocmd FileType php set ft=php.php_cakephp_bundle
+
+" Ruby
+autocmd FileType ruby colo railscasts
 
 " vimpress
 if !exists('*Wordpress_vim')
