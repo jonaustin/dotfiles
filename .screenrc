@@ -50,5 +50,5 @@ backtick 2 0 0 sh /home/jon/bin/cpuusage.sh
 #screen -t irc weechat-curses
 #screen -t rss newsbeuter
 #screen -t tor rtorrent
-#screen -t remind wyrd
-#screen -t todo vi /home/jon/documents/todo_now
+##screen -t remind wyrd
+##screen -t todo vi /home/jon/documents/todo_now

@@ -287,9 +287,19 @@ autocmd FileType php let php_htmlInStrings=1
 
 """ Source
 so ~/.vim/abbreviations.vim
+so ~/.vim/plugin/autotag.vim
 
 """ csound
 au BufNewFile,BufRead *.orc,*.sco,*.csd   so ~/.vim/syntax/csound.vim
 au BufNewFile,BufRead *.csd               so ~/.vim/macros/csound_macros.vim
 au BufNewFile *.csd                       0r ~/.vim/templates/template.csd
 au BufNewFile *.orc                       0r ~/.vim/templates/template.orc
+
+
+
+" GREP plugin
+"fix grep
+":let Grep_Find_Use_Xargs = 0
+":let Grep_Default_Filelist = '*.rb'
+set grepprg=ack\ --column
+set grepformat=%f:%l:%c:%m
