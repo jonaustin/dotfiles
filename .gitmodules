@@ -37,3 +37,10 @@
 [submodule ".vim/bundle/vim-markdown"]
 	path = .vim/bundle/vim-markdown
 	url = git://github.com/tpope/vim-markdown.git
+
+[submodule ".config/awesome/obvious"]
+	path = .config/awesome/obvious
+	url = git://git.mercenariesguild.net/obvious.git
+[submodule ".config/awesome/vicious"]
+	path = .config/awesome/vicious
+	url = http://git.sysphere.org/vicious
