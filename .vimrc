@@ -1,11 +1,6 @@
 " Modeline and Notes {
 " vim: set foldmarker={,} foldlevel=0 foldmethod=marker spell:
 "
-" 	This is the personal .vimrc file of Steve Francia.
-" 	While much of it is beneficial for general use, I would
-" 	recommend picking out the parts you want and understand.
-"
-" 	You can find me at http://spf13.com
 " }
 
 " Setup Bundle Support {
@@ -47,7 +42,7 @@
 " }
 
 " Vim UI {
-	color zenburn     	       		" load a colorscheme
+	color zenburn_jon     	       		" load a colorscheme
 	set tabpagemax=15 				" only show 15 tabs
 	set showmode                   	" display the current mode
 
@@ -91,9 +86,9 @@
 " Formatting {
 	set nowrap                     	" wrap long lines
 	set autoindent                 	" indent at the same level of the previous line
-	set shiftwidth=4               	" use indents of 4 spaces
+	set shiftwidth=2               	" use indents of 2 spaces
 	set noexpandtab 	       		" tabs are tabs, not spaces
-	set tabstop=4 					" an indentation every four columns
+	set tabstop=2 					" an indentation every 2 columns
 	"set matchpairs+=<:>            	" match, to be used with % 
 	set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
@@ -143,10 +138,10 @@
 	" }
 
 	" Misc { 
-		:map <C-F10> <Esc>:vsp<CR>:VTree<CR>
+		":map <C-F10> <Esc>:vsp<CR>:VTree<CR>
 		" map Control + F10 to Vtree
 
-		let g:checksyntax_auto = 0
+		let g:checksyntax_auto = 1
 
 		"comment out line(s) in visual mode
 		vmap  o  :call NERDComment(1, 'toggle')<CR>
@@ -218,7 +213,7 @@
 
 	" SnipMate {
 		" Setting the author var
-		let g:snips_author = 'Steve Francia <steve.francia@gmail.com>'
+		let g:snips_author = 'Jon Austin <jon.i.austin@gmail.com>'
 		" Shortcut for reloading snippets, useful when developing
 		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 	" }
