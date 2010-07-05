@@ -231,7 +231,7 @@
 	" }
 
 	" dbext {
-		let g:dbext_default_SQLITE_bin='sqlite3''
+		let g:dbext_default_SQLITE_bin='sqlite3'
 	" }
 
 " GUI Settings {
