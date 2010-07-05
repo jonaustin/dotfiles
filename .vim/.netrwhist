@@ -1,4 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/media/MORGOTH/documents/code/ruby/rails/musix'
-let g:netrw_dirhist_2='/media/MORGOTH/documents/code/ruby/rails/musix/app'
