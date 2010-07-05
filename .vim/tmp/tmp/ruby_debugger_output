@@ -1,0 +1,7 @@
+Fast Debugger (ruby-debug-ide 0.4.9) listens on :39767
+	/home/jon/.rvm/gems/ruby-1.8.6-p399/gems/ruby-debug-ide-0.4.9/lib/ruby-debug-ide.rb:109:in `debug_load'
+	/home/jon/.rvm/gems/ruby-1.8.6-p399/gems/ruby-debug-ide-0.4.9/lib/ruby-debug-ide.rb:109:in `debug_program'
+	/home/jon/.rvm/gems/ruby-1.8.6-p399/gems/ruby-debug-ide-0.4.9/bin/rdebug-ide:87
+	/home/jon/.rvm/gems/ruby-1.8.6-p399/bin/rdebug-ide:19:in `load'
+	/home/jon/.rvm/gems/ruby-1.8.6-p399/bin/rdebug-ide:19
+Uncaught exception: no such file to load -- script/server

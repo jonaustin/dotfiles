@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/jon/.rvm/gems/ruby-1.8.6-p399/gems/drx-0.4.5/lib/drx'
+let g:netrw_dirhist_2='/etc/php'
+let g:netrw_dirhist_3='/media/MORGOTH/documents/code/projects/craigslist'
+let g:netrw_dirhist_4='/media/MORGOTH/documents/code/ruby/rails/fixtape/app/views/layouts'
+let g:netrw_dirhist_5='/home/jon/.lyrics'
+let g:netrw_dirhist_6='/media/MORGOTH/documents/Jack/git/sup'
