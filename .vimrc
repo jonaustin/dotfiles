@@ -119,6 +119,16 @@
 	" Shortcuts
 	" Change Working Directory to that of the current file
     cmap cwd lcd %:p:h
+
+	" remap jj to escape
+	inoremap jj <ESC>
+
+	" NERDTree
+	map <S-w> :NERDTreeToggle<cr>
+
+	" TagList
+	map <S-t> :TlistToggle<cr>
+
 " }
 
 " Plugins {
