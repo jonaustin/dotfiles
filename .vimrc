@@ -107,11 +107,11 @@
 	map <S-L> gt
 
 	" Stupid shift key fixes
-	cmap W w 						
-	cmap WQ wq
-	cmap wQ wq
-	cmap Q q
-	cmap Tabe tabe
+	"cmap W w 						
+	"cmap WQ wq
+	"cmap wQ wq
+	"cmap Q q
+	"cmap Tabe tabe
 
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
@@ -229,7 +229,10 @@
 		" Shortcut for reloading snippets, useful when developing
 		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 	" }
-" }
+
+	" dbext {
+		let g:dbext_default_SQLITE_bin='sqlite3''
+	" }
 
 " GUI Settings {
 	" GVIM- (here instead of .gvimrc)
