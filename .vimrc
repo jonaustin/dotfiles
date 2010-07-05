@@ -16,6 +16,7 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
 endif
 
 " Enable loading filetype and indentation plugins
+call pathogen#runtime_append_all_bundles() " must be run before `filetype on`
 filetype on
 filetype plugin on
 filetype indent on
