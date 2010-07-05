@@ -1,0 +1,39 @@
+[submodule ".vim/bundle/piv"]
+	path = .vim/bundle/piv
+	url = git@github.com:spf13/PIV.git
+[submodule ".vim/bundle/snipmate"]
+	path = .vim/bundle/snipmate
+	url = git://github.com/msanders/snipmate.vim.git
+[submodule ".vim/bundle/nerdcommenter"]
+	path = .vim/bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule ".vim/bundle/spf13-vim-colors"]
+	path = .vim/bundle/spf13-vim-colors
+	url = git://github.com/spf13/vim-colors.git
+[submodule ".vim/bundle/snipmate-snippets"]
+	path = .vim/bundle/snipmate-snippets
+	url = git@github.com:spf13/snipmate-snippets.git
+[submodule ".vim/bundle/snipmate-snippets/snippets"]
+	path = .vim/bundle/snipmate-snippets/snippets
+	url = git@github.com:spf13/snipmate-snippets.git
+[submodule ".vim/bundle/supertab"]
+	path = .vim/bundle/supertab
+	url = http://github.com/tsaleh/vim-supertab.git
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = http://github.com/scrooloose/nerdtree.git
+[submodule ".vim/bundle/fugitive"]
+	path = .vim/bundle/fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule ".vim/bundle/delimitMate"]
+	path = .vim/bundle/delimitMate
+	url = http://github.com/Raimondi/delimitMate.git
+[submodule ".vim/bundle/checksyntax"]
+	path = .vim/bundle/checksyntax
+	url = http://github.com/tomtom/checksyntax_vim.git
+[submodule ".vim/bundle/command-t"]
+	path = .vim/bundle/command-t
+	url = git://git.wincent.com/command-t.git
+[submodule ".vim/bundle/vim-markdown"]
+	path = .vim/bundle/vim-markdown
+	url = git://github.com/tpope/vim-markdown.git
