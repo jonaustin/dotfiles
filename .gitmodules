@@ -96,3 +96,6 @@
 [submodule ".vim/bundle/vim-bufexplorer"]
 	path = .vim/bundle/vim-bufexplorer
 	url = http://github.com/edsono/vim-bufexplorer.git
+[submodule ".vim/bundle/vim-autoclose"]
+	path = .vim/bundle/vim-autoclose
+	url = http://github.com/Townk/vim-autoclose.git
