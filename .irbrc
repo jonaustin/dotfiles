@@ -53,6 +53,8 @@ IRB.conf[:AUTO_INDENT]  = true
 # load libraries
 require 'rubygems' rescue nil
 require 'wirble'
+#require 'utility_belt'
+require 'interactive_editor'
 #require 'looksee/shortcuts'
 
 # load wirble

@@ -1,5 +1,5 @@
 " Modeline and Notes {
-" vim: set foldmarker={,} foldlevel=0 foldmethod=marker spell:
+" vim: set foldmarker={,} foldlevel=0 foldmethod=marker spell syntax=vim:
 "
 " }
 
@@ -7,6 +7,7 @@
 " The next two lines ensure that the ~/.vim/bundle/ system works
 	runtime! autoload/pathogen.vim
 	silent! call pathogen#runtime_append_all_bundles()
+	silent! call pathogen#helptags()
 " }
 
 " Basics {
@@ -87,10 +88,10 @@
 	set nowrap                     	" wrap long lines
 	set autoindent                 	" indent at the same level of the previous line
 	set shiftwidth=2               	" use indents of 2 spaces
-	set noexpandtab 	       		" tabs are tabs, not spaces
+	set expandtab 	       		    " tabs should be spaces for sanity
 	set tabstop=2 					" an indentation every 2 columns
 	"set matchpairs+=<:>            	" match, to be used with % 
-	set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
+	set pastetoggle=<F10>          	" pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 " }
 
@@ -183,12 +184,13 @@
 		hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
 		" some convenient mappings 
-		inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-		inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-		inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-		inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-		inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-		inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+" commented as this was causing pumvisible()... to show up every time enter is hit..
+		"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+		"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+		"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+		"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+		"inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+		"inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
 		" automatically open and close the popup menu / preview window
 		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
@@ -233,4 +235,14 @@
 	if has('win32') || has('win64')
 	  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 	endif
+" }
+
+" Various {
+	if has("autocmd")
+	  " Restore cursor position (initially for IRB<->Vim integration, if obnoxious for other things, put in ftdetect or somesuch)
+	  autocmd BufReadPost *
+		\ if line("'\"") > 1 && line("'\"") <= line("$") |
+		\   exe "normal! g`\"" |
+		\ endif
+	endif	
 " }

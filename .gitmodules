@@ -93,6 +93,3 @@
 [submodule ".config/awesome/vicious"]
 	path = .config/awesome/vicious
 	url = http://git.sysphere.org/vicious
-[submodule ".vim/bundle/vim-bufexplorer"]
-	path = .vim/bundle/vim-bufexplorer
-	url = http://github.com/edsono/vim-bufexplorer.git
