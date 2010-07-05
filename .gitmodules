@@ -87,10 +87,12 @@
 	url = git://github.com/tpope/vim-unimpaired.git
 
 
-
 [submodule ".config/awesome/obvious"]
 	path = .config/awesome/obvious
 	url = git://git.mercenariesguild.net/obvious.git
 [submodule ".config/awesome/vicious"]
 	path = .config/awesome/vicious
 	url = http://git.sysphere.org/vicious
+[submodule ".vim/bundle/vim-bufexplorer"]
+	path = .vim/bundle/vim-bufexplorer
+	url = http://github.com/edsono/vim-bufexplorer.git
