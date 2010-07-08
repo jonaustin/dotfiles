@@ -249,6 +249,7 @@
 	  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 	endif
 " }
+" }
 
 " Various {
 	if has("autocmd")
@@ -259,3 +260,6 @@
 		\ endif
 	endif	
 " }
+
+" Testing {
+  set scrolloff=999 " causes current line to always be vertically centered
