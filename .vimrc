@@ -13,6 +13,7 @@
 " Basics {
 	set nocompatible 		" must be first line
 	set background=dark     " Assume a dark background
+	:let mapleader = ","
 " }
  
 " General {
@@ -249,6 +250,11 @@
 	  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 	endif
 " }
+
+" Ack {
+  map <leader>a :Ack<space>
+"}
+
 " }
 
 " Various {
