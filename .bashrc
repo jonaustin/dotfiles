@@ -711,37 +711,37 @@ function ctag(){
 
 ### Debian ###
 #apt
-#alias ac='apt-cache $1'
-#alias ag='sudo apt-get install $1'
-#alias agu='sudo apt-get update; sudo apt-get upgrade'
-#alias show='apt-cache show $1'
-#alias a='aptitude'
-#alias s='apt-cache search'
-#alias ac='apt-cache'
-#alias apt-top='grep-status -FStatus -sInstalled-Size,Package -n             "install ok installed" | paste -sd "  \n" | sort -n'
+alias ac='apt-cache $1'
+alias ag='sudo apt-get install $1'
+alias agu='sudo apt-get update; sudo apt-get upgrade'
+alias show='apt-cache show $1'
+alias a='aptitude'
+alias s='apt-cache search'
+alias ac='apt-cache'
+alias apt-top='grep-status -FStatus -sInstalled-Size,Package -n             "install ok installed" | paste -sd "  \n" | sort -n'
 
 ### Arch ###
 #pacman
-alias pi="sudo powerpill -S "
-alias pag="sudo powerpill -S "
-alias ag="sudo pacman -S "
-alias s="pacman -Ss "
-alias i="pacman -Si "
-alias ql="pacman -Ql "
-alias pq="pacman -Q|grep -i "
-alias r="sudo pacman -R "
-alias agu='sudo pacman -Syu; yaourt -Syu'
-alias pagu="sudo powerpill -Syu"
-alias psizes="LANG=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
-
-#yaourt
-alias y='yaourt $1'
-alias show='yaourt -Si $1'
-alias yg="yaourt -G" #just fetch PKGBUILD
-alias yu='yaourt -Syu --aur'
-alias yac='yaourt -C' # autoclean
-alias yacc='yaourt -Cc' # clean and remove all archived packageiiis
-alias yaqt='yaourt -Qdt' # search for orphaned packages
+#alias pi="sudo powerpill -S "
+#alias pag="sudo powerpill -S "
+#alias ag="sudo pacman -S "
+#alias s="pacman -Ss "
+#alias i="pacman -Si "
+#alias ql="pacman -Ql "
+#alias pq="pacman -Q|grep -i "
+#alias r="sudo pacman -R "
+#alias agu='sudo pacman -Syu; yaourt -Syu'
+#alias pagu="sudo powerpill -Syu"
+#alias psizes="LANG=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
+#
+##yaourt
+#alias y='yaourt $1'
+#alias show='yaourt -Si $1'
+#alias yg="yaourt -G" #just fetch PKGBUILD
+#alias yu='yaourt -Syu --aur'
+#alias yac='yaourt -C' # autoclean
+#alias yacc='yaourt -Cc' # clean and remove all archived packageiiis
+#alias yaqt='yaourt -Qdt' # search for orphaned packages
 
 # urxvt
 alias fsize="smallprompt; printf '\33]50;%s%d\007' 'xft:Terminus:pixelsize='"
