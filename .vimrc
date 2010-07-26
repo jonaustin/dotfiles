@@ -269,3 +269,14 @@
 
 " Testing {
   set scrolloff=999 " causes current line to always be vertically centered
+" }
+
+" File Types {
+"" Filetype detection
+augroup filetypedetect
+    "" Detect .txt as 'text'
+    autocmd! BufNewFile,BufRead *.txt setfiletype text
+    "" cakephp
+    autocmd! BufNewFile,BufRead *.thtml setfiletype php
+    autocmd! BufNewFilee,BufRead *.ctp setfiletype php
+augroup END
