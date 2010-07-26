@@ -278,5 +278,5 @@ augroup filetypedetect
     autocmd! BufNewFile,BufRead *.txt setfiletype text
     "" cakephp
     autocmd! BufNewFile,BufRead *.thtml setfiletype php
-    autocmd! BufNewFilee,BufRead *.ctp setfiletype php
+    autocmd! BufNewFile,BufRead *.ctp setfiletype php
 augroup END
