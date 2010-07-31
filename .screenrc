@@ -22,8 +22,8 @@ bindkey "^[[24~" next # f12
 #bindkey "[1;3C" next # alt-left
 bindkey "^[^[[D" next # alt-right  ...doesn't work
 bindkey "^[^[[C" next # alt-left  ...doesn't work
-bindkey "^k" hardstatus string ''
-bindkey "^j" hardstatus string "%{G}[ %{Y}%H %{G}][%{w}%?%-Lw%?%{G}(%{W}%n*%f%t%?(%u)%?%{G})%{w}%?%+Lw%?%?%= %{G}][ Updates: %1` %2`%%][ %C ]"
+bindkey "^o" hardstatus string ''
+bindkey "^p" hardstatus string "%{G}[ %{Y}%H %{G}][%{w}%?%-Lw%?%{G}(%{W}%n*%f%t%?(%u)%?%{G})%{w}%?%+Lw%?%?%= %{G}][ Updates: %1` %2`%%][ %C ]"
 #bindkey "^k" eval "copy" "stuff ^b"  # enter copy mode and move up one page
 #bindkey "^j" eval "stuff ^b"  # when in copy mode, move down one page
 #bindkey "^k" eval "copy" "stuff k"    # enter copy mode and move up one line
