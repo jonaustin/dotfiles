@@ -117,7 +117,7 @@ if [ `/usr/bin/whoami` = 'root' ]; then
   PS1='\[\e[0;32m\]\u \[\e[1;34m\]\w \[\e[1;32m\]\$ \[\e[1;37m\] '
 else
   #PS1='\A/$? \[\033[01;32m\][\u@\h] \[\033[01;34m\]\w \$ \[\033[00m\]'
-  export PS1='\A [\W]$ '
+  export PS1='\h \A [\W]$ '
 fi
 
 ####
@@ -344,7 +344,7 @@ alias n8='ssh root@192.168.0.232'
 alias work_proxy='ssh -D 8080 -f -C -q -N jon@barracuda-ext.cmdpdx.com'
 alias work_rdc='ssh jon@barracuda-ext.cmdpdx.com -L 10000:jaustin.cmdpdx.com:3389' # tunnel rdc connection to localhost:10000
 
-alias syn='synergyc 192.168.0.123'
+alias syn='synergyc 192.168.0.9'
 alias ssyn='ssh -f -N -L12345:10.10.10.155:24800 barracuda-ext.cmdpdx.com; synergyc localhost:12345'
 alias ksyn="killall synergyc"
 
@@ -416,8 +416,17 @@ alias rup='echo >> /home/jon/documents/resume_new.txt'
 alias re='vim /home/jon/documents/resume_new.txt'
 alias rsee='cat /home/jon/documents/resume_new.txt'
 
+### GTD ###
+alias gcal=' gcalcli; ' 
+alias gcala='gcalcli agenda; ' 
+### weird, had to add 'function' keyword or got syntax error
+function gcadd(){ gcalcli quick; }  # gcadd "10/31 7 pm Halloween Party"
+function gcq() { rvm use system; gcalcli quick $1; rvm use default; }  # gcadd "10/31 7 pm Halloween Party"
+function gcla() { rvm use system; google calendar add $1; rvm use default; }  #$ google calendar add "Social Media Day SF Party at 7pm"{ 
+function gcll() { rvm use system; google calendar list $1; rvm use default; } 
 set_task() { echo "  * " $1 "  " > /home/jon/.cur_task; }
 add_task() { echo "  * " $1 "  " >> /home/jon/.cur_task; }
+alias vct='vim ~/.cur_task'
   
 
 ### HACKS ###
@@ -437,6 +446,16 @@ rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
 
 ### FUNCTIONS ###
 cmdfu(){ curl "http://www.commandlinefu.com/commands/matching/$@/$(echo -n $@ | openssl base64)/plaintext"; }
+
+create_index(){ 
+  rm index.html;
+  for n in *; 
+  do 
+    echo $n;
+    n="<a href=${n}>${n}</a>\n<br/>"; 
+    echo $n >> index.html; 
+  done
+}
 
 
 #Usage: ii
@@ -635,7 +654,8 @@ absbuild ()
 
 # search the vim reference manual for a keyword
 # usage: :h <keyword>
-:h() {  vim --cmd ":silent help $@" --cmd "only"; }
+#:h() {  vim --cmd ":silent help $@" --cmd "only"; }
+alias :h='vim -c help ' # seems to work a lot better than above (i.e. ':h dbext' doesn't work with the function, but does with alias..)
 
 # mkmine - recursively change ownership to $USER:$USER
 # usage:  mkmine, or
@@ -727,6 +747,7 @@ alias pag="sudo powerpill -S "
 alias ag="sudo pacman -S "
 alias s="pacman -Ss "
 alias i="pacman -Si "
+alias Q='pacman -Q | grep -i '
 alias ql="pacman -Ql "
 alias pq="pacman -Q|grep -i "
 alias r="sudo pacman -R "
@@ -751,9 +772,9 @@ alias fsize="smallprompt; printf '\33]50;%s%d\007' 'xft:Terminus:pixelsize='"
 
 
 
-alias sxs='ssh -p666 xs'
-alias fxs='sftp -oPort=666 xs'
-alias sfxs='sftp -oPort=666 xs'
+alias sxs='ssh -p666 jon@xs.homeunix.net'
+alias fxs='sftp -oPort=666 jon@xs.homeunix.net'
+alias sfxs='sftp -oPort=666 jon@xs.homeunix.net'
 
 # not sure if this works, but should:
 # allow specific commands to be run at X startup

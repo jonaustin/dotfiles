@@ -17,6 +17,8 @@ fi
 exec awesome
 #exec xterm
 
+#exec subtle
+
 # exec gnome-session
 # exec startkde
 # exec startxfce4

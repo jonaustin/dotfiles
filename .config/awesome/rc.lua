@@ -52,13 +52,13 @@ layouts =
 -- Define a tag table which hold all screen tags.
 tags = {}
 tags.setup = {
-    { name = "term",  layout = layouts[3]  },
-    { name = "term2", layout = layouts[3]  },
-    { name = "vimp",   layout = layouts[3]  },
-    { name = "firefox",  layout = layouts[10]  },
-    { name = "5",    layout = layouts[3], mwfact = 0.13 },
-    { name = "6",     layout = layouts[3], }, --hide   = true },
-    { name = "7",     layout = layouts[3], }, --hide   = true },
+    { name = "term",  layout = layouts[2]  },
+    { name = "term2", layout = layouts[2]  },
+    { name = "vimp",   layout = layouts[2]  },
+    { name = "firefox",  layout = layouts[2]  },
+    { name = "5",    layout = layouts[2], mwfact = 0.13 },
+    { name = "6",     layout = layouts[2], }, --hide   = true },
+    { name = "7",     layout = layouts[2], }, --hide   = true },
     { name = "files",   layout = layouts[10]  },
     { name = "chrome", layout = layouts[10]  }
 }
