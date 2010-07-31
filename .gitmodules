@@ -89,7 +89,7 @@
 
 [submodule ".config/awesome/obvious"]
 	path = .config/awesome/obvious
-	url = git://git.mercenariesguild.net/obvious.git
+	url = http://github.com/farhaven/obvious.git
 [submodule ".config/awesome/vicious"]
 	path = .config/awesome/vicious
 	url = http://git.sysphere.org/vicious
