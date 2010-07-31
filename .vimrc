@@ -130,6 +130,10 @@
 	" TagList
 	map <S-t> :TlistToggle<cr>
 
+  " Conque Bash
+	map <leader>b :ConqueTerm bash<cr>
+	map <leader>bs :ConqueTermSplit bash<cr>
+
 " }
 
 " Plugins {
