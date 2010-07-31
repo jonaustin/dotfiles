@@ -130,6 +130,10 @@
 	" TagList
 	map <S-t> :TlistToggle<cr>
 
+  " Conque Bash
+	map <leader>b :ConqueTerm bash<cr>
+	map <leader>bs :ConqueTermSplit bash<cr>
+
 " }
 
 " Plugins {
@@ -269,3 +273,14 @@
 
 " Testing {
   set scrolloff=999 " causes current line to always be vertically centered
+" }
+
+" File Types {
+"" Filetype detection
+augroup filetypedetect
+    "" Detect .txt as 'text'
+    autocmd! BufNewFile,BufRead *.txt setfiletype text
+    "" cakephp
+    autocmd! BufNewFile,BufRead *.thtml setfiletype php
+    autocmd! BufNewFile,BufRead *.ctp setfiletype php
+augroup END

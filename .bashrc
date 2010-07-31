@@ -731,14 +731,14 @@ function ctag(){
 
 ### Debian ###
 #apt
-#alias ac='apt-cache $1'
-#alias ag='sudo apt-get install $1'
-#alias agu='sudo apt-get update; sudo apt-get upgrade'
-#alias show='apt-cache show $1'
-#alias a='aptitude'
-#alias s='apt-cache search'
-#alias ac='apt-cache'
-#alias apt-top='grep-status -FStatus -sInstalled-Size,Package -n             "install ok installed" | paste -sd "  \n" | sort -n'
+alias ac='apt-cache $1'
+alias ag='sudo apt-get install $1'
+alias agu='sudo apt-get update; sudo apt-get upgrade'
+alias show='apt-cache show $1'
+alias a='aptitude'
+alias s='apt-cache search'
+alias ac='apt-cache'
+alias apt-top='grep-status -FStatus -sInstalled-Size,Package -n             "install ok installed" | paste -sd "  \n" | sort -n'
 
 ### Arch ###
 #pacman
