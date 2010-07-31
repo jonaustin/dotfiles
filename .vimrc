@@ -132,7 +132,7 @@
 
   " Conque Bash
 	map <leader>b :ConqueTerm bash<cr>
-	map <leader>bs :ConqueTermSplit bash<cr>
+	map <leader>bsp :ConqueTermSplit bash<cr>
 
 " }
 
