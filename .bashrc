@@ -117,7 +117,7 @@ if [ `/usr/bin/whoami` = 'root' ]; then
   PS1='\[\e[0;32m\]\u \[\e[1;34m\]\w \[\e[1;32m\]\$ \[\e[1;37m\] '
 else
   #PS1='\A/$? \[\033[01;32m\][\u@\h] \[\033[01;34m\]\w \$ \[\033[00m\]'
-  export PS1='\A [\W]$ '
+  export PS1='\h \A [\W]$ '
 fi
 
 ####
