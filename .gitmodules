@@ -105,3 +105,6 @@
 [submodule ".vim/bundle/vim-conque"]
 	path = .vim/bundle/vim-conque
 	url = http://github.com/rson/vim-conque.git
+[submodule ".vim/snippets"]
+	path = .vim/snippets
+	url = git@github.com:jonaustin/snipmate-snippets.git
