@@ -19,7 +19,7 @@
 " General {
 	filetype plugin indent on  	" Automatically detect file types.
 	syntax on 					" syntax highlighting
-	set mouse=a					" automatically enable mouse usage
+	set mouse=					" automatically enable mouse usage ### disabled..add =a to enable
 	"set autochdir 				" always switch to the current file directory.. 
 	" not every vim is compiled with this, use the following line instead
      "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif

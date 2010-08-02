@@ -256,7 +256,8 @@ alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server
 alias qlg='gem contents '
 alias glq='gem contents '
 alias rtags='rtags -vi' # vi compatible rtags (default is emacs)
-gwhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
+alias gwhois='gem whois '
+gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
 
 ### awesome
 alias vac='vim ~/.config/awesome/rc.lua'
