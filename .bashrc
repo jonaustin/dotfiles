@@ -329,8 +329,11 @@ function fr () { # find random file *1*
     find . -iname "*${1}*" | randline
 }
 
+## CODING (FIXME: move all coding stuff under here)
 # code dirs #
 alias rivo='cd /media/MORGOTH/documents/code/ruby/rails/tv_updater/railer'
+# shortcuts #
+alias rvd='vim --servername VIM $1'; # ruby vim debug -- then :Rdebugger, then connect to xxx:3000, then go to it
 
 ##configs
 alias rc='source ~/.bashrc'

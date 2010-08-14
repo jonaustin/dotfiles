@@ -272,6 +272,8 @@ globalkeys = awful.util.table.join(
     awful.key({}, "#107", function () awful.util.spawn("/home/jon/bin/softer", false) end),
     awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
     awful.key({}, "#127", function () awful.util.spawn("/home/jon/bin/mute", false) end),
+    awful.key({ "Shift" }, "#107", function () awful.util.spawn("amixer -D hw:1 set Speaker 1-", false) end),
+    awful.key({ "Shift" }, "#78", function () awful.util.spawn("amixer -D hw:1 set Speaker 1+", false) end),
     awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh", false) end),
     awful.key({ modkey }, "n",function () awful.util.spawn_with_shell("mpc -p 6602 next; /home/jon/bin/mpd_status.sh", false) end),
     awful.key({ modkey }, "v",function () awful.util.spawn_with_shell("mpc -p 6602 prev; /home/jon/bin/mpd_status.sh", false) end),

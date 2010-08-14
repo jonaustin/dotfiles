@@ -86,7 +86,7 @@
 " }
 
 " Formatting {
-	set nowrap                     	" wrap long lines
+	set wrap                     	" wrap long lines
 	set autoindent                 	" indent at the same level of the previous line
 	set shiftwidth=2               	" use indents of 2 spaces
 	set expandtab 	       		    " tabs should be spaces for sanity
@@ -99,8 +99,10 @@
 " Key Mappings {
 
 	" Easier moving in tabs and windows
-	map <C-J> <C-W>j<C-W>_
+	map <C-J> <C-W>j<C-W>_  
+	"map <S-C-j> <C-W>j :res 35<cr>
 	map <C-K> <C-W>k<C-W>_
+	"map <S-C-k> <C-W>k :res 35<cr>
 	map <C-L> <C-W>l<C-W>_
 	map <C-H> <C-W>h<C-W>_
 	map <C-K> <C-W>k<C-W>_
@@ -130,9 +132,13 @@
 	" TagList
 	map <S-t> :TlistToggle<cr>
 
-  " Conque Bash
+	" Conque Bash
 	map <leader>b :ConqueTerm bash<cr>
 	map <leader>bsp :ConqueTermSplit bash<cr>
+
+    " quit!
+  	map <leader>qq :q!<cr>
+  	map <leader>qqa :qall!<cr>
 
 " }
 

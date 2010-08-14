@@ -1,1 +1,30 @@
 Fast Debugger (ruby-debug-ide 0.4.9) listens on :39767
+=> Booting WEBrick
+=> Rails 2.3.5 application starting on http://0.0.0.0:3000
+/home/jon/.rvm/gems/ruby-1.8.7-p249/gems/rails-2.3.5/lib/rails/gem_dependency.rb:119:Warning: Gem::Dependency#version_requirements is deprecated and will be removed on or after August 2010.  Use #requirement
+=> Call with -d to detach
+=> Ctrl-C to shutdown server
+[2010-08-14 07:45:27] INFO  WEBrick 1.3.1
+[2010-08-14 07:45:27] INFO  ruby 1.8.7 (2010-01-10) [i686-linux]
+[2010-08-14 07:45:27] WARN  TCPServer Error: Address already in use - bind(2)
+Exiting
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/webrick/utils.rb:73:in `initialize'
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/webrick/utils.rb:73:in `new'
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/webrick/utils.rb:73:in `create_listeners'
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/webrick/utils.rb:70:in `each'
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/webrick/utils.rb:70:in `create_listeners'
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/webrick/server.rb:75:in `listen'
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/webrick/server.rb:63:in `initialize'
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/webrick/httpserver.rb:24:in `initialize'
+	/home/jon/.rvm/gems/ruby-1.8.7-p249/gems/rack-1.0.1/lib/rack/handler/webrick.rb:10:in `new'
+	/home/jon/.rvm/gems/ruby-1.8.7-p249/gems/rack-1.0.1/lib/rack/handler/webrick.rb:10:in `run'
+	/home/jon/.rvm/gems/ruby-1.8.7-p249/gems/rails-2.3.5/lib/commands/server.rb:111
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+	/home/jon/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+	./script/server:3
+	/home/jon/.rvm/gems/ruby-1.8.7-p249/gems/ruby-debug-ide-0.4.9/lib/ruby-debug-ide.rb:109:in `debug_load'
+	/home/jon/.rvm/gems/ruby-1.8.7-p249/gems/ruby-debug-ide-0.4.9/lib/ruby-debug-ide.rb:109:in `debug_program'
+	/home/jon/.rvm/gems/ruby-1.8.7-p249/gems/ruby-debug-ide-0.4.9/bin/rdebug-ide:87
+	/home/jon/.rvm/gems/ruby-1.8.7-p249/bin/rdebug-ide:19:in `load'
+	/home/jon/.rvm/gems/ruby-1.8.7-p249/bin/rdebug-ide:19
+Uncaught exception: Address already in use - bind(2)
