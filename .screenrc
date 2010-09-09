@@ -6,7 +6,7 @@ startup_message off               # don't display the copyright page
 defutf8 on                        # utf-8 encoding
 defscrollback 10000                # change default scrollback value for new windows
 bufferfile $HOME/.screen_exchange # the file to use for "readbuf" ('<') and  "writebuf" ('>'):
-shell -$SHELL                     # make the shell in every window a login shell
+shell -${SHELL}                     # make the shell in every window a login shellz.
 termcapinfo rxvt* ti@:te@:XT      # improve mouse scrolling
 #terminfo rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' # fix 256 colors for uxrvt
 #shelltitle '$ |bash'   # enable this to have currently running app show up in screen 'title'
@@ -42,7 +42,7 @@ backtick 2 0 0 sh /home/jon/bin/cpuusage.sh
 
 #screen -t blog vim -c BlogList
 #screen -t m ncmpcpp -p6602
-##screen -t vifm vifm
+#screen -t vifm vifm
 #screen 
 #screen 
 #screen 

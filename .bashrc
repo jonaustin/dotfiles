@@ -240,6 +240,8 @@ alias vbl='vim -c BlogList'
 alias games='cd /media/ext3/Warez/Games/'
 export games='/media/ext3/Warez/Games/'
 alias lsgames='echo Civ4; echo Quake4; echo Portal; echo Warhammer; echo Freedom Force;'
+alias lp='lesspipe.sh '
+alias it='iotop'
 
 ### ruby
 alias fri='fri -L' # ruby fastri -- always bind to local as net stuff doesn't work
@@ -251,7 +253,7 @@ alias wr='which ruby'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-alias cdgem='cd /home/jon/.rvm/gems/ruby-1.8.6-p399/gems/'
+alias cdgem='cd /home/jon/.rvm/gems/ruby-1.8.7-p302/gems'
 alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server.sh'
 alias qlg='gem contents '
 alias glq='gem contents '
@@ -272,17 +274,20 @@ alias ogv23gp='for n in `ls *.ogv`; do sudo ffmpeg -i $n -r 15 -b 64kb -ac 1 -s 
 alias vr='for n in 1 2 3 4  5 6 7 8 9 0; do for n in 1 2 3 4 5 6 7 8 9; do echo; done; done'
 
 ### screen
-alias sc='screen -dr'
+alias scl='screen -list'
+alias sc='screen -Sx'
 alias scs='screen -Sx screen'
 alias sccs='screen -c /home/jon/.screenrcs/screen -S screen'
 alias scsr='screen -c /home/jon/.screenrcs/rivo -S rivo'
 alias sccr='screen -Sx rivo'
 alias scc='screen -c /home/jon/.screenrcs/coding -S code'
+alias scn='screen -c /home/jon/.screenrcs/nextfm -S code'
 alias scx='screen -Sx '
 
 # dir shortcuts
 alias tv='cd /media/ext3/tv/'
 alias mov='cd /media/ext/Movies'
+alias scifi='cd /home/jon/_vids/classic_scifi/'
 alias books='cd /media/ext/books/'
 alias noo='cd /media/ext/nootropic/'
 alias tor='cd /media/filez/torrents/'
@@ -295,6 +300,8 @@ alias simpsons="cd /media/extbak/tv/Simpsons/"
 alias home='cd /home/jon'
 alias nyx='cd ~/Jack/sandbox/nyx'
 alias fixtape='cd ~/documents/code/ruby/rails/musix'
+alias cdrails='cd /home/jon/.rvm/gems/ruby-1.8.7-p249/gems/rails-2.3.5'
+alias cdaudio='cd /media/extbak/Audio/'
 #alias frm='find . -iname "*$1*" -print0 |xargs -0 rm' #egh put in function, otherwise with no arg deletes everything! 
 alias cd..='cd ..'
 alias ..='cd ..'
@@ -758,6 +765,7 @@ alias r="sudo pacman -R "
 alias agu='sudo pacman -Syu; yaourt -Syu'
 alias pagu="sudo powerpill -Syu"
 alias psizes="LANG=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
+alias redownload_all='for n in `pacman -Q`; do sudo pacman -Sw $n; done'
 
 #yaourt
 alias y='yaourt $1'
@@ -796,3 +804,5 @@ alias fallout2='cd "/home/jon/.wine/drive_c/Program Files/Interplay/Fallout 2 1.
 alias fallouttactics='cd "/home/jon/.wine/drive_c/Program Files/Interplay/Fallout Tactics"; wine BOS.EXE'
 alias ra3='cd "/home/jon/.PlayOnLinux/wineprefix/RA3U/drive_c/Program Files/Electronic Arts/Red Alert 3"; WINEPREFIX=/home/jon/.PlayOnLinux/wineprefix/RA3U/ wine RA3.exe'
 
+### Music creation ###
+alias aplay_all='prename "s/ /_/g" *; for n in *; do echo -e $n |  osd_cat -f "-*-terminus-*-*-*-*-24-*-*-*-*-*-*-*"  -p bottom -o 15 -l 3 -A right -c "#fff" -s 3 -d 4 &   aplay $n; sleep 2; done'

@@ -86,14 +86,15 @@
 " }
 
 " Formatting {
-	set wrap                     	" wrap long lines
-	set autoindent                 	" indent at the same level of the previous line
-	set shiftwidth=2               	" use indents of 2 spaces
-	set expandtab 	       		    " tabs should be spaces for sanity
-	set tabstop=2 					" an indentation every 2 columns
-	"set matchpairs+=<:>            	" match, to be used with % 
-	set pastetoggle=<F10>          	" pastetoggle (sane indentation on pastes)
-	"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
+	set wrap                      	   " wrap long lines
+	set autoindent                 	   " indent at the same level of the previous line
+	set shiftwidth=2               	   " use indents of 2 spaces
+	set expandtab 	       	  	       " tabs should be spaces for sanity
+	set tabstop=2 					           " an indentation every 2 columns
+  "set matchpairs+=<:>               " match, to be used with % 
+	set pastetoggle=<F10>          	   " pastetoggle (sane indentation on pastes)
+	"set comments=sl:/*,mb:*,elx:*/    " auto format comment blocks
+  set encoding=utf-8                 " no junk chars
 " }
 
 " Key Mappings {
@@ -289,4 +290,5 @@ augroup filetypedetect
     "" cakephp
     autocmd! BufNewFile,BufRead *.thtml setfiletype php
     autocmd! BufNewFile,BufRead *.ctp setfiletype php
+    autocmd! BufNewFile,BufRead *.scss setfiletype sass
 augroup END

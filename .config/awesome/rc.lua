@@ -274,12 +274,16 @@ globalkeys = awful.util.table.join(
     awful.key({}, "#127", function () awful.util.spawn("/home/jon/bin/mute", false) end),
     awful.key({ "Shift" }, "#107", function () awful.util.spawn("amixer -D hw:1 set Speaker 1-", false) end),
     awful.key({ "Shift" }, "#78", function () awful.util.spawn("amixer -D hw:1 set Speaker 1+", false) end),
-    awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh", false) end),
-    awful.key({ modkey }, "n",function () awful.util.spawn_with_shell("mpc -p 6602 next; /home/jon/bin/mpd_status.sh", false) end),
-    awful.key({ modkey }, "v",function () awful.util.spawn_with_shell("mpc -p 6602 prev; /home/jon/bin/mpd_status.sh", false) end),
-    awful.key({ modkey }, "x",function () awful.util.spawn_with_shell("mpc -p 6602 toggle", false) end),
+    awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 6600", false) end),
+    awful.key({ modkey, "Shift" }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 6602", false) end),
+    awful.key({ modkey }, "n",function () awful.util.spawn_with_shell("mpc -p 6600 next; /home/jon/bin/mpd_status.sh 6600", false) end),
+    awful.key({ modkey, "Shift" }, "n",function () awful.util.spawn_with_shell("mpc -p 6602 next; /home/jon/bin/mpd_status.sh 6602", false) end),
+    awful.key({ modkey }, "v",function () awful.util.spawn_with_shell("mpc -p 6600 prev; /home/jon/bin/mpd_status.sh 6600", false) end),
+    awful.key({ modkey, "Shift" }, "v",function () awful.util.spawn_with_shell("mpc -p 6602 prev; /home/jon/bin/mpd_status.sh 6602", false) end),
+    awful.key({ modkey }, "x",function () awful.util.spawn_with_shell("mpc -p 6600 toggle", false) end),
+    awful.key({ modkey, "Shift" }, "x",function () awful.util.spawn_with_shell("mpc -p 6602 toggle", false) end),
     awful.key({ modkey }, "p", function () awful.util.spawn("/usr/bin/projectM-libvisual-alsa") end),
-    awful.key({ modkey }, "z", function () awful.util.spawn("/home/jon/bin/cur_task.sh") end),
+--    awful.key({ modkey }, "z", function () awful.util.spawn("/home/jon/bin/cur_task.sh") end),
     awful.key({ modkey }, "u", function () awful.util.spawn("/home/jon/bin/uptime.sh") end),
     awful.key({ modkey, "Shift" }, "u", function () awful.util.spawn("/home/jon/bin/cpu_hogs.sh") end),
     awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("/home/jon/bin/datetime.sh") end),
@@ -300,6 +304,9 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
+    -- switch to other screen
+    awful.key({ modkey }, "]", function () awful.screen.focus(1) end),
+    awful.key({ modkey }, "[", function () awful.screen.focus(2) end),
 --    awful.key({ modkey,           }, "w", function () mymainmenu:show(true)        end),
 
     -- Layout manipulation
