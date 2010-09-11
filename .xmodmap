@@ -17,12 +17,13 @@ xmodmap -e "remove Lock = Caps_Lock"
 xmodmap -e 'keysym Caps_Lock = Control_L'
 xmodmap -e 'add Control = Control_L'
 
-# maltron
-xmodmap -e 'keycode 112 = Super_L'
-xmodmap -e 'keycode 117 = Super_R'
-xmodmap -e 'keycode 94 = backslash bar'
-#xmodmap -e "keysym Print = F21"
-#xmodmap -e "keysym Scroll_Lock = F22"
-#xmodmap -e "keysym Pause = F23"
-#xmodmap -e "remove Lock = Caps_Lock"
+# Maltron
+#xmodmap -e 'keycode 112 = Super_L'
+#xmodmap -e 'keycode 117 = Super_R'
+#xmodmap -e 'keycode 94 = backslash bar'
+#xmodmap -e 'keycode 108 = Alt_R'
+##xmodmap -e "keysym Print = F21"
+##xmodmap -e "keysym Scroll_Lock = F22"
+##xmodmap -e "keysym Pause = F23"
+##xmodmap -e "remove Lock = Caps_Lock"
 
