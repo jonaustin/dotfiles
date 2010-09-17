@@ -386,7 +386,7 @@ alias fixres="xrandr --size 1920x1200"    # reset resolution
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
 
-alias dvd="sudo mount /dev/sr0 /media/dvd; cd /media/dvd"
+alias dvd="sudo mount /dev/sr0 /media/dvd; sleep 3; cd /media/dvd"
 alias dvd2="sudo mount /dev/sr1 /media/dvd; cd /media/dvd"
 alias ejectdvd="sudo eject /media/dvd"
 alias udvd="sudo eject /media/dvd"
