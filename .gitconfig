@@ -10,3 +10,6 @@
 	editor = vim
 [merge]
 	tool = vimdiff
+[alias]
+	co = checkout
+  br = branch

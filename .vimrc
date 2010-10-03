@@ -38,8 +38,14 @@
 		silent execute '!mkdir -p $HOME/.vimbackup'
 		silent execute '!mkdir -p $HOME/.vimswap'
 		silent execute '!mkdir -p $HOME/.vimviews'
-		au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
-		au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
+    " note these two below were causing rails.vim to not be able to find files
+    " in 'path' so replaced with the autocmd
+		"au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
+		"au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ exe "normal g`\"" |
+    \ endif
 	" }
 " }
 

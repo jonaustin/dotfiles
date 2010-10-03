@@ -60,7 +60,7 @@ tags.setup = {
     { name = "6",     layout = layouts[2], }, --hide   = true },
     { name = "7",     layout = layouts[2], }, --hide   = true },
     { name = "files",   layout = layouts[10]  },
-    { name = "chrome", layout = layouts[10]  }
+    { name = "qjackctl", layout = layouts[2]  }
 }
 
 for s = 1, screen.count() do
@@ -358,7 +358,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
-    awful.key({ modkey, "Shift"   }, "n",      function (c) c.minimized = not c.minimized    end),
+    awful.key({ modkey, "Shift"   }, "m",      function (c) c.minimized = not c.minimized    end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal

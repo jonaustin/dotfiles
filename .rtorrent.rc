@@ -18,8 +18,8 @@ max_peers = 52
 max_uploads = 7
 
 # Global upload and download rate in KiB. "0" for unlimited.
-download_rate = 500
-upload_rate = 40
+download_rate = 1000
+upload_rate = 90
 
 # Default directory to save the downloaded torrents.
 directory = /media/filez/torrents/

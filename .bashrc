@@ -33,7 +33,8 @@ export SURFRAW_graphical_browser="vimprobable"
 export SURFRAW_browser="vimprobable"
 
 ### woohoo! use for paths -- i.e. cd ${msx}/Mew -- even works with Tab completion!
-export msx='/media/MORGOTH/musix/musix/'
+export msx='/media/MORGOTH/musix/'
+export mmsx='/media/MORGOTH/musix/musix/'
 
 
 #export RAILS_GEM_VERSION=2.3.5
@@ -241,7 +242,18 @@ alias games='cd /media/ext3/Warez/Games/'
 export games='/media/ext3/Warez/Games/'
 alias lsgames='echo Civ4; echo Quake4; echo Portal; echo Warhammer; echo Freedom Force;'
 alias lp='lesspipe.sh '
+toptracks() { rvm use 1.8.6; /home/jon/bin/ruby/top_tracks.rb "${1}"; rvm use default; }
+um() { sudo umount /media/${1}; }
+alias sup="rvm use 1.8.7-p302; sup"
+
+
+### Monitoring
 alias it='iotop'
+alias dt='dmesg|tail'
+alias tm='tail -f /var/log/messages.log'
+alias lm='less /var/log/messages.log'
+alias cl='cd /var/log/'
+
 
 ### ruby
 alias fri='fri -L' # ruby fastri -- always bind to local as net stuff doesn't work
@@ -260,6 +272,10 @@ alias glq='gem contents '
 alias rtags='rtags -vi' # vi compatible rtags (default is emacs)
 alias gwhois='gem whois '
 gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
+alias gsrt='rvm gemset use rails3tut'
+alias fixdarkfish='for n in `rvm gemdir`/doc/*; do mkdir -p $n/rdoc/js; cp -n ~/.rvm/src/ruby-1.9.2-p0/lib/rdoc/generator/template/darkfish/js/*  $n/rdoc/js/; done'
+alias gd="grep 'describe' "
+rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
 
 ### awesome
 alias vac='vim ~/.config/awesome/rc.lua'
@@ -271,20 +287,21 @@ alias ogv2mp4="mencoder out.ogg -of lavf -lavfopts format=mp4 -oac mp3lame -lame
 alias ogv23gp='for n in `ls *.ogv`; do sudo ffmpeg -i $n -r 15 -b 64kb -ac 1 -s 176x132 -padtop 6 -padbottom 6 -ar 16000 -ab 32kb -acodec libfaac -vcodec h263 $(echo $n | cut -d "." -f 1).3gp; done'
 
 # terminal window
-alias vr='for n in 1 2 3 4  5 6 7 8 9 0; do for n in 1 2 3 4 5 6 7 8 9; do echo; done; done'
+alias vr='for n in `seq 0 99`; do echo; done;' 
 
 ### screen
 alias scl='screen -list'
-alias sc='screen -Sx'
+alias sc='screen -Sx '
+alias sd='screen -Sd'
 alias scs='screen -Sx screen'
 alias sccs='screen -c /home/jon/.screenrcs/screen -S screen'
 alias scsr='screen -c /home/jon/.screenrcs/rivo -S rivo'
 alias sccr='screen -Sx rivo'
 alias scc='screen -c /home/jon/.screenrcs/coding -S code'
 alias scn='screen -c /home/jon/.screenrcs/nextfm -S code'
-alias scx='screen -Sx '
 
 # dir shortcuts
+alias e3='cd /media/ext3'
 alias tv='cd /media/ext3/tv/'
 alias mov='cd /media/ext/Movies'
 alias scifi='cd /home/jon/_vids/classic_scifi/'
@@ -309,6 +326,7 @@ alias newz='cd /media/filez/usenet/newzbin'
 alias msx='cd /media/MORGOTH/musix'
 alias mmsx='cd /media/MORGOTH/musix/musix'
 h='/home/jon/'
+alias starter='cd /home/jon/starter/'
 
 # syncing
 alias async='sudo rsync -avz /media/ext/books_epub/ /media/usb/eBooks/;  sudo rsync -avz /media/ext/books_epub/ /media/usb/Books/; ' 
@@ -370,7 +388,7 @@ alias killspkr='sudo modprobe -r pcspkr'
 
 ### shortcut-TRICKS
 alias igrep='grep -i'
-alias pg='ps aux | grep -v grep | grep -i '
+pg() { ps aux | grep -v grep | grep -i ${1}; }
 alias g="grep -ir"
 alias hist='history | grep -i '
 
