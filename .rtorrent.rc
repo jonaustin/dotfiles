@@ -15,7 +15,7 @@ max_peers = 52
 #max_peers_seed = 50
 
 # Maximum number of simultanious uploads per torrent.
-max_uploads = 7
+#max_uploads = 7
 
 # Global upload and download rate in KiB. "0" for unlimited.
 download_rate = 1000
@@ -31,7 +31,7 @@ session = ~/.rsession
 
 
 # Keeps session data files even if torrent has finished
-session_on_completion = yes
+#session_on_completion = yes
 # Not really required, but recommended - see rtorrent(1) man page
 session_lock = yes
 # Save session data every 5 mins, with a 4 min offset
@@ -47,7 +47,7 @@ schedule = session_save,240,300,session_save=
 # http://libtorrent.rakshasa.no/wiki/RTorrentRatioHandling
 # http://libtorrent.rakshasa.no/wiki/RTorrentCommandsRaw
 # Enable the default ratio group.
-ratio.enable=yes
+#ratio.enable=yes
 
 # Change the limits, the defaults should be sufficient.
 ratio.min.set=000

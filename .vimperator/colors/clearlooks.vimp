@@ -3,7 +3,6 @@
 " ==Clearlooks_Colorscheme_Settings==
 hi Bell                 border: 0 none; background-color: black;
 hi Boolean              color: red;
-hi CmdLine              font-family: monospace; padding: 1px;
 hi CmdOutput                white-space: pre;
 hi CompDesc             color: gray; width: 50%;
 "hi CompGroup    
@@ -47,7 +46,8 @@ hi Object               color: maroon;
 hi Preview              color: gray;
 hi Question             color: green; background: white; font-weight: bold;
 hi Search               font-size: inherit; padding: 0; color: black; background-color: #86ABD9; padding: 0;
-hi StatusLine               color: black; background: #E6E6E6;
+"hi StatusLine        color: black; background: #E6E6E6; 
+hi StatusLine           color: #d8dada; background:#1f1f1f;
 hi StatusLineBroken         color: black; background: #FF6060; /* light-red */
 hi StatusLineSecure         color: black; background: #B0FF00; /* light-green */
 hi String               color: green;
@@ -61,3 +61,4 @@ hi Title                color: #86ABD9; background: white; font-weight: bold;
 hi URL                  text-decoration: none; color: green; background: inherit;
 hi URL:hover                text-decoration: underline; cursor: pointer;
 hi WarningMsg               color: red; background: white;
+hi CmdLine              font-family: terminus; padding: 1px; color: #d8dada; background:#1f1f1f;

@@ -162,9 +162,12 @@ alias free='free -m'
 alias info='pinfo'
 
 #ask before overwriting
-alias rm='rm -i'
+#alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
+# don't ask
+alias rm='rm -f'
 
 
 #ls
@@ -188,6 +191,7 @@ fi
 
 
 #convenience
+alias fdays='find . -mtime '
 alias mr='sudo /etc/rc.d/mpd restart'
 alias mrm='sudo /etc/rc.d/mpd restart && ncmpcpp'
 alias mra='sudo /etc/rc.d/mpd_all restart'
@@ -209,7 +213,7 @@ alias c='clear'
 alias e='exit; clear'
 alias svi='sudo vim'
 alias t='todo.sh'
-alias enc='h264enc -2p -p hq'
+alias enc='xvidenc -2p -p hq'
 alias h2='h264enc -2p -p hq'
 alias S='sudo '
 alias t='top'
@@ -242,10 +246,15 @@ alias games='cd /media/ext3/Warez/Games/'
 export games='/media/ext3/Warez/Games/'
 alias lsgames='echo Civ4; echo Quake4; echo Portal; echo Warhammer; echo Freedom Force;'
 alias lp='lesspipe.sh '
-toptracks() { rvm use 1.8.6; /home/jon/bin/ruby/top_tracks.rb "${1}"; rvm use default; }
+#toptracks() { rvm use 1.8.6; /home/jon/bin/ruby/top_tracks.rb "${1}"; rvm use default; }
+alias toptracks='top_tracks_rockstar.rb'
 um() { sudo umount /media/${1}; }
 alias sup="rvm use 1.8.7-p302; sup"
-
+alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
+alias lsfuncbody='declare -f'
+alias lsfunc='declare -F' 
+alias xm='/home/jon/.xmodmap'
+alias reset='reset; v'
 
 ### Monitoring
 alias it='iotop'
@@ -265,7 +274,7 @@ alias wr='which ruby'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-alias cdgem='cd /home/jon/.rvm/gems/ruby-1.8.7-p302/gems'
+alias cdgem='cd /home/jon/.rvm/gems/ruby-1.9.2-p0/gems'
 alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server.sh'
 alias qlg='gem contents '
 alias glq='gem contents '
@@ -276,6 +285,11 @@ alias gsrt='rvm gemset use rails3tut'
 alias fixdarkfish='for n in `rvm gemdir`/doc/*; do mkdir -p $n/rdoc/js; cp -n ~/.rvm/src/ruby-1.9.2-p0/lib/rdoc/generator/template/darkfish/js/*  $n/rdoc/js/; done'
 alias gd="grep 'describe' "
 rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
+rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
+
+### ruboto
+ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }
+alias ruboto_rake_build="CLASSPATH=$JAVA_HOME/lib/tools.jar rake" # jruby rake having issues with java_home... https://github.com/ruboto/ruboto-core/issues#issue/5
 
 ### awesome
 alias vac='vim ~/.config/awesome/rc.lua'
@@ -407,7 +421,7 @@ alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort 
 alias dvd="sudo mount /dev/sr0 /media/dvd; sleep 3; cd /media/dvd"
 alias dvd2="sudo mount /dev/sr1 /media/dvd; cd /media/dvd"
 alias ejectdvd="sudo eject /media/dvd"
-alias udvd="sudo eject /media/dvd"
+alias udvd="cd ../; sudo eject /media/dvd; cd -"
 alias movie="vlc -f $1"
 #alias v='vlc -f $1'
 
@@ -824,3 +838,4 @@ alias ra3='cd "/home/jon/.PlayOnLinux/wineprefix/RA3U/drive_c/Program Files/Elec
 
 ### Music creation ###
 alias aplay_all='prename "s/ /_/g" *; for n in *; do echo -e $n |  osd_cat -f "-*-terminus-*-*-*-*-24-*-*-*-*-*-*-*"  -p bottom -o 15 -l 3 -A right -c "#fff" -s 3 -d 4 &   aplay $n; sleep 2; done'
+alias mkindle='sudo mount /dev/disk/by-uuid/4B67-1FC0 /media/kindle'

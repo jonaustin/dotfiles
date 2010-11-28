@@ -67,7 +67,7 @@ require 'boson'; Boson.start
 
 
 # awesome_print all return values
-require 'ap'
+require 'awesome_print'
 module IRB
   class Irb
     def output_value

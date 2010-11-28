@@ -8,11 +8,11 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "awsetbg /home/jon/.config/awesome/themes/zenburn/zenburn-background.png" }
+theme.wallpaper_cmd = { "awsetbg /home/jon/.config/awesome/themes/zenburn/calvin_hobbes.png" } --zenburn-background.png" }
 -- }}}
 
 -- {{{ Styles
-theme.font      = "Profont 8"
+theme.font      = "Terminus 8"
 
 -- {{{ Colors
 theme.fg_normal = "#D8dada"

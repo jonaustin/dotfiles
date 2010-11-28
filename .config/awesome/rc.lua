@@ -272,8 +272,8 @@ globalkeys = awful.util.table.join(
     awful.key({}, "#107", function () awful.util.spawn("/home/jon/bin/softer", false) end),
     awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
     awful.key({}, "#127", function () awful.util.spawn("/home/jon/bin/mute", false) end),
-    awful.key({ "Shift" }, "#107", function () awful.util.spawn("amixer -D hw:1 set Speaker 1-", false) end),
-    awful.key({ "Shift" }, "#78", function () awful.util.spawn("amixer -D hw:1 set Speaker 1+", false) end),
+    awful.key({ "Shift" }, "#107", function () awful.util.spawn("amixer -D hw:2 set Speaker 1-", false) end),
+    awful.key({ "Shift" }, "#78", function () awful.util.spawn("amixer -D hw:2 set Speaker 1+", false) end),
     awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 6600", false) end),
     awful.key({ modkey, "Shift" }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 6602", false) end),
     awful.key({ modkey, "Control" }, "d",function () awful.util.spawn("mpc -p 6600 del 0", false) end),
@@ -307,8 +307,8 @@ globalkeys = awful.util.table.join(
             if client.focus then client.focus:raise() end
         end),
     -- switch to other screen
-    awful.key({ modkey }, "]", function () awful.screen.focus(1) end),
-    awful.key({ modkey }, "[", function () awful.screen.focus(2) end),
+    awful.key({ modkey }, "[", function () awful.screen.focus(1) end),
+    awful.key({ modkey }, "]", function () awful.screen.focus(2) end),
 --    awful.key({ modkey,           }, "w", function () mymainmenu:show(true)        end),
 
     -- Layout manipulation
@@ -427,7 +427,9 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons,
+                     size_hints_honor = false
+    } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },

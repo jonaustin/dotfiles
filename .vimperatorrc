@@ -3,7 +3,7 @@
 
 " Options
 " Window title (Vimperator by default)
-set titlestring=Firefox
+set titlestring=Foo
 
 " Editor, C-i invokes it in text fields (replaces "It's All Text")
 set editor=vim
@@ -35,7 +35,7 @@ set hlsearch
 " Default search engine is ignored, plugins are used, place yubnub in there and do:
 " set ds=yubnub
 
-colo clearlooks
+colo zenburn
 
 " Abbreviations
 
