@@ -272,20 +272,39 @@ globalkeys = awful.util.table.join(
     awful.key({}, "#107", function () awful.util.spawn("/home/jon/bin/softer", false) end),
     awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
     awful.key({}, "#127", function () awful.util.spawn("/home/jon/bin/mute", false) end),
-    awful.key({ "Shift" }, "#107", function () awful.util.spawn("amixer -D hw:2 set Speaker 1-", false) end),
-    awful.key({ "Shift" }, "#78", function () awful.util.spawn("amixer -D hw:2 set Speaker 1+", false) end),
+    awful.key({ "Shift" }, "#107", function () awful.util.spawn("amixer -D hw:1 set Speaker 1-", false) end),
+    awful.key({ "Shift" }, "#78", function () awful.util.spawn("amixer -D hw:1 set Speaker 1+", false) end),
+    -- MPD
+    ---- MPD - alsa
     awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 6600", false) end),
-    awful.key({ modkey, "Shift" }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 6602", false) end),
     awful.key({ modkey, "Control" }, "d",function () awful.util.spawn("mpc -p 6600 del 0", false) end),
-    awful.key({ modkey, "Shift", "Control" }, "d",function () awful.util.spawn("mpc -p 6602 del 0", false) end),
     awful.key({ modkey }, "n",function () awful.util.spawn_with_shell("mpc -p 6600 next; /home/jon/bin/mpd_status.sh 6600", false) end),
-    awful.key({ modkey, "Shift" }, "n",function () awful.util.spawn_with_shell("mpc -p 6602 next; /home/jon/bin/mpd_status.sh 6602", false) end),
     awful.key({ modkey }, "v",function () awful.util.spawn_with_shell("mpc -p 6600 prev; /home/jon/bin/mpd_status.sh 6600", false) end),
-    awful.key({ modkey, "Shift" }, "v",function () awful.util.spawn_with_shell("mpc -p 6602 prev; /home/jon/bin/mpd_status.sh 6602", false) end),
     awful.key({ modkey }, "x",function () awful.util.spawn_with_shell("mpc -p 6600 toggle", false) end),
-    awful.key({ modkey, "Shift" }, "x",function () awful.util.spawn_with_shell("mpc -p 6602 toggle", false) end),
+
+    ---- MPD - jack
+    awful.key({ modkey, "Shift" }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 6601", false) end),
+    --awful.key({ modkey, "Shift", "Control" }, "d",function () awful.util.spawn("mpc -p 6601 del 0", false) end),
+    awful.key({ modkey, "Shift" }, "n",function () awful.util.spawn_with_shell("mpc -p 6601 next; /home/jon/bin/mpd_status.sh 6601", false) end),
+    awful.key({ modkey, "Shift" }, "v",function () awful.util.spawn_with_shell("mpc -p 6601 prev; /home/jon/bin/mpd_status.sh 6601", false) end),
+    awful.key({ modkey, "Shift" }, "x",function () awful.util.spawn_with_shell("mpc -p 6601 toggle", false) end),
+    
+    ---- MPD_all - alsa
+    awful.key({ modkey, "Control" }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 7700", false) end),
+    --awful.key({ modkey, "Control", "Control" }, "d",function () awful.util.spawn("mpc -p 7700 del 0", false) end),
+    awful.key({ modkey, "Control" }, "n",function () awful.util.spawn_with_shell("mpc -p 7700 next; /home/jon/bin/mpd_status.sh 7700", false) end),
+    awful.key({ modkey, "Control" }, "v",function () awful.util.spawn_with_shell("mpc -p 7700 prev; /home/jon/bin/mpd_status.sh 7700", false) end),
+    awful.key({ modkey, "Control" }, "x",function () awful.util.spawn_with_shell("mpc -p 7700 toggle", false) end),
+
+    ---- MPD_all - jack
+    awful.key({ modkey, "Shift", "Control" }, "d",function () awful.util.spawn("/home/jon/bin/mpd_status.sh 7701", false) end),
+    awful.key({ modkey, "Shift", "Control" }, "n",function () awful.util.spawn_with_shell("mpc -p 7701 next; /home/jon/bin/mpd_status.sh 7701", false) end),
+    awful.key({ modkey, "Shift", "Control" }, "v",function () awful.util.spawn_with_shell("mpc -p 7701 prev; /home/jon/bin/mpd_status.sh 7701", false) end),
+    awful.key({ modkey, "Shift", "Control" }, "x",function () awful.util.spawn_with_shell("mpc -p 7701 toggle", false) end),
+    --awful.key({ modkey, "Shift", "Control" }, "d",function () awful.util.spawn("mpc -p 7701 del 0", false) end),
+
+    ----
     awful.key({ modkey }, "p", function () awful.util.spawn("/usr/bin/projectM-libvisual-alsa") end),
---    awful.key({ modkey }, "z", function () awful.util.spawn("/home/jon/bin/cur_task.sh") end),
     awful.key({ modkey }, "u", function () awful.util.spawn("/home/jon/bin/uptime.sh") end),
     awful.key({ modkey, "Shift" }, "u", function () awful.util.spawn("/home/jon/bin/cpu_hogs.sh") end),
     awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("/home/jon/bin/datetime.sh") end),

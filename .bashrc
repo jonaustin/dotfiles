@@ -12,7 +12,7 @@
 
 
 ## ENV
-export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts:/usr/local/bin:/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/home/jon/bin/ruby"
+export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts:/usr/local/bin:/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/home/jon/bin/ruby:/home/jon/bin/bash"
 export EDITOR='vim'
 export BROWSER='elinks'
 export PAGER='less'
@@ -190,21 +190,21 @@ if [ "$TERM" != "dumb" ]; then
 fi
 
 
-#convenience
-alias fdays='find . -mtime '
-alias mr='sudo /etc/rc.d/mpd restart'
-alias mrm='sudo /etc/rc.d/mpd restart && ncmpcpp'
-alias mra='sudo /etc/rc.d/mpd_all restart'
-alias m='ncmpcpp'
-alias mnoo='ncmpcpp -p 6601'
-alias pnoo='pms -p 6601'
-alias ma='ncmpcpp -p 6602'
-alias pall='pms -p 6602'
-alias mva='ncmpcpp -p 6603'
-alias pva='pms -p 6603'
+# convenience
+## Music
 alias mc='cmus /media/musix/'
 alias vol="alsamixer"
 alias am="alsamixer"
+### MPD
+alias mr='sudo /etc/rc.d/mpd restart'
+alias mrm='sudo /etc/rc.d/mpd restart && ncmpcpp'
+alias mra='sudo /etc/rc.d/mpd_all restart'
+alias m='ncmpcpp -p 6600' # mpd alsa
+alias mj='ncmpcpp -p 6601' # mpd jack
+alias ma='ncmpcpp -p 7700' # mpd all alsa
+alias maj='ncmpcpp -p 7701' # mpd all jack
+alias toptracks="top_tracks_rockstar.rb; sed -i 's@musix/@@' /var/lib/mpd/playlists/_LASTFM-TOP_-_*;"   # weird..using sed the normal way 'sed -ie' causes a duplicate file with 'e' added to the end to be created..
+## Other
 alias sv='sudo vim'
 alias vrc='vim ~/.bashrc'
 alias v='vr'
@@ -246,8 +246,6 @@ alias games='cd /media/ext3/Warez/Games/'
 export games='/media/ext3/Warez/Games/'
 alias lsgames='echo Civ4; echo Quake4; echo Portal; echo Warhammer; echo Freedom Force;'
 alias lp='lesspipe.sh '
-#toptracks() { rvm use 1.8.6; /home/jon/bin/ruby/top_tracks.rb "${1}"; rvm use default; }
-alias toptracks='top_tracks_rockstar.rb'
 um() { sudo umount /media/${1}; }
 alias sup="rvm use 1.8.7-p302; sup"
 alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
@@ -255,6 +253,7 @@ alias lsfuncbody='declare -f'
 alias lsfunc='declare -F' 
 alias xm='/home/jon/.xmodmap'
 alias reset='reset; v'
+alias fdays='find . -mtime '
 
 ### Monitoring
 alias it='iotop'
@@ -262,6 +261,9 @@ alias dt='dmesg|tail'
 alias tm='tail -f /var/log/messages.log'
 alias lm='less /var/log/messages.log'
 alias cl='cd /var/log/'
+
+### Git
+
 
 
 ### ruby
@@ -286,6 +288,7 @@ alias fixdarkfish='for n in `rvm gemdir`/doc/*; do mkdir -p $n/rdoc/js; cp -n ~/
 alias gd="grep 'describe' "
 rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
 rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
+alias yardserver="yard server -g -r -d -p8809"
 
 ### ruboto
 ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }

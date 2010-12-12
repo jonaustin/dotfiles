@@ -17,10 +17,11 @@
 " }
  
 " General {
+  runtime! macros/matchit.vim
 	filetype plugin indent on  	" Automatically detect file types.
-	syntax on 					" syntax highlighting
-	set mouse=					" automatically enable mouse usage ### disabled..add =a to enable
-	set autochdir 				" always switch to the current file directory.. 
+	syntax on 					        " syntax highlighting
+	set mouse=					        " disable mouse..add =a to enable
+	set autochdir 				      " always switch to the current file directory.. 
 	" not every vim is compiled with this, use the following line instead
      "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 	scriptencoding utf-8
@@ -68,7 +69,7 @@
 	if has('statusline')
 		set laststatus=1           	" show statusline only if there are > 1 windows
 		" Use the commented line if fugitive isn't installed
-		"set statusline=%<%f\ %=\:\b%n%y%m%r%w\ %l,%c%V\ %P " a statusline, also on steroids
+      "set statusline=%<%f\ %=\:\b%n%y%m%r%w\ %l,%c%V\ %P " a statusline, also on steroids
 		set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 	endif
 
@@ -80,7 +81,7 @@
 	set hlsearch 					" highlight search terms
 	set winminheight=0 				" windows can be 0 line high 
 	set ignorecase 					" case insensitive search
-	set smartcase 					" case sensitive when uc present
+	set smartcase 					" become temporarilly case sensitive when any uppercase letters present in search string
 	set wildmenu 					" show list instead of just completing
 	set wildmode=list:longest,full 	" comand <Tab> completion, list matches, then longest common part, then all.
 	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
@@ -97,7 +98,7 @@
 	set shiftwidth=2               	   " use indents of 2 spaces
 	set expandtab 	       	  	       " tabs should be spaces for sanity
 	set tabstop=2 					           " an indentation every 2 columns
-  "set matchpairs+=<:>               " match, to be used with % 
+  set matchpairs+=<:>               " match, to be used with % 
 	set pastetoggle=<F10>          	   " pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/    " auto format comment blocks
   set encoding=utf-8                 " no junk chars
@@ -116,7 +117,7 @@
 	map <S-H> gT
 	map <S-L> gt
 
-	" Stupid shift key fixes
+	" shift key fixes
 	"cmap W w 						
 	"cmap WQ wq
 	"cmap wQ wq
@@ -140,20 +141,20 @@
 	map <S-t> :TlistToggle<cr>
 
 	" Conque Bash
-	map <leader>b :ConqueTerm bash<cr>
+	map <leader>bb :ConqueTerm bash<cr>
 	map <leader>bsp :ConqueTermSplit bash<cr>
 
-    " quit!
-  	map <leader>qq :q!<cr>
-  	map <leader>qqa :qall!<cr>
+  " quit!
+  map <leader>qq :q!<cr>
+  map <leader>qqa :qall!<cr>
 
 " }
 
 " Plugins {
 
 	" VCSCommand {
-		let b:VCSCommandMapPrefix=',v'
-		let b:VCSCommandVCSType='git'
+	"	let b:VCSCommandMapPrefix=',v'
+	"	let b:VCSCommandVCSType='git'
 		""let mapleader = "-"
 	" } 
 	
