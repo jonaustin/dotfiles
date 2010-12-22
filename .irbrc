@@ -120,4 +120,4 @@ def paste
 end
 =end
 
-
+require 'irbtools'

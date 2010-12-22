@@ -269,7 +269,7 @@ globalkeys = awful.util.table.join(
     -- }}}
 
     -- {{{ Multimedia keys
-    awful.key({}, "#107", function () awful.util.spawn("/home/jon/bin/softer", false) end),
+    awful.key({}, "F21", function () awful.util.spawn("/home/jon/bin/softer", false) end),
     awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
     awful.key({}, "#127", function () awful.util.spawn("/home/jon/bin/mute", false) end),
     awful.key({ "Shift" }, "#107", function () awful.util.spawn("amixer -D hw:1 set Speaker 1-", false) end),

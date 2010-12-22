@@ -299,3 +299,10 @@ augroup filetypedetect
     autocmd! BufNewFile,BufRead *.ctp setfiletype php
     autocmd! BufNewFile,BufRead *.scss setfiletype sass
 augroup END
+
+" }
+" Languages {
+" Ruby
+nmap <leader>rci :%!ruby-code-indenter<cr> 
+"}
+
