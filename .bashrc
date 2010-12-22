@@ -389,10 +389,16 @@ alias pb='ssh jonaustin@mrfantastic.dreamhost.com'
 alias n8='ssh root@192.168.0.232'
 alias work_proxy='ssh -D 8080 -f -C -q -N jon@barracuda-ext.cmdpdx.com'
 alias work_rdc='ssh jon@barracuda-ext.cmdpdx.com -L 10000:jaustin.cmdpdx.com:3389' # tunnel rdc connection to localhost:10000
-
+#synergy
 alias syn='synergyc 192.168.0.9'
 alias ssyn='ssh -f -N -L12345:10.10.10.155:24800 barracuda-ext.cmdpdx.com; synergyc localhost:12345'
 alias ksyn="killall synergyc"
+#non-frak
+alias fxxs='sftp -oPort=666 jon@xs.homeunix.net'
+alias home_proxy='ssh -p666 -D 8080 -f -C -q -N jon@xs.homeunix.net'
+alias sfxxs='sftp -oPort=666 jon@xs.homeunix.net'
+alias sxxs='ssh -p666 jon@xs.homeunix.net'
+alias xxsfs='sshfs -o reconnect -p666 jon@xs.homeunix.net:/ /media/xs'
 
 ##apps
 alias nd="ncdu ."
@@ -842,3 +848,7 @@ alias ra3='cd "/home/jon/.PlayOnLinux/wineprefix/RA3U/drive_c/Program Files/Elec
 ### Music creation ###
 alias aplay_all='prename "s/ /_/g" *; for n in *; do echo -e $n |  osd_cat -f "-*-terminus-*-*-*-*-24-*-*-*-*-*-*-*"  -p bottom -o 15 -l 3 -A right -c "#fff" -s 3 -d 4 &   aplay $n; sleep 2; done'
 alias mkindle='sudo mount /dev/disk/by-uuid/4B67-1FC0 /media/kindle'
+
+
+
+
