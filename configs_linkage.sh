@@ -1,13 +1,13 @@
 #!/bin/bash
-ln configs/.bashrc 
-ln configs/.Xdefaults
+ln -s configs/.bashrc 
+ln -s configs/.Xdefaults
 ln -s configs/.vim
-ln configs/.vimrc
-ln configs/.gitconfig
-ln configs/.vimperatorrc
+ln -s configs/.vimrc
+ln -s configs/.gitconfig
+ln -s configs/.vimperatorrc
 ln -s configs/.vimperator
-ln configs/.screenrc
-ln configs/.inputrc 
+ln -s configs/.screenrc
+ln -s configs/.inputrc 
 ln -s configs/.config/awesome .config/awesome
 ln -s configs/.config/vimprobable .config/vimprobable
 mkdir .vim/bin
