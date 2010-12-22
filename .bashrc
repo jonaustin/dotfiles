@@ -394,11 +394,12 @@ alias syn='synergyc 192.168.0.9'
 alias ssyn='ssh -f -N -L12345:10.10.10.155:24800 barracuda-ext.cmdpdx.com; synergyc localhost:12345'
 alias ksyn="killall synergyc"
 #non-frak
-alias fxxs='sftp -oPort=666 jon@xs.homeunix.net'
+alias fxs='sftp -oPort=666 jon@xs.homeunix.net'
 alias home_proxy='ssh -p666 -D 8080 -f -C -q -N jon@xs.homeunix.net'
-alias sfxxs='sftp -oPort=666 jon@xs.homeunix.net'
-alias sxxs='ssh -p666 jon@xs.homeunix.net'
-alias xxsfs='sshfs -o reconnect -p666 jon@xs.homeunix.net:/ /media/xs'
+alias sfxs='sftp -oPort=666 jon@xs.homeunix.net'
+alias sxs='ssh -p666 jon@xs.homeunix.net'
+alias xsfs='sshfs -o reconnect -p666 jon@xs.homeunix.net:/ /media/xs'
+
 
 ##apps
 alias nd="ncdu ."
@@ -824,10 +825,6 @@ alias fsize="smallprompt; printf '\33]50;%s%d\007' 'xft:Terminus:pixelsize='"
 #alias updatedb='sudo /usr/libexec/locate.updatedb'
 
 
-
-alias sxs='ssh -p666 jon@xs.homeunix.net'
-alias fxs='sftp -oPort=666 jon@xs.homeunix.net'
-alias sfxs='sftp -oPort=666 jon@xs.homeunix.net'
 
 # not sure if this works, but should:
 # allow specific commands to be run at X startup
