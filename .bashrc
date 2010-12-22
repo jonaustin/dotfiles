@@ -847,4 +847,8 @@ alias mkindle='sudo mount /dev/disk/by-uuid/4B67-1FC0 /media/kindle'
 
 
 
-
+### local overrides
+if [ -e ~/.bashrc_local ];
+then
+  source ~/.bashrc_local;
+fi
