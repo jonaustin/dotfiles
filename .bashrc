@@ -81,6 +81,8 @@ export MAIL=/var/spool/mail/jon
 setterm -blength 0
 #xset -b
 
+xset s off -dpms   # disable automatic screen blanking
+
 # BASH COLOR CODES (for reference)
 #Black       0;30     Dark Gray     1;30
 #Blue        0;34     Light Blue    1;34
