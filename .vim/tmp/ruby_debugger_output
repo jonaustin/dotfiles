@@ -1,9 +1,0 @@
-Fast Debugger (ruby-debug-ide 0.4.10) listens on :39767
-=> Booting WEBrick
-=> Rails 2.3.5 application starting on http://0.0.0.0:3000
-/home/jon/.rvm/gems/ruby-1.8.7-p302/gems/rails-2.3.5/lib/rails/gem_dependency.rb:119:Warning: Gem::Dependency#version_requirements is deprecated and will be removed on or after August 2010.  Use #requirement
-=> Call with -d to detach
-=> Ctrl-C to shutdown server
-[2010-09-14 19:20:40] INFO  WEBrick 1.3.1
-[2010-09-14 19:20:40] INFO  ruby 1.8.7 (2010-08-16) [i686-linux]
-[2010-09-14 19:20:40] INFO  WEBrick::HTTPServer#start: pid=15816 port=3000
