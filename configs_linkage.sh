@@ -27,4 +27,4 @@ ln -s ${HOME}/.vim/bundle/vim-ruby-debugger/vim/doc/ruby_debugger.txt .vim/doc/r
 #ln -s configs/.inputrc .
 #ln -s configs/.xbindkeysrc .
 #ln -s configs/.xmodmap 
-
+ 
