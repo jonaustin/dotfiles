@@ -847,7 +847,9 @@ alias ra3='cd "/home/jon/.PlayOnLinux/wineprefix/RA3U/drive_c/Program Files/Elec
 alias aplay_all='prename "s/ /_/g" *; for n in *; do echo -e $n |  osd_cat -f "-*-terminus-*-*-*-*-24-*-*-*-*-*-*-*"  -p bottom -o 15 -l 3 -A right -c "#fff" -s 3 -d 4 &   aplay $n; sleep 2; done'
 alias mkindle='sudo mount /dev/disk/by-uuid/4B67-1FC0 /media/kindle'
 
-
+# rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session. 
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
 ### local overrides
 if [ -e ~/.bashrc_local ];
