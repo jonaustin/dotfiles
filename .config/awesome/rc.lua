@@ -326,8 +326,8 @@ globalkeys = awful.util.table.join(
             if client.focus then client.focus:raise() end
         end),
     -- switch to other screen
-    awful.key({ modkey }, "[", function () awful.screen.focus(1) end),
-    awful.key({ modkey }, "]", function () awful.screen.focus(2) end),
+--    awful.key({ modkey }, "[", function () awful.screen.focus(1) end),
+--    awful.key({ modkey }, "]", function () awful.screen.focus(2) end),
 --    awful.key({ modkey,           }, "w", function () mymainmenu:show(true)        end),
 
     -- Layout manipulation
