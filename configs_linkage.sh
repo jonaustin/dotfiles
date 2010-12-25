@@ -8,14 +8,15 @@ ln -s configs/.vimperatorrc
 ln -s configs/.vimperator
 ln -s configs/.screenrc
 ln -s configs/.inputrc 
-ln -s /home/jon/configs/.config/awesome /home/jon/.config/awesome
-ln -s /home/jon/configs/.config/vimprobable /home/jon/.config/vimprobable
+ln -s /home/jon/configs/.config/awesome /home/jon/.config/
+ln -s /home/jon/configs/.config/vimprobable /home/jon/.config/
 ln -s configs/.elinks/ .
 ln -s configs/.gemrc .
 ln -s configs/.irbrc .
 ln -s configs/.ncmpcpp/ .
 ln -s configs/.rtorrent.rc .
 ln -s configs/.xinitrc .
+ln -s /home/jon/configs/.config/ranger .config/
 
 mkdir .vim/bin
 ln -s ${HOME}/.vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb .vim/bin/

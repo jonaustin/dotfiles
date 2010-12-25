@@ -1,3 +1,6 @@
 .vimperator/info/**/*
 blog.vim
 .vim/tmp
+.netrwhist
+*.pyo
+*.pyc

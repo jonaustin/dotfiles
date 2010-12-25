@@ -1,0 +1,10 @@
+search foo
+!locate imax
+find im
+find imax
+shell locate imax
+open_with hjk
+search .config
+find rang
+q
+
