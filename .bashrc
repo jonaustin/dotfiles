@@ -12,7 +12,7 @@
 
 
 ## ENV
-export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts:/usr/local/bin:/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/home/jon/bin/ruby:/home/jon/bin/bash"
+export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/usr/local/bin::/home/jon/bin/ruby:/home/jon/bin/bash"
 export EDITOR='vim'
 export BROWSER='elinks'
 export PAGER='less'
@@ -163,6 +163,9 @@ alias df='df -Th'
 alias free='free -m'
 alias info='pinfo'
 
+# non pkg'd app-updates
+alias upcalibre="sudo python -c \"import urllib2; exec urllib2.urlopen('http://status.calibre-ebook.com/linux_installer').read(); main()\""
+
 #ask before overwriting
 #alias rm='rm -i'
 alias cp='cp -i'
@@ -173,7 +176,7 @@ alias rm='rm -f'
 
 
 #ls
-alias l='ls -CF'
+#alias l='ls -CF'
 alias ll='ls -l'
 alias lll='ls -l|less'
 alias la='ls -lA'
@@ -197,6 +200,9 @@ fi
 alias mc='cmus /media/musix/'
 alias vol="alsamixer"
 alias am="alsamixer"
+alias mccc='mpc current'
+alias mpcn='mpc next'
+alias mpcp='mpc toggle'
 ### MPD
 alias mr='sudo /etc/rc.d/mpd restart'
 alias mrm='sudo /etc/rc.d/mpd restart && ncmpcpp'
@@ -256,6 +262,8 @@ alias lsfunc='declare -F'
 alias xm='/home/jon/.xmodmap'
 alias reset='reset; v'
 alias fdays='find . -mtime '
+alias loc='locate'
+alias loci='locate -i'
 
 ### Monitoring
 alias it='iotop'
@@ -278,7 +286,7 @@ alias wr='which ruby'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-alias cdgem='cd /home/jon/.rvm/gems/ruby-1.9.2-p0/gems'
+alias cdgem='cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems'
 alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server.sh'
 alias qlg='gem contents '
 alias glq='gem contents '
@@ -794,7 +802,7 @@ alias dac='apt-cache'
 alias apt-top='grep-status -FStatus -sInstalled-Size,Package -n             "install ok installed" | paste -sd "  \n" | sort -n'
 
 ### Arch ###
-#pacman
+export PACMAN=pacman-color
 alias pi="sudo powerpill -S "
 alias pag="sudo powerpill -S "
 alias ag="sudo pacman -S "

@@ -132,7 +132,7 @@ key_next_column = 'l'
 #
 #key_artist_info = 'I'
 #
-#key_lyrics = 'l'
+key_lyrics = ';'
 #
 #key_reverse_selection = 'v'
 #
