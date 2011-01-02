@@ -264,6 +264,7 @@ alias reset='reset; v'
 alias fdays='find . -mtime '
 alias loc='locate'
 alias loci='locate -i'
+alias nmap='sudo nmap'
 
 ### Monitoring
 alias it='iotop'
