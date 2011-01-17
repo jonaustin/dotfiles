@@ -47,7 +47,7 @@ schedule = session_save,240,300,session_save=
 # http://libtorrent.rakshasa.no/wiki/RTorrentRatioHandling
 # http://libtorrent.rakshasa.no/wiki/RTorrentCommandsRaw
 # Enable the default ratio group.
-#ratio.enable=yes
+ratio.enable=yes
 
 # Change the limits, the defaults should be sufficient.
 ratio.min.set=000
