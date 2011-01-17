@@ -5,7 +5,7 @@ blog.vim
 .netrwhist
 *.pyo
 *.pyc
-.elinks/bookmarks/
+.elinks/bookmarks
 .elinks/cookies
 .elinks/searchhist
 .elinks/globhist
