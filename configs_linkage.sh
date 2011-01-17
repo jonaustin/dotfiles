@@ -17,6 +17,7 @@ ln -s configs/.ncmpcpp/ .
 ln -s configs/.rtorrent.rc .
 ln -s configs/.xinitrc .
 ln -s /home/jon/configs/.config/ranger .config/
+ln -s configs/.pentadactyl* ~/
 
 mkdir .vim/bin
 ln -s ${HOME}/.vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb .vim/bin/
