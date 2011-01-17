@@ -1,4 +1,5 @@
 .vimperator/info/**/*
+.pentadactyl/info/**/*
 blog.vim
 .vim/tmp
 .netrwhist
@@ -8,3 +9,4 @@ blog.vim
 .elinks/cookies
 .elinks/searchhist
 .elinks/globhist
+**/*log
