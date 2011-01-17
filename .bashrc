@@ -16,7 +16,8 @@ export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts/usr/X11R6/bin:/home/jon/bi
 export EDITOR='vim'
 export BROWSER='elinks'
 export PAGER='less'
-export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr' # --LINE-NUMBERS --quit-if-one-screen'
+export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R' # --LINE-NUMBERS --quit-if-one-screen' # -R for less coloring with source-highlight (external app)
+export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export DISPLAY=:0
 export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
 export TERM=xterm-256color    # no idea why I didn't add this before
@@ -255,7 +256,7 @@ export games='/media/ext3/Warez/Games/'
 alias lsgames='echo Civ4; echo Quake4; echo Portal; echo Warhammer; echo Freedom Force;'
 alias lp='lesspipe.sh '
 um() { sudo umount /media/${1}; }
-alias sup="rvm use 1.8.7-p302; sup"
+#alias sup="rvm use 1.8.7-p302; sup"
 alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
 alias lsfuncbody='declare -f'
 alias lsfunc='declare -F' 
@@ -387,8 +388,11 @@ alias rivo='cd /media/MORGOTH/documents/code/ruby/rails/tv_updater/railer'
 # shortcuts #
 alias rvd='vim --servername VIM $1'; # ruby vim debug -- then :Rdebugger, then connect to xxx:3000, then go to it
 
-##configs
+## configs
 alias rc='source ~/.bashrc'
+
+## incantations
+alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
 
 ##network
 #ssh
@@ -818,14 +822,14 @@ alias pagu="sudo powerpill -Syu"
 alias psizes="LANG=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
 alias redownload_all='for n in `pacman -Q`; do sudo pacman -Sw $n; done'
 
-#yaourt
-alias y='yaourt $1'
-alias show='yaourt -Si $1'
-alias yg="yaourt -G" #just fetch PKGBUILD
-alias yu='yaourt -Syu --aur'
-alias yac='yaourt -C' # autoclean
-alias yacc='yaourt -Cc' # clean and remove all archived packageiiis
-alias yaqt='yaourt -Qdt' # search for orphaned packages
+#packer
+alias y='packer $1'
+alias show='packer -Si $1'
+alias yg="packer -G" #just fetch PKGBUILD
+alias yu='packer -Syu --aur'
+alias yac='packer -C' # autoclean
+alias yacc='packer -Cc' # clean and remove all archived packageiiis
+alias yaqt='packer -Qdt' # search for orphaned packages
 
 # urxvt
 alias fsize="smallprompt; printf '\33]50;%s%d\007' 'xft:Terminus:pixelsize='"
