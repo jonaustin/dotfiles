@@ -285,6 +285,7 @@ alias gg='gitg --all&'
 alias gx='gitx --all'
 alias got='git '
 alias get='git '
+alias gpom='git push origin master'
 
 
 
