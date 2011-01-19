@@ -275,6 +275,16 @@ alias lm='less /var/log/messages.log'
 alias cl='cd /var/log/'
 
 ### Git
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout '
+alias gg='gitg --all&'
+alias gx='gitx --all'
+alias got='git '
+alias get='git '
 
 
 
