@@ -10,6 +10,13 @@
 	editor = vim
 [merge]
 	tool = vimdiff
+[pretty]
 [alias]
 	co = checkout
+  ci = commit
   br = branch
+  st = status
+  l  = log
+  lp = log --pretty=oneline
+  lpg = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  d  = diff
