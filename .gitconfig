@@ -20,6 +20,7 @@
   lp = log --pretty=oneline
   lpg = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  histall = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --all
   d  = diff
   type = cat-file -t
   dump = cat-file -p
