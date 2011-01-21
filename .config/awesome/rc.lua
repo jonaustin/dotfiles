@@ -269,10 +269,12 @@ globalkeys = awful.util.table.join(
     -- }}}
 
     -- {{{ Multimedia keys
-<<<<<<< Updated upstream
-    awful.key({}, "F21", function () awful.util.spawn("/home/jon/bin/softer", false) end),
-    awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
-    awful.key({}, "#127", function () awful.util.spawn("/home/jon/bin/mute", false) end),
+    --awful.key({}, "F21", function () awful.util.spawn("/home/jon/bin/softer", false) end),
+    --awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
+    --awful.key({}, "#127", function () awful.util.spawn("/home/jon/bin/mute", false) end),
+    awful.key({}, "Print", function () awful.util.spawn("/home/jon/bin/softer", false) end),
+    awful.key({}, "Scroll_Lock", function () awful.util.spawn("/home/jon/bin/louder", false) end),
+    awful.key({}, "Break", function () awful.util.spawn("/home/jon/bin/mute", false) end),
     awful.key({ "Shift" }, "#107", function () awful.util.spawn("amixer -D hw:1 set Speaker 1-", false) end),
     awful.key({ "Shift" }, "#78", function () awful.util.spawn("amixer -D hw:1 set Speaker 1+", false) end),
     -- MPD
