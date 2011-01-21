@@ -329,6 +329,7 @@ alias wma2ogg='for i in *.wma; do ffmpeg -i $i -acodec vorbis -aq 100 ${i}.ogg; 
 alias ogv2avi='for n in `ls *`; do mencoder $n -ovc lavc -oac mp3lame -o $(echo $n | cut -d "." -f 1).avi; done'
 alias ogv2mp4="mencoder out.ogg -of lavf -lavfopts format=mp4 -oac mp3lame -lameopts cbr:br=128 -ovc x264 -x264encopts bitrate=1000 -o final.mp4"
 alias ogv23gp='for n in `ls *.ogv`; do sudo ffmpeg -i $n -r 15 -b 64kb -ac 1 -s 176x132 -padtop 6 -padbottom 6 -ar 16000 -ab 32kb -acodec libfaac -vcodec h263 $(echo $n | cut -d "." -f 1).3gp; done'
+alias mp423gp='for n in `ls *.mp4`; do mencoder $n -vf scale=176:144 -oac mp3lame -ovc lavc -o $(echo $n | cut -d "." -f 1).3gp; done'
 
 # terminal window
 alias vr='for n in `seq 0 99`; do echo; done;' 
@@ -416,6 +417,7 @@ alias smini="ssh 192.168.0.199"
 alias b="ssh jon@barracuda-ext.cmdpdx.com"
 alias pb='ssh jonaustin@mrfantastic.dreamhost.com'
 alias n8='ssh root@192.168.0.232'
+alias home_proxy='ssh -p666 -D 8080 -f -C -q -N jon@xs.homeunix.net'
 alias work_proxy='ssh -D 8080 -f -C -q -N jon@barracuda-ext.cmdpdx.com'
 alias work_rdc='ssh jon@barracuda-ext.cmdpdx.com -L 10000:jaustin.cmdpdx.com:3389' # tunnel rdc connection to localhost:10000
 #synergy
@@ -522,8 +524,8 @@ LC_ALL=en_US.UTF-8;        export LC_ALL
 ### Some one-liners
 # for testing if we have a command - i.e. `have less`
 have() { type "$1" &> /dev/null; }
-###
 rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
+###
 
 
 ### FUNCTIONS ###
