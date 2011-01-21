@@ -286,6 +286,9 @@ alias gx='gitx --all'
 alias got='git '
 alias get='git '
 alias gpom='git push origin master'
+function git_diff() {
+  git diff --no-ext-diff -w "$@" | vim -R -
+}
 
 
 
@@ -299,11 +302,12 @@ alias wr='which ruby'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-alias cdgem='cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems'
+alias cdgems='cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems/'
+function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems/$1*; }
 alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server.sh'
 alias qlg='gem contents '
 alias glq='gem contents '
-alias rtags='rtags -vi' # vi compatible rtags (default is emacs)
+alias rtags='rtags --vi -R' # vi compatible rtags (default is emacs)
 alias gwhois='gem whois '
 gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
 alias gsrt='rvm gemset use rails3tut'
@@ -879,3 +883,4 @@ if [ -e ~/.bashrc_local ];
 then
   source ~/.bashrc_local;
 fi
+

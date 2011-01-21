@@ -31,9 +31,6 @@
 [submodule ".vim/bundle/checksyntax"]
 	path = .vim/bundle/checksyntax
 	url = http://github.com/tomtom/checksyntax_vim.git
-[submodule ".vim/bundle/command-t"]
-	path = .vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
 [submodule ".vim/bundle/vim-markdown"]
 	path = .vim/bundle/vim-markdown
 	url = git://github.com/tpope/vim-markdown.git
@@ -108,3 +105,6 @@
 [submodule ".vim/snippets"]
 	path = .vim/snippets
 	url = git@github.com:jonaustin/snipmate-snippets.git
+[submodule ".vim/bundle/command-t"]
+	path = .vim/bundle/command-t
+	url = https://github.com/wincent/Command-T.git

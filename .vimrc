@@ -298,6 +298,7 @@ augroup filetypedetect
     autocmd! BufNewFile,BufRead *.thtml setfiletype php
     autocmd! BufNewFile,BufRead *.ctp setfiletype php
     autocmd! BufNewFile,BufRead *.scss setfiletype sass
+    autocmd! BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
 augroup END
 
 " }
