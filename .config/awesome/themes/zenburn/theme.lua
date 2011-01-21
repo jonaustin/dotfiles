@@ -8,7 +8,7 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "awsetbg /home/jon/.config/awesome/themes/zenburn/zenburn-background.png" } --calvin_hobbes.png" }
+theme.wallpaper_cmd = { "awsetbg /home/jon/.config/awesome/themes/zenburn/calvin_hobbes.png" }
 -- }}}
 
 -- {{{ Styles

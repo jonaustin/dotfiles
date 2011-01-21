@@ -52,13 +52,13 @@ layouts =
 -- Define a tag table which hold all screen tags.
 tags = {}
 tags.setup = {
-    { name = "term",  layout = layouts[2]  },
-    { name = "term2", layout = layouts[2]  },
-    { name = "vimp",   layout = layouts[2]  },
-    { name = "firefox",  layout = layouts[2]  },
-    { name = "5",    layout = layouts[2], mwfact = 0.13 },
-    { name = "6",     layout = layouts[2], }, --hide   = true },
-    { name = "7",     layout = layouts[2], }, --hide   = true },
+    { name = "term",  layout = layouts[3]  },
+    { name = "term2", layout = layouts[3]  },
+    { name = "vimp",   layout = layouts[3]  },
+    { name = "firefox",  layout = layouts[10]  },
+    { name = "5",    layout = layouts[3], mwfact = 0.13 },
+    { name = "6",     layout = layouts[3], }, --hide   = true },
+    { name = "7",     layout = layouts[3], }, --hide   = true },
     { name = "files",   layout = layouts[10]  },
     { name = "qjackctl", layout = layouts[2]  }
 }
@@ -106,9 +106,9 @@ separator.text  = "|"
 
 -- {{{ Network usage widget
 -- Initialize widget
-netwidget = widget({ type = "textbox" })
+-- netwidget = widget({ type = "textbox" })
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393">${eth0 down_kb}</span> <span color="#7F9F7F">${eth0 up_kb}</span>', 3)
+-- vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393">${eth0 down_kb}</span> <span color="#7F9F7F">${eth0 up_kb}</span>', 3)
 dnicon = widget({ type = "imagebox" })
 upicon = widget({ type = "imagebox" })
 dnicon.image = image(beautiful.widget_netdown)
@@ -233,7 +233,7 @@ for s = 1, screen.count() do
         --spacer, separator, spacer, cpuwidget, cpuicon,
         spacer, separator, spacer, uptimewidget, cpuicon,
         spacer, separator, spacer, memwidget, memicon,
-        spacer, separator, spacer, upicon, netwidget, dnicon,
+--        spacer, separator, spacer, upicon, netwidget, dnicon,
         spacer, separator, spacer, mpdwidget,
         --spacer, separator, spacer, myMPDwidget,
         s == 1 and mysystray or nil,
@@ -259,9 +259,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "w", function () awful.util.spawn("vimprobable", false) end),
     awful.key({ modkey }, "q", function () awful.util.spawn("vimprobable", false) end),
     -- awful.key({ modkey }, "F1",    function () awful.util.spawn("urxvt", false) end),
-    awful.key({ modkey }, "grave", function () teardrop.toggle('urxvt','top','center',0.99999,0.3) end),
+    awful.key({ modkey }, "grave", function () teardrop.toggle('urxvt','top','center',0.99999,0.4) end),
     --awful.key({ altkey }, "grave", function () teardrop.toggle("urxvt") end),
-    awful.key({ modkey }, "F1", function () teardrop.toggle('urxvt','top','center',0.99999,0.3) end),
+    awful.key({ modkey }, "F1", function () teardrop.toggle('urxvt','top','center',0.99999,0.4) end),
     awful.key({ modkey }, "a", function ()
         awful.util.spawn("urxvt -title Alpine -e alpine_exp", false)
     end),
@@ -269,6 +269,7 @@ globalkeys = awful.util.table.join(
     -- }}}
 
     -- {{{ Multimedia keys
+<<<<<<< Updated upstream
     awful.key({}, "F21", function () awful.util.spawn("/home/jon/bin/softer", false) end),
     awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
     awful.key({}, "#127", function () awful.util.spawn("/home/jon/bin/mute", false) end),
@@ -308,6 +309,21 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "u", function () awful.util.spawn("/home/jon/bin/uptime.sh") end),
     awful.key({ modkey, "Shift" }, "u", function () awful.util.spawn("/home/jon/bin/cpu_hogs.sh") end),
     awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("/home/jon/bin/datetime.sh") end),
+=======
+    awful.key({}, "#107", function () awful.util.spawn("/home/user/bin/softer", false) end),
+    awful.key({}, "#78", function () awful.util.spawn("/home/user/bin/louder", false) end),
+--    awful.key({}, "#127", function () awful.util.spawn("/home/user/bin/mute", false) end),
+    awful.key({ modkey }, "d",function () awful.util.spawn("/home/user/bin/mpd_status.sh", false) end),
+    awful.key({ modkey, "Control" }, "d",function () awful.util.spawn("mpc -p 6602 del 0", false) end),
+    awful.key({ modkey }, "n",function () awful.util.spawn_with_shell("mpc -p 6602 next; /home/user/bin/mpd_status.sh", false) end),
+    awful.key({ modkey }, "v",function () awful.util.spawn_with_shell("mpc -p 6602 prev; /home/user/bin/mpd_status.sh", false) end),
+    awful.key({ modkey }, "x",function () awful.util.spawn_with_shell("mpc -p 6602 toggle", false) end),
+    awful.key({ modkey }, "p", function () awful.util.spawn("/usr/bin/projectM-libvisual-alsa") end),
+    awful.key({ modkey }, "z", function () awful.util.spawn("/home/user/bin/cur_task.sh") end),
+    awful.key({ modkey }, "u", function () awful.util.spawn("/home/user/bin/uptime.sh") end),
+    awful.key({ modkey, "Shift" }, "u", function () awful.util.spawn("/home/user/bin/cpu_hogs.sh") end),
+    awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("/home/user/bin/datetime.sh") end),
+>>>>>>> Stashed changes
     -- }}}
 
 
@@ -334,7 +350,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey }, "[", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey }, "]", function () awful.screen.focus_relative(-1) end),
 --    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
