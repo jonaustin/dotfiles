@@ -311,7 +311,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "u", function () awful.util.spawn("/home/jon/bin/uptime.sh") end),
     awful.key({ modkey, "Shift" }, "u", function () awful.util.spawn("/home/jon/bin/cpu_hogs.sh") end),
     awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("/home/jon/bin/datetime.sh") end),
-=======
     awful.key({}, "#107", function () awful.util.spawn("/home/user/bin/softer", false) end),
     awful.key({}, "#78", function () awful.util.spawn("/home/user/bin/louder", false) end),
 --    awful.key({}, "#127", function () awful.util.spawn("/home/user/bin/mute", false) end),
@@ -325,7 +324,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "u", function () awful.util.spawn("/home/user/bin/uptime.sh") end),
     awful.key({ modkey, "Shift" }, "u", function () awful.util.spawn("/home/user/bin/cpu_hogs.sh") end),
     awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("/home/user/bin/datetime.sh") end),
->>>>>>> Stashed changes
     -- }}}
 
 
