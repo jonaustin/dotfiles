@@ -415,8 +415,19 @@ function vimhtml() {
     vim -f +"set nonu" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" $f; 
     sed -i 's@|</font><font color="#ffd7af"><b>\([^<]*\)@|</font><font color="#ffd7af"><b><a href="#\1">\1</a>@' $f.html;
     sed -i 's@\*</font><font color="#d78787">\([^<]*\)@*</font><font color="#d78787"><a name="\1">\1</a>@' $f.html;
+    sed -i 's@^&nbsp;@\&mcto;@' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
+    sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
+    sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
+    sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
+    sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
+    sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
+    sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
+    sed -i 's@^\([^<]*\)<font color="#000000">|</font><font color="#ffd7af"><b><a href="#\([^"]*\)">[^<]*</a>.*$@<a href="#\2">\1</a><br>@' $f.html;
+    sed -i 's@&nbsp;@@g' $f.html; # this seems to help a Lot with premature linebreaks, esp in portrait mode on kindle
+    sed -i 's@&mcto;@\&nbsp;@g' $f.html
     mv $f.html ${f%.*}.html
-  done; }
+  done; 
+}
 alias instapaper='rm -rf /tmp/instapaper*; ebook-convert /opt/calibre/resources/recipes/instapaper.recipe  /tmp/instapaper --username phaedrix@phaedrix.com --password \$tr@ng3r; cd /tmp/; zip -r instapaper.epub instapaper; kindlegen instapaper.epub; sudo mount /dev/sdb1 /media/Kindle\ Main\ Memory/; sudo mv -f instapaper.mobi /media/Kindle\ Main\ Memory/documents;'
 
 ##network
