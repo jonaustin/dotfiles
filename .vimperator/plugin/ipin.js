@@ -6,12 +6,12 @@
 // Usage: Use :pinboard <tags delimited by spaces> command
 // Usage: if successfully posted you will see "done" echoed
 
-commands.addUserCommand(['pinboard'], "Save page as a bookmark on pinboard",
+commands.addUserCommand(['pinboard'], "Save page as a bookmark on pinboard mobilizing via instapaper",
                         function(args) {
                             var url = "https://api.pinboard.in/v1/posts/add?";
                             url += "&url=" + encodeURIComponent("http://www.instapaper.com/m?u=" + escape(buffer.URL));
                             url += "&description=" + encodeURIComponent(buffer.title);
-                            url += "&tags=" + encodeURIComponent(args.string);
+                            url += "&tags=" + encodeURIComponent("readkindletmp readkindle instapaper"+args.string);
                             
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", url, false);

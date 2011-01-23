@@ -11,7 +11,7 @@ commands.addUserCommand(['pinboard'], "Save page as a bookmark on pinboard",
                             var url = "https://api.pinboard.in/v1/posts/add?";
                             url += "&url=" + encodeURIComponent("http://purifyr.com/?url=" + escape(buffer.URL));
                             url += "&description=" + encodeURIComponent(buffer.title);
-                            url += "&tags=" + encodeURIComponent(args.string);
+                            url += "&tags=" + encodeURIComponent("purifyr readkindletmp readkindle"+args.string);
                             
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", url, false);

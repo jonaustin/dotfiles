@@ -11,7 +11,7 @@ commands.addUserCommand(['idel'], "Save page as a bookmark on Delicious",
                             var url = "https://api.del.icio.us/v1/posts/add?";
                             url += "&url=" + encodeURIComponent("http://www.instapaper.com/m?u=" + escape(buffer.URL));
                             url += "&description=" + encodeURIComponent(buffer.title);
-                            url += "&tags=" + encodeURIComponent("instapaper "+args.string);
+                            url += "&tags=" + encodeURIComponent("readkindletmp readkindle instapaper"+args.string);
                             
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", url, false);

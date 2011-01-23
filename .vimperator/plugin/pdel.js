@@ -11,7 +11,7 @@ commands.addUserCommand(['pdel'], "Save purifyr'd page as a bookmark on Deliciou
                             var url = "https://api.del.icio.us/v1/posts/add?";
                             url += "&url=" + encodeURIComponent("http://purifyr.com/?url=" + escape(buffer.URL));
                             url += "&description=" + encodeURIComponent(buffer.title);
-                            url += "&tags=" + encodeURIComponent("purifyr"+args.string);
+                            url += "&tags=" + encodeURIComponent("purifyr readkindletmp readkindle"+args.string);
                             
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", url, false);
