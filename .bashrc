@@ -409,9 +409,9 @@ alias rc='source ~/.bashrc'
 
 ## incantations
 alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
-function vimdoc2html() { 
+function vimplugindoc2html() { 
   for n in `find . ~/.vim/ -iname "*txt"|g "/doc/";`; do /bin/cp -f $n .; done
-  echo "<html><body>" > toc.html;
+  echo "<html><head><title>Vim Plugin Docs</title></head><body>" > toc.html;
   for f in *.${1:-txt}; 
   do 
     vim -f +"set nonu" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" $f; 
@@ -428,9 +428,13 @@ function vimdoc2html() {
     sed -i 's@&nbsp;@@g' $f.html; # this seems to help a Lot with premature linebreaks, esp in portrait mode on kindle
     sed -i 's@&mcto;@\&nbsp;@g' $f.html
     mv $f.html ${f%.*}.html
-    echo "<a href='$f'>$f</a> <br>" >> toc.html;
+    echo "<a href='${f%.*}.html'>${f%.*}</a> <br>" >> toc.html;
   done; 
   echo "</body></html>" >> toc.html
+}
+function vimplugindoc2kindle() {
+  vimplugindoc2html;
+  ebook-convert toc.html vim_plugin_docs;
 }
 alias instapaper='rm -rf /tmp/instapaper*; ebook-convert /opt/calibre/resources/recipes/instapaper.recipe  /tmp/instapaper --username phaedrix@phaedrix.com --password \$tr@ng3r; cd /tmp/; zip -r instapaper.epub instapaper; kindlegen instapaper.epub; sudo mount /dev/sdb1 /media/Kindle\ Main\ Memory/; sudo mv -f instapaper.mobi /media/Kindle\ Main\ Memory/documents;'
 
