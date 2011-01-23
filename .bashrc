@@ -409,14 +409,15 @@ alias rc='source ~/.bashrc'
 
 ## incantations
 alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
-function vimplugindoc2html() { 
-  for n in `find . ~/.vim/ -iname "*txt"|g "/doc/";`; do /bin/cp -f $n .; done
-  echo "<html><head><title>Vim Plugin Docs</title></head><body>" > toc.html;
-  for f in *.${1:-txt}; 
-  do 
-    vim -f +"set nonu" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" $f; 
+function vimplugindoc2html() {
+    for n in `find . ~/.vim/ -iname "*txt"|g "/doc/";`; do /bin/cp -f $n .; done
+    vim -f +"set ft=help" +"set nonu" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" $f; 
     sed -i 's@|</font><font color="#ffd7af"><b>\([^<]*\)@|</font><font color="#ffd7af"><b><a href="#\1">\1</a>@' $f.html;
     sed -i 's@\*</font><font color="#d78787">\([^<]*\)@*</font><font color="#d78787"><a name="\1">\1</a>@' $f.html;
+    sed -i 's@#d78787@#000000@g' $f.html;
+    sed -i 's@#d7afaf@#000000@g' $f.html;
+    sed -i 's@#87af87@#000000@g' $f.html;
+    sed -i 's@<font color="#d7d7af">\([^<]*\)</font>@<h4>\1</h4>@g' $f.html;
     sed -i 's@^&nbsp;@\&mcto;@' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
     sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
     sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
@@ -424,17 +425,25 @@ function vimplugindoc2html() {
     sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
     sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
     sed -i 's@&mcto;&nbsp;@\&mcto;\&mcto;@;' $f.html # 'store' nbsp;s that are at the beginning as they're good to keep for formatting
-    sed -i 's@^\([^<]*\)<font color="#000000">|</font><font color="#ffd7af"><b><a href="#\([^"]*\)">[^<]*</a>.*$@<a href="#\2">\1</a><br>@' $f.html;
+    #sed -i 's@^\([^<]*\)<font color="#000000">|</font><font color="#ffd7af"><b><a href="#\([^"]*\)">[^<]*</a>.*$@<a href="#\2">\1</a><br>@' $1.html;
     sed -i 's@&nbsp;@@g' $f.html; # this seems to help a Lot with premature linebreaks, esp in portrait mode on kindle
     sed -i 's@&mcto;@\&nbsp;@g' $f.html
     mv $f.html ${f%.*}.html
+}
+
+function vimplugindocs2html() { 
+  for n in `find . ~/.vim/ -iname "*txt"|g "/doc/";`; do /bin/cp -f $n .; done
+  echo "<html><head><title>Vim Plugin Docs</title></head><body>" > toc.html;
+  for f in *.${1:-txt}; 
+  do 
+    vimplugindoc2html $f;
     echo "<a href='${f%.*}.html'>${f%.*}</a> <br>" >> toc.html;
   done; 
   echo "</body></html>" >> toc.html
 }
-function vimplugindoc2kindle() {
-  vimplugindoc2html;
-  ebook-convert toc.html vim_plugin_docs;
+function vimplugindocs2kindle() {
+  vimplugindoc2shtml;
+  ebook-convert toc.html vim_plugin_docs.mobi;
 }
 alias instapaper='rm -rf /tmp/instapaper*; ebook-convert /opt/calibre/resources/recipes/instapaper.recipe  /tmp/instapaper --username phaedrix@phaedrix.com --password \$tr@ng3r; cd /tmp/; zip -r instapaper.epub instapaper; kindlegen instapaper.epub; sudo mount /dev/sdb1 /media/Kindle\ Main\ Memory/; sudo mv -f instapaper.mobi /media/Kindle\ Main\ Memory/documents;'
 
