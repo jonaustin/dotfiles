@@ -30,8 +30,8 @@ export INPUTRC=~/.inputrc
 #export http_proxy=http://127.0.0.1:8118
 export OPCODEDIR64=/lib/csound/plugins64  # for csound5
 
-export SURFRAW_graphical_browser="vimprobable"
-export SURFRAW_browser="vimprobable"
+export SURFRAW_graphical_browser="uzbl"
+export SURFRAW_browser="uzbl"
 
 ### woohoo! use for paths -- i.e. cd ${msx}/Mew -- even works with Tab completion!
 export msx='/media/MORGOTH/musix/'
@@ -409,6 +409,15 @@ alias rc='source ~/.bashrc'
 
 ## incantations
 alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
+function vimhtml() { 
+  for f in *.${1:-txt}; 
+  do 
+    vim -f +"set nonu" +"syn on" +"run! syntax/2html.vim" +"wq" +"q" $f; 
+    sed -i 's@|</font><font color="#ffd7af"><b>\([^<]*\)@|</font><font color="#ffd7af"><b><a href="#\1">\1</a>@' $f.html;
+    sed -i 's@\*</font><font color="#d78787">\([^<]*\)@*</font><font color="#d78787"><a name="\1">\1</a>@' $f.html;
+    mv $f.html ${f%.*}.html
+  done; }
+alias instapaper='rm -rf /tmp/instapaper*; ebook-convert /opt/calibre/resources/recipes/instapaper.recipe  /tmp/instapaper --username phaedrix@phaedrix.com --password \$tr@ng3r; cd /tmp/; zip -r instapaper.epub instapaper; kindlegen instapaper.epub; sudo mount /dev/sdb1 /media/Kindle\ Main\ Memory/; sudo mv -f instapaper.mobi /media/Kindle\ Main\ Memory/documents;'
 
 ##network
 #ssh
