@@ -10,3 +10,6 @@ blog.vim
 .elinks/searchhist*
 .elinks/globhist*
 **/*log
+.config/ranger/bookmarks
+.config/ranger/history
+
