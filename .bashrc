@@ -3,10 +3,10 @@
 # outputting anything in those cases.
 
 # note: this is usually autodetected -- but IS needed for rsync, and probably some other utils (scp,rcp...?)
-#if [[ $- != *i* ]] ; then
+if [[ $- != *i* ]] ; then
 	# Shell is non-interactive.  Be done now!
-#	return
-#fi
+	return
+fi
 
 
 
