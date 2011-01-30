@@ -36,7 +36,8 @@ export SURFRAW_browser="uzbl"
 ### woohoo! use for paths -- i.e. cd ${msx}/Mew -- even works with Tab completion!
 export msx='/media/MORGOTH/musix/'
 export mmsx='/media/MORGOTH/musix/musix/'
-
+export kindle="/media/Kindle Main Memory/"
+export kdd="${kindle}/DK_documents/"
 
 #export RAILS_GEM_VERSION=2.3.5
 
@@ -526,6 +527,8 @@ alias fixres="xrandr --size 1920x1200"    # reset resolution
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
 
+# drives
+alias mkindle='sudo mount /dev/disk/by-uuid/4B67-1FC0 /media/Kindle\ Main\ Memory'
 alias dvd="sudo mount /dev/sr0 /media/dvd; sleep 3; cd /media/dvd"
 alias dvd2="sudo mount /dev/sr1 /media/dvd; cd /media/dvd"
 alias ejectdvd="sudo eject /media/dvd"
@@ -941,7 +944,6 @@ alias ra3='cd "/home/jon/.PlayOnLinux/wineprefix/RA3U/drive_c/Program Files/Elec
 
 ### Music creation ###
 alias aplay_all='prename "s/ /_/g" *; for n in *; do echo -e $n |  osd_cat -f "-*-terminus-*-*-*-*-24-*-*-*-*-*-*-*"  -p bottom -o 15 -l 3 -A right -c "#fff" -s 3 -d 4 &   aplay $n; sleep 2; done'
-alias mkindle='sudo mount /dev/disk/by-uuid/4B67-1FC0 /media/kindle'
 
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session. 
