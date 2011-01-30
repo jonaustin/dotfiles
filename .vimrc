@@ -52,6 +52,9 @@
 
 " Vim UI {
 	color zenburn_jon     	       		" load a colorscheme
+    " stop shoddy gvim only-aware colorschemes from screwing up the cursorline
+  highlight CursorLine cterm=NONE cterm=235
+
 	set tabpagemax=15 				" only show 15 tabs
 	set showmode                   	" display the current mode
 
