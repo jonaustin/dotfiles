@@ -15,6 +15,16 @@ termcapinfo rxvt* ti@:te@:XT      # improve mouse scrolling
 #terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 #terminfo rxvt-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
+### Woohoo - setting the background differently than the Xdefault actually works now!
+# http://frexx.de/xterm-256-notes/
+#terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+# tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# erase background with current bg color
+defbce "on" 
+
 # keybindings
 bindkey "^[[23~" prev # f11
 bindkey "^[[24~" next # f12
@@ -52,3 +62,4 @@ backtick 2 0 0 sh /home/jon/bin/cpuusage.sh
 #screen -t tor rtorrent
 ##screen -t remind wyrd
 ##screen -t todo vi /home/jon/documents/todo_now
+
