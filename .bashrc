@@ -406,6 +406,9 @@ alias rivo='cd /media/MORGOTH/documents/code/ruby/rails/tv_updater/railer'
 # shortcuts #
 alias rvd='vim --servername VIM $1'; # ruby vim debug -- then :Rdebugger, then connect to xxx:3000, then go to it
 
+# shortcuts for source
+alias vsup='vim ~/Jack/git/sup/lib/sup.rb'
+
 ## configs
 alias rc='source ~/.bashrc'
 
