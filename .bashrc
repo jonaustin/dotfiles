@@ -489,11 +489,13 @@ alias syn='synergyc 192.168.0.9'
 alias ssyn='ssh -f -N -L12345:10.10.10.155:24800 barracuda-ext.cmdpdx.com; synergyc localhost:12345'
 alias ksyn="killall synergyc"
 #non-frak
-alias fxs='sftp -oPort=666 jon@xs.homeunix.net'
-alias home_proxy='ssh -p666 -D 8080 -f -C -q -N jon@xs.homeunix.net'
-alias sfxs='sftp -oPort=666 jon@xs.homeunix.net'
-alias sxs='ssh -p666 jon@xs.homeunix.net'
-alias xsfs='sshfs -o reconnect -p666 jon@xs.homeunix.net:/ /media/xs'
+alias fxs='sftp jon@xs.homeunix.net'
+alias home_proxy='ssh -D 8080 -f -C -q -N jon@xs.homeunix.net'
+alias sxxs='ssh jon@xs.homeunix.net'
+alias sxs='ssh jon@192.168.0.99'
+alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
+alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
+alias fsfs='sshfs -o reconnect -p666 jon@192.168.0.166:/ /media/frak'
 
 
 ##apps

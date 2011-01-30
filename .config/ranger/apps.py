@@ -82,7 +82,7 @@ class CustomApplications(Applications):
 		if f.video or f.audio:
 			if f.video:
 				c.flags += 'd'
-			return self.either(c, 'mplayer', 'totem')
+			return self.either(c, 'vlc')
 
 		if f.image:
 			return self.either(c, 'feh', 'eog', 'mirage')
