@@ -134,6 +134,10 @@
 	" remap jj to escape
 	inoremap jj <ESC>
 
+  " split windows
+  noremap <leader>o :only<cr>
+  noremap <leader>O :only<cr>:tabonly<cr>
+
 	" NERDTree
 	map <S-w> :NERDTreeToggle<cr>
 
