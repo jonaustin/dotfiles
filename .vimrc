@@ -138,6 +138,12 @@
   noremap <leader>o :only<cr>
   noremap <leader>O :only<cr>:tabonly<cr>
 
+  " buffers
+    " i.e buffer next
+  :noremap <leader>bn :bn<cr>
+    " i.e buffer prev
+  :noremap <leader>bp :bp<cr>
+
 	" NERDTree
 	map <S-w> :NERDTreeToggle<cr>
 
