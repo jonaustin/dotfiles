@@ -30,8 +30,8 @@ export INPUTRC=~/.inputrc
 #export http_proxy=http://127.0.0.1:8118
 export OPCODEDIR64=/lib/csound/plugins64  # for csound5
 
-export SURFRAW_graphical_browser="uzbl"
-export SURFRAW_browser="uzbl"
+export SURFRAW_graphical_browser="vimprobable2"
+export SURFRAW_browser="vimprobable2"
 
 ### woohoo! use for paths -- i.e. cd ${msx}/Mew -- even works with Tab completion!
 export msx='/media/MORGOTH/musix/'
@@ -213,6 +213,7 @@ alias m='ncmpcpp -p 6600' # mpd alsa
 alias mj='ncmpcpp -p 6601' # mpd jack
 alias ma='ncmpcpp -p 7700' # mpd all alsa
 alias maj='ncmpcpp -p 7701' # mpd all jack
+alias mb='ncmpcpp -p 8800' # audiobooks
 alias toptracks="top_tracks_rockstar.rb; sed -i 's@musix/@@' /var/lib/mpd/playlists/_LASTFM-TOP_-_*;"   # weird..using sed the normal way 'sed -ie' causes a duplicate file with 'e' added to the end to be created..
 ## Other
 alias sv='sudo vim'
@@ -277,6 +278,7 @@ alias cl='cd /var/log/'
 
 ### Git
 alias gs='git status '
+alias gsl='git status | less'
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'

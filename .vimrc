@@ -51,7 +51,8 @@
 " }
 
 " Vim UI {
-	color zenburn_jon     	       		" load a colorscheme
+	"color zenburn_jon     	       		" load a colorscheme
+	color leo     	       		" load a colorscheme
 
 	set tabpagemax=15 				" only show 15 tabs
 	set showmode                   	" display the current mode
