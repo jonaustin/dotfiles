@@ -263,6 +263,8 @@ if &t_Co > 255
     hi Type            ctermfg=187   
     hi Underlined      ctermfg=188   ctermbg=234     
     hi VertSplit       ctermfg=236   ctermbg=65
+      " Visual was missing from regular zenburn, so had a glaring white ctermbg
+    hi Visual          ctermfg=24  ctermbg=153
     hi VisualNOS       ctermfg=236   ctermbg=210     
     hi WarningMsg      ctermfg=15    ctermbg=236     
     hi WildMenu        ctermbg=236   ctermfg=194     
