@@ -346,6 +346,7 @@ alias scc='screen -c /home/jon/.screenrcs/coding -S code'
 alias scn='screen -c /home/jon/.screenrcs/nextfm -S code'
 
 # dir shortcuts
+alias configs='cd /home/jon/configs'
 alias e3='cd /media/ext3'
 alias tv='cd /media/ext3/tv/'
 alias mov='cd /media/ext/Movies'
