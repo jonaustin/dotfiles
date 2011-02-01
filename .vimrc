@@ -296,6 +296,10 @@ augroup filetypedetect
     autocmd! BufNewFile,BufRead *.scss setfiletype sass
     "" epub
     autocmd! BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
+    "" markdown
+    autocmd! BufNewFile,BufRead *.md setfiletype markdown
+    autocmd! BufNewFile,BufRead *.mkd setfiletype markdown
+    autocmd! BufNewFile,BufRead *.markdown setfiletype markdown
 augroup END
 
 " }
