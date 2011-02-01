@@ -98,6 +98,7 @@
 	set wrap                      	   " wrap long lines
 	set autoindent                 	   " indent at the same level of the previous line
 	set shiftwidth=2               	   " use indents of 2 spaces
+  set softtabstop=2                  " backspace will go back 2 chars instead of 1 (i.e. act like its a tab)
 	set expandtab 	       	  	       " tabs should be spaces for sanity
 	set tabstop=2 					           " an indentation every 2 columns
   set matchpairs+=<:>               " match, to be used with % 
@@ -116,6 +117,7 @@
 	map <C-L> <C-W>l<C-W>_
 	map <C-H> <C-W>h<C-W>_
 	map <C-K> <C-W>k<C-W>_
+  " easy tab switching
 	map <S-H> gT
 	map <S-L> gt
 

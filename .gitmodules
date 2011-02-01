@@ -111,3 +111,6 @@
 [submodule ".vim/bundle/csapprox"]
 	path = .vim/bundle/csapprox
 	url = https://github.com/godlygeek/csapprox.git
+[submodule ".vim/bundle/easytags"]
+	path = .vim/bundle/easytags
+	url = https://github.com/vim-scripts/easytags.vim.git
