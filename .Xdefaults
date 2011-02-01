@@ -60,8 +60,10 @@ urxvt.cursorColor: #DCDCCC
 ! Zenburn color-scheme
 !urxvt*background:  #3f3f3f
 !urxvt*foreground:  #dcdccc
-urxvt*background:  #1f1f1f
-urxvt*foreground:  #d8dada
+!urxvt*background:  #1f1f1f
+!urxvt*foreground:  #d8dada
+urxvt*background:  #080808
+urxvt*foreground:  #eeeeee
 ! black + red
 !urxvt*color0:     #3f3f3f
 urxvt*color0:      #1E2320
