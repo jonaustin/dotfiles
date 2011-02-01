@@ -111,7 +111,8 @@
 
 	" Easier moving in tabs and windows
 	map <C-J> <C-W>j<C-W>_  
-	"map <S-C-j> <C-W>j :res 35<cr>
+    " for some odd reason, its mapping <S[hift]-C[trl]-j> to <C-j> ...?
+  "map <S-C-j> <C-W>j :res 35<cr>
 	map <C-K> <C-W>k<C-W>_
 	"map <S-C-k> <C-W>k :res 35<cr>
 	map <C-L> <C-W>l<C-W>_
@@ -120,6 +121,8 @@
   " easy tab switching
 	map <S-H> gT
 	map <S-L> gt
+  " move window to new tab
+  map <leader>mt <C-W>T
 
 	" shift key fixes
 	"cmap W w 						
@@ -165,12 +168,6 @@
 " }
 
 " Plugins {
-
-	" VCSCommand {
-	"	let b:VCSCommandMapPrefix=',v'
-	"	let b:VCSCommandVCSType='git'
-		""let mapleader = "-"
-	" } 
 	
 	" PIV {
 		let g:DisableAutoPHPFolding = 0
@@ -240,22 +237,6 @@
 		set completeopt=menu,longest,preview
 	" }
 	
-	" Ctags {
-		set tags=./tags;/	
-	" }
-
-	" Delimitmate {
-		au FileType * let b:delimitMate_autoclose = 1
-
-		" If using html auto complete (complete closing tag)
-        au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
-	" }
-	
-	" AutoCloseTag {
-		" Make it so AutoCloseTag works for xml and xhtml files as well
-		au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
-	" }
-
 	" SnipMate {
 		" Setting the author var
 		let g:snips_author = 'Jon Austin <jon.i.austin@gmail.com>'
@@ -311,7 +292,9 @@ augroup filetypedetect
     "" cakephp
     autocmd! BufNewFile,BufRead *.thtml setfiletype php
     autocmd! BufNewFile,BufRead *.ctp setfiletype php
+    "" sass
     autocmd! BufNewFile,BufRead *.scss setfiletype sass
+    "" epub
     autocmd! BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
 augroup END
 
