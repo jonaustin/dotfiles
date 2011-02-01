@@ -289,6 +289,7 @@ alias gx='gitx --all'
 alias got='git '
 alias get='git '
 alias gpom='git push origin master'
+alias gp='git pull'
 function git_diff() {
   git diff --no-ext-diff -w "$@" | vim -R -
 }
