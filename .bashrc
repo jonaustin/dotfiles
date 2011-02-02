@@ -218,6 +218,7 @@ alias toptracks="top_tracks_rockstar.rb; sed -i 's@musix/@@' /var/lib/mpd/playli
 ## Other
 alias sv='sudo vim'
 alias vrc='vim ~/.bashrc'
+alias vlrc='vim ~/.bashrc_local'
 alias v='vr'
 alias vvc='vim ~/.vimrc'
 alias c='clear'
