@@ -14,6 +14,8 @@
 	set nocompatible 		" must be first line
 	set background=dark     " Assume a dark background
 	:let mapleader = ","
+  :set clipboard=unnamed       " yank/put using system clipboard! (with --version +xterm_clipboard)
+  ":set clipboard=unnamedplus  " >=7.3.74 only
 " }
  
 " General {
