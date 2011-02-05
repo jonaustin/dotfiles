@@ -12,7 +12,7 @@ fi
 
 
 ## ENV
-export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/usr/local/bin::/home/jon/bin/ruby:/home/jon/bin/bash"
+export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash"
 export EDITOR='vim'
 export BROWSER='elinks'
 export PAGER='less'
@@ -574,7 +574,6 @@ alias dsee='cat /home/jon/documents/d_cal.txt'
 alias de='vi /home/jon/documents/d_cal.txt'
 
 alias rup='echo >> /home/jon/documents/resume_new.txt'
-alias re='vim /home/jon/documents/resume_new.txt'
 alias rsee='cat /home/jon/documents/resume_new.txt'
 
 ### GTD ###
@@ -951,6 +950,11 @@ alias ra3='cd "/home/jon/.PlayOnLinux/wineprefix/RA3U/drive_c/Program Files/Elec
 
 ### Music creation ###
 alias aplay_all='prename "s/ /_/g" *; for n in *; do echo -e $n |  osd_cat -f "-*-terminus-*-*-*-*-24-*-*-*-*-*-*-*"  -p bottom -o 15 -l 3 -A right -c "#fff" -s 3 -d 4 &   aplay $n; sleep 2; done'
+
+### Ruby ###
+rcalc() { ruby -e "puts $1"; }
+function re() { ruby -e  "$1"; }
+rne() { ruby -ne "$1"; }
 
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session. 
