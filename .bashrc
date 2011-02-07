@@ -291,6 +291,7 @@ alias got='git '
 alias get='git '
 alias gpom='git push origin master'
 alias gp='git pull'
+alias gclone='git clone '
 function git_diff() {
   git diff --no-ext-diff -w "$@" | vim -R -
 }
@@ -321,6 +322,8 @@ alias gd="grep 'describe' "
 rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
 rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
 alias yardserver="yard server -g -r -d -p8809"
+complete -C rails-complete -o default rails
+alias rspec='rspec --color --format doc'  # .rspecrc or something ? 
 
 ### ruboto
 ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }
