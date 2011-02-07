@@ -148,8 +148,10 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # echo fortune from all (offensive and not) fortunes, show cookie file, consider all fortunes equal regardless of size -- only short ones
 #echo && fortune -aces && echo
 #echo && fortune -ac && echo
-
-echo && fortune -e tao && echo # taow
+if [ $USER = 'jon' ]; then
+    clear;
+    echo && fortune tao && echo;
+fi
 
 
 
