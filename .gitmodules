@@ -2,7 +2,7 @@
 	path = .vim/bundle/piv
 	url = http://github.com/spf13/PIV.git
 [submodule ".vim/bundle/snipmate"]
-	path = .vim/bundle/snipmate
+	path = .vim/bundle/snipmate.vim
 	url = git://github.com/msanders/snipmate.vim.git
 [submodule ".vim/bundle/nerdcommenter"]
 	path = .vim/bundle/nerdcommenter
