@@ -100,6 +100,3 @@
 [submodule ".vim/bundle/PIV"]
 	path = .vim/bundle/PIV
 	url = http://github.com/spf13/PIV.git
-[submodule ".vim/bundle/phpcomplete"]
-	path = .vim/bundle/phpcomplete
-	url = http://github.com/shawncplus/phpcomplete.vim.git
