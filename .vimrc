@@ -138,7 +138,7 @@
 
 	" Shortcuts
 	" Change Working Directory to that of the current file
-    cmap cwd lcd %:p:h
+  "cmap cwd lcd %:p:h
 
 	" remap jj to escape
 	inoremap jj <ESC>
@@ -148,9 +148,9 @@
   noremap <leader>O :only<cr>:tabonly<cr>
 
   " buffers
-    " i.e buffer next
+    " buffer next
   :noremap <leader>bn :bn<cr>
-    " i.e buffer prev
+    " buffer prev
   :noremap <leader>bp :bp<cr>
 
 	" NERDTree
@@ -160,12 +160,21 @@
 	map <S-t> :TlistToggle<cr>
 
 	" Conque Bash
-	map <leader>bb :ConqueTerm bash<cr>
+	map <leader>bb  :ConqueTerm bash<cr>
 	map <leader>bsp :ConqueTermSplit bash<cr>
 
   " quit!
-  map <leader>qq :q!<cr>
+  map <leader>qq  :q!<cr>
   map <leader>qqa :qall!<cr>
+
+  " app calls, probably 
+  map <leader>cuc   :!cucumber<cr>
+  map <leader>cuco  :!cucumber %<cr>
+  map <leader>rsp   :!rspec spec<cr>
+  map <leader>rspo  :!rspec %<cr>
+  map <leader>php   :!php %<cr>
+  map <leader>phpl  :!php -l %<cr>
+
 
 " }
 
@@ -302,6 +311,7 @@ augroup filetypedetect
     autocmd! BufNewFile,BufRead *.md setfiletype markdown
     autocmd! BufNewFile,BufRead *.mkd setfiletype markdown
     autocmd! BufNewFile,BufRead *.markdown setfiletype markdown
+    autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
 augroup END
 
 " }
