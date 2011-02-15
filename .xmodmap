@@ -2,6 +2,7 @@ xmodmap -e "keysym Print = F21"
 xmodmap -e "keysym Scroll_Lock = F22"
 xmodmap -e "keysym Pause = F23"
 xmodmap -e "remove Lock = Caps_Lock"
+xmodmap -e 'keysym Menu = backslash bar' # get rid of menu key and make \|
 
 # for Model M
 #xmodmap -e "keysym Caps_Lock = Super_L"
