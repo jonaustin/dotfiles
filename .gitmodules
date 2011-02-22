@@ -1,18 +1,9 @@
-[submodule ".vim/bundle/piv"]
-	path = .vim/bundle/piv
-	url = http://github.com/spf13/PIV.git
-[submodule ".vim/bundle/snipmate"]
-	path = .vim/bundle/snipmate.vim
-	url = git://github.com/msanders/snipmate.vim.git
 [submodule ".vim/bundle/nerdcommenter"]
 	path = .vim/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
 [submodule ".vim/bundle/spf13-vim-colors"]
 	path = .vim/bundle/spf13-vim-colors
 	url = git://github.com/spf13/vim-colors.git
-[submodule ".vim/bundle/snipmate-snippets/snippets"]
-	path = .vim/bundle/snipmate-snippets/snippets
-	url = git@github.com:spf13/snipmate-snippets.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = http://github.com/scrooloose/nerdtree.git
@@ -97,6 +88,6 @@
 [submodule ".vim/bundle/easytags"]
 	path = .vim/bundle/easytags
 	url = https://github.com/vim-scripts/easytags.vim.git
-[submodule ".vim/bundle/PIV"]
-	path = .vim/bundle/PIV
-	url = http://github.com/spf13/PIV.git
+[submodule ".vim/bundle/snipmate"]
+	path = .vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
