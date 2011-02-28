@@ -401,8 +401,12 @@ function randlines () {
     cat ${1} | while read i; do echo $RANDOM "$i"; done | sort -n | sed 's/^[0-9]* //'
 }
 
-function f () { # find file *1*
+function f () { # find file/dir *1*
     find . -iname "*${1}*"
+}
+
+function fd () { # find directory *1*
+    find . -type d -iname "*${1}*"
 }
 
 function fr () { # find random file *1*

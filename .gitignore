@@ -2,6 +2,7 @@
 .pentadactyl/info/**/*
 blog.vim
 .vim/tmp
+.vim/doc/tags
 .netrwhist
 *.pyo
 *.pyc
@@ -13,4 +14,3 @@ blog.vim
 .config/ranger/bookmarks
 .config/ranger/history
 .config/ranger/tagged
-
