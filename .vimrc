@@ -163,17 +163,22 @@
 	map <leader>bb  :ConqueTerm bash<cr>
 	map <leader>bsp :ConqueTermSplit bash<cr>
 
-  " quit!
+  " quit!, write
   map <leader>qq  :q!<cr>
   map <leader>qqa :qall!<cr>
+  map <leader>w   :w<cr>
+  map <leader>ww  :w!<cr>
 
-  " app calls, probably 
+  " coding app calls
   map <leader>cuc   :!cucumber<cr>
   map <leader>cuco  :!cucumber %<cr>
   map <leader>rsp   :!rspec spec<cr>
   map <leader>rspo  :!rspec %<cr>
   map <leader>php   :!php %<cr>
   map <leader>phpl  :!php -l %<cr>
+
+  " close quickfix
+  map <leader>qf :ccl<cr>
 
 
 " }

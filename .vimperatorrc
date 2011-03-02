@@ -11,8 +11,8 @@ set editor=vim
 " Command line and search patterns history
 set history=10000
 
-" Show the toolbar on startup (I keep all bars in one)
-set go+=m
+" Show no toolbars/menus on startup
+set go=
 " add numbers to tabs
 set go+=n
 
@@ -35,7 +35,7 @@ set hlsearch
 " Default search engine is ignored, plugins are used, place yubnub in there and do:
 " set ds=yubnub
 
-colo zenburn
+colo phaedrix
 
 " Abbreviations
 

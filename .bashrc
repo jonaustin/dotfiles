@@ -170,13 +170,10 @@ alias info='pinfo'
 # non pkg'd app-updates
 alias upcalibre="sudo python -c \"import urllib2; exec urllib2.urlopen('http://status.calibre-ebook.com/linux_installer').read(); main()\""
 
-#ask before overwriting
-#alias rm='rm -i'
+#alias rm='rm -i' #ask before overwriting
 alias cp='cp -i'
 alias mv='mv -i'
-
-# don't ask
-alias rm='rm -f'
+alias rm='rm -f' # don't ask
 
 
 #ls
@@ -218,6 +215,7 @@ alias maj='ncmpcpp -p 7701' # mpd all jack
 alias mb='ncmpcpp -p 8800' # audiobooks
 alias toptracks="top_tracks_rockstar.rb; sed -i 's@musix/@@' /var/lib/mpd/playlists/_LASTFM-TOP_-_*;"   # weird..using sed the normal way 'sed -ie' causes a duplicate file with 'e' added to the end to be created..
 ## Other
+alias cm='chmod'
 alias sv='sudo vim'
 alias vrc='vim ~/.bashrc'
 alias vlrc='vim ~/.bashrc_local'
@@ -301,6 +299,8 @@ function git_diff() {
 
 
 ### ruby
+alias be='bundle exec'
+alias bec='bundle exec cucumber'
 alias fri='fri -L' # ruby fastri -- always bind to local as net stuff doesn't work
 alias create_ri_rdoc_for_gems='gem rdoc --all --overwrite'
 alias ris='ri --system '
