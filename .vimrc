@@ -180,6 +180,9 @@
   " close quickfix
   map <leader>qf :ccl<cr>
 
+  " Blog
+  map <leader>bl :BlogList<cr>
+
 
 " }
 
