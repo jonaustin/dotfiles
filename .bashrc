@@ -518,7 +518,7 @@ alias sss='ssh jon@sam'
 alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
 alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
 alias fsfs='sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frak'
-alias fsfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
+alias ssfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
 
 
 ##apps
