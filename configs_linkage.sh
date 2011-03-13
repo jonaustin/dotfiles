@@ -1,32 +1,32 @@
 #!/bin/bash
-ln -s ${HOME}/configs/.bashrc 
-ln -s ${HOME}/configs/.Xdefaults
-ln -s ${HOME}/configs/.vim
-ln -s ${HOME}/configs/.vimrc
-ln -s ${HOME}/configs/.gitconfig
-ln -s ${HOME}/configs/.vimperatorrc
-ln -s ${HOME}/configs/.vimperator
-ln -s ${HOME}/configs/.screenrc
-ln -s ${HOME}/configs/.inputrc 
-ln -s ${HOME}/configs/.config/awesome ${HOME}/.config/
-ln -s ${HOME}/configs/.config/vimprobable ${HOME}/.config/
-ln -s ${HOME}/configs/.elinks/ .
-ln -s ${HOME}/configs/.gemrc .
-ln -s ${HOME}/configs/.irbrc .
-ln -s ${HOME}/configs/.ncmpcpp/ .
-ln -s ${HOME}/configs/.rtorrent.rc .
-ln -s ${HOME}/configs/.xinitrc .
-ln -s ${HOME}/configs/.config/ranger .config/
-ln -s ${HOME}/configs
+cd ${HOME}
+ln -s configs/.bashrc 
+ln -s configs/.Xdefaults
+ln -s configs/.vim
+ln -s configs/.vimrc
+ln -s configs/.gitconfig
+ln -s configs/.vimperatorrc
+ln -s configs/.vimperator
+ln -s configs/.screenrc
+ln -s configs/.inputrc 
+ln -s configs/.config/awesome .config/
+ln -s configs/.config/vimprobable .config/
+ln -s configs/.elinks/ .
+ln -s configs/.gemrc .
+ln -s configs/.irbrc .
+ln -s configs/.ncmpcpp/ .
+ln -s configs/.rtorrent.rc .
+ln -s configs/.xinitrc .
+ln -s configs/.config/ranger .config/
+ln -s configs
 
 mkdir .vim/bin
-ln -s ${HOME}/.vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb .vim/bin/
-ln -s ${HOME}/.vim/bundle/vim-ruby-debugger/vim/plugin/ruby_debugger.vim .vim/plugin/
-ln -s ${HOME}/.vim/bundle/vim-ruby-debugger/vim/doc/ruby_debugger.txt .vim/doc/ruby_debugger.txt
+ln -s .vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb .vim/bin/
+ln -s .vim/bundle/vim-ruby-debugger/vim/plugin/ruby_debugger.vim .vim/plugin/
+ln -s .vim/bundle/vim-ruby-debugger/vim/doc/ruby_debugger.txt .vim/doc/ruby_debugger.txt
 
 # optional
-#ln -s ${HOME}/configs/.asoundrc .
-#ln -s ${HOME}/configs/.inputrc .
-#ln -s ${HOME}/configs/.xbindkeysrc .
-#ln -s ${HOME}/configs/.xmodmap 
+#ln -s configs/.asoundrc .
+#ln -s configs/.xbindkeysrc .
+#ln -s configs/.xmodmap 
  

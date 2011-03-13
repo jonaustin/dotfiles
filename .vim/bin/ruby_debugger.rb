@@ -1,1 +1,1 @@
-/home/jon/.vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb
+.vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb

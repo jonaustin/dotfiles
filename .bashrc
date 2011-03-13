@@ -12,7 +12,7 @@ fi
 
 
 ## ENV
-export PATH="$PATH:/sbin:/usr/sbin:/usr/local/scripts/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash"
+export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/usr/local/scripts/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash"
 export EDITOR='vim'
 export BROWSER='elinks'
 export PAGER='less'
@@ -21,6 +21,7 @@ export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export DISPLAY=:0
 export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
 export TERM=xterm-256color    # no idea why I didn't add this before
+export MOZ_DISABLE_PANGO=1 # improve rendering (may also fix font issues for all mozilla apps -- https://wiki.archlinux.org/index.php/Firefox_Tips_and_Tweaks#Network_settings )
 
 export HISTFILESIZE=10000
 export HISTSIZE=10000
@@ -293,7 +294,7 @@ alias gpom='git push origin master'
 alias gp='git pull'
 alias gclone='git clone '
 function git_diff() {
-  git diff --no-ext-diff -w "$@" | vim -R -
+  git diff --no-ext-diff -w "$@" #| vim -R -
 }
 
 
@@ -310,8 +311,8 @@ alias wr='which ruby'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-alias cdgems='cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems/'
-function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems/$1*; }
+alias cdgems='cd /home/jon/.rvm/gems/ruby-1.9.2-p180/gems/'
+function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p180/gems/$1*; }
 alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server.sh'
 alias qlg='gem contents '
 alias glq='gem contents '
@@ -371,6 +372,7 @@ alias rdir='cd /media/MORGOTH/documents/code/ruby'
 alias d='cd ~/documents/'
 alias simpsons="cd /media/extbak/tv/Simpsons/"
 alias home='cd /home/jon'
+alias cdh='cd /home/jon'
 alias fixtape='cd ~/documents/code/ruby/rails/musix'
 alias cdrails='cd /home/jon/.rvm/gems/ruby-1.8.7-p249/gems/rails-2.3.5'
 alias cdaudio='cd /media/extbak/Audio/'
@@ -511,9 +513,12 @@ alias fxs='sftp jon@xs.homeunix.net'
 alias home_proxy='ssh -D 8080 -f -C -q -N jon@xs.homeunix.net'
 alias sxxs='ssh jon@xs.homeunix.net'
 alias sxs='ssh jon@192.168.0.99'
+alias sfs='ssh -p666 jon@frak'
+alias sss='ssh jon@sam'
 alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
 alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
-alias fsfs='sshfs -o reconnect -p666 jon@192.168.0.166:/ /media/frak'
+alias fsfs='sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frak'
+alias fsfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
 
 
 ##apps
@@ -540,6 +545,7 @@ alias hist='history | grep -i '
 alias burn='growisofs -Z /dev/sr0 -v -l -R -J -joliet-long' 
 alias xp='xprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""' # get xprop CLASS and NAME
 alias fixres="xrandr --size 1920x1200"    # reset resolution
+alias fixres2="xrandr --output VGA-0 --mode 1920x1200"    # reset resolution
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
 
@@ -909,7 +915,8 @@ alias dac='apt-cache'
 alias apt-top='grep-status -FStatus -sInstalled-Size,Package -n             "install ok installed" | paste -sd "  \n" | sort -n'
 
 ### Arch ###
-export PACMAN=pacman-color
+#export PACMAN=pacman-color
+export PACMAN=pacman
 alias pi="sudo powerpill -S "
 alias pag="sudo powerpill -S "
 alias ag="sudo pacman -S "

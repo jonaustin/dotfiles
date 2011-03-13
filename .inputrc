@@ -1,4 +1,4 @@
-"\e[A":history-search-backward
+"\e[A":history-search-backward  # see History search at https://wiki.archlinux.org/index.php/Bash#Tips_and_tricks
 "\e[B":history-search-forward
 # vi keybindings (though I think the editing-mode sets the keymap as well..)
 set editing-mode vi
