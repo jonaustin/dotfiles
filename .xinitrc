@@ -9,9 +9,9 @@
 #/etc/X11/Xsession
 sh /home/jon/.xmodmap
 # D-bus
-#if which dbus-launch >/dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS"; then
-#       eval "$(dbus-launch --sh-syntax --exit-with-session)"
-#fi
+if which dbus-launch >/dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+       eval "$(dbus-launch --sh-syntax --exit-with-session)"
+fi
 
 #ivman&
 exec ck-launch-session awesome  # consolekit -- for udev/devmon automounting policy allowance
