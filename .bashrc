@@ -205,6 +205,8 @@ alias am="alsamixer"
 alias mccc='mpc current'
 alias mpcn='mpc next'
 alias mpcp='mpc toggle'
+alias rmm3u='find . -iname "*m3u" -print0 | xargs -0 rm'
+alias rmmac='find . -iname "__MACOSX" -print0 | xargs -0 rm -rf'
 ### MPD
 alias mr='sudo /etc/rc.d/mpd restart'
 alias mrm='sudo /etc/rc.d/mpd restart && ncmpcpp'
@@ -214,7 +216,10 @@ alias mj='ncmpcpp -p 6601' # mpd jack
 alias ma='ncmpcpp -p 7700' # mpd all alsa
 alias maj='ncmpcpp -p 7701' # mpd all jack
 alias mb='ncmpcpp -p 8800' # audiobooks
+alias mva='ncmpcpp -p 9900' # mpd various artists
 alias toptracks="top_tracks_rockstar.rb; sed -i 's@musix/@@' /var/lib/mpd/playlists/_LASTFM-TOP_-_*;"   # weird..using sed the normal way 'sed -ie' causes a duplicate file with 'e' added to the end to be created..
+## web
+alias ff='firefox'
 ## Other
 alias cm='chmod'
 alias sv='sudo vim'
@@ -296,6 +301,7 @@ alias gclone='git clone '
 function git_diff() {
   git diff --no-ext-diff -w "$@" #| vim -R -
 }
+alias git-diff=git_diff
 
 
 

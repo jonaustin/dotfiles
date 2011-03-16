@@ -183,6 +183,9 @@
   " Blog
   map <leader>bl :BlogList<cr>
 
+  " remove search highlights
+  map <leader>h :nohl<cr>
+
 
 " }
 
