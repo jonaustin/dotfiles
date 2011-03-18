@@ -169,7 +169,7 @@ alias free='free -m'
 alias info='pinfo'
 
 # non pkg'd app-updates
-alias upcalibre="sudo python -c \"import urllib2; exec urllib2.urlopen('http://status.calibre-ebook.com/linux_installer').read(); main()\""
+alias upcalibre="sudo python2 -c \"import urllib2; exec urllib2.urlopen('http://status.calibre-ebook.com/linux_installer').read(); main()\""
 
 #alias rm='rm -i' #ask before overwriting
 alias cp='cp -i'
@@ -295,7 +295,8 @@ alias gg='gitg --all&'
 alias gx='gitx --all'
 alias got='git '
 alias get='git '
-alias gpom='git push origin master'
+alias gpo='git push origin'
+  alias gpom='gpo'
 alias gp='git pull'
 alias gclone='git clone '
 function git_diff() {
@@ -525,6 +526,8 @@ alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
 alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
 alias fsfs='sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frak'
 alias ssfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
+# queries
+alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is to just use `host <ip>`
 
 
 ##apps

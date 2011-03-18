@@ -186,6 +186,9 @@
   " remove search highlights
   map <leader>h :nohl<cr>
 
+  " folding
+  map <leader>f :fold<cr>
+
 
 " }
 

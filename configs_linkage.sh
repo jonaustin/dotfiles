@@ -9,16 +9,19 @@ ln -s configs/.vimperatorrc
 ln -s configs/.vimperator
 ln -s configs/.screenrc
 ln -s configs/.inputrc 
-ln -s configs/.config/awesome .config/
-ln -s configs/.config/vimprobable .config/
-ln -s configs/.elinks/ .
-ln -s configs/.gemrc .
-ln -s configs/.irbrc .
-ln -s configs/.ncmpcpp/ .
-ln -s configs/.rtorrent.rc .
-ln -s configs/.xinitrc .
-ln -s configs/.config/ranger .config/
-ln -s configs
+ln -s configs/.elinks/ 
+ln -s configs/.gemrc 
+ln -s configs/.irbrc 
+ln -s configs/.ncmpcpp/ 
+ln -s configs/.rtorrent.rc 
+ln -s configs/.xinitrc 
+ln -s configs/.mailcap
+ln -s configs/.xmodmap 
+
+mkdir .config; cd .config
+ln -s ../configs/.config/awesome
+ln -s ../configs/.config/vimprobable
+ln -s ../configs/.config/ranger
 
 mkdir .vim/bin
 ln -s .vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb .vim/bin/
@@ -26,7 +29,6 @@ ln -s .vim/bundle/vim-ruby-debugger/vim/plugin/ruby_debugger.vim .vim/plugin/
 ln -s .vim/bundle/vim-ruby-debugger/vim/doc/ruby_debugger.txt .vim/doc/ruby_debugger.txt
 
 # optional
-#ln -s configs/.asoundrc .
-#ln -s configs/.xbindkeysrc .
-#ln -s configs/.xmodmap 
+#ln -s configs/.asoundrc 
+#ln -s configs/.xbindkeysrc 
  
