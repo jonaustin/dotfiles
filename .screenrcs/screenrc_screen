@@ -1,0 +1,15 @@
+source /home/jon/.screenrc
+
+screen -t m ncmpcpp -p 6600
+screen
+screen
+screen 
+screen 
+screen 
+screen
+screen -t irc weechat-curses
+screen -t sup sup
+screen
+#screen -t remind wyrd
+#screen -t todo vi /home/jon/documents/todo_now
+

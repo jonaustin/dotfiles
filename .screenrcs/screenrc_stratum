@@ -1,0 +1,11 @@
+source /home/jon/.screenrc
+
+screen -t s rails s
+screen -t c rails c
+screen -t code vim
+screen -t test vim
+screen 
+screen -t guard bundle exec guard
+screen -t spork bundle exec spork
+screen -t other
+

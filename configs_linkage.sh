@@ -8,6 +8,7 @@ ln -s configs/.gitconfig
 ln -s configs/.vimperatorrc
 ln -s configs/.vimperator
 ln -s configs/.screenrc
+ln -s configs/.screenrcs
 ln -s configs/.inputrc 
 ln -s configs/.elinks/ 
 ln -s configs/.gemrc 

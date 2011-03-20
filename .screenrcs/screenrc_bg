@@ -1,0 +1,5 @@
+source /home/jon/.screenrc
+
+screen -t yard yardserver
+screen -t devmon devmon
+screen -t notify inotify-daemon.py

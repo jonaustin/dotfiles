@@ -50,16 +50,4 @@ backtick 50 0 0 hostname
 backtick 1 60 60 sh /home/jon/bin/get_updates.sh
 backtick 2 0 0 sh /home/jon/bin/cpuusage.sh
 
-#screen -t blog vim -c BlogList
-#screen -t m ncmpcpp -p6602
-#screen -t vifm vifm
-#screen 
-#screen 
-#screen 
-#screen -t sup sup
-#screen -t irc weechat-curses
-#screen -t rss newsbeuter
-#screen -t tor rtorrent
-##screen -t remind wyrd
-##screen -t todo vi /home/jon/documents/todo_now
 
