@@ -22,7 +22,7 @@
  *          - completion with Ubiquity command description
  *      v0.2
  *          - completion includes Ubiquity command icons
- *          - changed commands.add to commands.addUserCommand
+ *          - changed commands.add to group.commands.add
  *          - :ubiquity! (bang) open Ubiquity window with arguments as input
  *
  * TODO:
@@ -30,7 +30,7 @@
  */
 
 
-commands.addUserCommand(['ubi[quity]'],
+group.commands.add(['ubi[quity]'],
   'Run Ubiquity commands from within vimperator.',
    function (args) {
         var cmdMgr = gUbiquity.__cmdManager;

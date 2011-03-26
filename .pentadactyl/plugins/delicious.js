@@ -6,7 +6,7 @@
 // Usage: Use :delicious <tags delimited by spaces> command
 // Usage: if successfully posted you will see "done" echoed
 
-commands.addUserCommand(['delicious'], "Save page as a bookmark on Delicious",
+group.commands.add(['delicious'], "Save page as a bookmark on Delicious",
                         function(args) {
                             var url = "https://api.del.icio.us/v1/posts/add?";
                             url += "&url=" + encodeURIComponent(buffer.URL);

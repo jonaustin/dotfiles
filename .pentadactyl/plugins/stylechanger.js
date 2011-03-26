@@ -143,7 +143,7 @@ dactyl.plugins.styleSheetsManger = (function(){
 			return CSSData;
 		}
 	};
-	commands.addUserCommand(['altcolo[rschema]'], 'set alternativeStyleSheet',
+	group.commands.add(['altcolo[rschema]'], 'set alternativeStyleSheet',
 		function(arg){
 			if (!arg){
 				manager.list(true);
@@ -162,7 +162,7 @@ dactyl.plugins.styleSheetsManger = (function(){
 			}
 		}
 	);
-	commands.addUserCommand(['colo[rschema]'], 'set user stylesheet',
+	group.commands.add(['colo[rschema]'], 'set user stylesheet',
 		function(arg, special){
 			if (!arg){
 				manager.list(false);
@@ -192,7 +192,7 @@ dactyl.plugins.styleSheetsManger = (function(){
 		}
 	);
 	var CSSData = {};
-	commands.addUserCommand(['hi[ghlight]'], 'temporary style changer',
+	group.commands.add(['hi[ghlight]'], 'temporary style changer',
 		function(args){
 			if (args.length == 0){
 				var str = ['show highlight list'];

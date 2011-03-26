@@ -25,7 +25,7 @@
  * @version 0.1
  */
 
-commands.add(["search"],
+group.commands.add(["search"],
   "Search the current site using your default search engine.",
   function(args) {
     var loc = window.content.document.location.toString();
