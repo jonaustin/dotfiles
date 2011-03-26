@@ -148,7 +148,7 @@ function StylishVimperator() {
 
 var sv = StylishVimperator();
 
-commands.addUserCommand(["stylish"],
+group.commands.add(["stylish"],
   "Execute stylish commands",
   function(args) { sv._execute(args); },
   { argCount: '1', completer: sv._completer }

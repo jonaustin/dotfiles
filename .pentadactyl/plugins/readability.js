@@ -5,7 +5,7 @@
 // URL: 
 // Usage: Use :readability <tags delimited by spaces> command
 
-commands.addUserCommand(['readability'], "Readability bookmarklet",
+group.commands.add(['readability'], "Readability bookmarklet",
     function(){
       readConvertLinksToFootnotes=false;
       readStyle='style-ebook';

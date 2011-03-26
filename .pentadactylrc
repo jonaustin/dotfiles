@@ -10,8 +10,8 @@ set editor=vim_wrapper.sh
 " Command line and search patterns history
 set history=10000
 
-" Show the toolbar on startup (I keep all bars in one)
-set go+=m
+" Hide everything
+set go+=
 " add numbers to tabs
 set go+=n
 
@@ -21,6 +21,8 @@ set showtabline=1
 " Show destination links in 1=status line, 2=command line
 set showstatuslinks=1
 
+" Disable obnoxiously huge auto-completion menu
+set au=!
 " Show completions and use AwesomeBar (+search plugins)
 set complete=sl
 "set wildoptions=auto
