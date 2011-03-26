@@ -12,9 +12,9 @@ set editor=vim
 set history=10000
 
 " Show no toolbars/menus on startup
-set go=
+set gui=
 " add numbers to tabs
-set go+=n
+set gui+=n
 
 " Show the tab bar only if more then one tab is open
 set showtabline=1
@@ -22,8 +22,9 @@ set showtabline=1
 " Show destination links in 1=status line, 2=command line
 set showstatuslinks=1
 
-" Show completions and use AwesomeBar (+search plugins)
-set complete=sl
+" Turn off complete because there's no way to reduce the size and there's this huge distracting menu (it wasn't like that in vimperator2) - so this way  tab turns it on just like vimp2
+" also if complete is on then pasting is completely broken (i.e. pasting causes the pasted text to be Prepended to the first 'smart' completion entry)
+set complete=
 "set wildoptions=auto
 
 " Ex commands output in a new tab by default (prefs, addons...)
