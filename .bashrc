@@ -231,6 +231,7 @@ alias vvc='vim ~/.vimrc'
 alias c='clear'
 alias e='exit; clear'
 alias svi='sudo vim'
+alias svdi='sudo vimdiff'
 alias t='todo.sh'
 alias enc='xvidenc -2p -p hq'
 alias h2='h264enc -2p -p hq'
@@ -553,8 +554,8 @@ alias hist='history | grep -i '
 ### INCANTATIONS ###
 alias burn='growisofs -Z /dev/sr0 -v -l -R -J -joliet-long' 
 alias xp='xprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""' # get xprop CLASS and NAME
-alias fixres="xrandr --size 1920x1200"    # reset resolution
-alias fixres2="xrandr --output VGA-0 --mode 1920x1200"    # reset resolution
+#alias fixres="xrandr --size 1920x1200"    # reset resolution
+alias fixres="xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off"    # set 24" samsung resolution, disable internal
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
 
@@ -574,7 +575,7 @@ alias eterm='Eterm -t trans&'
 alias eterm="Eterm -t smoked_glass -f green"
 alias aterm="aterm -name aterm -title 'term' -sl 3000 -tr +sb -sr -si -sk -bg black -shading 60 -fade 90 -tn xterm -fn -misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2 -g 130x50+20-0 -fg \#cecece"
 # alias aterm='aterm -tr -trsb -cr red +sb -fg gray -fn fixed -fb fixed'
-alias sudo='A=`alias` sudo '
+alias sudo='A=`alias` sudo ' # can't remember why the A is there, but you're essentially calling all your aliases before sudo hits
 
 alias cdbusy='fuser -muv /cdrom/' #sweet! shows which process is keeping the damn cdrom busy - also see lsof - list open files
 
