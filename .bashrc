@@ -22,6 +22,7 @@ export DISPLAY=:0
 export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
 export TERM=xterm-256color    # no idea why I didn't add this before
 export MOZ_DISABLE_PANGO=1 # improve rendering (may also fix font issues for all mozilla apps -- https://wiki.archlinux.org/index.php/Firefox_Tips_and_Tweaks#Network_settings )
+#export WINEDEBUG=-all
 
 export HISTFILESIZE=10000
 export HISTSIZE=10000
@@ -503,6 +504,7 @@ function vimcoredocs2kindle() {
 alias instapaper='rm -rf /tmp/instapaper*; ebook-convert /opt/calibre/resources/recipes/instapaper.recipe  /tmp/instapaper --username phaedrix@phaedrix.com --password \$tr@ng3r; cd /tmp/; zip -r instapaper.epub instapaper; kindlegen instapaper.epub; sudo mount /dev/sdb1 /media/Kindle\ Main\ Memory/; sudo mv -f instapaper.mobi /media/Kindle\ Main\ Memory/documents;'
 
 ##network
+alias wgetnc='wget --no-check-certificate'
 #ssh
 alias smb="ssh jon@192.168.0.123"
 alias smini="ssh 192.168.0.199"
@@ -525,7 +527,7 @@ alias sfs='ssh -p666 jon@frak'
 alias sss='ssh jon@sam'
 alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
 alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
-alias fsfs='sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frak'
+alias fsfs='sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frakssh'
 alias ssfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
 # queries
 alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is to just use `host <ip>`
@@ -981,6 +983,7 @@ alias aplay_all='prename "s/ /_/g" *; for n in *; do echo -e $n |  osd_cat -f "-
 rcalc() { ruby -e "puts $1"; }
 function re() { ruby -e  "$1"; }
 rne() { ruby -ne "$1"; }
+alias jekyll='jekyll --rdiscount' # because default maruku is weak (i.e. chokes on a ul within a ul)
 
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session. 

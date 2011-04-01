@@ -5,8 +5,8 @@ ln -s configs/.Xdefaults
 ln -s configs/.vim
 ln -s configs/.vimrc
 ln -s configs/.gitconfig
-ln -s configs/.vimperatorrc
-ln -s configs/.vimperator
+ln -s configs/.pentadactylrc
+ln -s configs/.pentadactyl
 ln -s configs/.screenrc
 ln -s configs/.screenrcs
 ln -s configs/.inputrc 
