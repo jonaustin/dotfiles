@@ -1,0 +1,7 @@
+source /home/jon/.screenrc
+
+screen -t m bash -c ncmpcpp -p 6600
+screen
+screen
+screen 
+screen 

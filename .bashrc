@@ -362,6 +362,7 @@ alias sd='screen -Sd'
 alias scs='screen -Sx screen'
 alias sccs='cd ~; screen -c /home/jon/.screenrcs/screenrc_screen -S screen'
 alias scbg='cd ~; screen -c /home/jon/.screenrcs/screenrc_bg -S bg'
+alias scqt='cd ~; screen -c /home/jon/.screenrcs/screenrc_qt -S qt'
 alias scc='cd ~; screen -c /home/jon/.screenrcs/screenrc_coding -S code'
 alias scstratum='cd ~/projects/stratum; screen -c /home/jon/.screenrcs/screenrc_stratum -S stratum'
 
