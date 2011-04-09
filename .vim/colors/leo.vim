@@ -153,9 +153,12 @@ if v:version >= 700
 	"hi TabLine			cterm=none	ctermfg=252		ctermbg=17
 	"hi TabLineSel		cterm=none	ctermfg=255		ctermbg=21
 	"hi TabLineFill	cterm=none	ctermfg=17		ctermbg=17
-	hi TabLine			cterm=none	ctermfg=233		ctermbg=110
-	hi TabLineSel		cterm=none	ctermfg=110		ctermbg=233
-	hi TabLineFill	cterm=none	ctermfg=233		ctermbg=110
+  "hi TabLine			cterm=none	ctermfg=233		ctermbg=110
+	"hi TabLineSel		cterm=none	ctermfg=110		ctermbg=233
+	"hi TabLineFill	cterm=none	ctermfg=233		ctermbg=110
+	hi TabLine			cterm=none	ctermfg=255		ctermbg=235
+	hi TabLineSel		cterm=none	ctermfg=249		ctermbg=233
+	hi TabLineFill	cterm=none	ctermfg=233		ctermbg=235
 
 endif
 
