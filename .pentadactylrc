@@ -31,7 +31,7 @@ set complete=sl
 set newtab=all
 
 " Hilight previous search pattern matches
-set hlsearch
+"set hlsearch ## doesn't work in pentadactyl
 
 " Default search engine is ignored, plugins are used, place yubnub in there and do:
 " set ds=yubnub

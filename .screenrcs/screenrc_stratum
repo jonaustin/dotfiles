@@ -1,7 +1,7 @@
 source /home/jon/.screenrc
 
-screen -t s rails s
-screen -t c rails c
+screen -t s ./script/server
+screen -t c ./script/console
 screen -t code vim
 screen -t test vim
 screen 

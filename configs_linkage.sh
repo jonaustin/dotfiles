@@ -20,9 +20,10 @@ ln -s configs/.mailcap
 ln -s configs/.xmodmap 
 
 mkdir .config; cd .config
-ln -s ../configs/.config/awesome
-ln -s ../configs/.config/vimprobable
-ln -s ../configs/.config/ranger
+ln -s /configs/.config/awesome
+ln -s /configs/.config/vimprobable
+ln -s /configs/.config/ranger
+ln -s /configs/.config/subtle
 
 mkdir .vim/bin
 ln -s .vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb .vim/bin/

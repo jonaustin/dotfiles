@@ -149,14 +149,14 @@ function completePerms(context) {
     context.completions = iter(PERMS);
 }
 
-options.add(["cookies", "ck"],
+options.add(["cookie", "ck"],
     "The default mode for newly added cookie permissions",
     "stringlist", "session",
     {
         completer: completePerms,
         validator: Options.validateCompleter,
     });
-commands.addUserCommand(["cookies", "ck"],
+group.commands.add(["cookie", "ck"],
     "Change cookie permissions for sites.",
     function (args) {
         let host = args.shift();
