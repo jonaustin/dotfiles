@@ -10,16 +10,14 @@ set editor=vim_wrapper.sh
 " Command line and search patterns history
 set history=10000
 
-" Hide everything
-set go+=
-" add numbers to tabs
-set go+=n
+" Hide everything, but status bar and numbers in tabs
+set go=sn
 
 " Show the tab bar only if more then one tab is open
-set showtabline=1
+set showtabline=multitab
 
-" Show destination links in 1=status line, 2=command line
-set showstatuslinks=1
+" Show destination links in 'status' line, 'command' line
+set showstatuslinks=status
 
 " Disable obnoxiously huge auto-completion menu
 set au=!
@@ -36,9 +34,27 @@ set newtab=all
 " Default search engine is ignored, plugins are used, place yubnub in there and do:
 " set ds=yubnub
 
+" its nice to have a comprehensive history of used commands
+set history=5000
+
+" use the home row!
+set hintkeys="asdfg;lkjh"
+
+" cookies only last for session
+set cookielifetime=session
+" don't accept 3rd party (e.g. usually tracking) cookies
+set cookieaccept=samesite
+
+set mapleader=,
+
+" Mappings
+map gb :back<cr>
+map gB :forward<cr>  " gf is used to view source..
+map <leader>s :stop
+
+
 colo zenburn
 
-" Abbreviations
 
 source! ~/.vimperatorrc.local
 
