@@ -1,0 +1,20 @@
+#net
+alias sxs='ssh -p666 jon@frak'
+
+#dirs
+msx=~/.mpd/music/
+mmsx=~/.mpd_local/music/
+fmsx=/media/frakssh/media/musix
+fmmsx=/media/frakssh/media/musix/musix
+alias msx="cd $msx"
+alias mmsx="cd $mmsx"
+alias fmsx="cd $fmsx"
+alias fmmsx="cd $fmmsx"
+# network dirs
+#frak
+alias newz='cd /media/media/filez/usenet/newzbin/'
+
+#convenience
+alias toptracks='toptracks.rb'
+alias heroes3="WINEPREFIX=~/.wineprefix/test/Heroes3/ wine Heroes3_C_crked.exe"
+alias ds1="export DISPLAY=:1"
