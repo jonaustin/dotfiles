@@ -18,7 +18,7 @@
 # Following options change behaviour and sizes of the window manager:
 #
 # Border size in pixel of the windows
-set :border, 2
+set :border, 0
 
 # Window move/resize steps in pixel per keypress
 set :step, 5
@@ -30,7 +30,7 @@ set :snap, 10
 set :gravity, :center
 
 # Make transient windows urgent
-set :urgent, false
+set :urgent, true
 
 # Honor resize size hints globally
 set :resize, false
@@ -39,7 +39,7 @@ set :resize, false
 set :strut, [ 0, 0, 0, 0 ]
 
 # Font string either take from e.g. xfontsel or use xft
-set :font, "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-*-*"
+set :font, "-artwiz-snap-*-*-*-*-*-*-*-*-*-*-*-*"
 #set :font, "xft:sans-8"
 
 # Space around windows
@@ -52,7 +52,7 @@ set :padding, [ 0, 0, 0, 0 ]
 set :separator, "|"
 
 # Outline border size in pixel of panel items
-set :outline, 0
+set :outline, 3
 
 # Set the WM_NAME of subtle (Java quirk)
 # set _wmname, "LG3D"
@@ -81,7 +81,7 @@ set :outline, 0
 #
 # === Link
 #
-# http://subforge.org/wiki/subtle/Panel
+# http://subforge.org/projects/subtle/wiki/Panel
 #
 
 screen 1 do
@@ -123,7 +123,7 @@ end
 #
 # === Link
 #
-# http://subforge.org/wiki/subtle/Themes
+# http://subforge.org/projects/subtle/wiki/Themes
 
 color :title_fg,        "#ffffff"
 color :title_bg,        "#1a1a1a"
@@ -181,7 +181,7 @@ color :separator,       "#DF8787"
 #
 # === Link
 #
-# http://subforge.org/wiki/subtle/Gravity
+# http://subforge.org/projects/subtle/wiki/Gravity
 #
 
   # Top left
@@ -305,13 +305,13 @@ gravity :gimp_dock,      [ 100,   0,  10, 100 ]
 #
 # === Link
 #
-# http://subforge.org/wiki/subtle/Grabs
+# http://subforge.org/projects/subtle/wiki/Grabs
 #
 
 # Escape grab
 #  grab "C-y", :SubtleEscape
 
-# Jump to view1, view2, ...
+# Jump to view1, view2, ... (multi-head setups)
 grab "W-S-1", :ViewJump1
 grab "W-S-2", :ViewJump2
 grab "W-S-3", :ViewJump3
@@ -327,7 +327,7 @@ grab "W-4", :ViewSwitch4
 grab "KP_Add",      :ViewNext
 grab "KP_Subtract", :ViewPrev
 
-# Move mouse to screen1, screen2, ...
+# Move mouse to screen1, screen2, ... (multi-head setups)
 grab "W-A-1", :ScreenJump1
 grab "W-A-2", :ScreenJump2
 grab "W-A-3", :ScreenJump3
@@ -349,10 +349,10 @@ grab "W-B1", :WindowMove
 grab "W-B3", :WindowResize
 
 # Toggle floating mode of window
-grab "W-f", :WindowFloat
+grab "W-space", :WindowFloat
 
 # Toggle fullscreen mode of window
-grab "W-space", :WindowFull
+grab "W-f", :WindowFull
 
 # Toggle sticky mode of window (will be visible on all views)
 grab "W-S-s", :WindowStick
@@ -361,13 +361,13 @@ grab "W-S-s", :WindowStick
 grab "W-r", :WindowRaise
 
 # Lower window
-grab "W-l", :WindowLower
+grab "W-S-l", :WindowLower
 
 # Select next windows
-grab "W-Left",  :WindowLeft
-grab "W-Down",  :WindowDown
-grab "W-Up",    :WindowUp
-grab "W-Right", :WindowRight
+grab "W-h",   :WindowLeft
+grab "W-j",   :WindowDown
+grab "W-k",   :WindowUp
+grab "W-l",   :WindowRight
 
 # Kill current window
 grab "W-S-c", :WindowKill
@@ -385,6 +385,14 @@ grab "W-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 
 # Exec programs
 grab "W-Return", "urxvt"
+grab "W-S-w", "firefox -P"
+# MPD
+grab "W-n", "mpc -p 6600 next"
+grab "W-v", "mpc -p 6600 prev"
+grab "W-p", "mpc -p 6600 toggle"
+grab "W-m", "mpd_status.sh 6600"
+grab "F21", "softer"
+grab "F22", "louder"
 
 # Run Ruby lambdas
 grab "S-F2" do |c|
@@ -399,7 +407,8 @@ end
 # == Tags
 #
 # Tags are generally used in subtle for placement of windows. This placement is
-# strict, that means that - aside from other tiling window managers - windows # must have a matching tag to be on a certain view. This also includes that
+# strict, that means that - aside from other tiling window managers - windows 
+# must have a matching tag to be on a certain view. This also includes that
 # windows that are started on a certain view will not automatically be placed
 # there.
 #
@@ -510,7 +519,7 @@ end
 #
 # === Link
 #
-# http://subforge.org/wiki/subtle/Tagging
+# http://subforge.org/projects/subtle/wiki/Tagging
 #
 
 # Simple tags
@@ -623,13 +632,13 @@ end
 #
 # === Link
 #
-# http://subforge.org/wiki/subtle/Tagging
+# http://subforge.org/projects/subtle/wiki/Tagging
 #
 
-view "terms", "terms|default"
+view "terms", "terms"
+view "xterms", "terms"
 view "www",   "browser"
-view "gimp",  "gimp_.*"
-view "dev",   "editor"
+view "other",   "default"
 
 #
 # == Sublets
@@ -674,7 +683,7 @@ view "dev",   "editor"
 #
 #  === Link
 #
-# http://subforge.org/wiki/subtle/Sublets
+# http://subforge.org/projects/subtle/wiki/Sublets
 #
 
 #
@@ -712,7 +721,7 @@ view "dev",   "editor"
 #
 # === Link
 #
-# http://subforge.org/wiki/subtle/Hooks
+# http://subforge.org/projects/subtle/wiki/Hooks
 #
 
 # vim:ts=2:bs=2:sw=2:et:fdm=marker
