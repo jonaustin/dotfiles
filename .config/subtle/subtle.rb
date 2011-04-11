@@ -358,7 +358,7 @@ grab "W-f", :WindowFull
 grab "W-S-s", :WindowStick
 
 # Raise window
-grab "W-r", :WindowRaise
+grab "W-S-r", :WindowRaise
 
 # Lower window
 grab "W-S-l", :WindowLower
@@ -387,12 +387,15 @@ grab "W-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 grab "W-Return", "urxvt"
 grab "W-S-w", "firefox -P"
 # MPD
-grab "W-n", "mpc -p 6600 next"
-grab "W-v", "mpc -p 6600 prev"
-grab "W-p", "mpc -p 6600 toggle"
-grab "W-m", "mpd_status.sh 6600"
-grab "F21", "softer"
-grab "F22", "louder"
+grab "W-n", "mpd_cmd next"
+grab "W-v", "mpd_cmd prev"
+grab "W-p", "mpd_cmd toggle"
+grab "W-m", "mpd_status"
+#grab "F21", "softer"
+#grab "F22", "louder"
+# system
+grab "W-r", "launcher.rb"
+grab "W-o", "selector.rb"
 
 # Run Ruby lambdas
 grab "S-F2" do |c|
