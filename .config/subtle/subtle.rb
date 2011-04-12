@@ -46,13 +46,13 @@ set :font, "-artwiz-snap-*-*-*-*-*-*-*-*-*-*-*-*"
 set :gap, 0
 
 # Panel size padding (left, right, top, bottom)
-set :padding, [ 0, 0, 0, 0 ]
+set :padding, [ 4, 4, 2, 2 ]
 
 # Separator between sublets
 set :separator, "|"
 
 # Outline border size in pixel of panel items
-set :outline, 3
+set :outline, 1
 
 # Set the WM_NAME of subtle (Java quirk)
 # set _wmname, "LG3D"
@@ -89,7 +89,8 @@ screen 1 do
   stipple false
 
   # Content of the top panel
-  top     [ :views, :title, :spacer, :tray, :sublets ]
+  #top     [ :views, :title, :spacer, :tray, :sublets ]
+  top     [:views, :title, :spacer, :center, :volume, :mpd, :center, :tray, :sublets, :separator, :fuzzytime]
 
   # Content of the bottom panel
   bottom  [ ]
@@ -322,6 +323,10 @@ grab "W-1", :ViewSwitch1
 grab "W-2", :ViewSwitch2
 grab "W-3", :ViewSwitch3
 grab "W-4", :ViewSwitch4
+grab "W-5", :ViewSwitch5
+grab "W-6", :ViewSwitch6
+grab "W-7", :ViewSwitch7
+grab "W-8", :ViewSwitch8
 
 # Select next and prev view */
 grab "KP_Add",      :ViewNext
@@ -385,14 +390,15 @@ grab "W-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 
 # Exec programs
 grab "W-Return", "urxvt"
-grab "W-S-w", "firefox -P"
+grab "W-u", "urxvt -T term2"
+grab "W-S-w", "firefox"
 # MPD
 grab "W-n", "mpd_cmd next"
 grab "W-v", "mpd_cmd prev"
 grab "W-p", "mpd_cmd toggle"
 grab "W-m", "mpd_status"
-#grab "F21", "softer"
-#grab "F22", "louder"
+grab "F21", "softer"
+grab "F22", "louder"
 # system
 grab "W-r", "launcher.rb"
 grab "W-o", "selector.rb"
@@ -526,8 +532,19 @@ end
 #
 
 # Simple tags
-tag "terms",   "xterm|[u]?rxvt"
+tag "terms" do
+  match :name => "xterm|[u]?rxvt"
+end
+
+tag "terms2" do
+  match :name => "term2"
+end
+
 tag "browser", "uzbl|opera|firefox|navigator"
+
+tag "filemanagers", "pcmanfm|thunar|ranger|vifm"
+
+tag "media", "vlc|mplayer|amarok"
 
 # Placement
 tag "editor" do
@@ -551,7 +568,7 @@ end
 
 # Modes
 tag "stick" do
-  match "mplayer"
+  match "mplayer|vlc"
   float true
   stick true
 end
@@ -638,10 +655,18 @@ end
 # http://subforge.org/projects/subtle/wiki/Tagging
 #
 
-view "terms", "terms"
-view "xterms", "terms"
+view "terms", "^terms$"
+view "terms2", "^terms2$"
 view "www",   "browser"
 view "other",   "default"
+view "files" do
+  match "filemanagers"
+  dynamic true
+end
+view "media" do
+  match "media"
+  dynamic true
+end
 
 #
 # == Sublets
