@@ -13,11 +13,16 @@ if which dbus-launch >/dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS"; then
        eval "$(dbus-launch --sh-syntax --exit-with-session)"
 fi
 
+eval 'xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off'
+# background
+eval `cat ~/.fehbg`
+
 #ivman&
-exec ck-launch-session awesome  # consolekit -- for udev/devmon automounting policy allowance
+#exec ck-launch-session awesome  # consolekit -- for udev/devmon automounting policy allowance
+exec ck-launch-session subtle
+
 #exec xterm
 
-#exec subtle
 
 # exec gnome-session
 # exec startkde
