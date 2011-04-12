@@ -18,6 +18,7 @@ ln -s configs/.rtorrent.rc
 ln -s configs/.xinitrc 
 ln -s configs/.mailcap
 ln -s configs/.xmodmap 
+ln -s configs/.fehbg
 
 mkdir .config; cd .config
 ln -s /configs/.config/awesome
