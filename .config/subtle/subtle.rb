@@ -543,8 +543,7 @@ tag "pdf", "apvlv|evince|acroread"
 
 tag "bashrun" do
   match  "bashrun" 
-  #size   [ 50, 1000, 200, 28 ] ### err..this doesn't seem to do a thing, always in the same place no matter what is here..
-  #size   [ 500, 100, 800, 280 ] ### err..this doesn't seem to do a thing, always in the same place no matter what is here..
+  geometry   [ 800, 600, 200, 18 ] ### err..this doesn't seem to do a thing, always in the same place no matter what is here..
   stick  true
   float  true
   urgent true
