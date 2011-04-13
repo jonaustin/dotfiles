@@ -21,10 +21,11 @@ ln -s configs/.xmodmap
 ln -s configs/.fehbg
 
 mkdir .config; cd .config
-ln -s /configs/.config/awesome
-ln -s /configs/.config/vimprobable
-ln -s /configs/.config/ranger
-ln -s /configs/.config/subtle
+ln -s ../configs/.config/awesome
+ln -s ../configs/.config/vimprobable
+ln -s ../configs/.config/ranger
+ln -s ../configs/.config/subtle
+ln -s ../configs/.config/bashrun
 
 mkdir .vim/bin
 ln -s .vim/bundle/vim-ruby-debugger/vim/bin/ruby_debugger.rb .vim/bin/
