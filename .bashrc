@@ -12,7 +12,7 @@ fi
 
 
 ## ENV
-export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/usr/local/scripts/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash"
+export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/usr/local/scripts/usr/X11R6/bin:/home/jon/bin:/usr/local/:/usr/lib/firefox/:/opt/kde/bin:/usr/lib/surfraw:/opt/java/jre/bin/:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash:/home/jon/bin/mpd:/home/jon/bin/subtle"
 export EDITOR='vim'
 export BROWSER='elinks'
 export PAGER='less'
@@ -35,7 +35,7 @@ export OPCODEDIR64=/lib/csound/plugins64  # for csound5
 export SURFRAW_graphical_browser="vimprobable2"
 export SURFRAW_browser="vimprobable2"
 
-### woohoo! use for paths -- i.e. cd ${msx}/Mew -- even works with Tab completion!
+### woohoo! use for paths -- i.e. cd ${msx}/Mew -- for some unknown reason no longer works with tab completion (tab \escapes bloody everything)
 export msx='/media/MORGOTH/musix/'
 export mmsx='/media/MORGOTH/musix/musix/'
 export kindle="/media/Kindle Main Memory/"
@@ -209,6 +209,7 @@ alias mpcp='mpc toggle'
 alias rmm3u='find . -iname "*m3u" -print0 | xargs -0 rm'
 alias rmmac='find . -iname "__MACOSX" -print0 | xargs -0 rm -rf'
 alias retag='find . -type f -print0|xargs -0 id3tag '
+alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 ### MPD
 alias mr='sudo /etc/rc.d/mpd restart'
 alias mrm='sudo /etc/rc.d/mpd restart && ncmpcpp'
@@ -219,10 +220,13 @@ alias ma='ncmpcpp -p 7700' # mpd all alsa
 alias maj='ncmpcpp -p 7701' # mpd all jack
 alias mb='ncmpcpp -p 8800' # audiobooks
 alias mva='ncmpcpp -p 9900' # mpd various artists
+alias mt='ncmpcpp -p 1100' # mpd testing artists/albums
 alias toptracks="top_tracks_rockstar.rb; sed -i 's@musix/@@' /var/lib/mpd/playlists/_LASTFM-TOP_-_*;"   # weird..using sed the normal way 'sed -ie' causes a duplicate file with 'e' added to the end to be created..
 ## web
 alias ff='firefox'
 ## Other
+alias aunpackall='for n in *; do aunpack $n; done'
+alias rmspace="prename 's/ /_/g' *"
 alias cm='chmod'
 alias sv='sudo vim'
 alias vrc='vim ~/.bashrc'
@@ -278,6 +282,9 @@ alias fdays='find . -mtime '
 alias loc='locate'
 alias loci='locate -i'
 alias nmap='sudo nmap'
+# Window Manager
+# subtle
+alias sl='subtler'
 
 ### Monitoring
 alias it='iotop'
@@ -558,6 +565,7 @@ alias burn='growisofs -Z /dev/sr0 -v -l -R -J -joliet-long'
 alias xp='xprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""' # get xprop CLASS and NAME
 #alias fixres="xrandr --size 1920x1200"    # reset resolution
 alias fixres="xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off"    # set 24" samsung resolution, disable internal
+alias fixres2='export DISPLAY=:1; xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off'
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
 
