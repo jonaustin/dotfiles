@@ -1,19 +1,5 @@
-#
-# Author::  Christoph Kappel <unexist@dorfelite.net>
-# Version:: $Id: contrib/subtle.rb,v 2520 2011/01/12 23:01:03 unexist $
-# License:: GNU GPL
-#
-# = Subtle default configuration
-#
-# This file will be installed as default and can also be used as a starter for
-# an own custom configuration file. The system wide config usually resides in
-# +/etc/xdg/subtle+ and the user config in +HOME/.config/subtle+, both locations
-# are dependent on the locations specified by +XDG_CONFIG_DIRS+ and
-# +XDG_CONFIG_HOME+.
-#
-
-#
-# == Options
+# = Subtle config
+# == Options {{{
 #
 # Following options change behaviour and sizes of the window manager:
 #
@@ -43,7 +29,7 @@ set :font, "-artwiz-snap-*-*-*-*-*-*-*-*-*-*-*-*"
 #set :font, "xft:sans-8"
 
 # Space around windows
-set :gap, 0
+set :gap, 1
 
 # Panel size padding (left, right, top, bottom)
 set :padding, [ 4, 4, 2, 2 ]
@@ -56,10 +42,10 @@ set :outline, 1
 
 # Set the WM_NAME of subtle (Java quirk)
 # set _wmname, "LG3D"
+# }}}
 
-#
-# == Screen
-#
+# == Screen {{{
+# Notes {{{
 # Generally subtle comes with two panels per screen, one on the top and one at
 # the bottom. Each panel can be configured with different panel items and
 # sublets screen wise. The default config uses top panel on the first screen
@@ -82,7 +68,7 @@ set :outline, 1
 # === Link
 #
 # http://subforge.org/projects/subtle/wiki/Panel
-#
+# }}}
 
 screen 1 do
   # Add stipple to panels
@@ -107,10 +93,10 @@ end
 #  # Content of the bottom panel
 #  bottom  [ ]
 #end
+# }}}
 
-#
-# == Colors
-#
+# == Colors {{{
+# Notes {{{
 # Colors directly define the look of subtle, valid values are:
 #
 # [*hexadecimal*] #0000ff
@@ -125,6 +111,7 @@ end
 # === Link
 #
 # http://subforge.org/projects/subtle/wiki/Themes
+# }}}
 
 color :title_fg,        "#ffffff"
 color :title_bg,        "#1a1a1a"
@@ -159,12 +146,10 @@ color :panel,           "#1a1a1a"
 
 color :stipple,         "#595959"
 color :separator,       "#DF8787"
+# }}}
 
-
-
-#
-# == Gravities
-#
+# == Gravities {{{
+# Notes {{{
 # Gravities are predefined sizes a window can be set to. There are several ways
 # to set a certain gravity, most convenient is to define a gravity via a tag or
 # change them during runtime via grab. Subtler and subtlext can also modify
@@ -183,7 +168,7 @@ color :separator,       "#DF8787"
 # === Link
 #
 # http://subforge.org/projects/subtle/wiki/Gravity
-#
+# }}}
 
   # Top left
 gravity :top_left,       [   0,   0,  50,  50 ]
@@ -234,10 +219,10 @@ gravity :bottom_right33, [ 100, 100,  50,  34 ]
 gravity :gimp_image,     [  50,  50,  80, 100 ]
 gravity :gimp_toolbox,   [   0,   0,  10, 100 ]
 gravity :gimp_dock,      [ 100,   0,  10, 100 ]
+# }}}
 
-#
-# == Grabs
-#
+# == Grabs {{{
+# Notes {{{
 # Grabs are keyboard and mouse actions within subtle, every grab can be
 # assigned either to a key and/or to a mouse button combination. A grab
 # consists of a chain and an action.
@@ -307,12 +292,12 @@ gravity :gimp_dock,      [ 100,   0,  10, 100 ]
 # === Link
 #
 # http://subforge.org/projects/subtle/wiki/Grabs
-#
-
+# }}}
+# Subtle {{{
 # Escape grab
 #  grab "C-y", :SubtleEscape
 
-# Jump to view1, view2, ... (multi-head setups)
+# Jump to view1, view2, ... (multi-head setups only...see wiki)
 grab "W-S-1", :ViewJump1
 grab "W-S-2", :ViewJump2
 grab "W-S-3", :ViewJump3
@@ -329,8 +314,8 @@ grab "W-7", :ViewSwitch7
 grab "W-8", :ViewSwitch8
 
 # Select next and prev view */
-grab "KP_Add",      :ViewNext
-grab "KP_Subtract", :ViewPrev
+grab "W-Right", :ViewNext
+grab "W-Left",  :ViewPrev
 
 # Move mouse to screen1, screen2, ... (multi-head setups)
 grab "W-A-1", :ScreenJump1
@@ -387,10 +372,12 @@ grab "W-d", [ :right,        :right66,        :right33        ]
 grab "W-z", [ :bottom_left,  :bottom_left66,  :bottom_left33  ]
 grab "W-x", [ :bottom,       :bottom66,       :bottom33       ]
 grab "W-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
+# }}}
 
-# Exec programs
+# Exec programs {{{
 grab "W-Return", "urxvt"
 grab "W-u", "urxvt -T term2"
+grab "W-i", "urxvt -T term3"
 grab "W-S-w", "firefox"
 # MPD
 grab "W-n", "mpd_cmd next"
@@ -400,7 +387,8 @@ grab "W-m", "mpd_status"
 grab "F21", "softer"
 grab "F22", "louder"
 # system
-grab "W-r", "launcher.rb"
+grab "W-r", "bashrun"
+grab "W-S-r", "bashrun2"
 grab "W-o", "selector.rb"
 
 # Run Ruby lambdas
@@ -411,10 +399,11 @@ end
 grab "S-F3" do
   puts Subtlext::VERSION
 end
+# }}}
+# }}}
 
-#
-# == Tags
-#
+# == Tags {{{
+# Notes {{{
 # Tags are generally used in subtle for placement of windows. This placement is
 # strict, that means that - aside from other tiling window managers - windows 
 # must have a matching tag to be on a certain view. This also includes that
@@ -529,7 +518,7 @@ end
 # === Link
 #
 # http://subforge.org/projects/subtle/wiki/Tagging
-#
+# }}}
 
 # Simple tags
 tag "terms" do
@@ -540,11 +529,27 @@ tag "terms2" do
   match :name => "term2"
 end
 
+tag "terms3" do
+  match :name => "term3"
+end
+
 tag "browser", "uzbl|opera|firefox|navigator"
 
-tag "filemanagers", "pcmanfm|thunar|ranger|vifm"
+tag "filemanagers", "pcmanfm|thunar|ranger|vifm|feh"
 
 tag "media", "vlc|mplayer|amarok"
+
+tag "pdf", "apvlv|evince|acroread"
+
+tag "bashrun" do
+  match  "bashrun" 
+  #size   [ 50, 1000, 200, 28 ] ### err..this doesn't seem to do a thing, always in the same place no matter what is here..
+  #size   [ 500, 100, 800, 280 ] ### err..this doesn't seem to do a thing, always in the same place no matter what is here..
+  stick  true
+  float  true
+  urgent true
+  #screen 0
+end
 
 # Placement
 tag "editor" do
@@ -593,10 +598,10 @@ tag "gimp_dock" do
   match   :role => "gimp-dock"
   gravity :gimp_dock
 end
+# }}}
 
-#
-# == Views
-#
+# == Views {{{
+# Notes {{{
 # Views are the virtual desktops in subtle, they show all windows that share a
 # tag with them. Windows that have no tag will be visible on the default view
 # which is the view with the default tag or the first defined view when this
@@ -653,10 +658,11 @@ end
 # === Link
 #
 # http://subforge.org/projects/subtle/wiki/Tagging
-#
+# }}}
 
 view "terms", "^terms$"
 view "terms2", "^terms2$"
+view "terms3", "^terms3$"
 view "www",   "browser"
 view "other",   "default"
 view "files" do
@@ -667,10 +673,14 @@ view "media" do
   match "media"
   dynamic true
 end
+view "pdf" do
+  match "pdf"
+  dynamic true
+end
+# }}}
 
-#
-# == Sublets
-#
+# == Sublets {{{
+# Notes {{{
 # Sublets are Ruby scripts that provide data for the panel and can be managed
 # with the sur script that comes with subtle.
 #
@@ -713,10 +723,12 @@ end
 #
 # http://subforge.org/projects/subtle/wiki/Sublets
 #
+# }}}
 
-#
-# == Hooks
-#
+# }}}
+
+# == Hooks {{{
+# Notes {{{
 # And finally hooks are a way to bind Ruby scripts to a certain event.
 #
 # Following hooks exist so far:
@@ -750,6 +762,6 @@ end
 # === Link
 #
 # http://subforge.org/projects/subtle/wiki/Hooks
-#
+# }}}
 
 # vim:ts=2:bs=2:sw=2:et:fdm=marker
