@@ -351,6 +351,9 @@ alias ruboto_rake_build="CLASSPATH=$JAVA_HOME/lib/tools.jar rake" # jruby rake h
 ### awesome
 alias vac='vim ~/.config/awesome/rc.lua'
 
+### subtle
+alias vsc='vim ~/.config/subtle/subtle.rb'
+
 # media conversion
 alias wma2ogg='for i in *.wma; do ffmpeg -i $i -acodec vorbis -aq 100 ${i}.ogg; done'
 alias ogv2avi='for n in `ls *`; do mencoder $n -ovc lavc -oac mp3lame -o $(echo $n | cut -d "." -f 1).avi; done'
