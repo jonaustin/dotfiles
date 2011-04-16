@@ -798,7 +798,7 @@ end
 # == Hacks {{{
 
 # Quake-style 'drop-down' console
-grab "W-F1" do
+grab "W-grave" do
   if((c = Subtlext::Client["quaketerm"]))
     c.gravity = :top33
     c.toggle_stick
