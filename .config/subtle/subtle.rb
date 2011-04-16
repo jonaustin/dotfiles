@@ -788,6 +788,11 @@ on :start do
 #  c = Subtlext::Subtle.spawn("urxvt -name quaketerm")
 end
 
+# always switch to client upon creation
+on :client_create do |c|
+  c.views.first.jump
+end
+
 # }}}
 
 # == Hacks {{{
