@@ -294,8 +294,8 @@ alias lm='less /var/log/messages.log'
 alias cl='cd /var/log/'
 
 ### Git
-alias gs='git status '
-alias gsl='git status | less'
+alias gs='git status --ignore-submodules'
+alias gsl='git status --ignore-submodules | less'
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
