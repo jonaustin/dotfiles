@@ -1,10 +1,3 @@
-
-
-
-! anrxc's X application resource database
-!   - Updated on: Aug 16, 00:52:51 CEST 2009
-
-
 !{{{ XFT
 Xft.dpi:       96
 Xft.antialias: 1
@@ -21,77 +14,77 @@ Emacs.font: -xos4-terminus-medium-r-normal-*-12-120-72-72-c-60-iso8859-2
 !}}}
 
 
-!{{{ URXVT
+!{{{ URxvt
 !
 ! General
-!urxvt*geometry:         80x26
-urxvt.termName:  rxvt-256color
-urxvt.loginShell:         true
-urxvt.scrollBar:         false
-urxvt.secondaryScroll:    true
-urxvt.saveLines:         65535
-urxvt.cursorBlink:       false
-urxvt.urgentOnBell:       true
-urxvt.override-redirect: false
-!urxvt.borderLess:       false
-!urxvt.borderWidth:          1
-!urxvt.internalBorder:       0
+!URxvt.geometry:         80x26
+URxvt.termName:  rxvt-256color
+URxvt.loginShell:         true
+URxvt.scrollBar:         false
+URxvt.secondaryScroll:    true
+URxvt.saveLines:         65535
+URxvt.cursorBlink:       false
+URxvt.urgentOnBell:       true
+URxvt.override-redirect: false
+!URxvt.borderLess:       false
+!URxvt.borderWidth:          1
+!URxvt.internalBorder:       0
 !
 ! Extensions
-urxvt*perl-lib:         /usr/lib/urxvt/perl/
-urxvt*perl-ext-common:  default,matcher,searchable-scrollback
+URxvt.perl-lib:         /usr/lib/URxvt/perl/
+URxvt.perl-ext-common:  default,matcher,searchable-scrollback
 URxvt.urlLauncher:      /usr/bin/firefox
-urxvt*matcher.button:   1
+URxvt.matcher.button:   1
 URxvt.keysym.C-Delete:  perl:matcher
 URxvt.underlineURLs:    true
 
 ! So we catch even nasty URLs
-urxvt.cutchars:         `()'*<>[]{|}"
-URxvt*cutchars:         `"()'*<>[]{|}
+!URxvt.cutchars:         `()'*<>[]{|}"
+!URxvt.cutchars:         `"()'*<>[]{|}
 !
 ! Appearance
-urxvt.font:     -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
-urxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
+URxvt.font:     -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
+URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
 !
 ! Cursor
-urxvt.cursorColor: #DCDCCC
+URxvt.cursorColor: #DCDCCC
 !
 ! Pseudo Transparency
-!urxvt.shading:     30
-!urxvt.transparent: false
+!URxvt.shading:     30
+!URxvt.transparent: false
 ! 
 ! Zenburn color-scheme
-!urxvt*background:  #3f3f3f
-!urxvt*foreground:  #dcdccc
-!urxvt*background:  #1f1f1f
-!urxvt*foreground:  #d8dada
-urxvt*background:  #080808
-urxvt*foreground:  #eeeeee
+!URxvt.background:  #3f3f3f
+!URxvt.foreground:  #dcdccc
+!URxvt.background:  #1f1f1f
+!URxvt.foreground:  #d8dada
+URxvt.background:  #080808
+URxvt.foreground:  #eeeeee
 ! black + red
-!urxvt*color0:     #3f3f3f
-urxvt*color0:      #1E2320
-urxvt*color1:      #705050
+!URxvt.color0:     #3f3f3f
+URxvt.color0:      #1E2320
+URxvt.color1:      #705050
 ! green + yellow
-urxvt*color2:      #60b48a
-urxvt*color3:      #dfaf8f
+URxvt.color2:      #60b48a
+URxvt.color3:      #dfaf8f
 ! blue + purple
-urxvt*color4:      #506070
-urxvt*color5:      #dc8cc3
+URxvt.color4:      #506070
+URxvt.color5:      #dc8cc3
 ! cyan + white
-urxvt*color6:      #8cd0d3
-urxvt*color7:      #dcdccc
+URxvt.color6:      #8cd0d3
+URxvt.color7:      #dcdccc
 ! bright-black + bright-red
-urxvt*color8:      #709080
-urxvt*color9:      #dca3a3
+URxvt.color8:      #709080
+URxvt.color9:      #dca3a3
 ! bright-green + bright-yellow
-urxvt*color10:     #c3bf9f
-urxvt*color11:     #f0dfaf
+URxvt.color10:     #c3bf9f
+URxvt.color11:     #f0dfaf
 ! bright-blue + bright-purple
-urxvt*color12:     #94bff3
-urxvt*color13:     #ec93d3
+URxvt.color12:     #94bff3
+URxvt.color13:     #ec93d3
 ! bright-cyan + bright-white
-urxvt*color14:     #93e0e3
-urxvt*color15:     #ffffff
+URxvt.color14:     #93e0e3
+URxvt.color15:     #ffffff
 !}}}
 
 
