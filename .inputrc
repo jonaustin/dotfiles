@@ -4,7 +4,7 @@
 set editing-mode vi
 set keymap vi-insert
 # ignore case for bash tab completion
-set completion-ignore-case On
+set completion-ignore-case on
 # no annoying beep
 set bell-style none
 set blink-matching-paren on
