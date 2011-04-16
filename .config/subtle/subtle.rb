@@ -373,7 +373,6 @@ grab "W-z", [ :bottom_left,  :bottom_left66,  :bottom_left33  ]
 grab "W-x", [ :bottom,       :bottom66,       :bottom33       ]
 grab "W-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 # }}}
-
 # Exec programs {{{
 grab "W-Return", "urxvt"
 grab "W-u", "urxvt -T term2"
@@ -390,6 +389,20 @@ grab "F22", "louder"
 grab "W-r", "bashrun"
 grab "W-S-r", "bashrun2"
 grab "W-o", "selector.rb"
+
+grab "A-Tab" do |c|
+   sel     = 0
+   clients = Subtlext::Client.visible
+
+   clients.each_index do |idx|
+     if(clients[idx].id == c.id)
+       sel = idx + 1 if(idx < clients.size - 1)
+     end
+   end
+
+  clients[sel].focus
+end
+
 
 # Run Ruby lambdas
 grab "S-F2" do |c|
@@ -597,6 +610,13 @@ tag "gimp_dock" do
   match   :role => "gimp-dock"
   gravity :gimp_dock
 end
+
+# Hacks
+tag "flash" do
+  match "<unknown>|exe|operapluginwrapper|npviewer.bin"  # <unkown> = firefox ---- http://subforge.org/ezfaq/show/subtle?faq_id=20
+  stick true
+end
+
 # }}}
 
 # == Views {{{
@@ -762,5 +782,65 @@ end
 #
 # http://subforge.org/projects/subtle/wiki/Hooks
 # }}}
+
+# On subtle startup (or restart)
+on :start do
+#  c = Subtlext::Subtle.spawn("urxvt -name quaketerm")
+end
+
+# }}}
+
+# == Hacks {{{
+
+# Quake-style 'drop-down' console
+grab "W-F1" do
+  if((c = Subtlext::Client["quaketerm"]))
+    c.gravity = :top33
+    c.toggle_stick
+    c.focus
+  elsif((c = Subtlext::Subtle.spawn("urxvt -name quaketerm")))
+    # setting gravity here doesn't do anything...wtf.
+      c.gravity = :top33
+    c.tags  = [] 
+    c.flags = [ :stick ]
+  end
+end
+
+# Move windows
+# This snippet adds nine grabs to move windows on the fly to nine defined views. It uses tagging for this, creates tags based on the view names and applies them when needed.
+on :start do
+  # Create missing tags
+  views = Subtlext::View.all.map { |v| v.name }
+  tags  = Subtlext::Tag.all.map { |t| t.name }
+
+  views.each do |v|
+    unless(tags.include?(v))
+      t = Subtlext::Tag.new(v)
+      t.save
+    end
+  end
+end
+
+# Add nine C-< number> grabs
+(1..9).each do |i|
+  grab "C-%d" % [ i ] do |c|
+    views = Subtlext::View.all
+    names = views.map { |v| v.name }
+
+    # Sanity check
+    if(i <= views.size)
+      # Tag client
+      tags = c.tags.reject { |t| names.include?(t.name) or "default" == t.name }
+      tags << names[i - 1]
+
+      c.tags = tags
+
+      # Tag view
+      views[i - 1].tag(names[i - 1])
+    end
+  end
+end
+
+
 
 # vim:ts=2:bs=2:sw=2:et:fdm=marker
