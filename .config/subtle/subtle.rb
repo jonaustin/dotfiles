@@ -790,7 +790,7 @@ end
 
 # always switch to client upon creation
 on :client_create do |c|
-  c.views.first.jump
+  c.views.first.jump unless c.name == 'bashrun'
 end
 
 # }}}
@@ -805,7 +805,7 @@ grab "W-grave" do
     c.focus
   elsif((c = Subtlext::Subtle.spawn("urxvt -name quaketerm")))
     # setting gravity here doesn't do anything...wtf.
-      c.gravity = :top33
+      c.gravity = :top33 # [:top33] works even less well (i.e. still no gravity change and doesn't hide the window anymore)
     c.tags  = [] 
     c.flags = [ :stick ]
   end
