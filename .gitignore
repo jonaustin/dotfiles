@@ -15,4 +15,5 @@ blog.vim
 .config/ranger/history
 .config/ranger/tagged
 .local/share/bashrun/history
-.config/newsbeuter/cache.db
+.newsbeuter/cache.db
+.newsbeuter/history.search

@@ -19,6 +19,7 @@ ln -s configs/.xinitrc
 ln -s configs/.mailcap
 ln -s configs/.xmodmap 
 ln -s configs/.fehbg
+ln -s configs/.newsbeuter
 
 mkdir .config; cd .config
 ln -s ../configs/.config/awesome
