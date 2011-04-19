@@ -17,7 +17,7 @@ set go=sn
 set showtabline=multitab
 
 " Show destination links in 'status' line, 'command' line
-set showstatuslinks=status
+set showstatuslinks=command
 
 " Disable obnoxiously huge auto-completion menu
 set au=!
