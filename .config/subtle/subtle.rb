@@ -790,7 +790,7 @@ end
 
 # always switch to client upon creation
 on :client_create do |c|
-  c.views.first.jump unless c.name == 'bashrun'
+  c.views.first.jump unless (c.name == 'bashrun' or c.name == 'Dialog' or c.name == '<unknown>')
 end
 
 # }}}
