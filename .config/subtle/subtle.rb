@@ -4,7 +4,6 @@
 # Following options change behaviour and sizes of the window manager:
 #
 # Border size in pixel of the windows
-set :border, 0
 
 # Window move/resize steps in pixel per keypress
 set :step, 5
@@ -21,24 +20,12 @@ set :urgent, true
 # Honor resize size hints globally
 set :resize, false
 
-# Screen strut for e.g. other panels (left, right, top, bottom)
-set :strut, [ 0, 0, 0, 0 ]
-
 # Font string either take from e.g. xfontsel or use xft
 set :font, "-artwiz-snap-*-*-*-*-*-*-*-*-*-*-*-*"
 #set :font, "xft:sans-8"
 
-# Space around windows
-set :gap, 1
-
-# Panel size padding (left, right, top, bottom)
-set :padding, [ 4, 4, 2, 2 ]
-
 # Separator between sublets
 set :separator, "|"
-
-# Outline border size in pixel of panel items
-set :outline, 1
 
 # Set the WM_NAME of subtle (Java quirk)
 # set _wmname, "LG3D"
@@ -113,39 +100,78 @@ end
 # http://subforge.org/projects/subtle/wiki/Themes
 # }}}
 
-color :title_fg,        "#ffffff"
-color :title_bg,        "#1a1a1a"
-color :title_border,    "#1a1a1a"
+style :title do
+  padding     4, 4, 2, 2
+  border      "#1a1a1a", 1
+  foreground  "#ffffff"
+  background  "#1a1a1a"
+end
 
-color :focus_fg,        "#ffffff"
-color :focus_bg,        "#595959"
-color :focus_border,    "#1a1a1a"
+style :focus do
+  padding     4, 4, 2, 2
+  border      "#1a1a1a", 1
+  foreground  "#ffffff"
+  background  "#595959"
+end
 
-color :urgent_fg,       "#DF8787"
+style :urgent do
+  padding     4, 4, 2, 2
+  border      1
+  foreground  "#DF8787"
+end
+
+style :occupied do
+  padding     4, 4, 2, 2
+  border      "#1a1a1a", 1
+  foreground  "#777777"
+  background  "#404040"
+end
+
+style :views do
+  padding     4, 4, 2, 2
+  border      "#1a1a1a", 1
+  foreground  "#a8a8a8"
+  background  "#1a1a1a"
+end
+
+style :sublets do
+  padding     4, 4, 2, 2
+  border      "#1a1a1a", 1
+  foreground  "#a8a8a8"
+  background  "#1a1a1a"
+end
+
+style :separator do
+  padding     4, 4, 2, 2
+  border      1
+  background  "#1a1a1a"
+  foreground  "#DF8787"
+end
+
+style :clients do
+  active      "#a8a8a8", 0
+  inactive    "#404040", 0
+  margin      1
+end
+
+style :subtle do
+  padding     0, 0, 0, 0
+  panel       "#1a1a1a"
+  stipple     "#595959"
+end
+
+
+
 #color :urgent_bg,       "#404040"
 #color :urgent_border,   "#1a1a1a"
 
-color :occupied_fg,     "#777777"
-color :occupied_bg,     "#404040"
-color :occupied_border, "#1a1a1a"
 
-color :views_fg,        "#a8a8a8"
-color :views_bg,        "#1a1a1a"
-color :views_border,    "#1a1a1a"
 
 #color :sublets_fg,      "#595959"
-color :sublets_fg,      "#a8a8a8"
-color :sublets_bg,      "#1a1a1a"
-color :sublets_border,  "#1a1a1a"
 
-color :client_active,   "#a8a8a8"
-color :client_inactive, "#404040"
 
-color :panel,           "#1a1a1a"
 #color :background,     "#404040"
 
-color :stipple,         "#595959"
-color :separator,       "#DF8787"
 # }}}
 
 # == Gravities {{{
