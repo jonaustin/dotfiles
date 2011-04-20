@@ -221,6 +221,7 @@ alias maj='ncmpcpp -p 7701' # mpd all jack
 alias mb='ncmpcpp -p 8800' # audiobooks
 alias mva='ncmpcpp -p 9900' # mpd various artists
 alias mt='ncmpcpp -p 1100' # mpd testing artists/albums
+alias mp='ncmpcpp -p 2200' # mpd podcasts
 alias toptracks="top_tracks_rockstar.rb; sed -i 's@musix/@@' /var/lib/mpd/playlists/_LASTFM-TOP_-_*;"   # weird..using sed the normal way 'sed -ie' causes a duplicate file with 'e' added to the end to be created..
 ## web
 alias ff='firefox'
