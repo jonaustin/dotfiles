@@ -20,6 +20,7 @@ ln -s configs/.mailcap
 ln -s configs/.xmodmap 
 ln -s configs/.fehbg
 ln -s configs/.newsbeuter
+ln -s configs/.oh-my-zsh
 
 mkdir .config; cd .config
 ln -s ../configs/.config/awesome

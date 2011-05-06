@@ -1,0 +1,12 @@
+"SamsungToolsDummyCommand"
+  Control+Alt+Shift+Mod4+F1+F2+F3
+"samsung-tools --show-notify --quiet --backlight hotkey"
+  XF86Launch1
+"samsung-tools --show-notify --quiet --bluetooth hotkey"
+  XF86Launch2
+"samsung-tools --show-notify --quiet --cpu hotkey"
+  XF86Launch3
+"samsung-tools --show-notify --quiet --webcam hotkey"
+  Alt+KP_Insert
+"samsung-tools --show-notify --quiet --wireless hotkey"
+  XF86WLAN

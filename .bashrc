@@ -224,8 +224,8 @@ alias mt='ncmpcpp -p 1100' # mpd testing artists/albums
 alias mp='ncmpcpp -p 2200' # mpd podcasts
 alias toptracks="top_tracks_rockstar.rb; sed -i 's@musix/@@' /var/lib/mpd/playlists/_LASTFM-TOP_-_*;"   # weird..using sed the normal way 'sed -ie' causes a duplicate file with 'e' added to the end to be created..
 ## web
-alias ff='firefox'
 ## Other
+alias ff='firefox'
 alias aunpackall='for n in *; do aunpack $n; done'
 alias rmspace="prename 's/ /_/g' *"
 alias cm='chmod'
@@ -273,7 +273,7 @@ export games='/media/ext3/Warez/Games/'
 alias lsgames='echo Civ4; echo Quake4; echo Portal; echo Warhammer; echo Freedom Force;'
 alias lp='lesspipe.sh '
 um() { sudo umount /media/${1}; }
-#alias sup="rvm use 1.8.7-p302; sup"
+alias sup="rvm use 1.9.2-p180; sup"
 alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
 alias lsfuncbody='declare -f'
 alias lsfunc='declare -F' 
@@ -333,7 +333,7 @@ function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p180/gems/$1*; }
 alias redmine='cd /media/MORGOTH/documents/code/ruby/rails/redmine/ && sh server.sh'
 alias qlg='gem contents '
 alias glq='gem contents '
-alias rtags='rtags --vi -R' # vi compatible rtags (default is emacs)
+alias rtags='rvm use 1.8.7; rtags --vi -R; rvm use default' # vi compatible rtags (default is emacs) -- and fails on ruby 1.9.2
 alias gwhois='gem whois '
 gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
 alias gsrt='rvm gemset use rails3tut'
@@ -445,7 +445,7 @@ alias rvd='vim --servername VIM $1'; # ruby vim debug -- then :Rdebugger, then c
 alias vsup='vim ~/Jack/git/sup/lib/sup.rb'
 
 ## configs
-alias rc='source ~/.bashrc'
+alias rc='source ~/.bashrc; v'
 
 ## incantations
 alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
@@ -997,13 +997,20 @@ function re() { ruby -e  "$1"; }
 rne() { ruby -ne "$1"; }
 alias jekyll='jekyll --rdiscount' # because default maruku is weak (i.e. chokes on a ul within a ul)
 
+# injections
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session. 
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+# z smart `cd` completion
+. /home/jon/jack/tools/z/z.sh
+
+# ls
+alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:/home/jon/ /media/stark'
 
 ### local overrides
 if [ -e ~/.bashrc_local ];
 then
   source ~/.bashrc_local;
 fi
+
 

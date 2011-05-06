@@ -63,7 +63,7 @@ screen 1 do
 
   # Content of the top panel
   #top     [ :views, :title, :spacer, :tray, :sublets ]
-  top     [:views, :title, :spacer, :center, :volume, :mpd, :center, :tray, :sublets, :separator, :fuzzytime]
+  top     [:views, :title, :spacer, :center, :volume, :mpd, :center, :sublets, :separator, :tray, :fuzzytime]
 
   # Content of the bottom panel
   bottom  [ ]
@@ -428,7 +428,6 @@ grab "A-Tab" do |c|
 
   clients[sel].focus
 end
-
 
 # Run Ruby lambdas
 grab "S-F2" do |c|
@@ -814,9 +813,10 @@ on :start do
 #  c = Subtlext::Subtle.spawn("urxvt -name quaketerm")
 end
 
+# IMPORTANT -- this is dangerous -- i.e. any fullscreen app (i.e. flash/vlc/etc) needs to be in the explicit list below, otherwise it'll be all screwed up
 # always switch to client upon creation
 on :client_create do |c|
-  c.views.first.jump unless (c.name == 'bashrun' or c.name == 'Dialog' or c.name == '<unknown>')
+  c.views.first.jump unless (c.name == 'bashrun' or c.name == 'Dialog' or c.name == '<unknown>' or c.name == 'vlc')
 end
 
 # }}}
@@ -852,9 +852,9 @@ on :start do
   end
 end
 
-# Add nine C-< number> grabs
+# Add nine S-C-< number> grabs
 (1..9).each do |i|
-  grab "C-%d" % [ i ] do |c|
+  grab "S-C-%d" % [ i ] do |c|
     views = Subtlext::View.all
     names = views.map { |v| v.name }
 

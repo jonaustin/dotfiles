@@ -330,7 +330,7 @@ configure :mpd do |s| # {{{
 
   # Create mpd object
   host, password = (s.config[:host] || ENV["MPD_HOST"] || "localhost").split("@")
-  port           = s.config[:port]  || ENV["MPD_PORT"] || 1100
+  port           = s.config[:port]  || ENV["MPD_PORT"] || 6600
 
   s.mpd = Mpd.new(host, port, password)
 

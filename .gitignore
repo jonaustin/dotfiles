@@ -14,6 +14,8 @@ blog.vim
 .config/ranger/bookmarks
 .config/ranger/history
 .config/ranger/tagged
-.local/share/bashrun/history
+.local/share/
+!.local/share/subtle
 .newsbeuter/cache.db
 .newsbeuter/history.search
+.oh-my-zsh
