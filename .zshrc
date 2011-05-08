@@ -460,3 +460,5 @@ function weather ()
 function precmd () {
   z --add "$(pwd -P)"
 }
+
+source ~/.zshrc_local
