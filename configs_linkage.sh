@@ -21,6 +21,7 @@ ln -s configs/.xmodmap
 ln -s configs/.fehbg
 ln -s configs/.newsbeuter
 ln -s configs/.oh-my-zsh
+ln -s configs/.zshrc
 
 mkdir .config; cd .config
 ln -s ../configs/.config/awesome
