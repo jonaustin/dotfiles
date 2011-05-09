@@ -18,4 +18,3 @@ blog.vim
 !.local/share/subtle
 .newsbeuter/cache.db
 .newsbeuter/history.search
-.oh-my-zsh

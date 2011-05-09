@@ -404,10 +404,12 @@ grab "W-Return", "urxvt"
 grab "W-u", "urxvt -T term2"
 grab "W-i", "urxvt -T term3"
 grab "W-S-w", "firefox"
+grab "W-t", "thunar"
 # MPD
 grab "W-n", "mpd_cmd next"
 grab "W-v", "mpd_cmd prev"
 grab "W-p", "mpd_cmd toggle"
+grab "W-S-p", "mpd_cmd toggle 1100"
 grab "W-m", "mpd_status"
 grab "F21", "softer"
 grab "F22", "louder"
@@ -707,7 +709,8 @@ end
 view "terms", "^terms$"
 view "terms2", "^terms2$"
 view "terms3", "^terms3$"
-view "www",   "browser"
+view "www",   "^browser$"
+view "www2",   "^browser2$"
 view "other",   "default"
 view "files" do
   match "filemanagers"
@@ -768,6 +771,13 @@ end
 # http://subforge.org/projects/subtle/wiki/Sublets
 #
 # }}}
+#sublet :gmail do
+#  interval  360
+##  user      'jon.i.austin'
+##  pass      'auximinus'
+#  urgent    '#ffc400'
+#  normal    '#eeeeee'
+#end
 
 # }}}
 
@@ -810,7 +820,7 @@ end
 
 # On subtle startup (or restart)
 on :start do
-#  c = Subtlext::Subtle.spawn("urxvt -name quaketerm")
+  #  c = Subtlext::Subtle.spawn("urxvt -name quaketerm")
 end
 
 # IMPORTANT -- this is dangerous -- i.e. any fullscreen app (i.e. flash/vlc/etc) needs to be in the explicit list below, otherwise it'll be all screwed up
@@ -831,7 +841,7 @@ grab "W-grave" do
     c.focus
   elsif((c = Subtlext::Subtle.spawn("urxvt -name quaketerm")))
     # setting gravity here doesn't do anything...wtf.
-      c.gravity = :top33 # [:top33] works even less well (i.e. still no gravity change and doesn't hide the window anymore)
+    c.gravity = :top33 # [:top33] works even less well (i.e. still no gravity change and doesn't hide the window anymore)
     c.tags  = [] 
     c.flags = [ :stick ]
   end
@@ -854,7 +864,7 @@ end
 
 # Add nine S-C-< number> grabs
 (1..9).each do |i|
-  grab "S-C-%d" % [ i ] do |c|
+  grab "W-C-%d" % [ i ] do |c|
     views = Subtlext::View.all
     names = views.map { |v| v.name }
 
