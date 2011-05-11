@@ -173,7 +173,7 @@ alias pgoo='ping -c2 google.com'
 alias wgetnc='wget --no-check-certificate'
 ### ssh
 alias pb='ssh jonaustin@mrfantastic.dreamhost.com'
-alias home_proxy='ssh -p666 -D 8080 -f -C -q -N jon@xs.homeunix.net'
+alias home_proxy='ssh -D 8080 -f -C -q -N jon@xs.homeunix.net'
 alias work_proxy='ssh -D 8080 -f -C -q -N jon@barracuda-ext.cmdpdx.com'
 alias work_rdc='ssh jon@barracuda-ext.cmdpdx.com -L 10000:jaustin.cmdpdx.com:3389' # tunnel rdc connection to localhost:10000
 ### synergy
@@ -238,14 +238,16 @@ alias cdgems='cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems/'
 function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems/$1*; }
 alias qlg='gem contents '
 alias glq='gem contents '
-alias rtags='rvm use 1.8.7; rtags --vi -R; rvm use default' # vi compatible rtags (default is emacs) -- and fails on ruby 1.9.2
+alias rtags='rvm use 1.8.7; rtags --vi -R -f tmp/tags; rvm use default' # vi compatible rtags (default is emacs) -- and fails on ruby 1.9.2
 alias gwhois='gem whois '
 gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
-rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
 rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
 alias yardserver="yard server -g -r -d -p8809"
 rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
 alias jekyll='jekyll --rdiscount' # because default maruku is weak (i.e. chokes on a ul within a ul)
+# rspec
+rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
+alias specs="spec --color --format specdoc " # show spec results with english summaries
 
 ### ruboto
 ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }
