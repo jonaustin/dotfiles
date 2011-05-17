@@ -17,26 +17,26 @@
   :set clipboard=unnamed       " yank/put using system clipboard! (with --version +xterm_clipboard)
   ":set clipboard=unnamedplus  " >=7.3.74 only
 " }
- 
+
 " General {
   runtime! macros/matchit.vim
 	filetype plugin indent on  	" Automatically detect file types.
 	syntax on 					        " syntax highlighting
-	set mouse=					        " disable mouse..add =a to enable
-	"set autochdir 				      " always switch to the current file directory.. 
+	set mouse=a					        " mouse= : disable, mouse=a : enable
+	"set autochdir 				      " always switch to the current file directory..
 	" not every vim is compiled with this, use the following line instead
      "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 	scriptencoding utf-8
 	set autowrite
 	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
 	" set spell 		 	     	" spell checking on
-	
+
 	" Setting up the directories {
 		set backup 						" backups are nice ...
 		set backupdir=$HOME/.vimbackup  " but not when they clog .
 		set directory=$HOME/.vimswap 	" Same for swap files
 		set viewdir=$HOME/.vimviews 	" same but for view files
-		
+
 		" Creating directories if they don't exist
 		silent execute '!mkdir -p $HOME/.vimbackup'
 		silent execute '!mkdir -p $HOME/.vimswap'
@@ -83,7 +83,7 @@
 	set showmatch                  	" show matching brackets/parenthesis
 	set incsearch 					" find as you type search
 	set hlsearch 					" highlight search terms
-	set winminheight=0 				" windows can be 0 line high 
+	set winminheight=0 				" windows can be 0 line high
 	set ignorecase 					" case insensitive search
 	set smartcase 					" become temporarilly case sensitive when any uppercase letters present in search string
 	set wildmenu 					" show list instead of just completing
@@ -103,7 +103,7 @@
   set softtabstop=2                  " backspace will go back 2 chars instead of 1 (i.e. act like its a tab)
 	set expandtab 	       	  	       " tabs should be spaces for sanity
 	set tabstop=2 					           " an indentation every 2 columns
-  set matchpairs+=<:>               " match, to be used with % 
+  set matchpairs+=<:>               " match, to be used with %
 	set pastetoggle=<F10>          	   " pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/    " auto format comment blocks
   set encoding=utf-8                 " no junk chars
@@ -112,7 +112,7 @@
 " Key Mappings {
 
 	" Easier moving in tabs and windows
-	map <C-J> <C-W>j<C-W>_  
+	map <C-J> <C-W>j<C-W>_
     " for some odd reason, its mapping <S[hift]-C[trl]-j> to <C-j> ...?
   "map <S-C-j> <C-W>j :res 35<cr>
 	map <C-K> <C-W>k<C-W>_
@@ -127,7 +127,7 @@
   map <leader>mt <C-W>T
 
 	" shift key fixes
-	"cmap W w 						
+	"cmap W w
 	"cmap WQ wq
 	"cmap wQ wq
 	"cmap Q q
@@ -177,8 +177,11 @@
   map <leader>php   :!php %<cr>
   map <leader>phpl  :!php -l %<cr>
 
-  " close quickfix
-  map <leader>qf :ccl<cr>
+  " quickfix
+  " open
+  map <leader>qf :cope<cr>
+  " close
+  map <leader>cf :ccl<cr>
 
   " Blog
   map <leader>bl :BlogList<cr>
@@ -193,17 +196,17 @@
 " }
 
 " Plugins {
-	
+
 	" PIV {
 		let g:DisableAutoPHPFolding = 0
 	" }
-	
+
 	" Supertab {
 		"let g:SuperTabDefaultCompletionType = "context"
 		let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 	" }
 
-	" Misc { 
+	" Misc {
 		":map <C-F10> <Esc>:vsp<CR>:VTree<CR>
 		" map Control + F10 to Vtree
 
@@ -229,7 +232,7 @@
 		" For multiple marks on the same line.
 		highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
 	" }
-	
+
 	" OmniComplete {
 		"if has("autocmd") && exists("+omnifunc")
 			"autocmd Filetype *
@@ -248,7 +251,7 @@
 		hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
 		hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
-		" some convenient mappings 
+		" some convenient mappings
 " commented as this was causing pumvisible()... to show up every time enter is hit..
 		"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
 		"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
@@ -261,7 +264,7 @@
 		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 		set completeopt=menu,longest,preview
 	" }
-	
+
 	" SnipMate {
 		" Setting the author var
 		let g:snips_author = 'Jon Austin <jon.i.austin@gmail.com>'
@@ -283,7 +286,7 @@
 
 " Windows Compatible {
 	" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-	" across (heterogeneous) systems easier. 
+	" across (heterogeneous) systems easier.
 	if has('win32') || has('win64')
 	  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 	endif
@@ -302,7 +305,7 @@
 		\ if line("'\"") > 1 && line("'\"") <= line("$") |
 		\   exe "normal! g`\"" |
 		\ endif
-	endif	
+	endif
 " }
 
 " Testing {
@@ -332,7 +335,8 @@ augroup END
 
 " Languages {
 " Ruby
-nmap <leader>rci :%!ruby-code-indenter<cr> 
+nmap <leader>rci :%!ruby-code-indenter<cr>
+map <leader>sqf :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
 "}
 
 
@@ -347,14 +351,14 @@ function MyTabLine()
   " loop through each tab page
   for t in range(tabpagenr('$'))
 
-    " set highlight for tab number and &modified 
+    " set highlight for tab number and &modified
     let s .= '%#TabLineSel#'
 
     " set the tab page number (for mouse clicks)
     let s .= '%' . (t + 1) . 'T'
 
     " set page number string
-    let s .=  t + 1 . ':' 
+    let s .=  t + 1 . ':'
 
     " get buffer names and statuses
     let n = ''  "temp string for buffer names while we loop and check buftype
@@ -368,7 +372,7 @@ function MyTabLine()
       " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
       if getbufvar( b, "&buftype" ) == 'help'
         let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
-      elseif getbufvar( b, "&buftype" ) == 'quickfix' 
+      elseif getbufvar( b, "&buftype" ) == 'quickfix'
         let n .= '[Q]'
       else
         let n .= pathshorten(bufname(b))
@@ -421,6 +425,27 @@ function MyTabLine()
   return s
 
 endfunction
+" }
+" Strip trailing whitespace {
+function! <SID>StripTrailingWhitespaces()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+if has("autocmd")
+  autocmd Filetype html :call <SID>StripTrailingWhitespaces()
+  autocmd Filetype ruby :call <SID>StripTrailingWhitespaces()
+endif
+" }
+" Rails ctags
+let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(named_scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
 " }
 " }
 

@@ -31,8 +31,7 @@ set :separator, "|"
 # set _wmname, "LG3D"
 # }}}
 
-# == Screen {{{
-# Notes {{{
+# == Screen {{{ # Notes {{{
 # Generally subtle comes with two panels per screen, one on the top and one at
 # the bottom. Each panel can be configured with different panel items and
 # sublets screen wise. The default config uses top panel on the first screen
@@ -67,7 +66,22 @@ screen 1 do
 
   # Content of the bottom panel
   bottom  [ ]
+  view 1
 end
+
+screen 2 do
+  # Add stipple to panels
+  stipple false
+
+  # Content of the top panel
+  #top     [ :views, :title, :spacer, :tray, :sublets ]
+  top     [:views, :title, :spacer, :center, :volume, :mpd, :center, :sublets, :separator, :tray, :fuzzytime]
+
+  # Content of the bottom panel
+  bottom  [ ]
+  view 0
+end
+
 
 # Example for a second screen:
 #screen 2 do
@@ -348,6 +362,8 @@ grab "W-A-1", :ScreenJump1
 grab "W-A-2", :ScreenJump2
 grab "W-A-3", :ScreenJump3
 grab "W-A-4", :ScreenJump4
+grab "W-9",   :ScreenJump1
+grab "W-0",   :ScreenJump2
 
 # Force reload of config and sublets
 grab "W-C-r", :SubtleReload
@@ -445,7 +461,7 @@ end
 # == Tags {{{
 # Notes {{{
 # Tags are generally used in subtle for placement of windows. This placement is
-# strict, that means that - aside from other tiling window managers - windows 
+# strict, that means that - aside from other tiling window managers - windows
 # must have a matching tag to be on a certain view. This also includes that
 # windows that are started on a certain view will not automatically be placed
 # there.
@@ -573,7 +589,7 @@ tag "terms3" do
   match :name => "term3"
 end
 
-tag "browser", "uzbl|opera|firefox|navigator"
+tag "browser", "uzbl|opera|firefox|navigator|chromium"
 
 tag "filemanagers", "pcmanfm|thunar|ranger|vifm|feh"
 
@@ -582,7 +598,7 @@ tag "media", "vlc|mplayer|amarok"
 tag "pdf", "apvlv|evince|acroread"
 
 tag "bashrun" do
-  match  "bashrun" 
+  match  "bashrun"
   geometry   [ 800, 600, 200, 18 ] ### err..this doesn't seem to do a thing, always in the same place no matter what is here..
   stick  true
   float  true
@@ -710,7 +726,6 @@ view "terms", "^terms$"
 view "terms2", "^terms2$"
 view "terms3", "^terms3$"
 view "www",   "^browser$"
-view "www2",   "^browser2$"
 view "other",   "default"
 view "files" do
   match "filemanagers"
@@ -842,7 +857,7 @@ grab "W-grave" do
   elsif((c = Subtlext::Subtle.spawn("urxvt -name quaketerm")))
     # setting gravity here doesn't do anything...wtf.
     c.gravity = :top33 # [:top33] works even less well (i.e. still no gravity change and doesn't hide the window anymore)
-    c.tags  = [] 
+    c.tags  = []
     c.flags = [ :stick ]
   end
 end

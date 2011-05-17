@@ -167,6 +167,7 @@ alias xm='/home/jon/.xmodmap'
 alias reset='reset; v'
 alias fdays='find . -mtime '
 alias loci='locate -i'
+alias acka='ack -air '
 
 ## network
 alias pgoo='ping -c2 google.com' 
@@ -248,6 +249,8 @@ alias jekyll='jekyll --rdiscount' # because default maruku is weak (i.e. chokes 
 # rspec
 rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
 alias specs="spec --color --format specdoc " # show spec results with english summaries
+#sass - compass watch
+alias compassw='compass watch --app rails --sass-dir public/stylesheets/sass --css-dir public/stylesheets'
 
 ### ruboto
 ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }
@@ -332,6 +335,39 @@ alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:/home/j
 
 
 # Functions
+#Usage: ii
+RED='\e[1;31m'
+BLUE='\e[1;34m'
+CYAN='\e[1;36m'
+NC='\e[0m'
+
+function ii(){
+    clear
+    echo -e "\nYou are logged on ${RED}$HOSTNAME"
+    echo -e "\nAdditional information:$NC " ; uname -a
+    echo -e "\n${RED}Users logged on:$NC " ; w -h
+    echo -e "\n${RED}Current date :$NC " ; date
+    echo -e "\n${RED}Machine stats :$NC " ; uptime
+    echo -e "\n${RED}Memory stats :$NC " ; free -m
+    echo -e "\n${RED}Disk usage :$NC " ; df -lh
+    echo -e "\n${RED}Local IP Address :$NC" ; /sbin/ifconfig eth0 | awk '/inet/
+{ print $2 } ' | sed -e s/addr://
+    echo -e "----------------------------------------------------------------------\n"
+}
+
+# roll - archive wrapper
+# usage: roll <foo.tar.gz> ./foo ./bar
+roll ()
+{
+  FILE=$1
+  case $FILE in
+    *.tar.bz2) shift && tar cjf $FILE $* ;;
+    *.tar.gz) shift && tar czf $FILE $* ;;
+    *.tgz) shift && tar czf $FILE $* ;;
+    *.zip) shift && zip $FILE $* ;;
+    *.rar) shift && rar $FILE $* ;;
+  esac
+}
 function randlines () {
     cat ${1} | while read i; do echo $RANDOM "$i"; done | sort -n | sed 's/^[0-9]* //'
 }
