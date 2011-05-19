@@ -28,6 +28,7 @@
 	scriptencoding utf-8
 	set autowrite
 	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
+  set foldmethod=syntax
 	" set spell 		 	     	" spell checking on
 
 	" Setting up the directories {
@@ -87,7 +88,7 @@
 	set smartcase 					" become temporarilly case sensitive when any uppercase letters present in search string
 	set wildmenu 					" show list instead of just completing
 	set wildmode=list:longest,full 	" comand <Tab> completion, list matches, then longest common part, then all.
-	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
+	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to previous/next line
 	set scrolljump=5 				" lines to scroll when cursor leaves screen
 	set scrolloff=3 				" minimum lines to keep above and below cursor
 	set foldenable  				" auto fold code
@@ -167,6 +168,7 @@
   map <leader>qqa :qall!<cr>
   map <leader>w   :w<cr>
   map <leader>ww  :w!<cr>
+  map <leader>wq  :wq<cr>
 
   " coding app calls
   map <leader>cuc   :!cucumber<cr>
@@ -308,7 +310,7 @@
 " }
 
 " Testing {
-  set scrolloff=999 " causes current line to always be vertically centered
+set scrolloff=999 " causes current line to always be vertically centered
 " }
 
 " File Types {
