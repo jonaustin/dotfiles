@@ -336,7 +336,6 @@ alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:/home/j
 
 
 # Functions
-<<<<<<< HEAD
 #Usage: ii
 RED='\e[1;31m'
 BLUE='\e[1;34m'
