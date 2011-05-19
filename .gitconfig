@@ -35,3 +35,6 @@
   d  = diff
   type = cat-file -t
   dump = cat-file -p
+[remote "mine"]
+  url = jon@pittock.legitscript.com:./git/web.git
+  fetch = +refs/heads/*:refs/remotes/mine/*
