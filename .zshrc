@@ -245,7 +245,7 @@ rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't se
 rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
 alias yardserver="yard server -g -r -d -p8809"
 rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
-alias jekyll='jekyll --rdiscount' # because default maruku is weak (i.e. chokes on a ul within a ul)
+alias jekyllr='jekyll --pygments --safe --rdiscount'
 
 ### ruboto
 ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }
@@ -259,7 +259,8 @@ alias ogv23gp='for n in `ls *.ogv`; do sudo ffmpeg -i $n -r 15 -b 64kb -ac 1 -s 
 alias mp423gp='for n in `ls *.mp4`; do mencoder $n -vf scale=176:144 -oac mp3lame -ovc lavc -o $(echo $n | cut -d "." -f 1).3gp; done'
 
 # terminal window
-alias vr='for n in `seq 0 99`; do echo; done;' 
+alias vr='n=99; while [ $n -gt 0 ]; do echo; n=`echo $n-1|bc`; done'
+vn() { n=$1; while [ $n -gt 0 ]; do echo; n=`echo $n-1|bc`; done; }
 
 ## screen
 alias screen='TERM=xterm-256color screen -T $TERM' 
@@ -330,6 +331,20 @@ alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:/home/j
 
 
 # Functions
+# roll - archive wrapper
+# usage: roll <foo.tar.gz> ./foo ./bar
+roll ()
+{
+  FILE=$1
+  case $FILE in
+    *.tar.bz2) shift && tar cjf $FILE $* ;;
+    *.tar.gz) shift && tar czf $FILE $* ;;
+    *.tgz) shift && tar czf $FILE $* ;;
+    *.zip) shift && zip $FILE $* ;;
+    *.rar) shift && rar $FILE $* ;;
+  esac
+}
+
 function randlines () {
     cat ${1} | while read i; do echo $RANDOM "$i"; done | sort -n | sed 's/^[0-9]* //'
 }

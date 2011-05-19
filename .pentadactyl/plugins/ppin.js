@@ -9,7 +9,8 @@
 group.commands.add(['ppin'], "Save page as a bookmark on pinboard",
                         function(args) {
                             var url = "https://api.pinboard.in/v1/posts/add?";
-                            url += "&url=" + encodeURIComponent("http://purifyr.com/?url=" + escape(buffer.URL));
+                            //url += "&url=" + encodeURIComponent("http://purifyr.com/?url=" + escape(buffer.URL));
+                            url += "&url=" + encodeURIComponent(buffer.URL);
                             url += "&description=" + encodeURIComponent(buffer.title);
                             url += "&tags=" + encodeURIComponent("purifyr readkindletmp readkindle"+args.string);
                             
