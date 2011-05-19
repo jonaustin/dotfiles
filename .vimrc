@@ -14,16 +14,15 @@
 	set nocompatible 		" must be first line
 	set background=dark     " Assume a dark background
 	:let mapleader = ","
-  :set clipboard=unnamed       " yank/put using system clipboard! (with --version +xterm_clipboard)
-  ":set clipboard=unnamedplus  " >=7.3.74 only
+  :set clipboard=unnamed       " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+  ":set clipboard=unnamedplus  " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
 " }
 
 " General {
   runtime! macros/matchit.vim
 	filetype plugin indent on  	" Automatically detect file types.
 	syntax on 					        " syntax highlighting
-	set mouse=a					        " mouse= : disable, mouse=a : enable
-	"set autochdir 				      " always switch to the current file directory..
+	set mouse=a					        " disable mouse..add =a to enable
 	" not every vim is compiled with this, use the following line instead
      "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 	scriptencoding utf-8

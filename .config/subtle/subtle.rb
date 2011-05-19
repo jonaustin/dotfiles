@@ -352,6 +352,7 @@ grab "W-5", :ViewSwitch5
 grab "W-6", :ViewSwitch6
 grab "W-7", :ViewSwitch7
 grab "W-8", :ViewSwitch8
+grab "W-9", :ViewSwitch9
 
 # Select next and prev view */
 grab "W-Right", :ViewNext
@@ -722,23 +723,14 @@ end
 # http://subforge.org/projects/subtle/wiki/Tagging
 # }}}
 
-view "terms", "^terms$"
+view "terms",  "^terms$"
 view "terms2", "^terms2$"
 view "terms3", "^terms3$"
-view "www",   "^browser$"
-view "other",   "default"
-view "files" do
-  match "filemanagers"
-  dynamic true
-end
-view "media" do
-  match "media"
-  dynamic true
-end
-view "pdf" do
-  match "pdf"
-  dynamic true
-end
+view "www",    "^browser$"
+view "other",  "default"
+view "files",  "filemanagers"
+view "media",  "media"
+view "pdf",    "pdf"
 # }}}
 
 # == Sublets {{{
