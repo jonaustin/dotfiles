@@ -246,7 +246,7 @@ rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
 alias yardserver="yard server -g -r -d -p8809"
 rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
 # rspec
-rspecb() { rspec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
+specb() { spec ${1} | grep -v "#"; } # remove backtrace since there doesn't seem to be an option to do so .. wtf..
 alias specs="spec --color --format specdoc " # show spec results with english summaries
 #sass - compass watch
 alias compassw='compass watch --app rails --sass-dir public/stylesheets/sass --css-dir public/stylesheets'

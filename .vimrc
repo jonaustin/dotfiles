@@ -79,7 +79,7 @@
 
 	set backspace=indent,eol,start 	" backspace for dummys
 	set linespace=0 				" No extra spaces between rows
-	set nu 							" Line numbers on
+	"set nu 							" Line numbers on
 	set showmatch                  	" show matching brackets/parenthesis
 	set incsearch 					" find as you type search
 	set hlsearch 					" highlight search terms
@@ -125,6 +125,10 @@
 	map <S-L> gt
   " move window to new tab
   map <leader>mt <C-W>T
+
+  " add/remove numbers
+  map <leader>qn :set nonu<cr>
+  map <leader>an :set nu<cr>
 
 	" shift key fixes
 	"cmap W w
