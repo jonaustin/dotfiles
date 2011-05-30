@@ -228,6 +228,7 @@ function git_diff() {
   git diff --no-ext-diff -w "$@" #| vim -R -
 }
 alias git-diff=git_diff
+alias glpo='git log --oneline --decorate'
 
 ## ruby
 alias be='bundle exec'
