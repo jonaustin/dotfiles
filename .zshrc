@@ -142,6 +142,7 @@ alias mb='ncmpcpp -p 8800' # audiobooks
 alias mva='ncmpcpp -p 9900' # mpd various artists
 alias mt='ncmpcpp -p 1100' # mpd testing artists/albums
 alias mp='ncmpcpp -p 2200' # mpd podcasts
+alias mn='ncmpcpp -p 20000' # mpd null
 alias toptracks='toptracks.rb'
 
 ## Other
