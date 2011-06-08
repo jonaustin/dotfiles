@@ -202,10 +202,6 @@
 
 " Plugins {
 
-	" PIV {
-		let g:DisableAutoPHPFolding = 0
-	" }
-
 	" Supertab {
 		"let g:SuperTabDefaultCompletionType = "context"
 		let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
@@ -301,6 +297,9 @@
   map <leader>a :Ack<space>
 "}
 
+" Gundo {
+  nnoremap <S-U> :GundoToggle<cr>
+" }
 " }
 
 " Various {
