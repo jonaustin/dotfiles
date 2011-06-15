@@ -13,8 +13,8 @@
 " Basics {
 	set nocompatible 		" must be first line
 	set background=dark     " Assume a dark background
-	:let mapleader = ","
-  :set clipboard=unnamed       " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+	let mapleader = ","
+  set clipboard=unnamed       " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   ":set clipboard=unnamedplus  " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
 " }
 
@@ -130,13 +130,6 @@
   map <leader>qn :set nonu<cr>
   map <leader>an :set nu<cr>
 
-	" shift key fixes
-	"cmap W w
-	"cmap WQ wq
-	"cmap wQ wq
-	"cmap Q q
-	"cmap Tabe tabe
-
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
 
@@ -167,7 +160,8 @@
 	map <leader>bb  :ConqueTerm bash<cr>
 	map <leader>bsp :ConqueTermSplit bash<cr>
 
-  " quit!, write
+  " quit, write
+  map <leader>q   :q<cr>
   map <leader>qq  :q!<cr>
   map <leader>qqa :qall!<cr>
   map <leader>w   :w<cr>
@@ -197,6 +191,9 @@
   " folding
   map <leader>f :fold<cr>
 
+  " mouse
+  map <leader>m  :set mouse=a<cr>
+  map <leader>mo :set mouse=<cr>
 
 " }
 
@@ -341,6 +338,7 @@ augroup END
 " Ruby
 nmap <leader>rci :%!ruby-code-indenter<cr>
 map <leader>sqf :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
+map <leader>sc  :!ruby -c %<cr>
 "}
 
 
