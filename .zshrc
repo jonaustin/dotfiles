@@ -111,6 +111,7 @@ alias lp='lesspipe.sh '
 alias loc='locate'
 alias nd="ncdu ."
 alias rex='rexima' #vi style vol control
+alias am='alsamixer'
 
 # zsh
 alias vzc='vim $HOME/.zshrc'
