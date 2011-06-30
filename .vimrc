@@ -29,6 +29,7 @@
 	set autowrite
 	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
   set foldmethod=syntax
+  set foldlevelstart=1
 	" set spell 		 	     	" spell checking on
 
 	" Setting up the directories {
