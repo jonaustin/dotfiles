@@ -68,6 +68,7 @@ alias wget='wget -c' #auto continue files
 alias df='df -Th'
 alias free='free -m'
 alias info='pinfo'
+alias fortune='echo && fortune tao && echo'
 
 # non pkg'd app-updates
 alias upcalibre="sudo python2 -c \"import urllib2; exec urllib2.urlopen('http://status.calibre-ebook.com/linux_installer').read(); main()\""
