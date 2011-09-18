@@ -91,11 +91,12 @@
 	set wildmode=list:longest,full 	" comand <Tab> completion, list matches, then longest common part, then all.
 	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to previous/next line
 	set scrolljump=5 				" lines to scroll when cursor leaves screen
-	set scrolloff=3 				" minimum lines to keep above and below cursor
+	set scrolloff=15 				" minimum lines to keep above and below cursor
 	set foldenable  				" auto fold code
 	"set gdefault					" the /g flag on :s substitutions by default
-  set relativenumber
-  set undofile
+  set relativenumber    " line numbers relative to current position
+  set undofile          " undo even after closing and re-opening a file!
+  set ttyfast           " assume fast connection (smoother redraw)
 
 " }
 
@@ -110,6 +111,14 @@
 	set pastetoggle=<F10>          	   " pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/    " auto format comment blocks
   set encoding=utf-8                 " no junk chars
+  set textwidth=79
+  set colorcolumn=85                 " show vertical colored column
+  set formatoptions=qrn1             " q: Allow formatting of comments with gq
+                                     " r: Automatically insert the current comment leader after hitting <Enter> in Insert mode.
+                                     " n: When formatting text, recognize numbered lists.
+                                     " 1: Don't break a line after a one-letter word.  It's broken before it instead (if possible). 
+                                     " l: Long lines are not broken in insert mode: When a line was longer than 
+                                     "    'textwidth' when the insert command started, Vim does not automatically format it.
 " }
 
 " Key Mappings {
@@ -136,7 +145,7 @@
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
 
-	" Shortcuts
+	" Shonrtcuts
 	" Change Working Directory to that of the current file
   "cmap cwd lcd %:p:h
 
@@ -144,6 +153,7 @@
 	inoremap jj <ESC>
 
   " split windows
+  nnoremap <leader>sw <C-w>v<C-w>l " split and switch
   noremap <leader>o :only<cr>
   noremap <leader>O :only<cr>:tabonly<cr>
 
@@ -189,7 +199,7 @@
   map <leader>bl :BlogList<cr>
 
   " remove search highlights
-  map <leader>h :nohl<cr>
+  map <leader><space> :nohl<cr>
 
   " folding
   map <leader>f :fold<cr>
@@ -198,127 +208,140 @@
   map <leader>m  :set mouse=a<cr>
   map <leader>mo :set mouse=<cr>
 
+  " tab matches bracket pairs
+  nnoremap <tab> %
+  vnoremap <tab> %
+
+  " get cmd mode with ;
+  nnoremap ; :
+
+  " remove trailing whitespace
+  nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+  " open vimrc in split window
+  nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 " }
 
 " Plugins {
 
-	" Supertab {
-		"let g:SuperTabDefaultCompletionType = "context"
-		let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-	" }
+  " Supertab {
+  "let g:SuperTabDefaultCompletionType = "context"
+  let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+  " }
 
-	" Misc {
-		":map <C-F10> <Esc>:vsp<CR>:VTree<CR>
-		" map Control + F10 to Vtree
+  " Misc {
+  ":map <C-F10> <Esc>:vsp<CR>:VTree<CR>
+  " map Control + F10 to Vtree
 
-		let g:checksyntax_auto = 1
+  let g:checksyntax_auto = 1
 
-		"comment out line(s) in visual mode
-		vmap  o  :call NERDComment(1, 'toggle')<CR>
-		let g:NERDShutUp=1
+  "comment out line(s) in visual mode
+  vmap  o  :call NERDComment(1, 'toggle')<CR>
+  let g:NERDShutUp=1
 
-		let b:match_ignorecase = 1
-	" }
+  let b:match_ignorecase = 1
+  " }
 
-	" ShowMarks {
-		let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		" Don't leave on by default, use :ShowMarksOn to enable
-		let g:showmarks_enable = 0
-		" For marks a-z
-		highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
-		" For marks A-Z
-		highlight ShowMarksHLu gui=bold guibg=LightRed guifg=DarkRed
-		" For all other marks
-		highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
-		" For multiple marks on the same line.
-		highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
-	" }
+  " ShowMarks {
+  let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  " Don't leave on by default, use :ShowMarksOn to enable
+  let g:showmarks_enable = 0
+  " For marks a-z
+  highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
+  " For marks A-Z
+  highlight ShowMarksHLu gui=bold guibg=LightRed guifg=DarkRed
+  " For all other marks
+  highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
+  " For multiple marks on the same line.
+  highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
+  " }
 
-	" OmniComplete {
-		"if has("autocmd") && exists("+omnifunc")
-			"autocmd Filetype *
-				"\if &omnifunc == "" |
-				"\setlocal omnifunc=syntaxcomplete#Complete |
-				"\endif
-		"endif
+  " OmniComplete {
+  "if has("autocmd") && exists("+omnifunc")
+  "autocmd Filetype *
+  "\if &omnifunc == "" |
+  "\setlocal omnifunc=syntaxcomplete#Complete |
+  "\endif
+  "endif
 
-		" Popup menu hightLight Group
-		"highlight Pmenu 	ctermbg=13 	guibg=DarkBlue
-		highlight PmenuSel 	ctermbg=7 	guibg=DarkBlue 		guifg=LightBlue
-		"highlight PmenuSbar ctermbg=7 	guibg=DarkGray
-		"highlight PmenuThumb 			guibg=Black
+  " Popup menu hightLight Group
+  "highlight Pmenu 	ctermbg=13 	guibg=DarkBlue
+  highlight PmenuSel 	ctermbg=7 	guibg=DarkBlue 		guifg=LightBlue
+  "highlight PmenuSbar ctermbg=7 	guibg=DarkGray
+  "highlight PmenuThumb 			guibg=Black
 
-		hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-		hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-		hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+  hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+  hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+  hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
-		" some convenient mappings
-" commented as this was causing pumvisible()... to show up every time enter is hit..
-		"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-		"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-		"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-		"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-		"inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-		"inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+  " some convenient mappings
+  " commented as this was causing pumvisible()... to show up every time enter is hit..
+  "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+  "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+  "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+  "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+  "inoremap <expr> <C-d> 	   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+  "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
-		" automatically open and close the popup menu / preview window
-		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-		set completeopt=menu,longest,preview
-	" }
+  " automatically open and close the popup menu / preview window
+  au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+  set completeopt=menu,longest,preview
+  " }
 
-	" SnipMate {
-		" Setting the author var
-		let g:snips_author = 'Jon Austin <jon.i.austin@gmail.com>'
-		" Shortcut for reloading snippets, useful when developing
-		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
-	" }
+  " SnipMate {
+  " Setting the author var
+  let g:snips_author = 'Jon Austin <jon.i.austin@gmail.com>'
+  " Shortcut for reloading snippets, useful when developing
+  nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
+  " }
 
-	" dbext {
-		let g:dbext_default_SQLITE_bin='sqlite3'
-	" }
+  " dbext {
+  let g:dbext_default_SQLITE_bin='sqlite3'
+  " }
 
-" GUI Settings {
-	" GVIM- (here instead of .gvimrc)
-	if has('gui_running')
-		set guioptions-=T          	" remove the toolbar
-		set lines=40               	" 40 lines of text instead of 24,
-	endif
-" }
+  " GUI Settings {
+  " GVIM- (here instead of .gvimrc)
+  if has('gui_running')
+    set guioptions-=T          	" remove the toolbar
+    set lines=40               	" 40 lines of text instead of 24,
+  endif
+  " }
 
-" Windows Compatible {
-	" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-	" across (heterogeneous) systems easier.
-	if has('win32') || has('win64')
-	  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-	endif
-" }
+  " Windows Compatible {
+  " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+  " across (heterogeneous) systems easier.
+  if has('win32') || has('win64')
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+  endif
+  " }
 
-" Ack {
+  " Ack {
   map <leader>a :Ack<space>
-"}
+  "}
 
-" Gundo {
+  " Gundo {
   nnoremap <S-U> :GundoToggle<cr>
-" }
+  " }
 " }
 
 " Various {
-	if has("autocmd")
-	  " Restore cursor position (initially for IRB<->Vim integration, if obnoxious for other things, put in ftdetect or somesuch)
-	  autocmd BufReadPost *
-		\ if line("'\"") > 1 && line("'\"") <= line("$") |
-		\   exe "normal! g`\"" |
-		\ endif
-	endif
+  if has("autocmd")
+    " Restore cursor position (initially for IRB<->Vim integration, if obnoxious for other things, put in ftdetect or somesuch)
+    autocmd BufReadPost *
+          \ if line("'\"") > 1 && line("'\"") <= line("$") |
+          \   exe "normal! g`\"" |
+          \ endif
+  endif
 " }
 
 " Testing {
-set scrolloff=999 " causes current line to always be vertically centered
+  "set scrolloff=999 " causes current line to always be vertically centered
+  "(unforuntately really screws up selecting with mouse)
 " }
 
 " File Types {
-"" Filetype detection
-augroup filetypedetect
+  "" Filetype detection
+  augroup filetypedetect
     "" Detect .txt as 'text'
     autocmd! BufNewFile,BufRead *.txt setfiletype text
     "" cakephp
@@ -335,124 +358,124 @@ augroup filetypedetect
     autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
     "" shell
     autocmd! BufNewFile,BufRead *.zsh-theme setfiletype zsh
-augroup END
-
+  augroup END
 " }
 
 " Languages {
-" Ruby
-nmap <leader>rci :%!ruby-code-indenter<cr>
-map <leader>sqf :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
-map <leader>sc  :!ruby -c %<cr>
+  " Ruby
+  nmap <leader>rci :%!ruby-code-indenter<cr>
+  map <leader>sqf :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
+  map <leader>sc  :!ruby -c %<cr>
 "}
 
 
 " Other Customizations {
-" Add #s to tabline so gt/gT is actually useful..sheesh.. {
-set showtabline=1         " 0, 1 or 2; when to use a tab pages line
-set tabline=%!MyTabLine()   " custom tab pages line
-function MyTabLine()
+  " Add #s to tabline so gt/gT is actually useful..sheesh.. {
+  set showtabline=1         " 0, 1 or 2; when to use a tab pages line
+  set tabline=%!MyTabLine()   " custom tab pages line
+  function MyTabLine()
 
-  let s = '' " complete tabline goes here
+    let s = '' " complete tabline goes here
 
-  " loop through each tab page
-  for t in range(tabpagenr('$'))
+    " loop through each tab page
+    for t in range(tabpagenr('$'))
 
-    " set highlight for tab number and &modified
-    let s .= '%#TabLineSel#'
+      " set highlight for tab number and &modified
+      let s .= '%#TabLineSel#'
 
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (t + 1) . 'T'
+      " set the tab page number (for mouse clicks)
+      let s .= '%' . (t + 1) . 'T'
 
-    " set page number string
-    let s .=  t + 1 . ':'
+      " set page number string
+      let s .=  t + 1 . ':'
 
-    " get buffer names and statuses
-    let n = ''  "temp string for buffer names while we loop and check buftype
-    let m = 0 " &modified counter
-    let bc = len(tabpagebuflist(t + 1))  "counter to avoid last ' '
+      " get buffer names and statuses
+      let n = ''  "temp string for buffer names while we loop and check buftype
+      let m = 0 " &modified counter
+      let bc = len(tabpagebuflist(t + 1))  "counter to avoid last ' '
 
-    " loop through each buffer in a tab
-    for b in tabpagebuflist(t + 1)
+      " loop through each buffer in a tab
+      for b in tabpagebuflist(t + 1)
 
-      " buffer types: quickfix gets a [Q], help gets [H]{base fname}
-      " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
-      if getbufvar( b, "&buftype" ) == 'help'
-        let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
-      elseif getbufvar( b, "&buftype" ) == 'quickfix'
-        let n .= '[Q]'
+        " buffer types: quickfix gets a [Q], help gets [H]{base fname}
+        " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
+        if getbufvar( b, "&buftype" ) == 'help'
+          let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
+        elseif getbufvar( b, "&buftype" ) == 'quickfix'
+          let n .= '[Q]'
+        else
+          let n .= pathshorten(bufname(b))
+        endif
+
+        " check and ++ tab's &modified count
+        if getbufvar( b, "&modified" )
+          let m += 1
+        endif
+
+        " no final ' ' added...formatting looks better done later
+        if bc > 1
+          let n .= ' '
+        endif
+
+        let bc -= 1
+
+      endfor
+
+      " add modified label [n+] where n pages in tab are modified
+      if m > 0
+        let s .= '[' . m . '+]'
+      endif
+
+      " select the highlighting for the buffer names
+      " my default highlighting only underlines the active tab
+      " buffer names.
+      if t + 1 == tabpagenr()
+        let s .= '%#TabLine#'
       else
-        let n .= pathshorten(bufname(b))
+        let s .= '%#TabLineSel#'
       endif
 
-      " check and ++ tab's &modified count
-      if getbufvar( b, "&modified" )
-        let m += 1
-      endif
+      " add buffer names
+      let s .= n
 
-      " no final ' ' added...formatting looks better done later
-      if bc > 1
-        let n .= ' '
-      endif
-
-      let bc -= 1
+      " switch to no underlining and add final space to buffer list
+      let s .= '%#TabLineSel#' . ' '
 
     endfor
 
-    " add modified label [n+] where n pages in tab are modified
-    if m > 0
-      let s .= '[' . m . '+]'
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#TabLineFill#%T'
+
+    " right-align the label to close the current tab page
+    if tabpagenr('$') > 1
+      let s .= '%=%#TabLineFill#%999Xclose'
     endif
 
-    " select the highlighting for the buffer names
-    " my default highlighting only underlines the active tab
-    " buffer names.
-    if t + 1 == tabpagenr()
-      let s .= '%#TabLine#'
-    else
-      let s .= '%#TabLineSel#'
-    endif
+    return s
 
-    " add buffer names
-    let s .= n
+  endfunction
+  " }
 
-    " switch to no underlining and add final space to buffer list
-    let s .= '%#TabLineSel#' . ' '
+  " Strip trailing whitespace {
+  function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+  endfunction
 
-  endfor
-
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s .= '%#TabLineFill#%T'
-
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s .= '%=%#TabLineFill#%999Xclose'
+  if has("autocmd")
+    autocmd Filetype html :call <SID>StripTrailingWhitespaces()
+    autocmd Filetype ruby :call <SID>StripTrailingWhitespaces()
   endif
+  " }
 
-  return s
-
-endfunction
+  " Rails ctags {
+  let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
+  " }
 " }
-" Strip trailing whitespace {
-function! <SID>StripTrailingWhitespaces()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  %s/\s\+$//e
-  " Clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-
-if has("autocmd")
-  autocmd Filetype html :call <SID>StripTrailingWhitespaces()
-  autocmd Filetype ruby :call <SID>StripTrailingWhitespaces()
-endif
-" }
-" Rails ctags
-let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(named_scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
-" }
-" }
-
