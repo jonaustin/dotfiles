@@ -13,9 +13,14 @@ if which dbus-launch >/dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS"; then
        eval "$(dbus-launch --sh-syntax --exit-with-session)"
 fi
 
-eval 'xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off'
+# disable internal screen
+eval `xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off`
 # background
-eval `cat ~/.fehbg`
+#eval `cat ~/.fehbg`
+xsetroot -solid black
+
+# network
+#eval `sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frakssh`
 
 #ivman&
 #exec ck-launch-session awesome  # consolekit -- for udev/devmon automounting policy allowance
