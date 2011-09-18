@@ -235,8 +235,8 @@ alias wr='which ruby'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-alias cdgems='cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems/'
-function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p136/gems/$1*; }
+alias cdgems='cd /home/jon/.rvm/gems/ruby-1.9.2-p290/gems/'
+function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p290/gems/$1*; }
 alias qlg='gem contents '
 alias glq='gem contents '
 alias rtags='rvm use 1.8.7; rtags --vi -R -f tmp/tags; rvm use default' # vi compatible rtags (default is emacs) -- and fails on ruby 1.9.2
