@@ -100,9 +100,9 @@
 [submodule ".vim/bundle/align"]
 	path = .vim/bundle/align
 	url = https://github.com/tsaleh/vim-align.git
-[submodule "/home/jon/.vim/bundle/gundo"]
+[submodule ".vim/bundle/gundo"]
 	path = .vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
-[submodule "vim-surround"]
-	path = vim-surround
+[submodule ".vim/bundle/surround"]
+	path = .vim/bundle/surround
 	url = https://github.com/tpope/vim-surround.git
