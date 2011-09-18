@@ -6,10 +6,8 @@ blog.vim
 .netrwhist
 *.pyo
 *.pyc
-.elinks/bookmarks*
-.elinks/cookies*
-.elinks/searchhist*
-.elinks/globhist*
+.elinks
+!.elinks/elinks.conf
 **/*log
 .config/ranger/bookmarks
 .config/ranger/history
@@ -18,3 +16,5 @@ blog.vim
 !.local/share/subtle
 .newsbeuter/cache.db
 .newsbeuter/history.search
+.oh-my-zsh
+.ncmpcpp
