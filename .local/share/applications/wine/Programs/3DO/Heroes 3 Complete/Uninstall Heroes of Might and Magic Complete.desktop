@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Uninstall Heroes of Might and Magic Complete
-Exec=env WINEPREFIX="/home/jon/.wineprefix/heroes3" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/jon/.wineprefix/heroes3/dosdevices/c:/users/Public/Start\\ Menu/Programs/3DO/Heroes\\ 3\\ Complete/Uninstall\\ Heroes\\ of\\ Might\\ and\\ Magic\\ Complete.lnk
-Type=Application
-StartupNotify=true
-Icon=EA77_ISUNINST.0

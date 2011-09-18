@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=hh
-MimeType=application/x-chm;
-Exec=env WINEPREFIX="/home/jon/.wine" wine start /ProgIDOpen chm.file %f
-NoDisplay=true
-StartupNotify=true
-Icon=A35F_hh.0

@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Support
-Exec=env WINEPREFIX="/home/jon/.wineprefix/heroes3" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/jon/.wineprefix/heroes3/dosdevices/c:/users/Public/Start\\ Menu/Programs/3DO/Support.lnk
-Type=Application
-StartupNotify=true
-Icon=219F_support.0

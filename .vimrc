@@ -93,7 +93,9 @@
 	set scrolljump=5 				" lines to scroll when cursor leaves screen
 	set scrolloff=3 				" minimum lines to keep above and below cursor
 	set foldenable  				" auto fold code
-	set gdefault					" the /g flag on :s substitutions by default
+	"set gdefault					" the /g flag on :s substitutions by default
+  set relativenumber
+  set undofile
 
 " }
 
@@ -331,6 +333,8 @@ augroup filetypedetect
     autocmd! BufNewFile,BufRead *.mkd setfiletype markdown
     autocmd! BufNewFile,BufRead *.markdown setfiletype markdown
     autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
+    "" shell
+    autocmd! BufNewFile,BufRead *.zsh-theme setfiletype zsh
 augroup END
 
 " }

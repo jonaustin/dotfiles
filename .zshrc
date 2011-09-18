@@ -116,6 +116,7 @@ alias am='alsamixer'
 
 # zsh
 alias vzc='vim $HOME/.zshrc'
+alias vzcl='vim $HOME/.zshrc_local'
 alias zc='source $HOME/.zshrc'
 
 ## sys
@@ -139,12 +140,6 @@ alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 
 ### MPD
 alias m='ncmpcpp -p 6600' # mpd alsa
-alias ma='ncmpcpp -p 7700' # mpd all alsa
-alias mb='ncmpcpp -p 8800' # audiobooks
-alias mva='ncmpcpp -p 9900' # mpd various artists
-alias mt='ncmpcpp -p 1100' # mpd testing artists/albums
-alias mp='ncmpcpp -p 2200' # mpd podcasts
-alias mn='ncmpcpp -p 20000' # mpd null
 alias toptracks='toptracks.rb'
 
 ## Other
@@ -185,15 +180,15 @@ alias syn='synergyc 192.168.0.9'
 alias ssyn='ssh -f -N -L12345:10.10.10.155:24800 barracuda-ext.cmdpdx.com; synergyc localhost:12345'
 alias ksyn="killall synergyc"
 ### non-frak
-alias sxs='ssh -p666 jon@frak'
+alias sxs='ssh jon@frak'
 alias fxs='sftp jon@xs.homeunix.net'
 alias home_proxy='ssh -D 8080 -f -C -q -N jon@xs.homeunix.net'
 alias sxxs='ssh jon@xs.homeunix.net'
-alias sfs='ssh -p666 jon@frak'
+alias sfs='ssh jon@frak'
 alias sss='ssh jon@sam'
 alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
 alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
-alias fsfs='sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frakssh'
+alias fsfs='sshfs -o reconnect -o allow_other jon@frak:/ /media/frakssh'
 alias ssfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
 # queries
 alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is to just use `host <ip>`
@@ -202,6 +197,7 @@ alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | 
 # Window Manager
 ## subtle
 alias sl='subtler'
+alias fbg="`cat ~/.fehbg`"
 
 ## Monitoring
 alias it='iotop'
@@ -492,6 +488,44 @@ function remindme()
 function weather () 
 { 
     lynx -dump "http://google.com/search?q=weather+${1:-97212}" | grep -A 5 -m 1 '^ *Weather for' | grep -v 'Add to'
+}
+
+
+# extract
+extract () {
+    if [ -f $1 ] ; then
+       case $1 in
+           *.tar.bz2) tar xjf $1    ;;
+           *.tar.gz)  tar xzf $1    ;;
+           *.bz2)     bunzip2 $1    ;;
+           *.rar)     unrar x $1    ;;
+           *.gz)      gunzip $1    ;;
+           *.tar)     tar xf $1    ;;
+           *.tbz2)    tar xjf $1    ;;
+           *.tgz)     tar xzf $1    ;;
+           *.zip)     unzip $1    ;;
+           *.ZIP)     unzip $1    ;;
+           *.Z)       uncompress $1;;
+           *.7z)      7za e $1;;
+           *)         echo "'$1' cannot be extracted via extract()" ;;
+       esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# roll - archive wrapper
+# usage: roll <foo.tar.gz> ./foo ./bar
+roll ()
+{
+  FILE=$1
+  case $FILE in
+    *.tar.bz2) shift && tar cjf $FILE $* ;;
+    *.tar.gz) shift && tar czf $FILE $* ;;
+    *.tgz) shift && tar czf $FILE $* ;;
+    *.zip) shift && zip $FILE $* ;;
+    *.rar) shift && rar $FILE $* ;;
+  esac
 }
 
 

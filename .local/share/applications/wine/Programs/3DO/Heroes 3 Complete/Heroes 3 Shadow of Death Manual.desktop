@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Heroes 3 Shadow of Death Manual
-Exec=env WINEPREFIX="/home/jon/.wineprefix/heroes3" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/jon/.wineprefix/heroes3/dosdevices/c:/users/Public/Start\\ Menu/Programs/3DO/Heroes\\ 3\\ Complete/Heroes\\ 3\\ Shadow\\ of\\ Death\\ Manual.lnk
-Type=Application
-StartupNotify=true
-Path=/home/jon/.wineprefix/heroes3/dosdevices/c:/Program Files (x86)/3DO/Heroes 3 Complete
-Icon=EC5F_H3SoD_PC Manual.0

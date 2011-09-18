@@ -6,7 +6,7 @@
 // Usage: Use :pin <tags delimited by spaces> command
 // Usage: if successfully posted you will see "done" echoed
 
-group.commands.add(['pin'], "Save page as a bookmark on pinboard",
+group.commands.add(['pb'], "Save page as a bookmark on pinboard",
                         function(args) {
                             var url = "https://api.pinboard.in/v1/posts/add?";
                             url += "&url=" + encodeURIComponent(buffer.URL);

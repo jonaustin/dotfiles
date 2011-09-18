@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=GameUpdate
-Exec=env WINEPREFIX="/home/jon/.wineprefix/heroes3" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/jon/.wineprefix/heroes3/dosdevices/c:/users/Public/Start\\ Menu/Programs/3DO/GameUpdate.lnk
-Type=Application
-StartupNotify=true
-Icon=6DD8_Gameup.0

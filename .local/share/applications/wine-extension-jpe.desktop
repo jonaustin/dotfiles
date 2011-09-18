@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=A Wine application
-MimeType=image/jpeg;
-Exec=env WINEPREFIX="/home/jon/.wine" wine start /ProgIDOpen jpegfile %f
-NoDisplay=true
-StartupNotify=true

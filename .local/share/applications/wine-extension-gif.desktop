@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=A Wine application
-MimeType=image/gif;
-Exec=env WINEPREFIX="/home/jon/.wine" wine start /ProgIDOpen giffile %f
-NoDisplay=true
-StartupNotify=true
