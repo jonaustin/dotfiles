@@ -1,9 +1,22 @@
-# = Subtle config
+#
+# Author::  Christoph Kappel <unexist@dorfelite.net>
+# Version:: $Id$
+# License:: GNU GPLv2
+#
+# = Subtle default configuration
+#
+# This file will be installed as default and can also be used as a starter for
+# an own custom configuration file. The system wide config usually resides in
+# +/etc/xdg/subtle+ and the user config in +HOME/.config/subtle+, both locations
+# are dependent on the locations specified by +XDG_CONFIG_DIRS+ and
+# +XDG_CONFIG_HOME+.
+#
+
+#
 # == Options {{{
 #
 # Following options change behaviour and sizes of the window manager:
 #
-# Border size in pixel of the windows
 
 # Window move/resize steps in pixel per keypress
 set :step, 5
@@ -11,7 +24,8 @@ set :step, 5
 # Window screen border snapping
 set :snap, 10
 
-# Default starting gravity for windows (0 = gravity of last client)
+# Default starting gravity for windows. Comment out to use gravity of
+# currently active client
 set :gravity, :center
 
 # Make transient windows urgent
@@ -19,6 +33,9 @@ set :urgent, true
 
 # Honor resize size hints globally
 set :resize, false
+
+# Enable gravity tiling
+set :tiling, false
 
 # Font string either take from e.g. xfontsel or use xft
 set :font, "-artwiz-snap-*-*-*-*-*-*-*-*-*-*-*-*"
@@ -28,59 +45,74 @@ set :font, "-artwiz-snap-*-*-*-*-*-*-*-*-*-*-*-*"
 set :separator, "|"
 
 # Set the WM_NAME of subtle (Java quirk)
-# set _wmname, "LG3D"
-# }}}
+# set :wmname, "LG3D"
 
-# == Screen {{{ # Notes {{{
+# == Screen {{{
+# Notes {{{
 # Generally subtle comes with two panels per screen, one on the top and one at
 # the bottom. Each panel can be configured with different panel items and
 # sublets screen wise. The default config uses top panel on the first screen
 # only, it's up to the user to enable the bottom panel or disable either one
 # or both.
+
+# === Properties
 #
-# Empty panels are hidden.
+# [*stipple*]    This property adds a stipple pattern to both screen panels.
 #
-# Following items are available:
+#                Example: stipple "~/stipple.xbm"
+#                         stipple Subtlext::Icon.new("~/stipple.xbm")
+#
+# [*top*]        This property adds a top panel to the screen.
+#
+#                Example: top [ :views, :title ]
+#
+# [*bottom*]     This property adds a bottom panel to the screen.
+#
+#                Example: bottom [ :views, :title ]
+
+#
+# Following items are available for the panels:
 #
 # [*:views*]     List of views with buttons
 # [*:title*]     Title of the current active window
-# [*:tray*]      Systray icons (Can be used once)
+# [*:tray*]      Systray icons (Can be used only once)
+# [*:keychain*]  Display current chain (Can be used only once)
 # [*:sublets*]   Catch-all for installed sublets
 # [*:sublet*]    Name of a sublet for direct placement
 # [*:spacer*]    Variable spacer (free width / count of spacers)
 # [*:center*]    Enclose items with :center to center them on the panel
 # [*:separator*] Insert separator
 #
-# === Link
+# Empty panels are hidden.
 #
+# === Links
+#
+# http://subforge.org/projects/subtle/wiki/Multihead
 # http://subforge.org/projects/subtle/wiki/Panel
 # }}}
 
 screen 1 do
-  # Add stipple to panels
-  stipple false
-
   # Content of the top panel
   #top     [ :views, :title, :spacer, :tray, :sublets ]
   top     [:views, :title, :spacer, :center, :volume, :mpd, :center, :sublets, :separator, :tray, :fuzzytime]
 
   # Content of the bottom panel
   bottom  [ ]
-  view 1
+#  view 1
 end
 
-screen 2 do
-  # Add stipple to panels
-  stipple false
-
-  # Content of the top panel
-  #top     [ :views, :title, :spacer, :tray, :sublets ]
-  top     [:views, :title, :spacer, :center, :volume, :mpd, :center, :sublets, :separator, :tray, :fuzzytime]
-
-  # Content of the bottom panel
-  bottom  [ ]
-  view 0
-end
+#screen 2 do
+#  # Add stipple to panels
+#  stipple false
+#
+#  # Content of the top panel
+#  #top     [ :views, :title, :spacer, :tray, :sublets ]
+#  top     [:views, :title, :spacer, :center, :volume, :mpd, :center, :sublets, :separator, :tray, :fuzzytime]
+#
+#  # Content of the bottom panel
+#  bottom  [ ]
+#  view 0
+#end
 
 
 # Example for a second screen:
@@ -96,24 +128,19 @@ end
 #end
 # }}}
 
-# == Colors {{{
-# Notes {{{
-# Colors directly define the look of subtle, valid values are:
 #
-# [*hexadecimal*] #0000ff
-# [*decimal*]     (0, 0, 255)
-# [*names*]       blue
+# == Styles {{{
 #
-# Whenever there is no valid value for a color set - subtle will use a default
-# one. There is only one exception to this: If no background color is given no
-# color will be set. This will ensure a custom background pixmap won't be
-# overwritten.
+# Styles define various properties of styleable items in a CSS-like syntax.
+#
+# If no background color is given no color will be set. This will ensure a
+# custom background pixmap won't be overwritten.
 #
 # === Link
 #
-# http://subforge.org/projects/subtle/wiki/Themes
-# }}}
+# http://subforge.org/projects/subtle/wiki/Styles
 
+# Style for focus window title
 style :title do
   padding     4, 4, 2, 2
   border      "#1a1a1a", 1
@@ -121,6 +148,7 @@ style :title do
   background  "#1a1a1a"
 end
 
+# Style for the active views
 style :focus do
   padding     4, 4, 2, 2
   border      "#1a1a1a", 1
@@ -128,12 +156,15 @@ style :focus do
   background  "#595959"
 end
 
+# Style for urgent window titles and views
 style :urgent do
   padding     4, 4, 2, 2
   border      1
   foreground  "#DF8787"
+  background  "#202020"
 end
 
+# Style for occupied views (views with clients)
 style :occupied do
   padding     4, 4, 2, 2
   border      "#1a1a1a", 1
@@ -141,6 +172,7 @@ style :occupied do
   background  "#404040"
 end
 
+# Style for view buttons
 style :views do
   padding     4, 4, 2, 2
   border      "#1a1a1a", 1
@@ -148,6 +180,7 @@ style :views do
   background  "#1a1a1a"
 end
 
+# Style for sublets
 style :sublets do
   padding     4, 4, 2, 2
   border      "#1a1a1a", 1
@@ -155,6 +188,7 @@ style :sublets do
   background  "#1a1a1a"
 end
 
+# Style for separator
 style :separator do
   padding     4, 4, 2, 2
   border      1
@@ -162,34 +196,26 @@ style :separator do
   foreground  "#DF8787"
 end
 
+# Style for active/inactive windows
 style :clients do
   active      "#a8a8a8", 0
   inactive    "#404040", 0
   margin      1
+  width       50
 end
 
+# Style for subtle
 style :subtle do
-  padding     0, 0, 0, 0
+  margin     0, 0, 0, 0
   panel       "#1a1a1a"
+  background  "#3d3d3d"
   stipple     "#595959"
 end
-
-
-
-#color :urgent_bg,       "#404040"
-#color :urgent_border,   "#1a1a1a"
-
-
-
-#color :sublets_fg,      "#595959"
-
-
-#color :background,     "#404040"
-
 # }}}
 
+#
 # == Gravities {{{
-# Notes {{{
+#
 # Gravities are predefined sizes a window can be set to. There are several ways
 # to set a certain gravity, most convenient is to define a gravity via a tag or
 # change them during runtime via grab. Subtler and subtlext can also modify
@@ -208,7 +234,6 @@ end
 # === Link
 #
 # http://subforge.org/projects/subtle/wiki/Gravity
-# }}}
 
   # Top left
 gravity :top_left,       [   0,   0,  50,  50 ]
@@ -221,44 +246,47 @@ gravity :top66,          [   0,   0, 100,  66 ]
 gravity :top33,          [   0,   0, 100,  34 ]
 
   # Top right
-gravity :top_right,      [ 100,   0,  50,  50 ]
-gravity :top_right66,    [ 100,   0,  50,  66 ]
-gravity :top_right33,    [ 100,   0,  50,  34 ]
+#gravity :top_right,      [ 100,   0,  50,  50 ]
+#gravity :top_right66,    [ 100,   0,  50,  66 ]
+#gravity :top_right33,    [ 100,   0,  50,  34 ]
+gravity :top_right,      [ 50,   0,  50,  50 ]
+gravity :top_right66,    [ 34,   0,  50,  66 ]
+gravity :top_right33,    [ 67,   0,  50,  34 ]
 
-  # Left
+# Left
 gravity :left,           [   0,   0,  50, 100 ]
-gravity :left66,         [   0,  50,  50,  34 ]
-gravity :left33,         [   0,  50,  25,  34 ]
+gravity :left66,         [   0,   0,  66, 100 ]
+gravity :left33,         [   0,   0,  33, 100 ]
 
-  # Center
+# Center
 gravity :center,         [   0,   0, 100, 100 ]
-gravity :center66,       [   0,  50, 100,  34 ]
-gravity :center33,       [  50,  50,  50,  34 ]
+gravity :center66,       [  17,  17,  66,  66 ]
+gravity :center33,       [  33,  33,  33,  33 ]
 
-  # Right
-gravity :right,          [ 100,   0,  50, 100 ]
-gravity :right66,        [ 100,  50,  50,  34 ]
-gravity :right33,        [ 100,  50,  25,  34 ]
+# Right
+gravity :right,          [  50,   0,  50, 100 ]
+gravity :right66,        [  34,   0,  66, 100 ]
+gravity :right33,        [  67,  50,  33, 100 ]
 
-  # Bottom left
-gravity :bottom_left,    [   0, 100,  50,  50 ]
-gravity :bottom_left66,  [   0, 100,  50,  66 ]
-gravity :bottom_left33,  [   0, 100,  50,  34 ]
+# Bottom left
+gravity :bottom_left,    [   0,  50,  50,  50 ]
+gravity :bottom_left66,  [   0,  34,  50,  66 ]
+gravity :bottom_left33,  [   0,  67,  50,  33 ]
 
-  # Bottom
-gravity :bottom,         [   0, 100, 100,  50 ]
-gravity :bottom66,       [   0, 100, 100,  66 ]
-gravity :bottom33,       [   0, 100, 100,  34 ]
+# Bottom
+gravity :bottom,         [   0,  50, 100,  50 ]
+gravity :bottom66,       [   0,  34, 100,  66 ]
+gravity :bottom33,       [   0,  67, 100,  33 ]
 
-  # Bottom right
-gravity :bottom_right,   [ 100, 100,  50,  50 ]
-gravity :bottom_right66, [ 100, 100,  50,  66 ]
-gravity :bottom_right33, [ 100, 100,  50,  34 ]
+# Bottom right
+gravity :bottom_right,   [  50,  50,  50,  50 ]
+gravity :bottom_right66, [  50,  34,  50,  66 ]
+gravity :bottom_right33, [  50,  67,  50,  33 ]
 
-  # Gimp
-gravity :gimp_image,     [  50,  50,  80, 100 ]
+# Gimp
+gravity :gimp_image,     [  10,   0,  80, 100 ]
 gravity :gimp_toolbox,   [   0,   0,  10, 100 ]
-gravity :gimp_dock,      [ 100,   0,  10, 100 ]
+gravity :gimp_dock,      [  90,   0,  10, 100 ]
 # }}}
 
 # == Grabs {{{
@@ -283,19 +311,17 @@ gravity :gimp_dock,      [ 100,   0,  10, 100 ]
 #
 # === Chaining
 #
-# Chains are a combination of keys and modifiers to one key and can be used in
-# various ways to trigger an action. In subtle there are two ways to define
-# chains for grabs:
+# Chains are a combination of keys and modifiers to one or a list of keys
+# and can be used in various ways to trigger an action. In subtle, there are
+# two ways to define chains for grabs:
 #
-#   1. Default way*: Add modifiers to a key and use it for a grab
+#   1. *Default*: Add modifiers to a key and use it for a grab
 #
 #      *Example*: grab "W-Return", "urxvt"
 #
-#   2. *Escape way*: Define an escape grab that needs to be pressed before
-#      *any* other grab can be used like in screen/tmux.
+#   2. *Chain*: Define a list of grabs that need to be pressed in order
 #
-#      *Example*: grab "C-y", :SubtleEscape
-#                 grab "Return", "urxvt"
+#      *Example*: grab "C-y Return", "urxvt"
 #
 # ==== Mouse buttons
 #
@@ -333,9 +359,6 @@ gravity :gimp_dock,      [ 100,   0,  10, 100 ]
 #
 # http://subforge.org/projects/subtle/wiki/Grabs
 # }}}
-# Subtle {{{
-# Escape grab
-#  grab "C-y", :SubtleEscape
 
 # Jump to view1, view2, ... (multi-head setups only...see wiki)
 grab "W-S-1", :ViewJump1
@@ -406,6 +429,7 @@ grab "W-l",   :WindowRight
 grab "W-S-c", :WindowKill
 
 # Cycle between given gravities
+# In case no numpad is available e.g. on notebooks
 grab "W-q", [ :top_left,     :top_left66,     :top_left33     ]
 grab "W-w", [ :top,          :top66,          :top33          ]
 grab "W-e", [ :top_right,    :top_right66,    :top_right33    ]
@@ -421,7 +445,7 @@ grab "W-Return", "urxvt"
 grab "W-u", "urxvt -T term2"
 grab "W-i", "urxvt -T term3"
 grab "W-S-w", "firefox"
-grab "W-t", "thunar"
+grab "W-t", "pcmanfm"
 # MPD
 grab "W-n", "mpd_cmd next"
 grab "W-v", "mpd_cmd prev"
@@ -590,11 +614,11 @@ tag "terms3" do
   match :name => "term3"
 end
 
-tag "browser", "uzbl|opera|firefox|navigator|chromium"
+tag "browser", "uzbl|opera|firefox|navigator"
 
-tag "filemanagers", "pcmanfm|thunar|ranger|vifm|feh"
+tag "filemanagers", "pcmanfm|thunar|ranger|vifm"
 
-tag "media", "vlc|mplayer|amarok"
+tag "media", "vlc|mplayer|amarok|gmpc|feh"
 
 tag "pdf", "apvlv|evince|acroread"
 
@@ -628,11 +652,11 @@ tag "gravity" do
 end
 
 # Modes
-tag "stick" do
-  match "mplayer|vlc"
-  float true
-  stick true
-end
+#tag "stick" do
+  #match "mplayer|vlc"
+  #float true
+  #stick true
+#end
 
 tag "float" do
   match "display"
@@ -832,9 +856,9 @@ end
 
 # IMPORTANT -- this is dangerous -- i.e. any fullscreen app (i.e. flash/vlc/etc) needs to be in the explicit list below, otherwise it'll be all screwed up
 # always switch to client upon creation
-on :client_create do |c|
-  c.views.first.jump unless (c.name == 'bashrun' or c.name == 'Dialog' or c.name == '<unknown>' or c.name == 'vlc')
-end
+#on :client_create do |c|
+#  c.views.first.jump unless (c.name == 'bashrun' or c.name == 'Dialog' or c.name == '<unknown>' or c.name == 'vlc')
+#end
 
 # }}}
 

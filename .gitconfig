@@ -33,6 +33,7 @@
   d  = diff
   type = cat-file -t
   dump = cat-file -p
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate
 [remote "mine"]
   url = jon@pittock.legitscript.com:./git/web.git
   fetch = +refs/heads/*:refs/remotes/mine/*
