@@ -533,10 +533,5 @@ roll ()
 # initializers
 ## rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
-# z - intelligent cd -- https://github.com/rupa/z
-. /home/jon/jack/tools/z/z.sh
-function precmd () {
-  z --add "$(pwd -P)"
-}
 
 source ~/.zshrc_local
