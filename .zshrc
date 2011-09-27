@@ -239,7 +239,7 @@ alias cdgems='cd /home/jon/.rvm/gems/ruby-1.9.2-p290/gems/'
 function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p290/gems/$1*; }
 alias qlg='gem contents '
 alias glq='gem contents '
-alias rtags='rvm use 1.8.7; rtags --vi -R -f tmp/tags; rvm use default' # vi compatible rtags (default is emacs) -- and fails on ruby 1.9.2
+alias rtags='rvm use 1.8.7-head; rtags --vi -R -f tmp/tags; rvm use default' # vi compatible rtags (default is emacs) -- and fails on ruby 1.9.2
 alias gwhois='gem whois '
 gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
 rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
