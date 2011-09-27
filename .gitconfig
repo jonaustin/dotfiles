@@ -37,3 +37,7 @@
 [remote "mine"]
   url = jon@pittock.legitscript.com:./git/web.git
   fetch = +refs/heads/*:refs/remotes/mine/*
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 1918x1058+1+21
+	history-view-vpane-position = 734
