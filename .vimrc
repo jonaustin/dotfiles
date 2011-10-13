@@ -26,7 +26,7 @@
 	set autowrite
 	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
   set foldmethod=syntax
-  set foldlevelstart=1
+  set foldlevelstart=0
 	" set spell 		 	     	" spell checking on
 
 	" Setting up the directories {
@@ -475,4 +475,8 @@
   " Rails ctags {
   let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
   " }
+" }
+
+" LS {
+map <leader>rs :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
 " }
