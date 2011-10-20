@@ -4,3 +4,4 @@ text/html; /usr/bin/elinks '%s'
 image/*; /usr/bin/feh '%s'; description=png img; test=test -n "$DISPLAY";  nametemplate=%s.png
 application/octet-stream; /usr/bin/evince '%s'; description=pdf; test=test -n "$DISPLAY";  nametemplate=%s.pdf
 application/pdf; /usr/bin/evince '%s'; description=pdf; test=test -n "$DISPLAY";  nametemplate=%s.pdf
+application/msword; antiword %s; copiousoutput
