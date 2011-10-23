@@ -17,14 +17,15 @@ fi
 eval `xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off`
 # background
 #eval `cat ~/.fehbg`
-xsetroot -solid black
+#xsetroot -solid black
 
 # network
 #eval `sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frakssh`
 
 #ivman&
 #exec ck-launch-session awesome  # consolekit -- for udev/devmon automounting policy allowance
-exec ck-launch-session subtle
+#exec ck-launch-session subtle
+exec awesome
 
 #exec xterm
 
