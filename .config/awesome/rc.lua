@@ -9,11 +9,11 @@ require("naughty")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/home/jon/.config/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
-editor = os.getenv("EDITOR") or "nano"
+terminal = "urxvt"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -46,7 +46,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[2])
 end
 -- }}}
 
@@ -168,6 +168,31 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+    -- {{{ Applications
+    awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("firefox", false) end),
+    --awful.key({ modkey }, "grave", function () teardrop.toggle('urxvt','top','center',0.99999,0.4) end),
+    --awful.key({ altkey }, "grave", function () teardrop.toggle("urxvt") end),
+    --awful.key({ modkey }, "F1", function () teardrop.toggle('urxvt','top','center',0.99999,0.4) end),
+    awful.key({ modkey }, "t",    function () awful.util.spawn("thunar", false) end),
+    -- MPD
+    awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd/mpd_status 6600", false) end),
+    awful.key({ modkey, "Control" }, "d",function () awful.util.spawn("mpc -p 6600 del 0", false) end),
+    awful.key({ modkey }, "n",function () awful.util.spawn_with_shell("mpc -p 6600 next; /home/jon/bin/mpd/mpd_status 6600", false) end),
+    awful.key({ modkey }, "v",function () awful.util.spawn_with_shell("mpc -p 6600 prev; /home/jon/bin/mpd/mpd_status 6600", false) end),
+    awful.key({ modkey }, "p",function () awful.util.spawn_with_shell("mpc -p 6600 toggle", false) end),
+    -- }}}
+
+    -- {{{ Multimedia keys
+    awful.key({}, "#107", function () awful.util.spawn("/home/jon/bin/softer", false) end),
+    awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
+    -- }}}
+    
+    -- {{{ Wibox
+    awful.key({ modkey }, "b", function ()
+        mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
+    end),
+    --- }}}
+
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
@@ -303,7 +328,12 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     maximized_vertical   = false,
+                     maximized_horizontal = false,
+                     buttons = clientbuttons,
+                     size_hints_honor = false
+                   } 
+    },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
