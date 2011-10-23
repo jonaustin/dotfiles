@@ -6,6 +6,8 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
+-- scratchpad (dropdown terminal)
+require('scratch')
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -168,11 +170,11 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+    -- {{{ Scratchpad
+    awful.key({ modkey }, "grave", function () scratch.drop('urxvt','top','center',0.99999,0.4) end),
+    -- }}}
     -- {{{ Applications
     awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("firefox", false) end),
-    --awful.key({ modkey }, "grave", function () teardrop.toggle('urxvt','top','center',0.99999,0.4) end),
-    --awful.key({ altkey }, "grave", function () teardrop.toggle("urxvt") end),
-    --awful.key({ modkey }, "F1", function () teardrop.toggle('urxvt','top','center',0.99999,0.4) end),
     awful.key({ modkey }, "t",    function () awful.util.spawn("thunar", false) end),
     -- MPD
     awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd/mpd_status 6600", false) end),
