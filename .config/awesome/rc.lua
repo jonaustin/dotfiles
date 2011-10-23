@@ -8,6 +8,8 @@ require("beautiful")
 require("naughty")
 -- scratchpad (dropdown terminal)
 require('scratch')
+-- move mouse with keyboard
+require('rodentbane')
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -170,10 +172,22 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    -- {{{ Scratchpad
+  -- {{{ Hacks
+    -- Escape from keyboard focus trap (eg Flash plugin in Firefox)
+    awful.key({ modkey, "Control" }, "Escape", function ()
+         awful.util.spawn("xdotool getactivewindow mousemove --window %1 0 0 click --clearmodifiers 2")
+    end),   
+    -- move the mouse to top left
+    awful.key({ modkey, "Control" }, "m", function() mouse.coords({ x=0, y=0 }) end),
+    -- rodentbane
+    awful.key({ modkey }, "i", function() rodentbane.start() end),
+  -- }}}
+    
+  -- {{{ Scratchpad
     awful.key({ modkey }, "grave", function () scratch.drop('urxvt','top','center',0.99999,0.4) end),
-    -- }}}
-    -- {{{ Applications
+  -- }}}
+    
+  -- {{{ Applications
     awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("firefox", false) end),
     awful.key({ modkey }, "t",    function () awful.util.spawn("thunar", false) end),
     -- MPD
@@ -182,18 +196,18 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "n",function () awful.util.spawn_with_shell("mpc -p 6600 next; /home/jon/bin/mpd/mpd_status 6600", false) end),
     awful.key({ modkey }, "v",function () awful.util.spawn_with_shell("mpc -p 6600 prev; /home/jon/bin/mpd/mpd_status 6600", false) end),
     awful.key({ modkey }, "p",function () awful.util.spawn_with_shell("mpc -p 6600 toggle", false) end),
-    -- }}}
+  -- }}}
 
-    -- {{{ Multimedia keys
+  -- {{{ Multimedia keys
     awful.key({}, "#107", function () awful.util.spawn("/home/jon/bin/softer", false) end),
     awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
-    -- }}}
+  -- }}}
     
-    -- {{{ Wibox
+  -- {{{ Wibox
     awful.key({ modkey }, "b", function ()
         mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
     end),
-    --- }}}
+  --- }}}
 
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
