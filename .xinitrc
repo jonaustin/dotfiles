@@ -8,23 +8,24 @@
 
 #/etc/X11/Xsession
 sh /home/jon/.xmodmap
-# D-bus
-if which dbus-launch >/dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS"; then
-       eval "$(dbus-launch --sh-syntax --exit-with-session)"
-fi
+# D-bus (this messes up notify-send in awesome)
+#if which dbus-launch >/dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+       #eval "$(dbus-launch --sh-syntax --exit-with-session)"
+#fi
 
 # disable internal screen
 eval `xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off`
 # background
 #eval `cat ~/.fehbg`
-xsetroot -solid black
+#xsetroot -solid black
 
 # network
 #eval `sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frakssh`
 
 #ivman&
 #exec ck-launch-session awesome  # consolekit -- for udev/devmon automounting policy allowance
-exec ck-launch-session subtle
+#exec ck-launch-session subtle
+exec awesome
 
 #exec xterm
 
