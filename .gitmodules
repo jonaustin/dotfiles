@@ -60,7 +60,7 @@
 	url = git://github.com/tpope/vim-unimpaired.git
 [submodule ".config/awesome/obvious"]
 	path = .config/awesome/obvious
-	url = http://github.com/farhaven/obvious.git
+	url = git://git.mercenariesguild.net/obvious.git
 [submodule ".config/awesome/vicious"]
 	path = .config/awesome/vicious
 	url = http://git.sysphere.org/vicious
@@ -109,3 +109,6 @@
 [submodule ".vim/bundle/coffee-script"]
 	path = .vim/bundle/coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule ".config/awesome/awesompd"]
+	path = .config/awesome/awesompd
+	url = https://github.com/alexander-yakushev/awesompd
