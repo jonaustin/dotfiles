@@ -112,3 +112,6 @@
 [submodule ".config/awesome/awesompd"]
 	path = .config/awesome/awesompd
 	url = https://github.com/alexander-yakushev/awesompd
+[submodule ".vim/bundle/csv"]
+	path = .vim/bundle/csv
+	url = https://github.com/chrisbra/csv.vim
