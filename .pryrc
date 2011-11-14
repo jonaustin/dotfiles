@@ -1,4 +1,12 @@
 # vim: ft=ruby
+
+# always display activerecord sql on stdout
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+
+def sql(a)
+  ActiveRecord::Base.connection.execute(a).fetch_hash
+end
+
 begin
   require 'awesome_print'
   Pry.config.print = proc { |output, value| output.send(:ap, value) }
@@ -23,6 +31,9 @@ rescue LoadError
   # Missing some goodies, bummer
 end
 
-def sql(a)
-  ActiveRecord::Base.connection.execute(a).fetch_hash
-end
+#begin
+  #require 'awesome_print'
+  #Pry.config.print = proc { |output, value| Pry::Helpers::BaseHelpers.stagger_output("=> #{value.ai}", output) }
+#rescue LoadError => err
+  #puts "no awesome_print :("
+#end
