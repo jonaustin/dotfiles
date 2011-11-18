@@ -96,7 +96,8 @@ endif
 "hi Normal				cterm=none		ctermfg=255		ctermbg=232 guifg=#ffffff	guibg=#121212
 " enable pseudo-transparency (ctermbg=none)
 hi Normal				cterm=none		ctermfg=255		ctermbg=NONE guifg=#ffffff	guibg=#121212 
-hi CursorLine		cterm=none		ctermbg=16		guibg=#050505
+hi CursorLine		cterm=none		ctermbg=none		guibg=#050505
+"hi CursorLine		cterm=none		ctermbg=16		guibg=#050505
 hi SpecialKey		cterm=none		ctermfg=245		ctermbg=233		guifg=#8a8a8a	guibg=#090909
 hi Folded				cterm=none		ctermfg=110		ctermbg=233		guifg=#87afd7	guibg=#000000
 

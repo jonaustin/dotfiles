@@ -93,6 +93,7 @@
 	"set gdefault					" the /g flag on :s substitutions by default
   set relativenumber    " line numbers relative to current position
   set undofile          " undo even after closing and re-opening a file!
+  set undodir=$HOME/.vimundo 
   set ttyfast           " assume fast connection (smoother redraw)
 
 " }

@@ -172,7 +172,7 @@ alias pgoo='ping -c2 google.com'
 alias wgetnc='wget --no-check-certificate'
 ### ssh
 alias pb='ssh jonaustin@mrfantastic.dreamhost.com'
-alias home_proxy='ssh -D 8080 -f -C -q -N jon@xs.homeunix.net'
+alias home_proxy='ssh -D 8089 -f -C -q -N jon@xs.homeunix.net'
 alias work_proxy='ssh -D 8080 -f -C -q -N jon@barracuda-ext.cmdpdx.com'
 alias work_rdc='ssh jon@barracuda-ext.cmdpdx.com -L 10000:jaustin.cmdpdx.com:3389' # tunnel rdc connection to localhost:10000
 ### synergy
@@ -182,7 +182,6 @@ alias ksyn="killall synergyc"
 ### non-frak
 alias sxs='ssh jon@frak'
 alias fxs='sftp jon@xs.homeunix.net'
-alias home_proxy='ssh -D 8080 -f -C -q -N jon@xs.homeunix.net'
 alias sxxs='ssh jon@xs.homeunix.net'
 alias sfs='ssh jon@frak'
 alias sss='ssh jon@sam'
@@ -369,6 +368,7 @@ roll ()
     *.rar) shift && rar $FILE $* ;;
   esac
 }
+function zipc () {'zip -r ${1}.zip $1'}
 
 function randlines () {
     cat ${1} | while read i; do echo $RANDOM "$i"; done | sort -n | sed 's/^[0-9]* //'
