@@ -19,7 +19,7 @@ require('rodentbane')
   musicwidget = awesompd:create() -- Create awesompd widget
   musicwidget.font = "snap" -- Set widget font 
   musicwidget.scrolling = true -- If true, the text in the widget will be scrolled
-  musicwidget.output_size = 30 -- Set the size of widget in symbols
+  musicwidget.output_size = 50 -- Set the size of widget in symbols
   musicwidget.update_interval = 10 -- Set the update interval in seconds
   -- Set the folder where icons are located (change username to your login name)
   musicwidget.path_to_icons = "/home/jon/.config/awesome/awesompd/icons" 
@@ -42,8 +42,8 @@ require('rodentbane')
   -- Specify decorators on the left and the right side of the
   -- widget. Or just leave empty strings if you decorate the widget
   -- from outside.
-  musicwidget.ldecorator = " "
-  musicwidget.rdecorator = " "
+  musicwidget.ldecorator = " | "
+  musicwidget.rdecorator = " | "
   -- Set all the servers to work with (here can be any servers you use)
   musicwidget.servers = {
      { server = "localhost",
@@ -206,10 +206,10 @@ for s = 1, screen.count() do
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
-        musicwidget.widget,
         mytextclock,
+        musicwidget.widget,
         s == 1 and mysystray or nil,
-        mytasklist[s],
+        -- mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
 end

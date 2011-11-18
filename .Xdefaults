@@ -21,7 +21,7 @@ Emacs.font: -xos4-terminus-medium-r-normal-*-12-120-72-72-c-60-iso8859-2
 !urxvt*foreground:#B0B0B0
 !urxvt*background:rgba:2000/2000/2000/cccc
 urxvt*transparent: true
-urxvt*shading: 15
+urxvt*shading: 25
 ! General
 !URxvt.geometry:         80x26
 URxvt.termName:  rxvt-256color
@@ -45,9 +45,6 @@ URxvt.matcher.button:   1
 URxvt.keysym.C-Delete:  perl:matcher
 URxvt.underlineURLs:    true
 
-! So we catch even nasty URLs
-!URxvt.cutchars:         `()'*<>[]{|}"
-!URxvt.cutchars:         `"()'*<>[]{|}
 !
 ! Appearance
 URxvt.font:     -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-*-*

@@ -25,7 +25,7 @@ eval `xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off`
 #ivman&
 #exec ck-launch-session awesome  # consolekit -- for udev/devmon automounting policy allowance
 #exec ck-launch-session subtle
-exec awesome
+exec ck-launch-session awesome
 
 #exec xterm
 

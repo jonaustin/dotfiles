@@ -69,6 +69,8 @@ alias df='df -Th'
 alias free='free -m'
 alias info='pinfo'
 alias fortune='echo && fortune tao && echo'
+alias xephr='Xephyr -ac -br -noreset -screen 1152x720 :1 &'
+alias test_awesome='DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua'
 
 # non pkg'd app-updates
 alias upcalibre="sudo python2 -c \"import urllib2; exec urllib2.urlopen('http://status.calibre-ebook.com/linux_installer').read(); main()\""
@@ -152,6 +154,7 @@ alias vlrc='vim ~/.bashrc_local'
 alias v='vr'
 alias vvc='vim ~/.vimrc'
 alias vsc='vim ~/.config/subtle/subtle.rb'
+alias vac='vim ~/.config/awesome/rc.lua'
 alias c='clear'
 alias e='exit; clear'
 alias svi='sudo vim'
