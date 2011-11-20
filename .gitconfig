@@ -1,0 +1,56 @@
+[user]
+	name = Jon Austin
+	email = jon.i.austin@gmail.com
+[github]
+	token = 93d49b6e93fe6b3b1ff4f9c901352de2
+	user = jonaustin
+[color]
+  ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+[core]
+	editor = vim
+[merge]
+  tool = vimdiff
+[mergetool "p4merge"]
+  cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+  keepTemporaries = false
+  trustExitCode = false
+  keepBackup = false
+[pager]
+  diff = #this is needed for vimdiff to work
+[pretty]
+[gc]
+  auto=1 # automatic garbage collection
+[merge]
+  summary=true # get a summary of the changes you’re merging
+[alias]
+[alias]
+  co = checkout
+  cb = checkout -b
+  ci = commit
+  cim= commit --amend
+  br = branch -v
+  b  = branch -v
+  r  = remote -v
+  t  = tag -l
+  st = status
+  d  = diff
+  ds = diff --staged
+  l  = log
+  lp = log --pretty=oneline
+  lpg = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  histall = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --all
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  type = cat-file -t
+  dump = cat-file -p
+  cp = cherry-pick -x # automatically put the original commit hash into the commit comment. Here’s an alias for doing this:
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^ # remove last commit and put changes into staging area
+  changelog = log --pretty=format:\" * %s\"
+[remote "mine"]
+  url = jon@pittock.legitscript.com:./git/web.git
+  fetch = +refs/heads/*:refs/remotes/mine/*
