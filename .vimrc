@@ -364,6 +364,7 @@
   nmap <leader>rci :%!ruby-code-indenter<cr>
   map <leader>sqf :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
   map <leader>sc  :!ruby -c %<cr>
+  command! FR set filetype=ruby
 "}
 
 

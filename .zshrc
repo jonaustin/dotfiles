@@ -145,7 +145,7 @@ alias m='ncmpcpp -p 6600' # mpd alsa
 alias toptracks='toptracks.rb'
 
 ## Other
-alias aunpackall='for n in *; do aunpack $n; done'
+alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
 alias rmspace="prename 's/ /_/g' *"
 alias cm='chmod'
 alias sv='sudo vim'
