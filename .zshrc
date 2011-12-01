@@ -25,7 +25,7 @@ bindkey '^[[B' down-line-or-search
 export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/home/jon/bin:/usr/local/bin:/usr/lib/surfraw:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash:/home/jon/bin/mpd:/home/jon/bin/subtle"
 
 export EDITOR='vim'
-export BROWSER='elinks'
+export BROWSER='firefox'
 export PAGER='less'
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R' # --LINE-NUMBERS --quit-if-one-screen' # -R for less coloring with source-highlight (external app)
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
