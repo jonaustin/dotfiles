@@ -23,6 +23,7 @@ ln -s configs/.newsbeuter
 ln -s configs/.oh-my-zsh
 ln -s configs/.zshrc
 ln -s configs/.pryrc
+ln -s configs/.tmux.conf
 
 mkdir .config; cd .config
 ln -s ../configs/.config/awesome
