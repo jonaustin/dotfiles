@@ -11,7 +11,7 @@ export ZSH_THEME="flazz"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github vi-mode rails gem bundler ruby)
+plugins=(git github vi-mode rails gem bundler ruby rake)
 
 source $ZSH/oh-my-zsh.sh
 # }}}
@@ -23,6 +23,7 @@ bindkey '^[[B' down-line-or-search
 # }}}
 # Exports {{{ 
 export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/home/jon/bin:/usr/local/bin:/usr/lib/surfraw:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash:/home/jon/bin/mpd:/home/jon/bin/subtle"
+export NODE_PATH=/usr/lib/node_modules
 
 export EDITOR='vim'
 export BROWSER='firefox'
@@ -103,7 +104,7 @@ fi
 # convenience #
 
 ## App shortcuts (GUI/Curses)
-alias sup="rvm use 1.9.2-p180; sup"
+#alias sup="rvm use 1.9.2-p180; sup"
 alias ff='firefox'
 
 ## Apps shortcuts (CLI)
@@ -242,6 +243,7 @@ function cdgem() { cd /home/jon/.rvm/gems/ruby-1.9.2-p290/gems/$1*; }
 alias qlg='gem contents '
 alias glq='gem contents '
 alias rtags='rvm use 1.8.7-head; rtags --vi -R -f tmp/tags; rvm use default' # vi compatible rtags (default is emacs) -- and fails on ruby 1.9.2
+alias rctag='ctags -R --exclude=.git --exclude=log *'
 alias gwhois='gem whois '
 gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
 rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }

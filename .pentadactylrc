@@ -10,8 +10,8 @@ set editor=vim_wrapper.sh
 " Command line and search patterns history
 set history=10000
 
-" Hide everything, but status bar and numbers in tabs
-set go=sn
+" Hide everything, but right scroll bar and numbers in tabs
+set go=rn
 
 " Show the tab bar only if more then one tab is open
 set showtabline=multitab

@@ -1,6 +1,6 @@
 source /home/jon/.screenrc
 
-screen -t m ncmpcpp -p 6600
+screen -t mt ncmpcpp -p 1100
 screen
 screen
 screen 

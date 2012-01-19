@@ -162,10 +162,10 @@
   :noremap <leader>bp :bp<cr>
 
 	" NERDTree
-	map <S-w> :NERDTreeToggle<cr>
+	map <C-w> :NERDTreeToggle<cr>
 
 	" TagList
-	map <S-t> :TlistToggle<cr>
+	map <C-t> :TlistToggle<cr>
 
 	" Conque Bash
 	map <leader>bb  :ConqueTerm bash<cr>
