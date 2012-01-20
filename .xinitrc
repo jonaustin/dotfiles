@@ -27,6 +27,10 @@ eval `xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off`
 #exec ck-launch-session subtle
 exec ck-launch-session awesome
 
+# autocutsel - synchronizes the two copy/paste buffers mainly used by X applications
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
 #exec xterm
 
 
