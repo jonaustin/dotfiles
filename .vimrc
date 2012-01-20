@@ -162,7 +162,7 @@
   :noremap <leader>bp :bp<cr>
 
 	" NERDTree
-	map <C-w> :NERDTreeToggle<cr>
+	map <S-w> :NERDTreeToggle<cr>
 
 	" TagList
 	map <C-t> :TlistToggle<cr>
