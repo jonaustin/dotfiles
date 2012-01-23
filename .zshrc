@@ -1,6 +1,7 @@
 # init {{{
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
+unsetopt correct_all
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -277,11 +278,11 @@ alias scr='screen -Sx $1'
 alias scl='screen -list'
 alias sc='screen -Sx '
 alias sd='screen -Sd'
-alias scs='screen -Sx screen'
-alias sccs='cd ~; screen -c /home/jon/.screenrcs/screenrc_screen -S screen'
-alias scbg='cd ~; screen -c /home/jon/.screenrcs/screenrc_bg -S bg'
-alias scqt='cd ~; screen -c /home/jon/.screenrcs/screenrc_qt -S qt'
-alias scc='cd ~; screen -c /home/jon/.screenrcs/screenrc_coding -S code'
+alias scs='tmux attach -t core'
+alias sccs='cd ~; tmux new -s core'
+#alias scbg='cd ~; screen -c /home/jon/.screenrcs/screenrc_bg -S bg'
+#alias scqt='cd ~; screen -c /home/jon/.screenrcs/screenrc_qt -S qt'
+#alias scc='cd ~; screen -c /home/jon/.screenrcs/screenrc_coding -S code'
 
 # dir shortcuts
 alias configs='cd /home/jon/configs'
