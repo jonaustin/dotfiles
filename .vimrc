@@ -77,7 +77,6 @@
 
 	set backspace=indent,eol,start 	" backspace for dummys
 	set linespace=0 				" No extra spaces between rows
-	"set nu 							" Line numbers on
 	set showmatch                  	" show matching brackets/parenthesis
 	set incsearch 					" find as you type search
 	set hlsearch 					" highlight search terms
@@ -91,7 +90,8 @@
 	set scrolloff=15 				" minimum lines to keep above and below cursor
 	set foldenable  				" auto fold code
 	"set gdefault					" the /g flag on :s substitutions by default
-  set relativenumber    " line numbers relative to current position
+  "set relativenumber    " line numbers relative to current position
+	set nu 							" Line numbers on
   set undofile          " undo even after closing and re-opening a file!
   set undodir=$HOME/.vimundo 
   set ttyfast           " assume fast connection (smoother redraw)
