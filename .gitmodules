@@ -58,9 +58,6 @@
 [submodule ".vim/bundle/vim-unimpaired"]
 	path = .vim/bundle/vim-unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
-[submodule ".config/awesome/obvious"]
-	path = .config/awesome/obvious
-	url = git://git.mercenariesguild.net/obvious.git
 [submodule ".config/awesome/vicious"]
 	path = .config/awesome/vicious
 	url = http://git.sysphere.org/vicious
@@ -79,9 +76,6 @@
 [submodule ".vim/bundle/csapprox"]
 	path = .vim/bundle/csapprox
 	url = https://github.com/godlygeek/csapprox.git
-[submodule ".vim/bundle/easytags"]
-	path = .vim/bundle/easytags
-	url = https://github.com/vim-scripts/easytags.vim.git
 [submodule ".vim/bundle/snipmate"]
 	path = .vim/bundle/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
@@ -118,3 +112,12 @@
 [submodule ".vim/bundle/vim-bundler"]
 	path = .vim/bundle/vim-bundler
 	url = http://github.com/tpope/vim-bundler.git
+[submodule ".vim/bundle/vim-ruby-doc"]
+	path = .vim/bundle/vim-ruby-doc
+	url = http://github.com/yakloinsteak/vim-ruby-doc.git
+[submodule ".config/awesome/obvious"]
+	path = .config/awesome/obvious
+	url = http://github.com/farhaven/obvious.git
+[submodule ".vim/bundle/easytags"]
+	path = .vim/bundle/easytags
+	url = http://github.com/xolox/vim-easytags.git
