@@ -32,7 +32,7 @@ export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-i
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export DISPLAY=:0
 export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
-export TERM=screen-256color
+export TERM=xterm-256color
 export MOZ_DISABLE_PANGO=1 # improve rendering (may also fix font issues for all mozilla apps -- https://wiki.archlinux.org/index.php/Firefox_Tips_and_Tweaks#Network_settings )
 #export WINEDEBUG=-all
 
