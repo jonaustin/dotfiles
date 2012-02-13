@@ -118,6 +118,3 @@
 [submodule ".config/awesome/obvious"]
 	path = .config/awesome/obvious
 	url = http://github.com/farhaven/obvious.git
-[submodule ".vim/bundle/easytags"]
-	path = .vim/bundle/easytags
-	url = http://github.com/xolox/vim-easytags.git
