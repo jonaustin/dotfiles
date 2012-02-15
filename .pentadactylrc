@@ -55,6 +55,7 @@ map <leader>s :stop
 
 colo zenburn
 
+set defsearch=duckduckgo-ssl
 
 source! ~/.vimperatorrc.local
 
