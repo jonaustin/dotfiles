@@ -73,15 +73,13 @@
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
   filelog = log -u # show changes to a file
   changelog = log --pretty=format:\" * %s\"
+  lg = log --pretty=format:'%C(red)%h%Creset %C(yellow)%d%Creset %s %Cgreen(%an)%Creset %Cblue[%ar]' --graph -35 HEAD master
 
   unstage = reset HEAD # un-add files from index (tracking)
   uncommit = reset --soft HEAD^ # go back one commit, put changes into your working dir and index
   chunkyadd = add --patch # stage commits chunk by chunk
   amend = commit --amend # fix last commit
   ammend = commit --amend # for those who can't spell :-)
-
-
-
 [remote "mine"]
   url = jon@pittock.legitscript.com:./git/web.git
   fetch = +refs/heads/*:refs/remotes/mine/*
