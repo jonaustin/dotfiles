@@ -10,7 +10,7 @@ rails = File.join Dir.getwd, 'config', 'environment.rb'
 
 if File.exist?(rails) && ENV['SKIP_RAILS'].nil?
   require rails
-  
+
   if Rails.version[0..0] == "2"
     require 'console_app'
     require 'console_with_helpers'
@@ -23,6 +23,13 @@ if File.exist?(rails) && ENV['SKIP_RAILS'].nil?
 
   # always display activerecord sql on stdout
   ActiveRecord::Base.logger = Logger.new(STDOUT)
+end
+
+class Object
+  # list methods which aren't in superclass
+  def local_methods(obj = self)
+    (obj.methods - obj.class.superclass.instance_methods).sort
+  end
 end
 
 begin
