@@ -337,6 +337,9 @@ alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
 # ls
 alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:/home/jon/ /media/stark'
 
+# tmux
+alias tma='tmux attach'
+alias tmat='tmux attach -t '
 
 
 # Functions
