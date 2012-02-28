@@ -18,7 +18,7 @@ theme.font      = "snap 8"
 theme.fg_normal = "#DCDCCC"
 theme.fg_focus  = "#F0DFAF"
 theme.fg_urgent = "#CC9393"
-theme.bg_normal = "#3F3F3F"
+theme.bg_normal = "#000000"
 theme.bg_focus  = "#1E2320"
 theme.bg_urgent = "#3F3F3F"
 -- }}}
@@ -77,7 +77,7 @@ theme.taglist_squares_unsel = "/usr/share/awesome/themes/zenburn/taglist/squarez
 -- }}}
 
 -- {{{ Misc
-theme.awesome_icon           = "/usr/share/awesome/themes/zenburn/awesome-icon.png"
+theme.awesome_icon           = "/home/jon/.config/awesome/themes/zenburn/awesome-icon.png"
 theme.menu_submenu_icon      = "/usr/share/awesome/themes/default/submenu.png"
 theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
 -- }}}
