@@ -24,6 +24,7 @@ ln -s configs/.oh-my-zsh
 ln -s configs/.zshrc
 ln -s configs/.pryrc
 ln -s configs/.tmux.conf
+ln -s configs/.caprc
 
 mkdir .config; cd .config
 ln -s ../configs/.config/awesome
