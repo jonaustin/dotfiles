@@ -46,7 +46,8 @@ hi link htmlEndTag                  xmlEndTag
 
 highlight Normal                    guifg=#E6E1DC guibg=#111111 
 highlight Cursor                    guifg=#000000 ctermfg=0 guibg=#FFFFFF ctermbg=15	
-highlight CursorLine                guibg=#000000 ctermbg=233 cterm=NONE
+"highlight CursorLine                guibg=#000000 ctermbg=233 cterm=NONE
+highlight CursorLine                guibg=#000000 ctermbg=NONE cterm=NONE
 
 highlight Comment                   guifg=#BC9458 ctermfg=180 gui=italic
 highlight Constant                  guifg=#6D9CBE ctermfg=73
@@ -94,3 +95,11 @@ highlight SpellBad                  guifg=#D70000 ctermfg=160 ctermbg=NONE cterm
 highlight SpellRare                 guifg=#D75F87 ctermfg=168 guibg=NONE ctermbg=NONE gui=underline cterm=underline
 highlight SpellCap                  guifg=#D0D0FF ctermfg=189 guibg=NONE ctermbg=NONE gui=underline cterm=underline
 highlight MatchParen                guifg=#FFFFFF ctermfg=15 guibg=#005f5f ctermbg=23
+
+" jon's colors
+hi TabLine			cterm=none	ctermfg=255		ctermbg=235
+hi TabLineSel		cterm=none	ctermfg=249		ctermbg=233
+hi TabLineFill	cterm=none	ctermfg=233		ctermbg=235
+hi StatusLine		cterm=none		ctermfg=255		ctermbg=233		guifg=#0000af	guibg=#ffffff
+hi StatusLineNC	cterm=none		ctermfg=252		ctermbg=233		guifg=#00005f guibg=#d0d0d0
+hi VertSplit		cterm=none		ctermfg=254		ctermbg=16		guifg=#000000 guibg=#eeeeee
