@@ -118,3 +118,6 @@
 [submodule ".config/awesome/obvious"]
 	path = .config/awesome/obvious
 	url = http://github.com/farhaven/obvious.git
+[submodule "/home/jon/.vim/bundle/syntastic"]
+	path = /home/jon/.vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git

@@ -25,6 +25,7 @@ ln -s configs/.zshrc
 ln -s configs/.pryrc
 ln -s configs/.tmux.conf
 ln -s configs/.caprc
+ln -s configs/.difmplayrc
 
 sudo ln -s ${HOME}/configs/usr/share/fortune/* /usr/share/fortune/
 
