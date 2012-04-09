@@ -69,7 +69,7 @@ alias wget='wget -c' #auto continue files
 alias df='df -Th'
 alias free='free -m'
 alias info='pinfo'
-alias fortune='echo && fortune tao && echo'
+alias fortune='echo && fortune taom && echo'
 alias xephr='Xephyr -ac -br -noreset -screen 1152x720 :1 &'
 alias test_awesome='DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua'
 
@@ -538,6 +538,31 @@ roll ()
 ## rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 
+# ssh-agent
+SSH_ENV="$HOME/.ssh/environment"
+function start_agent {
+  echo "Initialising new SSH agent..."
+  /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+  echo 'succeeded'
+  chmod 600 "${SSH_ENV}"
+  . "${SSH_ENV}" > /dev/null
+  /usr/bin/ssh-add;
+}
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+  . "${SSH_ENV}" > /dev/null
+  #ps ${SSH_AGENT_PID}
+  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+  start_agent;
+}
+else
+  start_agent;
+fi
+
 unsetopt correctall
 
 source ~/.zshrc_local
+
+fortune
+alias bgbg='cat ~/.fehbg >> ~/fehbgs'
+alias mem='sudo ps_mem'
