@@ -51,8 +51,9 @@
 " }
 
 " Vim UI {
-	"color zenburn_jon     	       		" load a colorscheme
-	color leo     	       		" load a colorscheme
+	"color zenburn_jon
+	"color leo
+  colo railscasts
 
 	set tabpagemax=15 				" only show 15 tabs
 	set showmode                   	" display the current mode
@@ -453,6 +454,28 @@
     return s
 
   endfunction
+
+  "
+  " relative/absolute line number switching
+  function! NumberToggle()
+    if(&relativenumber == 1)
+      set number
+    else
+      set relativenumber
+    endif
+  endfunc
+
+  nnoremap <C-n> :call NumberToggle()<cr>
+
+  " automatically switch to absolute line numbers whenever vim loses focus
+  " (this doesn't seem to work...)
+  :au FocusLost * :set number
+  :au FocusGained * :set relativenumber
+
+  " insert mode: automatically use absolute line numbers
+  autocmd InsertEnter * :set number
+  " command mode: automatically use relative line numbers
+  autocmd InsertLeave * :set relativenumber
   " }
 
   " Strip trailing whitespace {
@@ -482,3 +505,4 @@
 " LS {
 map <leader>rs :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
 " }
+

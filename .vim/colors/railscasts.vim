@@ -44,7 +44,7 @@ hi link htmlTag                     xmlTag
 hi link htmlTagName                 xmlTagName
 hi link htmlEndTag                  xmlEndTag
 
-highlight Normal                    guifg=#E6E1DC guibg=#111111 
+highlight Normal                    guifg=#E6E1DC guibg=#111111 ctermfg=255		ctermbg=NONE 
 highlight Cursor                    guifg=#000000 ctermfg=0 guibg=#FFFFFF ctermbg=15	
 "highlight CursorLine                guibg=#000000 ctermbg=233 cterm=NONE
 highlight CursorLine                guibg=#000000 ctermbg=NONE cterm=NONE
@@ -62,6 +62,7 @@ highlight LineNr                    guifg=#2B2B2B ctermfg=159 guibg=#C0C0FF
 highlight Number                    guifg=#A5C261 ctermfg=107
 highlight PreProc                   guifg=#E6E1DC ctermfg=103
 highlight Search                    guifg=NONE ctermfg=NONE guibg=#2b2b2b ctermbg=235 gui=italic cterm=underline
+highlight IncSearch		              cterm=reverse
 highlight Statement                 guifg=#CC7833 ctermfg=173 gui=NONE cterm=NONE
 highlight String                    guifg=#A5C261 ctermfg=107
 highlight Title                     guifg=#FFFFFF ctermfg=15
