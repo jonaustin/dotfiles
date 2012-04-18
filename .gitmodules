@@ -49,9 +49,6 @@
 [submodule ".vim/bundle/vim-ruby"]
 	path = .vim/bundle/vim-ruby 
 	url = git://github.com/vim-ruby/vim-ruby.git
-[submodule ".vim/bundle/vim-ruby-debugger"]
-	path = .vim/bundle/vim-ruby-debugger 
-	url = git://github.com/astashov/vim-ruby-debugger.git
 [submodule ".vim/bundle/vim-supertab"]
 	path = .vim/bundle/vim-supertab
 	url = git://github.com/tsaleh/vim-supertab.git
