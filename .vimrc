@@ -15,7 +15,7 @@
   ":set clipboard=unnamedplus  " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
 " }
 
-" General 
+" General {
   runtime! macros/matchit.vim
 	filetype plugin indent on  	" Automatically detect file types.
 	syntax on 					        " syntax highlighting
@@ -73,7 +73,7 @@
 		set laststatus=1           	" show statusline only if there are > 1 windows
 		" Use the commented line if fugitive isn't installed
       "set statusline=%<%f\ %=\:\b%n%y%m%r%w\ %l,%c%V\ %P " a statusline, also on steroids
-		set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+		set statusline=%<%f\ %h%m%r%y%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 	endif
 
 	set backspace=indent,eol,start 	" backspace for dummys
@@ -122,6 +122,9 @@
 
 " Key Mappings {
 
+  " source vimrc
+  nnoremap <leader>so :source ~/.vimrc<cr>
+
 	" Easier moving in tabs and windows
 	map <C-J> <C-W>j<C-W>_
     " for some odd reason, its mapping <S[hift]-C[trl]-j> to <C-j> ...?
@@ -167,7 +170,7 @@
 	map <S-q> :NERDTreeToggle<cr>
 
 	" TagList
-	map <C-t> :TlistToggle<cr>
+	"map <C-t> :TlistToggle<cr>
 
 	" Conque Bash
 	map <leader>bb  :ConqueTerm bash<cr>
