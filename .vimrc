@@ -216,6 +216,8 @@
   map zff :/^\s*class\s\\|^\s*function\s\\|^\s*def\s/<CR>:set foldmethod=expr foldlevel=0 foldcolumn=1<CR><CR>
   " space toggles the fold state under the cursor.
   nnoremap <silent><space> :exe 'normal! za'.(foldlevel('.')?'':'l')<cr>
+  " <leader>space expands with zO
+  map <leader><space> zO
 
   " mouse
   map <leader>m  :set mouse=a<cr>
