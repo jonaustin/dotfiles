@@ -69,8 +69,8 @@ highlight Title                     guifg=#FFFFFF ctermfg=15
 highlight Type                      guifg=#DA4939 ctermfg=167 gui=NONE cterm=NONE
 highlight Visual                    guibg=#5A647E ctermbg=60
 
-highlight DiffAdd                   guifg=#E6E1DC ctermfg=7 guibg=#519F50 ctermbg=71
-highlight DiffDelete                guifg=#E6E1DC ctermfg=7 guibg=#660000 ctermbg=52
+"highlight DiffAdd                   guifg=#E6E1DC ctermfg=7 guibg=#519F50 ctermbg=71
+"highlight DiffDelete                guifg=#E6E1DC ctermfg=7 guibg=#660000 ctermbg=52
 highlight Special                   guifg=#DA4939 ctermfg=167 
 
 highlight pythonBuiltin             guifg=#6D9CBE ctermfg=73 gui=NONE cterm=NONE
@@ -104,3 +104,9 @@ hi TabLineFill	cterm=none	ctermfg=233		ctermbg=235
 hi StatusLine		cterm=none		ctermfg=255		ctermbg=233		guifg=#0000af	guibg=#ffffff
 hi StatusLineNC	cterm=none		ctermfg=252		ctermbg=233		guifg=#00005f guibg=#d0d0d0
 hi VertSplit		cterm=none		ctermfg=254		ctermbg=16		guifg=#000000 guibg=#eeeeee
+hi Folded				cterm=none		ctermfg=110		ctermbg=233		guifg=#87afd7	guibg=#000000
+hi FoldColumn		cterm=none		ctermfg=110		ctermbg=16		guifg=#87afd7 guibg=#000000
+hi DiffAdd			cterm=none		ctermbg=235		guibg=#262626
+hi DiffChange		cterm=none		ctermbg=235		guibg=#262626
+hi DiffDelete		cterm=none		ctermfg=238		ctermbg=244		guifg=#444444	guibg=#808080
+hi DiffText			cterm=bold		ctermfg=255		ctermbg=196		guifg=#ffffff
