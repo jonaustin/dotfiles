@@ -15,7 +15,7 @@
   ":set clipboard=unnamedplus  " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
 " }
 
-" General {
+" General 
   runtime! macros/matchit.vim
 	filetype plugin indent on  	" Automatically detect file types.
 	syntax on 					        " syntax highlighting
@@ -26,7 +26,7 @@
 	set autowrite
 	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
   set foldmethod=syntax
-  set foldlevelstart=99   " start with all folds expanded
+  set foldlevelstart=2
 	" set spell 		 	     	" spell checking on
 
 	" Setting up the directories {
@@ -150,6 +150,7 @@
 
 	" remap jj to escape
 	inoremap jj <ESC>
+	inoremap jk <ESC>
 
   " split windows
   nnoremap <leader>sw <C-w>v<C-w>l " split and switch
@@ -200,8 +201,18 @@
   " remove search highlights
   map <leader><space> :nohl<cr>
 
-  " folding
+  """ Folding
   map <leader>f :fold<cr>
+  " restore syntax folding
+  map <silent><leader>zf :set foldmethod=syntax<CR>
+  " This folds every line that does not contain the search pattern."}
+  " see vimtip #282 and vimtip #108
+  map <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
+  " this folds all classes and function to create a code index.
+  " mnemonic: think "function fold"
+  map zff :/^\s*class\s\\|^\s*function\s\\|^\s*def\s/<CR>:set foldmethod=expr foldlevel=0 foldcolumn=1<CR><CR>
+  " space toggles the fold state under the cursor.
+  nnoremap <silent><space> :exe 'normal! za'.(foldlevel('.')?'':'l')<cr>
 
   " mouse
   map <leader>m  :set mouse=a<cr>
@@ -239,20 +250,6 @@
   let g:NERDShutUp=1
 
   let b:match_ignorecase = 1
-  " }
-
-  " ShowMarks {
-  let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  " Don't leave on by default, use :ShowMarksOn to enable
-  let g:showmarks_enable = 0
-  " For marks a-z
-  highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
-  " For marks A-Z
-  highlight ShowMarksHLu gui=bold guibg=LightRed guifg=DarkRed
-  " For all other marks
-  highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
-  " For multiple marks on the same line.
-  highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
   " }
 
   " OmniComplete {
@@ -469,13 +466,13 @@
 
   " automatically switch to absolute line numbers whenever vim loses focus
   " (this doesn't seem to work...)
-  :au FocusLost * :set number
-  :au FocusGained * :set relativenumber
+  ":au FocusLost * :set number
+  ":au FocusGained * :set relativenumber
 
   " insert mode: automatically use absolute line numbers
-  autocmd InsertEnter * :set number
+  "autocmd InsertEnter * :set number
   " command mode: automatically use relative line numbers
-  autocmd InsertLeave * :set relativenumber
+  "autocmd InsertLeave * :set relativenumber
   " }
 
   " Strip trailing whitespace {
@@ -499,6 +496,26 @@
 
   " Rails ctags {
   let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
+  " }
+  
+  " Ruby folding {
+    function! RubyFold()
+      if (exists("b:ruby_folded"))
+        return
+      endif
+      let b:ruby_folded = 1
+
+      setlocal foldenable
+      setlocal expandtab
+      setlocal foldmethod=syntax
+      execute 'silent! %foldopen!'
+      execute  'silent g/\v^\s+(def |it .+do|task |Factory |context .+do|describe .+do)/foldc'
+    endfunction
+
+    if has("autocmd")
+      "autocmd Filetype rspec :call RubyFold()
+      "autocmd Filetype ruby :call RubyFold()
+    endif
   " }
 " }
 

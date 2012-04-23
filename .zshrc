@@ -566,3 +566,5 @@ source ~/.zshrc_local
 fortune
 alias bgbg='cat ~/.fehbg >> ~/fehbgs'
 alias mem='sudo ps_mem'
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

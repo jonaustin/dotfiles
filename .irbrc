@@ -1,9 +1,9 @@
 #!/usr/bin/ruby
-require 'wirble'
-Wirble.init
-Wirble.colorize
+require 'rubygems'
+#require 'wirble'
+#Wirble.init
+#Wirble.colorize
 require 'awesome_print'
-require 'interactive_editor'
 
 # i.e. rh 'collect'
 def rh(*args); system('ri', *args); end
