@@ -147,7 +147,7 @@
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
 
-	" Shonrtcuts
+	" Shortcuts
 	" Change Working Directory to that of the current file
   "cmap cwd lcd %:p:h
 
@@ -235,6 +235,10 @@
 
   " open vimrc in split window
   nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+  " show/hide invisibles
+  map <leader>I :set list<cr>
+  map <leader>i :set nolist<cr>
 " }
 
 " Plugins {

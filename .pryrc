@@ -45,15 +45,12 @@ Pry.config.commands.import(Pry::CommandSet.new do
 end)
 
 
-
 ## Benchmarking
 # Inspired by <http://stackoverflow.com/questions/123494/whats-your-favourite-irb-trick/123834#123834>.
-
 def time(repetitions = 100, &block)
   require 'benchmark'
   Benchmark.bm{|b| b.report{repetitions.times(&block)}}
 end
-
 
 
 # Launch Pry with access to the entire Rails stack.

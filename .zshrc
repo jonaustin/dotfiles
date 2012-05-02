@@ -232,6 +232,7 @@ alias git-diff=git_diff
 alias glpo='git log --oneline --decorate'
 
 ## ruby
+alias cdstdlib="cd $MY_RUBY_HOME/lib/ruby/1.9.1"
 alias be='bundle exec'
 alias bec='bundle exec cucumber'
 alias wr='which ruby'
