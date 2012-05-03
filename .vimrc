@@ -202,7 +202,7 @@
   map <leader>bl :BlogList<cr>
 
   " remove search highlights
-  map <leader><space> :nohl<cr>
+  map <silent><leader>. :nohl<cr>
 
   """ Folding
   map <leader>f :fold<cr>
