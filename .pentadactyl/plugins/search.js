@@ -38,7 +38,7 @@ group.commands.add(["search"],
       return;
     }
 
-    var defsearch = options['defsearch'];
+    var defsearch = 'google'; //options['defsearch'];
     var engine = searchDomains[defsearch];
     if (!engine){
       var engines = [];
