@@ -61,9 +61,6 @@
 [submodule ".vim/bundle/vim-bufexplorer"]
 	path = .vim/bundle/vim-bufexplorer
 	url = http://github.com/edsono/vim-bufexplorer.git
-[submodule ".vim/bundle/vim-conque"]
-	path = .vim/bundle/vim-conque
-	url = http://github.com/rson/vim-conque.git
 [submodule ".vim/bundle/csapprox"]
 	path = .vim/bundle/csapprox
 	url = https://github.com/godlygeek/csapprox.git
