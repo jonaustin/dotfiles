@@ -568,4 +568,7 @@ fortune
 alias bgbg='cat ~/.fehbg >> ~/fehbgs'
 alias mem='sudo ps_mem'
 
+# fasd
+eval "$(fasd --init auto)"
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
