@@ -7,12 +7,15 @@ blog.vim
 *.pyo
 *.pyc
 .elinks
+.elinks/searchhist
 !.elinks/elinks.conf
 **/*log
 .config/ranger/bookmarks
 .config/ranger/history
 .config/ranger/tagged
+.config/vimprobable/cookies
 .local/share/
+.local/share/vlc/ml.xspf
 !.local/share/subtle
 .newsbeuter/cache.db
 .newsbeuter/history.search
