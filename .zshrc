@@ -391,6 +391,10 @@ function fr () { # find random file *1*
     find . -iname "*${1}*" | randline
 }
 
+function fsz () { # find files larger than <size>mb
+    find . -size +${1}
+}
+
 ###   Locate and Grep! Let's call it lg 
 lg () {
     locate $1 | grep $1

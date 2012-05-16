@@ -61,3 +61,5 @@ source! ~/.vimperatorrc.local
 
 " vim: set ft=vimperator:
 
+"allow autofocus
+"se strictfocus=*:laissez-faire
