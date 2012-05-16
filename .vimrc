@@ -239,6 +239,9 @@
   " show/hide invisibles
   map <leader>I :set list<cr>
   map <leader>i :set nolist<cr>
+
+  " yank all lines
+  map <leader>ya :%y+<cr>
 " }
 
 " Plugins {

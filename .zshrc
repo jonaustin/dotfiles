@@ -304,7 +304,7 @@ export PACMAN=pacman
 alias pi="sudo powerpill -S "
 alias pag="sudo powerpill -S "
 alias ag="sudo pacman -S "
-alias s="pacman -Ss "
+alias ss="pacman -Ss "
 alias i="pacman -Si "
 alias Q='pacman -Q | grep -i '
 alias ql="pacman -Ql "
@@ -379,7 +379,7 @@ function randlines () {
     cat ${1} | while read i; do echo $RANDOM "$i"; done | sort -n | sed 's/^[0-9]* //'
 }
 
-function f () { # find file/dir *1*
+function fn () { # find file/dir *1*
     find . -iname "*${1}*"
 }
 
@@ -567,5 +567,8 @@ source ~/.zshrc_local
 fortune
 alias bgbg='cat ~/.fehbg >> ~/fehbgs'
 alias mem='sudo ps_mem'
+
+# fasd
+eval "$(fasd --init auto)"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
