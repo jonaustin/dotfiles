@@ -98,9 +98,9 @@ highlight SpellCap                  guifg=#D0D0FF ctermfg=189 guibg=NONE ctermbg
 highlight MatchParen                guifg=#FFFFFF ctermfg=15 guibg=#005f5f ctermbg=23
 
 " jon's colors
-hi TabLine			cterm=none	ctermfg=255		ctermbg=235
-hi TabLineSel		cterm=none	ctermfg=249		ctermbg=233
-hi TabLineFill	cterm=none	ctermfg=233		ctermbg=235
+hi TabLine			cterm=none	  ctermfg=249		ctermbg=235
+hi TabLineSel		cterm=none	  ctermfg=255		ctermbg=233
+hi TabLineFill	cterm=none	  ctermfg=233		ctermbg=235
 hi StatusLine		cterm=none		ctermfg=255		ctermbg=233		guifg=#0000af	guibg=#ffffff
 hi StatusLineNC	cterm=none		ctermfg=252		ctermbg=233		guifg=#00005f guibg=#d0d0d0
 hi VertSplit		cterm=none		ctermfg=254		ctermbg=16		guifg=#000000 guibg=#eeeeee
