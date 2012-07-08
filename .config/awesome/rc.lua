@@ -7,13 +7,13 @@ require("beautiful")
 -- Notification library
 require("naughty")
 -- scratchpad (dropdown terminal)
-require('scratch')
+local scratch = require("scratch")
 -- move mouse with keyboard
 require('rodentbane')
 
 
 
--- WIDGETS {{{
+---- WIDGETS {{{
   -- mpd widget {{{
   require("awesompd/awesompd")
   musicwidget = awesompd:create() -- Create awesompd widget
@@ -60,8 +60,8 @@ require('rodentbane')
              { "", awesompd.MOUSE_SCROLL_DOWN, musicwidget:command_volume_down() },
              { "", awesompd.MOUSE_RIGHT, musicwidget:command_show_menu() } })
   musicwidget:run() -- After all configuration is done, run the widget
-  -- }}}
--- }}}
+  ---- }}}
+---- }}}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -244,13 +244,19 @@ globalkeys = awful.util.table.join(
     
   -- {{{ Applications
     awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("firefox", false) end),
-    awful.key({ modkey }, "t",    function () awful.util.spawn("thunar", false) end),
+    awful.key({ modkey }, "t",    function () awful.util.spawn("pcmanfm", false) end),
+    awful.key({ modkey, "Shift" }, "t",    function () awful.util.spawn("thunar", false) end),
     -- MPD
     awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd/mpd_status 6600", false) end),
     awful.key({ modkey, "Control" }, "d",function () awful.util.spawn("mpc -p 6600 del 0", false) end),
     awful.key({ modkey }, "n",function () awful.util.spawn_with_shell("mpc -p 6600 next; /home/jon/bin/mpd/mpd_status 6600", false) end),
     awful.key({ modkey }, "v",function () awful.util.spawn_with_shell("mpc -p 6600 prev; /home/jon/bin/mpd/mpd_status 6600", false) end),
     awful.key({ modkey }, "p",function () awful.util.spawn_with_shell("mpc -p 6600 toggle", false) end),
+    awful.key({ modkey, "Shift" }, "d",function () awful.util.spawn("/home/jon/bin/mpd/mpd_status 1100", false) end),
+    awful.key({ modkey, "Shift", "Control" }, "d",function () awful.util.spawn("mpc -p 1100 del 0", false) end),
+    awful.key({ modkey, "Shift" }, "n",function () awful.util.spawn_with_shell("mpc -p 1100 next; /home/jon/bin/mpd/mpd_status 1100", false) end),
+    awful.key({ modkey, "Shift" }, "v",function () awful.util.spawn_with_shell("mpc -p 1100 prev; /home/jon/bin/mpd/mpd_status 1100", false) end),
+    awful.key({ modkey, "Shift" }, "p",function () awful.util.spawn_with_shell("mpc -p 1100 toggle", false) end),
   -- }}}
 
   -- {{{ Multimedia keys
