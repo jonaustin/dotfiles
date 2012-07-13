@@ -8,32 +8,32 @@
 " }
 
 " Basics {
-	set nocompatible 		" must be first line
-	set background=dark     " Assume a dark background
+	set nocompatible 		                " must be first line
+	set background=dark                 " Assume a dark background
 	let mapleader = ","
-  set clipboard=unnamed       " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
-  ":set clipboard=unnamedplus  " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
+  set clipboard=unnamed               " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+  ":set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
 " }
 
 " General {
   runtime! macros/matchit.vim
-	filetype plugin indent on  	" Automatically detect file types.
-	syntax on 					        " syntax highlighting
-	set mouse=a					        " disable mouse..add =a to enable
+	filetype plugin indent on  	        " Automatically detect file types.
+	syntax on 					                " syntax highlighting
+	set mouse=a					                " disable mouse..add =a to enable
 	" not every vim is compiled with this, use the following line instead
      "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 	scriptencoding utf-8
 	set autowrite
-	set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
+	set shortmess+=filmnrxoOtT          " abbrev. of messages (avoids 'hit enter')
   set foldmethod=syntax
   set foldlevelstart=2
-	" set spell 		 	     	" spell checking on
+	" set spell 		 	     	            " spell checking on
 
 	" Setting up the directories {
-		set backup 						" backups are nice ...
-		set backupdir=$HOME/.vimbackup  " but not when they clog .
-		set directory=$HOME/.vimswap 	" Same for swap files
-		set viewdir=$HOME/.vimviews 	" same but for view files
+		set backup 						            " backups are nice ...
+		set backupdir=$HOME/.vimbackup    " but not when they clog .
+		set directory=$HOME/.vimswap 	    " Same for swap files
+		set viewdir=$HOME/.vimviews 	    " same but for view files
 
 		" Creating directories if they don't exist
 		silent execute '!mkdir -p $HOME/.vimbackup'
@@ -55,47 +55,47 @@
 	"color leo
   colo railscasts
 
-	set tabpagemax=15 				" only show 15 tabs
-	set showmode                   	" display the current mode
+	set tabpagemax=15 				          " only show 15 tabs
+	set showmode                   	    " display the current mode
 
-	set cursorline  				" highlight current line
-	hi cursorline guibg=#333333 	" highlight bg color of current line
-	hi CursorColumn guibg=#333333   " highlight cursor
+	set cursorline  				            " highlight current line
+	hi cursorline guibg=#333333 	      " highlight bg color of current line
+	hi CursorColumn guibg=#333333       " highlight cursor
 
 	if has('cmdline_info')
-		set ruler                  	" show the ruler
+		set ruler                  	      " show the ruler
 		set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-		set showcmd                	" show partial commands in status line and
-									" selected characters/lines in visual mode
+		set showcmd                	      " show partial commands in status line and
+									                    " selected characters/lines in visual mode
 	endif
 
 	if has('statusline')
-		set laststatus=1           	" show statusline only if there are > 1 windows
+		set laststatus=1           	      " show statusline only if there are > 1 windows
 		" Use the commented line if fugitive isn't installed
       "set statusline=%<%f\ %=\:\b%n%y%m%r%w\ %l,%c%V\ %P " a statusline, also on steroids
 		set statusline=%<%f\ %h%m%r%y%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 	endif
 
-	set backspace=indent,eol,start 	" backspace for dummys
-	set linespace=0 				" No extra spaces between rows
-	set showmatch                  	" show matching brackets/parenthesis
-	set incsearch 					" find as you type search
-	set hlsearch 					" highlight search terms
-	set winminheight=0 				" windows can be 0 line high
-	set ignorecase 					" case insensitive search
-	set smartcase 					" become temporarilly case sensitive when any uppercase letters present in search string
-	set wildmenu 					" show list instead of just completing
-	set wildmode=list:longest,full 	" comand <Tab> completion, list matches, then longest common part, then all.
-	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to previous/next line
-	set scrolljump=5 				" lines to scroll when cursor leaves screen
-	set scrolloff=15 				" minimum lines to keep above and below cursor
-	set foldenable  				" auto fold code
-	"set gdefault					" the /g flag on :s substitutions by default
-  "set relativenumber    " line numbers relative to current position
-	set nu 							" Line numbers on
-  set undofile          " undo even after closing and re-opening a file!
+	set backspace=indent,eol,start 	   " backspace for dummys
+	set linespace=0 				           " No extra spaces between rows
+	set showmatch                  	   " show matching brackets/parenthesis
+	set incsearch 					           " find as you type search
+	set hlsearch 					             " highlight search terms
+	set winminheight=0 				         " windows can be 0 line high
+	set ignorecase 					           " case insensitive search
+	set smartcase 					           " become temporarilly case sensitive when any uppercase letters present in search string
+	set wildmenu 					             " show list instead of just completing
+	set wildmode=list:longest,full 	   " comand <Tab> completion, list matches, then longest common part, then all.
+	set whichwrap=b,s,h,l,<,>,[,]	     " backspace and cursor keys wrap to previous/next line
+	set scrolljump=5 				           " lines to scroll when cursor leaves screen
+	set scrolloff=15 				           " minimum lines to keep above and below cursor
+	set foldenable  				           " auto fold code
+	"set gdefault					             " the /g flag on :s substitutions by default
+  "set relativenumber                " line numbers relative to current position
+	set nu 							               " Line numbers on
+  set undofile                       " undo even after closing and re-opening a file!
   set undodir=$HOME/.vimundo 
-  set ttyfast           " assume fast connection (smoother redraw)
+  set ttyfast                        " assume fast connection (smoother redraw)
 
 " }
 
@@ -106,12 +106,12 @@
   set softtabstop=2                  " backspace will go back 2 chars instead of 1 (i.e. act like its a tab)
 	set expandtab 	       	  	       " tabs should be spaces for sanity
 	set tabstop=2 					           " an indentation every 2 columns
-  set matchpairs+=<:>               " match, to be used with %
+  set matchpairs+=<:>                " match, to be used with %
 	set pastetoggle=<F10>          	   " pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/    " auto format comment blocks
   set encoding=utf-8                 " no junk chars
   set textwidth=79
-"  set colorcolumn=85                 " show vertical colored column
+"  set colorcolumn=85                " show vertical colored column
   set formatoptions=qrn1             " q: Allow formatting of comments with gq
                                      " r: Automatically insert the current comment leader after hitting <Enter> in Insert mode.
                                      " n: When formatting text, recognize numbered lists.
@@ -171,10 +171,6 @@
 
 	" TagList
 	"map <C-t> :TlistToggle<cr>
-
-	" Conque Bash
-	map <leader>bb  :ConqueTerm bash<cr>
-	map <leader>bsp :ConqueTermSplit bash<cr>
 
   " quit, write
   map <leader>q   :q<cr>
