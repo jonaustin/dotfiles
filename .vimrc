@@ -71,7 +71,7 @@
 	endif
 
 	if has('statusline')
-		set laststatus=1           	      " show statusline only if there are > 1 windows
+		set laststatus=2           	      " show statusline always
 		" Use the commented line if fugitive isn't installed
       "set statusline=%<%f\ %=\:\b%n%y%m%r%w\ %l,%c%V\ %P " a statusline, also on steroids
 		set statusline=%<%f\ %h%m%r%y%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
