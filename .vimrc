@@ -28,6 +28,7 @@
   set foldmethod=syntax
   set foldlevelstart=2
 	" set spell 		 	     	            " spell checking on
+  set vb                              " visual bell, no beeping
 
 	" Setting up the directories {
 		set backup 						            " backups are nice ...
