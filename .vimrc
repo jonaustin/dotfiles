@@ -89,7 +89,7 @@
 	set wildmode=list:longest,full 	   " comand <Tab> completion, list matches, then longest common part, then all.
 	set whichwrap=b,s,h,l,<,>,[,]	     " backspace and cursor keys wrap to previous/next line
 	set scrolljump=5 				           " lines to scroll when cursor leaves screen
-	set scrolloff=15 				           " minimum lines to keep above and below cursor
+	set scrolloff=10 				           " minimum lines to keep above and below cursor
 	set foldenable  				           " auto fold code
 	"set gdefault					             " the /g flag on :s substitutions by default
   "set relativenumber                " line numbers relative to current position
@@ -109,6 +109,8 @@
 	set tabstop=2 					           " an indentation every 2 columns
   set matchpairs+=<:>                " match, to be used with %
 	set pastetoggle=<F10>          	   " pastetoggle (sane indentation on pastes)
+  " Toggle paste mode
+  nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 	"set comments=sl:/*,mb:*,elx:*/    " auto format comment blocks
   set encoding=utf-8                 " no junk chars
   set textwidth=79
@@ -122,9 +124,6 @@
 " }
 
 " Key Mappings {
-
-  " source vimrc
-  nnoremap <leader>so :source ~/.vimrc<cr>
 
 	" Easier moving in tabs and windows
 	map <C-J> <C-W>j<C-W>_
@@ -239,6 +238,21 @@
 
   " yank all lines
   map <leader>ya :%y+<cr>
+
+  " The following beast is something i didn't write... it will return the
+  " syntax highlighting group that the current 'thing' under the cursor
+  " belongs to -- very useful for figuring out what to change as far as
+  " syntax highlighting goes.
+  nmap <silent> <leader>qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+  " Edit the vimrc file
+  nmap <silent> ,ev :e $MYVIMRC<CR>
+  nmap <silent> ,sv :so $MYVIMRC<CR>
+
+
+  " Make shift-insert work like in Xterm
+  map <S-Insert> <MiddleMouse>
+  map! <S-Insert> <MiddleMouse>
 " }
 
 " Plugins {
