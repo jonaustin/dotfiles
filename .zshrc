@@ -22,8 +22,8 @@ bindkey '^[[B' down-line-or-search
 
 # }}}
 # Exports {{{ 
-export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/home/jon/bin:/usr/local/bin:/usr/lib/surfraw:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash:/home/jon/bin/mpd:/home/jon/bin/subtle"
-export NODE_PATH=/usr/lib/node_modules
+export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/home/jon/bin:/usr/local/bin:/usr/lib/surfraw:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash:/home/jon/bin/mpd:/home/jon/bin/subtle:/home/jon/bin/bin"
+export NODE_PATH=/home/jon/bin/lib/node_modules
 
 export EDITOR='vim'
 export BROWSER='firefox'
@@ -576,3 +576,6 @@ alias mem='sudo ps_mem'
 eval "$(fasd --init auto)"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# node version manager
+. ~/code/nodejs/nvm/nvm.sh
