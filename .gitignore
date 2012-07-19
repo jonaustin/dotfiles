@@ -14,8 +14,9 @@ blog.vim
 .config/ranger/history
 .config/ranger/tagged
 .config/vimprobable/cookies
-.local/share/
-.local/share/vlc/ml.xspf
+.config/vimprobable/closed
+.local/share/**/*
+.local/share/*
 !.local/share/subtle
 .newsbeuter/cache.db
 .newsbeuter/history.search
