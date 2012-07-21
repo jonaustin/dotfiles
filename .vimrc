@@ -77,7 +77,7 @@
 		set statusline=%<%f\ %h%m%r%y%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 	endif
 
-	set backspace=indent,eol,start 	   " backspace for dummys
+	set backspace=indent,eol,start 	   " Allow backspacing over indent, eol, and the start of an insert
 	set linespace=0 				           " No extra spaces between rows
 	set showmatch                  	   " show matching brackets/parenthesis
 	set incsearch 					           " find as you type search
@@ -97,6 +97,7 @@
   set undofile                       " undo even after closing and re-opening a file!
   set undodir=$HOME/.vimundo 
   set ttyfast                        " assume fast connection (smoother redraw)
+  "set debug=msg                     " makes it so that error messages don't disappear after one second on startup.
 
 " }
 
@@ -113,7 +114,7 @@
   nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 	"set comments=sl:/*,mb:*,elx:*/    " auto format comment blocks
   set encoding=utf-8                 " no junk chars
-  set textwidth=79
+  set textwidth=80
 "  set colorcolumn=85                " show vertical colored column
   set formatoptions=qrn1             " q: Allow formatting of comments with gq
                                      " r: Automatically insert the current comment leader after hitting <Enter> in Insert mode.
