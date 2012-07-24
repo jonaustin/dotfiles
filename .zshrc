@@ -144,6 +144,7 @@ alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 ### MPD
 alias m='ncmpcpp -p 6600' # mpd alsa
 alias toptracks='toptracks.rb'
+alias fixmpd="sudo chown -R jon.users /var/run/mpd*; sudo chown -R jon.users /var/log/mpd*; start mpd{,_test,_all}"
 
 ## Other
 alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
@@ -310,7 +311,7 @@ alias Q='pacman -Q | grep -i '
 alias ql="pacman -Ql "
 alias pq="pacman -Q|grep -i "
 alias r="sudo pacman -R "
-alias agu='sudo pacman -Syu; yaourt -Syu'
+alias agu='sudo pacman -Syu'
 alias pagu="sudo powerpill -Syu"
 alias psizes="LANG=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
 alias redownload_all='for n in `pacman -Q`; do sudo pacman -Sw $n; done'
