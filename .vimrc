@@ -28,7 +28,7 @@
   set foldmethod=syntax
   set foldlevelstart=2
 	" set spell 		 	     	            " spell checking on
-  set vb                              " visual bell, no beeping
+  "set vb                              " visual bell, no beeping - disable - causes weird crap-glyphs in gnome-terminal
 
 	" Setting up the directories {
 		set backup 						            " backups are nice ...
