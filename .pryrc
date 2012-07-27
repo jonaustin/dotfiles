@@ -1,4 +1,7 @@
 # vim: ft=ruby
+
+Pry.config.prompt = Pry::NAV_PROMPT
+
 # Load plugins (only those I whitelist)
 #Pry.config.should_load_plugins = false
 #Pry.plugins['nav'].activate!
