@@ -55,7 +55,7 @@ map <leader>s :stop
 
 colo zenburn
 
-se defsearch=duckduckgo
+se defsearch=google
 
 source! ~/.vimperatorrc.local
 

@@ -161,6 +161,9 @@
   noremap <leader>o :only<cr>
   noremap <leader>O :only<cr>:tabonly<cr>
 
+  " open ctag in new tab
+  nmap <leader>ct <C-w><C-]><C-w>T
+
   " buffers
     " buffer next
   :noremap <leader>bn :bn<cr>
@@ -171,7 +174,7 @@
 	map <S-q> :NERDTreeToggle<cr>
 
 	" TagList
-	"map <C-t> :TlistToggle<cr>
+	map <leader>tl :TlistToggle<cr>
 
   " quit, write
   map <leader>q   :q<cr>
