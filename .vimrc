@@ -128,10 +128,15 @@
 
 	" Easier moving in tabs and windows
 	map <C-J> <C-W>j<C-W>_
-    " for some odd reason, its mapping <S[hift]-C[trl]-j> to <C-j> ...?
-  "map <S-C-j> <C-W>j :res 35<cr>
+  " resize horizontal split windows
+  map <leader>j <C-W>10+
+	map <leader>k <C-W>10-
+  " resize vertical split window
+  nmap <leader>h <C-W>10>
+  nmap <leader>l <C-W>10<
+
+  " move split window context
 	map <C-K> <C-W>k<C-W>_
-	"map <S-C-k> <C-W>k :res 35<cr>
 	map <C-L> <C-W>l<C-W>_
 	map <C-H> <C-W>h<C-W>_
 	map <C-K> <C-W>k<C-W>_
