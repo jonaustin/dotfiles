@@ -26,6 +26,7 @@ ln -s configs/.pryrc
 ln -s configs/.tmux.conf
 ln -s configs/.caprc
 ln -s configs/.difmplayrc
+ln -s ${HOME}/configs/other/snippets .vim/bundle/snipmate/
 
 sudo ln -s ${HOME}/configs/usr/share/fortune/* /usr/share/fortune/
 
