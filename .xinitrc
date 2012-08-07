@@ -29,7 +29,7 @@ exec ck-launch-session awesome
 
 # autocutsel - synchronizes the two copy/paste buffers mainly used by X applications
 ## unfortunately breaks Synergy
-autocutsel -fork &
+#autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
 #exec xterm
