@@ -22,7 +22,7 @@ bindkey '^[[B' down-line-or-search
 
 # }}}
 # Exports {{{ 
-export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/home/jon/bin:/usr/local/bin:/usr/lib/surfraw:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash:/home/jon/bin/mpd:/home/jon/bin/subtle:/home/jon/bin/bin"
+export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/home/jon/bin:/usr/local/bin:/usr/lib/surfraw:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash:/home/jon/bin/mpd:/home/jon/bin/subtle:/home/jon/bin/bin:/home/jon/node_modules/.bin"
 export NODE_PATH=/home/jon/bin/lib/node_modules
 
 export EDITOR='vim'
@@ -153,7 +153,6 @@ alias cm='chmod'
 alias sv='sudo vim'
 alias vrc='vim ~/.bashrc'
 alias vlrc='vim ~/.bashrc_local'
-alias v='vr'
 alias vvc='vim ~/.vimrc'
 alias vsc='vim ~/.config/subtle/subtle.rb'
 alias vac='vim ~/.config/awesome/rc.lua'
@@ -192,7 +191,7 @@ alias sfs='ssh jon@frak'
 alias sss='ssh jon@sam'
 alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
 alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
-alias fsfs='sshfs -o reconnect -o allow_other jon@frak:/ /media/frakssh'
+alias fsfs='sudo umount /media/frakssh; sshfs -o reconnect -o allow_other jon@frak:/ /media/frakssh'
 alias ssfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
 # queries
 alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is to just use `host <ip>`
@@ -295,7 +294,7 @@ alias fmsx="cd $fmsx"
 alias fmmsx="cd $fmmsx"
 kindle=/media/Kindle/DK_Documents//
 # network dirs
-alias newz='cd /media/media/filez/usenet/newzbin/'
+alias newz='cd /media/media/ext/filez/usenet/newzbin/'
 
 ## Coding
 
@@ -575,6 +574,9 @@ alias mem='sudo ps_mem'
 
 # fasd
 eval "$(fasd --init auto)"
+alias c='fasd_cd -d'
+alias v='f -e vim' # quick opening files with vim
+alias o='a -e xdg-open' # quick opening files with xdg-open
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
