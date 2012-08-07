@@ -301,17 +301,18 @@ alias newz='cd /media/media/ext/filez/usenet/newzbin/'
 ### Arch ###
 #export PACMAN=pacman-color
 export PACMAN=pacman
-alias pi="sudo powerpill -S "
-alias pag="sudo powerpill -S "
 alias ag="sudo pacman -S "
+  alias pg="sudo pacman -S "
 alias ss="pacman -Ss "
+  alias ps="pacman -Ss "
 alias i="pacman -Si "
 alias Q='pacman -Q | grep -i '
 alias ql="pacman -Ql "
 alias pq="pacman -Q|grep -i "
 alias r="sudo pacman -R "
+alias pac='pacman -c' # autoclean
 alias agu='sudo pacman -Syu'
-alias pagu="sudo powerpill -Syu"
+alias porphans='pacman -Qdt' # search for orphaned packages
 alias psizes="LANG=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
 alias redownload_all='for n in `pacman -Q`; do sudo pacman -Sw $n; done'
 
@@ -320,9 +321,6 @@ alias y='packer $1'
 alias show='packer -Si $1'
 alias yg="packer -G" #just fetch PKGBUILD
 alias yu='packer -Syu --aur'
-alias yac='packer -C' # autoclean
-alias yacc='packer -Cc' # clean and remove all archived packageiiis
-alias yaqt='packer -Qdt' # search for orphaned packages
 
 # urxvt
 alias fsize="smallprompt; printf '\33]50;%s%d\007' 'xft:Terminus:pixelsize='"
