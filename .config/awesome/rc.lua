@@ -269,8 +269,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "s",function () awful.util.spawn("scrot", false) end),
 
   -- {{{ Multimedia keys
-    awful.key({}, "#107", function () awful.util.spawn("/home/jon/bin/softer", false) end),
-    awful.key({}, "#78", function () awful.util.spawn("/home/jon/bin/louder", false) end),
+    awful.key({}, "F21", function () awful.util.spawn("/home/jon/bin/softer", false) end),
+    awful.key({}, "F22", function () awful.util.spawn("/home/jon/bin/louder", false) end),
   -- }}}
     
   -- {{{ Wibox
