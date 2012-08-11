@@ -576,3 +576,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # node version manager
 . ~/code/nodejs/nvm/nvm.sh
+
+# unalias
+unalias ss # thin web server creates this...
