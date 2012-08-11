@@ -1,9 +1,49 @@
 #!/usr/bin/ruby
-require 'rubygems'
-#require 'wirble'
-#Wirble.init
-#Wirble.colorize
-require 'awesome_print'
+require 'rubygems' unless defined? Gem # rubygems is only needed in 1.8
+
+def unbundled_require(gem)
+  loaded = false
+  if defined?(::Bundler)
+    Gem.path.each do |gems_path|
+      gem_path = Dir.glob("#{gems_path}/gems/#{gem}*").last
+      unless gem_path.nil?
+        $LOAD_PATH << "#{gem_path}/lib"
+        require gem
+        loaded = true
+      end
+    end
+  else
+    require gem
+    loaded = true
+  end
+  raise(LoadError, "couldn't find #{gem}") unless loaded
+  loaded
+end
+
+def load_gem(gem, &block)
+  begin
+    if unbundled_require gem
+      yield if block_given?
+    end
+  rescue Exception => err
+    warn "Couldn't load #{gem}: #{err}"
+  end
+
+end
+
+# Highlighting and other features
+load_gem 'wirble' do
+  Wirble.init
+  Wirble.colorize
+end
+
+# Improved formatting for objects
+load_gem 'awesome_print'
+
+# Improved formatting for collections
+load_gem 'hirb' do
+  Hirb.enable
+end
 
 # i.e. rh 'collect'
 def rh(*args); system('ri', *args); end
