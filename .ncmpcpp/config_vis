@@ -25,8 +25,8 @@ song_status_format = "{%a - }{%t - }{%b}"
 #progressbar_look = "|> "
 progressbar_look = "─╼ "
 titles_visibility = "no"
-header_visibility = "yes"
-statusbar_visibility = "yes" 
+header_visibility = "no"
+statusbar_visibility = "no" 
 
 # Browser
 browser_playlist_prefix = "$2plist »$9 "
@@ -43,9 +43,9 @@ color1 = "default"
 color2 = "green"
 main_window_highlight_color = "red"
 progressbar_color = "black"
-statusbar_color = "blue"
+statusbar_color = "black"
 active_column_color = "red"
-visualizer_color = "cyan"
+visualizer_color = "red"
 
 # Others
 song_window_title_format = "MPD: {%a > }{%t}{ [%b{ Disc %d}]}|{%f}"

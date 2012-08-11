@@ -143,6 +143,7 @@ alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 
 ### MPD
 alias m='ncmpcpp -p 6600' # mpd alsa
+alias mvis='ncmpcpp -c ~/.ncmpcpp/config_vis'
 alias toptracks='toptracks.rb'
 alias fixmpd="sudo chown -R jon.users /var/run/mpd*; sudo chown -R jon.users /var/log/mpd*; start mpd{,_test,_all}"
 
