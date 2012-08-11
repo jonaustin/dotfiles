@@ -302,9 +302,7 @@ alias newz='cd /media/media/ext/filez/usenet/newzbin/'
 #export PACMAN=pacman-color
 export PACMAN=pacman
 alias ag="sudo pacman -S "
-  alias pg="sudo pacman -S "
-alias ss="pacman -Ss "
-  alias ps="pacman -Ss "
+alias as="pacman -Ss "
 alias i="pacman -Si "
 alias Q='pacman -Q | grep -i '
 alias ql="pacman -Ql "
@@ -555,9 +553,7 @@ function start_agent {
 if [ -f "${SSH_ENV}" ]; then
   . "${SSH_ENV}" > /dev/null
   #ps ${SSH_AGENT_PID}
-  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-  start_agent;
-}
+  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null ||  start_agent;
 else
   start_agent;
 fi
