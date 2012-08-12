@@ -29,7 +29,8 @@
   set foldmethod=syntax
   set foldlevelstart=2
 	" set spell 		 	     	            " spell checking on
-  "set vb                              " visual bell, no beeping - disable - causes weird crap-glyphs in gnome-terminal
+  "set vb                             " visual bell, no beeping - disable - causes weird crap-glyphs in gnome-terminal
+  set synmaxcol=1024                  " Syntax coloring lines that are too long just slows down the world
 
 	" Setting up the directories {
 		set backup 						            " backups are nice ...
