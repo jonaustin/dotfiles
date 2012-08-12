@@ -11,6 +11,11 @@ Xft.rgba:      rgb
 
 
 ! === URxvt
+! Order matters here
+URxvt.intensityStyles: true
+URxvt.matcher.rend.0: Uline Bold fg8
+URxvt.skipBuiltinGlyphs: true
+URxvt.xftAntialias: true
 
 ! === Transparency ====================================
 
