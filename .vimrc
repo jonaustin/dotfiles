@@ -13,7 +13,6 @@
 	let mapleader = ","
   set clipboard=unnamed               " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   ":set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
-  set lazyredraw                      " fix horrible slowdown issues when moving cursor with syntax on
 " }
 
 " General {
@@ -30,6 +29,10 @@
   set foldlevelstart=2
 	" set spell 		 	     	            " spell checking on
   "set vb                             " visual bell, no beeping - disable - causes weird crap-glyphs in gnome-terminal
+
+  " Speed
+  set lazyredraw                      " fix horrible slowdown issues when moving cursor with syntax on
+  set ttyfast                         " assume fast connection (smoother redraw)
   set synmaxcol=1024                  " Syntax coloring lines that are too long just slows down the world
 
 	" Setting up the directories {
@@ -98,7 +101,6 @@
 	set nu 							               " Line numbers on
   set undofile                       " undo even after closing and re-opening a file!
   set undodir=$HOME/.vimundo 
-  set ttyfast                        " assume fast connection (smoother redraw)
   "set debug=msg                     " makes it so that error messages don't disappear after one second on startup.
 
 " }
