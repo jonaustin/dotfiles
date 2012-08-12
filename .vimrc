@@ -13,6 +13,7 @@
 	let mapleader = ","
   set clipboard=unnamed               " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   ":set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
+  set lazyredraw                      " fix horrible slowdown issues when moving cursor with syntax on
 " }
 
 " General {

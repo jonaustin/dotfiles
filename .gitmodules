@@ -100,3 +100,9 @@
 [submodule "/.vim/bundle/syntastic"]
   path = .vim/bundle/syntastic
   url = http://github.com/scrooloose/syntastic.git
+[submodule ".vim/bundle/blockle"]
+	path = .vim/bundle/blockle
+	url = https://github.com/jgdavey/vim-blockle.git
+[submodule ".vim/bundle/vim-rake"]
+	path = .vim/bundle/vim-rake
+	url = git://github.com/tpope/vim-rake.git
