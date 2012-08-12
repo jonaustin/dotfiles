@@ -27,6 +27,7 @@ ln -s configs/.tmux.conf
 ln -s configs/.caprc
 ln -s configs/.difmplayrc
 ln -s ${HOME}/configs/other/snippets .vim/bundle/snipmate/
+ln -s configs/.ackrc
 
 sudo ln -s ${HOME}/configs/usr/share/fortune/* /usr/share/fortune/
 
