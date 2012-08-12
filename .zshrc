@@ -11,7 +11,7 @@ export ZSH_THEME="bira"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github vi-mode rails gem bundler ruby rake)
+plugins=(git github vi-mode rails gem bundler ruby rake node npm)
 
 source $ZSH/oh-my-zsh.sh
 # }}}
