@@ -166,7 +166,7 @@ alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
 alias lsfuncbody='declare -f'
 alias lsfunc='declare -F' 
 alias xm='/home/jon/.xmodmap'
-alias reset='reset; v'
+alias reset='reset; vr'
 alias fdays='find . -mtime '
 alias loci='locate -i'
 alias acka='ack -air '
@@ -567,7 +567,7 @@ alias bgbg='cat ~/.fehbg >> ~/fehbgs'
 alias mem='sudo ps_mem'
 
 # fasd
-eval "$(fasd --init auto)"
+eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
 alias c='fasd_cd -d'
 alias v='f -e vim' # quick opening files with vim
 alias o='a -e xdg-open' # quick opening files with xdg-open

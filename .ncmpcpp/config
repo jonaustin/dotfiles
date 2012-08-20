@@ -7,7 +7,7 @@ visualizer_output_name = "fifo"
 visualizer_type = "wave" (spectrum/wave)
 
 # Playlist
-song_columns_list_format = "$L(9)[blue]{l} (20)[red]{a} (30)[green]{b}$R(20)[cyan]{t}"
+song_columns_list_format = "$L(12)[blue]{l} (20)[red]{a} (30)[green]{b}$R(20)[cyan]{t}"
 now_playing_prefix = "$b"
 #now_playing_subfix = "/$b"
 playlist_display_mode = "columns" (classic/columns)

@@ -156,6 +156,9 @@
 
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
+  " yank all lines
+  map <leader>ya :%y+<cr>
+
 
 	" Shortcuts
 	" Change Working Directory to that of the current file
@@ -248,9 +251,6 @@
   " show/hide invisibles
   map <leader>I :set list<cr>
   map <leader>i :set nolist<cr>
-
-  " yank all lines
-  map <leader>ya :%y+<cr>
 
   " The following beast is something i didn't write... it will return the
   " syntax highlighting group that the current 'thing' under the cursor
