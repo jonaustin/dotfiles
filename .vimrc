@@ -130,6 +130,12 @@
 
 " Key Mappings {
 
+  " Aliases {
+  :command Wq wq
+  :command WQ wq
+  :command W w
+  "}
+
 	" Easier moving in tabs and windows
 	map <C-J> <C-W>j<C-W>_
   " resize horizontal split windows
