@@ -131,9 +131,10 @@
 " Key Mappings {
 
   " Aliases {
-  :command Wq wq
-  :command WQ wq
-  :command W w
+  :command! Wq wq
+  :command! WQ wq
+  :command! W w
+  :command! Q q
   "}
 
 	" Easier moving in tabs and windows
@@ -246,7 +247,10 @@
   vnoremap <tab> %
 
   " get cmd mode with ;
-  nnoremap ; :
+  "nnoremap ; :
+
+  " unfold with one hand
+  nnoremap ;; zR
 
   " remove trailing whitespace
   nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -360,7 +364,11 @@
   " Gundo {
   nnoremap <S-U> :GundoToggle<cr>
   " }
-" }
+
+  " Fugitive {
+  nnoremap <leader>gb :Gblame<cr>
+  nnoremap <leader>gd :Gdiff<cr>
+  " }
 
 " Various {
   if has("autocmd")
