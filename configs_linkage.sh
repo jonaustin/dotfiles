@@ -29,6 +29,7 @@ ln -s configs/.difmplayrc
 ln -s ${HOME}/configs/other/snippets .vim/bundle/snipmate/
 ln -s configs/.ackrc
 ln -s configs/.oh-my-zsh/themes/jon.zsh-theme .oh-my-zsh/themes/
+ln -s configs/.pws
 
 sudo ln -s ${HOME}/configs/usr/share/fortune/* /usr/share/fortune/
 
