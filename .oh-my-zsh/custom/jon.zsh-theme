@@ -15,7 +15,7 @@ local git_branch='$(git_prompt_info)%{$reset_color%}'
 
 
 # local time, color coded by last return code
-local time_enabled="%(?.%{$fg[green]%}.%{$fg[red]%})%t%{$reset_color%}"
+local time_enabled="%(?.%{$fg[yellow]%}.%{$fg[red]%})%t%{$reset_color%}"
 local time_disabled="%{$fg[green]%}%*%{$reset_color%}"
 local time=$time_enabled
 
