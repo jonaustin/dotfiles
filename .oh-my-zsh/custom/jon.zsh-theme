@@ -11,7 +11,7 @@ else
     rvm_ruby='%{$fg[red]%}‹$(rbenv version | sed -e "s/ (set.*$//")›%{$reset_color%}'
   fi
 fi
-local git_branch='$(git_prompt_info)%{$reset_color%}'
+local git_branch='$(git_prompt_info)%{$reset_color%}$(git_prompt_status)%{$reset_color%}'
 
 
 # local time, color coded by last return code
@@ -24,7 +24,7 @@ PROMPT="╭─${user_host} ${current_dir} ${rvm_ruby} ${git_branch}
 ╰─%B$%b "
 
 # The right-hand prompt
-RPS1='${time} %{$fg[magenta]%}$(git_prompt_info)%{$reset_color%}$(git_prompt_status)%{$reset_color%}'
+RPS1='${time} %{$fg[magenta]%}%{$reset_color%}'
 #RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}‹"
