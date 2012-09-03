@@ -4,16 +4,20 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="bira"
+#export ZSH_THEME="bira"
+#export ZSH_THEME="wedisagree"
+export ZSH_THEME="jon"
+
 
 # Uncomment following line if you want to disable autosetting terminal title.
 # export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github vi-mode rails gem bundler ruby rake node npm)
+plugins=(git github vi-mode rails gem ruby rake node npm)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.zsh/rake.zsh
 # }}}
 # Options {{{
 unsetopt beep
@@ -562,7 +566,7 @@ unsetopt correctall
 
 source ~/.zshrc_local
 
-fortune
+#fortune
 alias bgbg='cat ~/.fehbg >> ~/fehbgs'
 alias mem='sudo ps_mem'
 
@@ -578,4 +582,4 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 . ~/code/nodejs/nvm/nvm.sh
 
 # unalias
-unalias ss # thin web server creates this...
+#unalias ss # thin web server creates this...
