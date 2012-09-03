@@ -152,6 +152,8 @@ alias fixmpd="sudo chown -R jon.users /var/run/mpd*; sudo chown -R jon.users /va
 
 ## Other
 alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
+alias aunpackallr='for n in *rar; do aunpack $n; done'
+alias aunpackallz='for n in *zip; do aunpack $n; done'
 alias rmspace="prename 's/ /_/g' *"
 alias cm='chmod'
 alias sv='sudo vim'

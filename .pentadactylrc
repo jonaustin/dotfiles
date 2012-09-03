@@ -45,7 +45,7 @@ set cookielifetime=session
 " don't accept 3rd party (e.g. usually tracking) cookies
 set cookieaccept=samesite
 
-set mapleader=,
+"set mapleader=,
 
 " Mappings
 map gb :back<cr>
