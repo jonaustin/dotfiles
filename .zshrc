@@ -574,6 +574,7 @@ alias mem='sudo ps_mem'
 
 # fasd
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
+alias f='fasd -f'        # file
 alias c='fasd_cd -d'
 alias v='f -e vim' # quick opening files with vim
 alias o='a -e xdg-open' # quick opening files with xdg-open
