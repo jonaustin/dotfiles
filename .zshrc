@@ -30,6 +30,7 @@ export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/home/jon/bin
 export NODE_PATH=/home/jon/bin/lib/node_modules
 
 export EDITOR='vim'
+export SHELL='zsh'
 export BROWSER='firefox'
 export PAGER='less'
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R' # --LINE-NUMBERS --quit-if-one-screen' # -R for less coloring with source-highlight (external app)
@@ -544,6 +545,8 @@ roll ()
 # initializers
 ## rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+## tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # ssh-agent
 SSH_ENV="$HOME/.ssh/environment"
