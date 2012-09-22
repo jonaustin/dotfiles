@@ -24,3 +24,4 @@ blog.vim
 .ncmpcpp
 *.un~
 .fehbg
+.zsh/zshrc_local
