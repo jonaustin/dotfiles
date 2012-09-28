@@ -12,10 +12,10 @@ export ZSH_THEME="jon"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git github vi-mode rails gem ruby rake node npm)
 
-unsetopt correctall
-
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
+
+unsetopt correctall
 
 ## source files
 source ~/.zsh/functions.sh
