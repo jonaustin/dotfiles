@@ -194,3 +194,13 @@ roll()
     *.rar) shift && rar $FILE $* ;;
   esac
 }
+
+# simple centered notification
+osd_cat2() {
+  echo -e "$1" | osd_cat -f '-*-terminus-*-*-*-*-24-*-*-*-*-*-*-*' -p middle -A center;
+}
+
+# timed (minute) notification
+tosd() {
+  sleep $1; osd_cat2 $2;
+}

@@ -279,3 +279,4 @@ alias tmat='tmux attach -t '
 alias bgbg='cat ~/.fehbg >> ~/fehbgs'
 alias mem='sudo ps_mem'
 
+alias teaosd='tosd 2.5m "============================\nYour Tea is Ready\n============================"'
