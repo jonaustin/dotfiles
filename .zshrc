@@ -10,7 +10,7 @@ export ZSH_THEME="jon"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github vi-mode rails gem ruby rake node npm)
+plugins=(git github rails gem ruby rake node npm)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
@@ -28,6 +28,7 @@ bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 ulimit -S -c 0 # Don't want any coredumps
 stty -ixon # disable ^S/^Q flow control 
+set -o vi
 # }}}
 
 # Exports {{{ 
