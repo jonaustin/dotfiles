@@ -273,7 +273,7 @@ alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:/home/j
 
 # tmux
 alias tma='tmux attach'
-alias tmat='tmux attach -t '
+alias tmat='tmux attach -t'
 
 # unorganized
 alias bgbg='cat ~/.fehbg >> ~/fehbgs'
