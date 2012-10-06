@@ -24,11 +24,11 @@ source ~/.zsh/aliases.sh
 
 # Shell init {{{
 unsetopt beep
+set -o vi
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 ulimit -S -c 0 # Don't want any coredumps
 stty -ixon # disable ^S/^Q flow control 
-set -o vi
 # }}}
 
 # Exports {{{ 
