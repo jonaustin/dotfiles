@@ -40,11 +40,6 @@ end
 # Improved formatting for objects
 load_gem 'awesome_print'
 
-# Improved formatting for collections
-load_gem 'hirb' do
-  Hirb.enable
-end
-
 # i.e. rh 'collect'
 def rh(*args); system('ri', *args); end
 
