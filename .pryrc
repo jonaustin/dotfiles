@@ -75,7 +75,7 @@ if File.exist?(rails) && ENV['SKIP_RAILS'].nil?
   end
 
   # always display activerecord sql on stdout
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  ActiveRecord::Base.logger = Logger.new(STDOUT) if defined? ActiveRecord
 end
 
 class Object
