@@ -13,6 +13,8 @@ ln -s configs/.inputrc
 ln -s configs/.elinks/ 
 ln -s configs/.gemrc 
 ln -s configs/.irbrc 
+ln -s configs/.pryrc
+ln -s configs/.railsrc
 ln -s configs/.ncmpcpp/ 
 ln -s configs/.rtorrent.rc 
 ln -s configs/.xinitrc 
@@ -21,16 +23,15 @@ ln -s configs/.xmodmap
 ln -s configs/.fehbg
 ln -s configs/.newsbeuter
 ln -s configs/.oh-my-zsh
-ln -s configs/.zshrc
-ln -s configs/.pryrc
 ln -s configs/.tmux.conf
 ln -s configs/.caprc
 ln -s configs/.difmplayrc
 ln -s ${HOME}/configs/other/snippets .vim/bundle/snipmate/
 ln -s configs/.ackrc
 ln -s configs/.pws
-ln -s ${HOME}/configs/.oh-my-zsh/custom/jon.zsh-theme .oh-my-zsh/custom/
+ln -s configs/.zshrc
 ln -s configs/.zsh
+ln -s ${HOME}/configs/.oh-my-zsh/custom/jon.zsh-theme .oh-my-zsh/custom/
 
 sudo ln -s ${HOME}/configs/usr/share/fortune/* /usr/share/fortune/
 
