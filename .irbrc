@@ -104,6 +104,14 @@ if ENV['RAILS_ENV']
   end
 end
 
+# Use Pry everywhere
+# http://lucapette.com/pry/pry-everywhere/
+require "rubygems"
+require 'pry'
+Pry.start
+exit
+
+
 #require 'irbtools'
 #require 'irbtools/more' # the /more just provides bond and drx (which doesn't work so far)
 # bond/yard looks cool, but doesn't seem capable of much yet:
