@@ -33,6 +33,7 @@
   # create a new branch (mnemonic: "git new branch branchname...")
   nb = checkout -b
   cb = checkout -b
+  bt = branch track
   ci = commit
   cim= commit --amend
   br = branch -v
@@ -43,6 +44,8 @@
   st = status
   d  = diff
   ds = diff --staged
+  df = diff --color --color-words --abbrev
+  wc = whatchanged -p --abbrev-commit --pretty=medium
 
   type = cat-file -t
   dump = cat-file -p
@@ -55,6 +58,7 @@
   outgoing = log -u origin/master..master # outgoing changes (in local, but not origin)
 
   # Handy shortcuts for rebasing
+  rmas = rebase master
   rc = rebase --continue
   rs = rebase --skip
   ra = rebase --abort
@@ -72,18 +76,28 @@
   changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
   filelog = log -u # show changes to a file
+  lfiles  = log --name-only
   changelog = log --pretty=format:\" * %s\"
-  lg = log --pretty=format:'%C(red)%h%Creset %C(yellow)%d%Creset %s %Cgreen(%an)%Creset %Cblue[%ar]' --graph -35 HEAD master
+  lg = log --pretty=format:'%C(red)%h%Creset %C(yellow)%d%Creset %s %Cgreen(%an)%Creset %Cblue[%ar]' --graph -35
+  lgf = log --pretty=format:'%C(red)%h%Creset %C(yellow)%d%Creset %s %Cgreen(%an)%Creset %Cblue[%ar]' --graph -35 --first-parent
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  h = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
   unstage = reset HEAD # un-add files from index (tracking)
   uncommit = reset --soft HEAD^ # go back one commit, put changes into your working dir and index
   chunkyadd = add --patch # stage commits chunk by chunk
   amend = commit --amend # fix last commit
-  ammend = commit --amend # for those who can't spell :-)
+
 [remote "mine"]
-  url = jon@pittock.legitscript.com:./git/web.git
-  fetch = +refs/heads/*:refs/remotes/mine/*
+  url = git@git.legitscript.com:web-jon
+  fetch = +refs/heads/*:refs/remotes/web-jon/*
+
 [giggle]
 	main-window-maximized = false
 	main-window-geometry = 1918x1058+1+21
 	history-view-vpane-position = 734
+	file-view-vpane-position = 158
+	main-window-view = HistoryView
+
+[push]
+ default=tracking
