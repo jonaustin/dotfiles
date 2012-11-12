@@ -58,7 +58,7 @@ alias am='alsamixer'
 
 # zsh
 alias vzc='vim $HOME/.zshrc'
-alias vzcl='vim $HOME/.zshrc_local'
+alias vzcl='vim $HOME/.zsh/zshrc_local'
 alias zc='source $HOME/.zshrc'
 
 ## sys
