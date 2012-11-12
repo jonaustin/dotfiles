@@ -280,3 +280,9 @@ alias bgbg='cat ~/.fehbg >> ~/fehbgs'
 alias mem='sudo ps_mem'
 
 alias teaosd='tosd 2.5m "============================\nYour Tea is Ready\n============================"'
+
+# mounting
+alias sdb1='sudo mount /dev/sdb1 /mnt'
+alias sdc1='sudo mount /dev/sdc1 /mnt'
+alias sdd1='sudo mount /dev/sdd1 /mnt'
+alias umnt='sudo umount /mnt'
