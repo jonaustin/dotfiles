@@ -6,12 +6,13 @@
 	user = jonaustin
 [color]
   ui = auto
-  diff = auto
+  diff = always # so piping to less will show colors
   status = auto
   branch = auto
   interactive = auto
 [core]
 	editor = vim
+	excludesfile = /home/jon/.gitignore_global
 [merge]
   tool = vimdiff
 [mergetool "p4merge"]
@@ -24,8 +25,8 @@
 [pager]
   diff = #this is needed for vimdiff to work
 [pretty]
-[gc]
-  auto=1 # automatic garbage collection
+;[gc]
+  ;auto=1 # automatic garbage collection
 [merge]
   summary=true # get a summary of the changes you’re merging
 [alias]
@@ -67,7 +68,6 @@
   cp = cherry-pick -x
 
   # logging
-  l  = log
   lp = log --pretty=oneline
   lpg = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
@@ -94,8 +94,8 @@
 
 [giggle]
 	main-window-maximized = false
-	main-window-geometry = 1918x1058+1+21
-	history-view-vpane-position = 734
+	main-window-geometry = 1920x1080+1920+0
+	history-view-vpane-position = 169
 	file-view-vpane-position = 158
 	main-window-view = HistoryView
 

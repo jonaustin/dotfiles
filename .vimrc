@@ -160,6 +160,8 @@
   " add/remove numbers
   map <leader>qn :set nonu<cr>
   map <leader>an :set nu<cr>
+  map <leader>nq :set nonu<cr>
+  map <leader>na :set nu<cr>
 
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
@@ -255,9 +257,6 @@
   " remove trailing whitespace
   nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
-  " open vimrc in split window
-  nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-
   " show/hide invisibles
   map <leader>I :set list<cr>
   map <leader>i :set nolist<cr>
@@ -270,7 +269,8 @@
 
   " Edit the vimrc file
   nmap <silent> ,ev :e $MYVIMRC<CR>
-  nmap <silent> ,sv :so $MYVIMRC<CR>
+  nmap <silent> ,sv :sp $MYVIMRC<CR>
+  nnoremap <leader>vv <C-w><C-v><C-l>:e $MYVIMRC<cr> " vertical split
 
 
   " Make shift-insert work like in Xterm
