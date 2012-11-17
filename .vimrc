@@ -370,6 +370,10 @@
   nnoremap <leader>gd :Gdiff<cr>
   " }
 
+  " Turbux {
+  let g:turbux_command_prefix = 'bundle exec'
+  " }
+
 " Various {
   if has("autocmd")
     " Restore cursor position (initially for IRB<->Vim integration, if obnoxious for other things, put in ftdetect or somesuch)
