@@ -374,6 +374,9 @@
   let g:turbux_command_prefix = 'bundle exec'
   " }
 
+  " Vimux {
+  map <Leader>c :call VimuxRunCommand("clear; bundle exec rails c")<CR>
+
 " Various {
   if has("autocmd")
     " Restore cursor position (initially for IRB<->Vim integration, if obnoxious for other things, put in ftdetect or somesuch)
