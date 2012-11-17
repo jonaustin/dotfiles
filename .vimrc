@@ -375,7 +375,40 @@
   " }
 
   " Vimux {
-  map <Leader>c :call VimuxRunCommand("clear; bundle exec rails c")<CR>
+  " https://github.com/benmills/vimux/
+  " Config
+  " Use exising pane (not used by vim) if found instead of running split-window.
+  let VimuxUseNearestPane = 1
+  let g:VimuxOrientation = "v"
+
+  " open rails console
+  map <Leader>vc :call VimuxRunCommand("clear; bundle exec rails c")<CR>:VimuxSwitchToRunner<CR>
+
+  " Prompt for a command to run
+  map <Leader>vp :VimuxPromptCommand<CR>
+
+  " Prompt for a command to run
+  map <Leader>vl :VimuxRunLastCommand<CR>
+
+  "Move into the tmux runner pane created by `VimuxRunCommand` and enter copy
+  "(scroll) mode
+  " Inspect runner pane
+  map <Leader>vi :VimuxInspectRunner<CR>
+
+  " switch to runner pane
+  map <Leader>vr :VimuxSwitchToRunner<CR>
+
+  " Close vim tmux runner opened by VimuxRunCommand
+  map <Leader>vq :VimuxCloseRunner<CR>
+
+  " Close all other tmux panes in current window
+  map <Leader>vx :VimuxClosePanes<CR>
+
+  " If text is selected, save it in the v buffer and send that buffer it to tmux
+  vmap <LocalLeader>vs "vy :call VimuxRunCommand(@v . "\n", 0)<CR>
+
+  " Select current paragraph and send it to tmux
+  nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
 
 " Various {
   if has("autocmd")
