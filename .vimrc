@@ -137,6 +137,8 @@
   :command! Q q
   "}
 
+  " Windows
+
   " For crosh
   map <C-E> <C-W>
   map <C-Q> <C-W>
@@ -170,6 +172,9 @@
 	nnoremap Y y$
   " yank all lines
   map <leader>ya :%y+<cr>
+
+  " add new line without entering insert mode
+  map <CR> o<Esc>
 
 
 	" Shortcuts
