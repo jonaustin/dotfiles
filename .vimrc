@@ -4,7 +4,7 @@
 " }
 
 " Pathogen {
-  call pathogen#infect() 
+  call pathogen#infect()
 " }
 
 " Basics {
@@ -100,7 +100,7 @@
   "set relativenumber                " line numbers relative to current position
 	set nu 							               " Line numbers on
   set undofile                       " undo even after closing and re-opening a file!
-  set undodir=$HOME/.vimundo 
+  set undodir=$HOME/.vimundo
   "set debug=msg                     " makes it so that error messages don't disappear after one second on startup.
 
 " }
@@ -123,8 +123,8 @@
   set formatoptions=qrn1             " q: Allow formatting of comments with gq
                                      " r: Automatically insert the current comment leader after hitting <Enter> in Insert mode.
                                      " n: When formatting text, recognize numbered lists.
-                                     " 1: Don't break a line after a one-letter word.  It's broken before it instead (if possible). 
-                                     " l: Long lines are not broken in insert mode: When a line was longer than 
+                                     " 1: Don't break a line after a one-letter word.  It's broken before it instead (if possible).
+                                     " l: Long lines are not broken in insert mode: When a line was longer than
                                      "    'textwidth' when the insert command started, Vim does not automatically format it.
 " }
 
@@ -137,6 +137,9 @@
   :command! Q q
   "}
 
+  " For crosh
+  map <C-E> <C-W>
+  map <C-Q> <C-W>
 	" Easier moving in tabs and windows
 	map <C-J> <C-W>j<C-W>_
   " resize horizontal split windows
@@ -268,9 +271,10 @@
   nmap <silent> <leader>qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
   " Edit the vimrc file
-  nmap <silent> ,ev :e $MYVIMRC<CR>
-  nmap <silent> ,sv :sp $MYVIMRC<CR>
+  nmap <silent> <leader>ev :tabnew $MYVIMRC<CR>
+  nmap <silent> <leader>sv :sp $MYVIMRC<CR>
   nnoremap <leader>vv <C-w><C-v><C-l>:e $MYVIMRC<cr> " vertical split
+  nmap <leader>ssv :source $MYVIMRC<CR>
 
 
   " Make shift-insert work like in Xterm
@@ -453,13 +457,22 @@
   map <leader>sqf :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
   map <leader>sc  :!ruby -c %<cr>
   command! FR set filetype=ruby
+
+  " Rails.vim extensions
+  " Edit routes
+  command! Rroutes :Redit config/routes.rb
+  command! RTroutes :RTedit config/routes.rb
+
+  " Edit factories
+  command! Rfactories :Redit spec/support/factories.rb
+  command! RTfactories :RTedit spec/support/factories.rb
 "}
 
 
 " Other Customizations {
   " Add #s to tabline so gt/gT is actually useful..sheesh.. {
   set showtabline=1         " 0, 1 or 2; when to use a tab pages line
-  
+
   " relative/absolute line number switching
   function! NumberToggle()
     if(&relativenumber == 1)
@@ -504,7 +517,7 @@
   " Rails ctags {
   let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
   " }
-  
+
   " Ruby folding {
     function! RubyFold()
       if (exists("b:ruby_folded"))
