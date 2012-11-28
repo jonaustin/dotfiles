@@ -174,7 +174,7 @@
   map <leader>ya :%y+<cr>
 
   " add new line without entering insert mode
-  map <CR> o<Esc>
+  nmap <CR> o<Esc>
 
 
 	" Shortcuts
