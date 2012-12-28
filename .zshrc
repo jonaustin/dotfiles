@@ -38,9 +38,9 @@ export NODE_PATH=/home/jon/bin/lib/node_modules
 # Uncomment following line if you want to disable autosetting terminal title.
 # export DISABLE_AUTO_TITLE="true"
 
-export EDITOR='vim'
-export SHELL='zsh'
-export BROWSER='firefox'
+export EDITOR='/usr/bin/vim'
+export SHELL='/bin/zsh'
+export BROWSER='/usr/bin/chromium'
 export PAGER='less'
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R' # --LINE-NUMBERS --quit-if-one-screen' # -R for less coloring with source-highlight (external app)
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
