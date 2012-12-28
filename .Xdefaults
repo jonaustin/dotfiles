@@ -49,7 +49,7 @@ URxvt.underlineURLs:    true
 
 ! === Appearance ======================================
 
-URxvt*font: xft:Monospace:pixelsize=14
+URxvt*font: xft:Monospace:pixelsize=18
 URxvt*boldFont: xft:Monospace:pixelsize=16
 URxvt*letterSpace: -1
 
