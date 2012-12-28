@@ -243,7 +243,7 @@ globalkeys = awful.util.table.join(
   -- }}}
     
   -- {{{ Applications
-    awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("firefox", false) end),
+    awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("chromium", false) end),
     awful.key({ modkey }, "t",    function () awful.util.spawn("thunar", false) end),
     awful.key({ modkey, "Shift" }, "t",    function () awful.util.spawn("thunar", false) end),
     -- MPD
