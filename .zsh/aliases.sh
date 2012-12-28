@@ -281,8 +281,16 @@ alias mem='sudo ps_mem'
 
 alias teaosd='tosd 2.5m "============================\nYour Tea is Ready\n============================"'
 
+# syncing
+alias msx_trance_backup='sudo rsync -aP /home/jon/music/trance/ /mnt/music/trance/'
+
 # mounting
 alias sdb1='sudo mount /dev/sdb1 /mnt'
-alias sdc1='sudo mount /dev/sdc1 /mnt'
-alias sdd1='sudo mount /dev/sdd1 /mnt'
-alias umnt='sudo umount /mnt'
+alias sdc1='sudo mount /dev/sdc1 /mntsd'
+alias sdd1='sudo mount /dev/sdd1 '
+alias dvd='sudo mount /dev/sr0'
+alias br='sudo mount /dev/sr1'
+alias umnt='sudo eject /mnt'
+alias usd='sudo eject /mntsd'
+alias udvd='sudo eject /mntdvd'
+alias ubr='sudo eject /mntbr'
