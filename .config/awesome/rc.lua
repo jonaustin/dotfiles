@@ -244,8 +244,8 @@ globalkeys = awful.util.table.join(
     
   -- {{{ Applications
     awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("chromium", false) end),
-    awful.key({ modkey }, "t",    function () awful.util.spawn("thunar", false) end),
-    awful.key({ modkey, "Shift" }, "t",    function () awful.util.spawn("thunar", false) end),
+    awful.key({ modkey }, "t",    function () awful.util.spawn("spacefm", false) end),
+    awful.key({ modkey, "Shift" }, "t",    function () awful.util.spawn("spacefm", false) end),
     -- MPD
     awful.key({ modkey }, "d",function () awful.util.spawn("/home/jon/bin/mpd/mpd_status 6600", false) end),
     awful.key({ modkey, "Control" }, "d",function () awful.util.spawn("mpc -p 6600 del 0", false) end),
@@ -264,8 +264,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "s",function () awful.util.spawn("scrot", false) end),
 
   -- {{{ Multimedia keys
-    awful.key({}, "F21", function () awful.util.spawn("/home/jon/bin/softer", false) end),
-    awful.key({}, "F22", function () awful.util.spawn("/home/jon/bin/louder", false) end),
+    awful.key({}, "F21", function () awful.util.spawn("/home/jon/bin/pulsevol.sh minus", false) end),
+    awful.key({}, "F22", function () awful.util.spawn("/home/jon/bin/pulsevol.sh plus", false) end),
   -- }}}
     
   -- {{{ Wibox
@@ -422,6 +422,8 @@ awful.rules.rules = {
     { rule = { class = "gimp" },
       properties = { floating = true } },
     { rule = { instance = 'plugin-container' },
+      properties = { floating = true } },
+    { rule = { instance = 'exe' },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
