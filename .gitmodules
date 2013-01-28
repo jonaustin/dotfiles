@@ -115,3 +115,9 @@
 [submodule ".vim/bundle/turbux"]
 	path = .vim/bundle/turbux
 	url = git://github.com/jgdavey/vim-turbux.git
+[submodule ".vim/bundle/easymotion"]
+	path = .vim/bundle/easymotion
+	url = git://github.com/Lokaltog/vim-easymotion.git
+[submodule ".vim/bundle/seek"]
+	path = .vim/bundle/seek
+	url = git://github.com/goldfeld/vim-seek.git

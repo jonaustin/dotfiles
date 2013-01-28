@@ -60,9 +60,10 @@
 	"color zenburn_jon
 	"color leo
 	set background=dark                 " Assume a dark background
-  let g:solarized_termcolors=256
-  colo solarized
-  "colo railscasts
+  "let g:solarized_termcolors=256
+  ""let g:solarized_termtrans=1
+  "colo solarized
+  colo railscasts
 
 	set tabpagemax=15 				          " only show 15 tabs
 	set showmode                   	    " display the current mode
@@ -468,16 +469,16 @@
 
   " Rails.vim extensions
   " Edit routes
-  command! Rroutes :Redit config/routes.rb
-  command! RTroutes :RTedit config/routes.rb
+  command! Rroutes :R config/routes.rb
+  command! RTroutes :RT config/routes.rb
 
   " Edit factories
-  command! Rfactories :Redit spec/support/factories.rb
-  command! RTfactories :RTedit spec/support/factories.rb
+  command! Rfactories :R spec/support/factories.rb
+  command! RTfactories :RT spec/support/factories.rb
 
   " Edit mocks
-  command! Rmocks :Redit spec/support/mocks.rb
-  command! RTmocks :RTedit spec/support/mocks.rb
+  command! Rmocks :R spec/support/mocks.rb
+  command! RTmocks :RT spec/support/mocks.rb
 "}
 
 
