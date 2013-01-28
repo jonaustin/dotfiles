@@ -230,6 +230,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Escape", function ()
          awful.util.spawn("xdotool getactivewindow mousemove --window %1 0 0 click --clearmodifiers 2")
     end),   
+    -- lock screen
+    awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn("xscreensaver-command -lock", false) end),
     -- move the mouse to top left
     awful.key({ modkey, "Control" }, "m", function() mouse.coords({ x=0, y=0 }) end),
     -- rodentbane
@@ -462,4 +464,4 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 -- }}}
-
+awful.util.spawn_with_shell("xscreensaver -no-splash")
