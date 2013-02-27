@@ -25,3 +25,4 @@ blog.vim
 *.un~
 .fehbg
 .zsh/zshrc_local
+.DS_Store
