@@ -96,6 +96,7 @@ alias sv='sudo vim'
 alias vrc='vim ~/.bashrc'
 alias vlrc='vim ~/.bashrc_local'
 alias vvc='vim ~/.vimrc'
+alias vvcl='vim ~/.vimrc.local'
 alias vsc='vim ~/.config/subtle/subtle.rb'
 alias vac='vim ~/.config/awesome/rc.lua'
 alias c='clear'
@@ -266,9 +267,6 @@ alias fsize="smallprompt; printf '\33]50;%s%d\007' 'xft:Terminus:pixelsize='"
 alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
 
 
-# ls
-alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:$HOME/ /media/stark'
-
 # tmux
 alias tma='tmux attach'
 alias tmat='tmux attach -t'
@@ -296,3 +294,6 @@ alias ubr='sudo eject /mntbr'
 # work
 alias lsvpn='nmcli con up uuid 330d95c2-1d78-4cba-ae11-8acc2bd705be'
 alias lsvpndown='nmcli con down uuid 330d95c2-1d78-4cba-ae11-8acc2bd705be'
+
+# network
+alias digsimple='dig +nocmd +nocomments '
