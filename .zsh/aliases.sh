@@ -1,4 +1,5 @@
 ## SHORTCUTS
+
 #sane defaults
 alias vi='vim'
 alias mkdir='mkdir -p'
@@ -8,7 +9,7 @@ alias wget='wget -c' #auto continue files
 alias df='df -Th'
 alias free='free -m'
 alias info='pinfo'
-alias fortune='echo && fortune taom && echo'
+#alias fortune='echo && fortune taom && echo'
 alias xephr='Xephyr -ac -br -noreset -screen 1152x720 :1 &'
 alias test_awesome='DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua'
 
@@ -33,12 +34,12 @@ alias lh='ls -lhS' # sort by filesize
 alias lsd="ls -l $1 | grep -r ^d"
 alias lsd2="ls -F $1 | grep \/ | sed -e 's/\/$//g'"
 # enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto'
-    alias dir='ls --color=auto --format=vertical'
-    alias vdir='ls --color=auto --format=long'
-fi
+#if [ "$TERM" != "dumb" ]; then
+    #eval "`dircolors -b`"
+    #alias ls='ls --color=auto'
+    #alias dir='ls --color=auto --format=vertical'
+    #alias vdir='ls --color=auto --format=long'
+#fi
 
 # convenience #
 
@@ -106,7 +107,7 @@ alias lsg='ls *|grep -i '
 alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
 alias lsfuncbody='declare -f'
 alias lsfunc='declare -F' 
-alias xm='/home/jon/.xmodmap'
+alias xm='$HOME/.xmodmap'
 alias reset='reset; vr'
 alias fdays='find . -mtime '
 alias loci='locate -i'
@@ -125,7 +126,7 @@ alias syn='synergyc 192.168.0.9'
 alias ssyn='ssh -f -N -L12345:10.10.10.155:24800 barracuda-ext.cmdpdx.com; synergyc localhost:12345'
 alias ksyn="killall synergyc"
 ### non-frak
-alias sxs='ssh jon@frak'
+alias sxs='ssh jon@xs'
 alias fxs='sftp jon@xs.homeunix.net'
 alias sxxs='ssh jon@xs.homeunix.net'
 alias sfs='ssh jon@frak'
@@ -139,9 +140,6 @@ alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is 
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 
 # Window Manager
-## subtle
-alias sl='subtler'
-alias fbg="`cat ~/.fehbg`"
 
 ## Monitoring
 alias it='iotop'
@@ -217,12 +215,12 @@ alias sc='screen -Sx '
 alias sd='screen -Sd'
 alias scs='tmux attach -t core'
 alias sccs='cd ~; tmux new -s core'
-#alias scbg='cd ~; screen -c /home/jon/.screenrcs/screenrc_bg -S bg'
-#alias scqt='cd ~; screen -c /home/jon/.screenrcs/screenrc_qt -S qt'
-#alias scc='cd ~; screen -c /home/jon/.screenrcs/screenrc_coding -S code'
+#alias scbg='cd ~; screen -c $HOME/.screenrcs/screenrc_bg -S bg'
+#alias scqt='cd ~; screen -c $HOME/.screenrcs/screenrc_qt -S qt'
+#alias scc='cd ~; screen -c $HOME/.screenrcs/screenrc_coding -S code'
 
 # dir shortcuts
-alias configs='cd /home/jon/configs'
+alias configs='cd $HOME/configs'
 alias cd..='cd ..'
 alias ..='cd ..'
 msx=~/.mpd/music/
@@ -269,7 +267,7 @@ alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
 
 
 # ls
-alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:/home/jon/ /media/stark'
+alias stark='sshfs -o reconnect -o allow_other jon@stark.legitscript.com:$HOME/ /media/stark'
 
 # tmux
 alias tma='tmux attach'
@@ -282,7 +280,7 @@ alias mem='sudo ps_mem'
 alias teaosd='tosd 2.5m "============================\nYour Tea is Ready\n============================"'
 
 # syncing
-alias msx_trance_backup='sudo rsync -aP /home/jon/music/trance/ /mnt/music/trance/'
+alias msx_trance_backup='sudo rsync -aP $HOME/music/trance/ /mnt/music/trance/'
 
 # mounting
 alias sdb1='sudo mount /dev/sdb1 /mnt'
@@ -294,3 +292,7 @@ alias umnt='sudo eject /mnt'
 alias usd='sudo eject /mntsd'
 alias udvd='sudo eject /mntdvd'
 alias ubr='sudo eject /mntbr'
+
+# work
+alias lsvpn='nmcli con up uuid 330d95c2-1d78-4cba-ae11-8acc2bd705be'
+alias lsvpndown='nmcli con down uuid 330d95c2-1d78-4cba-ae11-8acc2bd705be'

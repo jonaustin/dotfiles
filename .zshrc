@@ -32,8 +32,8 @@ stty -ixon # disable ^S/^Q flow control
 # }}}
 
 # Exports {{{ 
-export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin/:/sbin:/usr/sbin:/home/jon/bin:/usr/local/bin:/usr/lib/surfraw:/opt/android-sdk/tools:/usr/local/bin:/home/jon/bin/ruby:/home/jon/bin/bash:/home/jon/bin/mpd:/home/jon/bin/subtle:/home/jon/bin/bin:/home/jon/node_modules/.bin"
-export NODE_PATH=/home/jon/bin/lib/node_modules
+export PATH="$PATH:/usr/lib/perl5/vendor_perl/bin:/sbin:/usr/sbin:$HOME/bin:/usr/local/bin:/usr/lib/surfraw:/opt/android-sdk/tools:/usr/local/bin:$HOME/bin/ruby:$HOME/bin/bash:$HOME/bin/mpd:$HOME/bin/subtle:$HOME/bin/bin:$HOME/node_modules/.bin"
+export NODE_PATH=$HOME/bin/lib/node_modules
 
 # Uncomment following line if you want to disable autosetting terminal title.
 # export DISABLE_AUTO_TITLE="true"
@@ -57,6 +57,7 @@ export INPUTRC=~/.inputrc
 #export HTTP_PROXY=http://127.0.0.1:8118
 #export http_proxy=http://127.0.0.1:8118
 export OPCODEDIR64=/lib/csound/plugins64  # for csound5
+export DESKTOP_SESSION=LXDE
 # }}} 
 
 # Colourful manpages

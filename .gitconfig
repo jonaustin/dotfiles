@@ -1,9 +1,9 @@
 [user]
-	name = Jon Austin
-	email = jon.i.austin@gmail.com
+  name = Jon Austin
+  email = jon.i.austin@gmail.com
 [github]
-	token = 93d49b6e93fe6b3b1ff4f9c901352de2
-	user = jonaustin
+  token = 93d49b6e93fe6b3b1ff4f9c901352de2
+  user = jonaustin
 [color]
   ui = auto
   diff = always # so piping to less will show colors
@@ -11,8 +11,8 @@
   branch = auto
   interactive = auto
 [core]
-	editor = vim
-	excludesfile = /home/jon/.gitignore_global
+  editor = vim
+  excludesfile = /home/jon/.gitignore_global
 [merge]
   tool = vimdiff
 [mergetool "p4merge"]
@@ -72,7 +72,7 @@
   lpg = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   histall = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --all
-	lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
   changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
   filelog = log -u # show changes to a file
@@ -93,11 +93,11 @@
   fetch = +refs/heads/*:refs/remotes/web-jon/*
 
 [giggle]
-	main-window-maximized = false
-	main-window-geometry = 1920x1080+1920+0
-	history-view-vpane-position = 169
-	file-view-vpane-position = 158
-	main-window-view = HistoryView
+  main-window-maximized = false
+  main-window-geometry = 1920x1080+1920+0
+  history-view-vpane-position = 169
+  file-view-vpane-position = 158
+  main-window-view = HistoryView
 
 [push]
  default=tracking

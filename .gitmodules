@@ -94,9 +94,9 @@
 [submodule ".vim/bundle/vim-ruby-doc"]
   path = .vim/bundle/vim-ruby-doc
   url = http://github.com/yakloinsteak/vim-ruby-doc.git
-[submodule ".config/awesome/obvious"]
-  path = .config/awesome/obvious
-  url = http://github.com/farhaven/obvious.git
+;[submodule ".config/awesome/obvious"]
+  ;path = .config/awesome/obvious
+  ;url = http://github.com/farhaven/obvious.git
 [submodule "/.vim/bundle/syntastic"]
   path = .vim/bundle/syntastic
   url = http://github.com/scrooloose/syntastic.git
@@ -115,9 +115,9 @@
 [submodule ".vim/bundle/turbux"]
 	path = .vim/bundle/turbux
 	url = git://github.com/jgdavey/vim-turbux.git
-[submodule ".vim/bundle/easymotion"]
-	path = .vim/bundle/easymotion
-	url = git://github.com/Lokaltog/vim-easymotion.git
-[submodule ".vim/bundle/seek"]
-	path = .vim/bundle/seek
+[submodule ".vim/bundle/vim-seek"]
+	path = .vim/bundle/vim-seek
 	url = git://github.com/goldfeld/vim-seek.git
+[submodule ".vim/bundle/easymotion.git"]
+	path = .vim/bundle/easymotion.git
+	url = git://github.com/Lokaltog/vim-easymotion.git
