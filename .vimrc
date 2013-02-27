@@ -7,9 +7,9 @@
   call pathogen#infect()
 " }
 
+
 " Basics {
 	set nocompatible 		                " must be first line
-	set background=dark                 " Assume a dark background
 	let mapleader = ","
   set clipboard=unnamed               " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   ":set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
@@ -59,6 +59,10 @@
 " Vim UI {
 	"color zenburn_jon
 	"color leo
+	set background=dark                 " Assume a dark background
+  "let g:solarized_termcolors=256
+  ""let g:solarized_termtrans=1
+  "colo solarized
   colo railscasts
 
 	set tabpagemax=15 				          " only show 15 tabs
@@ -465,12 +469,16 @@
 
   " Rails.vim extensions
   " Edit routes
-  command! Rroutes :Redit config/routes.rb
-  command! RTroutes :RTedit config/routes.rb
+  command! Rroutes :R config/routes.rb
+  command! RTroutes :RT config/routes.rb
 
   " Edit factories
-  command! Rfactories :Redit spec/support/factories.rb
-  command! RTfactories :RTedit spec/support/factories.rb
+  command! Rfactories :R spec/support/factories.rb
+  command! RTfactories :RT spec/support/factories.rb
+
+  " Edit mocks
+  command! Rmocks :R spec/support/mocks.rb
+  command! RTmocks :RT spec/support/mocks.rb
 "}
 
 

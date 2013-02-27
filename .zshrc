@@ -72,3 +72,4 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 source ~/.zsh/initializers.sh
 source ~/.zsh/zshrc_local
+eval `dircolors ~/configs/.dircolors` # solarized ls colors
