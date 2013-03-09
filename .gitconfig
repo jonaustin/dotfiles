@@ -12,7 +12,7 @@
   interactive = auto
 [core]
   editor = vim
-  excludesfile = /home/jon/.gitignore_global
+  excludesfile = /Users/jon/.gitignore_global
 [merge]
   tool = vimdiff
 [mergetool "p4merge"]
@@ -101,3 +101,6 @@
 
 [push]
  default=tracking
+
+[pull]
+	rebase = true
