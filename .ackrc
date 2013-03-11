@@ -3,10 +3,17 @@
 --ignore-dir=log
 --ignore-dir=vendor
 --ignore-dir=_site
+--ignore-dir=odc
 --type-add=ruby=.haml,.rake
 --type-add=html=.html.erb,.html.haml
---type-add=css=.sass,.less,.scss
---type-set=textile=.textile
+--type-add=js=js.erb
 --type-set=javascript=.coffee
+--type-add=css=.sass,.less,.scss
+--type-add=markdown=.md,.mdown,.markdown
+--type-set=textile=.textile
 --nosql
 --noxml
+--sort-files
+--color
+--context=3
+--pager=less -iqRS
