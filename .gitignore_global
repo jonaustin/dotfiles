@@ -19,3 +19,4 @@ Thumbs.db
 /tags
 
 .rake_tasks
+.rvmrc
