@@ -109,3 +109,10 @@ begin
 rescue LoadError
   # Missing some goodies, bummer
 end
+
+# for debugger
+Pry.commands.alias_command 'c', 'continue'
+Pry.commands.alias_command 's', 'step'
+Pry.commands.alias_command 'n', 'next'
+Pry.commands.alias_command 'f', 'finish'
+load "#{ENV['HOME']}/.pryrc.local"
