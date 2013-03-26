@@ -20,3 +20,5 @@ Thumbs.db
 
 .rake_tasks
 .rvmrc
+
+Guardfile
