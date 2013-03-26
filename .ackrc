@@ -9,7 +9,6 @@
 --type-add=js=js.erb
 --type-set=javascript=.coffee
 --type-add=css=.sass,.less,.scss
---type-add=markdown=.md,.mdown,.markdown
 --type-set=textile=.textile
 --nosql
 --noxml
