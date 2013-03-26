@@ -16,6 +16,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
 
 unsetopt correctall
+setopt interactivecomments
 
 ## source files
 source ~/.zsh/functions.sh
