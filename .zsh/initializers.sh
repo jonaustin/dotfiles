@@ -36,3 +36,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 # node version manager
 #. ~/code/nodejs/nvm/nvm.sh
 
+# autocomplete
+compctl -g '~/.teamocil/*(:t:r)' teamocil
