@@ -6,3 +6,4 @@ gemwhois
 gem-browse
 gem-ctags
 tmuxinator
+pry-editline

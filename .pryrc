@@ -115,4 +115,12 @@ Pry.commands.alias_command 'c', 'continue'
 Pry.commands.alias_command 's', 'step'
 Pry.commands.alias_command 'n', 'next'
 Pry.commands.alias_command 'f', 'finish'
+
+# Use pry-editline (tpope) if available
+Gem.path.each do |gemset|
+  $:.concat(Dir.glob("#{gemset}/gems/pry-*/lib"))
+end if defined?(Bundler)
+$:.uniq!
+require 'pry-editline'
+
 load "#{ENV['HOME']}/.pryrc.local"
