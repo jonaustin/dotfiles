@@ -103,4 +103,4 @@
  default=tracking
 
 [pull]
-	rebase = true
+  rebase = true
