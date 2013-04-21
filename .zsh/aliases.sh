@@ -297,3 +297,7 @@ alias lsvpndown='nmcli con down uuid 330d95c2-1d78-4cba-ae11-8acc2bd705be'
 
 # network
 alias digsimple='dig +nocmd +nocomments '
+
+# git
+vimgd() { vim -p `git status --short | awk '{print $2}'`; }
+vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
