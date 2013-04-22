@@ -5,9 +5,21 @@ config nudgePercentOf screenSize
 config resizePercentOf screenSize
 config windowHintsIgnoreHiddenWindows false
 config windowHintsShowIcons true
+config windowHintsDuration 5
+# config windowHintsOrder persist # seems to break things
+config windowHintsSpread true
+#config layoutFocusOnActivate true
 
 ### Aliases {{{
-alias hyper ctrl;shift;alt;cmd
+alias hyper ctrl;alt;cmd
+
+# Apps
+alias browser 'Nightly'
+
+# Hints
+alias showHintsLeftHand hint AOEUIYQJKX
+alias showNormalHint hint AOEUIDHTNSYXFBPKGMCW
+
 # Abstract positions
 alias full          move screenOriginX;screenOriginY                  screenSizeX;screenSizeY
 alias lefthalf      move screenOriginX;screenOriginY                  screenSizeX/2;screenSizeY
@@ -39,6 +51,9 @@ bind 3:${hyper} sequence focus 'Preview' | focus 'Sublime Text 2' | layout Previ
 bind `:${hyper} hint QWERASDFZXCVTGBYUIOPHJKLNM
 
 # Resize Bindings
+bind f:${hyper} ${full}
+#bind f:${hyper} chain ${full} | undo  # Can't chain undo apparently
+#  see https://github.com/jigish/slate/issues/153 for fix with js config
 bind =:${hyper}  resize +5% +0
 bind -:${hyper}        resize -5% +0
 #bind up:alt          resize +0   -10%
@@ -77,4 +92,15 @@ bind k:ctrl    focus right
 
 # Undo
 bind u:${hyper} undo
+
+# Relaunch slate
+bind r:${hyper} relaunch
+
+# exp
+# swap windows
+# can js config tell whether the left or right is focused and swap intelligently?
+# first focus the window to the left, then push the previously focused window to the left, then push the newly focused window to the right.
+bind j:shift;${hyper} sequence focus left > push left | push right
+# same when focus is on right window
+bind k:shift;${hyper} sequence focus right > push right | push left
 # }}}
