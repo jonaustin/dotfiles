@@ -1,0 +1,80 @@
+# vim: set sw=2 ts=2 sts=2 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker ft=vim
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config windowHintsIgnoreHiddenWindows false
+config windowHintsShowIcons true
+
+### Aliases {{{
+alias hyper ctrl;shift;alt;cmd
+# Abstract positions
+alias full          move screenOriginX;screenOriginY                  screenSizeX;screenSizeY
+alias lefthalf      move screenOriginX;screenOriginY                  screenSizeX/2;screenSizeY
+alias righthalf     move screenOriginX+screenSizeX/2;screenOriginY    screenSizeX/2;screenSizeY
+alias rightmost     move screenOriginX+screenSizeX*0.4;screenOriginY  screenSizeX*0.6;screenSizeY
+alias rightless     move screenOriginX+screenSizeX*0.6;screenOriginY  screenSizeX*0.4;screenSizeY
+alias leftmost      move screenOriginX;screenOriginY                  screenSizeX*0.6;screenSizeY
+alias leftless      move screenOriginX;screenOriginY 
+# }}}
+
+### Layouts {{{
+# Chrome / iTerm
+layout ChromeiTerm 'Google Chrome' push left bar-resize:screenSizeX/2
+layout ChromeiTerm 'iTerm' push right bar-resize:screenSizeX/2
+bind 1:${hyper} sequence focus 'Google Chrome' | focus 'iTerm' | layout ChromeiTerm
+
+# Preview / iTerm
+layout PreviewiTerm 'Preview' push left bar-resize:screenSizeX/2
+layout PreviewiTerm 'iTerm' push right bar-resize:screenSizeX/2
+bind 2:${hyper} sequence focus 'Preview' | focus 'iTerm' | layout PreviewiTerm
+
+# Preview / SublimeText
+layout PreviewSublimeText 'Preview' push left bar-resize:screenSizeX/2
+layout PreviewSublimeText 'Sublime Text 2' push right bar-resize:screenSizeX/2
+bind 3:${hyper} sequence focus 'Preview' | focus 'Sublime Text 2' | layout PreviewSublimeText
+# }}}
+
+### Bindings {{{
+bind `:${hyper} hint QWERASDFZXCVTGBYUIOPHJKLNM
+
+# Resize Bindings
+bind =:${hyper}  resize +5% +0
+bind -:${hyper}        resize -5% +0
+#bind up:alt          resize +0   -10%
+#bind down:alt        resize +0   +10%
+#bind right:ctrl;alt  resize -10% +0 bottom-right
+#bind left:ctrl;alt   resize +10% +0 bottom-right
+#bind up:ctrl;alt     resize +0   +10% bottom-right
+#bind down:ctrl;alt   resize +0   -10% bottom-right
+
+# Push Bindings
+bind right:${hyper}  push right bar-resize:screenSizeX/2
+bind left:${hyper}   push left  bar-resize:screenSizeX/2
+bind up:${hyper}     push up    bar-resize:screenSizeY/2
+bind down:${hyper}   push down  bar-resize:screenSizeY/2
+
+# Nudge Bindings
+bind right:shift;alt nudge +10% +0
+bind left:shift;alt  nudge -10% +0
+bind up:shift;alt    nudge +0   -10%
+bind down:shift;alt  nudge +0   +10%
+
+# Throw Bindings
+
+# Focus Bindings
+bind j:${hyper}     focus left
+bind k:${hyper}    focus right
+bind j:ctrl     focus left
+bind k:ctrl    focus right
+#bind up:cmd       focus up
+#bind down:cmd     focus down
+#bind up:cmd;alt   focus behind
+#bind down:cmd;alt focus behind
+
+# App Switcher (beta - doesn't seem to work)
+#bind tab:${hyper} switch
+
+# Undo
+bind u:${hyper} undo
+# }}}
