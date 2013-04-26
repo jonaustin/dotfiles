@@ -38,3 +38,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # autocomplete
 compctl -g '~/.teamocil/*(:t:r)' teamocil
+
+# disable autosetting terminal title. (so that tmux `automatic-rename off` actually works)
+export DISABLE_AUTO_TITLE="true"
