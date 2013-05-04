@@ -214,86 +214,20 @@ alias scr='screen -Sx $1'
 alias scl='screen -list'
 alias sc='screen -Sx '
 alias sd='screen -Sd'
-alias scs='tmux attach -t core'
-alias sccs='cd ~; tmux new -s core'
 #alias scbg='cd ~; screen -c $HOME/.screenrcs/screenrc_bg -S bg'
 #alias scqt='cd ~; screen -c $HOME/.screenrcs/screenrc_qt -S qt'
 #alias scc='cd ~; screen -c $HOME/.screenrcs/screenrc_coding -S code'
 
-# dir shortcuts
-alias configs='cd $HOME/configs'
-alias cd..='cd ..'
-alias ..='cd ..'
-msx=~/.mpd/music/
-mmsx=~/.mpd_local/music/
-fmsx=/media/frakssh/media/MORGOTH/musix/
-fmmsx=/media/frakssh/media/MORGOTH/musix/musix/
-alias msx="cd $msx"
-alias mmsx="cd $mmsx"
-alias fmsx="cd $fmsx"
-alias fmmsx="cd $fmmsx"
-kindle=/media/Kindle/DK_Documents//
-# network dirs
-alias newz='cd /media/media/ext/filez/usenet/newzbin/'
-
 ## Coding
-
-### Arch ###
-#export PACMAN=pacman-color
-export PACMAN=pacman
-alias ag="sudo pacman -S "
-alias as="pacman -Ss "
-alias i="pacman -Si "
-alias Q='pacman -Q | grep -i '
-alias ql="pacman -Ql "
-alias pq="pacman -Q|grep -i "
-alias r="sudo pacman -R "
-alias pac='pacman -c' # autoclean
-alias agu='sudo pacman -Syu'
-alias porphans='pacman -Qdt' # search for orphaned packages
-alias psizes="LANG=C pacman -Qi | sed -n '/^Name[^:]*: \(.*\)/{s//\1 /;x};/^Installed[^:]*: \(.*\)/{s//\1/;H;x;s/\n//;p}' | sort -nk2"
-alias redownload_all='for n in `pacman -Q`; do sudo pacman -Sw $n; done'
-
-#packer
-alias y='packer $1'
-alias show='packer -Si $1'
-alias yg="packer -G" #just fetch PKGBUILD
-alias yu='packer -Syu --aur'
-
-# urxvt
-alias fsize="smallprompt; printf '\33]50;%s%d\007' 'xft:Terminus:pixelsize='"
 
 ## incantations
 alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
 
-
 # tmux
+alias scs='tmux attach -t core'
+alias sccs='cd ~; tmux new -s core'
 alias tma='tmux attach'
 alias tmat='tmux attach -t'
-
-# unorganized
-alias bgbg='cat ~/.fehbg >> ~/fehbgs'
-alias mem='sudo ps_mem'
-
-alias teaosd='tosd 2.5m "============================\nYour Tea is Ready\n============================"'
-
-# syncing
-alias msx_trance_backup='sudo rsync -aP $HOME/music/trance/ /mnt/music/trance/'
-
-# mounting
-alias sdb1='sudo mount /dev/sdb1 /mnt'
-alias sdc1='sudo mount /dev/sdc1 /mntsd'
-alias sdd1='sudo mount /dev/sdd1 '
-alias dvd='sudo mount /dev/sr0'
-alias br='sudo mount /dev/sr1'
-alias umnt='sudo eject /mnt'
-alias usd='sudo eject /mntsd'
-alias udvd='sudo eject /mntdvd'
-alias ubr='sudo eject /mntbr'
-
-# work
-alias lsvpn='nmcli con up uuid 330d95c2-1d78-4cba-ae11-8acc2bd705be'
-alias lsvpndown='nmcli con down uuid 330d95c2-1d78-4cba-ae11-8acc2bd705be'
 
 # network
 alias digsimple='dig +nocmd +nocomments '

@@ -41,3 +41,6 @@ compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 # disable autosetting terminal title. (so that tmux `automatic-rename off` actually works)
 export DISABLE_AUTO_TITLE="true"
+
+# fasd
+eval "$(fasd --init auto)"
