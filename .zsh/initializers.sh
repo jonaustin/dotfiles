@@ -43,4 +43,4 @@ compctl -g '~/.teamocil/*(:t:r)' teamocil
 export DISABLE_AUTO_TITLE="true"
 
 # fasd
-eval "$(fasd --init auto)"
+eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-wcomp)"
