@@ -1,0 +1,26 @@
+# z - intelligent cd -- https://github.com/rupa/z
+#. /home/jon/bin/z/z.sh
+#function precmd () {
+  #z --add "$(pwd -P)"
+#}
+
+alias top='top -o cpu'
+alias updatedb='/usr/libexec/locate.updatedb'
+
+# network
+alias lxs='ssh lxs'
+
+# tmux
+alias core='tmux attach -t core'
+
+# zsh
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# env
+export BROWSER='open'
+export EDITOR='/usr/local/bin/vim' # homebrew vim
+
+alias df='df -h'
+
+# Powerline
+#. /Users/jon/code/powerline/powerline/bindings/zsh/powerline.zsh

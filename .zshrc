@@ -60,4 +60,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 
 source ~/.zsh/initializers.sh
-source ~/.zsh/zshrc_local
+
+if [ `uname` = "Darwin" ]; then
+  . ${HOME}/.zsh/zshrc.local.osx
+elif [ `uname -o` = "GNU/Linux" ]; then
+  . ${HOME}/.zsh/zshrc.local.linux
+fi
