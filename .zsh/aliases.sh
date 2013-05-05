@@ -4,23 +4,12 @@
 alias vi='vim'
 alias mkdir='mkdir -p'
 alias grep="grep --color"
-alias nautilus="nautilus --no-desktop --browser"
 alias wget='wget -c' #auto continue files
 alias df='df -Th'
-alias free='free -m'
-alias info='pinfo'
-#alias fortune='echo && fortune taom && echo'
-alias xephr='Xephyr -ac -br -noreset -screen 1152x720 :1 &'
-alias test_awesome='DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua'
-
-# non pkg'd app-updates
-alias upcalibre="sudo python2 -c \"import urllib2; exec urllib2.urlopen('http://status.calibre-ebook.com/linux_installer').read(); main()\""
-
 #alias rm='rm -i' #ask before overwriting
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -f' # don't ask
-
 
 #ls
 #alias l='ls -CF'
@@ -33,15 +22,6 @@ alias lthn='ls -lt|head -n'
 alias lh='ls -lhS' # sort by filesize
 alias lsd="ls -l $1 | grep -r ^d"
 alias lsd2="ls -F $1 | grep \/ | sed -e 's/\/$//g'"
-# enable color support of ls and also add handy aliases
-#if [ "$TERM" != "dumb" ]; then
-    #eval "`dircolors -b`"
-    #alias ls='ls --color=auto'
-    #alias dir='ls --color=auto --format=vertical'
-    #alias vdir='ls --color=auto --format=long'
-#fi
-
-# convenience #
 
 ## App shortcuts (GUI/Curses)
 #alias sup="rvm use 1.9.2-p180; sup"
@@ -54,8 +34,6 @@ alias h='head '
 alias lp='lesspipe.sh '
 alias loc='locate'
 alias nd="ncdu ."
-alias rex='rexima' #vi style vol control
-alias am='alsamixer'
 
 # zsh
 alias vzc='vim $HOME/.zshrc'
@@ -64,9 +42,6 @@ alias zc='source $HOME/.zshrc'
 
 ## sys
 alias u='uptime'
-alias udb='sudo updatedb'
-alias killspkr='sudo modprobe -r pcspkr'
-alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
 have() { type "$1" &> /dev/null; }
 
 ## shortcut-TRICKS
@@ -81,10 +56,12 @@ alias rmmac='find . -iname "__MACOSX" -print0 | xargs -0 rm -rf'
 alias retag='find . -type f -print0|xargs -0 id3tag '
 alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 
-### MPD
-alias m='ncmpcpp -p 6600' # mpd alsa
-alias mvis='ncmpcpp -c ~/.ncmpcpp/config_vis'
-alias fixmpd="sudo chown -R jon.users /var/run/mpd*; sudo chown -R jon.users /var/log/mpd*; start mpd{,_test,_all}"
+# Vim
+alias sv='sudo vim'
+alias vrc='vim ~/.bashrc'
+alias vlrc='vim ~/.bashrc_local'
+alias vvc='vim ~/.vimrc'
+alias vvcl='vim ~/.vimrc.local'
 
 ## Other
 alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
@@ -92,13 +69,6 @@ alias aunpackallr='for n in *rar; do aunpack $n; done'
 alias aunpackallz='for n in *zip; do aunpack $n; done'
 alias rmspace="prename 's/ /_/g' *"
 alias cm='chmod'
-alias sv='sudo vim'
-alias vrc='vim ~/.bashrc'
-alias vlrc='vim ~/.bashrc_local'
-alias vvc='vim ~/.vimrc'
-alias vvcl='vim ~/.vimrc.local'
-alias vsc='vim ~/.config/subtle/subtle.rb'
-alias vac='vim ~/.config/awesome/rc.lua'
 alias c='clear'
 alias e='exit; clear'
 alias svi='sudo vim'
@@ -108,11 +78,9 @@ alias lsg='ls *|grep -i '
 alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
 alias lsfuncbody='declare -f'
 alias lsfunc='declare -F' 
-alias xm='$HOME/.xmodmap'
 alias reset='reset; vr'
 alias fdays='find . -mtime '
 alias loci='locate -i'
-alias acka='ack -air '
 
 ## network
 alias pgoo='ping -c2 google.com' 
@@ -136,9 +104,6 @@ alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
 alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
 alias fsfs='sudo umount /media/frakssh; sshfs -o reconnect -o allow_other jon@frak:/ /media/frakssh'
 alias ssfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
-# queries
-alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is to just use `host <ip>`
-alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 
 # Window Manager
 
@@ -190,7 +155,6 @@ gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
 rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
 alias yardserver="yard server -g -r -d -p8809"
 rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
-alias compassw='compass watch --app rails --sass-dir public/stylesheets/sass --css-dir public/stylesheets'
 alias jekyllr='jekyll --pygments --safe --rdiscount'
 
 ### ruboto
@@ -231,6 +195,8 @@ alias tmat='tmux attach -t'
 
 # network
 alias digsimple='dig +nocmd +nocomments '
+alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is to just use `host <ip>`
+alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 
 # git
 vimgd() { vim -p `git status --short | awk '{print $2}'`; }

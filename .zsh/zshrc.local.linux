@@ -1,4 +1,25 @@
+# vim: set sw=2 ts=2 sts=2 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker ft=zsh
 eval `dircolors ~/configs/.dircolors` # solarized ls colors
+
+# Sane Defaults {{{
+alias nautilus="nautilus --no-desktop --browser"
+alias info='pinfo'
+alias fortune='echo && fortune taom && echo'
+alias free='free -m'
+# }}}
+
+# Awesome {{{
+alias vac='vim ~/.config/awesome/rc.lua'
+alias test_awesome='DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua'
+# }}}
+
+# enable color support of ls and also add handy aliases
+if [ "$TERM" != "dumb" ]; then
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+  alias dir='ls --color=auto --format=vertical'
+  alias vdir='ls --color=auto --format=long'
+fi
 
 # Exports {{{ 
 # Uncomment following line if you want to disable autosetting terminal title.
@@ -11,13 +32,12 @@ export MOZ_DISABLE_PANGO=1 # improve rendering (may also fix font issues for all
 export OOO_FORCE_DESKTOP=gnome
 export OPCODEDIR64=/lib/csound/plugins64  # for csound5
 export DESKTOP_SESSION=LXDE
+export PACMAN=pacman
 # }}} 
 
 
 #) Aliases {{{
 ### Arch ###
-#export PACMAN=pacman-color
-export PACMAN=pacman
 alias ag="sudo pacman -S "
 alias as="pacman -Ss "
 alias i="pacman -Si "
@@ -36,6 +56,21 @@ alias y='packer $1'
 alias show='packer -Si $1'
 alias yg="packer -G" #just fetch PKGBUILD
 alias yu='packer -Syu --aur'
+
+# sys
+alias udb='sudo updatedb'
+alias killspkr='sudo modprobe -r pcspkr'
+alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 5 | sed -e 's/-bin//'" #get top cpu eating processess 
+alias xephr='Xephyr -ac -br -noreset -screen 1152x720 :1 &'
+alias rex='rexima' #vi style vol control
+alias am='alsamixer'
+alias xm='$HOME/.xmodmap'
+
+### MPD
+alias m='ncmpcpp -p 6600' # mpd alsa
+alias mvis='ncmpcpp -c ~/.ncmpcpp/config_vis'
+alias fixmpd="sudo chown -R jon.users /var/run/mpd*; sudo chown -R jon.users /var/log/mpd*; start mpd{,_test,_all}"
+
 
 # urxvt
 alias fsize="smallprompt; printf '\33]50;%s%d\007' 'xft:Terminus:pixelsize='"
