@@ -2,16 +2,6 @@
 
 Pry.config.prompt = Pry::NAV_PROMPT
 
-# Load plugins (only those I whitelist)
-#Pry.config.should_load_plugins = false
-#Pry.plugins['nav'].activate!
-
-#Pry.commands.alias_command 'c', 'continue'
-#Pry.commands.alias_command 's', 'step'
-#Pry.commands.alias_command 'n', 'next'
-
-
-
 # http://cubiclemuses.com/cm/articles/2011/12/19/pry-ruby-open/
 # reload <file>
 Pry.config.commands.import(Pry::CommandSet.new do
@@ -85,42 +75,44 @@ class Object
   end
 end
 
-begin
-  require 'awesome_print'
-  Pry.config.print = proc {|output, value| Pry::Helpers::BaseHelpers.stagger_output("=> #{value.ai}", output)}
-  #Pry.config.print = proc { |output, value| output.send(:ap, value) }
+# eh..I don't recall what this does..
+#begin
+  #require 'awesome_print'
+  #Pry.config.print = proc {|output, value| Pry::Helpers::BaseHelpers.stagger_output("=> #{value.ai}", output)}
+  ##Pry.config.print = proc { |output, value| output.send(:ap, value) }
 
-  require 'hirb'
-  # Dirty hack to support in-session Hirb.disable/enable
-  Hirb::View.instance_eval do
-    def enable_output_method
-      @output_method = true
-      Pry.config.print = proc do |output, value|
-        Hirb::View.view_or_page_output(value) || output.send(:ap, value)
-      end
-    end
+  #require 'hirb'
+  ## Dirty hack to support in-session Hirb.disable/enable
+  #Hirb::View.instance_eval do
+    #def enable_output_method
+      #@output_method = true
+      #Pry.config.print = proc do |output, value|
+        #Hirb::View.view_or_page_output(value) || output.send(:ap, value)
+      #end
+    #end
 
-    def disable_output_method
-      Pry.config.print = proc { |output, value| output.send(:ap, value) }
-      @output_method = nil
-    end
-  end
-  Hirb.enable
-rescue LoadError
-  # Missing some goodies, bummer
-end
+    #def disable_output_method
+      #Pry.config.print = proc { |output, value| output.send(:ap, value) }
+      #@output_method = nil
+    #end
+  #end
+  #Hirb.enable
+#rescue LoadError
+  ## Missing some goodies, bummer
+#end
 
-# for debugger
+# for pry-debugger
 Pry.commands.alias_command 'c', 'continue'
 Pry.commands.alias_command 's', 'step'
 Pry.commands.alias_command 'n', 'next'
 Pry.commands.alias_command 'f', 'finish'
 
-# Use pry-editline (tpope) if available
+# Use pry-editline (tpope) if available (this'll make it work even if its not in Gemfile)
 Gem.path.each do |gemset|
   $:.concat(Dir.glob("#{gemset}/gems/pry-*/lib"))
 end if defined?(Bundler)
 $:.uniq!
 require 'pry-editline'
 
-load "#{ENV['HOME']}/.pryrc.local"
+pryrc_local = "#{ENV['HOME']}/.pryrc.local"
+load pryrc_local if File.exist?(pryrc_local)
