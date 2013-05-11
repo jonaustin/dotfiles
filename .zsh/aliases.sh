@@ -1,9 +1,18 @@
 ## SHORTCUTS
 
+# open with suffix aliases
+alias -s rb=vim
+alias -s txt=vim
+alias -s md=vim
+alias -s markdown=vim
+alias -s py=vim
+alias -s sh=vim
+
 #sane defaults
 alias vi='vim'
 alias mkdir='mkdir -p'
 alias grep="grep --color"
+alias gp="|grep -i"
 alias wget='wget -c' #auto continue files
 alias df='df -Th'
 #alias rm='rm -i' #ask before overwriting
