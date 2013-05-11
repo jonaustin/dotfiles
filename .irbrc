@@ -32,10 +32,10 @@ def load_gem(gem, &block)
 end
 
 # Highlighting and other features
-load_gem 'wirble' do
-  Wirble.init
-  Wirble.colorize
-end
+#load_gem 'wirble' do
+  #Wirble.init
+  #Wirble.colorize
+#end
 
 # Improved formatting for objects
 load_gem 'awesome_print'
