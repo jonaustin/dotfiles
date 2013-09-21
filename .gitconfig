@@ -11,7 +11,7 @@
   branch = auto
   interactive = auto
 [core]
-  editor = vim
+  editor = /usr/local/bin/vim
   excludesfile = /Users/jon/.gitignore_global
 [merge]
   tool = vimdiff
@@ -103,4 +103,4 @@
  default=tracking
 
 [pull]
-  rebase = true
+  ;rebase = true

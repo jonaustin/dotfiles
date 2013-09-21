@@ -44,3 +44,10 @@ export DISABLE_AUTO_TITLE="true"
 
 # fasd
 eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-wcomp)"
+
+# Ruby GC Optimizations
+# http://fredwu.me/post/60441991350/protip-ruby-devs-please-tweak-your-gc-settings-for
+export RUBY_GC_MALLOC_LIMIT=90000000
+export RUBY_FREE_MIN=200000
+
+fpath=(/usr/local/share/zsh-completions $fpath)

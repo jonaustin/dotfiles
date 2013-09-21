@@ -210,3 +210,6 @@ alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | 
 # git
 vimgd() { vim -p `git status --short | awk '{print $2}'`; }
 vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
+
+# ruby/rails
+alias szs='sleep 30; zeus s'

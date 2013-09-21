@@ -24,3 +24,10 @@ alias df='df -h'
 
 # Powerline
 #. /Users/jon/code/powerline/powerline/bindings/zsh/powerline.zsh
+
+
+# Functions
+fixcsv () {
+	iconv -f utf-16 -t utf-8 $1 > $1.utf8.csv
+	sed -i "s/_RETURN_/\n/g" $1.utf8.csv
+}
