@@ -21,3 +21,4 @@ Thumbs.db
 .rvmrc
 .ruby-version
 .ruby-gemset
+/vendor
