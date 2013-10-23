@@ -204,3 +204,24 @@ osd_cat2() {
 tosd() {
   sleep $1; osd_cat2 $2;
 }
+
+# rails parallel_tests gem
+init_parallel_tests() {
+  rake db:test:reset
+  for n in `seq 2 8`;
+  do
+    sed -i '' -e "s/${1:-lsweb}_test.*/${1:-lsweb}_test${n}/" config/database.yml
+    rake db:test:reset
+  done
+  sed -i '' -e "s/${1:-lsweb}_test8/${1:-lsweb}_test<%= ENV['TEST_ENV_NUMBER'] %>/" config/database.yml
+}
+
+zp() {
+  zeus parallel_rspec -n ${1:-5} spec
+}
+
+# fix excel-formatted csvs (utf-16 (*.txt)) to be utf-8 (*.csv)
+fixcsv() {
+  iconv -f utf-16 -t utf-8 $1 > $1.utf8.csv
+  sed -i "s/_RETURN_/\n/g" $1.utf8.csv
+}
