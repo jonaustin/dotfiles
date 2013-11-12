@@ -1,23 +1,73 @@
 " Modeline and Notes {
-" vim: set foldmarker={,} foldlevel=0 foldmethod=marker spell syntax=vim:
+" vim: set sw=2 ts=2 sts=2 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker ft=vim
 "
 " }
 
-" Pathogen {
-  call pathogen#infect()
-" }
+" Vundle
+	filetype off                        " required for Vundle
+  set rtp+=~/.vim/bundle/vundle/
+  call vundle#rc()
+
+  " let Vundle manage Vundle
+  " required! 
+  Bundle 'gmarik/vundle'
+
+  Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+  Bundle 'airblade/vim-gitgutter'
+  Bundle 'ecomba/vim-ruby-refactoring'
+  Bundle 'godlygeek/csapprox'
+  Bundle 'goldfeld/vim-seek'
+  Bundle 'kien/ctrlp.vim'
+  Bundle 'matchit.zip'
+  Bundle 'mbbill/undotree'
+  Bundle 'mileszs/ack.vim'
+  Bundle 'myusuf3/numbers.vim'
+  Bundle 'scrooloose/nerdcommenter'
+  Bundle 'scrooloose/syntastic'
+  Bundle 'tpope/vim-fugitive'
+  Bundle 'tpope/vim-haml'
+  Bundle 'tpope/vim-markdown'
+  Bundle 'tpope/vim-rails'
+  Bundle 'tpope/vim-rake'
+  Bundle 'tpope/vim-repeat'
+  Bundle 'tpope/vim-surround'
+  Bundle 'vim-scripts/Tabmerge'
+  Bundle 'vim-scripts/restore_view.vim'
+  Bundle 'vim-scripts/sessionman.vim'
+  " colors
+  Bundle 'w0ng/vim-hybrid'
+  Bundle 'jonaustin/vim-colors'
+  " disabled
+  "Bundle 'Lokaltog/vim-easymotion'
+  "Bundle 'chrisbra/csv.vim'
+  "Bundle 'majutsushi/tagbar'
+  "Bundle 'mattboehm/vim-unstack'
+  "Bundle 'terryma/vim-multiple-cursors'
+  "Bundle 'tpope/vim-abolish' " smarter subsitution - :%Subvert/facilit{y,ies}/building{,s}/g
+  "Bundle 'tpope/vim-afterimage' " view Word/PDF files
+  "Bundle 'tpope/vim-bundler'
+  "Bundle 'tpope/vim-characterize' " inserting special chars (&copy) and getting unicode codes
+  "Bundle 'tpope/vim-endwise'
+  "Bundle 'tpope/vim-obsession' " probably conflicts with sessionman.vim
+  "Bundle 'tpope/vim-unimpaired'
+  " libs
+  "Bundle 'tomtom/tlib_vim'
+
+  
+  " Turn back on after Vundle finishes its thing
+  filetype plugin indent on  	        " Automatically detect file types.
 
 
 " Basics {
 	set nocompatible 		                " must be first line
 	let mapleader = ","
-  set clipboard=unnamed               " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+  set clipboard+=unnamed               " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   ":set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
+  set noautochdir                 " do not automatically change directory
+  set cryptmethod=blowfish            " strong blowfish encryption (instead of zip)
 " }
 
 " General {
-  runtime! macros/matchit.vim
-	filetype plugin indent on  	        " Automatically detect file types.
 	syntax on 					                " syntax highlighting
 	set mouse=a					                " disable mouse..add =a to enable
 	" not every vim is compiled with this, use the following line instead
@@ -34,25 +84,34 @@
   set lazyredraw                      " fix horrible slowdown issues when moving cursor with syntax on
   set ttyfast                         " assume fast connection (smoother redraw)
   set synmaxcol=1024                  " Syntax coloring lines that are too long just slows down the world
+  " Use the old regex engine
+  " http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
+  set re=1
+
+  " Disable Ex mode
+  map Q <Nop>
+  " Disable K looking stuff up
+  map K <Nop>
+
 
 	" Setting up the directories {
-		set backup 						            " backups are nice ...
-		set backupdir=$HOME/.vimbackup    " but not when they clog .
-		set directory=$HOME/.vimswap 	    " Same for swap files
-		set viewdir=$HOME/.vimviews 	    " same but for view files
+  set backup 						            " backups are nice ...
+  set backupdir=$HOME/.vimbackup    " but not when they clog .
+  set directory=$HOME/.vimswap 	    " Same for swap files
+  set viewdir=$HOME/.vimviews 	    " same but for view files
 
-		" Creating directories if they don't exist
-		silent execute '!mkdir -p $HOME/.vimbackup'
-		silent execute '!mkdir -p $HOME/.vimswap'
-		silent execute '!mkdir -p $HOME/.vimviews'
-    " note these two below were causing rails.vim to not be able to find files
-    " in 'path' so replaced with the autocmd
-		"au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
-		"au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
-    autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \ exe "normal g`\"" |
-    \ endif
+  " Creating directories if they don't exist
+  silent execute '!mkdir -p $HOME/.vimbackup'
+  silent execute '!mkdir -p $HOME/.vimswap'
+  silent execute '!mkdir -p $HOME/.vimviews'
+  " note these two below were causing rails.vim to not be able to find files
+  " in 'path' so replaced with the autocmd
+  "au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
+  "au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \ exe "normal g`\"" |
+  \ endif
 	" }
 " }
 
@@ -63,7 +122,10 @@
   "let g:solarized_termcolors=256
   ""let g:solarized_termtrans=1
   "colo solarized
-  colo railscasts
+  "colo railscasts
+  colo hybrid
+  
+  hi Normal ctermbg=232               " dark background
 
 	set tabpagemax=15 				          " only show 15 tabs
 	set showmode                   	    " display the current mode
@@ -93,9 +155,9 @@
 	set hlsearch 					             " highlight search terms
 	set winminheight=0 				         " windows can be 0 line high
 	set ignorecase 					           " case insensitive search
-	set smartcase 					           " become temporarilly case sensitive when any uppercase letters present in search string
+	set smartcase 					           " become temporarily case sensitive when any uppercase letters present in search string
 	set wildmenu 					             " show list instead of just completing
-	set wildmode=list:longest,full 	   " comand <Tab> completion, list matches, then longest common part, then all.
+	set wildmode=list:longest,full 	   " command <Tab> completion, list matches, then longest common part, then all.
 	set whichwrap=b,s,h,l,<,>,[,]	     " backspace and cursor keys wrap to previous/next line
 	set scrolljump=5 				           " lines to scroll when cursor leaves screen
 	set scrolloff=10 				           " minimum lines to keep above and below cursor
@@ -105,12 +167,14 @@
 	set nu 							               " Line numbers on
   set undofile                       " undo even after closing and re-opening a file!
   set undodir=$HOME/.vimundo
+  
   "set debug=msg                     " makes it so that error messages don't disappear after one second on startup.
 
 " }
 
 " Formatting {
 	set wrap                      	   " wrap long lines
+  set showbreak=↪                    " prettier line wrap
 	set autoindent                 	   " indent at the same level of the previous line
 	set shiftwidth=2               	   " use indents of 2 spaces
   set softtabstop=2                  " backspace will go back 2 chars instead of 1 (i.e. act like its a tab)
@@ -124,6 +188,7 @@
   set encoding=utf-8                 " no junk chars
   set textwidth=80
 "  set colorcolumn=85                " show vertical colored column
+  set shiftround                     " When at 3 spaces and I hit >>, go to 4, not 5.
   set formatoptions=qrn1             " q: Allow formatting of comments with gq
                                      " r: Automatically insert the current comment leader after hitting <Enter> in Insert mode.
                                      " n: When formatting text, recognize numbered lists.
@@ -144,8 +209,8 @@
   " Windows
 
   " For crosh
-  map <C-E> <C-W>
-  map <C-Q> <C-W>
+  "map <C-E> <C-W>
+  "map <C-Q> <C-W>
 	" Easier moving in tabs and windows
 	map <C-J> <C-W>j<C-W>_
   " resize horizontal split windows
@@ -166,6 +231,17 @@
   " move window to new tab
   map <leader>mt <C-W>T
 
+  " split windows
+  nnoremap <leader>sw <C-w>v<C-w>l " split and switch
+  noremap <leader>o :only<cr>
+  noremap <leader>O :only<cr>:tabonly<cr>
+
+  " open ctag in new tab
+  nmap <leader>ct <C-w><C-]><C-w>T
+  
+  " tabnew
+  map <leader>tn :tabnew
+
   " add/remove numbers
   map <leader>qn :set nonu<cr>
   map <leader>an :set nu<cr>
@@ -180,8 +256,6 @@
   " add new line without entering insert mode
   nmap <CR> o<Esc>
 
-
-	" Shortcuts
 	" Change Working Directory to that of the current file
   "cmap cwd lcd %:p:h
 
@@ -189,25 +263,21 @@
 	inoremap jj <ESC>
 	inoremap jk <ESC>
 
-  " split windows
-  nnoremap <leader>sw <C-w>v<C-w>l " split and switch
-  noremap <leader>o :only<cr>
-  noremap <leader>O :only<cr>:tabonly<cr>
+  " Quickly toggle wrap mode (for the current window)
+  nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
-  " open ctag in new tab
-  nmap <leader>ct <C-w><C-]><C-w>T
+  " save / quit
+  map <C-s> :w<cr>
+  map <C-q> :q<cr>
+
+  " sudo write file
+  command Sudo :w !sudo tee %
 
   " buffers
     " buffer next
   :noremap <leader>bn :bn<cr>
     " buffer prev
   :noremap <leader>bp :bp<cr>
-
-	" NERDTree
-	map <S-q> :NERDTreeToggle<cr>
-
-	" TagList
-	map <leader>tl :TlistToggle<cr>
 
   " quit, write
   map <leader>q   :q<cr>
@@ -230,9 +300,6 @@
   map <leader>qf :cope<cr>
   " close
   map <leader>cf :ccl<cr>
-
-  " Blog
-  map <leader>bl :BlogList<cr>
 
   " remove search highlights
   map <silent><leader>. :nohl<cr>
@@ -292,6 +359,11 @@
 " }
 
 " Plugins {
+	" NERDTree
+	map <S-q> :NERDTreeToggle<cr>
+
+	" TagList
+	map <leader>tl :TlistToggle<cr>
 
   " Supertab {
   "let g:SuperTabDefaultCompletionType = "context"
@@ -375,7 +447,7 @@
   "}
 
   " Gundo {
-  nnoremap <S-U> :GundoToggle<cr>
+  "nnoremap <S-U> :GundoToggle<cr>
   " }
 
   " Fugitive {
@@ -423,6 +495,13 @@
   " Select current paragraph and send it to tmux
   nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
 
+  " Ctrl-P {{{
+  :let g:ctrlp_match_window_bottom = 0
+  :let g:ctrlp_match_window_reversed = 0
+  :let g:ctrlp_working_path_mode = 0
+  :let g:ctrlp_dotfiles = 0
+  "}}}
+
 " Various {
   if has("autocmd")
     " Restore cursor position (initially for IRB<->Vim integration, if obnoxious for other things, put in ftdetect or somesuch)
@@ -435,7 +514,7 @@
 
 " Testing {
   "set scrolloff=999 " causes current line to always be vertically centered
-  "(unforuntately really screws up selecting with mouse)
+  "(unfortunately really screws up selecting with mouse)
 " }
 
 " File Types {
@@ -552,7 +631,21 @@
   " }
 " }
 
-" LS {
-map <leader>rs :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
-" }
-
+" Functions {{{
+  " Merge a tab into a split in the previous window
+  function! MergeTabs()
+    if tabpagenr() == 1
+      return
+    endif
+    let bufferName = bufname("%")
+    if tabpagenr("$") == tabpagenr()
+      close!
+    else
+      close!
+      tabprev
+    endif
+    vsplit
+    execute "buffer " . bufferName
+  endfunction
+  nmap <C-W>u :call MergeTabs()<CR>
+"}}}
