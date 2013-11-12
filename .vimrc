@@ -9,12 +9,12 @@
   call vundle#rc()
 
   " let Vundle manage Vundle
-  " required! 
   Bundle 'gmarik/vundle'
 
   Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
   Bundle 'airblade/vim-gitgutter'
   Bundle 'ecomba/vim-ruby-refactoring'
+  Bundle 'ervandew/supertab'
   Bundle 'godlygeek/csapprox'
   Bundle 'goldfeld/vim-seek'
   Bundle 'kien/ctrlp.vim'
@@ -22,6 +22,7 @@
   Bundle 'mbbill/undotree'
   Bundle 'mileszs/ack.vim'
   Bundle 'myusuf3/numbers.vim'
+  Bundle 'SirVer/ultisnips'
   Bundle 'scrooloose/nerdcommenter'
   Bundle 'scrooloose/syntastic'
   Bundle 'tpope/vim-fugitive'
@@ -53,7 +54,7 @@
   " libs
   "Bundle 'tomtom/tlib_vim'
 
-  
+
   " Turn back on after Vundle finishes its thing
   filetype plugin indent on  	        " Automatically detect file types.
 
@@ -84,6 +85,7 @@
   set lazyredraw                      " fix horrible slowdown issues when moving cursor with syntax on
   set ttyfast                         " assume fast connection (smoother redraw)
   set synmaxcol=1024                  " Syntax coloring lines that are too long just slows down the world
+  set nolist                          " Hide invisibles
   " Use the old regex engine
   " http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
   set re=1
@@ -124,7 +126,7 @@
   "colo solarized
   "colo railscasts
   colo hybrid
-  
+
   hi Normal ctermbg=232               " dark background
 
 	set tabpagemax=15 				          " only show 15 tabs
@@ -167,7 +169,7 @@
 	set nu 							               " Line numbers on
   set undofile                       " undo even after closing and re-opening a file!
   set undodir=$HOME/.vimundo
-  
+
   "set debug=msg                     " makes it so that error messages don't disappear after one second on startup.
 
 " }
@@ -238,7 +240,7 @@
 
   " open ctag in new tab
   nmap <leader>ct <C-w><C-]><C-w>T
-  
+
   " tabnew
   map <leader>tn :tabnew
 
@@ -365,9 +367,14 @@
 	" TagList
 	map <leader>tl :TlistToggle<cr>
 
+  " Ultisnips {
+  let g:UltiSnipsJumpForwardTrigger="<tab>"
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  " }
+
   " Supertab {
   "let g:SuperTabDefaultCompletionType = "context"
-  let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+  "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
   " }
 
   " Misc {
