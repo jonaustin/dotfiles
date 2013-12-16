@@ -26,3 +26,5 @@ blog.vim
 .fehbg
 .zsh/zshrc_local
 .DS_Store
+.vim/bundle
+.vim/sessions
