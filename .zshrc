@@ -66,3 +66,5 @@ if [ `uname` = "Darwin" ]; then
 elif [ `uname -o` = "GNU/Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

@@ -1,5 +1,3 @@
-## rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 ## tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
@@ -24,13 +22,12 @@ else
 fi
 
 # fasd
-eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
-alias f='fasd -f'        # file
+#eval "$(--init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
+#alias f='fasd -f'        # file
 #alias c='fasd_cd -d'
 alias v='f -e vim' # quick opening files with vim
 alias o='a -e xdg-open' # quick opening files with xdg-open
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # node version manager
@@ -43,7 +40,7 @@ compctl -g '~/.teamocil/*(:t:r)' teamocil
 export DISABLE_AUTO_TITLE="true"
 
 # fasd
-eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-wcomp)"
+#eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-wcomp)"
 
 # Ruby GC Optimizations
 # http://fredwu.me/post/60441991350/protip-ruby-devs-please-tweak-your-gc-settings-for
@@ -51,3 +48,10 @@ export RUBY_GC_MALLOC_LIMIT=90000000
 export RUBY_FREE_MIN=200000
 
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+# npm/nodejs
+export NODE_PATH="/usr/local/share/npm/lib/node_modules"
+
+# rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

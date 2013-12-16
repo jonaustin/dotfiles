@@ -5,7 +5,7 @@
 #}
 
 alias top='top -o cpu'
-alias updatedb='/usr/libexec/locate.updatedb'
+alias updatedb='sudo /usr/libexec/locate.updatedb'
 
 # network
 alias lxs='ssh lxs'

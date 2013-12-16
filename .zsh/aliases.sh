@@ -213,3 +213,10 @@ vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
 
 # ruby/rails
 alias szs='sleep 30; zeus s'
+
+# iphone simulator
+alias iphone_simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
+alias ipad_simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/iPadSimulator.platform/Developer/Applications/iPad\ Simulator.app'
+
+# simple http server
+alias serve='ruby -run -e httpd . -p 5000'
