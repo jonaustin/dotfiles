@@ -165,6 +165,11 @@ rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
 alias yardserver="yard server -g -r -d -p8809"
 rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
 alias jekyllr='jekyll --pygments --safe --rdiscount'
+function install_global_gems() {
+  for n in `cat ~/configs/global.gems`
+    do rvm @global do gem install $n
+  done
+}
 
 ### ruboto
 ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }
