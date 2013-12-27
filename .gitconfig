@@ -88,9 +88,9 @@
   chunkyadd = add --patch # stage commits chunk by chunk
   amend = commit --amend # fix last commit
 
-[remote "mine"]
-  url = git@git.legitscript.com:web-jon
-  fetch = +refs/heads/*:refs/remotes/web-jon/*
+;[remote "mine"]
+  ;url = git@git.legitscript.com:web-jon
+  ;fetch = +refs/heads/*:refs/remotes/web-jon/*
 
 [giggle]
   main-window-maximized = false
