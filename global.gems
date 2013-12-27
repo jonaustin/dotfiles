@@ -6,5 +6,12 @@ gemwhois
 gem-browse
 gem-ctags
 tmuxinator
+pry
 pry-editline
+pry-debugger
+pry-doc
+powder
 awesome_print
+github
+lunchy
+rubocop
