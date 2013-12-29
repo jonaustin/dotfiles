@@ -12,13 +12,14 @@
   Bundle 'gmarik/vundle'
 
   Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-  Bundle 'SirVer/ultisnips'
   Bundle 'airblade/vim-gitgutter'
   Bundle 'ecomba/vim-ruby-refactoring'
   Bundle 'ervandew/supertab'
+  Bundle 'garbas/vim-snipmate'
+  Bundle 'honza/vim-snippets'
   Bundle 'godlygeek/csapprox'
-  Bundle 'godlygeek/tabular'
   Bundle 'goldfeld/vim-seek'
+  Bundle 'junegunn/vim-easy-align'
   Bundle 'kien/ctrlp.vim'
   Bundle 'matchit.zip'
   Bundle 'mbbill/undotree'
@@ -36,6 +37,15 @@
   Bundle 'vim-scripts/Tabmerge'
   Bundle 'vim-scripts/restore_view.vim'
   Bundle 'vim-scripts/sessionman.vim'
+  "Bundle 'vim-scripts/scratch.vim'
+  Bundle 'thoughtbot/vim-rspec'
+  Bundle 'jgdavey/tslime.vim'
+  Bundle 'amix/vim-zenroom'
+
+  " libs
+  Bundle 'tomtom/tlib_vim'
+  Bundle 'MarcWeber/vim-addon-mw-utils'
+
   " colors
   Bundle 'w0ng/vim-hybrid'
   Bundle 'jonaustin/vim-colors'
@@ -52,8 +62,6 @@
   "Bundle 'tpope/vim-endwise'
   "Bundle 'tpope/vim-obsession' " probably conflicts with sessionman.vim
   "Bundle 'tpope/vim-unimpaired'
-  " libs
-  "Bundle 'tomtom/tlib_vim'
 
 
   " Turn back on after Vundle finishes its thing
@@ -78,7 +86,7 @@
 	set autowrite
 	set shortmess+=filmnrxoOtT          " abbrev. of messages (avoids 'hit enter')
   set foldmethod=syntax
-  set foldlevelstart=2
+  set foldlevelstart=99
 	" set spell 		 	     	            " spell checking on
   "set vb                             " visual bell, no beeping - disable - causes weird crap-glyphs in gnome-terminal
 
@@ -198,6 +206,19 @@
                                      " 1: Don't break a line after a one-letter word.  It's broken before it instead (if possible).
                                      " l: Long lines are not broken in insert mode: When a line was longer than
                                      "    'textwidth' when the insert command started, Vim does not automatically format it.
+" }
+
+" Tricks {
+  " Make the current window big, but leave others context {
+    " https://www.destroyallsoftware.com/file-navigation-in-vim.html
+    set winwidth=84
+    " We have to have a winheight bigger than we want to set winminheight. But if
+    " we set winheight to be huge before winminheight, the winminheight set will
+    " fail.
+    set winheight=5
+    set winminheight=5
+    set winheight=999
+  " }
 " }
 
 " Key Mappings {
@@ -368,11 +389,6 @@
 	" TagList
 	map <leader>tl :TlistToggle<cr>
 
-  " Ultisnips {
-  let g:UltiSnipsJumpForwardTrigger="<tab>"
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-  " }
-
   " Supertab {
   "let g:SuperTabDefaultCompletionType = "context"
   "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
@@ -431,8 +447,21 @@
   " }
 
   " dbext {
-  let g:dbext_default_SQLITE_bin='sqlite3'
+  "let g:dbext_default_SQLITE_bin='sqlite3'
   " }
+
+  " Start interactive EasyAlign in visual mode
+  vmap <Enter> <Plug>(EasyAlign)
+  " Start interactive EasyAlign with a Vim movement
+  nmap <Leader>a <Plug>(EasyAlign)
+" }
+
+  " Vim-rspec
+  let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+  map <Leader>t :call RunCurrentSpecFile()<CR>
+  map <Leader>T :call RunNearestSpec()<CR>
+  "map <Leader>l :call RunLastSpec()<CR>
+  "map <Leader>a :call RunAllSpecs()<CR>
 
   " GUI Settings {
   " GVIM- (here instead of .gvimrc)
@@ -451,7 +480,7 @@
   " }
 
   " Ack {
-  map <leader>a :Ack<space>
+  "map <leader>a :Ack<space>
   "}
 
   " Gundo {
@@ -553,6 +582,9 @@
   map <leader>sqf :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
   map <leader>sc  :!ruby -c %<cr>
   command! FR set filetype=ruby
+  " Nab lines from ~/.pry_history (respects "count": `,20ph`)
+  nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
+  iabbr debug require'pry';binding.pry
 
   " Rails.vim extensions
   " Edit routes
@@ -566,6 +598,44 @@
   " Edit mocks
   command! Rmocks :R spec/support/mocks.rb
   command! RTmocks :RT spec/support/mocks.rb
+
+  map <leader>gr :topleft :split config/routes.rb<cr>
+  function! ShowRoutes()
+    " Requires 'scratch' plugin
+    :topleft 100 :split __Routes__
+    " Make sure Vim doesn't write __Routes__ as a file
+    :set buftype=nofile
+    " Delete everything
+    :normal 1GdG
+    " Put routes output in buffer
+    :0r! bundle exec rake -s routes
+    " Size window to number of lines (1 plus rake output length)
+    :exec ":normal " . line("$") . "_ "
+    " Move cursor to bottom
+    :normal 1GG
+    " Delete empty trailing line
+    :normal dd
+  endfunction
+  map <leader>gR :call ShowRoutes()<cr>
+
+  function! PromoteToLet()
+    :normal! dd
+    " :exec '?^\s*it\>'
+    :normal! P
+    :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+    :normal ==
+  endfunction
+  :command! PromoteToLet :call PromoteToLet()
+  :map <leader>p :PromoteToLet<cr>
+
+  function! UpdateHashSyntax()
+    :normal! H
+    :%s/:\([^ ]*\)\(\s*\)=>/\1:/g
+    :normal ==
+  endfunction
+  :command! UpdateHashSyntax :call UpdateHashSyntax()
+  :map <leader>H :UpdateHashSyntax<cr>
+
 "}
 
 
@@ -614,6 +684,38 @@
   endif
   " }
 
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " OpenChangedFiles COMMAND
+  " Open a split for each dirty file in git
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  function! OpenChangedFiles()
+    only " Close all windows, unless they're modified
+    let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+    let filenames = split(status, "\n")
+    exec "edit " . filenames[0]
+    for filename in filenames[1:]
+      exec "sp " . filename
+    endfor
+  endfunction
+  command! OpenChangedFiles :call OpenChangedFiles()
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " RemoveFancyCharacters COMMAND
+  " Remove smart quotes, etc.
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  function! RemoveFancyCharacters()
+      let typo = {}
+      let typo["“"] = '"'
+      let typo["”"] = '"'
+      let typo["‘"] = "'"
+      let typo["’"] = "'"
+      let typo["–"] = '--'
+      let typo["—"] = '---'
+      let typo["…"] = '...'
+      :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
+  endfunction
+  command! RemoveFancyCharacters :call RemoveFancyCharacters()
+
   " Rails ctags {
   let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
   " }
@@ -636,6 +738,7 @@
       "autocmd Filetype rspec :call RubyFold()
       "autocmd Filetype ruby :call RubyFold()
     endif
+    command! RubyFold :call RubyFold()
   " }
 " }
 
