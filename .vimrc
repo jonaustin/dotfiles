@@ -442,8 +442,6 @@
   " SnipMate {
   " Setting the author var
   let g:snips_author = 'Jon Austin <jon.i.austin@gmail.com>'
-  " Shortcut for reloading snippets, useful when developing
-  nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
   " }
 
   " dbext {
@@ -584,7 +582,6 @@
   command! FR set filetype=ruby
   " Nab lines from ~/.pry_history (respects "count": `,20ph`)
   nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
-  iabbr debug require'pry';binding.pry
 
   " Rails.vim extensions
   " Edit routes
