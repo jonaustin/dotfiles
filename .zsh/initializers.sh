@@ -28,8 +28,6 @@ fi
 alias v='f -e vim' # quick opening files with vim
 alias o='a -e xdg-open' # quick opening files with xdg-open
 
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-
 # node version manager
 #. ~/code/nodejs/nvm/nvm.sh
 
@@ -54,6 +52,13 @@ export NODE_PATH="/usr/local/share/npm/lib/node_modules"
 
 # z
 . `brew --prefix`/etc/profile.d/z.sh
+
+# tmuxinator
+export DISABLE_AUTO_TITLE=true
+source ~/bin/tmuxinator.zsh
+
+# Homebrew python path (for Mopidy)
+export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
 
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
