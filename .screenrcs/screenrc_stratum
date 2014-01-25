@@ -1,8 +1,0 @@
-source /home/jon/.screenrc
-
-screen -t s rails s
-screen -t c rails c
-screen -t t guard
-screen 
-screen -t other
-

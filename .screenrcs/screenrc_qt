@@ -1,7 +1,0 @@
-source /home/jon/.screenrc
-
-screen -t mt bash -c 'ncmpcpp -p 1100'
-screen
-screen
-screen 
-screen 

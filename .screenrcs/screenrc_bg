@@ -1,5 +1,0 @@
-source /home/jon/.screenrc
-
-screen -t yard yard server -g -r -p8809
-screen -t devmon devmon
-screen -t /home/jon/bin/notify inotify-daemon.py
