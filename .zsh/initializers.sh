@@ -67,4 +67,5 @@ export PATH=$PATH:$HOME/.cabal/bin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 
-export PATH=./bin:$PATH
+# direnv
+eval "$(direnv hook zsh)"
