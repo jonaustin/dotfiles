@@ -42,8 +42,8 @@ export DISABLE_AUTO_TITLE="true"
 
 # Ruby GC Optimizations
 # http://fredwu.me/post/60441991350/protip-ruby-devs-please-tweak-your-gc-settings-for
-export RUBY_GC_MALLOC_LIMIT=90000000
-export RUBY_FREE_MIN=200000
+#export RUBY_GC_MALLOC_LIMIT=90000000
+#export RUBY_FREE_MIN=200000
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -60,6 +60,11 @@ source ~/bin/tmuxinator.zsh
 # Homebrew python path (for Mopidy)
 export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
 
+# Haskell Cabal
+export PATH=$PATH:$HOME/.cabal/bin
+
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+
+export PATH=./bin:$PATH
