@@ -13,6 +13,7 @@ alias vi='vim'
 alias mkdir='mkdir -p'
 alias grep="grep --color"
 alias gp="|grep -i"
+alias Grep="grep" # when hitting shift for pipe
 alias wget='wget -c' #auto continue files
 alias df='df -Th'
 #alias rm='rm -i' #ask before overwriting
@@ -58,6 +59,7 @@ alias igrep='grep -i'
 alias g="grep -ir"
 alias hist='history | grep -i '
 pg() { ps aux | grep -v grep | grep -i ${1}; }
+alias cdb='cd ..; cd -' # cd back
 
 ## Music
 alias rmm3u='find . -iname "*m3u" -print0 | xargs -0 rm'
@@ -144,6 +146,10 @@ function git_diff() {
 }
 alias git-diff=git_diff
 alias glpo='git log --oneline --decorate'
+function ggh() {
+  echo $1
+  git grep $1 $(git rev-list --all)
+}
 
 ## ruby
 alias cdstdlib="cd $MY_RUBY_HOME/lib/ruby/1.9.1"
@@ -225,3 +231,4 @@ alias ipad_simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/
 
 # simple http server
 alias serve='ruby -run -e httpd . -p 5000'
+
