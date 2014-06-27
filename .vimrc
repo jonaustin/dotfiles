@@ -9,62 +9,86 @@
   call vundle#rc()
 
   " let Vundle manage Vundle
-  Bundle 'gmarik/vundle'
+  Plugin 'gmarik/vundle'
 
-  Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-  Bundle 'airblade/vim-gitgutter'
-  Bundle 'ecomba/vim-ruby-refactoring'
-  Bundle 'ervandew/supertab'
-  Bundle 'garbas/vim-snipmate'
-  Bundle 'honza/vim-snippets'
-  Bundle 'godlygeek/csapprox'
-  Bundle 'goldfeld/vim-seek'
-  Bundle 'junegunn/vim-easy-align'
-  Bundle 'kchmck/vim-coffee-script'
-  Bundle 'kien/ctrlp.vim'
-  Bundle 'matchit.zip'
-  Bundle 'mbbill/undotree'
-  Bundle 'mileszs/ack.vim'
-  Bundle 'myusuf3/numbers.vim'
-  Bundle 'scrooloose/nerdcommenter'
-  Bundle 'scrooloose/nerdtree'
-  Bundle 'scrooloose/syntastic'
-  Bundle 'tpope/vim-fugitive'
-  Bundle 'tpope/vim-git'
-  Bundle 'tpope/vim-haml'
-  Bundle 'tpope/vim-markdown'
-  Bundle 'tpope/vim-rails'
-  Bundle 'tpope/vim-rake'
-  Bundle 'tpope/vim-repeat'
-  Bundle 'tpope/vim-surround'
-  Bundle 'vim-scripts/Tabmerge'
-  Bundle 'vim-scripts/restore_view.vim'
-  Bundle 'vim-scripts/sessionman.vim'
-  "Bundle 'vim-scripts/scratch.vim'
-  Bundle 'thoughtbot/vim-rspec'
-  Bundle 'jgdavey/tslime.vim'
-  Bundle 'amix/vim-zenroom'
+  " Clojure
+  Plugin 'kien/rainbow_parentheses.vim'
+  Plugin 'guns/vim-clojure-highlight'
+  Plugin 'guns/vim-clojure-static'
+  Plugin 'tpope/vim-classpath'
+  Plugin 'tpope/vim-fireplace'
 
-  " libs
-  Bundle 'tomtom/tlib_vim'
-  Bundle 'MarcWeber/vim-addon-mw-utils'
+  " Language
+  Plugin 'ecomba/vim-ruby-refactoring'
+  Plugin 'kchmck/vim-coffee-script'
+  Plugin 'mattn/emmet-vim'
+  Plugin 'tpope/vim-haml'
+  Plugin 'tpope/vim-markdown'
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'vim-ruby/vim-ruby'
 
-  " colors
-  Bundle 'w0ng/vim-hybrid'
-  Bundle 'jonaustin/vim-colors'
-  " disabled
-  "Bundle 'Lokaltog/vim-easymotion'
-  "Bundle 'chrisbra/csv.vim'
-  "Bundle 'majutsushi/tagbar'
-  "Bundle 'mattboehm/vim-unstack'
-  "Bundle 'terryma/vim-multiple-cursors'
-  "Bundle 'tpope/vim-abolish' " smarter subsitution - :%Subvert/facilit{y,ies}/building{,s}/g
-  "Bundle 'tpope/vim-afterimage' " view Word/PDF files
-  "Bundle 'tpope/vim-bundler'
-  "Bundle 'tpope/vim-characterize' " inserting special chars (&copy) and getting unicode codes
-  "Bundle 'tpope/vim-endwise'
-  "Bundle 'tpope/vim-obsession' " probably conflicts with sessionman.vim
-  "Bundle 'tpope/vim-unimpaired'
+  " Completion
+  Plugin 'ervandew/supertab'
+  Plugin 'garbas/vim-snipmate'
+  Plugin 'honza/vim-snippets'
+  "Plugin 'Shougo/neocomplete.vim'
+
+  " Navigation
+  Plugin 'kien/ctrlp.vim'
+  Plugin 'goldfeld/vim-seek'
+  Plugin 'mileszs/ack.vim'
+  "Plugin 'Lokaltog/vim-easymotion'
+
+  " Integrations
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'matchit.zip'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-git'
+  Plugin 'tpope/vim-rails'
+  Plugin 'tpope/vim-rake'
+  Plugin 'thoughtbot/vim-rspec'
+
+  " Commands
+  Plugin 'scrooloose/nerdcommenter'
+  Plugin 'mbbill/undotree'
+  "Plugin 'sjl/gundo.vim'
+  Plugin 'tpope/vim-repeat'
+  Plugin 'tpope/vim-surround'
+  Plugin 'vim-scripts/Tabmerge'
+  Plugin 'vim-scripts/restore_view.vim'
+  Plugin 'vim-scripts/sessionman.vim'
+  Plugin 'jgdavey/tslime.vim'
+
+  " UI
+  Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+  Plugin 'airblade/vim-gitgutter'
+  Plugin 'godlygeek/csapprox'
+  Plugin 'junegunn/vim-easy-align'
+  Plugin 'myusuf3/numbers.vim'
+  Plugin 'scrooloose/syntastic'
+
+  " Libs
+  Plugin 'tomtom/tlib_vim'
+  Plugin 'MarcWeber/vim-addon-mw-utils'
+
+  " Colors
+  Plugin 'w0ng/vim-hybrid'
+  Plugin 'jonaustin/vim-colors'
+
+  " Disabled
+  "Plugin 'vim-scripts/scratch.vim'
+  "Plugin 'amix/vim-zenroom'
+  "Plugin 'chrisbra/csv.vim'
+  "Plugin 'majutsushi/tagbar'
+  "Plugin 'mattboehm/vim-unstack'
+  "Plugin 'terryma/vim-multiple-cursors'
+  "Plugin 'tpope/vim-abolish' " smarter subsitution - :%Subvert/facilit{y,ies}/building{,s}/g
+  "Plugin 'tpope/vim-afterimage' " view Word/PDF files
+  "Plugin 'tpope/vim-bundler'
+  "Plugin 'tpope/vim-characterize' " inserting special chars (&copy) and getting unicode codes
+  "Plugin 'tpope/vim-endwise'
+  "Plugin 'tpope/vim-obsession' " probably conflicts with sessionman.vim
+  "Plugin 'tpope/vim-unimpaired'
 
 
   " Turn back on after Vundle finishes its thing
@@ -214,13 +238,13 @@
 " Tricks {
   " Make the current window big, but leave others context {
     " https://www.destroyallsoftware.com/file-navigation-in-vim.html
-    set winwidth=84
+    "set winwidth=84
     " We have to have a winheight bigger than we want to set winminheight. But if
     " we set winheight to be huge before winminheight, the winminheight set will
     " fail.
-    set winheight=5
-    set winminheight=5
-    set winheight=999
+    "set winheight=5
+    "set winminheight=5
+    "set winheight=999
   " }
 " }
 
@@ -455,7 +479,6 @@
   vmap <Enter> <Plug>(EasyAlign)
   " Start interactive EasyAlign with a Vim movement
   nmap <Leader>a <Plug>(EasyAlign)
-" }
 
   " Vim-rspec
   let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
@@ -463,6 +486,10 @@
   map <Leader>T :call RunNearestSpec()<CR>
   "map <Leader>l :call RunLastSpec()<CR>
   "map <Leader>a :call RunAllSpecs()<CR>
+
+  " use silver_searcher instead of ack
+  let g:ackprg = 'ag --nogroup --nocolor --column' 
+" }
 
   " GUI Settings {
   " GVIM- (here instead of .gvimrc)
@@ -548,6 +575,7 @@
           \   exe "normal! g`\"" |
           \ endif
   endif
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/coverage/*
 " }
 
 " Testing {
@@ -582,6 +610,7 @@
   nmap <leader>rci :%!ruby-code-indenter<cr>
   map <leader>sqf :Rcd<cr>:!sort -u tmp/quickfix > tmp/quickfix.sort<cr>:cfile tmp/quickfix.sort<cr>
   map <leader>sc  :!ruby -c %<cr>
+
   command! FR set filetype=ruby
   " Nab lines from ~/.pry_history (respects "count": `,20ph`)
   nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
@@ -665,23 +694,23 @@
   "autocmd InsertLeave * :set relativenumber
   " }
 
-  " Strip trailing whitespace {
-  function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-  endfunction
+  "" Strip trailing whitespace {
+  "function! <SID>StripTrailingWhitespaces()
+    "" Preparation: save last search, and cursor position.
+    "let _s=@/
+    "let l = line(".")
+    "let c = col(".")
+    "" Do the business:
+    "%s/\s\+$//e
+    "" Clean up: restore previous search history, and cursor position
+    "let @/=_s
+    "call cursor(l, c)
+  "endfunction
 
-  if has("autocmd")
-    autocmd Filetype html :call <SID>StripTrailingWhitespaces()
-    autocmd Filetype ruby :call <SID>StripTrailingWhitespaces()
-  endif
+  "if has("autocmd")
+    "autocmd Filetype html :call <SID>StripTrailingWhitespaces()
+    "autocmd Filetype ruby :call <SID>StripTrailingWhitespaces()
+  "endif
   " }
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
