@@ -225,3 +225,17 @@ fixcsv() {
   iconv -f utf-16 -t utf-8 $1 > $1.utf8.csv
   sed -i "s/_RETURN_/\n/g" $1.utf8.csv
 }
+
+scpc() {
+  # extract first element (relative path or '.')
+  rel_path=$1
+  # remove relative path element
+  shift
+  # loop through filenames (escaping those with spaces) and send to remote
+  for n in "${@}"; do
+    scp_wild "$n" root@10.0.1.26:/Removable/MicroSD/Comics/${rel_path} 1984 2222
+  done;
+  #for n in `ls $@`; do
+    #scp_wild $n root@10.0.1.26:/Removable/MicroSD/Comics/ 1984 2222
+  #done;
+}

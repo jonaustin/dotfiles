@@ -28,3 +28,4 @@ blog.vim
 .DS_Store
 .vim/bundle
 .vim/sessions
+initializers_private.sh
