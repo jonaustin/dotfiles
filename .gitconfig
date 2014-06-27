@@ -67,6 +67,9 @@
   # copy a commit from another branch with source info
   cp = cherry-pick -x
 
+  # add via interactive patch!
+  patch = add -p
+
   # logging
   lp = log --pretty=oneline
   lpg = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
@@ -103,4 +106,4 @@
  default=tracking
 
 [pull]
-  ;rebase = true
+  rebase = true
