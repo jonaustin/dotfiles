@@ -19,25 +19,42 @@
   Plugin 'tpope/vim-fireplace'
 
   " Language
-  Plugin 'ecomba/vim-ruby-refactoring'
-  Plugin 'kchmck/vim-coffee-script'
+  Plugin 'tpope/vim-liquid'
+  Plugin 'cakebaker/scss-syntax.vim'
+  Plugin 'ap/vim-css-color'
   Plugin 'mattn/emmet-vim'
-  Plugin 'tpope/vim-haml'
   Plugin 'tpope/vim-markdown'
-  Plugin 'pangloss/vim-javascript'
+  " Ruby
+  Plugin 'ecomba/vim-ruby-refactoring'
+  Plugin 'tpope/vim-haml'
   Plugin 'vim-ruby/vim-ruby'
+  Plugin 'slim-template/vim-slim'
+  Plugin 'sunaku/vim-ruby-minitest'
+  Plugin 'depuracao/vim-rdoc'
+  " Javascript
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'jelera/vim-javascript-syntax'
+  Plugin 'vim-scripts/JavaScript-Indent'
+  Plugin 'othree/javascript-libraries-syntax.vim'
+  Plugin 'kchmck/vim-coffee-script'
+  Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
 
   " Completion
-  Plugin 'ervandew/supertab'
-  Plugin 'garbas/vim-snipmate'
+  Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips
   Plugin 'honza/vim-snippets'
+  Plugin 'Valloric/YouCompleteMe'
+  Plugin 'marijnh/tern_for_vim' " JS
   "Plugin 'Shougo/neocomplete.vim'
+  "Plugin 'ervandew/supertab' " Obsoleted by YCM
+  "Plugin 'Raimondi/delimitMate' " http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
+
 
   " Navigation
   Plugin 'kien/ctrlp.vim'
   Plugin 'goldfeld/vim-seek'
   Plugin 'mileszs/ack.vim'
-  "Plugin 'Lokaltog/vim-easymotion'
+  Plugin 'Lokaltog/vim-easymotion'
+  Plugin 'jeetsukumaran/vim-buffergator' " <leader>b
 
   " Integrations
   Plugin 'scrooloose/nerdtree'
@@ -47,6 +64,9 @@
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-rake'
   Plugin 'thoughtbot/vim-rspec'
+  Plugin 'skwp/vim-rspec'
+  Plugin 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
+  "Plugin 'skalnik/vim-vroom' " ruby ruby tests
 
   " Commands
   Plugin 'scrooloose/nerdcommenter'
@@ -58,6 +78,12 @@
   Plugin 'vim-scripts/restore_view.vim'
   Plugin 'vim-scripts/sessionman.vim'
   Plugin 'jgdavey/tslime.vim'
+  Plugin 'itspriddle/ZoomWin' " <c-w>-o
+  Plugin 'mattn/webapi-vim'
+  Plugin 'terryma/vim-multiple-cursors' " <c-n>
+  Plugin 'thinca/vim-visualstar' " search your selection text in Visual-mode.
+  "Plugin 'chrisbra/NrrwRgn'
+  "Plugin 'rgarver/Kwbd.vim' " delete buffer without closing window
 
   " UI
   Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
@@ -73,6 +99,7 @@
 
   " Colors
   Plugin 'w0ng/vim-hybrid'
+  Plugin 'Lokaltog/vim-distinguished'
   Plugin 'jonaustin/vim-colors'
 
   " Disabled
@@ -469,6 +496,9 @@
   " SnipMate {
   " Setting the author var
   let g:snips_author = 'Jon Austin <jon.i.austin@gmail.com>'
+  " Remap from tab to avoid conflicts with YCM
+  imap <C-J> <Plug>snipMateNextOrTrigger
+  smap <C-J> <Plug>snipMateNextOrTrigger
   " }
 
   " dbext {
@@ -489,6 +519,9 @@
 
   " use silver_searcher instead of ack
   let g:ackprg = 'ag --nogroup --nocolor --column' 
+
+  " YouCompleteMe
+  let g:ycm_add_preview_to_completeopt = 1
 " }
 
   " GUI Settings {
