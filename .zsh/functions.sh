@@ -239,3 +239,8 @@ scpc() {
     #scp_wild $n root@10.0.1.26:/Removable/MicroSD/Comics/ 1984 2222
   #done;
 }
+
+# sum CSV column
+sum_col() {
+  awk -F ',' '{ x = x + $5 } END { print x }' $1
+}

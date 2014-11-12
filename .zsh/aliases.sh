@@ -147,6 +147,7 @@ function git_diff() {
 alias git-diff=git_diff
 alias glpo='git log --oneline --decorate'
 function ggh() {
+  # git grep all history
   echo $1
   git grep $1 $(git rev-list --all)
 }
@@ -221,6 +222,7 @@ alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | 
 # git
 vimgd() { vim -p `git status --short | awk '{print $2}'`; }
 vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
+gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@' } # git branches sorted by date desc
 
 # ruby/rails
 alias szs='sleep 30; zeus s'
@@ -232,3 +234,5 @@ alias ipad_simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/
 # simple http server
 alias serve='ruby -run -e httpd . -p 5000'
 
+# node/npm
+npmd() { npm view $1 description }
