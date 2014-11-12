@@ -31,3 +31,7 @@ fixcsv () {
 	iconv -f utf-16 -t utf-8 $1 > $1.utf8.csv
 	sed -i "s/_RETURN_/\n/g" $1.utf8.csv
 }
+
+# fix history up/down arrow keybindings for Yosemite
+bindkey '^[OA' up-line-or-search
+bindkey '^[OB' down-line-or-search
