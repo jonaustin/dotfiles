@@ -12,11 +12,11 @@
   Plugin 'gmarik/vundle'
 
   " Clojure
-  Plugin 'kien/rainbow_parentheses.vim'
-  Plugin 'guns/vim-clojure-highlight'
-  Plugin 'guns/vim-clojure-static'
-  Plugin 'tpope/vim-classpath'
-  Plugin 'tpope/vim-fireplace'
+  "Plugin 'kien/rainbow_parentheses.vim'
+  "Plugin 'guns/vim-clojure-highlight'
+  "Plugin 'guns/vim-clojure-static'
+  "Plugin 'tpope/vim-classpath'
+  "Plugin 'tpope/vim-fireplace'
 
   " Language
   Plugin 'tpope/vim-liquid'
@@ -31,6 +31,7 @@
   Plugin 'slim-template/vim-slim'
   Plugin 'sunaku/vim-ruby-minitest'
   Plugin 'depuracao/vim-rdoc'
+  Plugin 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
   " Javascript
   Plugin 'pangloss/vim-javascript'
   Plugin 'jelera/vim-javascript-syntax'
@@ -38,11 +39,12 @@
   Plugin 'othree/javascript-libraries-syntax.vim'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
+  Plugin 'mtscout6/vim-cjsx'
 
   " Completion
   Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips
   Plugin 'honza/vim-snippets'
-  Plugin 'Valloric/YouCompleteMe'
+  "Plugin 'Valloric/YouCompleteMe'
   Plugin 'marijnh/tern_for_vim' " JS
   "Plugin 'Shougo/neocomplete.vim'
   "Plugin 'ervandew/supertab' " Obsoleted by YCM
@@ -55,6 +57,7 @@
   Plugin 'mileszs/ack.vim'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'jeetsukumaran/vim-buffergator' " <leader>b
+  Plugin 't9md/vim-choosewin'
 
   " Integrations
   Plugin 'scrooloose/nerdtree'
@@ -64,7 +67,7 @@
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-rake'
   Plugin 'thoughtbot/vim-rspec'
-  Plugin 'skwp/vim-rspec'
+  "Plugin 'skwp/vim-rspec'
   Plugin 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
   "Plugin 'skalnik/vim-vroom' " ruby ruby tests
 
@@ -75,8 +78,9 @@
   Plugin 'tpope/vim-repeat'
   Plugin 'tpope/vim-surround'
   Plugin 'vim-scripts/Tabmerge'
-  Plugin 'vim-scripts/restore_view.vim'
-  Plugin 'vim-scripts/sessionman.vim'
+  "Plugin 'vim-scripts/sessionman.vim'
+  Plugin 'xolox/vim-session'
+  Plugin 'xolox/vim-misc' " required by vim-session
   Plugin 'jgdavey/tslime.vim'
   Plugin 'itspriddle/ZoomWin' " <c-w>-o
   Plugin 'mattn/webapi-vim'
@@ -100,7 +104,15 @@
   " Colors
   Plugin 'w0ng/vim-hybrid'
   Plugin 'Lokaltog/vim-distinguished'
-  Plugin 'jonaustin/vim-colors'
+  "Plugin 'jonaustin/vim-colors'
+  Plugin 'guns/jellyx.vim'
+  "Plugin 'chriskempson/base16'
+  Plugin 'tomasr/molokai'
+  Plugin 'nanotech/jellybeans.vim'
+  Plugin 'vim-scripts/xoria256.vim'
+  Plugin 'ciaranm/inkpot'
+  Plugin 'jnurmine/Zenburn'
+  Plugin 'altercation/vim-colors-solarized'
 
   " Disabled
   "Plugin 'vim-scripts/scratch.vim'
@@ -188,9 +200,10 @@
   ""let g:solarized_termtrans=1
   "colo solarized
   "colo railscasts
-  colo hybrid
+  "colo hybrid
+  colo base16-default
 
-  hi Normal ctermbg=232               " dark background
+  "hi Normal ctermbg=232               " dark background
 
 	set tabpagemax=15 				          " only show 15 tabs
 	set showmode                   	    " display the current mode
@@ -318,18 +331,23 @@
   nmap <leader>ct <C-w><C-]><C-w>T
 
   " tabnew
-  map <leader>tn :tabnew
+  nmap <leader>tn :tabnew
 
   " add/remove numbers
-  map <leader>qn :set nonu<cr>
-  map <leader>an :set nu<cr>
-  map <leader>nq :set nonu<cr>
-  map <leader>na :set nu<cr>
+  nmap <leader>qn :set nonu<cr>
+  nmap <leader>an :set nu<cr>
+  nmap <leader>nq :set nonu<cr>
+  nmap <leader>na :set nu<cr>
+
+  " copy current buffer to new tab
+  " http://vim.wikia.com/wiki/Maximize_window_and_return_to_previous_split_structure
+  nmap <leader>t% :tabedit %<CR>
+  nmap <leader>td :tabclose<CR>
 
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
   " yank all lines
-  map <leader>ya :%y+<cr>
+  nmap <leader>ya :%y+<cr>
 
   " add new line without entering insert mode
   nmap <CR> o<Esc>
@@ -437,6 +455,21 @@
 " }
 
 " Plugins {
+  " syntastic
+  let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+
+  " choosewin
+  nmap  -  <Plug>(choosewin)
+
+  " vim-seeing-is-believing
+  nmap <buffer> <F5> <Plug>(seeing-is-believing-run)
+  xmap <buffer> <F5> <Plug>(seeing-is-believing-run)
+  imap <buffer> <F5> <Plug>(seeing-is-believing-run)
+
+  nmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  xmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  imap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+
 	" NERDTree
 	map <S-q> :NERDTreeToggle<cr>
 
@@ -522,6 +555,10 @@
 
   " YouCompleteMe
   let g:ycm_add_preview_to_completeopt = 1
+  let g:ycm_collect_identifiers_from_tags_files = 1 " ctags
+  " blargh - Tab doesn't work for some reason
+  "let g:ycm_auto_trigger = 0
+  "let g:ycm_key_invoke_completion = '<TAB>'
 " }
 
   " GUI Settings {
@@ -598,6 +635,7 @@
   :let g:ctrlp_match_window_reversed = 0
   :let g:ctrlp_working_path_mode = 0
   :let g:ctrlp_dotfiles = 0
+  :let g:ctrlp_match_window = 'max:10,results:20'
   "}}}
 
 " Various {
@@ -817,7 +855,7 @@
       close!
       tabprev
     endif
-    vsplit
+    split
     execute "buffer " . bufferName
   endfunction
   nmap <C-W>u :call MergeTabs()<CR>
