@@ -141,16 +141,19 @@ alias gpo='git push origin'
   alias gpom='gpo'
 alias gp='git pull'
 alias gclone='git clone '
+alias git-diff=git_diff
+alias glpo='git log --oneline --decorate'
 function git_diff() {
   git diff --no-ext-diff -w "$@" #| vim -R -
 }
-alias git-diff=git_diff
-alias glpo='git log --oneline --decorate'
 function ggh() {
   # git grep all history
   echo $1
   git grep $1 $(git rev-list --all)
 }
+vimgd() { vim -p `git status --short | awk '{print $2}'`; }
+vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
+gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@' } # git branches sorted by date desc
 
 ## ruby
 alias cdstdlib="cd $MY_RUBY_HOME/lib/ruby/1.9.1"
@@ -218,11 +221,6 @@ alias tmat='tmux attach -t'
 alias digsimple='dig +nocmd +nocomments '
 alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is to just use `host <ip>`
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
-
-# git
-vimgd() { vim -p `git status --short | awk '{print $2}'`; }
-vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
-gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@' } # git branches sorted by date desc
 
 # ruby/rails
 alias szs='sleep 30; zeus s'
