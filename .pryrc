@@ -90,7 +90,7 @@ Gem.path.each do |gemset|
   $:.concat(Dir.glob("#{gemset}/gems/yard-*/lib"))
 end if defined?(Bundler)
 $:.uniq!
-require 'pry-editline'
+#require 'pry-editline'
 
 pryrc_local = "#{ENV['HOME']}/.pryrc.local"
 load pryrc_local if File.exist?(pryrc_local)

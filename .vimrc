@@ -3,6 +3,7 @@
 "
 " }
 
+
 " Vundle
 	filetype off                        " required for Vundle
   set rtp+=~/.vim/bundle/vundle/
@@ -32,6 +33,7 @@
   Plugin 'sunaku/vim-ruby-minitest'
   Plugin 'depuracao/vim-rdoc'
   Plugin 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
+  Plugin 'tpope/vim-rvm' " so ruby uses rvm vim instead of system vim
   " Javascript
   Plugin 'pangloss/vim-javascript'
   Plugin 'jelera/vim-javascript-syntax'
@@ -44,7 +46,7 @@
   " Completion
   Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips
   Plugin 'honza/vim-snippets'
-  "Plugin 'Valloric/YouCompleteMe'
+  Plugin 'Valloric/YouCompleteMe'
   Plugin 'marijnh/tern_for_vim' " JS
   "Plugin 'Shougo/neocomplete.vim'
   "Plugin 'ervandew/supertab' " Obsoleted by YCM
@@ -455,6 +457,9 @@
 " }
 
 " Plugins {
+  " vim-session
+  let g:session_autoload = 'no'
+
   " syntastic
   let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 
@@ -556,6 +561,7 @@
   " YouCompleteMe
   let g:ycm_add_preview_to_completeopt = 1
   let g:ycm_collect_identifiers_from_tags_files = 1 " ctags
+  let g:ycm_filetype_blacklist = { 'ruby' : 1 } " will not work with ruby files (segfault) so just disable. egh.
   " blargh - Tab doesn't work for some reason
   "let g:ycm_auto_trigger = 0
   "let g:ycm_key_invoke_completion = '<TAB>'
