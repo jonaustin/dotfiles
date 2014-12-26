@@ -456,6 +456,12 @@
   map! <S-Insert> <MiddleMouse>
 " }
 
+" Autocomplete
+" Ruby
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
 " Plugins {
   " vim-session
   let g:session_autoload = 'no'
@@ -556,7 +562,7 @@
   "map <Leader>a :call RunAllSpecs()<CR>
 
   " use silver_searcher instead of ack
-  let g:ackprg = 'ag --nogroup --nocolor --column' 
+  let g:ackprg = 'ag --nogroup --nocolor --column'
 
   " YouCompleteMe
   let g:ycm_add_preview_to_completeopt = 1
