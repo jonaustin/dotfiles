@@ -242,5 +242,10 @@ scpc() {
 
 # sum CSV column
 sum_col() {
-  awk -F ',' '{ x = x + $5 } END { print x }' $1
+  awk -F ',' '{ x = x + $4 } END { print x }' $1
+}
+
+# sum mint csv
+sum_mint_csv() {
+  awk -F ',' '{str=$4; gsub(/"/, "", str); x=x+str} END { print x }' $1
 }
