@@ -18,10 +18,6 @@ Thumbs.db
 /tags
 
 .rake_tasks
-.rvmrc
-.ruby-version
-.ruby-gemset
-
 .powrc
 
 # whibse
