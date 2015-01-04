@@ -23,7 +23,7 @@
   Plugin 'guns/vim-sexp.git'
 
   " Language
-  Plugin 'tpope/vim-liquid'
+  "Plugin 'tpope/vim-liquid' " jekyll
   Plugin 'cakebaker/scss-syntax.vim'
   Plugin 'ap/vim-css-color'
   Plugin 'mattn/emmet-vim'
@@ -34,12 +34,11 @@
   Plugin 'ecomba/vim-ruby-refactoring'
   Plugin 'tpope/vim-haml'
   Plugin 'vim-ruby/vim-ruby'
-  Plugin 'slim-template/vim-slim'
-  Plugin 'sunaku/vim-ruby-minitest'
-  Plugin 'depuracao/vim-rdoc'
+  "Plugin 'slim-template/vim-slim'
+  "Plugin 'sunaku/vim-ruby-minitest'
+  "Plugin 'depuracao/vim-rdoc'
   Plugin 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
-  Plugin 'tpope/vim-rvm' " so ruby uses rvm vim instead of system vim
-
+  "Plugin 'tpope/vim-rvm' " switch ruby versions within vim
   " Javascript
   Plugin 'pangloss/vim-javascript'
   Plugin 'jelera/vim-javascript-syntax'
@@ -47,10 +46,10 @@
   Plugin 'othree/javascript-libraries-syntax.vim'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
-  Plugin 'mtscout6/vim-cjsx'
+  Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
 
   " Completion
-  Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips
+  Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
   Plugin 'honza/vim-snippets'
   Plugin 'Valloric/YouCompleteMe'
   Plugin 'marijnh/tern_for_vim' " JS
@@ -60,11 +59,11 @@
 
   " Navigation
   Plugin 'kien/ctrlp.vim'
-  Plugin 'goldfeld/vim-seek'
-  Plugin 'mileszs/ack.vim'
-  Plugin 'Lokaltog/vim-easymotion'
-  Plugin 'jeetsukumaran/vim-buffergator' " <leader>b
-  Plugin 't9md/vim-choosewin'
+  Plugin 'goldfeld/vim-seek'              " <leader>s<2 chars>
+  Plugin 'mileszs/ack.vim'                " :Ack <search>
+  Plugin 'Lokaltog/vim-easymotion'        " <leader><leader>w
+  Plugin 'jeetsukumaran/vim-buffergator'  " <leader>b
+  Plugin 't9md/vim-choosewin'             " -
 
   " Integrations
   Plugin 'scrooloose/nerdtree'
@@ -76,7 +75,7 @@
   Plugin 'thoughtbot/vim-rspec'
   "Plugin 'skwp/vim-rspec'
   Plugin 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
-  "Plugin 'skalnik/vim-vroom' " ruby ruby tests
+  "Plugin 'skalnik/vim-vroom' " ruby tests
 
   " Commands
   Plugin 'scrooloose/nerdcommenter'
@@ -86,7 +85,7 @@
   Plugin 'tpope/vim-surround'
   Plugin 'vim-scripts/Tabmerge'
   "Plugin 'vim-scripts/sessionman.vim'
-  Plugin 'xolox/vim-session'
+  Plugin 'xolox/vim-session' " :OpenSession / :SaveSession
   Plugin 'xolox/vim-misc' " required by vim-session
   Plugin 'jgdavey/tslime.vim'
   Plugin 'itspriddle/ZoomWin' " <c-w>-o
@@ -100,7 +99,7 @@
   Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
   Plugin 'airblade/vim-gitgutter'
   Plugin 'godlygeek/csapprox'
-  Plugin 'junegunn/vim-easy-align'
+  Plugin 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
   Plugin 'myusuf3/numbers.vim'
   Plugin 'scrooloose/syntastic'
 
