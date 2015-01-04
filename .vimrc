@@ -5,12 +5,13 @@
 
 
 " Vundle
+	set nocompatible 		                " must be first directive
 	filetype off                        " required for Vundle
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
 
   " let Vundle manage Vundle
-  Plugin 'gmarik/vundle'
+  Plugin 'gmarik/Vundle.vim'
 
   " Clojure
   Plugin 'kien/rainbow_parentheses.vim'
@@ -133,13 +134,14 @@
   "Plugin 'tpope/vim-obsession' " probably conflicts with sessionman.vim
   "Plugin 'tpope/vim-unimpaired'
 
+  " All of your Plugins must be added before the following line
+  call vundle#end()                     " required
 
   " Turn back on after Vundle finishes its thing
   filetype plugin indent on  	        " Automatically detect file types.
 
 
 " Basics {
-	set nocompatible 		                " must be first line
 	let mapleader = ","
   set clipboard+=unnamed               " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   ":set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
