@@ -13,11 +13,13 @@
   Plugin 'gmarik/vundle'
 
   " Clojure
-  "Plugin 'kien/rainbow_parentheses.vim'
-  "Plugin 'guns/vim-clojure-highlight'
-  "Plugin 'guns/vim-clojure-static'
-  "Plugin 'tpope/vim-classpath'
-  "Plugin 'tpope/vim-fireplace'
+  Plugin 'kien/rainbow_parentheses.vim'
+  Plugin 'guns/vim-clojure-highlight'
+  Plugin 'guns/vim-clojure-static'
+  Plugin 'tpope/vim-classpath'
+  Plugin 'tpope/vim-fireplace' " ( nrepl middleware: https://github.com/clojure-emacs/cider-nrepl )
+  Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+  Plugin 'guns/vim-sexp.git'
 
   " Language
   Plugin 'tpope/vim-liquid'
@@ -571,6 +573,13 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " blargh - Tab doesn't work for some reason
   "let g:ycm_auto_trigger = 0
   "let g:ycm_key_invoke_completion = '<TAB>'
+
+  " Clojure
+  " RainbowParentheses
+  au BufEnter *.clj RainbowParenthesesActivate
+  au Syntax clojure RainbowParenthesesLoadRound
+  au Syntax clojure RainbowParenthesesLoadSquare
+  au Syntax clojure RainbowParenthesesLoadBraces
 " }
 
   " GUI Settings {
