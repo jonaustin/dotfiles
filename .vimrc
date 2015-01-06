@@ -28,6 +28,8 @@
   Plugin 'ap/vim-css-color'
   Plugin 'mattn/emmet-vim'
   Plugin 'tpope/vim-markdown'
+  Plugin 'tfnico/vim-gradle' " gradle syntax
+
   " Ruby
   Plugin 'ecomba/vim-ruby-refactoring'
   Plugin 'tpope/vim-haml'
@@ -37,6 +39,7 @@
   Plugin 'depuracao/vim-rdoc'
   Plugin 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
   Plugin 'tpope/vim-rvm' " so ruby uses rvm vim instead of system vim
+
   " Javascript
   Plugin 'pangloss/vim-javascript'
   Plugin 'jelera/vim-javascript-syntax'
@@ -54,7 +57,6 @@
   "Plugin 'Shougo/neocomplete.vim'
   "Plugin 'ervandew/supertab' " Obsoleted by YCM
   "Plugin 'Raimondi/delimitMate' " http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
-
 
   " Navigation
   Plugin 'kien/ctrlp.vim'
@@ -111,7 +113,7 @@
   Plugin 'Lokaltog/vim-distinguished'
   "Plugin 'jonaustin/vim-colors'
   Plugin 'guns/jellyx.vim'
-  "Plugin 'chriskempson/base16'
+  Plugin 'chriskempson/base16'
   Plugin 'tomasr/molokai'
   Plugin 'nanotech/jellybeans.vim'
   Plugin 'vim-scripts/xoria256.vim'
