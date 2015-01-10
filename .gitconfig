@@ -2,7 +2,6 @@
   name = Jon Austin
   email = jon.i.austin@gmail.com
 [github]
-  token = 93d49b6e93fe6b3b1ff4f9c901352de2
   user = jonaustin
 [color]
   ui = auto
@@ -15,11 +14,6 @@
   excludesfile = /Users/jon/.gitignore_global
 [merge]
   tool = vimdiff
-[mergetool "p4merge"]
-  cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
-  keepTemporaries = false
-  trustExitCode = false
-  keepBackup = false
 #[diff]
 # external = git_diff_wrapper
 [pager]
@@ -90,17 +84,6 @@
   uncommit = reset --soft HEAD^ # go back one commit, put changes into your working dir and index
   chunkyadd = add --patch # stage commits chunk by chunk
   amend = commit --amend # fix last commit
-
-;[remote "mine"]
-  ;url = git@git.legitscript.com:web-jon
-  ;fetch = +refs/heads/*:refs/remotes/web-jon/*
-
-[giggle]
-  main-window-maximized = false
-  main-window-geometry = 1920x1080+1920+0
-  history-view-vpane-position = 169
-  file-view-vpane-position = 158
-  main-window-view = HistoryView
 
 [push]
  default=tracking
