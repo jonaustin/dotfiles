@@ -249,3 +249,8 @@ sum_col() {
 sum_mint_csv() {
   awk -F ',' '{str=$4; gsub(/"/, "", str); x=x+str} END { print x }' $1
 }
+
+# view markdown files as formatted man pages
+markdown-view() {
+  pandoc -s -f markdown -t man $1 | groff -T utf8 -man | less
+}
