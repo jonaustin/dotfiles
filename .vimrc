@@ -470,6 +470,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 " Plugins {
   " vim-session
   let g:session_autoload = 'no'
+  let g:session_autosave = 'yes'
 
   " syntastic
   let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
