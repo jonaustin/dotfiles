@@ -254,3 +254,8 @@ sum_mint_csv() {
 markdown-view() {
   pandoc -s -f markdown -t man $1 | groff -T utf8 -man | less
 }
+
+split-asn() {
+  sed -i '' "s/,ASN Number,/,ASN Number, ASN Name,/" "$1"
+  sed -i '' "s/,\(AS[^\s]+\) \([^,]*\)/,\1,\2/"  "$1"
+}
