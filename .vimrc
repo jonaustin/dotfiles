@@ -66,6 +66,7 @@
   Plugin 't9md/vim-choosewin'             " -
 
   " Integrations
+  Plugin 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
   Plugin 'scrooloose/nerdtree'
   Plugin 'matchit.zip'
   Plugin 'tpope/vim-fugitive'
@@ -468,6 +469,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Plugins {
+  " Dash
+  nmap <silent> <leader>d <Plug>DashSearch
+
   " vim-session
   let g:session_autoload = 'no'
   let g:session_autosave = 'yes'
