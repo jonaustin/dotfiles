@@ -688,20 +688,20 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   augroup filetypedetect
     "" Detect .txt as 'text'
     autocmd! BufNewFile,BufRead *.txt setfiletype text
-    "" cakephp
-    autocmd! BufNewFile,BufRead *.thtml setfiletype php
-    autocmd! BufNewFile,BufRead *.ctp setfiletype php
-    "" sass
+    " sass
     autocmd! BufNewFile,BufRead *.scss setfiletype sass
     "" epub
-    autocmd! BufReadCmd   *.epub      call zip#Browse(expand("<amatch>"))
-    "" markdown
+    autocmd! BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+    " markdown
     autocmd! BufNewFile,BufRead *.md setfiletype markdown
     autocmd! BufNewFile,BufRead *.mkd setfiletype markdown
     autocmd! BufNewFile,BufRead *.markdown setfiletype markdown
-    autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
-    "" shell
+    " shell
     autocmd! BufNewFile,BufRead *.zsh-theme setfiletype zsh
+    " javascript
+    autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+    " ruby
+    autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
   augroup END
 " }
 
