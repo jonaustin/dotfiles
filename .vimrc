@@ -566,8 +566,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Vim-rspec
   let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
-  map <Leader>t :call RunCurrentSpecFile()<CR>
-  map <Leader>T :call RunNearestSpec()<CR>
+  map <Leader>r :call RunCurrentSpecFile()<CR>
+  map <Leader>R :call RunNearestSpec()<CR>
   "map <Leader>l :call RunLastSpec()<CR>
   "map <Leader>a :call RunAllSpecs()<CR>
 
