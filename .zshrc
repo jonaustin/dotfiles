@@ -68,3 +68,4 @@ elif [ `uname -o` = "GNU/Linux" ]; then
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=./bin:$PATH # use binstubs
