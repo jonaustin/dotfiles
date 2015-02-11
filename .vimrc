@@ -759,7 +759,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   function! UpdateHashSyntax()
     :normal! H
-    :%s/:\([^ ]*\)\(\s*\)=>/\1:/g
+    :%s/:\([^ ]*\)\(\s*\)=>/\1: /g
+    :%s/"\([^ ]*\)"\(\s*\)=>/\1: /g
     :normal ==
   endfunction
   :command! UpdateHashSyntax :call UpdateHashSyntax()
