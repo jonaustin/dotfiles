@@ -30,7 +30,7 @@ set -o vi
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 ulimit -S -c 0 # Don't want any coredumps
-stty -ixon -ixoff # disable ^S/^Q flow control
+stty -ixon # disable ^S/^Q flow control
 # }}}
 
 # Exports {{{
