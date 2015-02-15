@@ -49,8 +49,9 @@
   Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
 
   " Completion
-  Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
-  Plugin 'honza/vim-snippets'
+  "Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
+  "Plugin 'SirVer/ultisnips'
+  "Plugin 'honza/vim-snippets'
   Plugin 'Valloric/YouCompleteMe'
   Plugin 'marijnh/tern_for_vim' " JS
   "Plugin 'Shougo/neocomplete.vim'
