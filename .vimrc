@@ -661,11 +661,12 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
 
   " Ctrl-P {{{
-  :let g:ctrlp_match_window_bottom = 0
-  :let g:ctrlp_match_window_reversed = 0
-  :let g:ctrlp_working_path_mode = 0
-  :let g:ctrlp_dotfiles = 0
-  :let g:ctrlp_match_window = 'max:10,results:20'
+  let g:ctrlp_match_window_bottom = 0
+  let g:ctrlp_match_window_reversed = 0
+  let g:ctrlp_working_path_mode = 0
+  let g:ctrlp_dotfiles = 0
+  let g:ctrlp_match_window = 'max:10,results:20'
+  let g:ctrlp_custom_ignore = 'node_modules'
   "}}}
 
 " Various {
