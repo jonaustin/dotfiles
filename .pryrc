@@ -84,6 +84,11 @@ Pry.commands.alias_command 's', 'step'
 Pry.commands.alias_command 'n', 'next'
 Pry.commands.alias_command 'f', 'finish' # byebug only (I think)
 
+# Hit Enter to repeat last command
+Pry::Commands.command /^$/, "repeat last command" do
+  _pry_.run_command Pry.history.to_a.last
+end
+
 # Use pry-editline (tpope) if available (this'll make it work even if its not in Gemfile)
 Gem.path.each do |gemset|
   $:.concat(Dir.glob("#{gemset}/gems/pry-*/lib"))
