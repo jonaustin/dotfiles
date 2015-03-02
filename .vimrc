@@ -39,6 +39,7 @@
   "Plugin 'depuracao/vim-rdoc'
   Plugin 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
   "Plugin 'tpope/vim-rvm' " switch ruby versions within vim
+
   " Javascript
   Plugin 'pangloss/vim-javascript'
   Plugin 'jelera/vim-javascript-syntax'
@@ -46,7 +47,10 @@
   Plugin 'othree/javascript-libraries-syntax.vim'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
+  "" JSX - note also need `npm install -g jshint jsxhint`
   Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
+  Plugin 'mxw/vim-jsx' 
+
 
   " Completion
   "Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
@@ -479,6 +483,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " syntastic
   let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+  let g:syntastic_javascript_checkers = ['jsxhint']
 
   " choosewin
   nmap  -  <Plug>(choosewin)
