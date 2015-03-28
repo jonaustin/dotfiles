@@ -1,3 +1,4 @@
+gem-wrappers
 rubygems-bundler
 bundler
 rake
@@ -8,7 +9,7 @@ gem-ctags
 tmuxinator
 pry
 pry-editline
-pry-debugger
+pry-byebug
 pry-doc
 powder
 awesome_print
