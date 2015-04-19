@@ -234,3 +234,9 @@ alias serve='ruby -run -e httpd . -p 5000'
 
 # node/npm
 npmd() { npm view $1 description }
+
+# get remote ip
+alias myip="curl ifconfig.me"
+
+# run various updates
+alias maint='sh ~/bin/maintenance.sh'
