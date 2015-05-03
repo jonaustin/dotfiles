@@ -39,6 +39,7 @@ end
 
 # Improved formatting for objects
 #load_gem 'awesome_print'
+require 'ostruct' # must be required before awesome_print, otherwise openstruct support will not be loaded
 require "awesome_print"
 AwesomePrint.irb!
 

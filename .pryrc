@@ -97,6 +97,7 @@ end if defined?(Bundler)
 $:.uniq!
 #require 'pry-editline'
 
+require 'ostruct' # must be required before awesome_print, otherwise openstruct support will not be loaded
 require "awesome_print"
 AwesomePrint.pry!
 

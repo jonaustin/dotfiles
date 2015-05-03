@@ -634,7 +634,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Vimux {
   " Note: So this sort of works:
-  " * <Leader>vir
+  " * <Leader>vir -- should not be needed, but sometimes is..
   " * switch to new pane and run pry/irb/etc (note: pry puts in tons of extra " newlines for some reason..)
   " * <Leader>vs to run current paragragh
   " * <Leader>va to run current buffer
