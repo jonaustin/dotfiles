@@ -97,5 +97,8 @@ end if defined?(Bundler)
 $:.uniq!
 #require 'pry-editline'
 
+require "awesome_print"
+AwesomePrint.pry!
+
 pryrc_local = "#{ENV['HOME']}/.pryrc.local"
 load pryrc_local if File.exist?(pryrc_local)

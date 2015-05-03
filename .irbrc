@@ -38,7 +38,9 @@ end
 #end
 
 # Improved formatting for objects
-load_gem 'awesome_print'
+#load_gem 'awesome_print'
+require "awesome_print"
+AwesomePrint.irb!
 
 # i.e. rh 'collect'
 def rh(*args); system('ri', *args); end
