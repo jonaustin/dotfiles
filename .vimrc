@@ -49,14 +49,14 @@
   Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
   "" JSX - note also need `npm install -g jshint jsxhint`
   Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
-  Plugin 'mxw/vim-jsx' 
+  Plugin 'mxw/vim-jsx'
 
 
   " Completion
   "Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
   "Plugin 'SirVer/ultisnips'
   "Plugin 'honza/vim-snippets'
-  Plugin 'Valloric/YouCompleteMe'
+  "Plugin 'Valloric/YouCompleteMe'
   Plugin 'marijnh/tern_for_vim' " JS
   "Plugin 'Shougo/neocomplete.vim'
   "Plugin 'ervandew/supertab' " Obsoleted by YCM
@@ -93,7 +93,8 @@
   "Plugin 'vim-scripts/sessionman.vim'
   Plugin 'xolox/vim-session' " :OpenSession / :SaveSession
   Plugin 'xolox/vim-misc' " required by vim-session
-  Plugin 'jgdavey/tslime.vim'
+  "Plugin 'jgdavey/tslime.vim'
+  Plugin 'benmills/vimux'
   Plugin 'itspriddle/ZoomWin' " <c-w>-o
   Plugin 'mattn/webapi-vim'
   Plugin 'terryma/vim-multiple-cursors' " <c-n>
@@ -630,14 +631,38 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " }
 
   " Vimux {
+  " Note: So this sort of works:
+  " * <Leader>vir
+  " * switch to new pane and run pry/irb/etc (note: pry puts in tons of extra " newlines for some reason..)
+  " * <Leader>vs to run current paragragh
+  " * <Leader>va to run current buffer
+  "
   " https://github.com/benmills/vimux/
   " Config
   " Use exising pane (not used by vim) if found instead of running split-window.
   let VimuxUseNearestPane = 1
   let g:VimuxOrientation = "v"
 
-  " open rails console
-  map <Leader>vc :call VimuxRunCommand("clear; bundle exec rails c")<CR>:VimuxSwitchToRunner<CR>
+  function! VimuxSlime()
+    call VimuxRunCommand('') " egh, hack to make it actually work (otherwise it just complains about 'No vimux runner pane/window. Create one with VimuxOpenRunner'
+    call VimuxSendText(@v)
+  endfunction
+
+  " Init runner since vimux can't seem to do so itself. egh.
+  nmap <Leader>vir :VimuxRunCommand('')<CR>
+
+ " If text is selected, save it in the v buffer and send that buffer it to tmux
+ " Note the lack of a space between vy:call - having one there (as in the docs)
+ " triggers folding
+ vmap <Leader>vs "vy:call VimuxSlime()<CR>
+
+ " Select current paragraph and send it to tmux
+ "nmap <Leader>vs vip<Leader>vs
+ " mark current position (a) and return
+ nmap <Leader>vs mavip<Leader>vs'a
+
+  " send contents of current buffer to tmux pane
+  nmap <Leader>va :%y+<CR><Leader>vs
 
   " Prompt for a command to run
   map <Leader>vp :VimuxPromptCommand<CR>
@@ -658,12 +683,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Close all other tmux panes in current window
   map <Leader>vx :VimuxClosePanes<CR>
-
-  " If text is selected, save it in the v buffer and send that buffer it to tmux
-  vmap <LocalLeader>vs "vy :call VimuxRunCommand(@v . "\n", 0)<CR>
-
-  " Select current paragraph and send it to tmux
-  nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
 
   " Ctrl-P {{{
   let g:ctrlp_match_window_bottom = 0
