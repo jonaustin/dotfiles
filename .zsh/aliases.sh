@@ -240,3 +240,9 @@ alias myip="curl ifconfig.me"
 
 # run various updates
 alias maint='sh ~/bin/maintenance.sh'
+
+# https://github.com/nvbn/thefuck
+alias fuck='$(thefuck $(fc -ln -1))'
+
+# Rails/ruby
+alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
