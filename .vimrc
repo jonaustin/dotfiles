@@ -78,6 +78,7 @@
   Plugin 'tpope/vim-git'
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-rake'
+  Plugin 'jgdavey/tslime.vim' " needed for vim-rspec
   Plugin 'thoughtbot/vim-rspec'
   "Plugin 'skwp/vim-rspec'
   Plugin 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
@@ -93,7 +94,6 @@
   "Plugin 'vim-scripts/sessionman.vim'
   Plugin 'xolox/vim-session' " :OpenSession / :SaveSession
   Plugin 'xolox/vim-misc' " required by vim-session
-  "Plugin 'jgdavey/tslime.vim'
   Plugin 'benmills/vimux'
   Plugin 'itspriddle/ZoomWin' " <c-w>-o
   Plugin 'mattn/webapi-vim'
