@@ -1,0 +1,13 @@
+let mapleader = ","
+
+" easy tab switching
+map <S-H> gT
+map <S-L> gt
+
+" remap jj to escape
+inoremap jj <ESC>
+inoremap jk <ESC>
+
+" Quickly toggle wrap mode (for the current window)
+nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
+
