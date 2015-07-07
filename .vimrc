@@ -182,7 +182,7 @@
   " Disable Ex mode
   map Q <Nop>
   " Disable K looking stuff up
-  map K <Nop>
+  "map K <Nop>
 
 
 	" Setting up the directories {
@@ -303,6 +303,8 @@
 " }
 
 " Key Mappings {
+
+  map <C-l> :redraw!<cr>
 
   " Aliases {
   :command! Wq wq
@@ -572,7 +574,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   nmap <Leader>a <Plug>(EasyAlign)
 
   " Vim-rspec
-  let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+  let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
   map <Leader>r :call RunCurrentSpecFile()<CR>
   map <Leader>R :call RunNearestSpec()<CR>
   "map <Leader>l :call RunLastSpec()<CR>
