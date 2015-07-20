@@ -30,7 +30,7 @@ alias lt='ls -lt'
 alias lth='ls -lt|head'
 alias lthn='ls -lt|head -n'
 alias lh='ls -lhS' # sort by filesize
-alias lsd="ls -l $1 | grep -r ^d"
+alias lsd="ls -l $1 | grep '^d'"
 alias lsd2="ls -F $1 | grep \/ | sed -e 's/\/$//g'"
 
 ## App shortcuts (GUI/Curses)

@@ -68,4 +68,4 @@ elif [ `uname -o` = "GNU/Linux" ]; then
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=./bin:$PATH # use binstubs
+PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin # postgres
