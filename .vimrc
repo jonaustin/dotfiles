@@ -347,7 +347,8 @@
   nmap <leader>ct <C-w><C-]><C-w>T
 
   " tabnew
-  nmap <leader>tn :tabnew
+  nmap <leader>tn :tabnew<CR>
+  nmap <> :tabn<CR>
 
   " add/remove numbers
   nmap <leader>qn :set nonu<cr>
@@ -948,4 +949,14 @@ function! OpenChangedFiles()
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 noremap<Leader>C :OpenChangedFiles <CR>
+
+fun! s:FindWordUnderCursor()
+  " Yank the word under the cursor into the z register
+  normal "zyiw
+  exec "copen"
+
+  exec "Ack '" . @z . "'"
+endfun
+nmap <Leader>a :call <SID>FindWordUnderCursor()<CR>
+
 " }}}
