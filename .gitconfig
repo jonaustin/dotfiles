@@ -85,6 +85,9 @@
   chunkyadd = add --patch # stage commits chunk by chunk
   amend = commit --amend # fix last commit
 
+  # open modified files in vim tabs
+  edit = "!vim `git ls-files -m` -p"
+
 [push]
  default=tracking
 
