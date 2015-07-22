@@ -87,6 +87,7 @@
 
   # open modified files in vim tabs
   edit = "!vim `git ls-files -m` -p"
+  edit-last = "!vim `git diff-tree --no-commit-id --name-only -r HEAD~1` -p"
 
 [push]
  default=tracking
