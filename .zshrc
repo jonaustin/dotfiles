@@ -34,11 +34,11 @@ stty -ixon # disable ^S/^Q flow control
 # }}}
 
 # Exports {{{
-export EDITOR='/usr/bin/vim'
-export SHELL='/bin/zsh'
+export EDITOR='/usr/local/bin/vim'
+export SHELL='/usr/local/bin/zsh'
 export PAGER='less'
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R' # --LINE-NUMBERS --quit-if-one-screen' # -R for less coloring with source-highlight (external app)
-export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| src-hilite-lesspipe.sh %s"
 #export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
 export TERM=screen-256color # unfortunately required so tmux doesn't color bleed - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=618809
 
@@ -49,7 +49,7 @@ export INPUTRC=~/.inputrc
 #export http_proxy=http://127.0.0.1:8118
 # }}}
 
-# Colorful manpages
+# Colourful manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -58,14 +58,30 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-
-source ~/.zsh/initializers.sh
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 
 if [ `uname` = "Darwin" ]; then
+  export PATH="/usr/local/share/npm/bin:$PATH"
+  export PATH="/Users/jon/pear/bin:$PATH"
+  export PATH="$PATH:/sbin:/usr/sbin"
   . ${HOME}/.zsh/zshrc.local.osx
 elif [ `uname -o` = "GNU/Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin # postgres
+source ~/.zsh/initializers.sh
+source ~/.zsh/initializers_private.sh
+
+PATH=$HOME/.rvm/bin:$PATH
+
+# Fix git sloooow autocompletion
+# https://superuser.com/questions/458906/zsh-tab-completion-of-git-commands-is-very-slow-how-can-i-turn-it-off
+#setopt no_complete_aliases
+#__git_files () {
+#    _wanted files expl 'local files' _files
+#}
+# egh, just disable intelligent completion: http://www.zsh.org/mla/workers/2011/msg00502.html
+__git_files(){}
+__git_complete_index_file(){}
+# or disable git completion entirely
+#compdef -d git
