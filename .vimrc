@@ -47,7 +47,6 @@
   Plugin 'othree/javascript-libraries-syntax.vim'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
-  "" JSX - note also need `npm install -g jshint jsxhint`
   Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
   Plugin 'mxw/vim-jsx'
 
@@ -101,6 +100,7 @@
   Plugin 'thinca/vim-visualstar' " search your selection text in Visual-mode.
   "Plugin 'chrisbra/NrrwRgn'
   "Plugin 'rgarver/Kwbd.vim' " delete buffer without closing window
+  Plugin 'sickill/vim-pasta' " auto-indents p/P pasting based on context
 
   " UI
   Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
@@ -487,7 +487,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " syntastic
   let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
-  let g:syntastic_javascript_checkers = ['jsxhint']
+  let g:syntastic_javascript_checkers = ['standard']
 
   " choosewin
   nmap  -  <Plug>(choosewin)
