@@ -488,6 +488,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " syntastic
   let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
   let g:syntastic_javascript_checkers = ['standard']
+  let g:syntastic_ruby_mri_exec = "~/.rvm/rubies/ruby-2.2.0/bin/ruby"
 
   " choosewin
   nmap  -  <Plug>(choosewin)
