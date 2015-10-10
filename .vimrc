@@ -55,7 +55,7 @@
   "Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
   "Plugin 'SirVer/ultisnips'
   "Plugin 'honza/vim-snippets'
-  "Plugin 'Valloric/YouCompleteMe'
+  Plugin 'Valloric/YouCompleteMe'
   Plugin 'marijnh/tern_for_vim' " JS
   "Plugin 'Shougo/neocomplete.vim'
   "Plugin 'ervandew/supertab' " Obsoleted by YCM
@@ -151,9 +151,9 @@
 
 " Basics {
 	let mapleader = ","
-  set clipboard+=unnamed               " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+  set clipboard+=unnamed              " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   ":set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
-  set noautochdir                 " do not automatically change directory
+  set noautochdir                     " do not automatically change directory
   set cryptmethod=blowfish            " strong blowfish encryption (instead of zip)
 " }
 
@@ -588,7 +588,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " YouCompleteMe
   let g:ycm_add_preview_to_completeopt = 1
   let g:ycm_collect_identifiers_from_tags_files = 1 " ctags
-  let g:ycm_filetype_blacklist = { 'ruby' : 1 } " will not work with ruby files (segfault) so just disable. egh.
+  "let g:ycm_filetype_blacklist = { 'ruby' : 1 } " will not work with ruby files (segfault) so just disable. egh.
   " blargh - Tab doesn't work for some reason
   "let g:ycm_auto_trigger = 0
   "let g:ycm_key_invoke_completion = '<TAB>'
