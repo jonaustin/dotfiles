@@ -14,7 +14,7 @@
   Plugin 'gmarik/Vundle.vim'
 
   " Clojure
-  Plugin 'kien/rainbow_parentheses.vim'
+  Plugin 'eapache/rainbow_parentheses.vim'
   Plugin 'guns/vim-clojure-highlight'
   Plugin 'guns/vim-clojure-static'
   Plugin 'tpope/vim-classpath'
