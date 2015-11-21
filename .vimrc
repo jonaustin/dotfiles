@@ -14,7 +14,7 @@
   Plugin 'gmarik/Vundle.vim'
 
   " Clojure
-  Plugin 'eapache/rainbow_parentheses.vim'
+  Plugin 'eapache/rainbow_parentheses.vim' " better alt?: https://github.com/luochen1990/rainbow
   Plugin 'guns/vim-clojure-highlight'
   Plugin 'guns/vim-clojure-static'
   Plugin 'tpope/vim-classpath'
@@ -126,6 +126,7 @@
   Plugin 'ciaranm/inkpot'
   Plugin 'jnurmine/Zenburn'
   Plugin 'altercation/vim-colors-solarized'
+  Plugin 'sjl/badwolf' " clojure
 
   " Disabled
   "Plugin 'vim-scripts/scratch.vim'
