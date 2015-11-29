@@ -733,6 +733,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd BufRead,BufNewFile *.es6 setfiletype javascript
     " ruby
     autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
+    " json
+    autocmd! BufRead,BufNewFile .{eslintrc,babelrc} setf json
   augroup END
 " }
 
