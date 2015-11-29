@@ -720,7 +720,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     "" Detect .txt as 'text'
     autocmd! BufNewFile,BufRead *.txt setfiletype text
     " sass
-    autocmd! BufNewFile,BufRead *.scss setfiletype sass
+    autocmd! BufNewFile,BufRead *.{sass,scss} setfiletype sass
     "" epub
     autocmd! BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
     " markdown
@@ -735,6 +735,10 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
     " json
     autocmd! BufRead,BufNewFile .{eslintrc,babelrc} setf json
+    " groovy
+    autocmd! BufRead,BufNewFile *.gradle setf groovy
+    " gitconfig
+    autocmd! BufRead,BufNewFile gitconfig setf gitconfig
   augroup END
 " }
 
