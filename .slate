@@ -31,43 +31,43 @@ alias leftless      move screenOriginX;screenOriginY
 # }}}
 
 ### Layouts {{{
-# Chrome / iTerm
-layout ChromeiTerm 'Google Chrome' push left bar-resize:screenSizeX/2
-layout ChromeiTerm 'iTerm' push right bar-resize:screenSizeX/2
-bind 1:${hyper} sequence focus 'Google Chrome' | focus 'iTerm' | layout ChromeiTerm
+# Chrome / Terminal
+layout ChromeTerminal 'Google Chrome' push left bar-resize:screenSizeX/2
+layout ChromeTerminal 'Terminal' push right bar-resize:screenSizeX/2
+bind 1:${hyper} sequence focus 'Google Chrome' | focus 'Terminal' | layout ChromeTerminal
 
-# Preview / iTerm
-layout PreviewiTerm 'Preview' push left bar-resize:screenSizeX/2
-layout PreviewiTerm 'iTerm' push right bar-resize:screenSizeX/2
-bind 2:${hyper} sequence focus 'Preview' | focus 'iTerm' | layout PreviewiTerm
+# Preview / Terminal
+layout PreviewTerminal 'Terminal' push left bar-resize:screenSizeX/2
+layout PreviewTerminal 'Preview' push right bar-resize:screenSizeX/2
+bind 2:${hyper} sequence focus 'Preview' | focus 'Terminal' | layout PreviewTerminal
 
 # Preview / SublimeText
 layout PreviewSublimeText 'Preview' push left bar-resize:screenSizeX/2
 layout PreviewSublimeText 'Sublime Text 2' push right bar-resize:screenSizeX/2
 bind 3:${hyper} sequence focus 'Preview' | focus 'Sublime Text 2' | layout PreviewSublimeText
 
-# Clearview / iTerm
-layout ClearviewiTerm 'Clearview' push left bar-resize:screenSizeX/3
-layout ClearviewiTerm 'iTerm' push right bar-resize:screenSizeX/1.5
-bind 4:${hyper} sequence focus 'Clearview' | focus 'iTerm' | layout ClearviewiTerm
+# Clearview / Terminal
+layout ClearviewTerminal 'Clearview' push left bar-resize:screenSizeX/3
+layout ClearviewTerminal 'Terminal' push right bar-resize:screenSizeX/1.5
+bind 4:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal
 # }}}
 
-# Clearview / iTerm
-layout ClearviewiTerm2 'Clearview' push left bar-resize:screenSizeX/2.5
-layout ClearviewiTerm2 'iTerm' push right bar-resize:screenSizeX/1.67
-bind 5:${hyper} sequence focus 'Clearview' | focus 'iTerm' | layout ClearviewiTerm2
+# Clearview / Terminal
+layout ClearviewTerminal2 'Clearview' push left bar-resize:screenSizeX/2.5
+layout ClearviewTerminal2 'Terminal' push right bar-resize:screenSizeX/1.67
+bind 5:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal2
 # }}}
 
-# Clearview / iTerm
-layout ClearviewiTerm3 'Clearview' push left bar-resize:screenSizeX/2.25
-layout ClearviewiTerm3 'iTerm' push right bar-resize:screenSizeX/1.8
-bind 6:${hyper} sequence focus 'Clearview' | focus 'iTerm' | layout ClearviewiTerm3
+# Clearview / Terminal
+layout ClearviewTerminal3 'Clearview' push left bar-resize:screenSizeX/2.25
+layout ClearviewTerminal3 'Terminal' push right bar-resize:screenSizeX/1.8
+bind 6:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal3
 # }}}
 
-# Clearview / iTerm
-layout ClearviewiTerm4 'Clearview' push left bar-resize:screenSizeX/2
-layout ClearviewiTerm4 'iTerm' push right bar-resize:screenSizeX/2
-bind 7:${hyper} sequence focus 'Clearview' | focus 'iTerm' | layout ClearviewiTerm4
+# Clearview / Terminal
+layout ClearviewTerminal4 'Clearview' push left bar-resize:screenSizeX/2
+layout ClearviewTerminal4 'Terminal' push right bar-resize:screenSizeX/2
+bind 7:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal4
 # }}}
 
 ### Bindings {{{
