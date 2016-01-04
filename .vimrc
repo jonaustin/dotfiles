@@ -19,8 +19,8 @@
   Plugin 'guns/vim-clojure-static'
   Plugin 'tpope/vim-classpath'
   Plugin 'tpope/vim-fireplace' " ( nrepl middleware: https://github.com/clojure-emacs/cider-nrepl )
-  Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-  Plugin 'guns/vim-sexp.git'
+  "Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+  "Plugin 'guns/vim-sexp.git'
 
   " Language
   "Plugin 'tpope/vim-liquid' " jekyll
@@ -600,6 +600,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   au Syntax clojure RainbowParenthesesLoadRound
   au Syntax clojure RainbowParenthesesLoadSquare
   au Syntax clojure RainbowParenthesesLoadBraces
+  " Vim-Fireplace
+  " eval outermost form
+  map <leader>e :Eval<cr>
 " }
 
   " GUI Settings {
