@@ -4,17 +4,18 @@ BLUE='\e[1;34m'
 CYAN='\e[1;36m'
 NC='\e[0m'
 
-ii(){
-    clear
-    echo -e "\nYou are logged on ${RED}$HOSTNAME"
-    echo -e "\nAdditional information:$NC " ; uname -a
-    echo -e "\n${RED}Users logged on:$NC " ; w -h
-    echo -e "\n${RED}Current date :$NC " ; date
-    echo -e "\n${RED}Machine stats :$NC " ; uptime
-    echo -e "\n${RED}Memory stats :$NC " ; free -m
-    echo -e "\n${RED}Disk usage :$NC " ; df -lh
-    echo -e "\n${RED}Local IP Address :$NC" ; /sbin/ifconfig eth0 | awk '/inet/
-{ print $2 } ' | sed -e s/addr://
+ii()
+{
+  clear
+  echo -e "\nYou are logged on ${RED}$HOSTNAME"
+  echo -e "\nAdditional information:$NC " ; uname -a
+  echo -e "\n${RED}Users logged on:$NC " ; w -h
+  echo -e "\n${RED}Current date :$NC " ; date
+  echo -e "\n${RED}Machine stats :$NC " ; uptime
+  echo -e "\n${RED}Memory stats :$NC " ; free -m
+  echo -e "\n${RED}Disk usage :$NC " ; df -lh
+  echo -e "\n${RED}Local IP Address :$NC" ; /sbin/ifconfig eth0 | awk '/inet/
+  { print $2 } ' | sed -e s/addr://
     echo -e "----------------------------------------------------------------------\n"
 }
 
@@ -38,58 +39,39 @@ randlines() {
 }
 
 fn () { # find file/dir *1*
-    find . -iname "*${1}*"
+  find . -iname "*${1}*"
 }
 
 fd() { # find directory *1*
-    find . -type d -iname "*${1}*"
+  find . -type d -iname "*${1}*"
 }
 
 fr() { # find random file *1*
-    find . -iname "*${1}*" | randline
+  find . -iname "*${1}*" | randline
 }
 
 fsz() { # find files larger than <size>mb
-    find . -size +${1}
+  find . -size +${1}
 }
 
-### Locate and Grep! Let's call it lg 
+### Locate and Grep! Let's call it lg
 lg() {
-    locate $1 | grep $1
+  locate $1 | grep $1
 }
 
 ### Calculator
-calc() { 
-    echo "$*" | bc -l; 
+calc() {
+  echo "$*" | bc -l;
 }
 
 ### mkdir and cd directly
-mkcd() { 
-    mkdir $1 && cd $1 
+mkcd() {
+  mkdir $1 && cd $1
 }
-
-# deal with rc.d status easily
-start()
-{
-  for arg in $*; do
-    sudo /etc/rc.d/$arg start
-  done
-}
-restart()
-{
-  for arg in $*; do
-    sudo /etc/rc.d/$arg restart
-  done
-}
-stop()
-{
-  for arg in $*; do
-    sudo /etc/rc.d/$arg stop
-  done
-} 
 
 # nohup - run command detached from terminal and without output
 # usage: nh <command>
+# note: or use `disown` after launching and bg'ing
 nh()
 {
   nohup "$@" &>/dev/null &
@@ -100,14 +82,14 @@ nh()
 define()
 {
   lynx -dump "http://www.google.com/search?hl=en&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -w "*"  | sed 's/;/ -/g' | cut -d- -f5 > /tmp/templookup.txt
-  if [[ -s  /tmp/templookup.txt ]] ;then    
+  if [[ -s  /tmp/templookup.txt ]] ;then
     until ! read response
       do
       echo "${response}"
       done < /tmp/templookup.txt
     else
-      echo "Sorry $USER, I can't find the term \"${1} \""                
-  fi    
+      echo "Sorry $USER, I can't find the term \"${1} \""
+  fi
   rm -f /tmp/templookup.txt
 }
 
@@ -143,42 +125,42 @@ sanitize()
   chown -R ${USER}:users "$@"
 }
 
-# remind me, its important!
+# remind me, it's important!
 # usage: remindme <time> <text>
 # e.g.: remindme 10m "omg, the pizza"
 remindme()
 {
-    sleep $1 && zenity --info --text "$2" &
+  sleep $1 && zenity --info --text "$2" &
 }
 
 # weather() -- Check weather
-weather() 
-{ 
-    lynx -dump "http://google.com/search?q=weather+${1:-97212}" | grep -A 5 -m 1 '^ *Weather for' | grep -v 'Add to'
+weather()
+{
+  lynx -dump "http://google.com/search?q=weather+${1:-97212}" | grep -A 5 -m 1 '^ *Weather for' | grep -v 'Add to'
 }
 
 
 # extract
 extract() {
-    if [ -f $1 ] ; then
-       case $1 in
-           *.tar.bz2) tar xjf $1    ;;
-           *.tar.gz)  tar xzf $1    ;;
-           *.bz2)     bunzip2 $1    ;;
-           *.rar)     unrar x $1    ;;
-           *.gz)      gunzip $1    ;;
-           *.tar)     tar xf $1    ;;
-           *.tbz2)    tar xjf $1    ;;
-           *.tgz)     tar xzf $1    ;;
-           *.zip)     unzip $1    ;;
-           *.ZIP)     unzip $1    ;;
-           *.Z)       uncompress $1;;
-           *.7z)      7za e $1;;
-           *)         echo "'$1' cannot be extracted via extract()" ;;
-       esac
-    else
-        echo "'$1' is not a valid file"
-    fi
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2) tar xjf $1    ;;
+      *.tar.gz)  tar xzf $1    ;;
+      *.bz2)     bunzip2 $1    ;;
+      *.rar)     unrar x $1    ;;
+      *.gz)      gunzip $1    ;;
+      *.tar)     tar xf $1    ;;
+      *.tbz2)    tar xjf $1    ;;
+      *.tgz)     tar xzf $1    ;;
+      *.zip)     unzip $1    ;;
+      *.ZIP)     unzip $1    ;;
+      *.Z)       uncompress $1;;
+      *.7z)      7za e $1;;
+      *)         echo "'$1' cannot be extracted via extract()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
 }
 
 # roll - archive wrapper
@@ -205,21 +187,6 @@ tosd() {
   sleep $1; osd_cat2 $2;
 }
 
-# rails parallel_tests gem
-init_parallel_tests() {
-  rake db:test:reset
-  for n in `seq 2 8`;
-  do
-    sed -i '' -e "s/${1:-lsweb}_test.*/${1:-lsweb}_test${n}/" config/database.yml
-    rake db:test:reset
-  done
-  sed -i '' -e "s/${1:-lsweb}_test8/${1:-lsweb}_test<%= ENV['TEST_ENV_NUMBER'] %>/" config/database.yml
-}
-
-zp() {
-  zeus parallel_rspec -n ${1:-5} spec
-}
-
 # fix excel-formatted csvs (utf-16 (*.txt)) to be utf-8 (*.csv)
 fixcsv() {
   iconv -f utf-16 -t utf-8 $1 > $1.utf8.csv
@@ -235,9 +202,6 @@ scpc() {
   for n in "${@}"; do
     scp_wild "$n" root@10.0.1.26:/Removable/MicroSD/Comics/${rel_path} 1984 2222
   done;
-  #for n in `ls $@`; do
-    #scp_wild $n root@10.0.1.26:/Removable/MicroSD/Comics/ 1984 2222
-  #done;
 }
 
 # sum CSV column
@@ -253,4 +217,31 @@ sum_mint_csv() {
 # view markdown files as formatted man pages
 markdown-view() {
   pandoc -s -f markdown -t man $1 | groff -T utf8 -man | less
+}
+
+# toggle iTerm Dock icon
+# add this to your .bash_profile or .zshrc
+function toggleiTerm()
+{
+  pb='/usr/libexec/PlistBuddy'
+  iTerm='/opt/homebrew-cask/Caskroom/iterm2/2.1.3/iTerm.app/Contents/Info.plist'
+
+  echo "Do you wish to hide iTerm in Dock?"
+  select ync in "Hide" "Show" "Cancel"; do
+    case $ync in
+      'Hide' )
+        $pb -c "Add :LSUIElement bool true" $iTerm
+        echo "relaunch iTerm to take effect"
+        break
+        ;;
+      'Show' )
+        $pb -c "Delete :LSUIElement" $iTerm
+        echo "run killall 'iTerm' to exit, and then relaunch it"
+        break
+        ;;
+      'Cancel' )
+        break
+        ;;
+    esac
+  done
 }
