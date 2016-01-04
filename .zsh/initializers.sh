@@ -64,8 +64,8 @@ export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
 export PATH=$PATH:$HOME/.cabal/bin
 
 # rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
-PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+#PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 
 # direnv
 eval "$(direnv hook zsh)"
