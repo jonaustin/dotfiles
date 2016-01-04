@@ -9,3 +9,4 @@ set completion-ignore-case on
 set bell-style none
 set blink-matching-paren on
 set visible-stats on
+tab: complete
