@@ -63,6 +63,7 @@
 
   " Navigation
   Plugin 'kien/ctrlp.vim'
+  Plugin 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
   Plugin 'goldfeld/vim-seek'              " <leader>s<2 chars>
   Plugin 'mileszs/ack.vim'                " :Ack <search>
   Plugin 'Lokaltog/vim-easymotion'        " <leader><leader>w
@@ -461,7 +462,7 @@
   nmap <silent> <leader>qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
   " Edit the vimrc file
-  nmap <silent> <leader>ev :tabnew $MYVIMRC<CR>
+  "nmap <silent> <leader>ev :tabnew $MYVIMRC<CR>
   nmap <silent> <leader>sv :sp $MYVIMRC<CR>
   nnoremap <leader>vv <C-w><C-v><C-l>:e $MYVIMRC<cr> " vertical split
   nmap <leader>ssv :source $MYVIMRC<CR>
@@ -603,6 +604,11 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " Vim-Fireplace
   " eval outermost form
   map <leader>e :Eval<cr>
+
+  " Rails ctags {
+  let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
+  " }
+
 " }
 
   " GUI Settings {
@@ -698,7 +704,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   let g:ctrlp_working_path_mode = 0
   let g:ctrlp_dotfiles = 0
   let g:ctrlp_match_window = 'max:10,results:20'
-  let g:ctrlp_custom_ignore = 'node_modules'
+  let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|out)|(\.(swp|ico|git|svn))$'
+  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
   "}}}
 
 " Various {
@@ -742,6 +749,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd! BufRead,BufNewFile *.gradle setf groovy
     " gitconfig
     autocmd! BufRead,BufNewFile gitconfig setf gitconfig
+    "arduino
+    au BufRead,BufNewFile *.pde set filetype=arduino
+    au BufRead,BufNewFile *.ino set filetype=arduino
   augroup END
 " }
 
