@@ -114,7 +114,6 @@ alias gsl='git status --ignore-submodules | less'
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
-alias gd='git diff'
 alias gg='gitg --all&'
 alias gx='gitx --all'
 alias got='git '
@@ -236,6 +235,3 @@ alias fuck='$(thefuck $(fc -ln -1))'
 
 # Rails/ruby
 alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
-
-# Cojure
-alias repl='java -jar ~/code/_other/clj/clojure-1.8.0-fast.jar'

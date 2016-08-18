@@ -11,7 +11,8 @@ export ZSH_THEME='pure'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rails gem ruby rake node npm)
+#plugins=(git rails gem ruby rake node npm)
+plugins=(rails gem ruby rake node npm)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
@@ -69,9 +70,9 @@ elif [ `uname -o` = "GNU/Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
 fi
 
-source ~/.zsh/initializers.sh
-source ~/.zsh/initializers_private.sh
-. ${HOME}/.zsh/zshrc.local.work
+source ${HOME}/.zsh/initializers.sh
+source ${HOME}/.zsh/initializers_private.sh
+source ${HOME}/.zsh/zshrc.local.work
 
 #PATH=$HOME/.rvm/bin:$PATH
 
