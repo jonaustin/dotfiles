@@ -99,3 +99,7 @@ PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 # nodejs
 export PATH=$PATH:./node_modules/.bin
+
+# go
+export GOPATH=$HOME/code/_sandbox/_go
+export PATH=$HOME/code/_sandbox/_go/bin:$PATH
