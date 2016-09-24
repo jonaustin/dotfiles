@@ -47,9 +47,6 @@ export DISABLE_AUTO_TITLE="true"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# npm/nodejs
-export NODE_PATH="/usr/local/share/npm/lib/node_modules"
-
 # z
 . `brew --prefix`/etc/profile.d/z.sh
 
@@ -69,3 +66,5 @@ export PATH=$PATH:$HOME/.cabal/bin
 
 # direnv
 eval "$(direnv hook zsh)"
+
+eval "$(rbenv init -)"
