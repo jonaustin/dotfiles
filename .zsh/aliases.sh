@@ -96,25 +96,6 @@ alias loci='locate -i'
 ## network
 alias pgoo='ping -c2 google.com' 
 alias wgetnc='wget --no-check-certificate'
-### ssh
-alias pb='ssh jonaustin@mrfantastic.dreamhost.com'
-alias home_proxy='ssh -D 8089 -f -C -q -N jon@xs.homeunix.net'
-alias work_proxy='ssh -D 8080 -f -C -q -N jon@barracuda-ext.cmdpdx.com'
-alias work_rdc='ssh jon@barracuda-ext.cmdpdx.com -L 10000:jaustin.cmdpdx.com:3389' # tunnel rdc connection to localhost:10000
-### synergy
-alias syn='synergyc 192.168.0.9'
-alias ssyn='ssh -f -N -L12345:10.10.10.155:24800 barracuda-ext.cmdpdx.com; synergyc localhost:12345'
-alias ksyn="killall synergyc"
-### non-frak
-alias sxs='ssh jon@xs'
-alias fxs='sftp jon@xs.homeunix.net'
-alias sxxs='ssh jon@xs.homeunix.net'
-alias sfs='ssh jon@frak'
-alias sss='ssh jon@sam'
-alias xsfs='sshfs -o reconnect jon@192.168.0.99:/ /media/xs'
-alias xxsfs='sshfs -o reconnect jon@xs.homeunix.net:/ /media/xs'
-alias fsfs='sudo umount /media/frakssh; sshfs -o reconnect -o allow_other jon@frak:/ /media/frakssh'
-alias ssfs='sshfs -o reconnect -o allow_other jon@sam:/ /media/sam'
 
 # Window Manager
 
@@ -132,7 +113,6 @@ alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
 alias gd='git diff'
-alias go='git checkout '
 alias gg='gitg --all&'
 alias gx='gitx --all'
 alias got='git '
@@ -180,6 +160,13 @@ function install_global_gems() {
     do rvm @global do gem install $n
   done
 }
+
+# list largest files
+alias bigfiles='find . -type f -ls | sort -nrk7 | head -10'
+
+# sharing files
+share() { scp $1 jon@ssh.lastfmspot.com:/home/jon/apps/lastfmspot/current/public/ }
+alias lf='ssh jon@ssh.lastfmspot.com'
 
 ### ruboto
 ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }
@@ -234,6 +221,7 @@ alias serve='ruby -run -e httpd . -p 5000'
 
 # node/npm
 npmd() { npm view $1 description }
+alias npm='node --max-old-space-size=4000 /usr/local/bin/npm' # temporary: https://github.com/npm/npm/issues/12619#issuecomment-224547637
 
 # get remote ip
 alias myip="curl ifconfig.me"
@@ -246,3 +234,7 @@ alias fuck='$(thefuck $(fc -ln -1))'
 
 # Rails/ruby
 alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
+
+# Cojure
+alias clj='java -jar ~/code/_other/clj/clojure-1.8.0-fast.jar'
+alias lein='java -jar ~/code/_other/clj/clojure-1.8.0-fast.jar'
