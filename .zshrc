@@ -62,7 +62,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 
 if [ `uname` = "Darwin" ]; then
   export PATH="/usr/local/share/npm/bin:$PATH"
-  export PATH="/Users/jon/pear/bin:$PATH"
+  export PATH="$HOME/pear/bin:$PATH"
   export PATH="$PATH:/sbin:/usr/sbin"
   . ${HOME}/.zsh/zshrc.local.osx
 elif [ `uname -o` = "GNU/Linux" ]; then
@@ -71,8 +71,9 @@ fi
 
 source ~/.zsh/initializers.sh
 source ~/.zsh/initializers_private.sh
+. ${HOME}/.zsh/zshrc.local.work
 
-PATH=$HOME/.rvm/bin:$PATH
+#PATH=$HOME/.rvm/bin:$PATH
 
 # Fix git sloooow autocompletion
 # https://superuser.com/questions/458906/zsh-tab-completion-of-git-commands-is-very-slow-how-can-i-turn-it-off
@@ -85,3 +86,16 @@ __git_files(){}
 __git_complete_index_file(){}
 # or disable git completion entirely
 #compdef -d git
+
+#unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/help
+
+PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+
+# nodejs
+export PATH=$PATH:./node_modules/.bin
