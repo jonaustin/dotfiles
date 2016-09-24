@@ -29,6 +29,7 @@
   Plugin 'mattn/emmet-vim'
   Plugin 'tpope/vim-markdown'
   Plugin 'tfnico/vim-gradle' " gradle syntax
+  Plugin 'vimperator/vimperator.vim'
 
   " Ruby
   Plugin 'ecomba/vim-ruby-refactoring'

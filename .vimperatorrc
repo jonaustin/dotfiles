@@ -1,0 +1,38 @@
+colo darkness
+
+" no location bar
+set gui=nonavigation
+
+" show numbers on each tab
+set tabnumbers
+
+" Find
+"" perform incremental searching
+set incsearch
+"" highlight search results
+set hlsearch
+"" typically (see below) ignore case
+set ignorecase
+"" only consider case if an upper case char is used
+set smartcase
+
+""" Maps
+"" Note: Since about Vimperator 2.2, one must use S-char (shift+char) instead of CHAR (uppercase).
+""" Stop
+map <Esc> <C-c>
+
+" undo tab close
+map <S-x> u
+
+" close tab
+nnoremap x d
+
+" scrolling
+nnoremap j 2j
+nnoremap k 2k
+nnoremap h 2h
+nnoremap l 2l
+
+" easy tab switching
+nnoremap <S-j> gT
+nnoremap <S-k> gt
