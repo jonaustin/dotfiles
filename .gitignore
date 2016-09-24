@@ -30,3 +30,4 @@ blog.vim
 .vim/bundle
 .vim/sessions
 initializers_private.sh
+tags
