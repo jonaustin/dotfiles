@@ -25,6 +25,7 @@ blog.vim
 *.un~
 .fehbg
 .zsh/zshrc_local
+.zsh/zshrc.local.work
 .DS_Store
 .vim/bundle
 .vim/sessions
