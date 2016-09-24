@@ -60,6 +60,7 @@
   "Plugin 'Shougo/neocomplete.vim'
   "Plugin 'ervandew/supertab' " Obsoleted by YCM
   "Plugin 'Raimondi/delimitMate' " http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
+  Plugin 'ludovicchabant/vim-gutentags' " auto ctags
 
   " Navigation
   Plugin 'kien/ctrlp.vim'
