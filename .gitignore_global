@@ -19,6 +19,7 @@ Thumbs.db
 
 .rake_tasks
 .powrc
+.byebug_history
 
 # whibse
 #Gemfile.lock
