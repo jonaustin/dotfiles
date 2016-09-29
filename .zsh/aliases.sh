@@ -236,5 +236,4 @@ alias fuck='$(thefuck $(fc -ln -1))'
 alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
 
 # Cojure
-alias clj='java -jar ~/code/_other/clj/clojure-1.8.0-fast.jar'
-alias lein='java -jar ~/code/_other/clj/clojure-1.8.0-fast.jar'
+alias repl='java -jar ~/code/_other/clj/clojure-1.8.0-fast.jar'
