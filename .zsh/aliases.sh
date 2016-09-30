@@ -118,6 +118,9 @@ alias gd='git diff'
 alias gdd='git diff|less'
 gd() {git diff $1|less}
 alias gdl='git diff|less'
+alias gdd='git diff|less'
+gd() {git diff $1|less}
+alias gdl='git diff|less'
 alias gg='gitg --all&'
 alias gx='gitx --all'
 alias got='git '
