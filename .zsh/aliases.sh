@@ -59,6 +59,8 @@ alias igrep='grep -i'
 alias g="grep -ir"
 alias hist='history | grep -i '
 pg() { ps aux | grep -v grep | grep -i ${1}; }
+howlong() { ps -p ${1} -o etime=; }
+sport() { lsof -P -iTCP:${1}; }
 alias cdb='cd ..; cd -' # cd back
 
 ## Music
@@ -113,6 +115,9 @@ alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
 alias gd='git diff'
+alias gdd='git diff|less'
+gd() {git diff $1|less}
+alias gdl='git diff|less'
 alias gg='gitg --all&'
 alias gx='gitx --all'
 alias got='git '
@@ -234,6 +239,3 @@ alias fuck='$(thefuck $(fc -ln -1))'
 
 # Rails/ruby
 alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
-
-# Cojure
-alias repl='java -jar ~/code/_other/clj/clojure-1.8.0-fast.jar'
