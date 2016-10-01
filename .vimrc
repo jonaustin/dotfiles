@@ -580,9 +580,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   nmap <Leader>a <Plug>(EasyAlign)
 
   " Vim-rspec
-  let g:rspec_command = 'call Send_to_Tmux("bin/rspec {spec}\n")'
-  map <Leader>r :call RunCurrentSpecFile()<CR>
-  map <Leader>R :call RunNearestSpec()<CR>
+  let g:rspec_command = 'call Send_to_Tmux("bundle exec rspec {spec}\n")'
+  "map <Leader>r :call RunCurrentSpecFile()<CR>
+  "map <Leader>R :call RunNearestSpec()<CR>
   "map <Leader>l :call RunLastSpec()<CR>
   "map <Leader>a :call RunAllSpecs()<CR>
 
@@ -611,6 +611,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   let g:rails_ctags_arguments='--exclude="*.js" --regex-Ruby=/\(scope\|has_many\|has_and_belongs_to_many\|belongs_to\)\ :\([A-z]\+\)\ *,/\\2/e --exclude="*.sql" --exclude=.git --exclude=log --exclude=tmp --exclude=import --exclude=spec'
   " }
 
+  " set whibse ctags hack
+  map <leader>wc :set tags=~/code/whibse/tags<cr>
 " }
 
   " GUI Settings {
@@ -973,6 +975,8 @@ endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 noremap<Leader>C :OpenChangedFiles <CR>
 
+" fixme: just use `noremap <Leader>a :Ack <cword><cr>`:
+" https://github.com/mileszs/ack.vim/issues/33
 fun! s:FindWordUnderCursor()
   " Yank the word under the cursor into the z register
   normal "zyiw
@@ -981,5 +985,14 @@ fun! s:FindWordUnderCursor()
   exec "Ack '" . @z . "'"
 endfun
 nmap <Leader>a :call <SID>FindWordUnderCursor()<CR>
+
+nmap <Leader>r :redraw!<cr>
+
+" Tips I always forget
+" vertical split -> horizontal: ctrl+w then J
+" horizontal split -> vertical: ctrl+w H or ctrl+w L
+" reload all buffers - :bufdo e
+" Clojure
+" let g:ctrlp_custom_ignore = { 'dir':  '\v[\/]\.(out|deploy|build)$' }
 
 " }}}

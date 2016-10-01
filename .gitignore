@@ -31,3 +31,5 @@ blog.vim
 .vim/sessions
 initializers_private.sh
 tags
+.tmux/resurrect
+.tmux/plugins

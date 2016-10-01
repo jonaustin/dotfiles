@@ -59,6 +59,8 @@ alias igrep='grep -i'
 alias g="grep -ir"
 alias hist='history | grep -i '
 pg() { ps aux | grep -v grep | grep -i ${1}; }
+howlong() { ps -p ${1} -o etime=; }
+sport() { lsof -P -iTCP:${1}; }
 alias cdb='cd ..; cd -' # cd back
 
 ## Music
