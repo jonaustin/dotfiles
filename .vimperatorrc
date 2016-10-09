@@ -43,5 +43,8 @@ nmap <Leader>h :help<Space>
 nmap <Leader>, :source ~/.vimperatorrc<CR>
 cmap jj <Esc>
 
+" remove search highlights
+map <leader>. :nohl<cr>
+
 " https://github.com/seudut/dotfiles/commit/66888a5fab666cff1a72463acaf783a4de7e6352
 js services.services.autoCompleteSearch.class_="@mozilla.org/autocomplete/search;1?name=unifiedcomplete"
