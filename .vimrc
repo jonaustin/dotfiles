@@ -708,7 +708,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   let g:ctrlp_working_path_mode = 0
   let g:ctrlp_dotfiles = 0
   let g:ctrlp_match_window = 'max:10,results:20'
-  let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|out)|(\.(swp|ico|git|svn))$'
+  let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|out|build)|(\.(swp|ico|git|svn))$'
   let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
   "}}}
 
