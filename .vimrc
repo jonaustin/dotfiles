@@ -19,8 +19,8 @@
   Plugin 'guns/vim-clojure-static'
   Plugin 'tpope/vim-classpath'
   Plugin 'tpope/vim-fireplace' " ( nrepl middleware: https://github.com/clojure-emacs/cider-nrepl )
-  "Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-  "Plugin 'guns/vim-sexp.git'
+  Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+  Plugin 'guns/vim-sexp.git'
 
   " Language
   "Plugin 'tpope/vim-liquid' " jekyll
@@ -992,7 +992,5 @@ nmap <Leader>r :redraw!<cr>
 " vertical split -> horizontal: ctrl+w then J
 " horizontal split -> vertical: ctrl+w H or ctrl+w L
 " reload all buffers - :bufdo e
-" Clojure
-" let g:ctrlp_custom_ignore = { 'dir':  '\v[\/]\.(out|deploy|build)$' }
 
 " }}}
