@@ -10,7 +10,7 @@
   branch = auto
   interactive = auto
 [core]
-  editor = /usr/local/bin/vim
+  editor = /usr/bin/vim
   excludesfile = /Users/jon/.gitignore_global
 [merge]
   tool = vimdiff
