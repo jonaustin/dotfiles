@@ -2,5 +2,6 @@ export EDITOR='/usr/bin/vim'
 export SHELL='/usr/bin/zsh'
 
 alias agi='sudo apt-get install '
+alias agr='sudo apt-get remove '
 alias s='apt-cache search '
 alias ss='apt-cache show '
