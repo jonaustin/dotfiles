@@ -161,8 +161,8 @@
 
 " Basics {
 	let mapleader = ","
-  set clipboard+=unnamed              " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
-  ":set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
+  "set clipboard=unnamed              " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+  set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
   set noautochdir                     " do not automatically change directory
   set cryptmethod=blowfish            " strong blowfish encryption (instead of zip)
 " }
