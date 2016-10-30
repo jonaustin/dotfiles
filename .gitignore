@@ -33,3 +33,5 @@ initializers_private.sh
 tags
 .tmux/resurrect
 .tmux/plugins
+.vim/colors
+powerline.conf

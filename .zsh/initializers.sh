@@ -19,9 +19,6 @@ export DISABLE_AUTO_TITLE="true"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# z
-. `brew --prefix`/etc/profile.d/z.sh
-
 # tmuxinator
 export DISABLE_AUTO_TITLE=true
 #source ~/bin/tmuxinator.zsh

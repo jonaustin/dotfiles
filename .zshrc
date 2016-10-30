@@ -37,8 +37,6 @@ stty -ixon # disable ^S/^Q flow control
 # }}}
 
 # Exports {{{
-export EDITOR='/usr/local/bin/vim'
-export SHELL='/usr/local/bin/zsh'
 export PAGER='less'
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R' # --LINE-NUMBERS --quit-if-one-screen' # -R for less coloring with source-highlight (external app)
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
