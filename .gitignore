@@ -31,7 +31,10 @@ blog.vim
 .vim/sessions
 initializers_private.sh
 tags
+tags.*
 .tmux/resurrect
 .tmux/plugins
 .vim/colors
 powerline.conf
+.lein/repl-history
+.lein/self-installs
