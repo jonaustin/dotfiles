@@ -1,12 +1,17 @@
 export EDITOR='/usr/bin/vim'
 export SHELL='/usr/bin/zsh'
 
-alias agi='sudo apt-get install '
-alias agr='sudo apt-get remove '
-alias agu='sudo apt-get update '
-alias aguu='sudo apt-get upgrade '
-alias s='apt-cache search '
-alias ss='apt-cache show '
+alias y='packer -S '
+alias r='packer -R '
+alias agu='packer -Syu'
+alias s='packer -Ss '
+
+#alias agi='sudo apt-get install '
+#alias agr='sudo apt-get remove '
+#alias agu='sudo apt-get update '
+#alias aguu='sudo apt-get upgrade '
+#alias s='apt-cache search '
+#alias ss='apt-cache show '
 
 # ui
 alias fb="feh --recursive ~/Pictures/new -A 'feh --bg-fill %F' --action9 'cp %F ~/Pictures/best'  --action1 'mv %F ~/Pictures/delete' --info \"echo '%w x %h'\" -Y --zoom fill"
