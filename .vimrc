@@ -108,7 +108,7 @@
   " UI
   Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
   Plugin 'airblade/vim-gitgutter'
-  Plugin 'godlygeek/csapprox'
+  Plugin 'godlygeek/csapprox' " disable for transparency
   Plugin 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
   Plugin 'myusuf3/numbers.vim'
   Plugin 'scrooloose/syntastic'
@@ -194,11 +194,13 @@
   set backupdir=$HOME/.vimbackup    " but not when they clog .
   set directory=$HOME/.vimswap 	    " Same for swap files
   set viewdir=$HOME/.vimviews 	    " same but for view files
+  set undodir=$HOME/.vimundo
 
   " Creating directories if they don't exist
   silent execute '!mkdir -p $HOME/.vimbackup'
   silent execute '!mkdir -p $HOME/.vimswap'
   silent execute '!mkdir -p $HOME/.vimviews'
+  silent execute '!mkdir -p $HOME/.vimundo'
   " note these two below were causing rails.vim to not be able to find files
   " in 'path' so replaced with the autocmd
   "au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
@@ -215,20 +217,26 @@
 	"color leo
 	set background=dark                 " Assume a dark background
   "let g:solarized_termcolors=256
-  ""let g:solarized_termtrans=1
   "colo solarized
   "colo railscasts
-  "colo hybrid
-  colo base16-default
+  "colo base16-default
+  colo hybrid
+  "colo base16-default
+  " transparent background
+  let g:solarized_termtrans=1
+  "hi Normal ctermbg=none
+  "hi NonText ctermbg=none
+  "hi LineNr ctermbg=none
+  "hi clear CursorLineNr
 
   "hi Normal ctermbg=232               " dark background
 
 	set tabpagemax=15 				          " only show 15 tabs
 	set showmode                   	    " display the current mode
 
-	set cursorline  				            " highlight current line
-	hi cursorline guibg=#333333 	      " highlight bg color of current line
-	hi CursorColumn guibg=#333333       " highlight cursor
+	"set cursorline  				            " highlight current line
+	"hi cursorline guibg=#333333 	      " highlight bg color of current line
+	"hi CursorColumn guibg=#333333       " highlight cursor
 
 	if has('cmdline_info')
 		set ruler                  	      " show the ruler
@@ -262,7 +270,6 @@
   "set relativenumber                " line numbers relative to current position
 	set nu 							               " Line numbers on
   set undofile                       " undo even after closing and re-opening a file!
-  set undodir=$HOME/.vimundo
 
   "set debug=msg                     " makes it so that error messages don't disappear after one second on startup.
 
@@ -987,6 +994,26 @@ endfun
 nmap <Leader>a :call <SID>FindWordUnderCursor()<CR>
 
 nmap <Leader>r :redraw!<cr>
+
+""" Colorscheme Approximation """
+" This transforms colorschemes to terminal colorschemes
+" The ctermbg=NONE hooks make backgrounds transparent in terminals
+let g:CSApprox_hook_post = [
+            \ 'highlight Normal            ctermbg=NONE',
+            \ 'highlight LineNr            ctermbg=NONE',
+            \ 'highlight SignifyLineAdd    cterm=bold ctermbg=NONE ctermfg=green',
+            \ 'highlight SignifyLineDelete cterm=bold ctermbg=NONE ctermfg=red',
+            \ 'highlight SignifyLineChange cterm=bold ctermbg=NONE ctermfg=yellow',
+            \ 'highlight SignifySignAdd    cterm=bold ctermbg=NONE ctermfg=green',
+            \ 'highlight SignifySignDelete cterm=bold ctermbg=NONE ctermfg=red',
+            \ 'highlight SignifySignChange cterm=bold ctermbg=NONE ctermfg=yellow',
+            \ 'highlight SignColumn        ctermbg=NONE',
+            \ 'highlight CursorLine        ctermbg=NONE cterm=underline',
+            \ 'highlight Folded            ctermbg=NONE cterm=bold',
+            \ 'highlight FoldColumn        ctermbg=NONE cterm=bold',
+            \ 'highlight NonText           ctermbg=NONE',
+            \ 'highlight clear LineNr'
+            \]
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
