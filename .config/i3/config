@@ -129,7 +129,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+bindsym $mod+q layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -312,11 +312,16 @@ bar {
         status_command /home/jon/bin/i3spotify
 }
 
-# my stuff
+# apps
 bindsym $mod+Shift+s exec "/home/jon/bin/spotify"
-bindsym $mod+x exec "chromium --force-device-scale-factor=1.4"
-bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=0.8"
+bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
+bindsym $mod+Ctrl+x exec "chromium --force-device-scale-factor=0.8"
 bindsym $mod+Shift+w exec "feh --recursive --randomize --bg-max ~/img/best"
+
+# find windows (i3-wm-scripts)
+bindsym $mod+s exec python ~/bin/i3-wm-scripts/nextmatch.py spotify
+bindsym $mod+x exec python ~/bin/i3-wm-scripts/nextmatch.py '(chromium|firefox)'
+#bindsym $mod+e exec python ~/bin/nextfind.py
 
 # volume / spotify
 bindsym $mod+minus exec "amixer sset Master 5%-"
