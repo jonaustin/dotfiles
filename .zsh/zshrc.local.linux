@@ -22,6 +22,9 @@ alias fb="feh --recursive ~/Pictures/new -A 'feh --bg-fill %F' --action9 'cp %F 
 # audio
 alias am='alsamixer'
 
+# acpi
+alias pt='sudo powertop'
+
 # ssh
 SSH_ENV="$HOME/.ssh/environment"
 function start_agent {
