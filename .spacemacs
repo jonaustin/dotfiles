@@ -315,6 +315,9 @@ you should place your code here."
   ;; make window transparent
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "unspecified-bg" (selected-frame)))
+
+  ;; always follow symlinks without asking
+  (setq vc-follow-symlinks t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
