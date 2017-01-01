@@ -45,10 +45,11 @@ alias lp='lesspipe.sh '
 alias loc='locate'
 alias nd="ncdu ."
 
-# zsh
+# config files
 alias vzc='vim $HOME/.zshrc'
 alias vzcl='vim $HOME/.zsh/zshrc_local'
 alias zc='source $HOME/.zshrc'
+alias vlx='vim $HOME/.zsh/zshrc.local.linux'
 
 ## sys
 alias u='uptime'
@@ -62,6 +63,7 @@ pg() { ps aux | grep -v grep | grep -i ${1}; }
 howlong() { ps -p ${1} -o etime=; }
 sport() { lsof -P -iTCP:${1}; }
 alias cdb='cd ..; cd -' # cd back
+rename-spaces-to-underscores() { find . -type f -exec rename 's/ /_/' '{}' \; } # http://stackoverflow.com/a/15012788
 
 ## Music
 alias rmm3u='find . -iname "*m3u" -print0 | xargs -0 rm'
@@ -223,7 +225,7 @@ alias serve='ruby -run -e httpd . -p 5000'
 
 # node/npm
 npmd() { npm view $1 description }
-alias npm='node --max-old-space-size=4000 /usr/local/bin/npm' # temporary: https://github.com/npm/npm/issues/12619#issuecomment-224547637
+#alias npm='node --max-old-space-size=4000 /usr/local/bin/npm' # temporary: https://github.com/npm/npm/issues/12619#issuecomment-224547637
 
 # get remote ip
 alias myip="curl ifconfig.me"
