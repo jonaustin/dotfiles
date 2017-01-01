@@ -2,9 +2,10 @@ export EDITOR='/usr/bin/vim'
 export SHELL='/usr/bin/zsh'
 
 alias y='packer -S '
-alias r='packer -R '
-alias agu='packer -Syu'
+alias r='sudo pacman -R '
+alias agu='packer -Syyu'
 alias s='packer -Ss '
+alias pf='pacman -Fo ' # $file-name -- find out which package owns a file
 
 #alias agi='sudo apt-get install '
 #alias agr='sudo apt-get remove '
@@ -13,8 +14,13 @@ alias s='packer -Ss '
 #alias s='apt-cache search '
 #alias ss='apt-cache show '
 
+alias vic='vim ~/.i3/config'
+
 # ui
 alias fb="feh --recursive ~/Pictures/new -A 'feh --bg-fill %F' --action9 'cp %F ~/Pictures/best'  --action1 'mv %F ~/Pictures/delete' --info \"echo '%w x %h'\" -Y --zoom fill"
+
+# audio
+alias am='alsamixer'
 
 # ssh
 SSH_ENV="$HOME/.ssh/environment"
