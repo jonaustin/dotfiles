@@ -42,15 +42,15 @@ URxvt.internalBorder:       0
 URxvt.perl-lib:         /usr/lib/URxvt/perl/
 URxvt.perl-ext-common:  default,matcher,searchable-scrollback,url-select
 URxvt.keysym.M-u:       perl:url-select:select_next
-URxvt.urlLauncher:      /usr/bin/firefox
+URxvt.urlLauncher:      /usr/bin/chromium
 URxvt.matcher.button:   1
 URxvt.keysym.C-Delete:  perl:matcher
 URxvt.underlineURLs:    true
 
 ! === Appearance ======================================
 
-URxvt*font: xft:Monospace:pixelsize=17
-URxvt*boldFont: xft:Monospace:pixelsize=16
+urxvt*font:             xft:Inconsolata:size=10:antialias=true:hinting=true
+URxvt*boldFont: xft:Inconsolata:pixelsize=16
 URxvt*letterSpace: -1
 
 ! === Cursor ==========================================
