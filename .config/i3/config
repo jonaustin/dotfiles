@@ -65,7 +65,7 @@ bindsym $mod+d exec dmenu_run
 ################################################################################################
 
 exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+bindsym $mod+Ctrl+m exec terminal -x 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
@@ -315,11 +315,12 @@ bar {
 # my stuff
 bindsym $mod+Shift+s exec "/home/jon/bin/spotify"
 bindsym $mod+x exec "chromium --force-device-scale-factor=1.4"
-bindsym $mod+Shift+w exec "feh --recursive --randomize --bg-fill ~/img/best"
+bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=0.8"
+bindsym $mod+Shift+w exec "feh --recursive --randomize --bg-max ~/img/best"
 
 # volume / spotify
-bindsym $mod+minus exec "amixer sset PCM 5%-"
-bindsym $mod+equal exec "amixer sset PCM 5%+"
+bindsym $mod+minus exec "amixer sset Master 5%-"
+bindsym $mod+equal exec "amixer sset Master 5%+"
 bindsym $mod+space exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 bindsym $mod+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym $mod+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
@@ -336,13 +337,14 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap /home/jon/.xmodmap
 exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200
 exec --no-startup-id guake
-exec --no-stratup-id xflux -d 97203
+exec --no-startup-id xflux -z 97203 # doesn't work at startup?
 #exec --no-startup-id xrandr --output eDP-1 --dpi 205
 exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg
-exec --no-startup-id xinput --set-prop 13 'libinput Accel Speed' 1.0
-exec --no-startup-id xinput --set-prop 11 276 1 # tap to click
+exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
+exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Accel Speed' 1.0
 exec --no-startup-id parcellite -d
+exec --no-startup-id tmux start
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -353,7 +355,10 @@ exec --no-startup-id pamac-tray
 #exec --no-startup-id clipit
 # exec --no-startup-id blueman
 # exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
+#exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker blurlock
+#exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id setcursor
+
+# GUI apps
+exec --no-startup-id i3-msg "workspace 1; exec terminator -x tmux; zsh" #-e='tmux attach -t core; zsh'"
