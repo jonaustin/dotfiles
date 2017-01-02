@@ -25,6 +25,10 @@ alias am='alsamixer'
 # acpi
 alias pt='sudo powertop'
 
+# general cli
+alias xclipp='xclip -selection clipboard' # pipe into clipboard
+
+
 # ssh
 SSH_ENV="$HOME/.ssh/environment"
 function start_agent {
