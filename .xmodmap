@@ -1,3 +1,14 @@
-keycode 66 = Control_L
+clear control
+clear mod4
 clear Lock
-add Control = Control_L
+
+keycode 66 = Control_L NoSymbol Control_L
+keycode 133 = Control_L NoSymbol Control_L
+keycode 134 = Control_R NoSymbol Control_R
+keycode 37 = Super_L NoSymbol Super_L
+keycode 105 = Super_R NoSymbol Super_R
+
+
+add control = Control_L
+add control = Control_R
+add mod4 = Super_L

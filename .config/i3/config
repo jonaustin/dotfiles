@@ -168,6 +168,16 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+bindsym Ctrl+1 workspace 1
+bindsym Ctrl+2 workspace 2
+bindsym Ctrl+3 workspace 3
+bindsym Ctrl+4 workspace 4
+bindsym Ctrl+5 workspace 5
+bindsym Ctrl+6 workspace 6
+bindsym Ctrl+7 workspace 7
+bindsym Ctrl+8 workspace 8
+bindsym Ctrl+9 workspace 9
+bindsym Ctrl+0 workspace 10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
