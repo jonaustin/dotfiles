@@ -85,6 +85,8 @@
   "Plugin 'skwp/vim-rspec'
   Plugin 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
   "Plugin 'skalnik/vim-vroom' " ruby tests
+  Plugin 'mattn/gist-vim' "github gists
+
 
   " Commands
   Plugin 'scrooloose/nerdcommenter'
