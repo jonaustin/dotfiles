@@ -1,0 +1,23 @@
+! xmodmap -pm to see cur modifiers
+! xmodmap -pke to see current mappings
+clear control
+! mod1 is alt
+clear mod1
+! mod4 is windows key / super
+clear mod4
+clear Lock
+
+keycode 133 = Control_L NoSymbol Control_L
+keycode 66 = Control_L NoSymbol Control_L
+keycode 105 = Control_R NoSymbol Control_R
+
+keycode 134 = Alt_R NoSymbol Alt_R
+
+keycode 64 = Super_L NoSymbol Super_L
+
+
+add control = Control_L
+add control = Control_R
+add mod1 = Alt_L
+add mod1 = Alt_R
+add mod4 = Super_L
