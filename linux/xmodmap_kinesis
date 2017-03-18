@@ -1,5 +1,6 @@
 ! xmodmap -pm to see cur modifiers
 ! xmodmap -pke to see current mappings
+!
 clear control
 ! mod1 is alt
 clear mod1
@@ -7,13 +8,29 @@ clear mod1
 clear mod4
 clear Lock
 
-keycode 133 = Control_L NoSymbol Control_L
+! Ident
+! Control_L NoSymbol Control_L
+! Control_R NoSymbol Control_R
+! Alt_L NoSymbol Alt_L
+! Alt_R NoSymbol Alt_R
+! Super_L NoSymbol Super_L
+! Super_R NoSymbol Super_R
+!
+! left thumb
+! 133 - top left
+keycode 133 = Super_L NoSymbol Super_L
+! 64  - top right
+!keycode 64 =
+
+! right thumb
+! 134 - top left
+!keycode 134 =
+! 105 - top right
+keycode 105 = Alt_R NoSymbol Alt_R
+! 66 - caps lock
 keycode 66 = Control_L NoSymbol Control_L
-keycode 105 = Control_R NoSymbol Control_R
 
-keycode 134 = Alt_R NoSymbol Alt_R
 
-keycode 64 = Super_L NoSymbol Super_L
 
 
 add control = Control_L
