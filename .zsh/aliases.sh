@@ -9,6 +9,7 @@ alias -s py=vim
 alias -s sh=vim
 
 #sane defaults
+alias sudo='sudo ' # so aliases work
 alias vi='vim'
 alias mkdir='mkdir -p'
 alias grep="grep --color"
@@ -40,7 +41,7 @@ alias ff='firefox'
 ## Apps shortcuts (CLI)
 alias t='top'
 alias ht='htop'
-alias h='head ' 
+alias h='cd ~/'
 alias lp='lesspipe.sh '
 alias loc='locate'
 alias nd="ncdu ."
@@ -92,13 +93,13 @@ alias S='sudo '
 alias lsg='ls *|grep -i '
 alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
 alias lsfuncbody='declare -f'
-alias lsfunc='declare -F' 
+alias lsfunc='declare -F'
 alias reset='reset; vr'
 alias fdays='find . -mtime '
 alias loci='locate -i'
 
 ## network
-alias pgoo='ping -c2 google.com' 
+alias pgoo='ping -c2 google.com'
 alias wgetnc='wget --no-check-certificate'
 
 # Window Manager
@@ -188,7 +189,7 @@ alias vr='n=99; while [ $n -gt 0 ]; do echo; n=`echo $n-1|bc`; done'
 vn() { n=$1; while [ $n -gt 0 ]; do echo; n=`echo $n-1|bc`; done; }
 
 ## screen
-alias screen='TERM=xterm-256color screen -T $TERM' 
+alias screen='TERM=xterm-256color screen -T $TERM'
 alias scr='screen -Sx $1'
 alias scl='screen -list'
 alias sc='screen -Sx '
