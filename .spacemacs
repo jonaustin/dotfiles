@@ -37,21 +37,29 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     ;; emacs
      helm
-     emacs-lisp
-     git
-     markdown
      org
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      syntax-checking
-     clojure
+     ;; frameworks
      ruby-on-rails
+     ;; languages
+     clojure
+     python
+     ruby
      html
      javascript
-     dash
+     emacs-lisp
+     markdown
+     ;; vcs
+     git
      github
+     ;; apps
+     dash
+     spotify
      ;; spell-checking
      osx
      )
