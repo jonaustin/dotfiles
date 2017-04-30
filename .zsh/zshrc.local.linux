@@ -1,5 +1,7 @@
 export EDITOR='/usr/bin/vim'
+export BROWSER='/usr/bin/chromium'
 export SHELL='/usr/bin/zsh'
+export PATH=${PATH}:$HOME/.local/bin
 
 alias y='packer -S '
 alias r='sudo pacman -R '
@@ -48,3 +50,12 @@ if [ -f "${SSH_ENV}" ]; then
 else
         start_agent;
 fi
+
+# docker
+alias gitsome="docker run -ti --rm -v $(pwd):/src/ \
+  -v ${HOME}/.gitsomeconfig:/root/.gitsomeconfig  \
+  -v ${HOME}/.gitconfig:/root/.gitconfig          \
+  mariolet/gitsome"
+
+# python
+source /usr/bin/virtualenvwrapper.sh
