@@ -45,7 +45,7 @@ font pango:monospace 16
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator #i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -67,7 +67,7 @@ bindsym Ctrl+space exec dmenu_run
 ################################################################################################
 
 exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -x 'alsamixer'
+bindsym $mod+Ctrl+m exec i3-sensible-terminal -x 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
@@ -79,13 +79,13 @@ bindsym $mod+Ctrl+m exec terminal -x 'alsamixer'
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
-bindsym $mod+Ctrl+b exec terminal -x 'bmenu'
-bindsym $mod+F2 exec palemoon
+bindsym $mod+Ctrl+b exec i3-sensible-terminal -x 'bmenu'
+#bindsym $mod+F2 exec palemoon
 #bindsym $mod+F3 exec pcmanfm
 bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
-bindsym $mod+F5 exec terminal -x 'mocp'
-bindsym $mod+t exec --no-startup-id pkill compton
+bindsym $mod+F5 exec i3-sensible-terminal -x 'mocp'
+#bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 #bindsym Print exec --no-startup-id i3-scrot
@@ -333,14 +333,14 @@ bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --auto"
 bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --output DP1 --off"
 
 # time wasting
-bindsym $mod+Shift+h exec wine "/home/jon/.wine/drive_c/Program\ Files\ \(x86\)/Battle.net/Battle.net.exe"
+bindsym $mod+Shift+h exec 'hearthstone'
 
 # inits
 exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap /home/jon/.xmodmap
 exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200
 exec --no-startup-id guake
-exec --no-startup-id xflux -z 97203 # doesn't work at startup?
+exec --no-startup-id xflux -z 97203 # switch to red shift?
 #exec --no-startup-id xrandr --output eDP-1 --dpi 205
 exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg
