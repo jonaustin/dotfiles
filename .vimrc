@@ -110,7 +110,7 @@
   " UI
   Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
   Plugin 'airblade/vim-gitgutter'
-  Plugin 'godlygeek/csapprox' " disable for transparency
+  "Plugin 'godlygeek/csapprox' " disable for transparency
   Plugin 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
   Plugin 'myusuf3/numbers.vim'
   Plugin 'scrooloose/syntastic'
@@ -230,10 +230,10 @@
   "colo base16-default
   " transparent background
   let g:solarized_termtrans=1
-  "hi Normal ctermbg=none
-  "hi NonText ctermbg=none
-  "hi LineNr ctermbg=none
-  "hi clear CursorLineNr
+  hi Normal ctermbg=none
+  hi NonText ctermbg=none
+  hi LineNr ctermbg=none
+  hi clear CursorLineNr
 
   "hi Normal ctermbg=232               " dark background
 
