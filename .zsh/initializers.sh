@@ -26,6 +26,16 @@ export DISABLE_AUTO_TITLE=true
 # direnv
 eval "$(direnv hook zsh)"
 
+## Ruby
+eval "$(rbenv init -)"
+export RBENV_VERSION=2.3.4
+# rvm
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+#PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+
+## Python
+source /usr/bin/activate.sh # https://github.com/kennethreitz/autoenv/
+
 eval "$(rbenv init -)"
 export RBENV_VERSION=2.3.4
 export PATH="$HOME/.rbenv/bin:$PATH"
