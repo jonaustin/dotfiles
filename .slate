@@ -10,6 +10,9 @@ config windowHintsDuration 5
 config windowHintsSpread true
 #config layoutFocusOnActivate true
 
+# window hints
+bind e:cmd hint ASDFGHJKLQWERTYUIOPCVBN
+
 ### Aliases {{{
 alias hyper ctrl;alt;cmd
 
