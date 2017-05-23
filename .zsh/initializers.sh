@@ -17,6 +17,11 @@ export DISABLE_AUTO_TITLE="true"
 # fasd
 #eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-wcomp)"
 
+# edit command line in vi
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # tmuxinator
