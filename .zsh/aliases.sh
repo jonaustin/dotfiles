@@ -21,6 +21,7 @@ alias df='df -Th'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -f' # don't ask
+alias rmrf='rm -rf'
 
 #ls
 #alias l='ls -CF'
