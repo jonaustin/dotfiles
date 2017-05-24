@@ -20,7 +20,7 @@ clear Lock
 ! 133 - top left
 keycode 133 = Super_L NoSymbol Super_L
 ! 64  - top right
-!keycode 64 =
+keycode 64 = Alt_R NoSymbol Alt_R
 
 ! right thumb
 ! 134 - top left
