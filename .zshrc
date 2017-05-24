@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 #export ZSH_THEME="bira"
 #export ZSH_THEME="wedisagree"
 #export ZSH_THEME="jon"
-export ZSH_THEME='refined' # used to be 'pure'
+export ZSH_THEME='pure' # use upstream pure - https://github.com/sindresorhus/pure
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
