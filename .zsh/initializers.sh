@@ -14,9 +14,6 @@ compctl -g '~/.teamocil/*(:t:r)' teamocil
 # disable autosetting terminal title. (so that tmux `automatic-rename off` actually works)
 export DISABLE_AUTO_TITLE="true"
 
-# fasd
-#eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-wcomp)"
-
 # edit command line in vi
 autoload edit-command-line
 zle -N edit-command-line
@@ -32,11 +29,10 @@ export DISABLE_AUTO_TITLE=true
 eval "$(direnv hook zsh)"
 
 ## Ruby
+# rbenv
 eval "$(rbenv init -)"
 export RBENV_VERSION=2.3.4
-# rvm
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
-#PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 ## Python
 source /usr/bin/activate.sh # https://github.com/kennethreitz/autoenv/
