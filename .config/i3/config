@@ -305,7 +305,7 @@ bar {
 }
 
 # apps
-bindsym $mod+Shift+s exec "/home/jon/bin/spotify"
+#bindsym $mod+Shift+s exec "/home/jon/bin/spotify"
 bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
 bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
 bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
@@ -314,6 +314,7 @@ bindsym $mod+Shift+w exec "feh --recursive --randomize --bg-max ~/img/best"
 # find windows (i3-wm-scripts)
 bindsym $mod+s exec python ~/bin/i3-wm-scripts/nextmatch.py spotify
 bindsym $mod+x exec python ~/bin/i3-wm-scripts/nextmatch.py '(chromium|firefox)'
+bindsym $mod+p exec python ~/bin/i3-wm-scripts/nextmatch.py '(mupdf)'
 #bindsym $mod+e exec python ~/bin/nextfind.py
 
 # volume
@@ -331,6 +332,8 @@ bindsym $mod+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.sp
 bindsym $mod+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 bindsym $mod+Shift+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym $mod+Shift+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+# save a spotify trackid to file: 
+bindsym $mod+Shift+s exec "dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | awk -f $HOME/bin/spotify_trackid.awk >> ~/spotify_tracks.txt"
 
 # monitors
 bindsym $mod+n exec "xrandr --output HDMI1 --auto"
@@ -339,6 +342,7 @@ bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --auto"
 bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --output DP1 --off"
 
 # home automation
+# node-avcontrol for yamaha
 bindsym $mod+bracketleft exec "/home/jon/bin/yamaha -d"
 bindsym $mod+Shift+bracketleft exec "/home/jon/bin/yamaha -D"
 bindsym $mod+bracketright exec "/home/jon/bin/yamaha -u"
@@ -360,15 +364,16 @@ exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Ta
 exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Accel Speed' 1.0
 exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput Tapping Enabled' 1 # note: literal curly quote because...apple..
 exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput Accel Speed' 1.0
+exec --no-startup-id xinput set-button-map "Logitech Trackball" 1 3 3
 exec --no-startup-id parcellite -d
-exec --no-startup-id tmux start
+exec --no-startup-id tmux start-server
+exec --no-startup-id blueman-applet
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id nitrogen --restore; sleep 1; compton -b # background
-#setter
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
+#exec --no-startup-id pamac-tray # pacman tray
 #exec --no-startup-id clipit
 # exec --no-startup-id blueman
 # exec_always --no-startup-id sbxkb
