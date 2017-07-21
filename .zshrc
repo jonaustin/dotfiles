@@ -12,9 +12,9 @@ export ZSH_THEME='pure' # use upstream pure - https://github.com/sindresorhus/pu
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(git rails gem ruby rake node npm)
-# safe-paste fixes up/down history breakage in ubuntu
+# safe-paste fixes up/down history breakage
 # https://github.com/robbyrussell/oh-my-zsh/issues/1720
-plugins=(gitfast rails gem ruby rake node safe-paste) # npm
+plugins=(gitfast rails gem ruby rake node safe-paste autojump) # npm
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
