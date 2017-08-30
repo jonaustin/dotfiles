@@ -86,7 +86,7 @@
   Plugin 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
   "Plugin 'skalnik/vim-vroom' " ruby tests
   Plugin 'mattn/gist-vim' "github gists
-
+  Plugin 'tmux-plugins/vim-tmux'
 
   " Commands
   Plugin 'scrooloose/nerdcommenter'
@@ -132,6 +132,9 @@
   Plugin 'jnurmine/Zenburn'
   Plugin 'altercation/vim-colors-solarized'
   Plugin 'sjl/badwolf' " clojure
+
+  " Misc
+  Plugin 'johngrib/vim-game-code-break'
 
   " Disabled
   "Plugin 'vim-scripts/scratch.vim'
@@ -533,6 +536,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   let g:checksyntax_auto = 1
 
   "comment out line(s) in visual mode
+  let g:NERDDefaultAlign = 'left'
   vmap  o  :call NERDComment(1, 'toggle')<CR>
   let g:NERDShutUp=1
 
