@@ -48,9 +48,12 @@
   Plugin 'othree/javascript-libraries-syntax.vim'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
-  Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
+  "Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
   Plugin 'mxw/vim-jsx'
-
+  " typescript
+  Plugin 'leafgarland/typescript-vim'
+  Plugin 'Quramy/vim-js-pretty-template'
+  Plugin 'jason0x43/vim-js-indent'
 
   " Completion
   "Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
@@ -610,6 +613,11 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " blargh - Tab doesn't work for some reason
   "let g:ycm_auto_trigger = 0
   "let g:ycm_key_invoke_completion = '<TAB>'
+  " typescript
+  if !exists("g:ycm_semantic_triggers")
+    let g:ycm_semantic_triggers = {}
+  endif
+  let g:ycm_semantic_triggers['typescript'] = ['.']
 
   " Clojure
   " RainbowParentheses
