@@ -61,7 +61,7 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
 if [ `uname` = "Darwin" ]; then
   export PATH="/usr/local/share/npm/bin:$PATH"
@@ -75,8 +75,6 @@ fi
 source ${HOME}/.zsh/initializers.sh
 source ${HOME}/.zsh/initializers_private.sh
 source ${HOME}/.zsh/zshrc.local.work
-
-#PATH=$HOME/.rvm/bin:$PATH
 
 # Fix git sloooow autocompletion
 # https://superuser.com/questions/458906/zsh-tab-completion-of-git-commands-is-very-slow-how-can-i-turn-it-off

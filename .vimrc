@@ -57,7 +57,7 @@
   "Plugin 'SirVer/ultisnips'
   "Plugin 'honza/vim-snippets'
   Plugin 'Valloric/YouCompleteMe'
-  Plugin 'marijnh/tern_for_vim' " JS
+  "Plugin 'marijnh/tern_for_vim' " JS
   "Plugin 'Shougo/neocomplete.vim'
   "Plugin 'ervandew/supertab' " Obsoleted by YCM
   "Plugin 'Raimondi/delimitMate' " http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
@@ -135,6 +135,7 @@
 
   " Misc
   Plugin 'johngrib/vim-game-code-break'
+  Plugin 'wakatime/vim-wakatime'
 
   " Disabled
   "Plugin 'vim-scripts/scratch.vim'

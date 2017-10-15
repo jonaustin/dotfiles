@@ -136,7 +136,7 @@ remindme()
 # weather() -- Check weather
 weather()
 {
-  lynx -dump "http://google.com/search?q=weather+${1:-97212}" | grep -A 5 -m 1 '^ *Weather for' | grep -v 'Add to'
+  lynx -dump "http://google.com/search?q=weather+${1:-97203}" | grep -A 5 -m 1 '^ *Weather for' | grep -v 'Add to'
 }
 
 
@@ -244,4 +244,14 @@ function toggleiTerm()
         ;;
     esac
   done
+}
+
+function timer() {
+  for n in `seq 0 $1`
+  do
+    echo "($n-$1)*-1" | bc -l
+    sleep 1
+  done
+  espeak "$2"
+  notify-send "$2"
 }

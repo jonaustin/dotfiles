@@ -239,3 +239,25 @@ alias fuck='$(thefuck $(fc -ln -1))'
 
 # Rails/ruby
 alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
+
+# Python
+alias py3='PYENV_VERSION=3.6.1 '
+alias pip3='PYENV_VERSION=3.6.1 pip3'
+
+### Apps
+alias mpsyt="PYENV_VERSION=3.6.1 mpsyt" # youtube cli player
+
+### Database
+alias mys='mycli -uroot '
+
+# Youtube-dl
+alias yta='youtube-dl -x -f bestaudio --prefer-free-formats -i --output "%(title)s.%(ext)s" '
+alias ytalbum='youtube-dl -x -o "%(autonumber)s - %(title)s.%(ext)s" --autonumber-size 2 --audio-format=opus '
+alias ytv='youtube-dl -f bestvideo+bestaudio --prefer-free-formats -i --output "%(title)s.%(ext)s"'
+alias ytcast='youtube-dl -o - https://youtu.be/BaW_jenozKc | castnow --quiet -' # cast to chromecast
+
+### Systemd
+alias restart='sudo systemctl restart '
+alias start='sudo systemctl start '
+alias stop='sudo systemctl stop '
+alias status='sudo systemctl status '
