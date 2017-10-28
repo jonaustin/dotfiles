@@ -375,14 +375,14 @@ exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg
 exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
 exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Accel Speed' 1.0
+exec --no-startup-id xinput --set-prop 'Logitech Rechargeable Touchpad T650' 'libinput Tapping Enabled' 1
+exec --no-startup-id xinput --set-prop 'Logitech Rechargeable Touchpad T650' 'libinput Accel Speed' 1.0
 exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput Tapping Enabled' 1 # note: literal curly quote because...apple..
 exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput Accel Speed' 1.0
 exec --no-startup-id xinput set-button-map "Logitech Trackball" 1 3 3
 exec --no-startup-id parcellite -d
 exec --no-startup-id tmux start-server
 exec --no-startup-id blueman-applet
-exec --no-startup-id tlp start # weird fix for mouse jumpiness - https://trello.com/c/J5oM459p/79-apple-trackpad
-exec --no-startup-id "firetv-server -d 10.0.1.56:5555"
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
