@@ -80,6 +80,7 @@
   Plugin 'scrooloose/nerdtree'
   Plugin 'matchit.zip'
   Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-rhubarb' " Gbrowse
   Plugin 'tpope/vim-git'
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-rake'
