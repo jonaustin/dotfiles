@@ -23,7 +23,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 # tmuxinator
 export DISABLE_AUTO_TITLE=true
-#source ~/bin/tmuxinator.zsh
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -35,18 +34,11 @@ export RBENV_VERSION=2.3.4
 export PATH="$HOME/.rbenv/bin:$PATH"
 
 ## Python
-source /usr/bin/activate.sh # https://github.com/kennethreitz/autoenv/
-
-eval "$(rbenv init -)"
-export RBENV_VERSION=2.3.4
-export PATH="$HOME/.rbenv/bin:$PATH"
-
-## Python
-source /usr/bin/activate.sh # https://github.com/kennethreitz/autoenv/
+#source /usr/bin/activate.sh # https://github.com/kennethreitz/autoenv/
 
 # virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#source /usr/bin/virtualenvwrapper.sh
 
 # pyenv
 export PYTHON_CONFIGURE_OPTS="--enable-shared" # for youcompleteme
@@ -54,7 +46,7 @@ eval "$(pyenv init -)"
 export PYENV_VERSION=2.7.13
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-source $(pyenv root)/completions/pyenv.zsh
+#source $(pyenv root)/completions/pyenv.zsh
 
 ## Node
 # nvm

@@ -1,13 +1,18 @@
 ### ZSH {{{
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
+export SYSTEM_TYPE=`uname`
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 #export ZSH_THEME="bira"
 #export ZSH_THEME="wedisagree"
 #export ZSH_THEME="jon"
-export ZSH_THEME='pure' # use upstream pure - https://github.com/sindresorhus/pure
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export ZSH_THEME='refined'
+else
+  export ZSH_THEME='pure' # use upstream pure - https://github.com/sindresorhus/pure
+fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -61,9 +66,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
-if [ `uname` = "Darwin" ]; then
-  export PATH="/usr/local/share/npm/bin:$PATH"
-  export PATH="$HOME/pear/bin:$PATH"
+if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin"
   . ${HOME}/.zsh/zshrc.local.osx
 elif [ `uname -o` = "GNU/Linux" ]; then
@@ -76,10 +79,10 @@ source ${HOME}/.zsh/zshrc.local.work
 
 # Fix git sloooow autocompletion
 # https://superuser.com/questions/458906/zsh-tab-completion-of-git-commands-is-very-slow-how-can-i-turn-it-off
-#setopt no_complete_aliases
-#__git_files () {
-#    _wanted files expl 'local files' _files
-#}
+setopt no_complete_aliases
+__git_files () {
+    _wanted files expl 'local files' _files
+}
 # egh, just disable intelligent completion: http://www.zsh.org/mla/workers/2011/msg00502.html
 __git_files(){}
 __git_complete_index_file(){}
@@ -102,3 +105,10 @@ export PATH=$PATH:./node_modules/.bin
 # go
 export GOPATH=$HOME/code/_sandbox/_go
 export PATH=$HOME/code/_sandbox/_go/bin:$PATH
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh

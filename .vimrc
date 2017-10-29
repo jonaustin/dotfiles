@@ -30,6 +30,7 @@
   Plugin 'tpope/vim-markdown'
   Plugin 'tfnico/vim-gradle' " gradle syntax
   Plugin 'vimperator/vimperator.vim'
+  Plugin 'rodjek/vim-puppet'
 
   " Ruby
   Plugin 'ecomba/vim-ruby-refactoring'
@@ -50,6 +51,7 @@
   Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
   "Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
   Plugin 'mxw/vim-jsx'
+
   " typescript
   Plugin 'leafgarland/typescript-vim'
   Plugin 'Quramy/vim-js-pretty-template'
@@ -80,7 +82,7 @@
   Plugin 'scrooloose/nerdtree'
   Plugin 'matchit.zip'
   Plugin 'tpope/vim-fugitive'
-  Plugin 'tpope/vim-rhubarb' " Gbrowse
+  Plugin 'tpope/vim-rhubarb' " Gbrowse for fugitive
   Plugin 'tpope/vim-git'
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-rake'
@@ -167,8 +169,13 @@
 
 " Basics {
 	let mapleader = ","
-  "set clipboard=unnamed              " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
-  set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
+  if has('unix')
+    if has('mac')       " osx
+      set clipboard=unnamed              " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+    else " linux, bsd, etc
+      set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
+    endif
+  endif
   set noautochdir                     " do not automatically change directory
   "set cryptmethod=blowfish            " strong blowfish encryption (instead of zip)
 " }
@@ -236,10 +243,15 @@
   "colo base16-default
   " transparent background
   let g:solarized_termtrans=1
-  hi Normal ctermbg=none
-  hi NonText ctermbg=none
-  hi LineNr ctermbg=none
-  hi clear CursorLineNr
+  if has('unix')
+    if has('mac')       " osx
+    else " linux, bsd, etc
+      hi Normal ctermbg=none
+      hi NonText ctermbg=none
+      hi LineNr ctermbg=none
+      hi clear CursorLineNr
+    endif
+  endif
 
   "hi Normal ctermbg=232               " dark background
 
@@ -531,8 +543,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " syntastic
   let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
-  let g:syntastic_javascript_checkers = ['standard']
-  let g:syntastic_ruby_mri_exec = "~/.rvm/rubies/ruby-2.2.0/bin/ruby"
+  "let g:syntastic_javascript_checkers = ['standard']
+  let g:syntastic_ruby_mri_exec = "~/.rvm/rubies/ruby-2.3.1/bin/ruby"
 
   " choosewin
   nmap  -  <Plug>(choosewin)
@@ -799,9 +811,11 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd! BufRead,BufNewFile *.gradle setf groovy
     " gitconfig
     autocmd! BufRead,BufNewFile gitconfig setf gitconfig
-    "arduino
+    " arduino
     au BufRead,BufNewFile *.pde set filetype=arduino
     au BufRead,BufNewFile *.ino set filetype=arduino
+    " puppet
+    au BufRead,BufNewFile *.pp set filetype=puppet
   augroup END
 " }
 

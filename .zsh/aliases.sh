@@ -129,6 +129,7 @@ alias gp='git pull'
 alias gclone='git clone '
 alias git-diff=git_diff
 alias glpo='git log --oneline --decorate'
+alias gdd='git diff develop | less'
 function git_diff() {
   git diff --no-ext-diff -w "$@" #| vim -R -
 }

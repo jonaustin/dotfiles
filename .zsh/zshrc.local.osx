@@ -39,8 +39,5 @@ bindkey '^[OB' down-line-or-search
 # z
 . `brew --prefix`/etc/profile.d/z.sh
 
-# Homebrew python path (for Mopidy)
-export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
-
 export EDITOR='/usr/local/bin/vim'
 export SHELL='/usr/local/bin/zsh'
