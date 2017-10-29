@@ -501,6 +501,23 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Plugins {
+  " SeeingIsBelieving
+  " Enter on code line to annotate
+  " F4 to remove annotations
+  augroup seeingIsBelievingSettings
+    autocmd!
+
+    autocmd FileType ruby nmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
+    autocmd FileType ruby xmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
+
+    autocmd FileType ruby nmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+    autocmd FileType ruby xmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+    autocmd FileType ruby imap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+
+    autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing-is-believing-run)
+    autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing-is-believing-run)
+  augroup END
+
   " Airline/Powerline
   let g:airline_powerline_fonts = 1
   let g:airline_theme='base16'
