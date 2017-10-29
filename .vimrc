@@ -84,8 +84,8 @@
   Plugin 'tpope/vim-git'
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-rake'
-  Plugin 'jgdavey/tslime.vim' " needed for vim-rspec
-  Plugin 'thoughtbot/vim-rspec'
+  "Plugin 'jgdavey/tslime.vim' " needed for vim-rspec
+  "Plugin 'thoughtbot/vim-rspec'
   "Plugin 'skwp/vim-rspec'
   Plugin 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
   "Plugin 'skalnik/vim-vroom' " ruby tests
@@ -112,7 +112,9 @@
   Plugin 'sickill/vim-pasta' " auto-indents p/P pasting based on context
 
   " UI
-  Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
+  "Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
   Plugin 'airblade/vim-gitgutter'
   "Plugin 'godlygeek/csapprox' " disable for transparency
   Plugin 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
@@ -168,7 +170,7 @@
   "set clipboard=unnamed              " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
   set noautochdir                     " do not automatically change directory
-  set cryptmethod=blowfish            " strong blowfish encryption (instead of zip)
+  "set cryptmethod=blowfish            " strong blowfish encryption (instead of zip)
 " }
 
 " General {
@@ -499,6 +501,10 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Plugins {
+  " Airline/Powerline
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme='base16'
+
   " Dash
   nmap <silent> <leader>d <Plug>DashSearch
 
