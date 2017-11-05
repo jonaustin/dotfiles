@@ -13,6 +13,11 @@
   " let Vundle manage Vundle
   Plugin 'gmarik/Vundle.vim'
 
+  if has('nvim')
+    Plugin 'vifm/neovim-vifm'
+    Plugin 'airodactyl/neovim-ranger'
+  endif
+
   " Clojure
   Plugin 'eapache/rainbow_parentheses.vim' " better alt?: https://github.com/luochen1990/rainbow
   Plugin 'guns/vim-clojure-highlight'
@@ -51,11 +56,13 @@
   Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
   "Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
   Plugin 'mxw/vim-jsx'
+  Plugin 'othree/yajs.vim' " yet another javascript syntax
 
   " typescript
   Plugin 'leafgarland/typescript-vim'
   Plugin 'Quramy/vim-js-pretty-template'
   Plugin 'jason0x43/vim-js-indent'
+  Plugin 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
 
   " Completion
   "Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
@@ -112,6 +119,7 @@
   "Plugin 'chrisbra/NrrwRgn'
   "Plugin 'rgarver/Kwbd.vim' " delete buffer without closing window
   Plugin 'sickill/vim-pasta' " auto-indents p/P pasting based on context
+  Plugin 'tpope/vim-unimpaired'
 
   " UI
   Plugin 'vim-airline/vim-airline'
@@ -121,7 +129,7 @@
   "Plugin 'godlygeek/csapprox' " disable for transparency
   Plugin 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
   Plugin 'myusuf3/numbers.vim'
-  Plugin 'scrooloose/syntastic'
+  Plugin 'w0rp/ale' " asynchronous linter
 
   " Libs
   Plugin 'tomtom/tlib_vim'
@@ -158,7 +166,6 @@
   "Plugin 'tpope/vim-characterize' " inserting special chars (&copy) and getting unicode codes
   "Plugin 'tpope/vim-endwise'
   "Plugin 'tpope/vim-obsession' " probably conflicts with sessionman.vim
-  "Plugin 'tpope/vim-unimpaired'
 
   " All of your Plugins must be added before the following line
   call vundle#end()                     " required
@@ -545,6 +552,14 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
   "let g:syntastic_javascript_checkers = ['standard']
   let g:syntastic_ruby_mri_exec = "~/.rvm/rubies/ruby-2.3.1/bin/ruby"
+
+  " ALE asynchronous linter
+  let g:ale_fixers = {}
+  let g:ale_fixers['javascript'] = ['prettier']
+  let g:ale_fix_on_save = 1
+  let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+  let g:ale_sign_warning = '.'
+  let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
   " choosewin
   nmap  -  <Plug>(choosewin)
@@ -1045,6 +1060,15 @@ fun! s:FindWordUnderCursor()
   exec "Ack '" . @z . "'"
 endfun
 nmap <Leader>a :call <SID>FindWordUnderCursor()<CR>
+
+" Run a macro over a visual range
+" (.e.g instead of hitting '.' over and over)
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 nmap <Leader>r :redraw!<cr>
 
