@@ -1,5 +1,7 @@
 ## SHORTCUTS
 
+alias vim='nvim'
+
 # open with suffix aliases
 alias -s rb=vim
 alias -s txt=vim
@@ -11,6 +13,7 @@ alias -s sh=vim
 #sane defaults
 alias sudo='sudo ' # so aliases work
 alias vi='vim'
+alias spacemacs='emacs'
 alias mkdir='mkdir -p'
 alias grep="grep --color"
 alias gp="|grep -i"
