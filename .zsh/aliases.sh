@@ -230,9 +230,12 @@ alias ipad_simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/
 alias serve='ruby -run -e httpd . -p 5000'
 
 # node/npm
-npmd() { npm view $1 description }
-alias npm-list='npm list -g --depth=0' # list globally installed modules
-#alias npm='node --max-old-space-size=4000 /usr/local/bin/npm' # temporary: https://github.com/npm/npm/issues/12619#issuecomment-224547637
+npmd() {
+  npm view $1 description
+}
+npm-list() { #'npm list -g --depth=0' # list globally installed modules
+  npm -g ls --parseable --depth=0 | awk '{gsub(/\/.*\//,"",$1); print}'| sort -u
+}
 
 # get remote ip
 alias myip="curl ifconfig.me"
