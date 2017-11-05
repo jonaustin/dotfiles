@@ -556,6 +556,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " ALE asynchronous linter
   let g:ale_fixers = {}
   let g:ale_fixers['javascript'] = ['prettier']
+  let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
   let g:ale_fix_on_save = 1
   let g:ale_sign_error = '●' " Less aggressive than the default '>>'
   let g:ale_sign_warning = '.'
