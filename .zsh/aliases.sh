@@ -231,6 +231,7 @@ alias serve='ruby -run -e httpd . -p 5000'
 
 # node/npm
 npmd() { npm view $1 description }
+alias npm-list='npm list -g --depth=0' # list globally installed modules
 #alias npm='node --max-old-space-size=4000 /usr/local/bin/npm' # temporary: https://github.com/npm/npm/issues/12619#issuecomment-224547637
 
 # get remote ip
