@@ -148,6 +148,7 @@
   Plugin 'jnurmine/Zenburn'
   Plugin 'altercation/vim-colors-solarized'
   Plugin 'sjl/badwolf' " clojure
+  Plugin 'morhetz/gruvbox'
 
   " Misc
   Plugin 'johngrib/vim-game-code-break'
