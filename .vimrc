@@ -551,10 +551,11 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " syntastic
   let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
   "let g:syntastic_javascript_checkers = ['standard']
-  let g:syntastic_ruby_mri_exec = "~/.rvm/rubies/ruby-2.3.1/bin/ruby"
+  let g:syntastic_ruby_mri_exec = '~/.rvm/rubies/ruby-2.3.1/bin/ruby'
 
   " ALE asynchronous linter
   let g:ale_fixers = {}
+  let g:ale_linters = {}
   let g:ale_fixers['javascript'] = ['prettier']
   let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
   let g:ale_fix_on_save = 1
@@ -1022,7 +1023,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
       tabprev
     endif
     split
-    execute "buffer " . bufferName
+    execute 'buffer ' . bufferName
   endfunction
   nmap <C-W>u :call MergeTabs()<CR>
 "}}}
@@ -1056,7 +1057,7 @@ noremap<Leader>C :OpenChangedFiles <CR>
 fun! s:FindWordUnderCursor()
   " Yank the word under the cursor into the z register
   normal "zyiw
-  exec "copen"
+  exec 'copen'
 
   exec "Ack '" . @z . "'"
 endfun
@@ -1067,7 +1068,7 @@ nmap <Leader>a :call <SID>FindWordUnderCursor()<CR>
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
+  echo '@'.getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
