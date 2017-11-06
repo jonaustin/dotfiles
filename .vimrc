@@ -251,14 +251,19 @@
   "colo base16-default
   " transparent background
   let g:solarized_termtrans=1
-  if has('unix')
-    if has('mac')       " osx
-    else " linux, bsd, etc
-      hi Normal ctermbg=none
-      hi NonText ctermbg=none
-      hi LineNr ctermbg=none
-      hi clear CursorLineNr
-    endif
+  hi! Normal ctermbg=none
+  hi! NonText ctermbg=none
+  hi! LineNr ctermbg=none
+  "hi! clear CursorLineNr
+
+  " FIXME: kills transparency in terminator
+  "if has('nvim') || has('termguicolors')
+  "  set termguicolors
+  "endif
+  if has('termguicolors')     " set true colors
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+    set termguicolors
   endif
 
   "hi Normal ctermbg=232               " dark background
@@ -418,6 +423,7 @@
 	" remap jj to escape
 	inoremap jj <ESC>
 	inoremap jk <ESC>
+
 
   " Quickly toggle wrap mode (for the current window)
   nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
