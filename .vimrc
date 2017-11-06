@@ -14,13 +14,13 @@
   endif
 
   " Clojure
-  Plug 'eapache/rainbow_parentheses.vim' " better alt?: https://github.com/luochen1990/rainbow
-  Plug 'guns/vim-clojure-highlight'
-  Plug 'guns/vim-clojure-static'
-  Plug 'tpope/vim-classpath'
-  Plug 'tpope/vim-fireplace' " ( nrepl middleware: https://github.com/clojure-emacs/cider-nrepl )
-  Plug 'tpope/vim-sexp-mappings-for-regular-people'
-  Plug 'guns/vim-sexp'
+  Plug 'eapache/rainbow_parentheses.vim',            { 'for': 'clojure' } " better alt?: https://github.com/luochen1990/rainbow
+  Plug 'guns/vim-clojure-highlight',                 { 'for': 'clojure' }
+  Plug 'guns/vim-clojure-static',                    { 'for': 'clojure' }
+  Plug 'tpope/vim-classpath',                        { 'for': 'clojure' }
+  Plug 'tpope/vim-fireplace',                        { 'for': 'clojure' } " ( nrepl middleware: https://github.com/clojure-emacs/cider-nrepl )
+  Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
+  Plug 'guns/vim-sexp',                              { 'for': 'clojure' }
 
   " Language
   "Plug 'tpope/vim-liquid' " jekyll
