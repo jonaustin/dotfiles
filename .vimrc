@@ -3,179 +3,171 @@
 "
 " }
 
-
-" Vundle
-	set nocompatible 		                " must be first directive
-	filetype off                        " required for Vundle
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-
-  " let Vundle manage Vundle
-  Plugin 'gmarik/Vundle.vim'
+" vim-plug {{{
+  " Specify a directory for plugins
+  " - For Neovim: ~/.local/share/nvim/plugged
+  call plug#begin('~/.vim/bundle')
 
   if has('nvim')
-    Plugin 'vifm/neovim-vifm'
-    Plugin 'airodactyl/neovim-ranger'
+    Plug 'vifm/neovim-vifm'
+    Plug 'airodactyl/neovim-ranger'
   endif
 
   " Clojure
-  Plugin 'eapache/rainbow_parentheses.vim' " better alt?: https://github.com/luochen1990/rainbow
-  Plugin 'guns/vim-clojure-highlight'
-  Plugin 'guns/vim-clojure-static'
-  Plugin 'tpope/vim-classpath'
-  Plugin 'tpope/vim-fireplace' " ( nrepl middleware: https://github.com/clojure-emacs/cider-nrepl )
-  Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-  Plugin 'guns/vim-sexp.git'
+  Plug 'eapache/rainbow_parentheses.vim' " better alt?: https://github.com/luochen1990/rainbow
+  Plug 'guns/vim-clojure-highlight'
+  Plug 'guns/vim-clojure-static'
+  Plug 'tpope/vim-classpath'
+  Plug 'tpope/vim-fireplace' " ( nrepl middleware: https://github.com/clojure-emacs/cider-nrepl )
+  Plug 'tpope/vim-sexp-mappings-for-regular-people'
+  Plug 'guns/vim-sexp'
 
   " Language
-  "Plugin 'tpope/vim-liquid' " jekyll
-  Plugin 'cakebaker/scss-syntax.vim'
-  Plugin 'ap/vim-css-color'
-  Plugin 'mattn/emmet-vim'
-  Plugin 'tpope/vim-markdown'
-  Plugin 'tfnico/vim-gradle' " gradle syntax
-  Plugin 'vimperator/vimperator.vim'
-  Plugin 'rodjek/vim-puppet'
+  "Plug 'tpope/vim-liquid' " jekyll
+  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'ap/vim-css-color'
+  Plug 'mattn/emmet-vim'
+  Plug 'tpope/vim-markdown'
+  Plug 'tfnico/vim-gradle' " gradle syntax
+  Plug 'vimperator/vimperator.vim'
+  Plug 'rodjek/vim-puppet'
 
   " Ruby
-  Plugin 'ecomba/vim-ruby-refactoring'
-  Plugin 'tpope/vim-haml'
-  Plugin 'vim-ruby/vim-ruby'
-  "Plugin 'slim-template/vim-slim'
-  "Plugin 'sunaku/vim-ruby-minitest'
-  "Plugin 'depuracao/vim-rdoc'
-  Plugin 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
-  "Plugin 'tpope/vim-rvm' " switch ruby versions within vim
+  Plug 'ecomba/vim-ruby-refactoring'
+  Plug 'tpope/vim-haml'
+  Plug 'vim-ruby/vim-ruby'
+  "Plug 'slim-template/vim-slim'
+  "Plug 'sunaku/vim-ruby-minitest'
+  "Plug 'depuracao/vim-rdoc'
+  Plug 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
+  "Plug 'tpope/vim-rvm' " switch ruby versions within vim
 
   " Javascript
-  Plugin 'pangloss/vim-javascript'
-  Plugin 'jelera/vim-javascript-syntax'
-  Plugin 'vim-scripts/JavaScript-Indent'
-  Plugin 'othree/javascript-libraries-syntax.vim'
-  Plugin 'kchmck/vim-coffee-script'
-  Plugin 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
-  "Plugin 'mtscout6/vim-cjsx' " coffeescript with react jsx
-  Plugin 'mxw/vim-jsx'
-  Plugin 'othree/yajs.vim' " yet another javascript syntax
+  Plug 'pangloss/vim-javascript'
+  Plug 'jelera/vim-javascript-syntax'
+  Plug 'vim-scripts/JavaScript-Indent'
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'kchmck/vim-coffee-script'
+  Plug 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
+  "Plug 'mtscout6/vim-cjsx' " coffeescript with react jsx
+  Plug 'mxw/vim-jsx'
+  Plug 'othree/yajs.vim' " yet another javascript syntax
 
   " typescript
-  Plugin 'leafgarland/typescript-vim'
-  Plugin 'Quramy/vim-js-pretty-template'
-  Plugin 'jason0x43/vim-js-indent'
-  Plugin 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
+  Plug 'leafgarland/typescript-vim'
+  Plug 'Quramy/vim-js-pretty-template'
+  Plug 'jason0x43/vim-js-indent'
+  Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
 
   " Completion
-  "Plugin 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
-  "Plugin 'SirVer/ultisnips'
-  "Plugin 'honza/vim-snippets'
-  Plugin 'Valloric/YouCompleteMe'
-  "Plugin 'marijnh/tern_for_vim' " JS
-  "Plugin 'Shougo/neocomplete.vim'
-  "Plugin 'ervandew/supertab' " Obsoleted by YCM
-  "Plugin 'Raimondi/delimitMate' " http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
-  Plugin 'ludovicchabant/vim-gutentags' " auto ctags
+  "Plug 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
+  "Plug 'SirVer/ultisnips'
+  "Plug 'honza/vim-snippets'
+  Plug 'Valloric/YouCompleteMe'
+  "Plug 'marijnh/tern_for_vim' " JS
+  "Plug 'Shougo/neocomplete.vim'
+  "Plug 'ervandew/supertab' " Obsoleted by YCM
+  "Plug 'Raimondi/delimitMate' " http://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
+  Plug 'ludovicchabant/vim-gutentags' " auto ctags
 
   " Navigation
-  Plugin 'kien/ctrlp.vim'
-  Plugin 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
-  Plugin 'goldfeld/vim-seek'              " <leader>s<2 chars>
-  Plugin 'mileszs/ack.vim'                " :Ack <search>
-  Plugin 'Lokaltog/vim-easymotion'        " <leader><leader>w
-  Plugin 'jeetsukumaran/vim-buffergator'  " <leader>b
-  Plugin 't9md/vim-choosewin'             " -
+  Plug 'kien/ctrlp.vim'
+  Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
+  Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
+  Plug 'mileszs/ack.vim'                " :Ack <search>
+  Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
+  Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
+  Plug 't9md/vim-choosewin'             " -
 
   " Integrations
-  Plugin 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'matchit.zip'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'tpope/vim-rhubarb' " Gbrowse for fugitive
-  Plugin 'tpope/vim-git'
-  Plugin 'tpope/vim-rails'
-  Plugin 'tpope/vim-rake'
-  "Plugin 'jgdavey/tslime.vim' " needed for vim-rspec
-  "Plugin 'thoughtbot/vim-rspec'
-  "Plugin 'skwp/vim-rspec'
-  Plugin 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
-  "Plugin 'skalnik/vim-vroom' " ruby tests
-  Plugin 'mattn/gist-vim' "github gists
-  Plugin 'tmux-plugins/vim-tmux'
+  Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
+  Plug 'scrooloose/nerdtree'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb' " Gbrowse for fugitive
+  Plug 'tpope/vim-git'
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-rake'
+  "Plug 'jgdavey/tslime.vim' " needed for vim-rspec
+  "Plug 'thoughtbot/vim-rspec'
+  "Plug 'skwp/vim-rspec'
+  Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
+  "Plug 'skalnik/vim-vroom' " ruby tests
+  Plug 'mattn/gist-vim' "github gists
+  Plug 'tmux-plugins/vim-tmux'
 
   " Commands
-  Plugin 'scrooloose/nerdcommenter'
-  Plugin 'mbbill/undotree'
-  "Plugin 'sjl/gundo.vim'
-  Plugin 'tpope/vim-repeat'
-  Plugin 'tpope/vim-surround'
-  Plugin 'vim-scripts/Tabmerge'
-  "Plugin 'vim-scripts/sessionman.vim'
-  Plugin 'xolox/vim-session' " :OpenSession / :SaveSession
-  Plugin 'xolox/vim-misc' " required by vim-session
-  Plugin 'benmills/vimux'
-  Plugin 'itspriddle/ZoomWin' " <c-w>-o
-  Plugin 'mattn/webapi-vim'
-  Plugin 'terryma/vim-multiple-cursors' " <c-n>
-  Plugin 'thinca/vim-visualstar' " search your selection text in Visual-mode.
-  "Plugin 'chrisbra/NrrwRgn'
-  "Plugin 'rgarver/Kwbd.vim' " delete buffer without closing window
-  Plugin 'sickill/vim-pasta' " auto-indents p/P pasting based on context
-  Plugin 'tpope/vim-unimpaired'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'mbbill/undotree'
+  "Plug 'sjl/gundo.vim'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-surround'
+  Plug 'vim-scripts/Tabmerge'
+  "Plug 'vim-scripts/sessionman.vim'
+  Plug 'xolox/vim-session' " :OpenSession / :SaveSession
+  Plug 'xolox/vim-misc' " required by vim-session
+  Plug 'benmills/vimux'
+  Plug 'itspriddle/ZoomWin' " <c-w>-o
+  Plug 'mattn/webapi-vim'
+  Plug 'terryma/vim-multiple-cursors' " <c-n>
+  Plug 'thinca/vim-visualstar' " search your selection text in Visual-mode.
+  "Plug 'chrisbra/NrrwRgn'
+  "Plug 'rgarver/Kwbd.vim' " delete buffer without closing window
+  Plug 'sickill/vim-pasta' " auto-indents p/P pasting based on context
+  Plug 'tpope/vim-unimpaired'
 
   " UI
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  "Plugin 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-  Plugin 'airblade/vim-gitgutter'
-  "Plugin 'godlygeek/csapprox' " disable for transparency
-  Plugin 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
-  Plugin 'myusuf3/numbers.vim'
-  Plugin 'w0rp/ale' " asynchronous linter
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  "Plug 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+  Plug 'airblade/vim-gitgutter'
+  "Plug 'godlygeek/csapprox' " disable for transparency
+  Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
+  Plug 'myusuf3/numbers.vim'
+  Plug 'w0rp/ale' " asynchronous linter
 
   " Libs
-  Plugin 'tomtom/tlib_vim'
-  Plugin 'MarcWeber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'MarcWeber/vim-addon-mw-utils'
 
   " Colors
-  Plugin 'w0ng/vim-hybrid'
-  Plugin 'Lokaltog/vim-distinguished'
-  "Plugin 'jonaustin/vim-colors'
-  Plugin 'guns/jellyx.vim'
-  Plugin 'chriskempson/base16'
-  Plugin 'tomasr/molokai'
-  Plugin 'nanotech/jellybeans.vim'
-  Plugin 'vim-scripts/xoria256.vim'
-  Plugin 'ciaranm/inkpot'
-  Plugin 'jnurmine/Zenburn'
-  Plugin 'altercation/vim-colors-solarized'
-  Plugin 'sjl/badwolf' " clojure
-  Plugin 'morhetz/gruvbox'
+  Plug 'w0ng/vim-hybrid'
+  Plug 'Lokaltog/vim-distinguished'
+  "Plug 'jonaustin/vim-colors'
+  Plug 'guns/jellyx.vim'
+  Plug 'chriskempson/base16'
+  Plug 'tomasr/molokai'
+  Plug 'nanotech/jellybeans.vim'
+  Plug 'vim-scripts/xoria256.vim'
+  Plug 'ciaranm/inkpot'
+  Plug 'jnurmine/Zenburn'
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'sjl/badwolf' " clojure
+  Plug 'morhetz/gruvbox'
 
   " Misc
-  Plugin 'johngrib/vim-game-code-break'
-  Plugin 'wakatime/vim-wakatime'
+  Plug 'johngrib/vim-game-code-break'
+  Plug 'wakatime/vim-wakatime'
 
   " Disabled
-  "Plugin 'vim-scripts/scratch.vim'
-  "Plugin 'amix/vim-zenroom'
-  "Plugin 'chrisbra/csv.vim'
-  "Plugin 'majutsushi/tagbar'
-  "Plugin 'mattboehm/vim-unstack'
-  "Plugin 'terryma/vim-multiple-cursors'
-  "Plugin 'tpope/vim-abolish' " smarter subsitution - :%Subvert/facilit{y,ies}/building{,s}/g
-  "Plugin 'tpope/vim-afterimage' " view Word/PDF files
-  "Plugin 'tpope/vim-bundler'
-  "Plugin 'tpope/vim-characterize' " inserting special chars (&copy) and getting unicode codes
-  "Plugin 'tpope/vim-endwise'
-  "Plugin 'tpope/vim-obsession' " probably conflicts with sessionman.vim
+  "Plug 'vim-scripts/scratch.vim'
+  "Plug 'amix/vim-zenroom'
+  "Plug 'chrisbra/csv.vim'
+  "Plug 'majutsushi/tagbar'
+  "Plug 'mattboehm/vim-unstack'
+  "Plug 'terryma/vim-multiple-cursors'
+  "Plug 'tpope/vim-abolish' " smarter subsitution - :%Subvert/facilit{y,ies}/building{,s}/g
+  "Plug 'tpope/vim-afterimage' " view Word/PDF files
+  "Plug 'tpope/vim-bundler'
+  "Plug 'tpope/vim-characterize' " inserting special chars (&copy) and getting unicode codes
+  "Plug 'tpope/vim-endwise'
+  "Plug 'tpope/vim-obsession' " probably conflicts with sessionman.vim
 
-  " All of your Plugins must be added before the following line
-  call vundle#end()                     " required
-
-  " Turn back on after Vundle finishes its thing
-  filetype plugin indent on  	        " Automatically detect file types.
-
+  " Initialize plugin system
+  call plug#end()
+" }}}
 
 " Basics {
+  filetype plugin indent on  	        " Automatically detect file types.
 	let mapleader = ","
   if has('unix')
     if has('mac')       " osx
