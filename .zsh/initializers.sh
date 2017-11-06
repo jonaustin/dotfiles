@@ -43,7 +43,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 # pyenv
 export PYTHON_CONFIGURE_OPTS="--enable-shared" # for youcompleteme
 eval "$(pyenv init -)"
-export PYENV_VERSION=2.7.13
+export PYENV_VERSION=3.6.1 #2.7.13
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 #source $(pyenv root)/completions/pyenv.zsh
@@ -53,6 +53,11 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# vmux
+export VMUX_EDITOR=nvim
+export VMUX_REALEDITOR_VIM=/usr/bin/vim
+export VMUX_REALEDITOR_NVIM=/usr/bin/nvim
 
 ## Other
 
