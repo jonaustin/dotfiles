@@ -47,7 +47,7 @@
   "Plug 'slim-template/vim-slim'
   "Plug 'sunaku/vim-ruby-minitest'
   "Plug 'depuracao/vim-rdoc'
-  Plug 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
+  "Plug 'hwartig/vim-seeing-is-believing' " e.g `#> 'foo'` or t9md/vim-ruby-xmpfilter (deprecated for Codi, but might still be useful)
   "Plug 'tpope/vim-rvm' " switch ruby versions within vim
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-rake'
