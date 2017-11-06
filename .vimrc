@@ -41,7 +41,7 @@
   Plug 'rodjek/vim-puppet'
 
   " Ruby
-  Plug 'ecomba/vim-ruby-refactoring'
+  "Plug 'ecomba/vim-ruby-refactoring'
   Plug 'tpope/vim-haml'
   Plug 'vim-ruby/vim-ruby'
   "Plug 'slim-template/vim-slim'
@@ -49,6 +49,12 @@
   "Plug 'depuracao/vim-rdoc'
   Plug 'hwartig/vim-seeing-is-believing' " or t9md/vim-ruby-xmpfilter
   "Plug 'tpope/vim-rvm' " switch ruby versions within vim
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-rake'
+  "Plug 'jgdavey/tslime.vim' " needed for vim-rspec
+  "Plug 'thoughtbot/vim-rspec'
+  "Plug 'skwp/vim-rspec'
+  "Plug 'skalnik/vim-vroom' " ruby tests
 
   " Javascript
   Plug 'pangloss/vim-javascript'
@@ -88,18 +94,15 @@
   Plug 't9md/vim-choosewin'             " -
 
   " Integrations
+  Plug 'skywind3000/asyncrun.vim' " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
+  Plug 'janko-m/vim-test'
+  Plug 'metakirby5/codi.vim' " amazing repl
   Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
-  Plug 'scrooloose/nerdtree'
+  "Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb' " Gbrowse for fugitive
   Plug 'tpope/vim-git'
-  Plug 'tpope/vim-rails'
-  Plug 'tpope/vim-rake'
-  "Plug 'jgdavey/tslime.vim' " needed for vim-rspec
-  "Plug 'thoughtbot/vim-rspec'
-  "Plug 'skwp/vim-rspec'
   Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
-  "Plug 'skalnik/vim-vroom' " ruby tests
   Plug 'mattn/gist-vim' "github gists
   Plug 'tmux-plugins/vim-tmux'
 
@@ -128,7 +131,7 @@
   Plug 'vim-airline/vim-airline-themes'
   "Plug 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
   Plug 'airblade/vim-gitgutter'
-  "Plug 'godlygeek/csapprox' " disable for transparency
+  "Plug 'godlygeek/csapprox' " disable for transparency (or fix let g:CSApprox_hook_post below)
   Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
   Plug 'myusuf3/numbers.vim'
   Plug 'w0rp/ale' " asynchronous linter
@@ -177,6 +180,7 @@
 " Basics {
   filetype plugin indent on  	        " Automatically detect file types.
 	let mapleader = ","
+
   if has('unix')
     if has('mac')       " osx
       set clipboard=unnamed              " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
@@ -184,6 +188,7 @@
       set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
     endif
   endif
+
   set noautochdir                     " do not automatically change directory
   "set cryptmethod=blowfish            " strong blowfish encryption (instead of zip)
 " }
@@ -191,12 +196,13 @@
 " General {
 	syntax on 					                " syntax highlighting
 	set mouse=a					                " disable mouse..add =a to enable
+  set signcolumn=yes                " Otherwise realtime linter gets annoying
 	" not every vim is compiled with this, use the following line instead
      "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 	scriptencoding utf-8
 	set autowrite
 	set shortmess+=filmnrxoOtT          " abbrev. of messages (avoids 'hit enter')
-  set foldmethod=syntax
+  "set foldmethod=syntax
   set foldlevelstart=99
 	" set spell 		 	     	            " spell checking on
   "set vb                             " visual bell, no beeping - disable - causes weird crap-glyphs in gnome-terminal
@@ -563,6 +569,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   let g:ale_sign_error = '●' " Less aggressive than the default '>>'
   let g:ale_sign_warning = '.'
   let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+
+  " Codi repl
+  let g:codi#rightalign=0
 
   " choosewin
   nmap  -  <Plug>(choosewin)
