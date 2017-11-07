@@ -130,7 +130,7 @@
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   "Plug 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-  Plug 'airblade/vim-gitgutter'
+  "Plug 'airblade/vim-gitgutter'
   "Plug 'godlygeek/csapprox' " disable for transparency (or fix let g:CSApprox_hook_post below)
   Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
   Plug 'myusuf3/numbers.vim'
@@ -142,6 +142,7 @@
 
   " Colors
   Plug 'w0ng/vim-hybrid'
+  Plug 'sk1418/last256' " based on hybrid
   Plug 'Lokaltog/vim-distinguished'
   "Plug 'jonaustin/vim-colors'
   Plug 'guns/jellyx.vim'
@@ -360,6 +361,7 @@
   :command! WQ wq
   :command! W w
   :command! Q q
+  :command! Qa qa
   "}
 
   " Windows
@@ -547,6 +549,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " Airline/Powerline
   let g:airline_powerline_fonts = 1
   let g:airline_theme='base16'
+  let g:airline#extensions#tabline#enabled = 1
+
 
   " Dash
   nmap <silent> <leader>d <Plug>DashSearch
@@ -563,6 +567,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " ALE asynchronous linter
   let g:ale_fixers = {}
   let g:ale_linters = {}
+  let g:ale_linters['javascript'] = ['standard']
   let g:ale_fixers['javascript'] = ['prettier']
   let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
   let g:ale_fix_on_save = 1
@@ -572,6 +577,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Codi repl
   let g:codi#rightalign=0
+  let g:codi#width=80
 
   " choosewin
   nmap  -  <Plug>(choosewin)
@@ -590,11 +596,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 	" TagList
 	map <leader>tl :TlistToggle<cr>
-
-  " Supertab {
-  "let g:SuperTabDefaultCompletionType = "context"
-  "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-  " }
 
   " Misc {
   ":map <C-F10> <Esc>:vsp<CR>:VTree<CR>
@@ -915,22 +916,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 "}
 
-
-" Other Customizations {
-  " Add #s to tabline so gt/gT is actually useful..sheesh.. {
-  set showtabline=1         " 0, 1 or 2; when to use a tab pages line
-
-  " relative/absolute line number switching
-  function! NumberToggle()
-    if(&relativenumber == 1)
-      set number
-    else
-      set relativenumber
-    endif
-  endfunc
-
-  nnoremap <C-n> :call NumberToggle()<cr>
-
   " automatically switch to absolute line numbers whenever vim loses focus
   " (this doesn't seem to work...)
   ":au FocusLost * :set number
@@ -940,26 +925,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   "autocmd InsertEnter * :set number
   " command mode: automatically use relative line numbers
   "autocmd InsertLeave * :set relativenumber
-  " }
 
-  "" Strip trailing whitespace {
-  "function! <SID>StripTrailingWhitespaces()
-    "" Preparation: save last search, and cursor position.
-    "let _s=@/
-    "let l = line(".")
-    "let c = col(".")
-    "" Do the business:
-    "%s/\s\+$//e
-    "" Clean up: restore previous search history, and cursor position
-    "let @/=_s
-    "call cursor(l, c)
-  "endfunction
-
-  "if has("autocmd")
-    "autocmd Filetype html :call <SID>StripTrailingWhitespaces()
-    "autocmd Filetype ruby :call <SID>StripTrailingWhitespaces()
-  "endif
-  " }
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " OpenChangedFiles COMMAND
@@ -1076,7 +1042,6 @@ nmap <Leader>a :call <SID>FindWordUnderCursor()<CR>
 " Run a macro over a visual range
 " (.e.g instead of hitting '.' over and over)
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-
 function! ExecuteMacroOverVisualRange()
   echo '@'.getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
