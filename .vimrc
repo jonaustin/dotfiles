@@ -19,10 +19,30 @@
   if has('nvim')
     Plug 'vifm/neovim-vifm'
     Plug 'airodactyl/neovim-ranger'
+    Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   endif
 
+  " Async
+  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/vimproc.vim'
+
+  " deoplete
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  Plug 'Shougo/neco-syntax'
+  Plug 'zchee/deoplete-zsh'
+  Plug 'zchee/deoplete-jedi', { 'do': 'pip install jedi' }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'Shougo/deoplete-rct'
+
+
   " Clojure
-  Plug 'eapache/rainbow_parentheses.vim',            { 'for': 'clojure' } " better alt?: https://github.com/luochen1990/rainbow
+  "Plug 'eapache/rainbow_parentheses.vim',            { 'for': 'clojure' } " better alt?: https://github.com/luochen1990/rainbow
   Plug 'guns/vim-clojure-highlight',                 { 'for': 'clojure' }
   Plug 'guns/vim-clojure-static',                    { 'for': 'clojure' }
   Plug 'tpope/vim-classpath',                        { 'for': 'clojure' }
@@ -59,6 +79,7 @@
   " Javascript
   Plug 'pangloss/vim-javascript'
   Plug 'jelera/vim-javascript-syntax'
+  Plug 'othree/yajs.vim'
   Plug 'vim-scripts/JavaScript-Indent'
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'kchmck/vim-coffee-script'
@@ -68,16 +89,18 @@
   Plug 'othree/yajs.vim' " yet another javascript syntax
 
   " typescript
-  Plug 'leafgarland/typescript-vim'
-  Plug 'Quramy/vim-js-pretty-template'
+  "Plug 'leafgarland/typescript-vim' " syntax
+  Plug 'Quramy/vim-js-pretty-template' " template strings coloring
   Plug 'jason0x43/vim-js-indent'
   Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
+  Plug 'Quramy/tsuquyomi' " tsserver
+  Plug 'mhartington/nvim-typescript'
 
   " Completion
   "Plug 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
   "Plug 'SirVer/ultisnips'
   "Plug 'honza/vim-snippets'
-  Plug 'Valloric/YouCompleteMe'
+  "Plug 'Valloric/YouCompleteMe'
   "Plug 'marijnh/tern_for_vim' " JS
   "Plug 'Shougo/neocomplete.vim'
   "Plug 'ervandew/supertab' " Obsoleted by YCM
@@ -689,6 +712,22 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     let g:ycm_semantic_triggers = {}
   endif
   let g:ycm_semantic_triggers['typescript'] = ['.']
+
+  " Deoplete
+  let g:deoplete#enable_at_startup = 1
+
+  " LanguageClient-neovim
+  set hidden " Required for operations modifying multiple buffers like rename.
+  let g:LanguageClient_autoStart = 1
+  let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'typescript': ['/home/jon/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'javascript': ['/home/jon/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'ruby': ['language_server-ruby'],
+    \ }
+  nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+  nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+  nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
   " Clojure
   " RainbowParentheses
