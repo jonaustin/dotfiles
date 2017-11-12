@@ -269,3 +269,16 @@ codi() {
     hi NonText ctermfg=0 |\
     Codi $syntax" "$@"
 }
+
+# daily goals
+today() {
+  DIR=$HOME/notes/daily_goals
+  FILE=$DIR/$(date -I).md
+  mkdir -p $DIR
+  if [ -e $FILE ]; then
+    $EDITOR $FILE
+  else
+    cp $DIR/template.md $FILE
+    $EDITOR $FILE
+  fi;
+}

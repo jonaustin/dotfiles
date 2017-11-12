@@ -20,6 +20,7 @@
     Plug 'vifm/neovim-vifm'
     Plug 'airodactyl/neovim-ranger'
     Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+    "Plug 'kassio/neoterm', { 'rtp': '~/.vim/bundle/neoterm' } " vim-test vertical split
   endif
 
   " Async
@@ -36,9 +37,9 @@
   endif
   Plug 'Shougo/neco-syntax'
   Plug 'zchee/deoplete-zsh'
-  Plug 'zchee/deoplete-jedi', { 'do': 'pip install jedi' }
+  Plug 'zchee/deoplete-jedi', { 'do': 'pip install jedi' } " for use with jedi-vim: https://github.com/zchee/deoplete-jedi/issues/35#issuecomment-281791696
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  Plug 'Shougo/deoplete-rct'
+  "Plug 'Shougo/deoplete-rct'
 
 
   " Clojure
@@ -182,6 +183,8 @@
   " Misc
   Plug 'johngrib/vim-game-code-break'
   Plug 'wakatime/vim-wakatime'
+  Plug 'AD7six/vim-activity-log'
+
 
   " Disabled
   "Plug 'vim-scripts/scratch.vim'
@@ -441,7 +444,7 @@
   nmap <leader>ya :%y+<cr>
 
   " add new line without entering insert mode
-  nmap <CR> o<Esc>
+  "nmap <CR> o<Esc>
 
 	" Change Working Directory to that of the current file
   "cmap cwd lcd %:p:h
@@ -590,11 +593,13 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " ALE asynchronous linter
   let g:ale_fixers = {}
   let g:ale_linters = {}
-  let g:ale_linters['javascript'] = ['standard']
+  "let g:ale_linters['javascript'] = ['standard']
+  "let g:ale_fixers['javascript'] = ['prettier']
+  let g:ale_linters['javascript'] = ['eslint']
   let g:ale_fixers['javascript'] = ['prettier']
   let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
   " test
-  let g:ale_fix_on_save = 1
+  "let g:ale_fix_on_save = 1
   let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
   let g:ale_sign_warning = '◦'
   let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
@@ -613,19 +618,19 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   nmap  -  <Plug>(choosewin)
 
   " vim-seeing-is-believing
-  nmap <buffer> <F5> <Plug>(seeing-is-believing-run)
-  xmap <buffer> <F5> <Plug>(seeing-is-believing-run)
-  imap <buffer> <F5> <Plug>(seeing-is-believing-run)
+  "nmap <buffer> <F5> <Plug>(seeing-is-believing-run)
+  "xmap <buffer> <F5> <Plug>(seeing-is-believing-run)
+  "imap <buffer> <F5> <Plug>(seeing-is-believing-run)
 
-  nmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
-  xmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
-  imap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  "nmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  "xmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
+  "imap <buffer> <F4> <Plug>(seeing-is-believing-mark)
 
 	" NERDTree
 	map <S-q> :NERDTreeToggle<cr>
 
 	" TagList
-	map <leader>tl :TlistToggle<cr>
+	"map <leader>tl :TlistToggle<cr>
 
   " Misc {
   ":map <C-F10> <Esc>:vsp<CR>:VTree<CR>
@@ -669,8 +674,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
   " automatically open and close the popup menu / preview window
-  au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-  set completeopt=menu,longest,preview
+  "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+  "set completeopt=menu,longest,preview " see deoplete section
   " }
 
   " SnipMate {
@@ -689,6 +694,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   vmap <Enter> <Plug>(EasyAlign)
   " Start interactive EasyAlign with a Vim movement
   nmap <Leader>a <Plug>(EasyAlign)
+
+  " BufferGator
+  let g:buffergator_suppress_keymaps=1 " conflicts with vim-test ,t
 
   " Vim-rspec
   let g:rspec_command = 'call Send_to_Tmux("bundle exec rspec {spec}\n")'
@@ -715,6 +723,37 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Deoplete
   let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 10
+  let g:python3_host_prog = '/home/jon/.pyenv/shims/python3'
+  let g:python2_host_prog = '/home/jon/.pyenv/shims/python2'
+  let deoplete#tag#cache_limit_size = 5000000 " 5MB (for big ctags)
+  set completeopt+=noinsert " autoselect
+  "call deoplete#custom#source('ultisnips', 'rank', 1000) " rank sources
+  " Popup menu colors
+  "highlight Pmenu ctermbg=8 guibg=#606060
+  "highlight PmenuSel ctermbg=1 guifg=#dddd00 guibg=#1f82cd
+  "highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
+
+  " vim-test
+  let g:test#javascript#jasmine#file_pattern = '\v.*/.*spec\.(js|jsx|coffee)$'
+  let test#strategy = 'neovim' "'neoterm'
+  nmap <silent> <leader>t :TestNearest<CR>
+  nmap <silent> <leader>T :TestFile<CR>
+  "nmap <silent> <leader>a :TestSuite<CR>
+  nmap <silent> <leader>l :TestLast<CR>
+  nmap <silent> <leader>g :TestVisit<CR>
+
+  " NeoTerm
+  "set nocompatible
+  "filetype off
+  "let &runtimepath.=',~/.vim/bundle/neoterm'
+  "filetype plugin on
+  "let g:neoterm_position = 'vertical'
+  "" hide/close terminal
+  "nnoremap <silent> <Leader>th :call neoterm#close()<cr>
+  "" clear terminal
+  "nnoremap <silent> <Leader>tl :call neoterm#clear()<cr>
+  
 
   " LanguageClient-neovim
   set hidden " Required for operations modifying multiple buffers like rename.
