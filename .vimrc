@@ -19,7 +19,7 @@
   if has('nvim')
     Plug 'vifm/neovim-vifm'
     Plug 'airodactyl/neovim-ranger'
-    Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+    "Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
     "Plug 'kassio/neoterm', { 'rtp': '~/.vim/bundle/neoterm' } " vim-test vertical split
   endif
 
@@ -39,6 +39,7 @@
   Plug 'zchee/deoplete-zsh'
   Plug 'zchee/deoplete-jedi', { 'do': 'pip install jedi' } " for use with jedi-vim: https://github.com/zchee/deoplete-jedi/issues/35#issuecomment-281791696
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  "Plug 'ternjs/tern_for_vim'
   "Plug 'Shougo/deoplete-rct'
 
 
@@ -91,11 +92,11 @@
 
   " typescript
   "Plug 'leafgarland/typescript-vim' " syntax
-  Plug 'Quramy/vim-js-pretty-template' " template strings coloring
-  Plug 'jason0x43/vim-js-indent'
-  Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
-  Plug 'Quramy/tsuquyomi' " tsserver
-  Plug 'mhartington/nvim-typescript'
+  "Plug 'Quramy/vim-js-pretty-template' " template strings coloring
+  "Plug 'jason0x43/vim-js-indent'
+  "Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
+  "Plug 'Quramy/tsuquyomi' " tsserver
+  "Plug 'mhartington/nvim-typescript'
 
   " Completion
   "Plug 'garbas/vim-snipmate' " Maybe replace with YCM-compatible Ultisnips?
@@ -550,9 +551,9 @@
 
 " Autocomplete
 " Ruby
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Plugins {
   " SeeingIsBelieving
@@ -596,10 +597,10 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   "let g:ale_linters['javascript'] = ['standard']
   "let g:ale_fixers['javascript'] = ['prettier']
   let g:ale_linters['javascript'] = ['eslint']
-  let g:ale_fixers['javascript'] = ['prettier']
+  "let g:ale_fixers['javascript'] = ['prettier']
   let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
   " test
-  "let g:ale_fix_on_save = 1
+  let g:ale_fix_on_save = 1
   let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
   let g:ale_sign_warning = '◦'
   let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
@@ -723,16 +724,25 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Deoplete
   let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_delay = 10
+  let g:deoplete#auto_complete_delay = 0
   let g:python3_host_prog = '/home/jon/.pyenv/shims/python3'
   let g:python2_host_prog = '/home/jon/.pyenv/shims/python2'
   let deoplete#tag#cache_limit_size = 5000000 " 5MB (for big ctags)
+  let g:deoplete#ignore_sources = {'_': 'buffer'} " reaalllly slow on big files
   set completeopt+=noinsert " autoselect
+  "inoremap <expr> <TAB> deoplete#close_popup()
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  "
   "call deoplete#custom#source('ultisnips', 'rank', 1000) " rank sources
   " Popup menu colors
   "highlight Pmenu ctermbg=8 guibg=#606060
   "highlight PmenuSel ctermbg=1 guifg=#dddd00 guibg=#1f82cd
   "highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
+  " DEBUG
+  "let g:deoplete#enable_profile = 1
+  "call deoplete#enable_logging('DEBUG', 'deoplete.log')
+  "call deoplete#custom#source('jedi', 'debug_enabled', 1)
 
   " vim-test
   let g:test#javascript#jasmine#file_pattern = '\v.*/.*spec\.(js|jsx|coffee)$'
@@ -756,17 +766,17 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   
 
   " LanguageClient-neovim
-  set hidden " Required for operations modifying multiple buffers like rename.
-  let g:LanguageClient_autoStart = 1
-  let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'typescript': ['/home/jon/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'javascript': ['/home/jon/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'ruby': ['language_server-ruby'],
-    \ }
-  nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-  nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-  nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+  "set hidden " Required for operations modifying multiple buffers like rename.
+  "let g:LanguageClient_autoStart = 1
+  "let g:LanguageClient_serverCommands = {
+  "  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+  "  \ 'typescript': ['/home/jon/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
+  "  \ 'javascript': ['/home/jon/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
+  "  \ 'ruby': ['language_server-ruby'],
+  "  \ }
+  "nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+  "nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+  "nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
   " Clojure
   " RainbowParentheses
