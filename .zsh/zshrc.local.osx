@@ -18,7 +18,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 # env
 export BROWSER='open'
-export EDITOR='/usr/local/bin/vim' # homebrew vim
+export EDITOR='/usr/local/bin/nvim' # homebrew
 
 alias df='df -h'
 

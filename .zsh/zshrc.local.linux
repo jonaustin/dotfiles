@@ -1,5 +1,5 @@
-export EDITOR='/usr/bin/vim'
-export SYSTEMD_EDITOR='/usr/bin/vim'
+export EDITOR='/usr/bin/nvim'
+export SYSTEMD_EDITOR=$EDITOR
 export BROWSER='/usr/bin/chromium'
 export SHELL='/usr/bin/zsh'
 export PATH=${PATH}:$HOME/.local/bin
