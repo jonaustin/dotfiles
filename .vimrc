@@ -84,21 +84,41 @@
   " Integrations
   Plug 'skywind3000/asyncrun.vim' " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
   Plug 'janko-m/vim-test'
-  Plug 'metakirby5/codi.vim' " amazing repl
-  Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
-  "Plug 'scrooloose/nerdtree'
+  "Plug 'metakirby5/codi.vim' " amazing repl
+  "Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
+  ""Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb' " Gbrowse for fugitive
-  Plug 'tpope/vim-git'
-  Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
-  Plug 'mattn/gist-vim' "github gists
-  Plug 'tmux-plugins/vim-tmux'
+  "Plug 'tpope/vim-git'
+  "Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
+  "Plug 'mattn/gist-vim' "github gists
+  "Plug 'tmux-plugins/vim-tmux'
 
+  " Commands
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'mbbill/undotree'
+  "Plug 'sjl/gundo.vim'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
+  Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
+  Plug 'myusuf3/numbers.vim'
+  Plug 'w0rp/ale' " asynchronous linter
 
   " Colors
   Plug 'w0ng/vim-hybrid'
+  "Plug 'sk1418/last256' " based on hybrid
+  "Plug 'Lokaltog/vim-distinguished'
+  ""Plug 'jonaustin/vim-colors'
+  "Plug 'guns/jellyx.vim'
+  "Plug 'chriskempson/base16'
+  "Plug 'tomasr/molokai'
+  "Plug 'nanotech/jellybeans.vim'
+  "Plug 'vim-scripts/xoria256.vim'
+  "Plug 'ciaranm/inkpot'
+  "Plug 'jnurmine/Zenburn'
+  "Plug 'altercation/vim-colors-solarized'
+  "Plug 'sjl/badwolf' " clojure
+  "Plug 'morhetz/gruvbox'
 
   " UI
   Plug 'vim-airline/vim-airline'
@@ -238,6 +258,14 @@
     " buffer prev
   :noremap <leader>bp :bp<cr>
 
+
+  " quit, write
+  map <leader>q   :q<cr>
+  map <leader>qq  :q!<cr>
+  map <leader>qqa :qall!<cr>
+  map <leader>w   :w<cr>
+  map <leader>ww  :w!<cr>
+  map <leader>wq  :wq<cr>
   " quickfix
   " open
   map <leader>qf :cope<cr>
@@ -264,41 +292,22 @@
   nmap <silent> <leader>l :TestLast<CR>
   nmap <silent> <leader>g :TestVisit<CR>
 
+  " ALE asynchronous linter
+  let g:ale_fixers = {}
+  let g:ale_linters = {}
+  let g:ale_linters['javascript'] = ['standard']
+  let g:ale_fixers['javascript'] = ['prettier']
+  let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
+  " test
+  let g:ale_fix_on_save = 1
+  let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
+  let g:ale_sign_warning = '◦'
+  let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+  let g:airline#extensions#ale#enabled = 1
+  let g:ale_set_highlights = 0 " Less distracting
+  highlight clear ALEErrorSign
+  highlight clear ALEWarningSign
 
-  " Deoplete
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_delay = 0
-  let g:python3_host_prog = '/home/jon/.pyenv/shims/python3'
-  let g:python2_host_prog = '/home/jon/.pyenv/shims/python2'
-  "let deoplete#tag#cache_limit_size = 5000000 " 5MB (for big ctags)
-  let g:deoplete#sources = {}
-  let g:deoplete#sources['javascript.jsx'] = ['ternjs'] "['file', 'ultisnips', 'ternjs']
-  let g:deoplete#ignore_sources = {}
-  let g:deoplete#ignore_sources['javascript.jsx'] = ['buffer']
-
-  let g:deoplete#omni#functions = {}
-  let g:deoplete#omni#functions.javascript = [
-    \ 'tern#Complete'
-  \]
-  "let g:deoplete#ignore_sources = {'_': ['buffer', 'tags']} " reaalllly slow on big files
-  "set completeopt=longest,menuone,preview
-  set completeopt+=noinsert " autoselect
-  "inoremap <expr> <TAB> deoplete#close_popup()
-  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  "
-  "call deoplete#custom#source('ultisnips', 'rank', 1000) " rank sources
-  " Popup menu colors
-  "highlight Pmenu ctermbg=8 guibg=#606060
-  "highlight PmenuSel ctermbg=1 guifg=#dddd00 guibg=#1f82cd
-  "highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
-  " DEBUG
-  "let g:deoplete#enable_profile = 1
-  "call deoplete#enable_logging('DEBUG', 'deoplete.log')
-  "call deoplete#custom#source('ternjs', 'debug_enabled', 1)
-  "Tern for vim
-  "let g:tern#command = ['tern']
-  "let g:tern#arguments = ['--persistent']
 
 " File Types {
   "" Filetype detection
@@ -332,3 +341,9 @@
     au BufRead,BufNewFile *.pp set filetype=puppet
   augroup END
 " }
+
+" Tips I always forget
+" vertical split -> horizontal: ctrl+w then J
+" horizontal split -> vertical: ctrl+w H or ctrl+w L
+" reload all buffers - :bufdo e
+
