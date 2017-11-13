@@ -297,6 +297,11 @@
   highlight clear ALEErrorSign
   highlight clear ALEWarningSign
 
+  " Omni Completion
+  "set completeopt+=noinsert " autoselect
+  "set completeopt=menu,longest,preview
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " File Types {
   "" Filetype detection
@@ -335,4 +340,3 @@
 " vertical split -> horizontal: ctrl+w then J
 " horizontal split -> vertical: ctrl+w H or ctrl+w L
 " reload all buffers - :bufdo e
-
