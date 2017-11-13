@@ -16,23 +16,11 @@
 
   call plug#begin('~/.vim/bundle')
 
-  " deoplete
-  "if has('nvim')
-  "  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  "else
-  "  Plug 'Shougo/deoplete.nvim'
-  "  Plug 'roxma/nvim-yarp'
-  "  Plug 'roxma/vim-hug-neovim-rpc'
-  "endif
-  "Plug 'Shougo/neco-syntax'
-  "Plug 'zchee/deoplete-zsh'
-  "Plug 'zchee/deoplete-jedi', { 'do': 'pip install jedi' } " for use with jedi-vim: https://github.com/zchee/deoplete-jedi/issues/35#issuecomment-281791696
-  "Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  "Plug 'ternjs/tern_for_vim'
-  "Plug 'Shougo/deoplete-rct'
-
   Plug 'roxma/nvim-completion-manager'
-  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+  Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' }
+  Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' }
+  Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
+  Plug 'Shougo/neco-syntax' " syntax completion
   "Plug 'ajh17/VimCompletesMe'
   "Plug 'ternjs/tern_for_vim'
 
