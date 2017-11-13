@@ -1,3 +1,16 @@
+# Core
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export BROWSER='open'
+  export EDITOR='/usr/local/bin/nvim' # homebrew
+  export SHELL='/usr/local/bin/zsh'
+else
+  export EDITOR='/usr/bin/nvim'
+  export SYSTEMD_EDITOR=$EDITOR
+  export BROWSER='/usr/bin/chromium'
+  export SHELL='/usr/bin/zsh'
+  export PATH=${PATH}:$HOME/.local/bin
+fi
+
 ## tmuxinator
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
@@ -56,8 +69,13 @@ export NVM_DIR="$HOME/.nvm"
 
 # vmux
 export VMUX_EDITOR=nvim
-export VMUX_REALEDITOR_VIM=/usr/bin/vim
-export VMUX_REALEDITOR_NVIM=/usr/bin/nvim
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export VMUX_REALEDITOR_VIM=/usr/local/bin/vim
+  export VMUX_REALEDITOR_NVIM=/usr/local/bin/nvim
+else
+  export VMUX_REALEDITOR_VIM=/usr/bin/vim
+  export VMUX_REALEDITOR_NVIM=/usr/bin/nvim
+fi
 
 ## Other
 

@@ -17,8 +17,6 @@ alias core='tmux attach -t core'
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # env
-export BROWSER='open'
-export EDITOR='/usr/local/bin/vim' # homebrew vim
 
 alias df='df -h'
 
@@ -38,6 +36,3 @@ bindkey '^[OB' down-line-or-search
 
 # z
 . `brew --prefix`/etc/profile.d/z.sh
-
-export EDITOR='/usr/local/bin/vim'
-export SHELL='/usr/local/bin/zsh'
