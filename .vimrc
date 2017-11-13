@@ -277,11 +277,16 @@
   " ALE asynchronous linter
   let g:ale_fixers = {}
   let g:ale_linters = {}
-  let g:ale_linters['javascript'] = ['standard']
-  let g:ale_fixers['javascript'] = ['prettier']
+  if has('mac')
+    let g:ale_linters['javascript'] = ['eslint']
+    let g:ale_fixers['javascript'] = ['prettier']
+  else
+    let g:ale_linters['javascript'] = ['standard']
+    let g:ale_fixers['javascript'] = ['prettier']
+    "let g:ale_fix_on_save = 1
+  endif
   let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
   " test
-  let g:ale_fix_on_save = 1
   let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
   let g:ale_sign_warning = '◦'
   let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
