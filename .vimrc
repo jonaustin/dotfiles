@@ -26,7 +26,6 @@
   Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' }
   Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
   Plug 'Shougo/neco-syntax' " syntax completion
-  "Plug 'ajh17/VimCompletesMe'
   "Plug 'ternjs/tern_for_vim'
 
   " Ruby
@@ -66,7 +65,7 @@
   " Integrations
   Plug 'skywind3000/asyncrun.vim' " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
   Plug 'janko-m/vim-test'
-  "Plug 'metakirby5/codi.vim' " amazing repl
+  Plug 'metakirby5/codi.vim' " amazing repl
   "Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
   ""Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-fugitive'
@@ -294,6 +293,10 @@
   let g:ale_set_highlights = 0 " Less distracting
   highlight clear ALEErrorSign
   highlight clear ALEWarningSign
+
+  " Codi repl
+  let g:codi#rightalign=0
+  let g:codi#width=80
 
   " Omni Completion
   "set completeopt+=noinsert " autoselect
