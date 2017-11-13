@@ -45,16 +45,15 @@
   "Plug 'skalnik/vim-vroom' " ruby tests
 
   " Javascript
-  "Plug 'pangloss/vim-javascript'
+  Plug 'pangloss/vim-javascript'
   "Plug 'jelera/vim-javascript-syntax'
-  "Plug 'othree/yajs.vim'
+  Plug 'othree/yajs.vim' " yet another javascript syntax
   "Plug 'vim-scripts/JavaScript-Indent'
   "Plug 'othree/javascript-libraries-syntax.vim'
   "Plug 'kchmck/vim-coffee-script'
   "Plug 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
   ""Plug 'mtscout6/vim-cjsx' " coffeescript with react jsx
   "Plug 'mxw/vim-jsx'
-  "Plug 'othree/yajs.vim' " yet another javascript syntax
 
   " typescript
   "Plug 'leafgarland/typescript-vim' " syntax
@@ -77,7 +76,7 @@
   Plug 'skywind3000/asyncrun.vim' " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
   Plug 'janko-m/vim-test'
   Plug 'metakirby5/codi.vim' " amazing repl
-  "Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
+  Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
   ""Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb' " Gbrowse for fugitive
@@ -117,7 +116,6 @@
   Plug 'vim-airline/vim-airline-themes'
 
   " Misc
-  Plug 'johngrib/vim-game-code-break'
   Plug 'wakatime/vim-wakatime'
   Plug 'AD7six/vim-activity-log'
 
@@ -293,7 +291,7 @@
   else
     let g:ale_linters['javascript'] = ['standard']
     let g:ale_fixers['javascript'] = ['prettier']
-    "let g:ale_fix_on_save = 1
+    let g:ale_fix_on_save = 1
   endif
   let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
   " test
