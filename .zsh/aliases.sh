@@ -51,10 +51,12 @@ alias loc='locate'
 alias nd="ncdu ."
 
 # config files
-alias vzc='vim $HOME/.zshrc'
-alias vzcl='vim $HOME/.zsh/zshrc_local'
 alias zc='source $HOME/.zshrc'
-alias vlx='vim $HOME/.zsh/zshrc.local.linux'
+alias vzc='$EDITOR $HOME/.zshrc'
+alias vzcl='$EDITOR $HOME/.zsh/zshrc_local'
+alias vlx='$EDITOR $HOME/.zsh/zshrc.local.linux'
+alias vrc='$EDITOR ~/.bashrc'
+alias vlrc='$EDITOR ~/.bashrc_local'
 
 ## sys
 alias u='uptime'
@@ -78,10 +80,8 @@ alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 
 # Vim
 alias sv='sudo vim'
-alias vrc='vim ~/.bashrc'
-alias vlrc='vim ~/.bashrc_local'
-alias vvc='vim ~/.vimrc'
-alias vvcl='vim ~/.vimrc.local'
+alias vvc='$EDITOR ~/.vimrc'
+alias vvcl='$EDITOR ~/.vimrc.local'
 
 ## Other
 alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
