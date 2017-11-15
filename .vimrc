@@ -94,6 +94,8 @@
   Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
   Plug 'myusuf3/numbers.vim'
   Plug 'w0rp/ale' " asynchronous linter
+  Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
+  Plug 'xolox/vim-misc' " required by vim-session
 
   " Colors
   Plug 'w0ng/vim-hybrid'
@@ -332,6 +334,10 @@
     autocmd BufRead,BufNewFile *.es6 setfiletype javascript
     " ruby
     autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
+      " ruby autocomplete
+    autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+    autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+    autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     " json
     autocmd! BufRead,BufNewFile .{eslintrc,babelrc} setf json
     " groovy
