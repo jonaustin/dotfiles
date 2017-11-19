@@ -3,6 +3,7 @@
 blog.vim
 .vim/tmp
 .vim/doc/tags
+.vim/autoload
 .netrwhist
 *.pyo
 *.pyc
