@@ -1,14 +1,12 @@
 ## SHORTCUTS
 
-alias vim='nvim'
-
 # open with suffix aliases
-alias -s rb=vim
-alias -s txt=vim
 alias -s md=vim
 alias -s markdown=vim
-alias -s py=vim
-alias -s sh=vim
+alias -s txt=vim
+#alias -s py=vim
+#alias -s rb=vim
+#alias -s sh=vim
 
 #sane defaults
 alias sudo='sudo ' # so aliases work
@@ -79,7 +77,9 @@ alias retag='find . -type f -print0|xargs -0 id3tag '
 alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 
 # Vim
-alias sv='sudo vim'
+alias vim='nvim'
+alias v=$EDITOR
+alias sv='sudo $EDITOR'
 alias vvc='$EDITOR ~/.vimrc'
 alias vvcl='$EDITOR ~/.vimrc.local'
 

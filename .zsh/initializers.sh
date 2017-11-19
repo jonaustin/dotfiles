@@ -14,18 +14,11 @@ fi
 ## tmuxinator
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-# fasd
-#eval "$(--init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
-#alias f='fasd -f'        # file
-#alias c='fasd_cd -d'
-alias v='f -e vim' # quick opening files with vim
-alias o='a -e xdg-open' # quick opening files with xdg-open
-
 # autocomplete
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 # disable autosetting terminal title. (so that tmux `automatic-rename off` actually works)
-export DISABLE_AUTO_TITLE="true"
+export DISABLE_AUTO_TITLE=true
 
 # edit command line in vi
 autoload edit-command-line
@@ -33,9 +26,6 @@ zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 
 fpath=(/usr/local/share/zsh-completions $fpath)
-
-# tmuxinator
-export DISABLE_AUTO_TITLE=true
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -76,6 +66,9 @@ else
   export VMUX_REALEDITOR_VIM=/usr/bin/vim
   export VMUX_REALEDITOR_NVIM=/usr/bin/nvim
 fi
+
+# fzf
+source ~/.fzf.zsh
 
 ## Other
 

@@ -64,9 +64,11 @@ Plug 'othree/yajs.vim' " yet another javascript syntax
 "Plug 'mhartington/nvim-typescript'
 
 " Navigation
-"Plug 'kien/ctrlp.vim'
-"Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
-"Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
+Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 "Plug 'mileszs/ack.vim'                " :Ack <search>
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
 "Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
@@ -84,6 +86,8 @@ Plug 'tpope/vim-rhubarb' " Gbrowse for fugitive
 "Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
 "Plug 'mattn/gist-vim' "github gists
 "Plug 'tmux-plugins/vim-tmux'
+"Plug 'tbabej/taskwiki'
+"Plug 'vimwiki/vimwiki', { 'branch': 'dev' } " required by taskwiki (taskwarrior)
 
 " Commands
 Plug 'scrooloose/nerdcommenter'
@@ -258,7 +262,6 @@ map <leader>q   :q<cr>
 map <leader>qq  :q!<cr>
 map <leader>qqa :qall!<cr>
 map <leader>w   :w<cr>
-map <leader>ww  :w!<cr>
 map <leader>wq  :wq<cr>
 
 " quickfix

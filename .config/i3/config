@@ -324,9 +324,11 @@ bindsym $mod+x exec python ~/bin/i3-wm-scripts/nextmatch.py '(chromium|firefox)'
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 bindsym $mod+Mod1+bracketright exec "xbacklight -inc 1; notify-send $(xbacklight -get)"
 bindsym $mod+Mod1+bracketleft exec "xbacklight -dec 1; notify-send $(xbacklight -get)"
+bindsym Ctrl+Print exec "xbacklight -set 3"
+
 
 # volume
-bindsym shift+Print exec "amixer sset Master toggle"
+bindsym shift+Print exec "amixer sset Master toggle" # Mute toggle
 bindsym Print exec "amixer sset Master 5%-"
 bindsym $mod+minus exec "amixer sset Master 5%-"
 #bindsym Scroll_Lock exec "amixer sset Master 5%-"
