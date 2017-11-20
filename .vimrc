@@ -361,3 +361,4 @@ augroup END
 " horizontal split -> vertical: ctrl+w H or ctrl+w L
 " reload all buffers - :bufdo e
 " :w !sudo tee %
+" gx - open link in browser

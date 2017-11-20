@@ -19,7 +19,13 @@ fi
 #plugins=(git rails gem ruby rake node npm)
 # safe-paste fixes up/down history breakage
 # https://github.com/robbyrussell/oh-my-zsh/issues/1720
-plugins=(gitfast rails gem ruby rake node safe-paste autojump) # npm
+# `gbr create/publish/delete/track/rename branch_name origin_server`
+# jsontools: pp_json, is_json, urlencode_json, urldecode_json
+# node-docs [section]
+# systemd: add `sc-[command]` aliases to all systemctl cmds
+# urlencode / urldecode
+# git author accounts: https://github.com/walle/gas
+plugins=(gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
