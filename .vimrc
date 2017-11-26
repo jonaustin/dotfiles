@@ -23,10 +23,10 @@ if !has('nvim')
 endif
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' }
+"Plug 'ternjs/tern_for_vim'
 Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' }
 Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 Plug 'Shougo/neco-syntax' " syntax completion
-"Plug 'ternjs/tern_for_vim'
 
 " Ruby
 "Plug 'ecomba/vim-ruby-refactoring'
@@ -97,7 +97,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
 Plug 'myusuf3/numbers.vim'
-Plug 'w0rp/ale' " asynchronous linter
+"Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 Plug 'xolox/vim-misc' " required by vim-session
 
@@ -289,25 +289,25 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 " ALE asynchronous linter
-let g:ale_fixers = {}
-let g:ale_linters = {}
-if has('mac')
-  let g:ale_linters['javascript'] = ['eslint']
-  let g:ale_fixers['javascript'] = ['prettier']
-else
-  let g:ale_linters['javascript'] = ['standard']
-  let g:ale_fixers['javascript'] = ['prettier']
-  let g:ale_fix_on_save = 1
-endif
-let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
-" test
-let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '◦'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-let g:airline#extensions#ale#enabled = 1
-let g:ale_set_highlights = 0 " Less distracting
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
+"let g:ale_fixers = {}
+"let g:ale_linters = {}
+"if has('mac')
+  "let g:ale_linters['javascript'] = ['eslint']
+  "let g:ale_fixers['javascript'] = ['prettier']
+"else
+  "let g:ale_linters['javascript'] = ['standard']
+  "let g:ale_fixers['javascript'] = ['prettier']
+  "let g:ale_fix_on_save = 1
+"endif
+"let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
+"" test
+"let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
+"let g:ale_sign_warning = '◦'
+"let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+"let g:airline#extensions#ale#enabled = 1
+"let g:ale_set_highlights = 0 " Less distracting
+"highlight clear ALEErrorSign
+"highlight clear ALEWarningSign
 
 " Codi repl
 let g:codi#rightalign=0
