@@ -313,6 +313,9 @@ nmap <silent> <leader>g :TestVisit<CR>
 let g:codi#rightalign=0
 let g:codi#width=80
 
+" NERDCommenter
+let g:NERDDefaultAlign = 'left' "comment out line(s) in visual mode
+
 " Omni Completion
 "set completeopt+=noinsert " autoselect
 "set completeopt=menu,longest,preview
