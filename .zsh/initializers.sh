@@ -9,6 +9,10 @@ else
   export BROWSER='/usr/bin/chromium'
   export SHELL='/usr/bin/zsh'
   export PATH=${PATH}:$HOME/.local/bin
+  # gtk3 hidpi
+  export GDK_SCALE=2
+  export GDK_DPI_SCALE=0.5
+  export XCURSOR_SIZE=48
 fi
 
 ## tmuxinator
