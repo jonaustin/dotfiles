@@ -1,0 +1,1 @@
+ACTION=="add", ATTRS{idVendor}=="29ea", ATTRS{idProduct}=="0102", RUN+="/home/jon/bin/kbd_udev", OWNER="jon"

@@ -1,0 +1,4 @@
+#KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{address}=="84:fc:fe:e0:d6:07", RUN+="/home/jon/bin/bt_trackpad %p"
+#SUBSYSTEMS=="hidraw", ACTION=="add", RUN+="/home/jon/bin/bt_trackpad"
+ACTION=="add", KERNEL=="hci0", RUN+="/home/jon/bin/bt_trackpad"
+

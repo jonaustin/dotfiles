@@ -1,47 +1,36 @@
 #!/bin/sh
-
 #
 # ~/.xinitrc
 #
 # Executed by startx (run your window manager from here)
-#
 
-#/etc/X11/Xsession
-sh /home/jon/.xmodmap
-# D-bus (this messes up notify-send in awesome)
-#if which dbus-launch >/dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS"; then
-       #eval "$(dbus-launch --sh-syntax --exit-with-session)"
-#fi
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
 
-# disable internal screen
-eval `xrandr --output VGA-0 --mode 1920x1200; xrandr --output LVDS --off`
-# background
-#eval `cat ~/.fehbg`
-#xsetroot -solid black
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
-# network
-#eval `sshfs -o reconnect -o allow_other -p666 jon@frak:/ /media/frakssh`
+DEFAULT_SESSION='i3 --shmlog-size 0'
 
-#ivman&
-#exec ck-launch-session awesome  # consolekit -- for udev/devmon automounting policy allowance
-#exec ck-launch-session subtle
-exec ck-launch-session awesome
+case $1 in
+  awesome       ) exec dbus-launch awesome ;;
+  bspwm         ) exec dbus-launch bspwm-session ;;
+  budgie        ) exec dbus-launch budgie-desktop ;;
+  cinnamon      ) exec dbus-launch cinnamon-session ;;
+  deepin        ) exec dbus-launch startdde ;;
+  enlightenment ) exec dbus-launch enlightenment_start ;;
+  fluxbox       ) exec dbus-launch startfluxbox ;;
+  gnome         ) exec dbus-launch gnome-session ;;
+  i3|i3wm       ) exec dbus-launch i3 --shmlog-size 0 ;;
+  jwm           ) exec dbus-launch jwm ;;
+  kde           ) exec dbus-launch startkde ;;
+  lxde          ) exec dbus-launch startlxde ;;
+  lxqt          ) exec dbus-launch lxqt-session ;;
+  mate          ) exec dbus-launch mate-session ;;
+  xfce          ) exec dbus-launch xfce4-session ;;
 
-# autocutsel - synchronizes the two copy/paste buffers mainly used by X applications
-## unfortunately breaks Synergy
-#autocutsel -fork &
-autocutsel -selection PRIMARY -fork &
-
-#exec xterm
-
-
-# exec gnome-session
-# exec startkde
-# exec startxfce4
-# exec icewm
-# exec openbox
-# exec blackbox
-# exec fluxbox
-# exec ratpoison
-# exec dwm
-# ... or any other WM of your choosing ...
+  *             ) exec dbus-launch $DEFAULT_SESSION ;;
+esac
