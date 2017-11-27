@@ -69,7 +69,7 @@ Plug 'othree/yajs.vim' " yet another javascript syntax
 Plug 'kien/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
 Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
-"Plug 'mileszs/ack.vim'                " :Ack <search>
+Plug 'mileszs/ack.vim'                " :Ack <search>
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
 "Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
 "Plug 't9md/vim-choosewin'             " -
@@ -208,6 +208,7 @@ set wrap                      	   " wrap long lines
 set showbreak=↪                    " prettier line wrap
 set autoindent                 	   " indent at the same level of the previous line
 set shiftwidth=2               	   " use indents of 2 spaces
+set expandtab 	       	  	   " tabs should be spaces for sanity
 
 " Key Mappings {
 
