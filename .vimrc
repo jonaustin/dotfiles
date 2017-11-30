@@ -317,6 +317,9 @@ let g:codi#width=80
 " NERDCommenter
 let g:NERDDefaultAlign = 'left' "comment out line(s) in visual mode
 
+" Ctrl-p
+let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
+
 " Omni Completion
 "set completeopt+=noinsert " autoselect
 "set completeopt=menu,longest,preview
