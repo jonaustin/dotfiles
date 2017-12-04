@@ -328,7 +328,7 @@ bindsym Ctrl+Print exec "xbacklight -set 3"
 
 
 # volume
-bindsym shift+Print exec "amixer sset Master toggle" # Mute toggle
+bindsym shift+Print exec "amixer sset Master toggle"
 bindsym Print exec "amixer sset Master 5%-"
 bindsym $mod+minus exec "amixer sset Master 5%-"
 #bindsym Scroll_Lock exec "amixer sset Master 5%-"
@@ -399,7 +399,7 @@ exec --no-startup-id xfce4-power-manager
 #exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id xscreensaver -nosplash
 exec_always --no-startup-id setcursor
-exec_always --no-startup-id /home/jon/opt/activitywatch/aw-qt
+#exec_always --no-startup-id /home/jon/opt/activitywatch/aw-qt # activity watcher
 
 # GUI apps on startup
 #exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/terminator -x tmux; zsh" #-e='tmux attach -t core; zsh'"
