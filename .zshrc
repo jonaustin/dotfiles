@@ -14,9 +14,6 @@ else
   export ZSH_THEME='pure' # use upstream pure - https://github.com/sindresorhus/pure
 fi
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-#plugins=(git rails gem ruby rake node npm)
 # safe-paste fixes up/down history breakage
 # https://github.com/robbyrussell/oh-my-zsh/issues/1720
 # `gbr create/publish/delete/track/rename branch_name origin_server`
@@ -25,7 +22,7 @@ fi
 # systemd: add `sc-[command]` aliases to all systemctl cmds
 # urlencode / urldecode
 # git author accounts: https://github.com/walle/gas
-plugins=(gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
+plugins=(gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
@@ -40,9 +37,17 @@ source ~/.zsh/aliases.sh
 
 # Shell init {{{
 unsetopt beep
+# zsh
 set -o vi
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
+
+bindkey '^?' backward-delete-char # backspace on chars before start of insert mode (after leaving cmd mode) - https://www.zsh.org/mla/users/2009/msg00812.html
+bindkey '^h' backward-delete-char # ctrl-h also deletes chars
+bindkey '^r' history-incremental-search-backward # ctrl-r starts searching history backward
+
+export KEYTIMEOUT=1 # reduce lag between hitting esc and entering normal mode - https://dougblack.io/words/zsh-vi-mode.html, https://superuser.com/a/648046
+
 ulimit -S -c 0 # Don't want any coredumps
 stty -ixon # disable ^S/^Q flow control
 # }}}
@@ -97,6 +102,7 @@ __git_complete_index_file(){}
 
 #unalias run-help
 autoload run-help
+autoload -U compinit && compinit
 HELPDIR=/usr/local/share/zsh/help
 
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
