@@ -82,6 +82,7 @@ Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under
 ""Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb' " Gbrowse for fugitive
+Plug 'airblade/vim-gitgutter' " Show status in vim gutter
 "Plug 'tpope/vim-git'
 "Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
 "Plug 'mattn/gist-vim' "github gists
