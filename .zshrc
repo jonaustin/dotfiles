@@ -22,7 +22,7 @@ fi
 # systemd: add `sc-[command]` aliases to all systemctl cmds
 # urlencode / urldecode
 # git author accounts: https://github.com/walle/gas
-plugins=(gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas zsh-completions)
+#plugins=(gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
@@ -124,5 +124,3 @@ export PATH=$HOME/code/_sandbox/_go/bin:$PATH
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -71,9 +71,6 @@ else
   export VMUX_REALEDITOR_NVIM=/usr/bin/nvim
 fi
 
-# fzf
-source ~/.fzf.zsh
-
 ## Other
 
 # tabtab source for serverless package (npm i -g tabtab)
@@ -82,3 +79,6 @@ source ~/.fzf.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/jon/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/jon/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# fzf fuzzy finder - ctrl-r (history), ctrl-t (files)
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
