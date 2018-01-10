@@ -23,7 +23,7 @@ if !has('nvim')
 endif
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' }
-"Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' }
 Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 Plug 'Shougo/neco-syntax' " syntax completion
@@ -48,15 +48,15 @@ Plug 'tpope/vim-rake'
 Plug 'pangloss/vim-javascript'
 "Plug 'jelera/vim-javascript-syntax'
 Plug 'othree/yajs.vim' " yet another javascript syntax
-"Plug 'vim-scripts/JavaScript-Indent'
+Plug 'vim-scripts/JavaScript-Indent'
 "Plug 'othree/javascript-libraries-syntax.vim'
 "Plug 'kchmck/vim-coffee-script'
-"Plug 'mmalecki/vim-node.js' " detect node shebang and set FT to JS
+Plug 'mmalecki/vim-node.js' " kind of rails.vim for node
 ""Plug 'mtscout6/vim-cjsx' " coffeescript with react jsx
 "Plug 'mxw/vim-jsx'
 
 " typescript
-"Plug 'leafgarland/typescript-vim' " syntax
+Plug 'leafgarland/typescript-vim' " syntax
 "Plug 'Quramy/vim-js-pretty-template' " template strings coloring
 "Plug 'jason0x43/vim-js-indent'
 "Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
@@ -370,3 +370,4 @@ augroup END
 " reload all buffers - :bufdo e
 " :w !sudo tee %
 " gx - open link in browser
+" :Ack <C-R><C-W> " use c-r/c-w to paste word under cursor into ex command prompt
