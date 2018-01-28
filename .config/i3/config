@@ -11,6 +11,13 @@
 
 set $mod Mod4
 
+# j4-make-config / gruvbox
+# class                 border  backgr. text    indicator
+client.focused          #3c3836 #32302f #fabd2f #fabd2f
+client.focused_inactive #3c3836 #504945 #d5c4a1 #504945
+client.unfocused        #3c3836 #504945 #d5c4a1 #504945
+client.urgent           #7c6f64 #fabd2f #3c3836 #fabd2f
+
 # set default desktop layout (default is tiling)
 workspace_layout tabbed # <default|stacking|tabbed>
 
@@ -165,7 +172,7 @@ set $w3  " 3 "
 set $w4  "4 "
 set $w5  " 5 "
 set $w6  " 6 "
-set $w7  "7 𝅘𝅥𝅮"
+set $w7  "7 "
 set $w8  " 8 "
 set $w9  "9 "
 set $w10  "10 "
@@ -299,11 +306,47 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# dark aqua
+set $based3    #002b36
+set $based2    #073642
+set $based1    #586e75
+set $based0    #657b83
+set $base0     #839496
+set $base1     #93a1a1
+set $base2     #eee8d5
+set $base3     #fdf6e3
+set $yellow    #b58900
+set $orange    #cb4b16
+set $red       #dc322f
+set $magenta   #d33682
+set $violet    #6c71c4
+set $blue      #268bd2
+set $cyan      #2aa198
+set $green     #859900
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command /home/jon/bin/i3spotify
         #status_command py3status -c ~/.i3/i3status.conf
+        colors {
+          # j4-make-config / gruvbox
+          background #504945
+          statusline #d5c4a1
+          separator #3c3836 
+          focused_workspace #3c3836 #32302f #fabd2f
+          active_workspace #3c3836 #504945 #d5c4a1
+          inactive_workspace #3c3836 #504945 #d5c4a1
+          urgent_workspace   #7c6f64 #fabd2f #3c3836
+
+          # dark aqua
+          #statusline $based0
+          #background $based3
+          #focused_workspace $based3 $based3 $base3
+          #inactive_workspace $based3 $based2 $base0
+          #active_workspace $based3 $based2 $base3
+          #urgent_workspace $based3 $magenta $base2
+        }
 }
 
 # apps
