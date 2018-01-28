@@ -22,7 +22,11 @@ fi
 # systemd: add `sc-[command]` aliases to all systemctl cmds
 # urlencode / urldecode
 # git author accounts: https://github.com/walle/gas
-#plugins=(gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas zsh-completions)
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  plugins=(zsh-completions git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote taskwarrior urltools web-search gas)
+else
+  plugins=(zsh-completions gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
+fi
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
@@ -103,6 +107,8 @@ __git_complete_index_file(){}
 #unalias run-help
 autoload run-help
 autoload -U compinit && compinit
+autoload bashcompinit && bashcompinit # support bash completions
+source $HOME/bin/i3_completion.sh
 HELPDIR=/usr/local/share/zsh/help
 
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;

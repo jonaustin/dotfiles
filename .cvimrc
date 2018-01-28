@@ -10,7 +10,7 @@ let barposition = "bottom"
 
 let hintcharacters = "abc123"
 
-alias ':g' to ':tabnew google'
+"alias ':g' to ':tabnew google'
 command g tabnew google
 
 let completionengines = ["google", "amazon", "imdb"]
@@ -22,7 +22,7 @@ let searchalias g = "google" " Create a shortcut for search engines.
 " Open all of these in a tab with `gnb` or open one of these with <N>goa where <N>
 let qmark a = ["http://www.reddit.com", "http://www.google.com", "http://twitter.com"]
 
-let blacklists = ["https://mail.google.com/*", "*://mail.google.com/*", "@https://mail.google.com/mail/*"]
+let blacklists = ["https://mail.google.com/*", "*://mail.google.com/*", "https://mail.google.com/mail/*"]
 " blacklists prefixed by '@' act as a whitelist
 
 let mapleader = ","
@@ -31,9 +31,7 @@ let mapleader = ","
 
 map <Leader>r reloadTabUncached
 map <Leader>x :restore<Space>
-
-" This remaps the default 'j' mapping
-map j scrollUp
+map <Leader>g :g<cr>
 
 " You can use <Space>, which is interpreted as a
 " literal " " character, to enter buffer completion mode
@@ -48,12 +46,12 @@ map <C-h> :set hud!<CR>
 " Switch between alphabetical hint characters and numeric hints
 map <C-i> :set numerichints!<CR>
 
-map <C-u> rootFrame
-map <M-h> previousTab
-map <C-d> scrollPageDown
-map <C-e> scrollPageUp
-iunmap <C-y>
-imap <C-m> deleteWord
+"map <C-u> rootFrame
+"map <M-h> previousTab
+"map <C-d> scrollPageDown
+"map <C-e> scrollPageUp
+"iunmap <C-y>
+"imap <C-m> deleteWord
 
 " Create a variable that can be used/referenced in the command bar
 let @@reddit_prog = 'http://www.reddit.com/r/programming'
@@ -77,3 +75,6 @@ echo(link) -> {{
   alert(link.href);
 }}
 map <C-f> createScriptHint(echo)
+
+let configpath = '/home/jon/.cvimrc'
+set localconfig
