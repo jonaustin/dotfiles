@@ -62,8 +62,8 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-bindsym Ctrl+space exec dmenu_run
+bindsym $mod+d exec rofi -show run #dmenu_run
+bindsym Ctrl+space exec rofi -show run #dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -172,7 +172,7 @@ set $w3  " 3 "
 set $w4  "4 "
 set $w5  " 5 "
 set $w6  " 6 "
-set $w7  "7 "
+set $w7  " 7 "
 set $w8  " 8 "
 set $w9  "9 "
 set $w10  "10 "
@@ -405,6 +405,10 @@ bindsym $mod+bracketleft exec "/home/jon/bin/yamaha -d"
 bindsym $mod+Shift+bracketleft exec "/home/jon/bin/yamaha -D"
 bindsym $mod+bracketright exec "/home/jon/bin/yamaha -u"
 bindsym $mod+Shift+bracketright exec "/home/jon/bin/yamaha -U"
+bindsym $mod+Down exec "/home/jon/bin/yamaha -d"
+bindsym $mod+Shift+Down exec "/home/jon/bin/yamaha -m"
+bindsym $mod+Up exec "/home/jon/bin/yamaha -u"
+bindsym $mod+Shift+Up exec "/home/jon/bin/yamaha -U"
 
 # time wasting
 #bindsym $mod+Shift+h exec 'hearthstone'
