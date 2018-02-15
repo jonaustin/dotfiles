@@ -23,7 +23,7 @@ fi
 # urlencode / urldecode
 # git author accounts: https://github.com/walle/gas
 if [ $SYSTEM_TYPE = "Darwin" ]; then
-  plugins=(zsh-completions git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote taskwarrior urltools web-search gas)
+  plugins=(zsh-completions git_remote_branch httpie jira jsontools ng npm)# pip python aws redis-cli rand-quote taskwarrior urltools web-search gas)
 else
   plugins=(zsh-completions gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
 fi
@@ -129,6 +129,3 @@ export PATH=$HOME/code/_sandbox/_go/bin:$PATH
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
