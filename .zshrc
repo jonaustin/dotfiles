@@ -108,7 +108,9 @@ __git_complete_index_file(){}
 autoload run-help
 autoload -U compinit && compinit
 autoload bashcompinit && bashcompinit # support bash completions
-source $HOME/bin/i3_completion.sh
+if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
+  source $HOME/bin/i3_completion.sh
+fi
 HELPDIR=/usr/local/share/zsh/help
 
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
