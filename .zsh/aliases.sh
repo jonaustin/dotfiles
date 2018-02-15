@@ -47,6 +47,7 @@ alias h='cd ~/'
 alias lp='lesspipe.sh '
 alias loc='locate'
 alias nd="ncdu ."
+alias vnode='NODE_NO_READLINE=1 rlwrap node'
 
 # config files
 alias zc='source $HOME/.zshrc'

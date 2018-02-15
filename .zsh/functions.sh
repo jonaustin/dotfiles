@@ -42,9 +42,9 @@ fn () { # find file/dir *1*
   find . -iname "*${1}*"
 }
 
-fd() { # find directory *1*
-  find . -type d -iname "*${1}*"
-}
+#fd() { # find directory *1*
+#  find . -type d -iname "*${1}*"
+#}
 
 fr() { # find random file *1*
   find . -iname "*${1}*" | randline

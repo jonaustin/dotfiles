@@ -283,6 +283,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " vim-test
 let g:test#javascript#jasmine#file_pattern = '\v.*/.*spec\.(js|jsx|coffee)$'
+let g:test#ruby#rspec#executable = 'bundle exec rspec'
 let test#strategy = 'neovim' "'neoterm'
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
