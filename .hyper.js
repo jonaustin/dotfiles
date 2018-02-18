@@ -40,13 +40,19 @@ module.exports = {
     borderColor: '#333',
 
     // custom CSS to embed in the main window
-    css:
-      `.main {
-        border-width: 0px;
-      }`,
+    css: `
+      .notifications_view {
+        display: none;
+      }
+      `, // disable annoying update notifications on startup - https://github.com/zeit/hyper/issues/2599#issuecomment-362938038
 
     // custom CSS to embed in the terminal window
-    termCSS: '',
+    termCSS: '\
+   .cursor-node {\
+        background: none !important;\
+        border: none !important;\
+        border-left: 1px solid rgba(255, 255, 255, 0.7) !important;\
+    }', // does nothing??
 
     // set to `true` (without backticks and without quotes) if you're using a
     // Linux setup that doesn't show native menus
