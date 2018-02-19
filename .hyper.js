@@ -15,7 +15,7 @@ module.exports = {
     fontFamily: 'Inconsolata, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,28,229,0.8)',
+    cursorColor: 'rgba(255, 255, 255, 0.3)',
 
     // terminal text color under BLOCK cursor
     cursorAccentColor: '#000',
@@ -48,16 +48,12 @@ module.exports = {
 
     // custom CSS to embed in the terminal window
     termCSS: '\
-   .cursor-node {\
-        background: none !important;\
-        border: none !important;\
-        border-left: 1px solid rgba(255, 255, 255, 0.7) !important;\
-    }', // does nothing??
+    }',
 
     // set to `true` (without backticks and without quotes) if you're using a
     // Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows, ignored on macOS
-    showHamburgerMenu: '',
+    showHamburgerMenu: true, //'',
 
     // set to `false` (without backticks and without quotes) if you want to hide the minimize, maximize and close buttons
     // additionally, set to `'left'` if you want them on the left, like in Ubuntu
@@ -124,6 +120,7 @@ module.exports = {
     // bellSoundURL: 'http://example.com/bell.mp3',
 
     // for advanced config flags please refer to https://hyper.is/#cfg
+    // materialSyntax: 'dark'
   },
 
   // a list of plugins to fetch and install from npm
@@ -132,7 +129,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [],
+  plugins: ['hyper-native-window-decoration'],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
