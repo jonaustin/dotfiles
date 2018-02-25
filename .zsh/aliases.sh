@@ -83,6 +83,8 @@ alias v=$EDITOR
 alias sv='sudo $EDITOR'
 alias vvc='$EDITOR ~/.vimrc'
 alias vvcl='$EDITOR ~/.vimrc.local'
+alias vvh='$EDITOR ~/.hyper.js'
+alias vvj='$EDITOR ~/.hyper.js'
 
 ## Other
 alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
