@@ -398,6 +398,7 @@ bindsym $mod+n exec "xrandr --output HDMI1 --auto"
 bindsym $mod+Shift+n exec "xrandr --output eDP1 --auto --output HDMI1 --off"
 bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --auto"
 bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --output DP1 --off"
+bindsym $mod+b exec "$HOME/bin/brightness.sh"
 
 # home automation
 # node-avcontrol for yamaha
