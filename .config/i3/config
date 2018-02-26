@@ -11,6 +11,11 @@
 
 set $mod Mod4
 
+mode  "Passthrough Mode - Press $mod+F12 to exit" {
+        bindsym $mod+F12 mode "default"
+}
+bindsym $mod+F12 mode "Passthrough Mode - Press $mod+F12 to exit"
+
 # j4-make-config / gruvbox
 # class                 border  backgr. text    indicator
 client.focused          #3c3836 #32302f #fabd2f #fabd2f
