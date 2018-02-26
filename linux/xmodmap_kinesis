@@ -19,6 +19,13 @@ clear Lock
 ! left thumb
 ! 133 - top left
 keycode 133 = Super_L NoSymbol Super_L
+
+! 65 - space
+! Map super_l for right hand mod4
+keycode 65 = Super_L NoSymbol Super_L
+! map space to an unused keycode (to keep it around for xcape to use).
+keycode any = space
+
 ! 64  - top right
 keycode 64 = Alt_R NoSymbol Alt_R
 
@@ -37,4 +44,4 @@ add control = Control_L
 add control = Control_R
 add mod1 = Alt_L
 add mod1 = Alt_R
-add mod4 = Super_L
+add mod4 = Super_L Super_R

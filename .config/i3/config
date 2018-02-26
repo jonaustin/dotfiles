@@ -426,7 +426,8 @@ bindsym $mod+Shift+Up exec "/home/jon/bin/yamaha -U"
 # inits
 exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap /home/jon/.xmodmap
-exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200
+#exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200
+exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_L=space'
 exec --no-startup-id guake
 exec --no-startup-id xflux -z 97203 # switch to red shift?
 #exec --no-startup-id xrandr --output eDP-1 --dpi 205
