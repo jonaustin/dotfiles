@@ -55,7 +55,7 @@ Plug 'tpope/vim-rake'
 "Plug 'skalnik/vim-vroom' " ruby tests
 
 " Javascript
-"Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 "Plug 'jelera/vim-javascript-syntax'
 "Plug 'othree/yajs.vim' " yet another javascript syntax
 "Plug 'vim-scripts/JavaScript-Indent'
