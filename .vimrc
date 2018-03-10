@@ -88,7 +88,7 @@ Plug 'skywind3000/asyncrun.vim' " used by other plugins to run things asynchrono
 Plug 'janko-m/vim-test'
 Plug 'metakirby5/codi.vim' " amazing repl
 Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
-""Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb' " Gbrowse for fugitive
 Plug 'airblade/vim-gitgutter' " Show status in vim gutter
@@ -285,6 +285,10 @@ map <silent><leader>. :nohl<cr>
 " remove trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
+
+""" PLUGINS """
+
+
 " Airline/Powerline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16'
@@ -326,7 +330,10 @@ let g:codi#rightalign=0
 let g:codi#width=80
 
 " NERDCommenter
-let g:NERDDefaultAlign = 'left' "comment out line(s) in visual mode
+let g:NERDDefaultAlign = 'left' " put comments at col 0
+
+" NERDTree
+map <S-q> :NERDTreeToggle<cr>
 
 " Ctrl-p
 let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
