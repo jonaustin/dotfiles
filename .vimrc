@@ -22,11 +22,21 @@ if !has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' }
-Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
-Plug 'Shougo/neco-syntax' " syntax completion
+"Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' }
+"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+"Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
+"Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
+"Plug 'Shougo/neco-syntax' " syntax completion
+
+" Asynchronous execution library
+Plug 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
 " Ruby
 "Plug 'ecomba/vim-ruby-refactoring'
@@ -45,23 +55,22 @@ Plug 'tpope/vim-rake'
 "Plug 'skalnik/vim-vroom' " ruby tests
 
 " Javascript
-Plug 'pangloss/vim-javascript'
+"Plug 'pangloss/vim-javascript'
 "Plug 'jelera/vim-javascript-syntax'
-Plug 'othree/yajs.vim' " yet another javascript syntax
-Plug 'vim-scripts/JavaScript-Indent'
+"Plug 'othree/yajs.vim' " yet another javascript syntax
+"Plug 'vim-scripts/JavaScript-Indent'
 "Plug 'othree/javascript-libraries-syntax.vim'
 "Plug 'kchmck/vim-coffee-script'
-Plug 'mmalecki/vim-node.js' " kind of rails.vim for node
+"Plug 'mmalecki/vim-node.js' " kind of rails.vim for node
 ""Plug 'mtscout6/vim-cjsx' " coffeescript with react jsx
 "Plug 'mxw/vim-jsx'
 
 " typescript
 Plug 'leafgarland/typescript-vim' " syntax
-"Plug 'Quramy/vim-js-pretty-template' " template strings coloring
-"Plug 'jason0x43/vim-js-indent'
+Plug 'Quramy/vim-js-pretty-template' " template strings coloring
+Plug 'jason0x43/vim-js-indent'
 "Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
-"Plug 'Quramy/tsuquyomi' " tsserver
-"Plug 'mhartington/nvim-typescript'
+Plug 'Quramy/tsuquyomi' " tsserver (or nvim-typescript)
 
 " Navigation
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -365,6 +374,13 @@ augroup filetypedetect
 augroup END
 " }
 
+" Jump to previous line of file after closing and re-opening
+" :help last-position-jump
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \ exe "normal g`\"" |
+      \ endif
+
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
 " horizontal split -> vertical: ctrl+w H or ctrl+w L
@@ -372,3 +388,6 @@ augroup END
 " :w !sudo tee %
 " gx - open link in browser
 " :Ack <C-R><C-W> " use c-r/c-w to paste word under cursor into ex command prompt
+" `. - go to last line edited / '' - go to start of last line edited
+" g; / g, - jump through changelist (:help changelist)
+" change all buffers to tabs - :tab sball
