@@ -338,6 +338,12 @@ map <S-q> :NERDTreeToggle<cr>
 " Ctrl-p
 let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
 
+" Vim-session
+let g:session_autoload = 'no'
+
+""" END PLUGINS """
+
+
 " Omni Completion
 "set completeopt+=noinsert " autoselect
 "set completeopt=menu,longest,preview
@@ -385,7 +391,7 @@ augroup END
 " :help last-position-jump
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \ exe "normal g`\"" |
+        \ exe "normal g`\"" |
       \ endif
 
 " Tips I always forget
@@ -398,3 +404,5 @@ autocmd BufReadPost *
 " `. - go to last line edited / '' - go to start of last line edited
 " g; / g, - jump through changelist (:help changelist)
 " change all buffers to tabs - :tab sball
+" gf in new tab: <c-w>gF - open in a new tab (Ctrl-w gF)
+
