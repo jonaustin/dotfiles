@@ -32,6 +32,8 @@ alias la='ls -lA'
 alias lt='ls -lt'
 alias lth='ls -lt|head'
 alias lthn='ls -lt|head -n'
+alias ltr='ls -ltr'
+alias ltrn='ls -ltr| tail -n'
 alias lh='ls -lhS' # sort by filesize
 alias lsd="ls -l $1 | grep '^d'"
 alias lsd2="ls -F $1 | grep \/ | sed -e 's/\/$//g'"
@@ -273,3 +275,12 @@ alias restart='sudo systemctl restart '
 alias start='sudo systemctl start '
 alias stop='sudo systemctl stop '
 alias status='sudo systemctl status '
+alias reload='sudo systemctl daemon-reload'
+alias restartu='systemctl --user restart '
+alias startu='systemctl --user start '
+alias stopu='systemctl --user stop '
+alias statusu='systemctl --user status '
+alias reloadu='systemctl --user daemon-reload'
+
+# i3
+alias cur-monitor="xrandr | grep -C 3 '*' | grep DP | awk '{print \$1}'"
