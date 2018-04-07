@@ -98,6 +98,7 @@ Plug 'airblade/vim-gitgutter' " Show status in vim gutter
 "Plug 'tmux-plugins/vim-tmux'
 "Plug 'tbabej/taskwiki'
 "Plug 'vimwiki/vimwiki', { 'branch': 'dev' } " required by taskwiki (taskwarrior)
+Plug 'mboughaba/i3config.vim'
 
 " Commands
 Plug 'scrooloose/nerdcommenter'
