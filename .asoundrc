@@ -1,0 +1,86 @@
+##pcm.!default {
+##    type hw
+##    card 1
+##}
+##
+##ctl.!default {
+##    type hw           
+##    card 1
+##}
+##
+##pcm.ha2 {
+##        type plug
+##        slave.pcm "hw:DAC"
+##}
+
+
+
+## -------------------------------------------------------------
+##
+## Avoid resampling. This is how:
+##
+## 1. Elsewhere, disable pulseaudio
+## 2. Here in .asoundrc, create default pcm and ctl 
+## handles that don't use alsa's built-in 'dmix' 
+## software mixer. 
+## 3. Do use a "plug" wrapper around the underlying
+## device. This can do lossless sample format 
+## adjustments, which lets way more apps work
+## than without the "plug" wrapper.
+##
+## Q) How can you tell this is working?
+## A) /proc/asound/card*/pcm0p/sub0/hw_params should show 44kHz 
+## when playing CD-quality mp3s or wavs.
+##
+## -------------------------------------------------------------
+
+
+
+## Create a pcm handle named "DAC", this 
+## maps to the underlying hw driver for the "DAC".
+##
+## Identify the card by name to avoid maintaining
+## hardcoded numbers ("hw:2,0") that might change
+## depending on what else is plugged into the PC.
+##
+## Your device may have a different name, not DAC.
+## Get the name from aplay -l or /proc/asound/card*/id
+##
+#pcm.DAC {
+#  type hw
+#  card "DAC"
+#}
+
+## Bind a default ctl to the underlying hw driver
+## for the "DAC".
+##
+#ctl.!default {
+#  type hw
+#  card "DAC"
+#}
+
+## Create a default pcm, use the "plug" wrapper
+## to wrap the named PCM we created above.
+##
+## Plug will adjust sample format as needed; we can
+## force it to never change the sample rate! Nice.
+##
+#pcm.!default {
+#  type plug
+#  slave {
+#    #pcm "hw:2,0"
+#    pcm "DAC"
+#    rate "unchanged"
+#    #rate 96000
+#  }
+#}
+
+pcm.!default {
+type hw
+card 1
+}
+
+ctl.!default {
+type hw
+card 1
+}
