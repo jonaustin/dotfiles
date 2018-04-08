@@ -67,50 +67,22 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run -display-run '❯ ' #dmenu_run
+#bindsym $mod+d exec rofi -show run -display-run '❯ ' #dmenu_run
 bindsym Ctrl+space exec rofi -show run -display-run '❯ ' #dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec i3-sensible-terminal -x 'alsamixer'
-#exec --no-startup-id pulseaudio
-#exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
-
-################################################################################################
-
-# Start Applications
-bindsym $mod+Ctrl+b exec i3-sensible-terminal -x 'bmenu'
-#bindsym $mod+F2 exec palemoon
-#bindsym $mod+F3 exec pcmanfm
-bindsym $mod+F3 exec ranger
-bindsym $mod+Shift+F3 exec gksu pcmanfm
-bindsym $mod+F5 exec i3-sensible-terminal -x 'mocp'
-#bindsym $mod+t exec --no-startup-id pkill compton
-bindsym $mod+Ctrl+t exec --no-startup-id compton -b
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-#bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-#bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
-bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
-
 # change focus
 #bindsym $mod+j focus left
 #bindsym $mod+k focus down
 #bindsym $mod+l focus up
 #bindsym $mod+semicolon focus right
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h focus left; exec notify-send 'left'
+bindsym $mod+j focus down; exec notify-send 'down'
+bindsym $mod+k focus up; exec notify-send 'up'
+bindsym $mod+l focus right; exec notify-send 'right'
 
 # alternatively, you can use the cursor keys:
 #bindsym $mod+Left focus left
@@ -123,10 +95,10 @@ bindsym $mod+l focus right
 #bindsym $mod+Shift+k move down
 #bindsym $mod+Shift+l move up
 #bindsym $mod+Shift+semicolon move right
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left;exec notify-send 'move left'
+bindsym $mod+Shift+j move down;exec notify-send 'move down'
+bindsym $mod+Shift+k move up;exec notify-send 'move up'
+bindsym $mod+Shift+l move right;exec notify-send 'move right'
 
 # alternatively, you can use the cursor keys:
 #bindsym $mod+Shift+Left move left
@@ -149,12 +121,12 @@ bindsym $mod+v split v;exec notify-send 'tile vertically'
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+q layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+q layout stacking; exec notify-send 'stacking layout'
+bindsym $mod+w layout tabbed; exec notify-send 'tabbed layout'
+bindsym $mod+e layout toggle split; exec notify-send 'split layout toggle'
 
 # toggle tiling / floating
-#bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+enter floating toggle
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -166,7 +138,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
@@ -338,30 +310,30 @@ set $blue      #268bd2
 set $cyan      #2aa198
 set $green     #859900
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command /home/jon/bin/i3spotify
-        #status_command py3status -c ~/.i3/i3status.conf
-        colors {
-          # j4-make-config / gruvbox
-          background #504945
-          statusline #d5c4a1
-          separator #3c3836 
-          focused_workspace #3c3836 #32302f #fabd2f
-          active_workspace #3c3836 #504945 #d5c4a1
-          inactive_workspace #3c3836 #504945 #d5c4a1
-          urgent_workspace   #7c6f64 #fabd2f #3c3836
+## Start i3bar to display a workspace bar (plus the system information i3status
+## finds out, if available)
+#bar {
+#        status_command /home/jon/bin/i3spotify
+#        #status_command py3status -c ~/.i3/i3status.conf
+#        colors {
+#          # j4-make-config / gruvbox
+#          background #504945
+#          statusline #d5c4a1
+#          separator #3c3836 
+#          focused_workspace #3c3836 #32302f #fabd2f
+#          active_workspace #3c3836 #504945 #d5c4a1
+#          inactive_workspace #3c3836 #504945 #d5c4a1
+#          urgent_workspace   #7c6f64 #fabd2f #3c3836
 
-          # dark aqua
-          #statusline $based0
-          #background $based3
-          #focused_workspace $based3 $based3 $base3
-          #inactive_workspace $based3 $based2 $base0
-          #active_workspace $based3 $based2 $base3
-          #urgent_workspace $based3 $magenta $base2
-        }
-}
+#          # dark aqua
+#          #statusline $based0
+#          #background $based3
+#          #focused_workspace $based3 $based3 $base3
+#          #inactive_workspace $based3 $based2 $base0
+#          #active_workspace $based3 $based2 $base3
+#          #urgent_workspace $based3 $magenta $base2
+#        }
+#}
 
 # apps
 #bindsym $mod+Shift+s exec "/home/jon/bin/spotify"
@@ -425,17 +397,21 @@ bindsym $mod+Shift+Down exec "/home/jon/bin/yamaha -m"
 bindsym $mod+Up exec "/home/jon/bin/yamaha -u"
 bindsym $mod+Shift+Up exec "/home/jon/bin/yamaha -U"
 
+# lights
+bindsym $mod+o exec "lampe -s 10 y; lampe -s 9 y"
+bindsym $mod+Shift+o exec "lampe -s 10 n; lampe -s 9 n"
+
 # time wasting
 #bindsym $mod+Shift+h exec 'hearthstone'
 
 # inits
 exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap /home/jon/.xmodmap
-#exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200
-exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_L=space'
+exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200
+# exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_L=space'
 exec --no-startup-id guake
 exec --no-startup-id xflux -z 97203 # switch to red shift?
-#exec --no-startup-id xrandr --output eDP-1 --dpi 205
+# exec --no-startup-id xrandr --output eDP-1 --dpi 205
 exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg
 exec --no-startup-id xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
@@ -448,22 +424,23 @@ exec --no-startup-id xinput set-button-map "Logitech Trackball" 1 3 3
 exec --no-startup-id parcellite -d
 exec --no-startup-id tmux start-server
 exec --no-startup-id blueman-applet
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id nitrogen --restore; sleep 1; compton -b # background
+# exec --no-startup-id nitrogen --restore; sleep 1; compton -b # background
 exec --no-startup-id xfce4-power-manager
-#exec --no-startup-id pamac-tray # pacman tray
-#exec --no-startup-id clipit
+# exec --no-startup-id pamac-tray # pacman tray
+# exec --no-startup-id clipit
 # exec --no-startup-id blueman
 # exec_always --no-startup-id sbxkb
-#exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-#exec --no-startup-id xautolock -time 10 -locker blurlock
+# exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id xscreensaver -nosplash
 exec_always --no-startup-id setcursor
-#exec_always --no-startup-id /home/jon/opt/activitywatch/aw-qt # activity watcher
+# exec_always --no-startup-id /home/jon/opt/activitywatch/aw-qt # activity watcher
 
 # GUI apps on startup
-#exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/terminator -x tmux; zsh" #-e='tmux attach -t core; zsh'"
+# exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/terminator -x tmux; zsh" #-e='tmux attach -t core; zsh'"
 exec --no-startup-id /home/jon/bin/i3_restore_hack.sh
