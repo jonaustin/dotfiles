@@ -10,3 +10,8 @@ set bell-style none
 set blink-matching-paren on
 set visible-stats on
 tab: complete
+
+# automatically add / to end of symlinks so symlinked dirs act like normal ones
+set mark-symlinked-directories on
+
+
