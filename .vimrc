@@ -114,6 +114,7 @@ Plug 'myusuf3/numbers.vim'
 Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 Plug 'xolox/vim-misc' " required by vim-session
+Plug 'szw/vim-maximizer' " temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
 Plug 'w0ng/vim-hybrid'
@@ -352,6 +353,10 @@ let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
 " Vim-session
 let g:session_autoload = 'no'
 
+" Vim-maximizer
+nnoremap <silent><F3> :MaximizerToggle<CR>
+vnoremap <silent><F3> :MaximizerToggle<CR>gv
+inoremap <silent><F3> <C-o>:MaximizerToggle<CR>
 """ END PLUGINS """
 
 
