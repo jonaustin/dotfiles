@@ -10,18 +10,20 @@
 " Auto-install
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/bundle')
 
+"" nvim-completion-manager
 " Requires vim8 with has('python') or has('python3')
 " Requires the installation of msgpack-python. (pip install msgpack-python)
 if !has('nvim')
-  Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'roxma/vim-hug-neovim-rpc' " compatibility layer for vim8
 endif
 Plug 'roxma/nvim-completion-manager'
+
 "Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' }
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
@@ -39,16 +41,18 @@ Plug 'Shougo/vimproc.vim', {
       \ }
 
 " Ruby
-"Plug 'ecomba/vim-ruby-refactoring'
 Plug 'tpope/vim-haml'
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-rails'
+"Plug 'ecomba/vim-ruby-refactoring'
 "Plug 'slim-template/vim-slim'
-"Plug 'sunaku/vim-ruby-minitest'
 "Plug 'depuracao/vim-rdoc'
 "Plug 'hwartig/vim-seeing-is-believing' " e.g `#> 'foo'` or t9md/vim-ruby-xmpfilter (deprecated for Codi, but might still be useful)
 "Plug 'tpope/vim-rvm' " switch ruby versions within vim
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
+
+" Ruby testing
+"Plug 'sunaku/vim-ruby-minitest'
 "Plug 'jgdavey/tslime.vim' " needed for vim-rspec
 "Plug 'thoughtbot/vim-rspec'
 "Plug 'skwp/vim-rspec'
@@ -58,11 +62,10 @@ Plug 'tpope/vim-rake'
 Plug 'pangloss/vim-javascript'
 "Plug 'jelera/vim-javascript-syntax'
 "Plug 'othree/yajs.vim' " yet another javascript syntax
-"Plug 'vim-scripts/JavaScript-Indent'
 "Plug 'othree/javascript-libraries-syntax.vim'
+"Plug 'vim-scripts/JavaScript-Indent'
 "Plug 'kchmck/vim-coffee-script'
 "Plug 'mmalecki/vim-node.js' " kind of rails.vim for node
-""Plug 'mtscout6/vim-cjsx' " coffeescript with react jsx
 "Plug 'mxw/vim-jsx'
 
 " typescript
@@ -108,7 +111,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
 Plug 'myusuf3/numbers.vim'
-"Plug 'w0rp/ale' " asynchronous linter
+Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 Plug 'xolox/vim-misc' " required by vim-session
 
@@ -142,51 +145,53 @@ call plug#end()
 " }}}
 
 " Basics {
-filetype plugin indent on  	        " Automatically detect file types.
+filetype plugin indent on " Automatically detect file types.
 let mapleader = ","
 
 if has('unix')
-  if has('mac')       " osx
-    set clipboard=unnamed              " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+  if has('mac') " osx
+    set clipboard=unnamed " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
   else " linux, bsd, etc
-    set clipboard=unnamedplus         " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
+    set clipboard=unnamedplus " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
   endif
 endif
 
-set noautochdir                     " do not automatically change directory
-"set cryptmethod=blowfish            " strong blowfish encryption (instead of zip)
+set noautochdir " do not automatically change directory
+"set cryptmethod=blowfish " strong blowfish encryption (instead of zip) - incomptabile with nvim
 " }
 
 " General {
-syntax on 					                " syntax highlighting
+syntax on " syntax highlighting
 set mouse=a
-set signcolumn=yes                " Otherwise realtime linter gets annoying
+set signcolumn=yes " Otherwise realtime linter gets annoying
 " not every vim is compiled with this, use the following line instead
 "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 scriptencoding utf-8
-set encoding=utf-8                 " no junk chars
+set encoding=utf-8 " no junk chars
 set autowrite
-set shortmess+=filmnrxoOtT          " abbrev. of messages (avoids 'hit enter')
-"set foldmethod=syntax
+set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
+set foldmethod=syntax
 set foldlevelstart=99
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 
 " Speed
-set lazyredraw                      " fix horrible slowdown issues when moving cursor with syntax on
-set ttyfast                         " assume fast connection (smoother redraw)
-set synmaxcol=1024                  " Syntax coloring lines that are too long just slows down the world
-set nolist                          " Hide invisibles
+set lazyredraw     " fix horrible slowdown issues when moving cursor with syntax on
+set ttyfast        " assume fast connection (smoother redraw)
+set synmaxcol=1024 " Syntax coloring lines that are too long just slows down the world
+set nolist         " Hide invisibles
 " Use the old regex engine
 " http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
-set re=1
+" set re=1 " TODO: remove this?
 
 " Disable Ex mode
 map Q <Nop>
 
 " Setting up the directories {
-set backup 						            " backups are nice ...
-set backupdir=$HOME/.vimbackup    " but not when they clog .
-set directory=$HOME/.vimswap 	    " Same for swap files
-set viewdir=$HOME/.vimviews 	    " same but for view files
+set backup " backups are nice ...
+set backupdir=$HOME/.vimbackup " but not when they clog .
+set directory=$HOME/.vimswap " Same for swap files
+set viewdir=$HOME/.vimviews " same but for view files
 set undodir=$HOME/.vimundo
 
 " Creating directories if they don't exist
@@ -207,19 +212,19 @@ if has('unix')
     hi clear CursorLineNr
   endif
 endif
-set incsearch 					           " find as you type search
-set hlsearch 					             " highlight search terms
-set winminheight=0 				         " windows can be 0 line high
-set ignorecase 					           " case insensitive search
-set smartcase 					           " become temporarily case sensitive when any uppercase letters present in search string
-set undofile                       " undo even after closing and re-opening a file!
+set incsearch      " find as you type search
+set hlsearch       " highlight search terms
+set winminheight=0 " windows can be 0 line high
+set ignorecase     " case insensitive search
+set smartcase      " become temporarily case sensitive when any uppercase letters present in search string
+set undofile       " undo even after closing and re-opening a file!
 
 " Formatting {
-set wrap                      	   " wrap long lines
-set showbreak=↪                    " prettier line wrap
-set autoindent                 	   " indent at the same level of the previous line
-set shiftwidth=2               	   " use indents of 2 spaces
-set expandtab 	       	  	   " tabs should be spaces for sanity
+set wrap         " wrap long lines
+set showbreak=↪  " prettier line wrap
+set autoindent   " indent at the same level of the previous line
+set shiftwidth=2 " use indents of 2 spaces
+set expandtab    " tabs should be spaces for sanity
 
 " Key Mappings {
 
@@ -256,7 +261,7 @@ nnoremap Y y$
 " yank all lines
 nmap <leader>ya :%y+<cr>
 
-" remap jj to escape
+" remap to escape
 inoremap jj <ESC>
 inoremap jk <ESC>
 
@@ -297,7 +302,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " vim-test
 let g:test#javascript#jasmine#file_pattern = '\v.*/.*spec\.(js|jsx|coffee)$'
-let g:test#ruby#rspec#executable = 'bundle exec rspec'
+let g:test#ruby#rspec#executable = 'zeus rspec'
 let test#strategy = 'neovim' "'neoterm'
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
@@ -306,25 +311,30 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 " ALE asynchronous linter
-"let g:ale_fixers = {}
-"let g:ale_linters = {}
-"if has('mac')
-  "let g:ale_linters['javascript'] = ['eslint']
+" clear all fixers and linters
+let g:ale_fixers = {}
+let g:ale_linters = {}
+
+if has('mac') " e.g. 'work'
+  let g:ale_fixers['javascript'] = ['prettier']
+  let g:ale_fix_on_save = 0
+else
+  let g:ale_linters['javascript'] = ['prettier_standard'] " npm i -g prettier-standard
+  let g:ale_linters['javascript']  = ['']}
   "let g:ale_fixers['javascript'] = ['prettier']
-"else
-  "let g:ale_linters['javascript'] = ['standard']
-  "let g:ale_fixers['javascript'] = ['prettier']
-  "let g:ale_fix_on_save = 1
-"endif
-"let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
-"" test
-"let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
-"let g:ale_sign_warning = '◦'
-"let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-"let g:airline#extensions#ale#enabled = 1
-"let g:ale_set_highlights = 0 " Less distracting
-"highlight clear ALEErrorSign
-"highlight clear ALEWarningSign
+  let g:ale_fix_on_save = 0 " probably enable this if using prettier-standard
+endif
+
+let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
+
+" less distracting decorations
+let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '◦'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:airline#extensions#ale#enabled = 1
+let g:ale_set_highlights = 0 " Less distracting
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 
 " Codi repl
 let g:codi#rightalign=0
@@ -406,4 +416,3 @@ autocmd BufReadPost *
 " g; / g, - jump through changelist (:help changelist)
 " change all buffers to tabs - :tab sball
 " gf in new tab: <c-w>gF - open in a new tab (Ctrl-w gF)
-
