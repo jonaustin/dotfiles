@@ -31,8 +31,13 @@ fi
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/rake.zsh
 
+# zsh
 unsetopt correctall
 setopt interactivecomments
+# have command completion ignore case - e.g. `git co foo` will complete to `git co FOO`
+# Fair warning; may have side effects: https://unix.stackexchange.com/questions/197700/zsh-case-insensitive-mid-word-completion
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+  '+l:|?=** r:|?=**'
 
 ## source files
 source ~/.zsh/functions.sh
