@@ -79,6 +79,7 @@ Plug 'Quramy/tsuquyomi' " tsserver (or nvim-typescript)
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 Plug 'kien/ctrlp.vim'
+Plug 'vim-scripts/CtrlP-SmartTabs'
 Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
 Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 Plug 'mileszs/ack.vim'                " :Ack <search>
@@ -354,9 +355,14 @@ let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
 let g:session_autoload = 'no'
 
 " Vim-maximizer
-nnoremap <silent><F3> :MaximizerToggle<CR>
-vnoremap <silent><F3> :MaximizerToggle<CR>gv
-inoremap <silent><F3> <C-o>:MaximizerToggle<CR>
+nnoremap <silent><F5> :MaximizerToggle<CR>
+vnoremap <silent><F5> :MaximizerToggle<CR>
+inoremap <silent><F5> <C-o>:MaximizerToggle<CR>
+
+" CtrlP-SmartTabs
+nnoremap <silent><F5> :CtrlPSmartTabs<CR>
+nnoremap <silent><S-C-P> :CtrlPSmartTabs<CR>
+
 """ END PLUGINS """
 
 
