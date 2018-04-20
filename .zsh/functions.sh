@@ -32,7 +32,7 @@ roll()
     *.rar) shift && rar $FILE $* ;;
   esac
 }
-zipc() {'zip -r ${1}.zip $1'}
+zipc() { zip -r "${1}.zip" "$1"; }
 
 randlines() {
   cat ${1} | while read i; do echo $RANDOM "$i"; done | sort -n | sed 's/^[0-9]* //'
@@ -136,7 +136,7 @@ remindme()
 # weather() -- Check weather
 weather()
 {
-  lynx -dump "http://google.com/search?q=weather+${1:-97203}" | grep -A 5 -m 1 '^ *Weather for' | grep -v 'Add to'
+  curl http://en.wttr.in/${1:-97203}
 }
 
 
