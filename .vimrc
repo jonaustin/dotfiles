@@ -322,7 +322,7 @@ if has('mac') " e.g. 'work'
   let g:ale_fix_on_save = 0
 else
   let g:ale_linters['javascript'] = ['prettier_standard'] " npm i -g prettier-standard
-  let g:ale_linters['javascript']  = ['']}
+  let g:ale_linters['javascript'] = ['']
   "let g:ale_fixers['javascript'] = ['prettier']
   let g:ale_fix_on_save = 0 " probably enable this if using prettier-standard
 endif
