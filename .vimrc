@@ -79,7 +79,7 @@ Plug 'Quramy/tsuquyomi' " tsserver (or nvim-typescript)
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'vim-scripts/CtrlP-SmartTabs'
+Plug 'jonaustin/CtrlP-SmartTabs'
 Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
 Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 Plug 'mileszs/ack.vim'                " :Ack <search>
