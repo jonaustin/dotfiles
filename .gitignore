@@ -40,3 +40,4 @@ powerline.conf
 .lein/repl-history
 .lein/self-installs
 .gitconfig
+/old
