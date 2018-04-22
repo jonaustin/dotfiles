@@ -282,3 +282,10 @@ today() {
     $EDITOR $FILE
   fi;
 }
+
+
+## rsync
+rsynconly() {
+  rsync -amP --include="*/" --include="*.$1" --exclude="*" $2 $3
+}
+
