@@ -1,0 +1,4 @@
+---
+devices:
+  movieroom:
+    host: 10.0.1.113:5555
