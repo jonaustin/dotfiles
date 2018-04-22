@@ -53,8 +53,12 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared" # for youcompleteme
 eval "$(pyenv init -)"
 export PYENV_VERSION=3.6.1 #2.7.13
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-#source $(pyenv root)/completions/pyenv.zsh
+export PATH="$PYENV_ROOT/shims:$PATH"
+source $(pyenv root)/completions/pyenv.zsh
+
+# shims aren't being copied from VERSION/bin to .pyenv/shims for some reason
+export PATH="$PYENV_ROOT/versions/2.7.13/bin:$PATH"
+export PATH="$PYENV_ROOT/versions/3.6.1/bin:$PATH"
 
 ## Node
 # nvm
@@ -70,6 +74,25 @@ else
   export VMUX_REALEDITOR_VIM=/usr/bin/vim
   export VMUX_REALEDITOR_NVIM=/usr/bin/nvim
 fi
+
+# antigen - zsh plugin manager
+source /usr/share/zsh/share/antigen.zsh
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+#antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+#antigen theme pure #FIXME: use my custom version
+
+# Tell Antigen that you're done.
+antigen apply
+###
 
 ## Other
 
