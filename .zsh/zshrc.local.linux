@@ -4,6 +4,8 @@ alias agu='packer -Syyu'
 alias s='packer -Ss '
 alias pf='pacman -Fo ' # $file-name -- find out which package owns a file
 
+alias open=xdg-open
+
 #alias agi='sudo apt-get install '
 #alias agr='sudo apt-get remove '
 #alias agu='sudo apt-get update '
