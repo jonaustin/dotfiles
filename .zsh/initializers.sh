@@ -54,7 +54,11 @@ eval "$(pyenv init -)"
 export PYENV_VERSION=3.6.1 #2.7.13
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/shims:$PATH"
-source $(pyenv root)/completions/pyenv.zsh
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  . /usr/local/share/zsh/site-functions/pyenv.zsh
+else
+  . $(pyenv root)/completions/pyenv.zsh
+fi
 
 # shims aren't being copied from VERSION/bin to .pyenv/shims for some reason
 export PATH="$PYENV_ROOT/versions/2.7.13/bin:$PATH"
@@ -76,7 +80,11 @@ else
 fi
 
 # antigen - zsh plugin manager
-source /usr/share/zsh/share/antigen.zsh
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  source /usr/local/share/antigen/antigen.zsh
+else
+  source /usr/share/zsh/share/antigen.zsh
+fi
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
 antigen bundle heroku
@@ -99,9 +107,6 @@ antigen apply
 # tabtab source for serverless package (npm i -g tabtab)
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /home/jon/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/jon/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/jon/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/jon/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 # fzf fuzzy finder - ctrl-r (history), ctrl-t (files)
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

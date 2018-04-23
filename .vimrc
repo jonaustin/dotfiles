@@ -100,6 +100,7 @@ Plug 'airblade/vim-gitgutter' " Show status in vim gutter
 "Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
 "Plug 'mattn/gist-vim' "github gists
 "Plug 'tmux-plugins/vim-tmux'
+Plug 'christoomey/vim-tmux-navigator' " or use https://gist.github.com/mislav/5189704#gistcomment-1735600
 "Plug 'tbabej/taskwiki'
 "Plug 'vimwiki/vimwiki', { 'branch': 'dev' } " required by taskwiki (taskwarrior)
 Plug 'mboughaba/i3config.vim'
