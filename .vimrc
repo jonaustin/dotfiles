@@ -232,11 +232,14 @@ set expandtab    " tabs should be spaces for sanity
 " Key Mappings {
 
 " Aliases {
-:command! Wq wq
-:command! WQ wq
-:command! W w
-:command! Q q
-:command! Qa qa
+command! Wq wq
+command! WQ wq
+command! W w
+command! Q q
+command! Qa qa
+
+" Switch between 2 files
+"nmap <leader><leader> <c-^>
 "}
 
 " Windows
@@ -362,7 +365,7 @@ inoremap <silent><F5> <C-o>:MaximizerToggle<CR>
 
 " CtrlP-SmartTabs
 nnoremap <silent><F5> :CtrlPSmartTabs<CR>
-nnoremap <silent><S-C-P> :CtrlPSmartTabs<CR>
+nnoremap <silent><leader><leader> :CtrlPSmartTabs<CR>
 
 """ END PLUGINS """
 
