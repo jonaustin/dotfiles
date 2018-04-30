@@ -137,6 +137,8 @@ module.exports = {
   localPlugins: [],
 
   keymaps: {
+    "editor:paste": "ctrl+v",
+    "editor:copy": "ctrl+x"
     // Example
     // 'window:devtools': 'cmd+alt+o',
   },
