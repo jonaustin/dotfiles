@@ -17,7 +17,7 @@ bind e:cmd hint ASDFGHJKLQWERTYUIOPCVBN
 alias hyper ctrl;alt;cmd
 
 # Apps
-alias browser 'Nightly'
+alias browser 'Chrome.app'
 
 # Hints
 alias showHintsLeftHand hint AOEUIYQJKX
@@ -30,48 +30,48 @@ alias righthalf     move screenOriginX+screenSizeX/2;screenOriginY    screenSize
 alias rightmost     move screenOriginX+screenSizeX*0.4;screenOriginY  screenSizeX*0.6;screenSizeY
 alias rightless     move screenOriginX+screenSizeX*0.6;screenOriginY  screenSizeX*0.4;screenSizeY
 alias leftmost      move screenOriginX;screenOriginY                  screenSizeX*0.6;screenSizeY
-alias leftless      move screenOriginX;screenOriginY 
+alias leftless      move screenOriginX;screenOriginY
 # }}}
 
 ### Layouts {{{
-# Chrome / Terminal
-layout ChromeTerminal 'Google Chrome' push left bar-resize:screenSizeX/2
-layout ChromeTerminal 'Terminal' push right bar-resize:screenSizeX/2
-bind 1:${hyper} sequence focus 'Google Chrome' | focus 'Terminal' | layout ChromeTerminal
+## Chrome / Terminal
+#layout ChromeTerminal 'Google Chrome' push left bar-resize:screenSizeX/2
+#layout ChromeTerminal 'Terminal' push right bar-resize:screenSizeX/2
+#bind 1:${hyper} sequence focus 'Google Chrome' | focus 'Terminal' | layout ChromeTerminal
 
-# Preview / Terminal
-layout PreviewTerminal 'Terminal' push left bar-resize:screenSizeX/2
-layout PreviewTerminal 'Preview' push right bar-resize:screenSizeX/2
-bind 2:${hyper} sequence focus 'Preview' | focus 'Terminal' | layout PreviewTerminal
+## Preview / Terminal
+#layout PreviewTerminal 'Terminal' push left bar-resize:screenSizeX/2
+#layout PreviewTerminal 'Preview' push right bar-resize:screenSizeX/2
+#bind 2:${hyper} sequence focus 'Preview' | focus 'Terminal' | layout PreviewTerminal
 
-# Preview / SublimeText
-layout PreviewSublimeText 'Preview' push left bar-resize:screenSizeX/2
-layout PreviewSublimeText 'Sublime Text 2' push right bar-resize:screenSizeX/2
-bind 3:${hyper} sequence focus 'Preview' | focus 'Sublime Text 2' | layout PreviewSublimeText
+## Preview / SublimeText
+#layout PreviewSublimeText 'Preview' push left bar-resize:screenSizeX/2
+#layout PreviewSublimeText 'Sublime Text 2' push right bar-resize:screenSizeX/2
+#bind 3:${hyper} sequence focus 'Preview' | focus 'Sublime Text 2' | layout PreviewSublimeText
 
-# Clearview / Terminal
-layout ClearviewTerminal 'Clearview' push left bar-resize:screenSizeX/3
-layout ClearviewTerminal 'Terminal' push right bar-resize:screenSizeX/1.5
-bind 4:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal
-# }}}
+## Clearview / Terminal
+#layout ClearviewTerminal 'Clearview' push left bar-resize:screenSizeX/3
+#layout ClearviewTerminal 'Terminal' push right bar-resize:screenSizeX/1.5
+#bind 4:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal
+## }}}
 
-# Clearview / Terminal
-layout ClearviewTerminal2 'Clearview' push left bar-resize:screenSizeX/2.5
-layout ClearviewTerminal2 'Terminal' push right bar-resize:screenSizeX/1.67
-bind 5:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal2
-# }}}
+## Clearview / Terminal
+#layout ClearviewTerminal2 'Clearview' push left bar-resize:screenSizeX/2.5
+#layout ClearviewTerminal2 'Terminal' push right bar-resize:screenSizeX/1.67
+#bind 5:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal2
+## }}}
 
-# Clearview / Terminal
-layout ClearviewTerminal3 'Clearview' push left bar-resize:screenSizeX/2.25
-layout ClearviewTerminal3 'Terminal' push right bar-resize:screenSizeX/1.8
-bind 6:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal3
-# }}}
+## Clearview / Terminal
+#layout ClearviewTerminal3 'Clearview' push left bar-resize:screenSizeX/2.25
+#layout ClearviewTerminal3 'Terminal' push right bar-resize:screenSizeX/1.8
+#bind 6:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal3
+## }}}
 
-# Clearview / Terminal
-layout ClearviewTerminal4 'Clearview' push left bar-resize:screenSizeX/2
-layout ClearviewTerminal4 'Terminal' push right bar-resize:screenSizeX/2
-bind 7:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal4
-# }}}
+## Clearview / Terminal
+#layout ClearviewTerminal4 'Clearview' push left bar-resize:screenSizeX/2
+#layout ClearviewTerminal4 'Terminal' push right bar-resize:screenSizeX/2
+#bind 7:${hyper} sequence focus 'Clearview' | focus 'Terminal' | layout ClearviewTerminal4
+## }}}
 
 ### Bindings {{{
 bind `:${hyper} hint QWERASDFZXCVTGBYUIOPHJKLNM
@@ -102,6 +102,13 @@ bind up:shift;ctrl    nudge +0   -10%
 bind down:shift;ctrl  nudge +0   +10%
 
 # Throw Bindings
+bind 1:${hyper}     throw 0 resize
+bind 2:${hyper}     throw 1 resize
+bind 3:${hyper}     throw 2 resize
+#bind left:${hyper}  throw left  resize
+#bind right:${hyper} throw right resize
+#bind up:${hyper}    throw up    resize
+#bind down:${hyper}  throw down  resize
 
 # Focus Bindings
 bind j:${hyper}     focus left

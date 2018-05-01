@@ -170,7 +170,6 @@ set mouse=a
 set signcolumn=yes " Otherwise realtime linter gets annoying
 " not every vim is compiled with this, use the following line instead
 "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-"
 scriptencoding utf-8
 set encoding=utf-8
 set autowrite
@@ -359,6 +358,7 @@ inoremap <silent><F5> <C-o>:MaximizerToggle<CR>
 " CtrlP-SmartTabs
 nnoremap <silent><F5> :CtrlPSmartTabs<CR>
 nnoremap <silent><leader><leader> :CtrlPSmartTabs<CR>
+let g:ctrlp_smarttabs_modify_tabline = 0  " let airline manage (1 here turns it all white)
 
 """ END PLUGINS """
 
@@ -413,16 +413,12 @@ autocmd BufReadPost *
         \ exe "normal g`\"" |
       \ endif
 
-
-"if has('unix')
-  "if has('mac')       " osx
-  "else " linux, bsd, etc
-    hi Normal ctermbg=none
-    hi NonText ctermbg=none
-    hi LineNr ctermbg=none
-    hi clear CursorLineNr
-  "endif
-"endif
+" force transparency
+" must be last for some reason
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+hi LineNr ctermbg=none
+hi clear CursorLineNr
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
