@@ -166,11 +166,13 @@ set noautochdir " do not automatically change directory
 " General {
 syntax on " syntax highlighting
 set mouse=a
+
 set signcolumn=yes " Otherwise realtime linter gets annoying
 " not every vim is compiled with this, use the following line instead
 "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+"
 scriptencoding utf-8
-set encoding=utf-8 " no junk chars
+set encoding=utf-8
 set autowrite
 set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
 set foldmethod=syntax
@@ -206,15 +208,6 @@ silent execute '!mkdir -p $HOME/.vimundo'
 " Vim UI {
 set background=dark                 " Assume a dark background
 colo hybrid
-if has('unix')
-  if has('mac')       " osx
-  else " linux, bsd, etc
-    hi Normal ctermbg=none
-    hi NonText ctermbg=none
-    hi LineNr ctermbg=none
-    hi clear CursorLineNr
-  endif
-endif
 set incsearch      " find as you type search
 set hlsearch       " highlight search terms
 set winminheight=0 " windows can be 0 line high
@@ -419,6 +412,17 @@ autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \ exe "normal g`\"" |
       \ endif
+
+
+"if has('unix')
+  "if has('mac')       " osx
+  "else " linux, bsd, etc
+    hi Normal ctermbg=none
+    hi NonText ctermbg=none
+    hi LineNr ctermbg=none
+    hi clear CursorLineNr
+  "endif
+"endif
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
