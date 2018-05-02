@@ -357,12 +357,12 @@ bindsym Ctrl+Print exec "xbacklight -set 3"
 
 
 # volume
-bindsym shift+Print exec "amixer sset Master toggle"
-bindsym Print exec "amixer sset Master 5%-"
-bindsym $mod+minus exec "amixer sset Master 5%-"
+bindsym shift+Print exec $HOME/bin/volume -m
+bindsym Print exec $HOME/bin/volume -d
+bindsym $mod+minus exec $HOME/bin/volume -d
 #bindsym Scroll_Lock exec "amixer sset Master 5%-"
-bindsym $mod+equal exec "amixer sset Master 5%+"
-bindsym Pause exec "amixer sset Master 5%+"
+bindsym $mod+equal exec $HOME/bin/volume -u
+bindsym Pause exec $HOME/bin/volume -u
 
 # spotify
 # maybe change to use https://github.com/acrisci/playerctl
