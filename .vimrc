@@ -79,7 +79,6 @@ Plug 'Quramy/tsuquyomi' " tsserver (or nvim-typescript)
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'jonaustin/CtrlP-SmartTabs'
 Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
 Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 Plug 'mileszs/ack.vim'                " :Ack <search>
@@ -346,6 +345,8 @@ map <S-q> :NERDTreeToggle<cr>
 
 " Ctrl-p
 let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
+nnoremap <silent><leader><leader> :CtrlPBuffer<CR>
+
 
 " Vim-session
 let g:session_autoload = 'no'
@@ -354,11 +355,6 @@ let g:session_autoload = 'no'
 nnoremap <silent><F5> :MaximizerToggle<CR>
 vnoremap <silent><F5> :MaximizerToggle<CR>
 inoremap <silent><F5> <C-o>:MaximizerToggle<CR>
-
-" CtrlP-SmartTabs
-nnoremap <silent><F5> :CtrlPSmartTabs<CR>
-nnoremap <silent><leader><leader> :CtrlPSmartTabs<CR>
-let g:ctrlp_smarttabs_modify_tabline = 0  " let airline manage (1 here turns it all white)
 
 """ END PLUGINS """
 
