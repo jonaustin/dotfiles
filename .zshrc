@@ -1,3 +1,7 @@
+# zsh profiling
+#setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
+#zmodload zsh/zprof
+
 ### ZSH {{{
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
@@ -111,7 +115,7 @@ __git_complete_index_file(){}
 
 #unalias run-help
 autoload run-help
-autoload -U compinit && compinit
+autoload -U compinit && compinit -d # -d cache completion info
 autoload bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh

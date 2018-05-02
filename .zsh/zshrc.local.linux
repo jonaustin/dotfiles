@@ -55,6 +55,6 @@ alias gitsome="docker run -ti --rm -v $(pwd):/src/ \
   mariolet/gitsome"
 
 # python
-source /usr/bin/virtualenvwrapper.sh
+#source /usr/bin/virtualenvwrapper.sh # zprof says this is slow
 
 alias safari='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Safari/Safari.exe'

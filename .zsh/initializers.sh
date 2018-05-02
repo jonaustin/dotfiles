@@ -67,7 +67,35 @@ export PATH="$PYENV_ROOT/versions/3.6.1/bin:$PATH"
 ## Node
 # nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# https://github.com/creationix/nvm/issues/1261
+# https://github.com/creationix/nvm/pull/1737
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # OMG nvm startup is slow
+
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    # Load nvm but don't use it yet: we need to do some other hacks first.
+    # See https://github.com/creationix/nvm/issues/1261#issuecomment-366879288
+    . "$NVM_DIR/nvm.sh" --no-use
+    # I don't need this check, and it's slow (loads npm).
+    # Do not use the npm `prefix` config; do not report related bugs to nvm ;)
+    nvm_die_on_prefix() {
+        return 0
+    }
+    # This also loads npm; let's just skip it.
+    nvm_print_npm_version() {
+        return 0
+    }
+    nvm_ensure_version_installed() {
+        return 0
+    }
+    # nvm_resolve_local_alias can also be slow; cache it.
+    if [ -s "$NVM_DIR/_default_version" ]; then
+        NVM_AUTO_LOAD_VERSION=$(cat "$NVM_DIR/_default_version")
+    else
+        NVM_AUTO_LOAD_VERSION=$(nvm_resolve_local_alias default)
+        echo "$NVM_AUTO_LOAD_VERSION" > "$NVM_DIR/_default_version"
+    fi
+    nvm use --silent "$NVM_AUTO_LOAD_VERSION"
+fi
 
 # vmux
 export VMUX_EDITOR=nvim
