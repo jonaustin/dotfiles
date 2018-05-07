@@ -60,12 +60,12 @@ Plug 'tpope/vim-rails'
 
 " Javascript
 Plug 'pangloss/vim-javascript'
+Plug 'mmalecki/vim-node.js' " kind of rails.vim for node - gf,gF,etc
 "Plug 'jelera/vim-javascript-syntax'
 "Plug 'othree/yajs.vim' " yet another javascript syntax
 "Plug 'othree/javascript-libraries-syntax.vim'
 "Plug 'vim-scripts/JavaScript-Indent'
 "Plug 'kchmck/vim-coffee-script'
-"Plug 'mmalecki/vim-node.js' " kind of rails.vim for node
 "Plug 'mxw/vim-jsx'
 
 " typescript
@@ -401,8 +401,11 @@ augroup filetypedetect
   autocmd! BufNewFile,BufRead *.zsh-theme setfiletype zsh
   " javascript
   autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+  autocmd BufRead,BufNewFile *.mjs setfiletype javascript
+  autocmd! FileType javascript setlocal keywordprg='mdn'
   " ruby
   autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
+  autocmd! FileType ruby set keywordprg='ri -T'
   " ruby autocomplete
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
