@@ -61,9 +61,9 @@ Plug 'tpope/vim-rails'
 " Javascript
 Plug 'pangloss/vim-javascript'
 Plug 'mmalecki/vim-node.js' " kind of rails.vim for node - gf,gF,etc
+Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, react, etc
 "Plug 'jelera/vim-javascript-syntax'
 "Plug 'othree/yajs.vim' " yet another javascript syntax
-"Plug 'othree/javascript-libraries-syntax.vim'
 "Plug 'vim-scripts/JavaScript-Indent'
 "Plug 'kchmck/vim-coffee-script'
 "Plug 'mxw/vim-jsx'
