@@ -147,6 +147,7 @@ call plug#end()
 " }}}
 
 " Basics {
+set nocompatible
 filetype plugin indent on " Automatically detect file types.
 let mapleader = ","
 
@@ -163,9 +164,11 @@ set noautochdir " do not automatically change directory
 " }
 
 " General {
-syntax on " syntax highlighting
+set hidden         " allow unsaved background buffers and remember marks/undo for them
+set cursorline     " highlight current line
+set showtabline=2  " always show tab bar
+syntax on          " syntax highlighting
 set mouse=a
-
 set signcolumn=yes " Otherwise realtime linter gets annoying
 " not every vim is compiled with this, use the following line instead
 "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
@@ -173,18 +176,32 @@ scriptencoding utf-8
 set encoding=utf-8
 set autowrite
 set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set wildmenu " make tab completion for files,buffers act like bash
+set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
+" If a file is changed outside of vim, automatically reload it without asking
+set autoread
+
 set foldmethod=syntax
 set foldlevelstart=99
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
+
+" Prevent Vim from clobbering the scrollback buffer. See
+" http://www.shallowsky.com/linux/noaltscreen.html
+set t_ti= t_te=
+
 
 " Speed
 set lazyredraw     " fix horrible slowdown issues when moving cursor with syntax on
 set ttyfast        " assume fast connection (smoother redraw)
 set synmaxcol=1024 " Syntax coloring lines that are too long just slows down the world
 set nolist         " Hide invisibles
-" Use the old regex engine
+" Use the old vim regex engine (version 1, as opposed to version 2, which was
+" introduced in Vim 7.3.969). The Ruby syntax highlighting is significantly
+" slower with the new regex engine.
 " http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
+"
 " set re=1 " TODO: remove this?
 
 " Disable Ex mode
@@ -378,6 +395,8 @@ augroup filetypedetect
   autocmd! BufNewFile,BufRead *.md setfiletype markdown
   autocmd! BufNewFile,BufRead *.mkd setfiletype markdown
   autocmd! BufNewFile,BufRead *.markdown setfiletype markdown
+  " Don't syntax highlight markdown because it's often wrong
+  autocmd! FileType markdown setlocal syn=off
   " shell
   autocmd! BufNewFile,BufRead *.zsh-theme setfiletype zsh
   " javascript
