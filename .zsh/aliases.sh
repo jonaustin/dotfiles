@@ -23,6 +23,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -f' # don't ask
 alias rmrf='rm -rf'
+alias tree='tree -I "node_modules"' # add more with ignorethis|andthis
 
 #ls
 #alias l='ls -CF'
