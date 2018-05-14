@@ -70,7 +70,7 @@ export PAGER='less'
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R' # --LINE-NUMBERS --quit-if-one-screen' # -R for less coloring with source-highlight (external app)
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 #export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
-export TERM=screen-256color # unfortunately required so tmux doesn't color bleed - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=618809
+export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
 export SAVEHIST=100000
 export HISTSIZE=10000

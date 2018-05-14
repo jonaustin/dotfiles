@@ -181,6 +181,7 @@ set wildmenu " make tab completion for files,buffers act like bash
 set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
+set termguicolors " true colors (colorscheme must have gui colors)
 
 set foldmethod=syntax
 set foldlevelstart=99
@@ -434,8 +435,11 @@ autocmd BufReadPost *
 " force transparency
 " must be last for some reason
 hi Normal ctermbg=none
+hi Normal guibg=none
 hi NonText ctermbg=none
+hi NonText guibg=none
 hi LineNr ctermbg=none
+hi LineNr guibg=none
 hi clear CursorLineNr
 
 " Tips I always forget
