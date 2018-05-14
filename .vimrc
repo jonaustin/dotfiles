@@ -46,17 +46,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
 "Plug 'ecomba/vim-ruby-refactoring'
-"Plug 'slim-template/vim-slim'
-"Plug 'depuracao/vim-rdoc'
-"Plug 'hwartig/vim-seeing-is-believing' " e.g `#> 'foo'` or t9md/vim-ruby-xmpfilter (deprecated for Codi, but might still be useful)
-"Plug 'tpope/vim-rvm' " switch ruby versions within vim
-
-" Ruby testing
-"Plug 'sunaku/vim-ruby-minitest'
-"Plug 'jgdavey/tslime.vim' " needed for vim-rspec
-"Plug 'thoughtbot/vim-rspec'
-"Plug 'skwp/vim-rspec'
-"Plug 'skalnik/vim-vroom' " ruby tests
 
 " Javascript
 Plug 'pangloss/vim-javascript'
@@ -72,16 +61,17 @@ Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, 
 Plug 'leafgarland/typescript-vim' " syntax
 Plug 'Quramy/vim-js-pretty-template' " template strings coloring
 Plug 'jason0x43/vim-js-indent'
-"Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
 Plug 'Quramy/tsuquyomi' " tsserver (or nvim-typescript)
+"Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
 
 " Navigation
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
 Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 Plug 'mileszs/ack.vim'                " :Ack <search>
+Plug 'Wraul/vim-easytags', { 'branch': 'fix-universal-detection' } " ctags that just work (mostly; use universal ctags fix branch)
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
 "Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
 "Plug 't9md/vim-choosewin'             " -
@@ -153,7 +143,7 @@ let mapleader = ","
 
 if has('unix')
   if has('mac') " osx
-    set clipboard=unnamed " * register -- SYSTEM (middle-click) clipboard (with --version +xterm_clipboard)
+    set clipboard=unnamed " Copy to the OS clipboard
   else " linux, bsd, etc
     set clipboard=unnamedplus " >=7.3.74 only -- + register -- X11 (ctrl-c/v) clipboard
   endif
@@ -183,6 +173,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
 set autoread
 set termguicolors " true colors (colorscheme must have gui colors)
 
+" If folding is too slow, possibly add https://github.com/Konfekt/FastFold
 set foldmethod=syntax
 set foldlevelstart=99
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -194,7 +185,7 @@ set t_ti= t_te=
 
 
 " Speed
-set lazyredraw     " fix horrible slowdown issues when moving cursor with syntax on
+set lazyredraw     " fix slowdown issues when moving cursor with syntax on
 set ttyfast        " assume fast connection (smoother redraw)
 set synmaxcol=1024 " Syntax coloring lines that are too long just slows down the world
 set nolist         " Hide invisibles
@@ -309,6 +300,17 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 """ PLUGINS """
 
+" EasyTag
+let g:easytags_async=1 " compile ctags asynchronously
+let g:easytags_languages = {
+\   'javascript': {
+\     'cmd': 'jsctags',
+\	    'args': [],
+\	    'fileoutput_opt': '-f',
+\	    'stdout_opt': '-f-',
+\	    'recurse_flag': '-R'
+\   }
+\}
 
 " Airline/Powerline
 let g:airline_powerline_fonts = 1
@@ -453,3 +455,4 @@ hi clear CursorLineNr
 " g; / g, - jump through changelist (:help changelist)
 " change all buffers to tabs - :tab sball
 " gf in new tab: <c-w>gF - open in a new tab (Ctrl-w gF)
+" verbose <cmd/func> - debug info

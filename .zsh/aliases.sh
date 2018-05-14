@@ -155,6 +155,10 @@ vimgd() { vim -p `git status --short | awk '{print $2}'`; }
 vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
 gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@' } # git branches sorted by date desc
 
+# javascript
+alias jstagsnm='find . -type f -iregex ".*\.js$" -exec jsctags {} -f \; | sed "/^$/d" | sort > tags'
+alias jstags='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed "/^$/d" | sort > tags'
+
 ## ruby
 alias cdstdlib="cd $MY_RUBY_HOME/lib/ruby/1.9.1"
 alias be='bundle exec'
@@ -175,11 +179,6 @@ rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
 alias yardserver="yard server -g -r -d -p8809"
 rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
 alias jekyllr='jekyll --pygments --safe --rdiscount'
-function install_global_gems() {
-  for n in `cat ~/configs/global.gems`
-    do rvm @global do gem install $n
-  done
-}
 
 # list largest files
 alias bigfiles='find . -type f -ls | sort -nrk7 | head -10'
