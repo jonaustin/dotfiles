@@ -109,17 +109,19 @@ Plug 'szw/vim-maximizer' " temporarily maximize a window (or put this in vimrc: 
 
 " Colors
 Plug 'w0ng/vim-hybrid'
+Plug 'justinmk/molokai' " true color fork
+Plug 'nanotech/jellybeans.vim' " true colors
+Plug 'lifepillar/vim-solarized8' " true color fork
+Plug 'chriskempson/base16-vim'
+Plug 'romainl/flattened' " solarized 'without the bullshit'
 "Plug 'sk1418/last256' " based on hybrid
 "Plug 'Lokaltog/vim-distinguished'
 ""Plug 'jonaustin/vim-colors'
 "Plug 'guns/jellyx.vim'
-"Plug 'chriskempson/base16'
 "Plug 'tomasr/molokai'
-"Plug 'nanotech/jellybeans.vim'
 "Plug 'vim-scripts/xoria256.vim'
 "Plug 'ciaranm/inkpot'
 "Plug 'jnurmine/Zenburn'
-"Plug 'altercation/vim-colors-solarized'
 "Plug 'sjl/badwolf' " clojure
 "Plug 'morhetz/gruvbox'
 
@@ -155,7 +157,6 @@ set noautochdir " do not automatically change directory
 
 " General {
 set hidden         " allow unsaved background buffers and remember marks/undo for them
-set cursorline     " highlight current line
 set showtabline=2  " always show tab bar
 syntax on          " syntax highlighting
 set mouse=a
@@ -172,6 +173,10 @@ set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
 set termguicolors " true colors (colorscheme must have gui colors)
+
+" cursorline only visible in the current window and not in insert mode
+autocmd InsertLeave,WinEnter * set cursorline
+autocmd InsertEnter,WinLeave * set nocursorline
 
 " If folding is too slow, possibly add https://github.com/Konfekt/FastFold
 set foldmethod=syntax
