@@ -22,10 +22,9 @@ call plug#begin('~/.vim/bundle')
 if !has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc' " compatibility layer for vim8
 endif
-Plug 'roxma/nvim-completion-manager'
+Plug 'Valloric/YouCompleteMe'
 
-"Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' }
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
