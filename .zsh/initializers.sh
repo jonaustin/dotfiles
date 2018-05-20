@@ -51,7 +51,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 # pyenv
 export PYTHON_CONFIGURE_OPTS="--enable-shared" # for youcompleteme
 eval "$(pyenv init -)"
-export PYENV_VERSION=3.6.1 #2.7.13
+#export PYENV_VERSION=3.6.1 #2.7.13 # use pyenv global
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/shims:$PATH"
 if [ $SYSTEM_TYPE = "Darwin" ]; then
