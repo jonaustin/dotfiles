@@ -57,8 +57,8 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec terminator
+bindsym $mod+Shift+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -127,7 +127,7 @@ bindsym $mod+w layout tabbed; exec notify-send 'tabbed layout'
 bindsym $mod+e layout toggle split; exec notify-send 'split layout toggle'
 
 # toggle tiling / floating
-bindsym $mod+Shift+enter floating toggle
+bindsym $mod+Ctrl+Return floating toggle
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -153,16 +153,16 @@ bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
 # workspaces with icons
-set $w1  "1 ✪"
-set $w2  " 2 "
-set $w3  " 3 "
-set $w4  "4 "
-set $w5  " 5 "
-set $w6  " 6 "
-set $w7  " 7 "
-set $w8  " 8 "
-set $w9  "9 "
-set $w10  "10 "
+set $w1  "1"
+set $w2  "2"
+set $w3  "3"
+set $w4  "4"
+set $w5  "5"
+set $w6  "6"
+set $w7  "7"
+set $w8  "8"
+set $w9  "9"
+set $w10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -209,7 +209,7 @@ assign [class="Spotify"] $w7 # doesn't work
 # assign [class="Skype"] $ws5
 
 # Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 1
+#for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
@@ -225,7 +225,7 @@ for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [class="Pamac-manager"] floating enable
-for_window [class="Pavucontrol"] floating enable
+#for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
@@ -426,6 +426,7 @@ exec --no-startup-id xinput --set-prop 'Logitech Rechargeable Touchpad T650' 'li
 exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput Tapping Enabled' 1 # note: literal curly quote because...apple..
 exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput Accel Speed' 1.0
 exec --no-startup-id xinput set-button-map "Logitech Trackball" 1 3 3
+exec --no-startup-id start-pulseaudio-x11 # change to pulseaudio --start?
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
