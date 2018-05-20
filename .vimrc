@@ -16,15 +16,12 @@ endif
 
 call plug#begin('~/.vim/bundle')
 
-"" nvim-completion-manager
-" Requires vim8 with has('python') or has('python3')
-" Requires the installation of msgpack-python. (pip install msgpack-python)
 if !has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc' " compatibility layer for vim8
 endif
 Plug 'Valloric/YouCompleteMe'
 
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern`
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
@@ -48,7 +45,7 @@ Plug 'tpope/vim-rails'
 
 " Javascript
 Plug 'pangloss/vim-javascript'
-Plug 'mmalecki/vim-node.js' " kind of rails.vim for node - gf,gF,etc
+Plug 'mmalecki/vim-node.js'                   " kind of rails.vim for node - gf,gF,etc
 Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, react, etc
 "Plug 'jelera/vim-javascript-syntax'
 "Plug 'othree/yajs.vim' " yet another javascript syntax
@@ -57,10 +54,10 @@ Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, 
 "Plug 'mxw/vim-jsx'
 
 " typescript
-Plug 'leafgarland/typescript-vim' " syntax
+Plug 'leafgarland/typescript-vim'    " syntax
 Plug 'Quramy/vim-js-pretty-template' " template strings coloring
 Plug 'jason0x43/vim-js-indent'
-Plug 'Quramy/tsuquyomi' " tsserver (or nvim-typescript)
+Plug 'Quramy/tsuquyomi'              " tsserver (or nvim-typescript)
 "Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
 
 " Navigation
@@ -76,21 +73,21 @@ Plug 'Wraul/vim-easytags', { 'branch': 'fix-universal-detection' } " ctags that 
 "Plug 't9md/vim-choosewin'             " -
 
 " Integrations
-Plug 'skywind3000/asyncrun.vim' " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
+Plug 'skywind3000/asyncrun.vim'       " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
 Plug 'janko-m/vim-test'
-Plug 'metakirby5/codi.vim' " amazing repl
-Plug 'rizzatti/dash.vim' " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
+Plug 'metakirby5/codi.vim'            " amazing repl
+Plug 'rizzatti/dash.vim'              " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb' " Gbrowse for fugitive
-Plug 'airblade/vim-gitgutter' " Show status in vim gutter
-"Plug 'tpope/vim-git'
-"Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
-"Plug 'mattn/gist-vim' "github gists
-"Plug 'tmux-plugins/vim-tmux'
+Plug 'tpope/vim-rhubarb'              " Gbrowse for fugitive
+Plug 'airblade/vim-gitgutter'         " Show status in vim gutter
+" Plug 'tpope/vim-git'
+" Plug 'tpope/vim-eunuch' " :Mkdir, :SudoWrite, :Chmod, etc
+" Plug 'mattn/gist-vim' "github gists
+" Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator' " or use https://gist.github.com/mislav/5189704#gistcomment-1735600
-"Plug 'tbabej/taskwiki'
-"Plug 'vimwiki/vimwiki', { 'branch': 'dev' } " required by taskwiki (taskwarrior)
+" Plug 'tbabej/taskwiki'
+" Plug 'vimwiki/vimwiki', { 'branch': 'dev' } " required by taskwiki (taskwarrior)
 Plug 'mboughaba/i3config.vim'
 
 " Commands
@@ -108,11 +105,13 @@ Plug 'szw/vim-maximizer' " temporarily maximize a window (or put this in vimrc: 
 
 " Colors
 Plug 'w0ng/vim-hybrid'
-Plug 'justinmk/molokai' " true color fork
-Plug 'nanotech/jellybeans.vim' " true colors
+Plug 'justinmk/molokai'          " true color fork
+Plug 'nanotech/jellybeans.vim'   " true colors
 Plug 'lifepillar/vim-solarized8' " true color fork
+Plug 'hzchirs/vim-material'      " true colors
+Plug 'romainl/flattened'         " solarized 'without the bullshit'
+Plug 'dikiaap/minimalist'        " dark material theme
 Plug 'chriskempson/base16-vim'
-Plug 'romainl/flattened' " solarized 'without the bullshit'
 "Plug 'sk1418/last256' " based on hybrid
 "Plug 'Lokaltog/vim-distinguished'
 ""Plug 'jonaustin/vim-colors'
@@ -218,7 +217,7 @@ silent execute '!mkdir -p $HOME/.vimundo'
 
 " Vim UI {
 set background=dark                 " Assume a dark background
-colo hybrid
+colo vim-material
 set incsearch      " find as you type search
 set hlsearch       " highlight search terms
 set winminheight=0 " windows can be 0 line high
@@ -318,7 +317,7 @@ let g:easytags_languages = {
 
 " Airline/Powerline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16'
+let g:airline_theme='minimalist'
 let g:airline#extensions#tabline#enabled = 1
 
 " vim-test
@@ -412,7 +411,6 @@ augroup filetypedetect
   autocmd! FileType javascript setlocal keywordprg='mdn'
   " ruby
   autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
-  autocmd! FileType ruby set keywordprg='ri -T'
   " ruby autocomplete
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -440,13 +438,12 @@ autocmd BufReadPost *
 
 " force transparency
 " must be last for some reason
-hi Normal ctermbg=none
-hi Normal guibg=none
-hi NonText ctermbg=none
-hi NonText guibg=none
-hi LineNr ctermbg=none
-hi LineNr guibg=none
+hi Normal ctermbg=none guibg=none
+hi NonText ctermbg=none guibg=none
+hi LineNr ctermbg=none guibg=none
 hi clear CursorLineNr
+" always use dark grey colorscheme for status line
+autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
@@ -460,3 +457,4 @@ hi clear CursorLineNr
 " change all buffers to tabs - :tab sball
 " gf in new tab: <c-w>gF - open in a new tab (Ctrl-w gF)
 " verbose <cmd/func> - debug info
+" vim --startuptime /tmp/startup.log +q && vim /tmp/startup.log
