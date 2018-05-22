@@ -1,5 +1,13 @@
 [colors]
-background = #222
+;background = #22222222
+; transparent bg 8-bit hex with alpha channel:
+; lighter
+;background = #99222222
+background = #66000000
+;background = #6b6b6b6b
+;background = #BB222222
+; darker
+;background = #ED222222
 foreground = #eee
 linecolor = #fba922
 bordercolor = #333
@@ -51,7 +59,7 @@ overline-size = 2
 ;border-size = 5
 ;border-color = 0
 ;border-bottom-size = 0
-border-bottom-size = 2
+border-bottom-size = 0
 border-bottom-color = ${colors.bordercolor}
 
 padding-left = 0
@@ -59,9 +67,9 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = dina:pixelsize=9;1
-font-1 = siji:pixelsize=10;1
-font-2 = unifont:size=6;1
+font-0 = dina:pixelsize=10;1
+font-1 = siji:pixelsize=11;1
+font-2 = unifont:size=7;1
 
 modules-left = i3
 ;modules-center = mpd
@@ -71,7 +79,8 @@ modules-right = filesystem xbacklight volume wifi battery memory cpu date
 tray-position = right
 tray-padding = 4
 tray-maxsize = 16
-;tray-transparent = true
+tray-transparent = true
+;tray-background = ${root.background}
 ;tray-detached = true
 ;tray-offset-x = 50
 
