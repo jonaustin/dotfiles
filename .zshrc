@@ -40,8 +40,9 @@ unsetopt correctall
 setopt interactivecomments
 # have command completion ignore case - e.g. `git co foo` will complete to `git co FOO`
 # Fair warning; may have side effects: https://unix.stackexchange.com/questions/197700/zsh-case-insensitive-mid-word-completion
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
-  '+l:|?=** r:|?=**'
+# FIXME: if a completion fails it takes the 1st character of the path you tried to complete and doubles it.
+#zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+#  '+l:|?=** r:|?=**'
 
 ## source files
 source ~/.zsh/functions.sh
@@ -134,7 +135,3 @@ export PATH=$PATH:./node_modules/.bin
 # go
 export GOPATH=$HOME/code/_sandbox/_go
 export PATH=$HOME/code/_sandbox/_go/bin:$PATH
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh

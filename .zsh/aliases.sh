@@ -24,6 +24,7 @@ alias mv='mv -i'
 alias rm='rm -f' # don't ask
 alias rmrf='rm -rf'
 alias tree='tree -I "node_modules"' # add more with ignorethis|andthis
+alias ip='ip -br -c a' # ip -brief -color address
 
 #ls
 #alias l='ls -CF'
@@ -57,8 +58,10 @@ alias zc='source $HOME/.zshrc'
 alias vzc='$EDITOR $HOME/.zshrc'
 alias vzcl='$EDITOR $HOME/.zsh/zshrc_local'
 alias vlx='$EDITOR $HOME/.zsh/zshrc.local.linux'
-alias vrc='$EDITOR ~/.bashrc'
-alias vlrc='$EDITOR ~/.bashrc_local'
+alias vrc='$EDITOR $HOME/.bashrc'
+alias vlrc='$EDITOR $HOME/.bashrc_local'
+alias vac='$EDITOR $HOME/.zsh/aliases.sh'
+alias vfc='$EDITOR $HOME/.zsh/functions.sh'
 
 ## sys
 alias u='uptime'
@@ -261,9 +264,11 @@ alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
 # Python
 alias py3='PYENV_VERSION=3.6.1 '
 alias pip3='PYENV_VERSION=3.6.1 pip3'
+alias pip-upgrade-all=' pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U' # no, really: https://github.com/pypa/pip/issues/59
 
 ### Apps
 alias mpsyt="PYENV_VERSION=3.6.1 mpsyt" # youtube cli player
+alias mimeo='/usr/bin/python -m Mimeo ' # FIXME: messed up pyenv
 
 ### Database
 alias mys='mycli -uroot '

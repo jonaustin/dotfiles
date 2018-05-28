@@ -1,8 +1,8 @@
-alias y='packer -S '
+alias y='sudo aura -S '
 alias r='sudo pacman -R '
-alias agu='packer -Syyu'
-alias s='packer -Ss '
-alias pf='pacman -Fo ' # $file-name -- find out which package owns a file
+alias agu='aurman --no-confirm --needed -Su'
+alias s='sudo aura -Ss '
+alias pf='aura -Fo ' # $file-name -- find out which package owns a file
 
 alias open=xdg-open
 

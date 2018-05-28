@@ -289,3 +289,7 @@ rsynconly() {
   rsync -amP --include="*/" --include="*.$1" --exclude="*" $2 $3
 }
 
+## watch files
+watch-reload() {
+  find . -iname $1 | entr $2
+}
