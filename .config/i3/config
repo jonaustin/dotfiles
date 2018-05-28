@@ -320,7 +320,7 @@ set $green     #859900
 #          # j4-make-config / gruvbox
 #          background #504945
 #          statusline #d5c4a1
-#          separator #3c3836 
+#          separator #3c3836
 #          focused_workspace #3c3836 #32302f #fabd2f
 #          active_workspace #3c3836 #504945 #d5c4a1
 #          inactive_workspace #3c3836 #504945 #d5c4a1
@@ -341,7 +341,8 @@ set $green     #859900
 bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
 bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
 bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
-bindsym $mod+Shift+w exec "feh --recursive --randomize --bg-max ~/img/4k*"
+bindsym $mod+Shift+w exec "~/bin/fehbg"
+
 
 # find windows (i3-wm-scripts)
 bindsym $mod+s exec python ~/bin/i3-wm-scripts/nextmatch.py spotify
@@ -368,7 +369,7 @@ bindsym Pause exec $HOME/bin/volume -u
 bindsym $mod+space exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 bindsym $mod+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym $mod+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
-# save a spotify trackid to file: 
+# save a spotify trackid to file:
 #bindsym $mod+Shift+s exec "dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | awk -f $HOME/bin/spotify_trackid.awk >> ~/spotify_tracks.txt"
 
 # firetv
@@ -394,6 +395,11 @@ bindsym $mod+Down exec "$HOME/bin/yamaha -d"
 bindsym $mod+Shift+Down exec "$HOME/bin/yamaha -m"
 bindsym $mod+Up exec "$HOME/bin/yamaha -u"
 bindsym $mod+Shift+Up exec "$HOME/bin/yamaha -U"
+
+# keyboards
+bindsym $mod+mod1+m exec "xmodmap $HOME/.xmodmap"
+bindsym $mod+mod1+Shift+m exec "xmodmap $HOME/configs/linux/xmodmap_kinesis"
+
 
 # lights
 # movie room lights
