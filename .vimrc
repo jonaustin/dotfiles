@@ -104,6 +104,7 @@ Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
+Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8 
 Plug 'w0ng/vim-hybrid'
 Plug 'justinmk/molokai'          " true color fork
 Plug 'nanotech/jellybeans.vim'   " true colors
@@ -166,7 +167,13 @@ set encoding=utf-8
 set autowrite
 set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
+
+" When you type the first tab, it will complete as much as possible, the second
+" tab hit will provide a list, the third and subsequent tabs will cycle through
+" completion options so you can complete the file without further keys
+set wildmode=longest,list,full
 set wildmenu " make tab completion for files,buffers act like bash
+
 set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
@@ -177,7 +184,7 @@ autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
 
 " If folding is too slow, possibly add https://github.com/Konfekt/FastFold
-set foldmethod=syntax
+set foldmethod=manual
 set foldlevelstart=99
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
@@ -322,7 +329,8 @@ let g:airline#extensions#tabline#enabled = 1
 
 " vim-test
 let g:test#javascript#jasmine#file_pattern = '\v.*/.*spec\.(js|jsx|coffee)$'
-let g:test#ruby#rspec#executable = 'zeus rspec'
+let g:test#ruby#rspec#executable = 'bundle exec rspec'
+"let g:test#ruby#rspec#executable = 'zeus rspec'
 let test#strategy = 'neovim' "'neoterm'
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
@@ -335,15 +343,16 @@ nmap <silent> <leader>g :TestVisit<CR>
 let g:ale_fixers = {}
 let g:ale_linters = {}
 
-if has('mac') " e.g. 'work'
-  let g:ale_fixers['javascript'] = ['prettier']
+"if has('mac') " e.g. 'work'
+  let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+  let g:ale_fixers['typescript'] = ['prettier', 'tslint']
   let g:ale_fix_on_save = 0
-else
-  let g:ale_linters['javascript'] = ['prettier_standard'] " npm i -g prettier-standard
-  let g:ale_linters['javascript'] = ['']
-  "let g:ale_fixers['javascript'] = ['prettier']
-  let g:ale_fix_on_save = 0 " probably enable this if using prettier-standard
-endif
+"else
+"  let g:ale_linters['javascript'] = ['prettier_standard'] " npm i -g prettier-standard
+"  let g:ale_linters['javascript'] = ['']
+"  "let g:ale_fixers['javascript'] = ['prettier']
+"  let g:ale_fix_on_save = 0 " probably enable this if using prettier-standard
+"endif
 
 let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config if available
 
@@ -437,7 +446,6 @@ autocmd BufReadPost *
       \ endif
 
 " force transparency
-" must be last for some reason
 hi Normal ctermbg=none guibg=none
 hi NonText ctermbg=none guibg=none
 hi LineNr ctermbg=none guibg=none
