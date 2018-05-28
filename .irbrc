@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-require 'rubygems' unless defined? Gem # rubygems is only needed in 1.8
+require 'looksee' # irb> [].ls
 
 def unbundled_require(gem)
   loaded = false

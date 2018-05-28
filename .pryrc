@@ -103,3 +103,5 @@ AwesomePrint.pry!
 
 pryrc_local = "#{ENV['HOME']}/.pryrc.local"
 load pryrc_local if File.exist?(pryrc_local)
+
+require 'looksee' # irb> [].ls
