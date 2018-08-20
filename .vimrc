@@ -36,6 +36,11 @@ Plug 'Shougo/vimproc.vim', {
       \    },
       \ }
 
+" General syntax
+Plug 'rodjek/vim-puppet'
+Plug 'pearofducks/ansible-vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
+
 " Ruby
 Plug 'tpope/vim-haml'
 Plug 'vim-ruby/vim-ruby'
@@ -68,14 +73,18 @@ Plug 'mileszs/ack.vim'                " :Ack <search>
 Plug 'Wraul/vim-easytags', { 'branch': 'fix-universal-detection' } " ctags that just work (mostly; use universal ctags fix branch)
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
-"Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
+Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
 "Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
 "Plug 't9md/vim-choosewin'             " -
+
+" REPL
+"Plug 'kassio/neoterm'                 " :T <cmd> - open new or use existing terminal; :TREPLSend; :TREPLSendFile (to e.g. pry, node)
+Plug 'metakirby5/codi.vim'            " amazing repl
+Plug 'jalvesaq/vimcmdline'            " Send code to repl <leader>i, then Space
 
 " Integrations
 Plug 'skywind3000/asyncrun.vim'       " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
 Plug 'janko-m/vim-test'
-Plug 'metakirby5/codi.vim'            " amazing repl
 Plug 'rizzatti/dash.vim'              " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -101,7 +110,7 @@ Plug 'myusuf3/numbers.vim'
 Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 Plug 'xolox/vim-misc' " required by vim-session
-Plug 'szw/vim-maximizer' " temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
+Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
 Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8 
@@ -140,7 +149,8 @@ call plug#end()
 " Basics {
 set nocompatible
 filetype plugin indent on " Automatically detect file types.
-let mapleader = ","
+let mapleader = ','
+let maplocalleader = ','
 
 if has('unix')
   if has('mac') " osx
@@ -173,6 +183,8 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 " completion options so you can complete the file without further keys
 set wildmode=longest,list,full
 set wildmenu " make tab completion for files,buffers act like bash
+
+set wildignorecase " case insensitive :filename completion
 
 set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
 " If a file is changed outside of vim, automatically reload it without asking
@@ -231,6 +243,8 @@ set winminheight=0 " windows can be 0 line high
 set ignorecase     " case insensitive search
 set smartcase      " become temporarily case sensitive when any uppercase letters present in search string
 set undofile       " undo even after closing and re-opening a file!
+set switchbuf=usetab " If included, jump to the first open window or tab that contains the specified buffer (if there is one).  Otherwise: Do not examine other windows or tabs.
+
 
 " Formatting {
 set wrap         " wrap long lines
@@ -388,6 +402,25 @@ nnoremap <silent><F5> :MaximizerToggle<CR>
 vnoremap <silent><F5> :MaximizerToggle<CR>
 inoremap <silent><F5> <C-o>:MaximizerToggle<CR>
 
+" vimcmdline mappings
+let cmdline_map_start          = '<leader>i'
+let cmdline_map_send           = '<Space>'
+let cmdline_map_send_and_stay  = '<leader><Space>'
+"let cmdline_map_source_fun     = '<LocalLeader>f'
+"let cmdline_map_send_paragraph = '<LocalLeader>p'
+"let cmdline_map_send_block     = '<LocalLeader>b'
+"let cmdline_map_quit           = '<LocalLeader>q'
+
+" vimcmdline options
+let cmdline_vsplit      = 1      " Split the window vertically
+let cmdline_esc_term    = 1      " Remap <Esc> to :stopinsert in Neovim's terminal
+let cmdline_in_buffer   = 1      " Start the interpreter in a Neovim's terminal
+let cmdline_term_height = 15     " Initial height of interpreter window or pane
+let cmdline_term_width  = 80     " Initial width of interpreter window or pane
+let cmdline_tmp_dir     = '/tmp' " Temporary directory to save files
+let cmdline_outhl       = 1      " Syntax highlight the output
+let cmdline_auto_scroll = 1      " Keep the cursor at the end of terminal (nvim)
+
 """ END PLUGINS """
 
 
@@ -435,6 +468,8 @@ augroup filetypedetect
   au BufRead,BufNewFile *.ino set filetype=arduino
   " puppet
   au BufRead,BufNewFile *.pp set filetype=puppet
+  " eyaml
+  au BufRead,BufNewFile *.eyaml set filetype=yaml
 augroup END
 " }
 
@@ -449,9 +484,14 @@ autocmd BufReadPost *
 hi Normal ctermbg=none guibg=none
 hi NonText ctermbg=none guibg=none
 hi LineNr ctermbg=none guibg=none
+hi CursorLine ctermbg=none guibg=none
 hi clear CursorLineNr
 " always use dark grey colorscheme for status line
 autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
+
+" Hacks
+au InsertLeave * set nopaste " temp hack for neovim: https://github.com/neovim/neovim/issues/7994
+
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
