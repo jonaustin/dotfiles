@@ -19,12 +19,19 @@ call plug#begin('~/.vim/bundle')
 if !has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc' " compatibility layer for vim8
 endif
-Plug 'Valloric/YouCompleteMe'
 
+" Completions
+" https://stackoverflow.com/a/22253548/617320
+Plug 'Valloric/YouCompleteMe'
+Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>
+Plug 'honza/vim-snippets'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern`
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
+
+
 
 " Asynchronous execution library
 Plug 'Shougo/vimproc.vim', {
@@ -107,7 +114,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
 Plug 'myusuf3/numbers.vim'
-Plug 'w0rp/ale' " asynchronous linter
+Plug 'w0rp/ale' " asynchronous linter FIXME: is this causing stalls?
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
@@ -187,8 +194,7 @@ set wildmenu " make tab completion for files,buffers act like bash
 set wildignorecase " case insensitive :filename completion
 
 set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
-" If a file is changed outside of vim, automatically reload it without asking
-set autoread
+set autoread " If a file is changed outside of vim, automatically reload it without asking
 set termguicolors " true colors (colorscheme must have gui colors)
 
 " cursorline only visible in the current window and not in insert mode
@@ -201,10 +207,20 @@ set foldlevelstart=99
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
-" Prevent Vim from clobbering the scrollback buffer. See
-" http://www.shallowsky.com/linux/noaltscreen.html
+" Prevent Vim from clobbering the scrollback buffer (i.e. don't clear the
+" screen on exit). See http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
 
+" modelines
+set modeline
+set modelines=5
+
+" Insert only one space when joining lines that contain sentence-terminating
+" punctuation like `.`.
+set nojoinspaces
+
+" I don't care what the difference is between c-c and esc in insert mode
+imap <c-c> <esc>
 
 " Speed
 set lazyredraw     " fix slowdown issues when moving cursor with syntax on
@@ -313,7 +329,7 @@ map <leader>wq  :wq<cr>
 
 " quickfix
 map <leader>qf :cope<cr> " open
-map <leader>cf :ccl<cr> " close
+map <leader>cf :cclose<cr> " close
 
 " remove search highlights
 map <silent><leader>. :nohl<cr>
@@ -421,6 +437,19 @@ let cmdline_tmp_dir     = '/tmp' " Temporary directory to save files
 let cmdline_outhl       = 1      " Syntax highlight the output
 let cmdline_auto_scroll = 1      " Keep the cursor at the end of terminal (nvim)
 
+" Ultisnips
+"let g:UltiSnipsExpandTrigger="<c-w>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-x>"
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 """ END PLUGINS """
 
 
@@ -470,6 +499,8 @@ augroup filetypedetect
   au BufRead,BufNewFile *.pp set filetype=puppet
   " eyaml
   au BufRead,BufNewFile *.eyaml set filetype=yaml
+  " Expand tabs in Go. seriously gofmt, tabs?
+  autocmd! FileType go set sw=4 sts=4 expandtab | retab
 augroup END
 " }
 
@@ -492,6 +523,39 @@ autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=dar
 " Hacks
 au InsertLeave * set nopaste " temp hack for neovim: https://github.com/neovim/neovim/issues/7994
 
+" Functions
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OpenChangedFiles COMMAND
+" Open a split for each dirty file in git
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RemoveFancyCharacters COMMAND
+" Remove smart quotes, etc.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RemoveFancyCharacters()
+    let typo = {}
+    let typo["“"] = '"'
+    let typo["”"] = '"'
+    let typo["‘"] = "'"
+    let typo["’"] = "'"
+    let typo["–"] = '--'
+    let typo["—"] = '---'
+    let typo["…"] = '...'
+    :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
+endfunction
+command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
