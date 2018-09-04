@@ -8,6 +8,9 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# mod1: alt
+# mod4: super
 
 set $mod Mod4
 
@@ -58,7 +61,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Shift+Return exec i3-sensible-terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec termite
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -76,14 +79,10 @@ bindsym Ctrl+space exec rofi -show run -display-run '❯ ' #dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-#bindsym $mod+j focus left
-#bindsym $mod+k focus down
-#bindsym $mod+l focus up
-#bindsym $mod+semicolon focus right
-bindsym $mod+h focus left; exec notify-send 'left'
-bindsym $mod+j focus down; exec notify-send 'down'
-bindsym $mod+k focus up; exec notify-send 'up'
-bindsym $mod+l focus right; exec notify-send 'right'
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 #bindsym $mod+Left focus left
@@ -342,7 +341,7 @@ bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
 bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
 bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
 bindsym $mod+Shift+w exec "~/bin/fehbg"
-
+bindsym $mod+Mod1+w exec "echo `tail -n 1 ~/.fehbg` >> ~/img/best.txt"
 
 # find windows (i3-wm-scripts)
 bindsym $mod+s exec python ~/bin/i3-wm-scripts/nextmatch.py spotify
@@ -397,9 +396,8 @@ bindsym $mod+Up exec "$HOME/bin/yamaha -u"
 bindsym $mod+Shift+Up exec "$HOME/bin/yamaha -U"
 
 # keyboards
-bindsym $mod+mod1+m exec "xmodmap $HOME/.xmodmap"
-bindsym $mod+mod1+Shift+m exec "xmodmap $HOME/configs/linux/xmodmap_kinesis"
-
+bindsym $mod+mod1+m exec "xmodmap $HOME/.xmodmap; exec notify-send 'laptop'"
+bindsym $mod+mod1+Shift+m exec "xmodmap $HOME/configs/linux/xmodmap_kinesis; exec notify-send 'kinesis'"
 
 # lights
 # movie room lights
@@ -409,6 +407,12 @@ bindsym $mod+Shift+o exec "lampe -s 10 n; lampe -s 9 n"
 # fun
 bindsym $mod+mod1+s exec "RUN_PRESET=true $HOME/bin/animated_bg.sh"
 bindsym $mod+mod1+Shift+s exec "kill `cat $HOME/.cache/mpvbg.pid`"
+
+# misc
+bindsym $mod+Ctrl+s exec scrot
+bindsym $mod+Ctrl+i exec i3lock
+bindsym $mod+Mod1+l exec "xinput --set-prop 'Logitech Rechargeable Touchpad T650' 'libinput Tapping Enabled' 1"
+
 
 # inits
 exec --no-startup-id nm-applet
@@ -421,6 +425,7 @@ exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg    # use my feh bg script
 exec --no-startup-id parcellite -d  # dead simple clipboard management (switch to clipit fork?)
 exec --no-startup-id pamac-tray     # pacman tray
+exec --no-startup-id dropbox
 # exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id tmux start-server
 exec --no-startup-id blueman-applet

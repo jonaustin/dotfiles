@@ -8,7 +8,7 @@ background = #66000000
 ;background = #BB222222
 ; darker
 ;background = #ED222222
-foreground = #eee
+foreground = #00b200
 linecolor = #fba922
 bordercolor = #333
 accent = #e60053
@@ -67,20 +67,23 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = dina:pixelsize=10;1
-font-1 = siji:pixelsize=11;1
+font-0 = dina:size=10;1
+font-1 = siji:size=11;1
 font-2 = unifont:size=7;1
+font-3 = Font Awesome 5 Free:size=10;3
+font-4 = Font Awesome 5 Free Solid:size=10;3
+font-5 = Font Awesome 5 Brands:size=10;3
 
 modules-left = i3
 ;modules-center = mpd
-modules-center = spotify
-modules-right = filesystem xbacklight volume wifi battery memory cpu date
+modules-center = spotify pulseaudio-oppo
+modules-right = filesystem xbacklight wifi battery memory cpu date gmail
 
 tray-position = right
 tray-padding = 4
 tray-maxsize = 16
 tray-transparent = true
-;tray-background = ${root.background}
+tray-background = ${root.background}
 ;tray-detached = true
 ;tray-offset-x = 50
 
@@ -254,7 +257,7 @@ label-visible-padding = ${module/bspwm.label-empty-padding}
 type = internal/cpu
 interval = 2
 label = %percentage%%
-format-prefix = " "
+format-prefix = "💾"
 format-prefix-foreground = #666
 
 [module/memory]
@@ -351,6 +354,12 @@ format-foreground = #23CF5F
 exec = ~/.config/polybar/spotify
 exec-if = pgrep -f "Spotify"
 
+[module/gmail]
+type = custom/script
+exec = PYENV_VERSION=3.6.5 ~/.config/polybar/gmail/launch.py
+tail = true
+click-left = xdg-open https://mail.google.com
+
 [module/xbacklight]
 type = internal/xbacklight
 format = <ramp> <label>
@@ -364,9 +373,10 @@ label-foreground = ${root.foreground}
 
 [module/volume]
 type = internal/volume
-speaker-mixer = Speaker
-headphone-mixer = Headphone
-headphone-id = 9
+;speaker-mixer = Speaker
+speaker-mixer = 'OPPO HA-1 USB AUDIO 2.0 DAC Input Playback  1'
+;headphone-mixer = Headphone
+;headphone-id = 9
 
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%
@@ -382,9 +392,9 @@ ramp-volume-2 = 
 ramp-volume-3 = 
 ramp-volume-foreground = #666
 
-ramp-headphones-0 = 
-ramp-headphones-1 = 
-ramp-headphones-foreground = #666
+;ramp-headphones-0 = 
+;ramp-headphones-1 = 
+;ramp-headphones-foreground = #666
 
 [module/battery]
 type = internal/battery
@@ -529,5 +539,63 @@ label-maxlen = 75
 type = internal/counter
 format = <counter>
 interval = 0.1
+
+[module/pulseaudio-internal]
+type = internal/pulseaudio
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+; Interval for volume increase/decrease (in percent points) (unreleased)
+; Default: 5
+interval = 5
+
+[module/pulseaudio-oppo]
+type = internal/pulseaudio
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.usb-OPPO_OPPO_HA-2_USB_AUDIO_2.0_DAC-00.iec958-stereo
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+; Interval for volume increase/decrease (in percent points) (unreleased)
+; Default: 5
+interval = 5
+format-volume = <ramp-volume> <label-volume>
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
+; Available tokens:
+;   %percentage% (default)
+;label-volume = %percentage%%
+; Available tokens:
+;   %percentage% (default)
+label-muted = 🔇 muted
+label-muted-foreground = #666
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+[module/pulseaudio-tail]
+type = custom/script
+exec = ~/.config/polybar/scripts/pulseaudio-tail.sh
+tail = true
+click-right = exec pavucontrol &
+click-left = ~/.config/polybar/scripts/pulseaudio-tail.sh --mute
+scroll-up = ~/.config/polybar/scripts/pulseaudio-tail.sh --up
+scroll-down = ~/.config/polybar/scripts/pulseaudio-tail.sh --down
+
+[module/player-mpris-tail]
+type = custom/script
+exec = ~/.config/polybar/scripts/player-mpris-tail.py
+tail = true
+click-left = ~/.config/polybar/scripts/player-ctrl.sh previous
+click-right = ~/.config/polybar/scripts/player-ctrl.sh next
+click-middle = ~/.config/polybar/scripts/player-ctrl.sh play-pause
 
 ; vim:ft=dosini
