@@ -1,5 +1,8 @@
 ## SHORTCUTS
 
+# overrides
+alias cat=bat
+
 # open with suffix aliases
 alias -s md=vim
 alias -s markdown=vim
@@ -28,6 +31,7 @@ alias ip='ip -br -c a' # ip -brief -color address
 
 #ls
 #alias l='ls -CF'
+alias less='less -c' # if <1 screenful of text, then show at top of screen, not bottom
 alias ll='ls -l'
 alias lll='ls -l|less'
 alias la='ls -lA'
@@ -62,6 +66,9 @@ alias vrc='$EDITOR $HOME/.bashrc'
 alias vlrc='$EDITOR $HOME/.bashrc_local'
 alias vac='$EDITOR $HOME/.zsh/aliases.sh'
 alias vfc='$EDITOR $HOME/.zsh/functions.sh'
+
+# other editing shortcuts
+alias vnlog='$EDITOR ~/.config/configstore/nlog.json'
 
 ## sys
 alias u='uptime'
@@ -114,6 +121,7 @@ alias loci='locate -i'
 ## network
 alias pgoo='ping -c2 google.com'
 alias wgetnc='wget --no-check-certificate'
+alias syn='ssh root@10.0.1.8'
 
 # Window Manager
 
@@ -130,6 +138,7 @@ alias gsl='git status --ignore-submodules | less'
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
+alias gcv='git commit --no-verify'
 alias gg='gitg --all&'
 alias gx='gitx --all'
 alias gd='git diff '
@@ -250,7 +259,7 @@ npm-list() { #'npm list -g --depth=0' # list globally installed modules
 }
 
 # get remote ip
-alias myip="curl ifconfig.me"
+alias myip=" curl https://canhazip.com/" #"curl ifconfig.me"
 
 # run various updates
 alias maint='sh ~/bin/maintenance.sh'
@@ -262,8 +271,8 @@ alias fuck='$(thefuck $(fc -ln -1))'
 alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
 
 # Python
-alias py3='PYENV_VERSION=3.6.1 '
-alias pip3='PYENV_VERSION=3.6.1 pip3'
+#alias py3='PYENV_VERSION=3.6.1 '
+#alias pip3='PYENV_VERSION=3.6.1 pip3'
 alias pip-upgrade-all=' pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U' # no, really: https://github.com/pypa/pip/issues/59
 
 ### Apps

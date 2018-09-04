@@ -130,7 +130,8 @@ sanitize()
 # e.g.: remindme 10m "omg, the pizza"
 remindme()
 {
-  sleep $1 && zenity --info --text "$2" &
+  minutes=$(echo "$1 * 60" | bc -l)
+  sleep $minutes && zenity --info --text "$2" &
 }
 
 # weather() -- Check weather
@@ -271,6 +272,18 @@ codi() {
 }
 
 # daily goals
+#nlog() {
+#  DIR=$HOME/notes/drugs/nootropics/log
+#  FILE=$DIR/$(date -I).md
+#  mkdir -p $DIR
+#  if [ -e $FILE ]; then
+#    $EDITOR $FILE
+#  else
+#    cp $DIR/template.md $FILE
+#    $EDITOR $FILE
+#  fi;
+#}
+
 today() {
   DIR=$HOME/notes/daily_goals
   FILE=$DIR/$(date -I).md
@@ -293,3 +306,7 @@ rsynconly() {
 watch-reload() {
   find . -iname $1 | entr $2
 }
+
+# notes
+enote() { $EDITOR -p `fd "$1*" $HOME/notes` }
+note() { less `fd "$1*" $HOME/notes` }

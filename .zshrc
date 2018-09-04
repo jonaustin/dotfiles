@@ -14,8 +14,6 @@ export SYSTEM_TYPE=`uname`
 #export ZSH_THEME="jon"
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export ZSH_THEME='refined'
-else
-  export ZSH_THEME='pure' # use upstream pure - https://github.com/sindresorhus/pure
 fi
 
 # safe-paste fixes up/down history breakage
@@ -27,12 +25,17 @@ fi
 # urlencode / urldecode
 # git author accounts: https://github.com/walle/gas
 if [ $SYSTEM_TYPE = "Darwin" ]; then
-  plugins=(zsh-completions git_remote_branch httpie jira jsontools ng npm)# pip python aws redis-cli rand-quote taskwarrior urltools web-search gas)
+  plugins=(zsh-completions) # git_remote_branch httpie jira jsontools ng npm)# pip python aws redis-cli rand-quote taskwarrior urltools web-search gas)
 else
-  plugins=(zsh-completions gitfast rails gem rake node safe-paste docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
+  plugins=(zsh-completions safe-paste zsh-syntax-highlighting bd) # zsh-autosuggestions) # gitfast rails gem rake node  docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
 fi
 
 source $ZSH/oh-my-zsh.sh
+if [ $SYSTEM_TYPE != "Darwin" ]; then
+  autoload -U promptinit; promptinit
+  prompt pure
+fi
+
 source ~/.zsh/rake.zsh
 
 # zsh
@@ -68,7 +71,7 @@ stty -ixon # disable ^S/^Q flow control
 
 # Exports {{{
 export PAGER='less'
-export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R' # --LINE-NUMBERS --quit-if-one-screen' # -R for less coloring with source-highlight (external app)
+export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R --quit-if-one-screen' # --LINE-NUMBERS ' # -R for coloring with source-highlight (external app)
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 #export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
 export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
@@ -104,13 +107,13 @@ source ${HOME}/.zsh/zshrc.local.work
 
 # Fix git sloooow autocompletion
 # https://superuser.com/questions/458906/zsh-tab-completion-of-git-commands-is-very-slow-how-can-i-turn-it-off
-setopt no_complete_aliases
-__git_files () {
-    _wanted files expl 'local files' _files
-}
+#setopt no_complete_aliases
+#__git_files () {
+#    _wanted files expl 'local files' _files
+#}
 # egh, just disable intelligent completion: http://www.zsh.org/mla/workers/2011/msg00502.html
-__git_files(){}
-__git_complete_index_file(){}
+#__git_files(){}
+#__git_complete_index_file(){}
 # or disable git completion entirely
 #compdef -d git
 
@@ -135,3 +138,7 @@ export PATH=$PATH:./node_modules/.bin
 # go
 export GOPATH=$HOME/code/_sandbox/_go
 export PATH=$HOME/code/_sandbox/_go/bin:$PATH
+typeset -U PATH # remove duplicate paths
+
+# oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
+source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh

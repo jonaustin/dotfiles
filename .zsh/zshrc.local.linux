@@ -1,7 +1,11 @@
-alias y='sudo aura -S '
+#alias y='sudo aura -S '
+#alias r='sudo pacman -R '
+#alias agu='sudo aura -Syyu; sudo aura -Au'
+#alias s='sudo aura -Ss '
+alias y='aurman -S '
 alias r='sudo pacman -R '
-alias agu='aurman --no-confirm --needed -Su'
-alias s='sudo aura -Ss '
+alias agu='aurman -Syyu'
+alias s='aurman -Ss '
 alias pf='aura -Fo ' # $file-name -- find out which package owns a file
 
 alias open=xdg-open

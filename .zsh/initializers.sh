@@ -60,9 +60,9 @@ else
   . $(pyenv root)/completions/pyenv.zsh
 fi
 
-# shims aren't being copied from VERSION/bin to .pyenv/shims for some reason
-export PATH="$PYENV_ROOT/versions/2.7.13/bin:$PATH"
-export PATH="$PYENV_ROOT/versions/3.6.1/bin:$PATH"
+# shims aren't being copied from VERSION/bin to .pyenv/shims for some reason - use rehash
+#export PATH="$PYENV_ROOT/versions/2.7.13/bin:$PATH"
+#export PATH="$PYENV_ROOT/versions/3.6.1/bin:$PATH"
 
 ## Node
 # nvm
