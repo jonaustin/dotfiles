@@ -13,7 +13,7 @@ else
   export GDK_SCALE=2
   export GDK_DPI_SCALE=0.5
   export XCURSOR_SIZE=48
-  export TERMINAL=/usr/bin/hypert
+  export TERMINAL=termite
 fi
 
 ## tmuxinator
@@ -122,3 +122,8 @@ fi
 
 # fzf fuzzy finder - ctrl-r (history), ctrl-t (files)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# transfer.sh
+transfer() {
+    wget -t 1 -qO - --method=PUT --body-file="$1" --header="Content-Type: $(file -b --mime-type $1)" https://transfer.sh/$(basename $1);
+}
