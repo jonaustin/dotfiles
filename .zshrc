@@ -1,6 +1,38 @@
 # zsh profiling
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
-#zmodload zsh/zprof
+zmodload zsh/zprof
+
+# antigen - zsh plugin manager
+#if [ $SYSTEM_TYPE = "Darwin" ]; then
+#  source /usr/local/share/antigen/antigen.zsh
+#else
+  source /usr/share/zsh/share/antigen.zsh
+#fi
+
+antigen use oh-my-zsh
+ANTIGEN_LOG=$HOME/logs/antigen.log
+
+#antigen bundle command-not-found
+
+# https://github.com/unixorn/awesome-zsh-plugins#plugins
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+#antigen bundle zsh-users/zaw # Ctrl-x
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
+antigen bundle fcambus/ansiweather
+antigen bundle wting/autojump
+#antigen bundle Tarrasch/zsh-bd
+antigen bundle zdharma/zsh-diff-so-fancy # git dsf
+#antigen bundle h3poteto/zsh-ec2ssh
+antigen bundle MichaelAquilina/zsh-you-should-use
+#antigen bundle 
+
+antigen apply
+
+# plugin helpers
+[[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
 
 ### ZSH {{{
 # Path to your oh-my-zsh configuration.
@@ -12,9 +44,9 @@ export SYSTEM_TYPE=`uname`
 #export ZSH_THEME="bira"
 #export ZSH_THEME="wedisagree"
 #export ZSH_THEME="jon"
-if [ $SYSTEM_TYPE = "Darwin" ]; then
-  export ZSH_THEME='refined'
-fi
+#if [ $SYSTEM_TYPE = "Darwin" ]; then
+#  export ZSH_THEME='refined'
+#fi
 
 # safe-paste fixes up/down history breakage
 # https://github.com/robbyrussell/oh-my-zsh/issues/1720
@@ -27,14 +59,14 @@ fi
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   plugins=(zsh-completions) # git_remote_branch httpie jira jsontools ng npm)# pip python aws redis-cli rand-quote taskwarrior urltools web-search gas)
 else
-  plugins=(zsh-completions safe-paste zsh-syntax-highlighting bd) # zsh-autosuggestions) # gitfast rails gem rake node  docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
+  plugins=(zsh-completions safe-paste zsh-syntax-highlighting bd autojump) # zsh-autosuggestions) # gitfast rails gem rake node  docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
 fi
 
-source $ZSH/oh-my-zsh.sh
-if [ $SYSTEM_TYPE != "Darwin" ]; then
-  autoload -U promptinit; promptinit
-  prompt pure
-fi
+#source $ZSH/oh-my-zsh.sh
+#if [ $SYSTEM_TYPE != "Darwin" ]; then
+#  autoload -U promptinit; promptinit
+#  prompt pure
+#fi
 
 source ~/.zsh/rake.zsh
 
@@ -56,8 +88,29 @@ source ~/.zsh/aliases.sh
 unsetopt beep
 # zsh
 set -o vi
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
+
+key=(
+    BackSpace  "${terminfo[kbs]}"
+    Home       "${terminfo[khome]}"
+    End        "${terminfo[kend]}"
+    Insert     "${terminfo[kich1]}"
+    Delete     "${terminfo[kdch1]}"
+    Up         "${terminfo[kcuu1]}"
+    Down       "${terminfo[kcud1]}"
+    Left       "${terminfo[kcub1]}"
+    Right      "${terminfo[kcuf1]}"
+    PageUp     "${terminfo[kpp]}"
+    PageDown   "${terminfo[knp]}"
+)
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "$terminfo[kcuu1]" up-line-or-beginning-search # Up
+bindkey "$terminfo[kcud1]" down-line-or-beginning-search # down
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
 
 bindkey '^?' backward-delete-char # backspace on chars before start of insert mode (after leaving cmd mode) - https://www.zsh.org/mla/users/2009/msg00812.html
 bindkey '^h' backward-delete-char # ctrl-h also deletes chars
@@ -119,7 +172,7 @@ source ${HOME}/.zsh/zshrc.local.work
 
 #unalias run-help
 autoload run-help
-autoload -U compinit && compinit -d # -d cache completion info
+autoload -U compinit && compinit -du # -d cache completion info
 autoload bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
