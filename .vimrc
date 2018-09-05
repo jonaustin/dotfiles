@@ -23,10 +23,11 @@ endif
 " Completions
 " https://stackoverflow.com/a/22253548/617320
 Plug 'Valloric/YouCompleteMe'
+Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>
 Plug 'honza/vim-snippets'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern`
+"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
@@ -69,7 +70,7 @@ Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, 
 Plug 'leafgarland/typescript-vim'    " syntax
 Plug 'Quramy/vim-js-pretty-template' " template strings coloring
 Plug 'jason0x43/vim-js-indent'
-Plug 'Quramy/tsuquyomi'              " tsserver (or nvim-typescript)
+"Plug 'Quramy/tsuquyomi'              " tsserver (or nvim-typescript)
 "Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
 
 " Navigation
@@ -121,7 +122,9 @@ Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vim
 
 " Colors
 Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8 
+Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
 Plug 'w0ng/vim-hybrid'
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'justinmk/molokai'          " true color fork
 Plug 'nanotech/jellybeans.vim'   " true colors
 Plug 'lifepillar/vim-solarized8' " true color fork
@@ -141,8 +144,11 @@ Plug 'chriskempson/base16-vim'
 "Plug 'morhetz/gruvbox'
 
 " UI
+Plug 'reedes/vim-pencil'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+"Plug 'zefei/vim-wintabs'
+"Plug 'zefei/vim-wintabs-powerline'
 
 " Misc
 Plug 'wakatime/vim-wakatime'
@@ -200,6 +206,9 @@ set termguicolors " true colors (colorscheme must have gui colors)
 " cursorline only visible in the current window and not in insert mode
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
+
+" underline cursor (terminal as well)
+set guicursor=a:hor20-Cursor
 
 " If folding is too slow, possibly add https://github.com/Konfekt/FastFold
 set foldmethod=manual
@@ -317,6 +326,7 @@ inoremap jk <ESC>
 
 " sudo write file
 command Sudo :w !sudo tee %
+cmap w!! w !sudo tee % >/dev/null
 
 " quit, write
 map <C-s> :w<cr>
@@ -339,6 +349,15 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 
 """ PLUGINS """
+" vim-lexical
+augroup lexical
+  autocmd!
+  autocmd FileType markdown,mkd call lexical#init()
+  autocmd FileType textile call lexical#init()
+  autocmd FileType text call lexical#init() "({ 'spell': 0 })
+augroup END
+let g:lexical#spell = 0 " 0=disabled, 1=enabled
+let g:lexical#thesaurus = ['~/.vim/thesaurus/mthesaur.txt',]
 
 " EasyTag
 let g:easytags_async=1 " compile ctags asynchronously
@@ -407,7 +426,7 @@ map <S-q> :NERDTreeToggle<cr>
 
 " Ctrl-p
 let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
-nnoremap <silent><leader><leader> :CtrlPBuffer<CR>
+nnoremap <silent><leader>/ :CtrlPBuffer<CR>
 
 
 " Vim-session
@@ -463,44 +482,45 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "" Filetype detection
 augroup filetypedetect
   "" Detect .txt as 'text'
-  autocmd! BufNewFile,BufRead *.txt setfiletype text
+  autocmd BufNewFile,BufRead *.txt setfiletype text
   " sass
-  autocmd! BufNewFile,BufRead *.{sass,scss} setfiletype sass
+  autocmd BufNewFile,BufRead *.{sass,scss} setfiletype sass
   "" epub
-  autocmd! BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+  autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
   " markdown
-  autocmd! BufNewFile,BufRead *.md setfiletype markdown
-  autocmd! BufNewFile,BufRead *.mkd setfiletype markdown
-  autocmd! BufNewFile,BufRead *.markdown setfiletype markdown
+  autocmd BufNewFile,BufRead *.md setfiletype markdown
+  autocmd BufNewFile,BufRead *.mkd setfiletype markdown
+  autocmd BufNewFile,BufRead *.markdown setfiletype markdown
   " Don't syntax highlight markdown because it's often wrong
-  autocmd! FileType markdown setlocal syn=off
+  autocmd FileType markdown setlocal syn=off
   " shell
-  autocmd! BufNewFile,BufRead *.zsh-theme setfiletype zsh
+  autocmd BufNewFile,BufRead *.zsh-theme setfiletype zsh
   " javascript
   autocmd BufRead,BufNewFile *.es6 setfiletype javascript
   autocmd BufRead,BufNewFile *.mjs setfiletype javascript
-  autocmd! FileType javascript setlocal keywordprg='mdn'
+  autocmd FileType javascript setlocal keywordprg='mdn'
   " ruby
-  autocmd! BufNewFile,BufRead *.feature setfiletype cucumber
+  autocmd BufNewFile,BufRead *.feature setfiletype cucumber
   " ruby autocomplete
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " json
-  autocmd! BufRead,BufNewFile .{eslintrc,babelrc} setf json
+  autocmd BufRead,BufNewFile .{eslintrc,babelrc} setf json
   " groovy
-  autocmd! BufRead,BufNewFile *.gradle setf groovy
+  autocmd BufRead,BufNewFile *.gradle setf groovy
   " gitconfig
-  autocmd! BufRead,BufNewFile gitconfig setf gitconfig
+  autocmd BufRead,BufNewFile gitconfig setf gitconfig
   " arduino
-  au BufRead,BufNewFile *.pde set filetype=arduino
-  au BufRead,BufNewFile *.ino set filetype=arduino
+  autocmd BufRead,BufNewFile *.pde set filetype=arduino
+  autocmd BufRead,BufNewFile *.ino set filetype=arduino
   " puppet
-  au BufRead,BufNewFile *.pp set filetype=puppet
+  autocmd BufRead,BufNewFile *.pp set filetype=puppet
+  autocmd FileType js UltiSnipsAddFiletypes puppet
   " eyaml
-  au BufRead,BufNewFile *.eyaml set filetype=yaml
+  autocmd BufRead,BufNewFile *.eyaml set filetype=yaml
   " Expand tabs in Go. seriously gofmt, tabs?
-  autocmd! FileType go set sw=4 sts=4 expandtab | retab
+  autocmd FileType go set sw=4 sts=4 expandtab | retab
 augroup END
 " }
 
@@ -570,3 +590,4 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 " gf in new tab: <c-w>gF - open in a new tab (Ctrl-w gF)
 " verbose <cmd/func> - debug info
 " vim --startuptime /tmp/startup.log +q && vim /tmp/startup.log
+" :messages if a message scrolls by too fast (e.g. error on startup)
