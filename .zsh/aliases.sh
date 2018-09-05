@@ -13,7 +13,7 @@ alias -s txt=vim
 
 #sane defaults
 alias sudo='sudo ' # so aliases work
-alias vi='vim'
+#alias vi='vim'
 alias spacemacs='emacs'
 alias mkdir='mkdir -p'
 alias grep="grep --color"
@@ -92,12 +92,13 @@ alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 
 # Vim
 alias vim='nvim'
-alias v=$EDITOR
+#alias v=$EDITOR
 alias sv='sudo $EDITOR'
 alias vvc='$EDITOR ~/.vimrc'
 alias vvcl='$EDITOR ~/.vimrc.local'
 alias vvh='$EDITOR ~/.hyper.js'
 alias vvj='$EDITOR ~/.hyper.js'
+
 
 ## Other
 alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
@@ -298,7 +299,12 @@ alias restartu='systemctl --user restart '
 alias startu='systemctl --user start '
 alias stopu='systemctl --user stop '
 alias statusu='systemctl --user status '
-alias reloadu='systemctl --user daemon-reload'
+#alias reloadu='systemctl --user daemon-reload'
 
 # i3
 alias cur-monitor="xrandr | grep -C 3 '*' | grep DP | awk '{print \$1}'"
+
+# fasd
+alias v='f -e vim' # quick opening files with vim
+#alias m='f -e vlc' # quick opening files with mplayer
+alias o='a -e xdg-open' # quick opening files with xdg-open
