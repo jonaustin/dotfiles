@@ -31,7 +31,6 @@ zplug peterhurford/git-it-on.zsh
 #zplug Tarrasch/zsh-bd # meh, autojump already does it
 #zplug StackExchange/blackbox # gpg encrypt secrets in git repos
 zplug supercrabtree/k # pretty directory listings
-zplug b4b4r07/enhancd
 
 zplug sindresorhus/pure, use:pure.zsh, as:theme
 #autoload -U promptinit; promptinit
@@ -40,7 +39,6 @@ zplug sindresorhus/pure, use:pure.zsh, as:theme
 
 # plugin helpers
 [[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
-source $HOME/.antigen/bundles/b4b4r07/enhancd/init.sh
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -224,8 +222,8 @@ if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
 fi
 HELPDIR=/usr/local/share/zsh/help
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=100000
 
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;

@@ -2,6 +2,7 @@
 
 # overrides
 alias cat=bat
+alias ll=k; alias lsl='ls -l'
 
 # open with suffix aliases
 alias -s md=vim
@@ -31,7 +32,6 @@ alias ip='ip -br -c a' # ip -brief -color address
 
 #ls
 #alias l='ls -CF'
-alias less='less -c' # if <1 screenful of text, then show at top of screen, not bottom
 alias ll='ls -l'
 alias lll='ls -l|less'
 alias la='ls -lA'
@@ -43,6 +43,11 @@ alias ltrn='ls -ltr| tail -n'
 alias lh='ls -lhS' # sort by filesize
 alias lsd="ls -l $1 | grep '^d'"
 alias lsd2="ls -F $1 | grep \/ | sed -e 's/\/$//g'"
+
+# other
+alias less='less -c' # if <1 screenful of text, then show at top of screen, not bottom
+alias ..='cd ..'
+alias -- -='cd -' # -- treats next chars as operand
 
 ## App shortcuts (GUI/Curses)
 #alias sup="rvm use 1.9.2-p180; sup"
