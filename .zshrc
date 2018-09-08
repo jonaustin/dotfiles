@@ -12,7 +12,7 @@ source $ZPLUG_HOME/init.zsh
   #source /usr/share/zsh/share/antigen.zsh
 #fi
 
-#zplug "plugins/git", from:oh-my-zsh
+zplug plugins/command-not-found, from:oh-my-zsh
 #https://github.com/unixorn/awesome-zsh-plugins#plugins
 zplug zsh-users/zsh-syntax-highlighting
 zplug zsh-users/zsh-autosuggestions
@@ -208,6 +208,12 @@ autoload run-help
 #else
 #  compinit -C;
 #fi;
+### MAC OS X VERSION+autoload -Uz compinit
+#if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+#  compinit
+#else
+#  compinit -C
+#fi
 
 
 

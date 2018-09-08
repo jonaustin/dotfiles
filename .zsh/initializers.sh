@@ -133,6 +133,12 @@ fi
 # fzf fuzzy finder - ctrl-r (history), ctrl-t (files)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# fasd
+#fasd() {
+#  eval "$(fasd --init auto)"
+#  fasd "$@"
+#}
+
 # transfer.sh
 transfer() {
     wget -t 1 -qO - --method=PUT --body-file="$1" --header="Content-Type: $(file -b --mime-type $1)" https://transfer.sh/$(basename $1);
