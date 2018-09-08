@@ -2,49 +2,62 @@
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
 zmodload zsh/zprof
 
+export ZPLUG_HOME=$HOME/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
 # antigen - zsh plugin manager
 #if [ $SYSTEM_TYPE = "Darwin" ]; then
 #  source /usr/local/share/antigen/antigen.zsh
 #else
-  source /usr/share/zsh/share/antigen.zsh
+  #source /usr/share/zsh/share/antigen.zsh
 #fi
 
-antigen use oh-my-zsh
-ANTIGEN_LOG=$HOME/logs/antigen.log
+#zplug "plugins/git", from:oh-my-zsh
+#https://github.com/unixorn/awesome-zsh-plugins#plugins
+zplug zsh-users/zsh-syntax-highlighting
+zplug zsh-users/zsh-autosuggestions
+zplug zsh-users/zsh-completions
+#zplug zsh-users/zaw # Ctrl-x
+zplug mafredri/zsh-async
+zplug fcambus/ansiweather
+zplug wting/autojump
+#zplug Tarrasch/zsh-bd
+zplug zdharma/zsh-diff-so-fancy # git dsf
+#zplug h3poteto/zsh-ec2ssh
 
+#zplug MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
+#zplug djui/alias-tips # alias reminders; ugh adds 300ms to load time
+zplug peterhurford/git-it-on.zsh
+#zplug Tarrasch/zsh-bd # meh, autojump already does it
+#zplug StackExchange/blackbox # gpg encrypt secrets in git repos
+zplug supercrabtree/k # pretty directory listings
+zplug b4b4r07/enhancd
 
-# https://github.com/unixorn/awesome-zsh-plugins#plugins
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-#antigen bundle zsh-users/zaw # Ctrl-x
-antigen bundle mafredri/zsh-async
-antigen bundle fcambus/ansiweather
-antigen bundle wting/autojump
-#antigen bundle Tarrasch/zsh-bd
-antigen bundle zdharma/zsh-diff-so-fancy # git dsf
-#antigen bundle h3poteto/zsh-ec2ssh
-
-#antigen bundle MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
-antigen bundle djui/alias-tips # alias reminders
-antigen bundle peterhurford/git-it-on.zsh
-#antigen bundle Tarrasch/zsh-bd # meh, autojump already does it
-#antigen bundle StackExchange/blackbox # gpg encrypt secrets in git repos
-antigen bundle supercrabtree/k # pretty directory listings
-antigen bundle b4b4r07/enhancd
-
-antigen bundle sindresorhus/pure
-export RPROMPT='%F{blue}`date +"%F %T"`'
-
-antigen apply
+#zplug 'dracula/zsh', as:theme
+#zplug sindresorhus/pure, as:theme
+zplug sindresorhus/pure, use:pure.zsh, as:theme
+#autoload -U promptinit; promptinit
+#prompt pure
+#export RPROMPT='%F{blue}`date +"%F %T"`'
 
 # plugin helpers
 [[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
 source $HOME/.antigen/bundles/b4b4r07/enhancd/init.sh
 
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load #--verbose
+
 ### ZSH {{{
 # Path to your oh-my-zsh configuration.
-export ZSH=$HOME/.oh-my-zsh
+#export ZSH=$HOME/.oh-my-zsh
 export SYSTEM_TYPE=`uname`
 
 # Set to the name theme to load.
