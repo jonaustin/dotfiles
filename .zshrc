@@ -12,7 +12,6 @@ zmodload zsh/zprof
 antigen use oh-my-zsh
 ANTIGEN_LOG=$HOME/logs/antigen.log
 
-#antigen bundle command-not-found
 
 # https://github.com/unixorn/awesome-zsh-plugins#plugins
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -20,19 +19,28 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 #antigen bundle zsh-users/zaw # Ctrl-x
 antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
 antigen bundle fcambus/ansiweather
 antigen bundle wting/autojump
 #antigen bundle Tarrasch/zsh-bd
 antigen bundle zdharma/zsh-diff-so-fancy # git dsf
 #antigen bundle h3poteto/zsh-ec2ssh
-antigen bundle MichaelAquilina/zsh-you-should-use
-#antigen bundle 
+
+#antigen bundle MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
+antigen bundle djui/alias-tips # alias reminders
+antigen bundle peterhurford/git-it-on.zsh
+#antigen bundle Tarrasch/zsh-bd # meh, autojump already does it
+#antigen bundle StackExchange/blackbox # gpg encrypt secrets in git repos
+antigen bundle supercrabtree/k # pretty directory listings
+antigen bundle b4b4r07/enhancd
+
+antigen bundle sindresorhus/pure
+export RPROMPT='%F{blue}`date +"%F %T"`'
 
 antigen apply
 
 # plugin helpers
 [[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
+source $HOME/.antigen/bundles/b4b4r07/enhancd/init.sh
 
 ### ZSH {{{
 # Path to your oh-my-zsh configuration.
@@ -195,3 +203,4 @@ typeset -U PATH # remove duplicate paths
 
 # oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
 source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
+#eval "$(fasd --init auto)"
