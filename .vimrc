@@ -122,6 +122,7 @@ Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vim
 
 " Colors
 Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8 
+Plug 'rakr/vim-one' " true color
 Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
 Plug 'w0ng/vim-hybrid'
 Plug 'kristijanhusak/vim-hybrid-material'

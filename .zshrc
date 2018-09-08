@@ -12,27 +12,28 @@ source $ZPLUG_HOME/init.zsh
   #source /usr/share/zsh/share/antigen.zsh
 #fi
 
-zplug plugins/command-not-found, from:oh-my-zsh
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "plugins/fasd", from:oh-my-zsh
 #https://github.com/unixorn/awesome-zsh-plugins#plugins
-zplug zsh-users/zsh-syntax-highlighting
-zplug zsh-users/zsh-autosuggestions
-zplug zsh-users/zsh-completions
-#zplug zsh-users/zaw # Ctrl-x
-zplug mafredri/zsh-async
-zplug fcambus/ansiweather
-zplug wting/autojump
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+#zplug "zsh-users/zaw" # Ctrl-x
+zplug "mafredri/zsh-async"
+zplug "fcambus/ansiweather"
+zplug "wting/autojump"
 #zplug Tarrasch/zsh-bd
-zplug zdharma/zsh-diff-so-fancy # git dsf
+zplug "zdharma/zsh-diff-so-fancy" # git dsf
 #zplug h3poteto/zsh-ec2ssh
 
 #zplug MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
-zplug djui/alias-tips # alias reminders; ugh adds 300ms to load time
-zplug peterhurford/git-it-on.zsh
+#zplug djui/alias-tips # alias reminders; ugh adds 300ms to load time
+zplug "peterhurford/git-it-on.zsh"
 #zplug Tarrasch/zsh-bd # meh, autojump already does it
 #zplug StackExchange/blackbox # gpg encrypt secrets in git repos
-zplug supercrabtree/k # pretty directory listings
+zplug "supercrabtree/k" # pretty directory listings
 
-zplug sindresorhus/pure, use:pure.zsh, as:theme
+zplug "sindresorhus/pure", use:pure.zsh, as:theme
 #autoload -U promptinit; promptinit
 #prompt pure
 #export RPROMPT='%F{blue}`date +"%F %T"`'
@@ -178,21 +179,8 @@ source ${HOME}/.zsh/initializers.sh
 source ${HOME}/.zsh/initializers_private.sh
 source ${HOME}/.zsh/zshrc.local.work
 
-# Fix git sloooow autocompletion
-# https://superuser.com/questions/458906/zsh-tab-completion-of-git-commands-is-very-slow-how-can-i-turn-it-off
-#setopt no_complete_aliases
-#__git_files () {
-#    _wanted files expl 'local files' _files
-#}
-# egh, just disable intelligent completion: http://www.zsh.org/mla/workers/2011/msg00502.html
-#__git_files(){}
-#__git_complete_index_file(){}
-# or disable git completion entirely
-#compdef -d git
-
 #unalias run-help
 autoload run-help
-
 
 # On slow systems, checking the cached .zcompdump file to see if it must be
 # regenerated adds a noticable delay to zsh startup.  This little hack restricts
@@ -215,8 +203,6 @@ autoload run-help
 #else
 #  compinit -C
 #fi
-
-
 
 autoload -U compinit && compinit -du # -d cache completion info
 autoload bashcompinit && bashcompinit # support bash completions

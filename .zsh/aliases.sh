@@ -32,7 +32,7 @@ alias ip='ip -br -c a' # ip -brief -color address
 
 #ls
 #alias l='ls -CF'
-alias ll='ls -l'
+#alias ll='ls -l'
 alias lll='ls -l|less'
 alias la='ls -lA'
 alias lt='ls -lt'
@@ -308,8 +308,3 @@ alias statusu='systemctl --user status '
 
 # i3
 alias cur-monitor="xrandr | grep -C 3 '*' | grep DP | awk '{print \$1}'"
-
-# fasd
-alias v='f -e vim' # quick opening files with vim
-#alias m='f -e vlc' # quick opening files with mplayer
-alias o='a -e xdg-open' # quick opening files with xdg-open

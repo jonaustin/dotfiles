@@ -308,5 +308,6 @@ watch-reload() {
 }
 
 # notes
+vf() { $EDITOR -p `fd ".*$1.*" ${2:-.}` }
 enote() { $EDITOR -p `fd "$1*" $HOME/notes` }
 note() { less `fd "$1*" $HOME/notes` }
