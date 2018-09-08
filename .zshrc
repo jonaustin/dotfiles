@@ -121,12 +121,15 @@ key=(
 )
 
 autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
 bindkey "$terminfo[kcuu1]" up-line-or-beginning-search # Up
-bindkey "$terminfo[kcud1]" down-line-or-beginning-search # down
+bindkey '^[[A' up-line-or-search # terminfo above doesn't work in termite
 bindkey "^P" history-beginning-search-backward
+
+autoload -U down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "$terminfo[kcud1]" down-line-or-beginning-search # down
+bindkey '^[[B' down-line-or-search # terminfo above doesn't work in termite
 bindkey "^N" history-beginning-search-forward
 
 bindkey '^?' backward-delete-char # backspace on chars before start of insert mode (after leaving cmd mode) - https://www.zsh.org/mla/users/2009/msg00812.html
