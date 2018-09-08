@@ -1,7 +1,7 @@
 # zsh profiling
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
-zmodload zsh/zprof
-
+#for n in `seq 0 10`; do time zsh -i -c exit; done
+#zmodload zsh/zprof
 export ZPLUG_HOME=$HOME/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
@@ -26,15 +26,13 @@ zplug zdharma/zsh-diff-so-fancy # git dsf
 #zplug h3poteto/zsh-ec2ssh
 
 #zplug MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
-#zplug djui/alias-tips # alias reminders; ugh adds 300ms to load time
+zplug djui/alias-tips # alias reminders; ugh adds 300ms to load time
 zplug peterhurford/git-it-on.zsh
 #zplug Tarrasch/zsh-bd # meh, autojump already does it
 #zplug StackExchange/blackbox # gpg encrypt secrets in git repos
 zplug supercrabtree/k # pretty directory listings
 zplug b4b4r07/enhancd
 
-#zplug 'dracula/zsh', as:theme
-#zplug sindresorhus/pure, as:theme
 zplug sindresorhus/pure, use:pure.zsh, as:theme
 #autoload -U promptinit; promptinit
 #prompt pure
@@ -193,12 +191,35 @@ source ${HOME}/.zsh/zshrc.local.work
 
 #unalias run-help
 autoload run-help
+
+
+# On slow systems, checking the cached .zcompdump file to see if it must be
+# regenerated adds a noticable delay to zsh startup.  This little hack restricts
+# it to once a day.  It should be pasted into your own completion file.
+#
+# The globbing is a little complicated here:
+# - '#q' is an explicit glob qualifier that makes globbing work within zsh's [[ ]] construct.
+# - 'N' makes the glob pattern evaluate to nothing when it doesn't match (rather than throw a globbing error)
+# - '.' matches "regular files"
+# - 'mh+24' matches files (or directories or whatever) that are older than 24 hours.
+#autoload -Uz compinit
+#if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+#  compinit;
+#else
+#  compinit -C;
+#fi;
+
+
+
 autoload -U compinit && compinit -du # -d cache completion info
 autoload bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
 fi
 HELPDIR=/usr/local/share/zsh/help
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
 
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -216,4 +237,3 @@ typeset -U PATH # remove duplicate paths
 
 # oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
 source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
-#eval "$(fasd --init auto)"
