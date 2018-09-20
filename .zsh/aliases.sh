@@ -34,11 +34,14 @@ alias ip='ip -br -c a' # ip -brief -color address
 #alias l='ls -CF'
 #alias ll='ls -l'
 alias lll='ls -l|less'
-alias la='ls -lA'
-alias lt='ls -lt'
+#alias la='ls -lA'
+alias la='k -a'
+#alias lt='ls -lt'
+alias lt='k -lt'
 alias lth='ls -lt|head'
 alias lthn='ls -lt|head -n'
-alias ltr='ls -ltr'
+#alias ltr='ls -ltr'
+alias ltr='k -cr'
 alias ltrn='ls -ltr| tail -n'
 alias lh='ls -lhS' # sort by filesize
 alias lsd="ls -l $1 | grep '^d'"
@@ -265,7 +268,7 @@ npm-list() { #'npm list -g --depth=0' # list globally installed modules
 }
 
 # get remote ip
-alias myip=" curl https://canhazip.com/" #"curl ifconfig.me"
+alias myip="curl https://canhazip.com/" #"curl ifconfig.me"
 
 # run various updates
 alias maint='sh ~/bin/maintenance.sh'

@@ -97,6 +97,9 @@ setopt interactivecomments
 #zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
 #  '+l:|?=** r:|?=**'
 
+# case insensitive completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 ## source files
 source ~/.zsh/functions.sh
 source ~/.zsh/aliases.sh
@@ -210,7 +213,11 @@ if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
 fi
 HELPDIR=/usr/local/share/zsh/help
-HISTFILE=~/.zsh_history
+if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
+  HISTFILE=~/.zsh_historyw
+else
+  HISTFILE=~/.zsh_history
+fi
 HISTSIZE=10000
 SAVEHIST=100000
 

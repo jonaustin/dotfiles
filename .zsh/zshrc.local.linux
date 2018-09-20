@@ -66,3 +66,12 @@ alias gitsome="docker run -ti --rm -v $(pwd):/src/ \
 #source /usr/bin/virtualenvwrapper.sh # zprof says this is slow
 
 alias safari='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Safari/Safari.exe'
+
+alias zhw='cat ~/.zsh_historyw'
+alias zh='cat ~/.zsh_history'
+
+alias write-ip='myip >> /tmp/ip'
+
+
+# xrandr
+alias xrandr-dell-both-on='xrandr --output DP1 --mode 3840x2160 --output eDP1 --mode 2560x1440 --right-of DP1'

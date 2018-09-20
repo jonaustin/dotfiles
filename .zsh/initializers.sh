@@ -37,13 +37,9 @@ eval "$(direnv hook zsh)"
 
 ## Ruby
 # rbenv
-# lazy load to speed up shell init
 export RBENV_VERSION=2.3.4
 export PATH="$HOME/.rbenv/bin:$PATH"
-rbenv() {
-  eval "$(command rbenv init -)"
-  rbenv "$@"
-}
+eval "$(command rbenv init -)"
 
 ## Python
 #source /usr/bin/activate.sh # https://github.com/kennethreitz/autoenv/
@@ -73,39 +69,39 @@ fi
 export NVM_DIR="$HOME/.nvm"
 # https://github.com/creationix/nvm/issues/1261
 # https://github.com/creationix/nvm/pull/1737
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # OMG nvm startup is slow
-nvm-init() {
-  # lazy load as loading it by default adds ~300ms to load time
-  if [ -s "$NVM_DIR/nvm.sh" ]; then
-      # Load nvm but don't use it yet: we need to do some other hacks first.
-      # See https://github.com/creationix/nvm/issues/1261#issuecomment-366879288
-      . "$NVM_DIR/nvm.sh" --no-use
-      # I don't need this check, and it's slow (loads npm).
-      # Do not use the npm `prefix` config; do not report related bugs to nvm ;)
-      nvm_die_on_prefix() {
-          return 0
-      }
-      # This also loads npm; let's just skip it.
-      nvm_print_npm_version() {
-          return 0
-      }
-      nvm_ensure_version_installed() {
-          return 0
-      }
-      # nvm_resolve_local_alias can also be slow; cache it.
-      if [ -s "$NVM_DIR/_default_version" ]; then
-          NVM_AUTO_LOAD_VERSION=$(cat "$NVM_DIR/_default_version")
-      else
-          NVM_AUTO_LOAD_VERSION=$(nvm_resolve_local_alias default)
-          echo "$NVM_AUTO_LOAD_VERSION" > "$NVM_DIR/_default_version"
-      fi
-      nvm use --silent "$NVM_AUTO_LOAD_VERSION"
-  fi
-}
-nvm() {
-  nvm-init
-  nvm "$@"
-}
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # OMG nvm startup is slow
+#nvm-init() {
+#  # lazy load as loading it by default adds ~300ms to load time
+#  if [ -s "$NVM_DIR/nvm.sh" ]; then
+#      # Load nvm but don't use it yet: we need to do some other hacks first.
+#      # See https://github.com/creationix/nvm/issues/1261#issuecomment-366879288
+#      . "$NVM_DIR/nvm.sh" --no-use
+#      # I don't need this check, and it's slow (loads npm).
+#      # Do not use the npm `prefix` config; do not report related bugs to nvm ;)
+#      nvm_die_on_prefix() {
+#          return 0
+#      }
+#      # This also loads npm; let's just skip it.
+#      nvm_print_npm_version() {
+#          return 0
+#      }
+#      nvm_ensure_version_installed() {
+#          return 0
+#      }
+#      # nvm_resolve_local_alias can also be slow; cache it.
+#      if [ -s "$NVM_DIR/_default_version" ]; then
+#          NVM_AUTO_LOAD_VERSION=$(cat "$NVM_DIR/_default_version")
+#      else
+#          NVM_AUTO_LOAD_VERSION=$(nvm_resolve_local_alias default)
+#          echo "$NVM_AUTO_LOAD_VERSION" > "$NVM_DIR/_default_version"
+#      fi
+#      nvm use --silent "$NVM_AUTO_LOAD_VERSION"
+#  fi
+#}
+#nvm() {
+#  nvm-init
+#  nvm "$@"
+#}
 
 # vmux
 export VMUX_EDITOR=nvim
