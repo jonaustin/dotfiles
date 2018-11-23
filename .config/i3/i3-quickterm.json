@@ -1,0 +1,13 @@
+{
+    "menu": "rofi -dmenu -p 'quickterm: ' -no-custom -auto-select",
+    "term": "termite",
+    "history": "{$HOME}/.cache/i3/i3-quickterm.order",
+    "ratio": 0.40,
+    "pos": "top",
+    "shells": {
+        "haskell": "ghci",
+        "js": "node",
+        "python": "ipython3 --no-banner",
+        "shell": "{$SHELL}"
+    }
+}

@@ -1,5 +1,8 @@
 .vimperator/info/**/*
 .pentadactyl/info/**/*
+.config/tridactyl
+.zsh/zshrc.local.private
+keyrings
 blog.vim
 .vim/tmp
 .vim/doc/tags

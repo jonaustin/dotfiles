@@ -35,12 +35,12 @@ enable-ipc = true
 monitor = ${env:MONITOR:eDP1}
 monitor-fallback = DP1
 width = 100%
-height = 24
+height = 28
 ;radius = 5.0
 ;fixed-center = false
 ;override-redirect = true
 
-background = ${colors.background}
+
 foreground = ${colors.foreground}
 
 ;background-0 = #333
@@ -67,12 +67,13 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = dina:size=10;1
-font-1 = siji:size=11;1
-font-2 = unifont:size=7;1
-font-3 = Font Awesome 5 Free:size=10;3
-font-4 = Font Awesome 5 Free Solid:size=10;3
-font-5 = Font Awesome 5 Brands:size=10;3
+font-0 = Dina:size=12;1
+font-1 = Wuncon Siji:size=13;1
+font-2 = unifont:size=9;1
+font-3 = Font Awesome 5 Free:size=12;3
+font-4 = Font Awesome 5 Free Solid:size=12;3
+font-5 = Font Awesome 5 Brands:size=12;3
+font-6 = Noto Color Emoji:scale=9
 
 modules-left = i3
 ;modules-center = mpd
@@ -257,6 +258,7 @@ label-visible-padding = ${module/bspwm.label-empty-padding}
 type = internal/cpu
 interval = 2
 label = %percentage%%
+;format-prefix = ""
 format-prefix = "💾"
 format-prefix-foreground = #666
 
@@ -356,7 +358,7 @@ exec-if = pgrep -f "Spotify"
 
 [module/gmail]
 type = custom/script
-exec = PYENV_VERSION=3.6.5 ~/.config/polybar/gmail/launch.py
+exec = /home/jon/.pyenv/shims/python3.6 ~/.config/polybar/gmail/launch.py
 tail = true
 click-left = xdg-open https://mail.google.com
 
@@ -574,12 +576,13 @@ format-volume = <ramp-volume> <label-volume>
 ;label-volume = %percentage%%
 ; Available tokens:
 ;   %percentage% (default)
-label-muted = 🔇 muted
+label-muted =  muted
 label-muted-foreground = #666
 ; Only applies if <ramp-volume> is used
-ramp-volume-0 = 🔈
-ramp-volume-1 = 🔉
-ramp-volume-2 = 🔊
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
 
 [module/pulseaudio-tail]
 type = custom/script

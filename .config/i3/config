@@ -60,7 +60,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Shift+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec "USE_HOME='true' termite"
 bindsym $mod+Return exec termite
 
 # launch categorized menu
@@ -336,18 +336,19 @@ set $green     #859900
 #}
 
 # apps
-#bindsym $mod+Shift+s exec "$HOME/bin/spotify"
-bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
-bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
+#bindsym $mod+Shift+s exec "$HOME/bin/audio/spotify"
+#bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
+#bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
+bindsym $mod+Shift+x exec "firefox"
+bindsym Ctrl+q exec /bin/false # dammit firefox
 bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
 bindsym $mod+Shift+w exec "~/bin/fehbg"
 bindsym $mod+Mod1+w exec "echo `tail -n 1 ~/.fehbg` >> ~/img/best.txt"
 
 # find windows (i3-wm-scripts)
-bindsym $mod+s exec python ~/bin/i3-wm-scripts/nextmatch.py spotify
-bindsym $mod+x exec python ~/bin/i3-wm-scripts/nextmatch.py '(chromium|firefox)'
-#bindsym $mod+p exec python ~/bin/i3-wm-scripts/nextmatch.py '(mupdf)'
-#bindsym $mod+e exec python ~/bin/nextfind.py
+bindsym $mod+s exec python ~/bin/i3/i3-wm-scripts/nextmatch.py spotify
+bindsym $mod+x exec python ~/bin/i3/i3-wm-scripts/nextmatch.py '(chromium|firefox)'
+#bindsym $mod+p exec python ~/bin/i3/i3-wm-scripts/nextmatch.py '(mupdf)'
 
 # Screen brightness controls
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
@@ -357,19 +358,22 @@ bindsym $mod+Mod1+bracketleft exec "xbacklight -dec 1; notify-send $(xbacklight 
 bindsym Ctrl+Print exec "xbacklight -set 3"
 
 # volume
-bindsym shift+Print exec $HOME/bin/volume -m
-bindsym Print exec $HOME/bin/volume -d
-bindsym $mod+minus exec $HOME/bin/volume -d
-bindsym $mod+equal exec $HOME/bin/volume -u
-bindsym Pause exec $HOME/bin/volume -u
+bindsym shift+Print exec $HOME/bin/audio/volume -m
+bindsym Print exec $HOME/bin/audio/volume -d
+bindsym $mod+minus exec $HOME/bin/audio/volume -d
+bindsym $mod+equal exec $HOME/bin/audio/volume -u
+bindsym Pause exec $HOME/bin/audio/volume -u
 
 # spotify
 # maybe change to use https://github.com/acrisci/playerctl
+# play/pause
 bindsym $mod+space exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+# prev
 bindsym $mod+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+# next
 bindsym $mod+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 # save a spotify trackid to file:
-#bindsym $mod+Shift+s exec "dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | awk -f $HOME/bin/spotify_trackid.awk >> ~/spotify_tracks.txt"
+bindsym $mod+Shift+t exec "$HOME/bin/save_song.sh"
 
 # firetv
 bindsym $mod+p exec "$HOME/bin/firetv  play_pause"
@@ -386,14 +390,14 @@ bindsym $mod+b exec "$HOME/bin/brightness.sh"
 
 # home automation
 # node-avcontrol for yamaha
-bindsym $mod+bracketleft exec "$HOME/bin/yamaha -d"
-bindsym $mod+Shift+bracketleft exec "$HOME/bin/yamaha -D"
-bindsym $mod+bracketright exec "$HOME/bin/yamaha -u"
-bindsym $mod+Shift+bracketright exec "$HOME/bin/yamaha -U"
-bindsym $mod+Down exec "$HOME/bin/yamaha -d"
-bindsym $mod+Shift+Down exec "$HOME/bin/yamaha -m"
-bindsym $mod+Up exec "$HOME/bin/yamaha -u"
-bindsym $mod+Shift+Up exec "$HOME/bin/yamaha -U"
+bindsym $mod+bracketleft exec "$HOME/bin/audio/yamaha -d"
+bindsym $mod+Shift+bracketleft exec "$HOME/bin/audio/yamaha -D"
+bindsym $mod+bracketright exec "$HOME/bin/audio/yamaha -u"
+bindsym $mod+Shift+bracketright exec "$HOME/bin/audio/yamaha -U"
+bindsym $mod+Down exec "$HOME/bin/audio/yamaha -d"
+bindsym $mod+Shift+Down exec "$HOME/bin/audio/yamaha -m"
+bindsym $mod+Up exec "$HOME/bin/audio/yamaha -u"
+bindsym $mod+Shift+Up exec "$HOME/bin/audio/yamaha -U"
 
 # keyboards
 bindsym $mod+mod1+m exec "xmodmap $HOME/.xmodmap; exec notify-send 'laptop'"
@@ -410,20 +414,20 @@ bindsym $mod+mod1+Shift+s exec "kill `cat $HOME/.cache/mpvbg.pid`"
 
 # misc
 bindsym $mod+Ctrl+s exec scrot
-bindsym $mod+Ctrl+i exec i3lock
+bindsym $mod+Ctrl+i exec i3lock -c "000000"
 bindsym $mod+Mod1+l exec "xinput --set-prop 'Logitech Rechargeable Touchpad T650' 'libinput Tapping Enabled' 1"
-
+bindsym mod1+grave exec i3-quickterm shell
 
 # inits
 exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap $HOME/.xmodmap
 exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200 # tap ctrl for escape; tap l/r shift for ( and )
 exec --no-startup-id keynav         # control cursor with keyboard
-exec --no-startup-id guake          # drop down terminal ala quake console
+#exec --no-startup-id guake          # drop down terminal ala quake console
 exec --no-startup-id xflux -z 97203 # red light at night
 exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg    # use my feh bg script
-exec --no-startup-id parcellite -d  # dead simple clipboard management (switch to clipit fork?)
+exec --no-startup-id parcellite  # dead simple clipboard management (switch to clipit fork?)
 exec --no-startup-id pamac-tray     # pacman tray
 exec --no-startup-id dropbox
 # exec --no-startup-id xautolock -time 10 -locker blurlock
@@ -442,7 +446,7 @@ exec --no-startup-id start-pulseaudio-x11 # change to pulseaudio --start?
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id xscreensaver -nosplash
+exec --no-startup-id xscreensaver
 exec_always --no-startup-id setcursor
 
 # GUI apps on startup

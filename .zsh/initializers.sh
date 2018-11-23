@@ -6,7 +6,7 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
 else
   export EDITOR='/usr/bin/nvim'
   export SYSTEMD_EDITOR=$EDITOR
-  export BROWSER='/usr/bin/chromium'
+  export BROWSER='/home/bin/firefox'
   export SHELL='/usr/bin/zsh'
   export PATH=${PATH}:$HOME/.local/bin
   # gtk3 hidpi
@@ -37,7 +37,7 @@ eval "$(direnv hook zsh)"
 
 ## Ruby
 # rbenv
-export RBENV_VERSION=2.3.4
+export RBENV_VERSION=2.5.3
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(command rbenv init -)"
 
@@ -66,10 +66,10 @@ fi
 
 ## Node
 # nvm
-export NVM_DIR="$HOME/.nvm"
-# https://github.com/creationix/nvm/issues/1261
-# https://github.com/creationix/nvm/pull/1737
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # OMG nvm startup is slow
+#export NVM_DIR="$HOME/.nvm"
+## https://github.com/creationix/nvm/issues/1261
+## https://github.com/creationix/nvm/pull/1737
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # OMG nvm startup is slow
 #nvm-init() {
 #  # lazy load as loading it by default adds ~300ms to load time
 #  if [ -s "$NVM_DIR/nvm.sh" ]; then

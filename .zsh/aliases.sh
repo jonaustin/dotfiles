@@ -1,7 +1,7 @@
 ## SHORTCUTS
 
 # overrides
-alias cat=bat
+#alias cat=bat
 alias ll=k; alias lsl='ls -l'
 
 # open with suffix aliases
@@ -85,7 +85,7 @@ have() { type "$1" &> /dev/null; }
 ## shortcut-TRICKS
 alias igrep='grep -i'
 alias g="grep -ir"
-alias hist='history | grep -i '
+alias hist='cat ~/.zsh_history* | grep -i'
 pg() { ps aux | grep -v grep | grep -i ${1}; }
 howlong() { ps -p ${1} -o etime=; }
 sport() { lsof -P -iTCP:${1}; }
@@ -106,6 +106,7 @@ alias vvc='$EDITOR ~/.vimrc'
 alias vvcl='$EDITOR ~/.vimrc.local'
 alias vvh='$EDITOR ~/.hyper.js'
 alias vvj='$EDITOR ~/.hyper.js'
+alias vimdiff='/usr/bin/nvim -d'
 
 
 ## Other
@@ -311,3 +312,7 @@ alias statusu='systemctl --user status '
 
 # i3
 alias cur-monitor="xrandr | grep -C 3 '*' | grep DP | awk '{print \$1}'"
+
+# work
+alias wvpn='nmcli con down "US Seattle"; nmcli con up ls'
+alias hvpn='nmcli con down ls; nmcli con up "US Seattle"'

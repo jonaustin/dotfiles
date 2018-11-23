@@ -20,6 +20,8 @@ if !has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc' " compatibility layer for vim8
 endif
 
+Plug 'lambdalisue/vim-pyenv'
+
 " Completions
 " https://stackoverflow.com/a/22253548/617320
 Plug 'Valloric/YouCompleteMe'
@@ -56,6 +58,9 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
 "Plug 'ecomba/vim-ruby-refactoring'
 
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " Javascript
 Plug 'pangloss/vim-javascript'
 Plug 'mmalecki/vim-node.js'                   " kind of rails.vim for node - gf,gF,etc
@@ -76,12 +81,13 @@ Plug 'jason0x43/vim-js-indent'
 " Navigation
 Plug 'kien/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
-Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 Plug 'mileszs/ack.vim'                " :Ack <search>
 Plug 'Wraul/vim-easytags', { 'branch': 'fix-universal-detection' } " ctags that just work (mostly; use universal ctags fix branch)
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
-Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
+Plug 'justinmk/vim-sneak'
+"Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
+"Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
 "Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
 "Plug 't9md/vim-choosewin'             " -
 
@@ -448,6 +454,8 @@ let cmdline_map_send_and_stay  = '<leader><Space>'
 "let cmdline_map_quit           = '<LocalLeader>q'
 
 " vimcmdline options
+let cmdline_app         = {}
+let cmdline_app['ruby'] = 'pry'
 let cmdline_vsplit      = 1      " Split the window vertically
 let cmdline_esc_term    = 1      " Remap <Esc> to :stopinsert in Neovim's terminal
 let cmdline_in_buffer   = 1      " Start the interpreter in a Neovim's terminal
@@ -503,9 +511,9 @@ augroup filetypedetect
   " ruby
   autocmd BufNewFile,BufRead *.feature setfiletype cucumber
   " ruby autocomplete
-  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+  "autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  "autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  "autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " json
   autocmd BufRead,BufNewFile .{eslintrc,babelrc} setf json
   " groovy

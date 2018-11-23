@@ -5,15 +5,10 @@
 export ZPLUG_HOME=$HOME/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-# antigen - zsh plugin manager
-#if [ $SYSTEM_TYPE = "Darwin" ]; then
-#  source /usr/local/share/antigen/antigen.zsh
-#else
-  #source /usr/share/zsh/share/antigen.zsh
-#fi
-
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/fasd", from:oh-my-zsh
+zplug "plugins/golang", from:oh-my-zsh
+
 #https://github.com/unixorn/awesome-zsh-plugins#plugins
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
@@ -36,7 +31,7 @@ zplug "supercrabtree/k" # pretty directory listings
 zplug "sindresorhus/pure", use:pure.zsh, as:theme
 #autoload -U promptinit; promptinit
 #prompt pure
-#export RPROMPT='%F{blue}`date +"%F %T"`'
+export RPROMPT='%F{blue}`date +"%F %T"`'
 
 # plugin helpers
 [[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
@@ -52,39 +47,7 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load #--verbose
 
-### ZSH {{{
-# Path to your oh-my-zsh configuration.
-#export ZSH=$HOME/.oh-my-zsh
 export SYSTEM_TYPE=`uname`
-
-# Set to the name theme to load.
-# Look in ~/.oh-my-zsh/themes/
-#export ZSH_THEME="bira"
-#export ZSH_THEME="wedisagree"
-#export ZSH_THEME="jon"
-#if [ $SYSTEM_TYPE = "Darwin" ]; then
-#  export ZSH_THEME='refined'
-#fi
-
-# safe-paste fixes up/down history breakage
-# https://github.com/robbyrussell/oh-my-zsh/issues/1720
-# `gbr create/publish/delete/track/rename branch_name origin_server`
-# jsontools: pp_json, is_json, urlencode_json, urldecode_json
-# node-docs [section]
-# systemd: add `sc-[command]` aliases to all systemctl cmds
-# urlencode / urldecode
-# git author accounts: https://github.com/walle/gas
-if [ $SYSTEM_TYPE = "Darwin" ]; then
-  plugins=(zsh-completions) # git_remote_branch httpie jira jsontools ng npm)# pip python aws redis-cli rand-quote taskwarrior urltools web-search gas)
-else
-  plugins=(zsh-completions safe-paste zsh-syntax-highlighting bd autojump) # zsh-autosuggestions) # gitfast rails gem rake node  docker encode64 git_remote_branch httpie jira jsontools ng npm pip python aws redis-cli rand-quote systemd taskwarrior urltools web-search gas)
-fi
-
-#source $ZSH/oh-my-zsh.sh
-#if [ $SYSTEM_TYPE != "Darwin" ]; then
-#  autoload -U promptinit; promptinit
-#  prompt pure
-#fi
 
 source ~/.zsh/rake.zsh
 
@@ -101,6 +64,7 @@ setopt interactivecomments
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ## source files
+source ~/.zsh/initializers.sh
 source ~/.zsh/functions.sh
 source ~/.zsh/aliases.sh
 # }}}
@@ -150,11 +114,8 @@ stty -ixon # disable ^S/^Q flow control
 export PAGER='less'
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R --quit-if-one-screen' # --LINE-NUMBERS ' # -R for coloring with source-highlight (external app)
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
-#export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
 export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
-export SAVEHIST=100000
-export HISTSIZE=10000
 export INPUTRC=~/.inputrc
 #export HTTP_PROXY=http://127.0.0.1:8118
 #export http_proxy=http://127.0.0.1:8118
@@ -178,9 +139,10 @@ elif [ `uname -o` = "GNU/Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
 fi
 
-source ${HOME}/.zsh/initializers.sh
+#source ${HOME}/.zsh/initializers.sh
 source ${HOME}/.zsh/initializers_private.sh
 source ${HOME}/.zsh/zshrc.local.work
+source ${HOME}/.zsh/zshrc.local.private
 
 #unalias run-help
 autoload run-help
@@ -218,8 +180,9 @@ if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/
 else
   HISTFILE=~/.zsh_history
 fi
-HISTSIZE=10000
-SAVEHIST=100000
+export HISTSIZE=100000
+export SAVEHIST=100000
+echo $HISTFILE
 
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -237,3 +200,17 @@ typeset -U PATH # remove duplicate paths
 
 # oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
 source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
+
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/sls.zsh ]] && . /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/sls.zsh
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn

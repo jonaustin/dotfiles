@@ -207,6 +207,7 @@ scpc() {
 
 # sum CSV column
 sum_col() {
+  COL=$2
   awk -F ',' '{ x = x + $4 } END { print x }' $1
 }
 
