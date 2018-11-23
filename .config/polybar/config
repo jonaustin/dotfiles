@@ -14,6 +14,7 @@ bordercolor = #333
 accent = #e60053
 
 [settings]
+pseudo-transparency = true
 screenchange-reload = true
 ;throttle-output-for = 10
 ;throttle-output = 5
@@ -40,8 +41,8 @@ height = 28
 ;fixed-center = false
 ;override-redirect = true
 
-
 foreground = ${colors.foreground}
+background = ${colors.background}
 
 ;background-0 = #333
 ;background-1 = #222
@@ -83,8 +84,9 @@ modules-right = filesystem xbacklight wifi battery memory cpu date gmail
 tray-position = right
 tray-padding = 4
 tray-maxsize = 16
-tray-transparent = true
-tray-background = ${root.background}
+;tray-transparent = true
+;tray-background = ${root.background}
+;tray-background = #00000000
 ;tray-detached = true
 ;tray-offset-x = 50
 
