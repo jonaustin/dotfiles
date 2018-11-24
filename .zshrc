@@ -50,16 +50,6 @@ export SYSTEM_TYPE=`uname`
 source ~/.zsh/rake.zsh
 
 # zsh
-unsetopt correctall
-setopt interactivecomments
-# have command completion ignore case - e.g. `git co foo` will complete to `git co FOO`
-# Fair warning; may have side effects: https://unix.stackexchange.com/questions/197700/zsh-case-insensitive-mid-word-completion
-# FIXME: if a completion fails it takes the 1st character of the path you tried to complete and doubles it.
-#zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
-#  '+l:|?=** r:|?=**'
-
-# case insensitive completion
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ## source files
 source ~/.zsh/initializers.sh
@@ -68,22 +58,38 @@ source ~/.zsh/aliases.sh
 # }}}
 
 # Shell init {{{
-unsetopt beep
-bindkey -v # vim mode
+# setopts
+setopt auto_cd              # type bare dir name and cd to it e.g. `$ /`
+setopt complete_in_word     # don't move cursor to end of line on completion
+setopt interactive_comments # allow comments even in interactive shells.
+unsetopt beep               # don't bloody beep
+unsetopt bg_nice            # don't re-nice bg procs to lower priority
+unsetopt correct            # don't autocorrect spelling for args
+unsetopt correct_all        # don't autocorrect spelling for args
+unsetopt flow_control       # disable ^S/^Q flow control
+unsetopt hup                # don't send the HUP signal to running jobs when the shell exits.
+unsetopt list_beep          # don't beep on ambiguous completions
+unsetopt local_options      # allow funcs to have their own setopts (i.e. don't change globally)
+unsetopt local_traps        # allow funcs to have their own signal trap opts (i.e. don't change globally)
 
-key=(
-    BackSpace  "${terminfo[kbs]}"
-    Home       "${terminfo[khome]}"
-    End        "${terminfo[kend]}"
-    Insert     "${terminfo[kich1]}"
-    Delete     "${terminfo[kdch1]}"
-    Up         "${terminfo[kcuu1]}"
-    Down       "${terminfo[kcud1]}"
-    Left       "${terminfo[kcub1]}"
-    Right      "${terminfo[kcuf1]}"
-    PageUp     "${terminfo[kpp]}"
-    PageDown   "${terminfo[knp]}"
-)
+
+# history
+setopt append_history       # appends history file instead of replacing it
+setopt extended_history     # add timestamps to history
+setopt hist_ignore_all_dups # don't record dupes in history
+setopt hist_ignore_space    # remove command line from history list when first character on the line is a space
+setopt hist_reduce_blanks   # remove superflous blanks
+setopt hist_verify          # don't execute, just expand history
+setopt inc_append_history share_history  # adds history incrementally and share it across sessions
+
+# zstyles
+# case insensitive completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# Make new commands immediately visible to zsh
+zstyle ':completion:*' rehash true
+
+# bindkeys
+bindkey -v # vim mode
 
 # history search
 autoload -U up-line-or-beginning-search
@@ -102,10 +108,24 @@ bindkey '^?' backward-delete-char # backspace on chars before start of insert mo
 bindkey '^h' backward-delete-char # ctrl-h also deletes chars
 bindkey '^r' history-incremental-search-backward # ctrl-r starts searching history backward
 
+# FIXME: why did i add this?
+key=(
+    BackSpace  "${terminfo[kbs]}"
+    Home       "${terminfo[khome]}"
+    End        "${terminfo[kend]}"
+    Insert     "${terminfo[kich1]}"
+    Delete     "${terminfo[kdch1]}"
+    Up         "${terminfo[kcuu1]}"
+    Down       "${terminfo[kcud1]}"
+    Left       "${terminfo[kcub1]}"
+    Right      "${terminfo[kcuf1]}"
+    PageUp     "${terminfo[kpp]}"
+    PageDown   "${terminfo[knp]}"
+)
+
 export KEYTIMEOUT=1 # reduce lag between hitting esc and entering normal mode - https://dougblack.io/words/zsh-vi-mode.html, https://superuser.com/a/648046
 
 ulimit -S -c 0 # Don't want any coredumps
-stty -ixon # disable ^S/^Q flow control
 # }}}
 
 # Exports {{{
@@ -146,9 +166,6 @@ autoload -Uz run-help
 unalias run-help
 alias help=run-help
 
-# Make new commands immediately visible to zsh
-zstyle ':completion:*' rehash true
-
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
 
@@ -167,7 +184,6 @@ else
   autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
   autoload -U bashcompinit && bashcompinit # support bash completions
 fi
-
 
 if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
   HISTFILE=$HOME/.zsh_historyw
