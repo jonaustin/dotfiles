@@ -53,7 +53,6 @@ alias ..='cd ..'
 alias -- -='cd -' # -- treats next chars as operand
 
 ## App shortcuts (GUI/Curses)
-#alias sup="rvm use 1.9.2-p180; sup"
 alias ff='firefox'
 
 ## Apps shortcuts (CLI)
@@ -63,7 +62,7 @@ alias h='cd ~/'
 alias lp='lesspipe.sh '
 alias loc='locate'
 alias nd="ncdu ."
-alias vnode='NODE_NO_READLINE=1 rlwrap node'
+alias vnode='NODE_NO_READLINE=1 rlwrap node' # vim node repl
 
 # config files
 alias zc='source $HOME/.zshrc'
@@ -96,51 +95,37 @@ rename-spaces-to-underscores() { find . -type f -exec rename 's/ /_/' '{}' \; } 
 alias rmm3u='find . -iname "*m3u" -print0 | xargs -0 rm'
 alias rmmac='find . -iname "__MACOSX" -print0 | xargs -0 rm -rf'
 alias retag='find . -type f -print0|xargs -0 id3tag '
-alias toptracksall='for n in *; do cd $n; toptracks; cd -; done'
 
 # Vim
 alias vim='nvim'
-#alias v=$EDITOR
-alias sv='sudo $EDITOR'
+alias vimdiff='/usr/bin/nvim -d'
+alias svi='sudo $EDITOR'
+alias svdi='sudo vimdiff'
 alias vvc='$EDITOR ~/.vimrc'
 alias vvcl='$EDITOR ~/.vimrc.local'
 alias vvh='$EDITOR ~/.hyper.js'
 alias vvj='$EDITOR ~/.hyper.js'
-alias vimdiff='/usr/bin/nvim -d'
 
 
 ## Other
 alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
 alias aunpackallr='for n in *rar; do aunpack $n; done'
 alias aunpackallz='for n in *zip; do aunpack $n; done'
-alias rmspace="prename 's/ /_/g' *"
-alias cm='chmod'
 alias c='clear'
-alias e='exit; clear'
-alias svi='sudo vim'
-alias svdi='sudo vimdiff'
-alias S='sudo '
 alias lsg='ls *|grep -i '
-alias mine='sudo chown -R jon.users *; sudo chmod -R 775 *;'
+alias mine='sudo chown -R $USER:$USER *; sudo chmod -R 775 *;'
 alias lsfuncbody='declare -f'
 alias lsfunc='declare -F'
 alias reset='reset; vr'
 alias fdays='find . -mtime '
-alias loci='locate -i'
 
 ## network
 alias pgoo='ping -c2 google.com'
 alias wgetnc='wget --no-check-certificate'
 alias syn='ssh root@10.0.1.8'
 
-# Window Manager
-
 ## Monitoring
 alias it='iotop'
-alias dt='dmesg|tail'
-alias tm='tail -f /var/log/messages.log'
-alias lm='less /var/log/messages.log'
-alias cl='cd /var/log/'
 
 ## Git
 alias gs='git status --ignore-submodules'
@@ -177,41 +162,15 @@ vimgd() { vim -p `git status --short | awk '{print $2}'`; }
 vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
 gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@' } # git branches sorted by date desc
 
-# javascript
-alias jstagsnm='find . -type f -iregex ".*\.js$" -exec jsctags {} -f \; | sed "/^$/d" | sort > tags'
-alias jstags='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed "/^$/d" | sort > tags'
-
 ## ruby
-alias cdstdlib="cd $MY_RUBY_HOME/lib/ruby/1.9.1"
 alias be='bundle exec'
-alias bec='bundle exec cucumber'
-alias wr='which ruby'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-alias cdgems="cd $GEM_HOME"
 function cdgem() { cd ${GEMO_HOME}/gems/$1*; }
-alias qlg='gem contents '
-alias glq='gem contents '
-alias rtags='rvm use 1.8.7-head; rtags --vi -R -f tmp/tags; rvm use default; sed -i -e "s@\./@../@" tmp/tags' # vi compatible rtags (default is emacs) -- and fails on ruby 1.9.2
-alias rctag='ctags -R --exclude=.git --exclude=log *'
-alias gwhois='gem whois '
-gswhois() { for n in `gems $1|cut -f1 -d' '`; do gem whois $n; done; }
-rshowoff() { rvm use 1.8.7; showoff $* ; rvm use default; }
-alias yardserver="yard server -g -r -d -p8809"
-rgrep() { ruby -ne 'puts $_ if $_ =~ /\$1/' $2; }
-alias jekyllr='jekyll --pygments --safe --rdiscount'
 
 # list largest files
 alias bigfiles='find . -type f -ls | sort -nrk7 | head -10'
-
-# sharing files
-share() { scp $1 jon@ssh.lastfmspot.com:/home/jon/apps/lastfmspot/current/public/ }
-alias lf='ssh jon@ssh.lastfmspot.com'
-
-### ruboto
-ruboto_gen_app() { ruboto gen app --package com.${1} --name ${2} --target android-8 --activity ${3:-Main} --path `pwd`/${2} ; }
-alias ruboto_rake_build="CLASSPATH=$JAVA_HOME/lib/tools.jar rake" # jruby rake having issues with java_home... https://github.com/ruboto/ruboto-core/issues#issue/5
 
 # media conversion
 alias wma2ogg='for i in *.wma; do ffmpeg -i $i -acodec vorbis -aq 100 ${i}.ogg; done'
@@ -221,27 +180,11 @@ alias ogv23gp='for n in `ls *.ogv`; do sudo ffmpeg -i $n -r 15 -b 64kb -ac 1 -s 
 alias mp423gp='for n in `ls *.mp4`; do mencoder $n -vf scale=176:144 -oac mp3lame -ovc lavc -o $(echo $n | cut -d "." -f 1).3gp; done'
 
 # terminal window
-alias vr='n=99; while [ $n -gt 0 ]; do echo; n=`echo $n-1|bc`; done'
-vn() { n=$1; while [ $n -gt 0 ]; do echo; n=`echo $n-1|bc`; done; }
-
-## screen
-alias screen='TERM=xterm-256color screen -T $TERM'
-alias scr='screen -Sx $1'
-alias scl='screen -list'
-alias sc='screen -Sx '
-alias sd='screen -Sd'
-#alias scbg='cd ~; screen -c $HOME/.screenrcs/screenrc_bg -S bg'
-#alias scqt='cd ~; screen -c $HOME/.screenrcs/screenrc_qt -S qt'
-#alias scc='cd ~; screen -c $HOME/.screenrcs/screenrc_coding -S code'
+alias vr='for n in `seq 0 99`; do echo; done'
 
 ## Coding
 
-## incantations
-alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
-
 # tmux
-alias scs='tmux attach -t core'
-alias sccs='cd ~; tmux new -s core'
 alias tma='tmux attach'
 alias tmat='tmux attach -t'
 
@@ -249,13 +192,6 @@ alias tmat='tmux attach -t'
 alias digsimple='dig +nocmd +nocomments '
 alias rdns='dig +noall +answer -x ' # reverse dns lookup -- or a simpler way is to just use `host <ip>`
 alias getip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
-
-# ruby/rails
-alias szs='sleep 30; zeus s'
-
-# iphone simulator
-alias iphone_simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
-alias ipad_simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/iPadSimulator.platform/Developer/Applications/iPad\ Simulator.app'
 
 # simple http server
 alias serve='ruby -run -e httpd . -p 5000'
@@ -271,23 +207,14 @@ npm-list() { #'npm list -g --depth=0' # list globally installed modules
 # get remote ip
 alias myip="curl https://canhazip.com/" #"curl ifconfig.me"
 
-# run various updates
-alias maint='sh ~/bin/maintenance.sh'
-
 # https://github.com/nvbn/thefuck
 alias fuck='$(thefuck $(fc -ln -1))'
 
-# Rails/ruby
-alias rnof='bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"'
-
 # Python
-#alias py3='PYENV_VERSION=3.6.1 '
-#alias pip3='PYENV_VERSION=3.6.1 pip3'
 alias pip-upgrade-all=' pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U' # no, really: https://github.com/pypa/pip/issues/59
 
 ### Apps
 alias mpsyt="PYENV_VERSION=3.6.1 mpsyt" # youtube cli player
-alias mimeo='/usr/bin/python -m Mimeo ' # FIXME: messed up pyenv
 
 ### Database
 alias mys='mycli -uroot '

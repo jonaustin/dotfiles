@@ -180,15 +180,9 @@ if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/
 else
   HISTFILE=~/.zsh_history
 fi
-export HISTSIZE=100000
-export SAVEHIST=100000
+HISTSIZE=100000
+SAVEHIST=100000
 echo $HISTFILE
-
-PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 # nodejs
 export PATH=$PATH:./node_modules/.bin
@@ -201,8 +195,6 @@ typeset -U PATH # remove duplicate paths
 # oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
 source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
 
-
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -210,7 +202,5 @@ export NVM_DIR="$HOME/.nvm"
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/sls.zsh ]] && . /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/sls.zsh
+
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
