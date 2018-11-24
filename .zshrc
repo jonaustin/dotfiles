@@ -1,7 +1,7 @@
 # zsh profiling
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
+zmodload zsh/zprof
 #for n in `seq 0 10`; do time zsh -i -c exit; done
-#zmodload zsh/zprof
 export ZPLUG_HOME=$HOME/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
@@ -141,38 +141,33 @@ source ${HOME}/.zsh/initializers_private.sh
 source ${HOME}/.zsh/zshrc.local.work
 source ${HOME}/.zsh/zshrc.local.private
 
-#unalias run-help
-autoload run-help
+# FIXME: why did i put this here?
+autoload -Uz run-help
+unalias run-help
+alias help=run-help
 
-# On slow systems, checking the cached .zcompdump file to see if it must be
-# regenerated adds a noticable delay to zsh startup.  This little hack restricts
-# it to once a day.  It should be pasted into your own completion file.
-#
-# The globbing is a little complicated here:
-# - '#q' is an explicit glob qualifier that makes globbing work within zsh's [[ ]] construct.
-# - 'N' makes the glob pattern evaluate to nothing when it doesn't match (rather than throw a globbing error)
-# - '.' matches "regular files"
-# - 'mh+24' matches files (or directories or whatever) that are older than 24 hours.
-#autoload -Uz compinit
-#if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-#  compinit;
-#else
-#  compinit -C;
-#fi;
-### MAC OS X VERSION+autoload -Uz compinit
-#if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
-#  compinit
-#else
-#  compinit -C
-#fi
+# Make new commands immediately visible to zsh
+zstyle ':completion:*' rehash true
 
-autoload -U compinit && compinit -du # -d cache completion info
-autoload bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
+
+  # https://gist.github.com/ctechols/ca1035271ad134841284
+  setopt EXTENDEDGLOB
+  for dump in $HOME/.zcompdump(#qN.m1); do
+    compinit
+    if [[ -s "$dump" && (! -s "$dump.zwc" || "$dump" -nt "$dump.zwc") ]]; then
+      zcompile "$dump"
+    fi
+  done
+  unsetopt EXTENDEDGLOB
+  compinit -C
+else
+  # FIXME: Test if above works on os x
+  autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
+  autoload -U bashcompinit && bashcompinit # support bash completions
 fi
 
-HELPDIR=/usr/local/share/zsh/help
 
 if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
   HISTFILE=$HOME/.zsh_historyw
@@ -194,14 +189,6 @@ typeset -U PATH # remove duplicate paths
 
 # oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
 source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/serverless.zsh
 
 # load avn
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
