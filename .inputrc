@@ -13,5 +13,3 @@ tab: complete
 
 # automatically add / to end of symlinks so symlinked dirs act like normal ones
 set mark-symlinked-directories on
-
-

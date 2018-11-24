@@ -373,7 +373,7 @@ bindsym $mod+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.sp
 # next
 bindsym $mod+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 # save a spotify trackid to file:
-bindsym $mod+Shift+t exec "$HOME/bin/save_song.sh"
+bindsym $mod+Shift+t exec "$HOME/bin/audio/save_song.sh"
 
 # firetv
 bindsym $mod+p exec "$HOME/bin/firetv  play_pause"

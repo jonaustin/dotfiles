@@ -23,15 +23,13 @@ zplug "zdharma/zsh-diff-so-fancy" # git dsf
 
 #zplug MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
 #zplug djui/alias-tips # alias reminders; ugh adds 300ms to load time
-zplug "peterhurford/git-it-on.zsh"
+zplug "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
 #zplug Tarrasch/zsh-bd # meh, autojump already does it
 #zplug StackExchange/blackbox # gpg encrypt secrets in git repos
 zplug "supercrabtree/k" # pretty directory listings
 
 zplug "sindresorhus/pure", use:pure.zsh, as:theme
-#autoload -U promptinit; promptinit
-#prompt pure
-export RPROMPT='%F{blue}`date +"%F %T"`'
+export RPROMPT='%F{blue}`date +"%F %T"`' # put date on right side
 
 # plugin helpers
 [[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
@@ -71,8 +69,7 @@ source ~/.zsh/aliases.sh
 
 # Shell init {{{
 unsetopt beep
-# zsh
-set -o vi
+bindkey -v # vim mode
 
 key=(
     BackSpace  "${terminfo[kbs]}"
@@ -88,6 +85,7 @@ key=(
     PageDown   "${terminfo[knp]}"
 )
 
+# history search
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 bindkey "$terminfo[kcuu1]" up-line-or-beginning-search # Up
@@ -116,7 +114,6 @@ export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-i
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
-export INPUTRC=~/.inputrc
 #export HTTP_PROXY=http://127.0.0.1:8118
 #export http_proxy=http://127.0.0.1:8118
 # }}}
@@ -174,11 +171,13 @@ autoload bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
 fi
+
 HELPDIR=/usr/local/share/zsh/help
+
 if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
-  HISTFILE=~/.zsh_historyw
+  HISTFILE=$HOME/.zsh_historyw
 else
-  HISTFILE=~/.zsh_history
+  HISTFILE=$HOME/.zsh_history
 fi
 HISTSIZE=100000
 SAVEHIST=100000
@@ -190,6 +189,7 @@ export PATH=$PATH:./node_modules/.bin
 # go
 export GOPATH=$HOME/code/_sandbox/_go
 export PATH=$HOME/code/_sandbox/_go/bin:$PATH
+
 typeset -U PATH # remove duplicate paths
 
 # oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
@@ -203,4 +203,5 @@ export NVM_DIR="$HOME/.nvm"
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/jon/work/merchant-monitoring-api-deploy/node_modules/tabtab/.completions/serverless.zsh
 
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+# load avn
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"

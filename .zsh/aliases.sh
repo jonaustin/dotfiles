@@ -14,7 +14,8 @@ alias -s txt=vim
 
 #sane defaults
 alias sudo='sudo ' # so aliases work
-#alias vi='vim'
+alias fd='fd -HI' # search all files
+alias vi='vim'
 alias spacemacs='emacs'
 alias mkdir='mkdir -p'
 alias grep="grep --color"
