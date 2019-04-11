@@ -60,9 +60,7 @@ lg() {
 }
 
 ### Calculator
-calc() {
-  echo "$*" | bc -l;
-}
+calc() { echo "$*" | bc -l; }
 
 ### mkdir and cd directly
 mkcd() {
@@ -312,3 +310,14 @@ watch-reload() {
 vf() { $EDITOR -p `fd ".*$1.*" ${2:-.}` }
 enote() { $EDITOR -p `fd "$1*" $HOME/notes` }
 note() { less `fd "$1*" $HOME/notes` }
+
+# bluetooth
+btstr() {  
+  cat << EOD                                                                                                                                           2019-02-09 15:
+  [bluetooth]# power on
+  [bluetooth]# agent on
+  [bluetooth]# default-agent
+  [bluetooth]# scan on
+  [bluetooth]# connect  28:11:A5:48:19:A5
+EOD
+}

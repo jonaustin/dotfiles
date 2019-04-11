@@ -1,13 +1,15 @@
 # zsh profiling
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
-zmodload zsh/zprof
+#zmodload zsh/zprof
 #for n in `seq 0 10`; do time zsh -i -c exit; done
 export ZPLUG_HOME=$HOME/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/fasd", from:oh-my-zsh
-zplug "plugins/golang", from:oh-my-zsh
+#zplug "plugins/golang", from:oh-my-zsh
+
+zplug "mkokho/kubemrr" # kubectl completions (sourced below)
 
 #https://github.com/unixorn/awesome-zsh-plugins#plugins
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -87,6 +89,9 @@ setopt inc_append_history share_history  # adds history incrementally and share 
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 # Make new commands immediately visible to zsh
 zstyle ':completion:*' rehash true
+# Use caching so that commands like apt and dpkg complete are useable
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
 
 # bindkeys
 bindkey -v # vim mode
@@ -107,6 +112,7 @@ bindkey "^N" history-beginning-search-forward
 bindkey '^?' backward-delete-char # backspace on chars before start of insert mode (after leaving cmd mode) - https://www.zsh.org/mla/users/2009/msg00812.html
 bindkey '^h' backward-delete-char # ctrl-h also deletes chars
 bindkey '^r' history-incremental-search-backward # ctrl-r starts searching history backward
+
 
 # FIXME: why did i add this?
 key=(
@@ -130,7 +136,11 @@ ulimit -S -c 0 # Don't want any coredumps
 
 # Exports {{{
 export PAGER='less'
-export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --ignore-case --quit-on-intr -R --quit-if-one-screen' # --LINE-NUMBERS ' # -R for coloring with source-highlight (external app)
+# --RAW-CONTROL-CHARS for coloring with external app
+# --squeeze-blank-lines  -- no more than one blank line in a row
+# --quit-on-intr -- quit on interrupt, e.g. C-c
+# --quit-if-one-screen -- quit if content fills less than the screen
+export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --quit-on-intr --quit-if-one-screen --clear-screen'
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
@@ -154,7 +164,15 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   . ${HOME}/.zsh/zshrc.local.osx
 elif [ `uname -o` = "GNU/Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
+  . /usr/share/fzf/completion.zsh
+  . /usr/share/fzf/key-bindings.zsh
 fi
+
+# fzf
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fd --type f'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 #source ${HOME}/.zsh/initializers.sh
 source ${HOME}/.zsh/initializers_private.sh

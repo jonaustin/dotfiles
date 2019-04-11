@@ -54,7 +54,7 @@ fi
 
 ## Node
 # nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion -- ugh, this adds >300ms to zsh startup
 export NVM_DIR="$HOME/.nvm"
 ## https://github.com/creationix/nvm/issues/1261
 ## https://github.com/creationix/nvm/pull/1737
@@ -100,13 +100,6 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
 else
   export VMUX_REALEDITOR_VIM=/usr/bin/vim
   export VMUX_REALEDITOR_NVIM=/usr/bin/nvim
-fi
-
-# antigen - zsh plugin manager
-if [ $SYSTEM_TYPE = "Darwin" ]; then
-  source /usr/local/share/antigen/antigen.zsh
-else
-  source /usr/share/zsh/share/antigen.zsh
 fi
 
 ## Other

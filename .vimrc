@@ -50,6 +50,7 @@ Plug 'Shougo/vimproc.vim', {
 Plug 'rodjek/vim-puppet'
 Plug 'pearofducks/ansible-vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'hashivim/vim-terraform'
 
 " Ruby
 Plug 'tpope/vim-haml'
@@ -415,7 +416,7 @@ let g:ale_javascript_prettier_use_local_config = 1 " use local prettier config i
 " less distracting decorations
 let g:ale_sign_error = '∙' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '◦'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:ale_lint_on_enter = 0 " 0=don't lint on file open; 1=do lint on file open
 let g:airline#extensions#ale#enabled = 1
 let g:ale_set_highlights = 0 " Less distracting
 highlight clear ALEErrorSign
@@ -528,6 +529,7 @@ augroup filetypedetect
   autocmd FileType js UltiSnipsAddFiletypes puppet
   " eyaml
   autocmd BufRead,BufNewFile *.eyaml set filetype=yaml
+  autocmd BufRead,BufNewFile *.yaml set filetype=yaml.cloudformation
   " Expand tabs in Go. seriously gofmt, tabs?
   autocmd FileType go set sw=4 sts=4 expandtab | retab
 augroup END
@@ -600,3 +602,4 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 " verbose <cmd/func> - debug info
 " vim --startuptime /tmp/startup.log +q && vim /tmp/startup.log
 " :messages if a message scrolls by too fast (e.g. error on startup)
+" C-wL vertical (top/bot) split to horiz (left/right) split (C-wJ to go back)

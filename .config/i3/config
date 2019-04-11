@@ -340,7 +340,6 @@ set $green     #859900
 #bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
 #bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
 bindsym $mod+Shift+x exec "firefox"
-bindsym Ctrl+q exec /bin/false # dammit firefox
 bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
 bindsym $mod+Shift+w exec "~/bin/fehbg"
 bindsym $mod+Mod1+w exec "echo `tail -n 1 ~/.fehbg` >> ~/img/best.txt"
@@ -383,10 +382,13 @@ bindsym $mod+Shift+Right exec "$HOME/bin/firetv fast_forward"
 
 # monitors
 bindsym $mod+n exec "xrandr --output HDMI1 --auto"
-bindsym $mod+Shift+n exec "xrandr --output eDP1 --auto --output HDMI1 --off"
+bindsym $mod+Shift+n exec "xrandr --output eDP1 --auto --output HDMI1 --off --output HDMI2 --off --output DP1 --off"
 bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --auto"
 bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --output DP1 --off"
+
 bindsym $mod+b exec "$HOME/bin/brightness.sh"
+bindsym $mod+Shift+greater move container to output right
+bindsym $mod+Shift+less move container to output left
 
 # home automation
 # node-avcontrol for yamaha
@@ -400,8 +402,8 @@ bindsym $mod+Up exec "$HOME/bin/audio/yamaha -u"
 bindsym $mod+Shift+Up exec "$HOME/bin/audio/yamaha -U"
 
 # keyboards
-bindsym $mod+mod1+m exec "xmodmap $HOME/.xmodmap; exec notify-send 'laptop'"
-bindsym $mod+mod1+Shift+m exec "xmodmap $HOME/configs/linux/xmodmap_kinesis; exec notify-send 'kinesis'"
+bindsym $mod+mod1+m exec "xmodmap $HOME/.xmodmap; exec notify-send 'laptop'; pkill xcape; xcape -e 'Control_L=Escape' -t 200"
+bindsym $mod+mod1+Shift+m exec "xmodmap $HOME/configs/linux/xmodmap_kinesis; exec notify-send 'kinesis'; pkill xcape; xcape -e 'Control_L=Escape' -t 200"
 
 # lights
 # movie room lights
@@ -416,7 +418,8 @@ bindsym $mod+mod1+Shift+s exec "kill `cat $HOME/.cache/mpvbg.pid`"
 bindsym $mod+Ctrl+s exec scrot
 bindsym $mod+Ctrl+i exec i3lock -c "000000"
 bindsym $mod+Mod1+l exec "xinput --set-prop 'Logitech Rechargeable Touchpad T650' 'libinput Tapping Enabled' 1"
-bindsym mod1+grave exec i3-quickterm shell
+# &> /tmp/i3-quickterm; python -V > /tmp/pyv" --- if it doesn't work, su to root and pip install i3ipc (system python)
+bindsym mod1+grave exec "i3-quickterm shell"
 
 # inits
 exec --no-startup-id nm-applet
@@ -424,7 +427,7 @@ exec --no-startup-id xmodmap $HOME/.xmodmap
 exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200 # tap ctrl for escape; tap l/r shift for ( and )
 exec --no-startup-id keynav         # control cursor with keyboard
 #exec --no-startup-id guake          # drop down terminal ala quake console
-exec --no-startup-id xflux -z 97203 # red light at night
+exec --no-startup-id xflux -z 97203 # less blue light at night
 exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg    # use my feh bg script
 exec --no-startup-id parcellite  # dead simple clipboard management (switch to clipit fork?)

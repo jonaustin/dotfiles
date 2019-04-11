@@ -3,6 +3,7 @@ alias r='yay -R '
 alias R='yay -R '
 alias yy='aurman -S '
 alias s='yay -Ss'
+alias ss='/usr/bin/s' # override
 alias agu='yay -Syu'
 #alias y='sudo aura -S '
 #alias y='sudo pacman -S '
@@ -81,3 +82,6 @@ alias write-ip='myip >> /tmp/ip'
 
 # xrandr
 alias xrandr-dell-both-on='xrandr --output DP1 --mode 3840x2160 --output eDP1 --mode 2560x1440 --right-of DP1'
+alias movie-projector-on='xrandr --output HDMI2 --auto --output eDP1 --mode 2560x1440 --left-of HDMI2'
+alias movie-projector-off='xrandr --output HDMI2 --off --output eDP1 --mode 2560x1440 --left-of HDMI2'
+alias xrandr-laptop-only='xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --auto '

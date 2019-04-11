@@ -45,11 +45,10 @@ alias lthn='ls -lt|head -n'
 alias ltr='k -cr'
 alias ltrn='ls -ltr| tail -n'
 alias lh='ls -lhS' # sort by filesize
-alias lsd="ls -l $1 | grep '^d'"
-alias lsd2="ls -F $1 | grep \/ | sed -e 's/\/$//g'"
+alias lsd="ls -l $1 | grep '^d'" # only dirs
+alias lsd-names="ls -F $1 | grep \/ | sed -e 's/\/$//g'" # bare dir names for looping and such
 
 # other
-alias less='less -c' # if <1 screenful of text, then show at top of screen, not bottom
 alias ..='cd ..'
 alias -- -='cd -' # -- treats next chars as operand
 
@@ -159,6 +158,9 @@ function ggh() {
   echo $1
   git grep $1 $(git rev-list --all)
 }
+function git-blame-all() {
+  git ls-files -z | xargs -0n1 git blame -w --show-email | perl -n -e '/^.*?\((.*?)\s+[\d]{4}/; print $1,"\n"' | sort -f | uniq -c | sort -n
+}
 vimgd() { vim -p `git status --short | awk '{print $2}'`; }
 vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
 gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@' } # git branches sorted by date desc
@@ -244,3 +246,8 @@ alias cur-monitor="xrandr | grep -C 3 '*' | grep DP | awk '{print \$1}'"
 # work
 alias wvpn='nmcli con down "US Seattle"; nmcli con up ls'
 alias hvpn='nmcli con down ls; nmcli con up "US Seattle"'
+
+# s (web-cli search)
+alias ss='/usr/bin/s' # override s aliased to yay
+alias sa='/usr/bin/s -p amazon'
+alias sw='/usr/bin/s -p wikipedia'
