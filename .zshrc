@@ -2,8 +2,16 @@
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
 #zmodload zsh/zprof
 #for n in `seq 0 10`; do time zsh -i -c exit; done
-export ZPLUG_HOME=$HOME/opt/zplug
-source $ZPLUG_HOME/init.zsh
+
+export SYSTEM_TYPE=`uname`
+
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export ZPLUG_HOME=/usr/local/opt/zplug
+  source $ZPLUG_HOME/init.zsh
+else
+  export ZPLUG_HOME=$HOME/opt/zplug
+  source $ZPLUG_HOME/init.zsh
+fi;
 
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/fasd", from:oh-my-zsh
@@ -46,8 +54,6 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load #--verbose
-
-export SYSTEM_TYPE=`uname`
 
 source ~/.zsh/rake.zsh
 
