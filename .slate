@@ -17,7 +17,7 @@ bind e:cmd hint ASDFGHJKLQWERTYUIOPCVBN
 alias hyper ctrl;alt;cmd
 
 # Apps
-alias browser 'Chrome.app'
+alias browser 'Firefox.app'
 
 # Hints
 alias showHintsLeftHand hint AOEUIYQJKX

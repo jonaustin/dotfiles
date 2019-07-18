@@ -83,6 +83,9 @@ Plug 'jason0x43/vim-js-indent'
 Plug 'kien/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
 Plug 'mileszs/ack.vim'                " :Ack <search>
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 Plug 'Wraul/vim-easytags', { 'branch': 'fix-universal-detection' } " ctags that just work (mostly; use universal ctags fix branch)
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
@@ -269,7 +272,8 @@ silent execute '!mkdir -p $HOME/.vimundo'
 
 " Vim UI {
 set background=dark                 " Assume a dark background
-colo vim-material
+"colo vim-material
+colo hybrid_material
 set incsearch      " find as you type search
 set hlsearch       " highlight search terms
 set winminheight=0 " windows can be 0 line high
@@ -587,6 +591,25 @@ function! RemoveFancyCharacters()
     :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
 endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
+
+" https://thoughtbot.com/blog/faster-grepping-in-vim
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" This defines a new command Ag to search for the provided text and open a “quickfix” window:
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+" bind \ (backward slash) to grep shortcut
+nnoremap \ :Ag<SPACE>
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
