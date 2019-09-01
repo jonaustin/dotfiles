@@ -209,14 +209,14 @@ else
   autoload -U bashcompinit && bashcompinit # support bash completions
 fi
 
-if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
-  HISTFILE=$HOME/.zsh_historyw
+#if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export HISTFILE=$HOME/.zsh_historyw
 else
-  HISTFILE=$HOME/.zsh_history
+  export HISTFILE=$HOME/.zsh_history
 fi
-HISTSIZE=100000
-SAVEHIST=100000
-echo $HISTFILE
+export HISTSIZE=100000
+export SAVEHIST=100000
 
 # nodejs
 export PATH=$PATH:./node_modules/.bin
@@ -227,8 +227,11 @@ export PATH=$HOME/code/_sandbox/_go/bin:$PATH
 
 typeset -U PATH # remove duplicate paths
 
-# oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
-source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
-
 # load avn
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
+
+### ZSH Completions ###
+source $ZPLUG_REPOS/mkokho/kubemrr/kubectl_zsh_completions
+
+# oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
+source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh

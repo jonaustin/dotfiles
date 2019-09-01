@@ -24,7 +24,8 @@ Plug 'lambdalisue/vim-pyenv'
 
 " Completions
 " https://stackoverflow.com/a/22253548/617320
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>

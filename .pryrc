@@ -1,6 +1,6 @@
 # vim: ft=ruby
 
-Pry.config.prompt = Pry::NAV_PROMPT
+#Pry.config.prompt = Pry::NAV_PROMPT
 
 # http://cubiclemuses.com/cm/articles/2011/12/19/pry-ruby-open/
 # reload <file>
