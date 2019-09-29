@@ -251,3 +251,15 @@ alias hvpn='nmcli con down ls; nmcli con up "US Seattle"'
 alias ss='/usr/bin/s' # override s aliased to yay
 alias sa='/usr/bin/s -p amazon'
 alias sw='/usr/bin/s -p wikipedia'
+
+# fasd
+# these are largely the same as the aliases defined in /usr/bin/fasd script
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias f='fasd -f'        # file
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias j='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection

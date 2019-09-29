@@ -627,3 +627,4 @@ nnoremap \ :Ag<SPACE>
 " vim --startuptime /tmp/startup.log +q && vim /tmp/startup.log
 " :messages if a message scrolls by too fast (e.g. error on startup)
 " C-wL vertical (top/bot) split to horiz (left/right) split (C-wJ to go back)
+" c-a / c-x -- increment / decrement number

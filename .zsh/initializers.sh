@@ -92,6 +92,10 @@ nvm() {
   nvm "$@"
 }
 
+## Golang
+export GOPATH=$HOME/opt/golang
+export PATH=$HOME/opt/golang/bin:$PATH
+
 # vmux
 export VMUX_EDITOR=nvim
 if [ $SYSTEM_TYPE = "Darwin" ]; then
@@ -103,10 +107,6 @@ else
 fi
 
 ## Other
-
-# tabtab source for serverless package (npm i -g tabtab)
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/jon/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/jon/.nvm/versions/node/v6.8.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
 
 # fzf fuzzy finder - ctrl-r (history), ctrl-t (files)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

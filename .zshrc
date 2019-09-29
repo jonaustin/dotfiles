@@ -14,7 +14,7 @@ else
 fi;
 
 zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/fasd", from:oh-my-zsh
+zplug "plugins/fasd", from:oh-my-zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 #zplug "plugins/golang", from:oh-my-zsh
 
 zplug "mkokho/kubemrr" # kubectl completions (sourced below)
@@ -26,7 +26,7 @@ zplug "zsh-users/zsh-completions"
 #zplug "zsh-users/zaw" # Ctrl-x
 zplug "mafredri/zsh-async"
 zplug "fcambus/ansiweather"
-zplug "wting/autojump"
+#zplug "wting/autojump" # just use fasd alias 'z'
 #zplug Tarrasch/zsh-bd
 zplug "zdharma/zsh-diff-so-fancy" # git dsf
 #zplug h3poteto/zsh-ec2ssh
@@ -38,11 +38,12 @@ zplug "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your 
 #zplug StackExchange/blackbox # gpg encrypt secrets in git repos
 zplug "supercrabtree/k" # pretty directory listings
 
-zplug "sindresorhus/pure", use:pure.zsh, as:theme
-export RPROMPT='%F{blue}`date +"%F %T"`' # put date on right side
+zplug "romkatv/powerlevel10k", as:theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
 
 # plugin helpers
-[[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
+#[[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -221,10 +222,6 @@ export SAVEHIST=100000
 # nodejs
 export PATH=$PATH:./node_modules/.bin
 
-# go
-export GOPATH=$HOME/code/_sandbox/_go
-export PATH=$HOME/code/_sandbox/_go/bin:$PATH
-
 typeset -U PATH # remove duplicate paths
 
 # load avn
@@ -234,4 +231,4 @@ typeset -U PATH # remove duplicate paths
 source $ZPLUG_REPOS/mkokho/kubemrr/kubectl_zsh_completions
 
 # oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
-source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
+#source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
