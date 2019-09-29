@@ -142,11 +142,11 @@ bindsym $mod+d focus child
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-#bindsym $mod+minus scratchpad show
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
-bindsym $mod+minus scratchpad show
+#bindsym $mod+minus scratchpad show
+# note: just toggle floating to remove from scratchpad
 
 # Automatic back-and-forth when switching to the current workspace
 workspace_auto_back_and_forth yes
@@ -289,9 +289,15 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
+        # resize.py
+        # https://blog.cppse.nl/i3-floating-window-resize
+        bindsym Shift+k exec $HOME/bin/resize.py inc
+        bindsym Shift+j exec $HOME/bin/resize.py dec
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+
 }
 
 bindsym $mod+r mode "resize"
@@ -361,9 +367,9 @@ bindsym $mod+Mod1+bracketleft exec "xbacklight -dec 1; notify-send $(xbacklight 
 bindsym Ctrl+Print exec "xbacklight -set 3"
 
 # volume
-bindsym shift+Print exec $HOME/bin/audio/volume -m
+bindsym shift+Print exec $HOME/bin/audio/volume -m # mute
 #bindsym Print exec $HOME/bin/audio/volume -d
-#bindsym $mod+minus exec $HOME/bin/audio/volume -d
+bindsym $mod+minus exec $HOME/bin/audio/volume -d
 bindsym $mod+equal exec $HOME/bin/audio/volume -u
 bindsym Pause exec $HOME/bin/audio/volume -u
 
