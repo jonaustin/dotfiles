@@ -28,7 +28,7 @@ Plug 'lambdalisue/vim-pyenv'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>
+Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
 Plug 'honza/vim-snippets'
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
@@ -62,6 +62,38 @@ Plug 'tpope/vim-rails'
 
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve'
+" https://hackernoon.com/my-neovim-setup-for-go-7f7b6e805876 
+"  ]] takes you to the next function or method
+"  [[ takes you to the previous function or method
+"  shift-K to get docs for a func
+au FileType go set noexpandtab
+au FileType go set shiftwidth=4
+au FileType go set softtabstop=4
+au FileType go set tabstop=4
+let g:go_auto_type_info = 1 " show actual data type in status line when hovered
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses of that var
+let g:go_fmt_command = "goimports" " automatically import dependencies after safe
+" Error and warning signs.
+"let g:ale_sign_error = '⤫'
+"let g:ale_sign_warning = '⚠'
+au FileType go nmap <leader>gt :GoDeclsDir<cr> " show all funcs in file
+au FileType go nmap <F12> <Plug>(go-def) " go to definition of func
+" switch between file and tests
+" au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+" au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+" au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+"au FileType go nmap <F9> :GoCoverageToggle -short<cr> " test coverage
+" Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
 
 " Javascript
 Plug 'pangloss/vim-javascript'
@@ -490,8 +522,13 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " Omni Completion
 "set completeopt+=noinsert " autoselect
 "set completeopt=menu,longest,preview
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" ^n/^p if popup menu shows up (multiple completions); else just tab
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"  
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" c-y (complete) on enter
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" make <cr> complete with first completion without selecting a completion
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
 " File Types {
 "" Filetype detection
@@ -522,6 +559,8 @@ augroup filetypedetect
   "autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " json
   autocmd BufRead,BufNewFile .{eslintrc,babelrc} setf json
+  " jsonc
+  autocmd FileType json syntax match Comment +\/\/.\+$+
   " groovy
   autocmd BufRead,BufNewFile *.gradle setf groovy
   " gitconfig
@@ -535,8 +574,6 @@ augroup filetypedetect
   " eyaml
   autocmd BufRead,BufNewFile *.eyaml set filetype=yaml
   autocmd BufRead,BufNewFile *.yaml set filetype=yaml.cloudformation
-  " Expand tabs in Go. seriously gofmt, tabs?
-  autocmd FileType go set sw=4 sts=4 expandtab | retab
 augroup END
 " }
 

@@ -19,11 +19,24 @@ zplug "plugins/fasd", from:oh-my-zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 
 zplug "mkokho/kubemrr" # kubectl completions (sourced below)
 
-#https://github.com/unixorn/awesome-zsh-plugins#plugins
+# node
+export NVM_LAZY_LOAD=true
+#zplug "lukechilds/zsh-nvm" # even with lazy loading adds ~0.1 to zsh startup
+
+# navi
+zplug "denisidoro/navi", use: navi.plugin.zsh # ^g
+zplug "denisidoro/navi", as:command, use:"navi"
+
+# https://github.com/unixorn/awesome-zsh-plugins#plugins
+# zaw
+zplug "zsh-users/zaw" # have to source manually; 'use:' doesn't seem to work
+  zplug "termoshtt/zaw-systemd"
+  source $ZPLUG_REPOS/zsh-users/zaw/zaw.zsh # Ctrl-x; (^x then ;)
+  zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
+  zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-#zplug "zsh-users/zaw" # Ctrl-x
 zplug "mafredri/zsh-async"
 zplug "fcambus/ansiweather"
 #zplug "wting/autojump" # just use fasd alias 'z'
@@ -38,6 +51,7 @@ zplug "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your 
 #zplug StackExchange/blackbox # gpg encrypt secrets in git repos
 zplug "supercrabtree/k" # pretty directory listings
 
+#zplug "sindresorhus/pure", use:pure.zsh, as:theme
 zplug "romkatv/powerlevel10k", as:theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
@@ -45,13 +59,14 @@ zplug "romkatv/powerlevel10k", as:theme
 # plugin helpers
 #[[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
 
+# commented because this adds ~0.1s to zsh startup; just `zplug install` instead
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+#if ! zplug check --verbose; then
+#    printf "Install? [y/N]: "
+#    if read -q; then
+#        echo; zplug install
+#    fi
+#fi
 
 # Then, source plugins and add commands to $PATH
 zplug load #--verbose
