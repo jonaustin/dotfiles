@@ -35,22 +35,22 @@ eval "$(direnv hook zsh)"
 
 ## Ruby
 # rbenv
-export RBENV_VERSION=2.5.3
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(command rbenv init -)"
+#export RBENV_VERSION=2.5.3
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(command rbenv init -)"
 
 ## Python
 # pyenv
-export PYTHON_CONFIGURE_OPTS="--enable-shared" # for youcompleteme
-eval "$(pyenv init -)"
-#export PYENV_VERSION=3.6.1 #2.7.13 # use pyenv global
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
-if [ $SYSTEM_TYPE = "Darwin" ]; then
-  . /usr/local/share/zsh/site-functions/pyenv.zsh
-else
-  . $(pyenv root)/completions/pyenv.zsh
-fi
+#export PYTHON_CONFIGURE_OPTS="--enable-shared" # for youcompleteme
+#eval "$(pyenv init -)"
+##export PYENV_VERSION=3.6.1 #2.7.13 # use pyenv global
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/shims:$PATH"
+#if [ $SYSTEM_TYPE = "Darwin" ]; then
+#  . /usr/local/share/zsh/site-functions/pyenv.zsh
+#else
+#  . $(pyenv root)/completions/pyenv.zsh
+#fi
 
 ## Node
 # nvm
@@ -87,10 +87,10 @@ nvm-init() {
       nvm use --silent "$nvm_auto_load_version"
   fi
 }
-nvm() {
-  nvm-init
-  nvm "$@"
-}
+#nvm() {
+#  nvm-init
+#  nvm "$@"
+#}
 
 ## Golang
 export GOPATH=$HOME/opt/golang

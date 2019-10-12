@@ -20,7 +20,7 @@ if !has('nvim')
   Plug 'roxma/vim-hug-neovim-rpc' " compatibility layer for vim8
 endif
 
-Plug 'lambdalisue/vim-pyenv'
+"Plug 'lambdalisue/vim-pyenv'
 
 " Completions
 " https://stackoverflow.com/a/22253548/617320

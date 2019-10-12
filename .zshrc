@@ -20,8 +20,12 @@ zplug "plugins/fasd", from:oh-my-zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 zplug "mkokho/kubemrr" # kubectl completions (sourced below)
 
 # node
-export NVM_LAZY_LOAD=true
+#export NVM_LAZY_LOAD=true
 #zplug "lukechilds/zsh-nvm" # even with lazy loading adds ~0.1 to zsh startup
+
+# multi-lang version mgr
+export asdf_dir=/opt/asdf-vm/
+zplug "kiurchv/asdf.plugin.zsh", defer:2
 
 # navi
 zplug "denisidoro/navi", use: navi.plugin.zsh # ^g
