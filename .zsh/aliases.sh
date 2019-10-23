@@ -163,6 +163,7 @@ function git-blame-all() {
 }
 vimgd() { vim -p `git status --short | awk '{print $2}'`; }
 vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
+vimgdbr() { vim -p `git diff $1 --numstat | awk '{print $3}'`; }
 gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@' } # git branches sorted by date desc
 
 ## ruby

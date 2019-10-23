@@ -4,6 +4,7 @@
 #for n in `seq 0 10`; do time zsh -i -c exit; done
 
 export SYSTEM_TYPE=`uname`
+export DOTFILES=$HOME/.config
 
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export ZPLUG_HOME=/usr/local/opt/zplug
@@ -15,21 +16,35 @@ fi;
 
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/fasd", from:oh-my-zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
+# built-ins - because i forget the aliases
+#alias a='fasd -a'        # any
+#alias s='fasd -si'       # show / search / select
+#alias d='fasd -d'        # directory
+#alias f='fasd -f'        # file
+#alias sd='fasd -sid'     # interactive directory selection
+#alias sf='fasd -sif'     # interactive file selection
+#alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+#alias zz='fasd_cd -d -i' # cd with interactive selection
+
 #zplug "plugins/golang", from:oh-my-zsh
 
-zplug "mkokho/kubemrr" # kubectl completions (sourced below)
+#zplug "mkokho/kubemrr" # kubectl completions (sourced below)
 
 # node
 #export NVM_LAZY_LOAD=true
 #zplug "lukechilds/zsh-nvm" # even with lazy loading adds ~0.1 to zsh startup
 
 # multi-lang version mgr
-export asdf_dir=/opt/asdf-vm/
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export asdf_dir=$(brew --prefix asdf)
+else
+  export asdf_dir=/opt/asdf-vm/
+fi;
 zplug "kiurchv/asdf.plugin.zsh", defer:2
 
 # navi
-zplug "denisidoro/navi", use: navi.plugin.zsh # ^g
-zplug "denisidoro/navi", as:command, use:"navi"
+#zplug "denisidoro/navi", use: navi.plugin.zsh # ^g
+#zplug "denisidoro/navi", as:command, use:"navi"
 
 # https://github.com/unixorn/awesome-zsh-plugins#plugins
 # zaw
@@ -55,9 +70,9 @@ zplug "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your 
 #zplug StackExchange/blackbox # gpg encrypt secrets in git repos
 zplug "supercrabtree/k" # pretty directory listings
 
-#zplug "sindresorhus/pure", use:pure.zsh, as:theme
+zplug "sindresorhus/pure", use:pure.zsh, as:theme
 zplug "romkatv/powerlevel10k", as:theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# To customize prompt, run `p10k configure` or edit .p10k.zsh.
 [[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
 
 # plugin helpers
@@ -125,13 +140,17 @@ bindkey -v # vim mode
 # history search
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
-bindkey "$terminfo[kcuu1]" up-line-or-beginning-search # Up
+
+if [ ! $SYSTEM_TYPE = "Darwin" ]; then
+  bindkey "$terminfo[kcuu1]" up-line-or-beginning-search # Up
+  bindkey "$terminfo[kcud1]" down-line-or-beginning-search # down
+fi;
 bindkey '^[[A' up-line-or-search # terminfo above doesn't work in termite
 bindkey "^P" history-beginning-search-backward
 
 autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
-bindkey "$terminfo[kcud1]" down-line-or-beginning-search # down
+
 bindkey '^[[B' down-line-or-search # terminfo above doesn't work in termite
 bindkey "^N" history-beginning-search-forward
 
@@ -186,12 +205,16 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
 if [ $SYSTEM_TYPE = "Darwin" ]; then
-  export PATH="$PATH:/sbin:/usr/sbin"
+  export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
   . ${HOME}/.zsh/zshrc.local.osx
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 elif [ `uname -o` = "GNU/Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
   . /usr/share/fzf/completion.zsh
   . /usr/share/fzf/key-bindings.zsh
+
+  # oh-my-zsh aws doesn't work for some reason in linux (can't find autoload?! even though SHELL==zsh), so source directly
+  source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
 fi
 
 # fzf
@@ -210,6 +233,7 @@ autoload -Uz run-help
 unalias run-help
 alias help=run-help
 
+#fpath+=~/.zfunc # for poetry (python)
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
 
@@ -244,10 +268,40 @@ export PATH=$PATH:./node_modules/.bin
 typeset -U PATH # remove duplicate paths
 
 # load avn
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
+#[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
 
 ### ZSH Completions ###
-source $ZPLUG_REPOS/mkokho/kubemrr/kubectl_zsh_completions
+#source $ZPLUG_REPOS/mkokho/kubemrr/kubectl_zsh_completions
 
 # oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
 #source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
+
+# go
+export GOPATH=$HOME/code/_sandbox/_go
+export PATH=$HOME/code/_sandbox/_go/bin:$PATH
+
+# python
+## pyenv
+#export PATH="$PYENV_ROOT/shims:$PATH" # due to path ordering (touch PATH later in zshrc) had to add this at bottom of zshrc
+#export PYTHON_CONFIGURE_OPTS="--enable-shared" # for youcompleteme
+#eval "$(pyenv init -)"
+#export PYENV_VERSION=3.6.1 #2.7.13 # use pyenv global
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/shims:$PATH"
+#if [ $SYSTEM_TYPE = "Darwin" ]; then
+#  . /usr/local/share/zsh/site-functions/pyenv.zsh
+#else
+#  . $(pyenv root)/completions/pyenv.zsh
+#fi
+
+## poetry
+#export PATH="$HOME/.poetry/bin:$PATH"
+
+# load avn
+#[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
+
+# at end otherwise these get overwritten...somehow
+#alias v='fasd -f -e $EDITOR' # quick opening files with vim
+#alias vv='fasd -f -e $EDITOR' # quick opening files with vim
+#alias m='fasd -f -e mplayer' # quick opening files with mplayer
+#alias o='fasd -a -e xdg-open' # quick opening files with xdg-open

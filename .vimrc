@@ -63,7 +63,7 @@ Plug 'tpope/vim-rails'
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sebdah/vim-delve'
-" https://hackernoon.com/my-neovim-setup-for-go-7f7b6e805876 
+" https://hackernoon.com/my-neovim-setup-for-go-7f7b6e805876
 "  ]] takes you to the next function or method
 "  [[ takes you to the previous function or method
 "  shift-K to get docs for a func
@@ -164,7 +164,7 @@ Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
-Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8 
+Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
 Plug 'rakr/vim-one' " true color
 Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
 Plug 'w0ng/vim-hybrid'
@@ -523,7 +523,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "set completeopt+=noinsert " autoselect
 "set completeopt=menu,longest,preview
 " ^n/^p if popup menu shows up (multiple completions); else just tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"  
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " c-y (complete) on enter
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -642,8 +642,10 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " This defines a new command Ag to search for the provided text and open a “quickfix” window:
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 " bind \ (backward slash) to grep shortcut
@@ -665,3 +667,5 @@ nnoremap \ :Ag<SPACE>
 " :messages if a message scrolls by too fast (e.g. error on startup)
 " C-wL vertical (top/bot) split to horiz (left/right) split (C-wJ to go back)
 " c-a / c-x -- increment / decrement number
+" delete blank lines -> :g/^$/d
+"       or :%s/\n\n/\r/

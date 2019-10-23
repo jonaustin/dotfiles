@@ -56,8 +56,8 @@ eval "$(direnv hook zsh)"
 # nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion -- ugh, this adds >300ms to zsh startup
 export NVM_DIR="$HOME/.nvm"
-## https://github.com/creationix/nvm/issues/1261
-## https://github.com/creationix/nvm/pull/1737
+# https://github.com/creationix/nvm/issues/1261
+# https://github.com/creationix/nvm/pull/1737
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # OMG nvm startup is slow
 nvm-init() {
   # lazy load as loading it by default adds ~300ms to load time
@@ -115,3 +115,4 @@ fi
 transfer() {
     wget -t 1 -qO - --method=PUT --body-file="$1" --header="Content-Type: $(file -b --mime-type $1)" https://transfer.sh/$(basename $1);
 }
+

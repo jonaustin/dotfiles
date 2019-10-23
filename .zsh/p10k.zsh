@@ -59,9 +59,9 @@
       # go_version            # go version (https://golang.org)
       # rust_version          # rustc version (https://www.rust-lang.org)
       # dotnet_version        # .NET version (https://dotnet.microsoft.com)
-      rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
-      rvm                     # ruby version from rvm (https://rvm.io)
-      kubecontext             # current kubernetes context (https://kubernetes.io/)
+      #rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
+      #rvm                     # ruby version from rvm (https://rvm.io)
+      #kubecontext             # current kubernetes context (https://kubernetes.io/)
       terraform               # terraform workspace (https://www.terraform.io)
       aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
       #context                 # user@hostname
