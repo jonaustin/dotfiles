@@ -14,7 +14,7 @@ else
   source $ZPLUG_HOME/init.zsh
 fi;
 
-zplug "plugins/command-not-found", from:oh-my-zsh
+#zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/fasd", from:oh-my-zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 # built-ins - because i forget the aliases
 #alias a='fasd -a'        # any
@@ -29,6 +29,7 @@ zplug "plugins/fasd", from:oh-my-zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 #zplug "plugins/golang", from:oh-my-zsh
 
 #zplug "mkokho/kubemrr" # kubectl completions (sourced below)
+zplug "stevemcilwain/nonotes" # nmap zsh funcs
 
 # node
 #export NVM_LAZY_LOAD=true
@@ -56,12 +57,19 @@ zplug "zsh-users/zaw" # have to source manually; 'use:' doesn't seem to work
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-zplug "mafredri/zsh-async"
+zplug "mafredri/zsh-async", use:"async.zsh"
 zplug "fcambus/ansiweather"
 #zplug "wting/autojump" # just use fasd alias 'z'
 #zplug Tarrasch/zsh-bd
 zplug "zdharma/zsh-diff-so-fancy" # git dsf
 #zplug h3poteto/zsh-ec2ssh
+zplug "chriskempson/base16-shell"
+
+# and see bindkey below
+#zplug "aperezdc/zsh-notes"
+#zstyle :notes home  $HOME/notes/
+
+
 
 #zplug MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
 #zplug djui/alias-tips # alias reminders; ugh adds 300ms to load time
@@ -69,8 +77,19 @@ zplug "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your 
 #zplug Tarrasch/zsh-bd # meh, autojump already does it
 #zplug StackExchange/blackbox # gpg encrypt secrets in git repos
 zplug "supercrabtree/k" # pretty directory listings
+zplug "wfxr/forgit" # ga; glo; gi; gd; grh; gcf; gss; gclean
+zplug "hlohm/mfunc" # dynamically define and use shell functions
+#zplug "unixorn/warhol.plugin.zsh" # grc/lscolors auto # adds 0.1-0.2s 
+#zplug "amstrad/oh-my-matrix"
 
-zplug "sindresorhus/pure", use:pure.zsh, as:theme
+# work
+export JIRA_URL=https://legitscript.atlassian.net/
+zplug "plugins/jira", from:oh-my-zsh
+#zplug "gerges/oh-my-zsh-jira-plus"
+
+#zplug "sindresorhus/pure", use:pure.zsh, as:theme
+# Theme
+#zplug "sindresorhus/pure", use:pure.zsh, as:theme
 zplug "romkatv/powerlevel10k", as:theme
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 [[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
@@ -78,6 +97,7 @@ zplug "romkatv/powerlevel10k", as:theme
 # plugin helpers
 #[[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
 
+# zplug config
 # commented because this adds ~0.1s to zsh startup; just `zplug install` instead
 # Install plugins if there are plugins that have not been installed
 #if ! zplug check --verbose; then
@@ -135,7 +155,7 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
 
 # bindkeys
-bindkey -v # vim mode
+bindkey -v # vi mode
 
 # history search
 autoload -U up-line-or-beginning-search
@@ -156,8 +176,10 @@ bindkey "^N" history-beginning-search-forward
 
 bindkey '^?' backward-delete-char # backspace on chars before start of insert mode (after leaving cmd mode) - https://www.zsh.org/mla/users/2009/msg00812.html
 bindkey '^h' backward-delete-char # ctrl-h also deletes chars
-bindkey '^r' history-incremental-search-backward # ctrl-r starts searching history backward
+bindkey '^r' history-incremental-search-backward # ctrl-r starts searching history backward (note: doesn't work in vi mode)
 
+# zsh-notes
+bindkey '^N' notes-edit-widget
 
 # FIXME: why did i add this?
 key=(
@@ -233,9 +255,10 @@ autoload -Uz run-help
 unalias run-help
 alias help=run-help
 
-#fpath+=~/.zfunc # for poetry (python)
+fpath+=~/.zfunc # for poetry (python)
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
+  fpath=(/usr/local/share/zsh-completions $fpath)
 
   # https://gist.github.com/ctechols/ca1035271ad134841284
   setopt EXTENDEDGLOB
@@ -300,8 +323,20 @@ export PATH=$HOME/code/_sandbox/_go/bin:$PATH
 # load avn
 #[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
 
-# at end otherwise these get overwritten...somehow
-#alias v='fasd -f -e $EDITOR' # quick opening files with vim
-#alias vv='fasd -f -e $EDITOR' # quick opening files with vim
-#alias m='fasd -f -e mplayer' # quick opening files with mplayer
-#alias o='fasd -a -e xdg-open' # quick opening files with xdg-open
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export BROWSER='open'
+  export EDITOR='/usr/local/bin/nvim' # homebrew
+  export SHELL='/usr/local/bin/zsh'
+else
+  export EDITOR='/usr/bin/nvim'
+  export SYSTEMD_EDITOR=$EDITOR
+  export BROWSER='/home/bin/firefox'
+  export SHELL='/usr/bin/zsh'
+  export PATH=${PATH}:$HOME/.local/bin
+  # gtk3 hidpi
+  export GDK_SCALE=2
+  export GDK_DPI_SCALE=0.5
+  export XCURSOR_SIZE=48
+  export TERMINAL=termite
+fi
+
