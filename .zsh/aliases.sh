@@ -90,8 +90,12 @@ alias gh='cat ~/.zsh_history* | grep -i'
 pg() { ps aux | grep -v grep | grep -i ${1}; }
 howlong() { ps -p ${1} -o etime=; }
 sport() { lsof -P -iTCP:${1}; }
-alias cdb='cd ..; cd -' # cd back
-rename-spaces-to-underscores() { find . -type f -exec rename 's/ /_/' '{}' \; } # http://stackoverflow.com/a/15012788
+alias cdb='cd ..; cd -' # cd back (sometimes needed to reload dotfiles)
+
+# http://stackoverflow.com/a/15012788
+rename-spaces-to-underscores() { 
+  find . -type f -exec rename 's/ /_/' '{}' \; 
+}
 
 ## Music
 alias rmm3u='find . -iname "*m3u" -print0 | xargs -0 rm'
@@ -99,8 +103,9 @@ alias rmmac='find . -iname "__MACOSX" -print0 | xargs -0 rm -rf'
 alias retag='find . -type f -print0|xargs -0 id3tag '
 
 # Vim
-alias vim='nvim'
-alias vimdiff='/usr/bin/nvim -d'
+alias vim='dntw_edit'
+#alias vim='nvim'
+alias vimdiff='$EDITOR -d'
 alias svi='sudo $EDITOR'
 alias svdi='sudo vimdiff'
 alias vvc='$EDITOR ~/.vimrc'

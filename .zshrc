@@ -115,7 +115,6 @@ source ~/.zsh/rake.zsh
 # zsh
 
 ## source files
-source ~/.zsh/initializers.sh
 source ~/.zsh/functions.sh
 source ~/.zsh/aliases.sh
 # }}}
@@ -322,6 +321,9 @@ export PATH=$HOME/code/_sandbox/_go/bin:$PATH
 
 # load avn
 #[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
+
+eval "$(direnv hook zsh)"
+. $HOME/opt/dntw/dntw.sh # dedicated neovim tmux window; start tmux with `dntw`
 
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export BROWSER='open'
