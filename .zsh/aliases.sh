@@ -4,6 +4,9 @@
 #alias cat=bat
 alias ll=k; alias lsl='ls -l'
 
+# remembering to reshim asdf is a pain
+alias pip="$@ ; asdf reshim"
+
 # open with suffix aliases
 alias -s md=vim
 alias -s markdown=vim

@@ -6,17 +6,18 @@
 export SYSTEM_TYPE=`uname`
 export DOTFILES=$HOME/.config
 
-if [ $SYSTEM_TYPE = "Darwin" ]; then
-  export ZPLUG_HOME=/usr/local/opt/zplug
-  source $ZPLUG_HOME/init.zsh
-else
-  export ZPLUG_HOME=$HOME/opt/zplug
-  source $ZPLUG_HOME/init.zsh
-fi;
+source ~/.zplugin/bin/zplugin.zsh
 
-#zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/fasd", from:oh-my-zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
-# built-ins - because i forget the aliases
+if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
+  source $HOME/bin/i3_completion.sh
+  fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
+autoload -U bashcompinit && bashcompinit # support bash completions
+
+#zplugin OMZ::plugins/command-not-found/command-not-found.zsh
+zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
+# built-ins - until they get muscle memory
 #alias a='fasd -a'        # any
 #alias s='fasd -si'       # show / search / select
 #alias d='fasd -d'        # directory
@@ -26,10 +27,10 @@ zplug "plugins/fasd", from:oh-my-zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 #alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 #alias zz='fasd_cd -d -i' # cd with interactive selection
 
-#zplug "plugins/golang", from:oh-my-zsh
+zplugin snippet OMZ::plugins/golang/golang.plugin.zsh
 
 #zplug "mkokho/kubemrr" # kubectl completions (sourced below)
-zplug "stevemcilwain/nonotes" # nmap zsh funcs
+#zplugin light "stevemcilwain/nonotes" # nmap zsh funcs
 
 # node
 #export NVM_LAZY_LOAD=true
@@ -41,76 +42,60 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
 else
   export asdf_dir=/opt/asdf-vm/
 fi;
-zplug "kiurchv/asdf.plugin.zsh", defer:2
+zplugin light "kiurchv/asdf.plugin.zsh" #, defer:2
 
 # navi
-#zplug "denisidoro/navi", use: navi.plugin.zsh # ^g
-#zplug "denisidoro/navi", as:command, use:"navi"
+#zplugin light "denisidoro/navi", use: navi.plugin.zsh # ^g
+#zplugin light "denisidoro/navi", as:command, use:"navi"
 
 # https://github.com/unixorn/awesome-zsh-plugins#plugins
 # zaw
-zplug "zsh-users/zaw" # have to source manually; 'use:' doesn't seem to work
-  zplug "termoshtt/zaw-systemd"
+zplugin light "zsh-users/zaw" # have to source manually; 'use:' doesn't seem to work
+  zplugin light "termoshtt/zaw-systemd"
   source $ZPLUG_REPOS/zsh-users/zaw/zaw.zsh # Ctrl-x; (^x then ;)
   zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
   zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "mafredri/zsh-async", use:"async.zsh"
-zplug "fcambus/ansiweather"
-#zplug "wting/autojump" # just use fasd alias 'z'
-#zplug Tarrasch/zsh-bd
-zplug "zdharma/zsh-diff-so-fancy" # git dsf
-#zplug h3poteto/zsh-ec2ssh
-zplug "chriskempson/base16-shell"
+zplugin light "zsh-users/zsh-syntax-highlighting"
+zplugin light "zsh-users/zsh-autosuggestions"
+zplugin light "zsh-users/zsh-completions"
+zplugin light "mafredri/zsh-async"
+zplugin light "fcambus/ansiweather"
+#zplugin light "wting/autojump" # just use fasd alias 'z'
+#zplugin light Tarrasch/zsh-bd
+zplugin light "zdharma/zsh-diff-so-fancy" # git dsf
+#zplugin light h3poteto/zsh-ec2ssh
+zplugin light "chriskempson/base16-shell"
 
 # and see bindkey below
-#zplug "aperezdc/zsh-notes"
+#zplugin light "aperezdc/zsh-notes"
 #zstyle :notes home  $HOME/notes/
 
-
-
-#zplug MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
-#zplug djui/alias-tips # alias reminders; ugh adds 300ms to load time
-zplug "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
-#zplug Tarrasch/zsh-bd # meh, autojump already does it
-#zplug StackExchange/blackbox # gpg encrypt secrets in git repos
-zplug "supercrabtree/k" # pretty directory listings
-zplug "wfxr/forgit" # ga; glo; gi; gd; grh; gcf; gss; gclean
-zplug "hlohm/mfunc" # dynamically define and use shell functions
-#zplug "unixorn/warhol.plugin.zsh" # grc/lscolors auto # adds 0.1-0.2s 
-#zplug "amstrad/oh-my-matrix"
+#zplugin light MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
+#zplugin light djui/alias-tips # alias reminders; ugh adds 300ms to load time
+zplugin light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
+#zplugin light Tarrasch/zsh-bd # meh, autojump already does it
+#zplugin light StackExchange/blackbox # gpg encrypt secrets in git repos
+zplugin light "supercrabtree/k" # pretty directory listings
+zplugin light "wfxr/forgit" # ga; glo; gi; gd; grh; gcf; gss; gclean
+zplugin light "hlohm/mfunc" # dynamically define and use shell functions
+#zplugin light "unixorn/warhol.plugin.zsh" # grc/lscolors auto # adds 0.1-0.2s 
+#zplugin light "amstrad/oh-my-matrix"
 
 # work
 export JIRA_URL=https://legitscript.atlassian.net/
-zplug "plugins/jira", from:oh-my-zsh
-#zplug "gerges/oh-my-zsh-jira-plus"
+zplugin snippet OMZ::plugins/jira/jira.plugin.zsh
+#zplugin light "gerges/oh-my-zsh-jira-plus"
 
-#zplug "sindresorhus/pure", use:pure.zsh, as:theme
+# Prompt
+#zplugin light "sindresorhus/pure", use:pure.zsh, as:theme
 # Theme
-#zplug "sindresorhus/pure", use:pure.zsh, as:theme
-zplug "romkatv/powerlevel10k", as:theme
+#zplugin light "sindresorhus/pure", use:pure.zsh, as:theme
+zplugin light "romkatv/powerlevel10k"
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 [[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
 
-# plugin helpers
-#[[ -s /home/jon/.autojump/etc/profile.d/autojump.sh ]] && source /home/jon/.autojump/etc/profile.d/autojump.sh
 
-# zplug config
-# commented because this adds ~0.1s to zsh startup; just `zplug install` instead
-# Install plugins if there are plugins that have not been installed
-#if ! zplug check --verbose; then
-#    printf "Install? [y/N]: "
-#    if read -q; then
-#        echo; zplug install
-#    fi
-#fi
 
-# Then, source plugins and add commands to $PATH
-zplug load #--verbose
-
-source ~/.zsh/rake.zsh
 
 # zsh
 
@@ -250,30 +235,12 @@ source ${HOME}/.zsh/zshrc.local.work
 source ${HOME}/.zsh/zshrc.local.private
 
 # FIXME: why did i put this here?
-autoload -Uz run-help
-unalias run-help
-alias help=run-help
+#autoload -Uz run-help
+#unalias run-help
+#alias help=run-help
 
 fpath+=~/.zfunc # for poetry (python)
-if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
-  source $HOME/bin/i3_completion.sh
-  fpath=(/usr/local/share/zsh-completions $fpath)
 
-  # https://gist.github.com/ctechols/ca1035271ad134841284
-  setopt EXTENDEDGLOB
-  for dump in $HOME/.zcompdump(#qN.m1); do
-    compinit
-    if [[ -s "$dump" && (! -s "$dump.zwc" || "$dump" -nt "$dump.zwc") ]]; then
-      zcompile "$dump"
-    fi
-  done
-  unsetopt EXTENDEDGLOB
-  compinit -C
-else
-  # FIXME: Test if above works on os x
-  autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
-  autoload -U bashcompinit && bashcompinit # support bash completions
-fi
 
 #if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
 if [ $SYSTEM_TYPE = "Darwin" ]; then
