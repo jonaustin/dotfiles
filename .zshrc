@@ -42,24 +42,27 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
 else
   export asdf_dir=/opt/asdf-vm/
 fi;
-zplugin light "kiurchv/asdf.plugin.zsh" #, defer:2
+zplugin light kiurchv/asdf.plugin.zsh
+
+zplugin light unixorn/warhol.plugin.zsh
+export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43" # https://geoff.greer.fm/lscolors/
 
 # navi
-#zplugin light "denisidoro/navi", use: navi.plugin.zsh # ^g
+#zplugin light denisidoro/navi/navi.plugin.zsh # ^g
 #zplugin light "denisidoro/navi", as:command, use:"navi"
 
 # https://github.com/unixorn/awesome-zsh-plugins#plugins
 # zaw
-zplugin light "zsh-users/zaw" # have to source manually; 'use:' doesn't seem to work
-  zplugin light "termoshtt/zaw-systemd"
+zplugin light zsh-users/zaw
+  zplugin light termoshtt/zaw-systemd
   source $ZPLUG_REPOS/zsh-users/zaw/zaw.zsh # Ctrl-x; (^x then ;)
   zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
   zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
-zplugin light "zsh-users/zsh-syntax-highlighting"
-zplugin light "zsh-users/zsh-autosuggestions"
-zplugin light "zsh-users/zsh-completions"
-zplugin light "mafredri/zsh-async"
-zplugin light "fcambus/ansiweather"
+zplugin light zsh-users/zsh-syntax-highlighting
+zplugin light zsh-users/zsh-autosuggestions
+zplugin light zsh-users/zsh-completions
+zplugin light mafredri/zsh-async
+zplugin light fcambus/ansiweather
 #zplugin light "wting/autojump" # just use fasd alias 'z'
 #zplugin light Tarrasch/zsh-bd
 zplugin light "zdharma/zsh-diff-so-fancy" # git dsf
@@ -78,7 +81,7 @@ zplugin light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, 
 zplugin light "supercrabtree/k" # pretty directory listings
 zplugin light "wfxr/forgit" # ga; glo; gi; gd; grh; gcf; gss; gclean
 zplugin light "hlohm/mfunc" # dynamically define and use shell functions
-#zplugin light "unixorn/warhol.plugin.zsh" # grc/lscolors auto # adds 0.1-0.2s 
+#zplugin light "unixorn/warhol.plugin.zsh" # grc/lscolors auto # adds 0.1-0.2s
 #zplugin light "amstrad/oh-my-matrix"
 
 # work
@@ -87,9 +90,9 @@ zplugin snippet OMZ::plugins/jira/jira.plugin.zsh
 #zplugin light "gerges/oh-my-zsh-jira-plus"
 
 # Prompt
-#zplugin light "sindresorhus/pure", use:pure.zsh, as:theme
+#zplugin light "sindresorhus/pure"
 # Theme
-#zplugin light "sindresorhus/pure", use:pure.zsh, as:theme
+#zplugin light "sindresorhus/pure"
 zplugin light "romkatv/powerlevel10k"
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 [[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
