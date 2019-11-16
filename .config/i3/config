@@ -202,7 +202,7 @@ bindsym $mod+Shift+9 move container to workspace $w9
 bindsym $mod+Shift+0 move container to workspace $w10
 
 # Move workspace to other monitor
-bindsym $mod+Shift+s exec $HOME/bin/i3/switch-workspace.py
+# bindsym $mod+Shift+s exec $HOME/bin/i3/switch-workspace.py # fixme: broken; see https://i3ipc-python.readthedocs.io/en/latest/ or maybe https://fmos.at/2016/06/30/my-i3-dual-screen-workflow/
 
 # Open applications on specific workspaces
 # assign [class="Thunderbird"] $ws1
@@ -373,6 +373,7 @@ bindsym $mod+Shift+minus exec $HOME/bin/audio/pulseaudio.sh --down5
 bindsym $mod+equal exec $HOME/bin/audio/pulseaudio.sh --up
 bindsym $mod+Shift+equal exec $HOME/bin/audio/pulseaudio.sh --up5
 bindsym Pause exec $HOME/bin/audio/pulseaudio.sh --up
+bindsym $mod+Shift+s exec paswitch # switch output device for all sources
 
 # spotify
 # maybe change to use https://github.com/acrisci/playerctl
@@ -386,7 +387,7 @@ bindsym $mod+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.s
 bindsym $mod+Shift+t exec "$HOME/bin/audio/save_song.sh"
 
 # firetv  # FIXME: for osmc
-bindsym $mod+p exec "$HOME/bin/firetv  play_pause"
+bindsym $mod+p exec "$HOME/bin/firetv play_pause"
 bindsym $mod+shift+space exec "$HOME/bin/firetv play_pause"
 bindsym $mod+Shift+Left exec "$HOME/bin/firetv rewind"
 bindsym $mod+Shift+Right exec "$HOME/bin/firetv fast_forward"
@@ -464,4 +465,4 @@ exec --no-startup-id xscreensaver
 exec_always --no-startup-id setcursor
 
 # GUI apps on startup
-exec --no-startup-id $HOME/bin/i3_restore_hack.sh # my hack to restore usual apps on startup
+exec --no-startup-id $HOME/bin/i3/i3_restore_hack.sh # my hack to restore usual apps on startup

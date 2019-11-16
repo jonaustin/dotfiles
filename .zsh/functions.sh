@@ -321,3 +321,8 @@ btstr() {
   [bluetooth]# connect  28:11:A5:48:19:A5
 EOD
 }
+
+# diffstr "9f770789df3b7803105e5fbc19212889674cd503" $(sha1sum strap.sh|awk '{print $1}')
+diffstr() {
+  diff <(echo $1) <(echo $2)
+}

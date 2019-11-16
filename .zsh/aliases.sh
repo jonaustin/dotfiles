@@ -5,7 +5,7 @@
 alias ll=k; alias lsl='ls -l'
 
 # remembering to reshim asdf is a pain
-alias pip="$@ ; asdf reshim"
+#alias pip="pip $@ ; asdf reshim"
 
 # open with suffix aliases
 alias -s md=vim
@@ -274,3 +274,6 @@ alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias j='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
+
+# blackarch
+alias blarchls="sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u"

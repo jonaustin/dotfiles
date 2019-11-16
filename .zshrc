@@ -55,7 +55,6 @@ export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30
 # zaw
 zplugin light zsh-users/zaw
   zplugin light termoshtt/zaw-systemd
-  source $ZPLUG_REPOS/zsh-users/zaw/zaw.zsh # Ctrl-x; (^x then ;)
   zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
   zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
 zplugin light zsh-users/zsh-syntax-highlighting
