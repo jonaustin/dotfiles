@@ -5,6 +5,8 @@ allow_bold = true
 audible_bell = false
 clickable_url = true
 #dynamic_title = true
+
+# $ fc-list
 font = InconsolataGo Nerd Font Mono 9.5
 ;font = Inconsolata Regular 8.5
 ;font = Hack Nerd Font Mono 8.5

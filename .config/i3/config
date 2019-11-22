@@ -465,4 +465,4 @@ exec --no-startup-id xscreensaver
 exec_always --no-startup-id setcursor
 
 # GUI apps on startup
-exec --no-startup-id $HOME/bin/i3/i3_restore_hack.sh # my hack to restore usual apps on startup
+#exec --no-startup-id $HOME/bin/i3/i3_restore_hack.sh # my hack to restore usual apps on startup
