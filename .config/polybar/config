@@ -8,10 +8,19 @@ background = #66000000
 ;background = #BB222222
 ; darker
 ;background = #ED222222
-foreground = #00b200
+;
+; before pywal
+;foreground = #00b200
 linecolor = #fba922
 bordercolor = #333
 accent = #e60053
+
+; pywal
+foreground = ${xrdb:color7:#222}
+foreground-alt = ${xrdb:color7:#222}
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
 
 [settings]
 pseudo-transparency = true
@@ -30,6 +39,7 @@ screenchange-reload = true
 margin-top = 0
 margin-bottom = 0
 
+; https://github.com/polybar/polybar/wiki/Configuration#bar-settings
 [bar/top]
 bottom = false
 enable-ipc = true
@@ -40,6 +50,8 @@ height = 28
 ;radius = 5.0
 ;fixed-center = false
 ;override-redirect = true
+
+separator = " | "
 
 foreground = ${colors.foreground}
 background = ${colors.background}
@@ -68,76 +80,35 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Dina:size=12;1
-font-1 = Wuncon Siji:size=13;1
-font-2 = unifont:size=9;1
-font-3 = Font Awesome 5 Free:size=12;3
-font-4 = Font Awesome 5 Free Solid:size=12;3
-font-5 = Font Awesome 5 Brands:size=12;3
-font-6 = Noto Color Emoji:scale=9
+; note: https://github.com/polybar/polybar/issues/1305
+; fc-list | awk -F':' '{print $2}' | uniq
+; gucharmap # Filter View > By Unicode Block + Show only glyphs from this font and navigate to Private Use Area.
+; the line immediately above font-0 must be blank/empty-comment or polybar crashes (?!)
+;
+font-0 = InconsolataGo Nerd Font Mono:size=13;1
+font-1 = Dina:size=12;1
+font-2 = Wuncon Siji:size=13;1
+font-3 = unifont:size=9;1
+font-4 = Font Awesome 5 Free:size=12;3
+font-5 = Font Awesome 5 Free Solid:size=12;3
+font-6 = Font Awesome 5 Brands:size=12;3
+font-7 = Noto Color Emoji:scale=9
+font-8 = Weather Icons:size=12;1
+font-9 = Noto Color Emoji:size=24;1
 
 modules-left = i3
-;modules-center = mpd
-modules-center = spotify pulseaudio-oppo
-modules-right = filesystem xbacklight wifi battery memory cpu date gmail
+modules-center = spotify pulseaudio system-bluetooth-bluetoothctl
+modules-right = filesystem xbacklight wifi battery memory cpu openweathermap-fullfeatured gmail date 
 
 tray-position = right
 tray-padding = 4
 tray-maxsize = 16
-;tray-transparent = true
-;tray-background = ${root.background}
-;tray-background = #00000000
-;tray-detached = true
-;tray-offset-x = 50
 
 wm-restack = i3
 
-;dim-value = 0.2
-
-;click-left =
-;click-middle =
-;click-right =
-;scroll-up = bspwm-deskprev
-;scroll-down = bspwm-desknext
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
-;double-click-left = notify-send -u low doubleclick
-;double-click-right = notify-send -u low doubleclick2
 
-# bar/module specific vars
-bspwm-focused-overline = ${colors.linecolor}
-bspwm-focused-underline = #cc333333
-
-[bar/bottom]
-inherit = bar/top
-
-enable-ipc = true
-monitor = ${env:MONITOR:HDMI1}
-;monitor-fallback = eDP-1
-bottom = true
-;override-redirect = true
-
-underline-size = ${bar/top.overline-size}
-overline-size = ${bar/top.underline-size}
-
-;border-top-size = 2
-;border-top-color = ${colors.bordercolor}
-;border-bottom-size = 0
-
-modules-left = bspwm i3
-;modules-left =
-;modules-left = xwindow
-;modules-center = xwindow
-modules-center =
-modules-right = github fs-root date power-menu
-
-wm-restack = ${bar/top.wm-restack}
-
-tray-position = none
-
-# bar/module specific vars
-bspwm-focused-overline = #cc333333
-bspwm-focused-underline = ${colors.linecolor}
 
 [module/github]
 type = internal/github
@@ -155,26 +126,38 @@ type = internal/fs
 mount-0 = /
 label-mounted = %{F#e60053}%percentage_used%%%{F-} used of %mountpoint%
 
-[module/bspwm]
-type = internal/bspwm
-
-enable-scroll = false
+[module/i3]
+type = internal/i3
+index-sort = true
+pin-workspaces = true
+wrapping-scroll = true
+;reverse-scroll = false
+;enable-scroll = false
 
 format = <label-state> <label-mode>
-;format = <label-monitor> <label-state> <label-mode>
-;pin-workspaces = false
 
-ws-icon-default = x
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = ${colors.accent}
 
-inline-mode = true
 
-;label-focused = %icon%
-label-focused = o
+
+label-focused = %index%
 label-focused-background = #383838
 label-focused-foreground = #fff
-label-focused-overline = ${root.bspwm-focused-overline}
-label-focused-underline = ${root.bspwm-focused-underline}
+label-focused-overline = ${colors.linecolor}
+label-focused-underline = #cc333333
 label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding =  ${self.label-occupied-padding}
+
+label-urgent = !
+label-urgent-background = #bd2c40
+label-urgent-padding = 2
+
+label-visible = %index%
+label-visible-padding = 2
 
 label-focused-occupied = %{O-1}⏺%{O-1}
 label-focused-occupied-background = ${self.label-focused-background}
@@ -186,11 +169,6 @@ label-focused-occupied-padding = ${self.label-focused-padding}
 ;label-occupied = %icon%
 label-occupied = %{O-1}⏺%{O-1}
 label-occupied-padding = 2
-
-;label-urgent = %icon%
-label-urgent = !
-label-urgent-background = #bd2c40
-label-urgent-padding = 2
 
 ;label-empty = %icon%
 label-empty = x
@@ -225,53 +203,25 @@ label-dimmed-overline = ${root.background}
 label-dimmed-underline = ${root.background}
 label-dimmed-active-foreground = #f00
 
-[module/i3]
-type = internal/i3
-index-sort = true
-pin-workspaces = true
-wrapping-scroll = true
-;reverse-scroll = false
-;enable-scroll = false
-
-format = <label-state> <label-mode>
-
-label-mode = %mode%
-label-mode-padding = 2
-label-mode-background = ${colors.accent}
-
-label-focused = %index%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-foreground = ${module/bspwm.label-focused-foreground}
-label-focused-overline= ${module/bspwm.label-focused-overline}
-label-focused-underline= ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-
-label-unfocused = %index%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-label-urgent = %index%!
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-label-visible = %index%
-label-visible-padding = ${module/bspwm.label-empty-padding}
-
 [module/cpu]
 type = internal/cpu
 interval = 2
-label = %percentage%%
-;format-prefix = ""
-format-prefix = "💻"
-format-prefix-foreground = #666
-
-[module/memory]
-type = internal/memory
-interval = 2
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
 format = <label> <ramp-coreload>
-label = %percentage_used%%
-format-prefix = "cpu: "
-format-prefix-foreground = #666
 
+; Available tokens:
+;   %percentage% (default) - total cpu load averaged over all cores
+;   %percentage-sum% - Cumulative load on all cores
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = CPU %percentage%%
+
+; Spacing between individual per-core ramps
+ramp-coreload-spacing = 1
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
 ramp-coreload-2 = ▃
@@ -280,6 +230,76 @@ ramp-coreload-4 = ▅
 ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
+
+
+
+; https://github.com/polybar/polybar/wiki/Module:-memory
+[module/memory]
+type = internal/memory
+interval = 2
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+;   <ramp-used>
+;   <ramp-free>
+;   <bar-swap-used>
+;   <bar-swap-free>
+;   <ramp-swap-used>
+;   <ramp-swap-free>
+format = <label> <bar-used>
+
+; Available tokens:
+;   %percentage_used% (default)
+;   %percentage_free%
+;   %gb_used%
+;   %gb_free%
+;   %gb_total%
+;   %mb_used%
+;   %mb_free%
+;   %mb_total%
+;   %percentage_swap_used%
+;   %percentage_swap_free%
+;   %mb_swap_total%
+;   %mb_swap_free%
+;   %mb_swap_used%
+;   %gb_swap_total%
+;   %gb_swap_free%
+;   %gb_swap_used%
+
+;label = RAM %gb_used%/%gb_free%
+label = RAM:
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 15
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+; Only applies if <ramp-used> is used
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+; Only applies if <ramp-free> is used
+ramp-free-0 = ▁
+ramp-free-1 = ▂
+ramp-free-2 = ▃
+ramp-free-3 = ▄
+ramp-free-4 = ▅
+ramp-free-5 = ▆
+ramp-free-6 = ▇
+ramp-free-7 = █
 
 [module/wifi]
 type = internal/network
@@ -293,11 +313,11 @@ format-connected-prefix-foreground = #666
 format-connected-prefix-offset = -6
 label-connected = %downspeed:8%
 
-;format-disconnected = <label-disconnected>
-;format-disconnected-prefix = " "
-;format-disconnected-prefix-foreground = #666
-;label-disconnected = not connected
-;label-disconnected-foreground = #999
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = " "
+format-disconnected-prefix-foreground = #666
+label-disconnected = not connected
+label-disconnected-foreground = #999
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -305,6 +325,24 @@ ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = #666
+
+; Test connectivity every Nth update
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+; Default: 0
+;ping-interval = 3
+
+; Accumulate values from all interfaces
+; when querying for up/downspeed rate
+; Default: false
+accumulate-stats = true
+
+; Consider an `UNKNOWN` interface state as up.
+; Some devices like USB network adapters have 
+; an unknown state, even when they're running
+; Default: false
+unknown-as-up = true
+
 
 [module/wired]
 type = internal/network
@@ -403,28 +441,101 @@ ramp-volume-foreground = #666
 [module/battery]
 type = internal/battery
 full-at = 98
+
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
 time-format = %H:%M
 
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
 format-charging = <animation-charging> <label-charging>
-label-charging = %percentage%% %time%
 
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
 format-discharging = <ramp-capacity> <label-discharging>
-label-discharging = %percentage%% %time%
 
-format-full = <label-full>
-format-full-prefix = " "
-format-full-prefix-foreground = #666
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;format-full = <ramp-capacity> <label-full>
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = #666
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = %percentage%%
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = #666
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage%%
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+label-full = Fully charged
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
 animation-charging-framerate = 750
+
+; Only applies if <animation-discharging> is used
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
+
+
+
+;format-charging = <animation-charging> <label-charging>
+;label-charging = %percentage%% %time%
+
+;format-discharging = <ramp-capacity> <label-discharging>
+;label-discharging = %percentage%% %time%
+
+;format-full = <label-full>
+;format-full-prefix = " "
+;format-full-prefix-foreground = #666
+
+;ramp-capacity-0 = 
+;ramp-capacity-1 = 
+;ramp-capacity-2 = 
+;ramp-capacity-foreground = #666
+
+;animation-charging-0 = 
+;animation-charging-1 = 
+;animation-charging-2 = 
+;animation-charging-foreground = #666
+;animation-charging-framerate = 750
 
 ;[module/battery-multi]
 ;type = custom/script
@@ -602,5 +713,17 @@ tail = true
 click-left = ~/.config/polybar/scripts/player-ctrl.sh previous
 click-right = ~/.config/polybar/scripts/player-ctrl.sh next
 click-middle = ~/.config/polybar/scripts/player-ctrl.sh play-pause
+
+[module/openweathermap-fullfeatured]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/polybar-scripts/openweathermap-fullfeatured/openweathermap-fullfeatured.sh
+interval = 600
+label-font = 9
+
+[module/system-bluetooth-bluetoothctl]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetooth-bluetoothctl/system-bluetooth-bluetoothctl.sh
+tail = true
+click-left = ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetooth-bluetoothctl/system-bluetooth-bluetoothctl.sh --toggle &
 
 ; vim:ft=dosini
