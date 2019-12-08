@@ -11,6 +11,12 @@ source ~/.zplugin/bin/zplugin.zsh
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
   fpath=(/usr/local/share/zsh-completions $fpath)
+
+  # init XDG dirs
+  export XDG_CONFIG_HOME=$HOME/.config
+  export XDG_CACHE_HOME=$HOME/.cache
+  export XDG_DATA_HOME=$HOME/.local/share
+  export XDG_CONFIG_DIRS=/etc/xdg
 fi
 autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
 autoload -U bashcompinit && bashcompinit # support bash completions
@@ -51,7 +57,7 @@ fi
 ## pretty colors (using grc) for various commands; diff,mtr,netstat,ps,etc
 zplugin light unixorn/warhol.plugin.zsh
 ### I like these for ls
-export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43" # https://geoff.greer.fm/lscolors/
+#export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43" # https://geoff.greer.fm/lscolors/
 zplugin light zdharma/fast-syntax-highlighting
 # Base16 Shell
 #zplugin light "chriskempson/base16-shell" # base16<tab> # color themes
@@ -60,6 +66,9 @@ zplugin light zdharma/fast-syntax-highlighting
 #    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
 #    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
 #zplugin light trapd00r/LS_COLORS
+
+# pywal; automatic colors from current wallpaper
+(cat ~/.cache/wal/sequences &) # async
 
 # navi
 #zplugin light denisidoro/navi/navi.plugin.zsh # ^g
@@ -303,7 +312,7 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
 else
   export EDITOR='/usr/bin/nvim'
   export SYSTEMD_EDITOR=$EDITOR
-  export BROWSER='/home/bin/firefox'
+  export BROWSER='/usr/bin/firefox'
   export SHELL='/usr/bin/zsh'
   export PATH=${PATH}:$HOME/.local/bin
   # gtk3 hidpi
@@ -313,4 +322,3 @@ else
   export TERMINAL=termite
   export DISABLE_AUTO_TITLE=true
 fi
-
