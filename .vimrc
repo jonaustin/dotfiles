@@ -119,7 +119,9 @@ Plug 'mileszs/ack.vim'                " :Ack <search>
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-Plug 'Wraul/vim-easytags', { 'branch': 'fix-universal-detection' } " ctags that just work (mostly; use universal ctags fix branch)
+"Plug 'Wraul/vim-easytags'
+Plug 'jsfaint/gen_tags.vim'
+let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
@@ -176,6 +178,7 @@ Plug 'hzchirs/vim-material'      " true colors
 Plug 'romainl/flattened'         " solarized 'without the bullshit'
 Plug 'dikiaap/minimalist'        " dark material theme
 Plug 'chriskempson/base16-vim'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
 "Plug 'sk1418/last256' " based on hybrid
 "Plug 'Lokaltog/vim-distinguished'
 ""Plug 'jonaustin/vim-colors'
@@ -197,6 +200,9 @@ Plug 'vim-airline/vim-airline-themes'
 " Misc
 Plug 'wakatime/vim-wakatime'
 Plug 'AD7six/vim-activity-log'
+
+" Embedded neovim
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 
 " Initialize plugin system
