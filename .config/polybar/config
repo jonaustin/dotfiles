@@ -97,7 +97,7 @@ font-8 = Weather Icons:size=12;1
 font-9 = Noto Color Emoji:size=24;1
 
 modules-left = i3
-modules-center = spotify pulseaudio system-bluetooth-bluetoothctl
+modules-center = spotify pulseaudio-internal system-bluetooth-bluetoothctl
 modules-right = filesystem xbacklight wifi battery memory cpu openweathermap-fullfeatured gmail date 
 
 tray-position = right
@@ -392,7 +392,7 @@ format = <label>
 label-maxlen = 48
 format-prefix = " "
 format-prefix-foreground = #23CF5F
-format-foreground = #23CF5F
+format-foreground = ${colors.foreground}
 exec = ~/.config/polybar/spotify
 exec-if = pgrep -f "Spotify"
 
@@ -659,7 +659,7 @@ interval = 0.1
 type = internal/pulseaudio
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
 ; If not, uses default sink
-sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+sink = 
 ; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
 ; Default: true
 use-ui-max = true
@@ -705,14 +705,6 @@ click-right = exec pavucontrol &
 click-left = ~/.config/polybar/scripts/pulseaudio-tail.sh --mute
 scroll-up = ~/.config/polybar/scripts/pulseaudio-tail.sh --up
 scroll-down = ~/.config/polybar/scripts/pulseaudio-tail.sh --down
-
-[module/player-mpris-tail]
-type = custom/script
-exec = ~/.config/polybar/scripts/player-mpris-tail.py
-tail = true
-click-left = ~/.config/polybar/scripts/player-ctrl.sh previous
-click-right = ~/.config/polybar/scripts/player-ctrl.sh next
-click-middle = ~/.config/polybar/scripts/player-ctrl.sh play-pause
 
 [module/openweathermap-fullfeatured]
 type = custom/script
