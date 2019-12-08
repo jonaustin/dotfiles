@@ -166,6 +166,7 @@ Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
+Plug 'dylanaraps/wal.vim'
 Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
 Plug 'rakr/vim-one' " true color
 Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
@@ -251,7 +252,9 @@ set wildignorecase " case insensitive :filename completion
 
 set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
 set autoread " If a file is changed outside of vim, automatically reload it without asking
-set termguicolors " true colors (colorscheme must have gui colors)
+
+" ONLY disable this when (py)wal colorscheme is used!
+"set termguicolors " true colors (colorscheme must have gui colors)
 
 " cursorline only visible in the current window and not in insert mode
 autocmd InsertLeave,WinEnter * set cursorline
@@ -312,7 +315,8 @@ silent execute '!mkdir -p $HOME/.vimundo'
 " Vim UI {
 set background=dark                 " Assume a dark background
 "colo vim-material
-colo hybrid_material
+"colo hybrid_material
+colorscheme wal
 set incsearch      " find as you type search
 set hlsearch       " highlight search terms
 set winminheight=0 " windows can be 0 line high
@@ -591,13 +595,14 @@ autocmd BufReadPost *
       \ endif
 
 " force transparency
-hi Normal ctermbg=none guibg=none
-hi NonText ctermbg=none guibg=none
-hi LineNr ctermbg=none guibg=none
-hi CursorLine ctermbg=none guibg=none
+"hi Normal ctermbg=none guibg=none
+"hi NonText ctermbg=none guibg=none
+"hi LineNr ctermbg=none guibg=none
+"hi CursorLine ctermbg=none guibg=none
+hi clear CursorLine
 hi clear CursorLineNr
 " always use dark grey colorscheme for status line
-autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
+"autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
 
 " Hacks
 au InsertLeave * set nopaste " temp hack for neovim: https://github.com/neovim/neovim/issues/7994
