@@ -7,6 +7,8 @@ export SYSTEM_TYPE=`uname`
 export DOTFILES=$HOME/.config
 
 source ~/.zplugin/bin/zplugin.zsh
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
 
 if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   source $HOME/bin/i3_completion.sh
@@ -153,8 +155,12 @@ zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
 
 # bindkeys
 bindkey -v # vi mode
+## open current command in vim; esc to visual mode and hit 'v'
+export VISUAL=$EDITOR
+autoload edit-command-line; zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
-# history search
+# history search (fzf overrides this, but may as well keep it for fallbac)
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 
@@ -195,7 +201,7 @@ key=(
 
 export KEYTIMEOUT=1 # reduce lag between hitting esc and entering normal mode - https://dougblack.io/words/zsh-vi-mode.html, https://superuser.com/a/648046
 
-ulimit -S -c 0 # Don't want any coredumps
+ulimit -S -c 0 # Don't want any coredumps from segfaults
 # }}}
 
 # Exports {{{
@@ -322,3 +328,11 @@ else
   export TERMINAL=termite
   export DISABLE_AUTO_TITLE=true
 fi
+
+# multi-lang version mgr
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export asdf_dir=$(brew --prefix asdf)
+else
+  export asdf_dir=/opt/asdf-vm/
+fi;
+zplugin light kiurchv/asdf.plugin.zsh
