@@ -71,7 +71,9 @@ zplugin light zdharma/fast-syntax-highlighting
 #zplugin light trapd00r/LS_COLORS
 
 # pywal; automatic colors from current wallpaper
-(cat ~/.cache/wal/sequences &) # async
+if [ ! $SYSTEM_TYPE = "Darwin" ]; then
+  (cat ~/.cache/wal/sequences &) # async
+fi;
 
 # navi
 #zplugin light denisidoro/navi/navi.plugin.zsh # ^g
@@ -340,3 +342,8 @@ fi;
 zplugin light kiurchv/asdf.plugin.zsh
 
 source /home/jon/.config/broot/launcher/bash/br
+
+# bash-my-aws
+export PATH="$PATH:$HOME/.bash-my-aws/bin"
+source ~/.bash-my-aws/aliases
+source ~/.bash-my-aws/bash_completion.sh
