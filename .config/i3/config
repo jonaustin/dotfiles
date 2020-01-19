@@ -434,14 +434,14 @@ bindsym $mod+Ctrl+s exec scrot
 bindsym $mod+Ctrl+i exec i3lock -c "000000"
 bindsym $mod+Mod1+l exec "xinput --set-prop 'Logitech Rechargeable Touchpad T650' 'libinput Tapping Enabled' 1"
 # &> /tmp/i3-quickterm; python -V > /tmp/pyv" --- if it doesn't work, su to root and pip install i3ipc (system python)
-bindsym mod1+grave exec "i3-quickterm shell"
+#bindsym mod1+grave exec "i3-quickterm shell"
 
 # inits
 exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap $HOME/.xmodmap
 exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200 # tap ctrl for escape; tap l/r shift for ( and )
 exec --no-startup-id keynav         # control cursor with keyboard
-#exec --no-startup-id guake          # drop down terminal ala quake console
+exec --no-startup-id guake          # drop down terminal ala quake console
 exec --no-startup-id xflux -z 97203 # less blue light at night
 exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg    # use my feh bg script

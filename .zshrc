@@ -10,8 +10,11 @@ source ~/.zplugin/bin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
-  source $HOME/bin/i3_completion.sh
+autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
+autoload -U bashcompinit && bashcompinit # support bash completions
+
+if [ $SYSTEM_TYPE = "Linux" ]; then
+  source $HOME/bin/i3/i3-completion/i3_completion.sh # must come after bashcompinit
   fpath=(/usr/local/share/zsh-completions $fpath)
 
   # init XDG dirs
@@ -20,8 +23,6 @@ if [ $SYSTEM_TYPE = "GNU/Linux" ]; then
   export XDG_DATA_HOME=$HOME/.local/share
   export XDG_CONFIG_DIRS=/etc/xdg
 fi
-autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
-autoload -U bashcompinit && bashcompinit # support bash completions
 
 #zplugin OMZ::plugins/command-not-found/command-not-found.zsh
 zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
@@ -233,7 +234,8 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
   . ${HOME}/.zsh/zshrc.local.osx
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-elif [ `uname -o` = "GNU/Linux" ]; then
+elif [ $SYSTEM_TYPE = "Linux" ]; then
+  export PATH=/home/jon/Android/Sdk:$PATH
   . ${HOME}/.zsh/zshrc.local.linux
   . /usr/share/fzf/completion.zsh
   . /usr/share/fzf/key-bindings.zsh

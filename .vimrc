@@ -289,12 +289,6 @@ set lazyredraw     " fix slowdown issues when moving cursor with syntax on
 set ttyfast        " assume fast connection (smoother redraw)
 set synmaxcol=1024 " Syntax coloring lines that are too long just slows down the world
 set nolist         " Hide invisibles
-" Use the old vim regex engine (version 1, as opposed to version 2, which was
-" introduced in Vim 7.3.969). The Ruby syntax highlighting is significantly
-" slower with the new regex engine.
-" http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
-"
-" set re=1 " TODO: remove this?
 
 " Disable Ex mode
 map Q <Nop>
@@ -315,8 +309,8 @@ silent execute '!mkdir -p $HOME/.vimundo'
 " Vim UI {
 set background=dark                 " Assume a dark background
 "colo vim-material
-"colo hybrid_material
-colorscheme wal
+colo hybrid_material
+"colorscheme wal    " change scheme when background changes (pywal)
 set incsearch      " find as you type search
 set hlsearch       " highlight search terms
 set winminheight=0 " windows can be 0 line high
@@ -595,10 +589,10 @@ autocmd BufReadPost *
       \ endif
 
 " force transparency
-"hi Normal ctermbg=none guibg=none
-"hi NonText ctermbg=none guibg=none
-"hi LineNr ctermbg=none guibg=none
-"hi CursorLine ctermbg=none guibg=none
+hi Normal ctermbg=none guibg=none
+hi NonText ctermbg=none guibg=none
+hi LineNr ctermbg=none guibg=none
+hi CursorLine ctermbg=none guibg=none
 hi clear CursorLine
 hi clear CursorLineNr
 " always use dark grey colorscheme for status line
