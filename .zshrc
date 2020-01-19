@@ -338,3 +338,5 @@ else
   export asdf_dir=/opt/asdf-vm/
 fi;
 zplugin light kiurchv/asdf.plugin.zsh
+
+source /home/jon/.config/broot/launcher/bash/br
