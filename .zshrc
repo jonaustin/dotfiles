@@ -213,7 +213,7 @@ export PAGER='less'
 # --squeeze-blank-lines  -- no more than one blank line in a row
 # --quit-on-intr -- quit on interrupt, e.g. C-c
 # --quit-if-one-screen -- quit if content fills less than the screen
-export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --quit-on-intr --quit-if-one-screen --clear-screen'
+export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --quit-on-intr --clear-screen'
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
