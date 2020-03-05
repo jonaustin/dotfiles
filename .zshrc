@@ -6,9 +6,7 @@
 export SYSTEM_TYPE=`uname`
 export DOTFILES=$HOME/.config
 
-source ~/.zplugin/bin/zplugin.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+source ~/.zinit/bin/zinit.zsh
 
 autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
 autoload -U bashcompinit && bashcompinit # support bash completions
@@ -47,7 +45,7 @@ zplugin snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 
 # asdf: multi-lang version mgr
 if [ $SYSTEM_TYPE = "Darwin" ]; then
-  export asdf_dir=$(brew --prefix asdf)
+  export asdf_dir=/usr/local/opt/asdf
 else
   export asdf_dir=/opt/asdf-vm/
 fi;
@@ -55,6 +53,7 @@ if [[ -d $asdf_dir ]]; then
   source $asdf_dir/asdf.sh
   source $asdf_dir/completions/asdf.bash
 fi
+zplugin light kiurchv/asdf.plugin.zsh
 
 # colors
 ## pretty colors (using grc) for various commands; diff,mtr,netstat,ps,etc
@@ -333,17 +332,10 @@ else
   export DISABLE_AUTO_TITLE=true
 fi
 
-# multi-lang version mgr
-if [ $SYSTEM_TYPE = "Darwin" ]; then
-  export asdf_dir=$(brew --prefix asdf)
-else
-  export asdf_dir=/opt/asdf-vm/
-fi;
-zplugin light kiurchv/asdf.plugin.zsh
-
-source /home/jon/.config/broot/launcher/bash/br
-
 # bash-my-aws
 export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
 source ~/.bash-my-aws/bash_completion.sh
+
+export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
+#export PATH="/usr/local/opt/mysql-client/bin:$PATH"
