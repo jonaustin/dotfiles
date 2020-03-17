@@ -35,8 +35,6 @@ Plug 'honza/vim-snippets'
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
 
-
-
 " Asynchronous execution library
 Plug 'Shougo/vimproc.vim', {
       \ 'build' : {
@@ -512,9 +510,9 @@ let cmdline_auto_scroll = 1      " Keep the cursor at the end of terminal (nvim)
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-x>"
 " make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -575,6 +573,9 @@ augroup filetypedetect
   " puppet
   autocmd BufRead,BufNewFile *.pp set filetype=puppet
   autocmd FileType js UltiSnipsAddFiletypes puppet
+  au FileType puppet set shiftwidth=4
+  au FileType puppet set softtabstop=4
+  au FileType puppet set tabstop=4
   " eyaml
   autocmd BufRead,BufNewFile *.eyaml set filetype=yaml
   autocmd BufRead,BufNewFile *.yaml set filetype=yaml.cloudformation
@@ -588,6 +589,8 @@ autocmd BufReadPost *
         \ exe "normal g`\"" |
       \ endif
 
+" Hacks
+
 " force transparency
 hi Normal ctermbg=none guibg=none
 hi NonText ctermbg=none guibg=none
@@ -598,8 +601,6 @@ hi clear CursorLineNr
 " always use dark grey colorscheme for status line
 "autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
 
-" Hacks
-au InsertLeave * set nopaste " temp hack for neovim: https://github.com/neovim/neovim/issues/7994
 
 " Functions
 
