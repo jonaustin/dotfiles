@@ -3,6 +3,7 @@
 # overrides
 #alias cat=bat
 alias ll=k; alias lsl='ls -l'
+alias calibre='asdf shell python system && calibre'
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
@@ -255,8 +256,8 @@ alias statusu='systemctl --user status '
 alias cur-monitor="xrandr | grep -C 3 '*' | grep DP | awk '{print \$1}'"
 
 # work
-alias wvpn='nmcli con down "US Seattle"; nmcli con up ls'
-alias hvpn='nmcli con down ls; nmcli con up "US Seattle"'
+alias novpn='nmcli con down "mullvad_us"'
+alias hvpn='nmcli con up "mullvad_us"'
 
 # s (web-cli search)
 alias ss='/usr/bin/s' # override s aliased to yay

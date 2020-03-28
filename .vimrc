@@ -16,8 +16,13 @@ endif
 
 call plug#begin('~/.vim/bundle')
 
-if !has('nvim')
-  Plug 'roxma/vim-hug-neovim-rpc' " compatibility layer for vim8
+if has('nvim')
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+  set pyx=3
+else
+  Plug 'Shougo/denite.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 "Plug 'lambdalisue/vim-pyenv'
@@ -34,6 +39,7 @@ Plug 'honza/vim-snippets'
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
+Plug 'mattn/emmet-vim'
 
 " Asynchronous execution library
 Plug 'Shougo/vimproc.vim', {
@@ -101,7 +107,10 @@ Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, 
 "Plug 'othree/yajs.vim' " yet another javascript syntax
 "Plug 'vim-scripts/JavaScript-Indent'
 "Plug 'kchmck/vim-coffee-script'
-"Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty'
+let g:vim_jsx_pretty_colorful_config = 1 " requires vim-javascript
+Plug 'jparise/vim-graphql'
+au BufNewFile,BufRead *.prisma setfiletype graphql
 
 " typescript
 Plug 'leafgarland/typescript-vim'    " syntax
@@ -167,6 +176,11 @@ Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vim
 Plug 'dylanaraps/wal.vim'
 Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
 Plug 'rakr/vim-one' " true color
+Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim' " arctic, north-bluish
+Plug 'cocopon/iceberg.vim' " Dark blue
+Plug 'ajmwagar/vim-deus' " 'A better color scheme for the late night coder'
+Plug 'haishanh/night-owl.vim' " 'A 24bit dark Vim colorscheme based on sdras/night-owl-vscode-theme'
 Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
 Plug 'w0ng/vim-hybrid'
 Plug 'kristijanhusak/vim-hybrid-material'
@@ -176,7 +190,7 @@ Plug 'lifepillar/vim-solarized8' " true color fork
 Plug 'hzchirs/vim-material'      " true colors
 Plug 'romainl/flattened'         " solarized 'without the bullshit'
 Plug 'dikiaap/minimalist'        " dark material theme
-Plug 'chriskempson/base16-vim'
+"Plug 'chriskempson/base16-vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
 "Plug 'sk1418/last256' " based on hybrid
 "Plug 'Lokaltog/vim-distinguished'
@@ -199,6 +213,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Misc
 Plug 'wakatime/vim-wakatime'
 Plug 'AD7six/vim-activity-log'
+Plug 'fidian/hexmode'
 
 " Embedded neovim
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }

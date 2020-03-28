@@ -439,7 +439,7 @@ bindsym $mod+Mod1+l exec "xinput --set-prop 'Logitech Rechargeable Touchpad T650
 # inits
 exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap $HOME/.xmodmap
-exec --no-startup-id xcape -e 'Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0' -t 200 # tap ctrl for escape; tap l/r shift for ( and )
+exec --no-startup-id xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200 # tap ctrl for escape; tap l/r shift for ( and )
 exec --no-startup-id keynav         # control cursor with keyboard
 exec --no-startup-id guake          # drop down terminal ala quake console
 exec --no-startup-id xflux -z 97203 # less blue light at night

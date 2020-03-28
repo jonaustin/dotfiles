@@ -112,6 +112,8 @@ zplugin light "romkatv/powerlevel10k"
 zplugin ice wait'1' lucid
 zplugin light laggardkernel/zsh-thefuck
 
+zplugin ice wait'1' lucid
+zplugin light "buonomo/yarn-completion"
 
 # zsh
 
@@ -240,9 +242,6 @@ elif [ $SYSTEM_TYPE = "Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
   . /usr/share/fzf/completion.zsh
   . /usr/share/fzf/key-bindings.zsh
-
-  # oh-my-zsh aws doesn't work for some reason in linux (can't find autoload?! even though SHELL==zsh), so source directly
-  source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
 fi
 
 # fzf
@@ -284,12 +283,10 @@ typeset -U PATH # remove duplicate paths
 ### ZSH Completions ###
 #source $ZPLUG_REPOS/mkokho/kubemrr/kubectl_zsh_completions
 
-# oh-my-zsh aws doesn't work for some reason (can't find autoload?! even though SHELL==zsh), so source directly
-#source ~/.pyenv/versions/2.7.13/bin/aws_zsh_completer.sh
-
 # go
-export GOPATH=$HOME/code/_sandbox/_go
-export PATH=$HOME/code/_sandbox/_go/bin:$PATH
+export GOPATH=$HOME/opt/_go
+export GOBIN=$GOPATH/bin
+export PATH=$HOME/opt/_go/bin:$PATH
 
 # python
 ## pyenv
