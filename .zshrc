@@ -50,10 +50,11 @@ else
   export asdf_dir=/opt/asdf-vm/
 fi;
 if [[ -d $asdf_dir ]]; then
-  source $asdf_dir/asdf.sh
-  source $asdf_dir/completions/asdf.bash
+  #source $asdf_dir/asdf.sh
+  #source $asdf_dir/completions/asdf.bash
+  zplugin ice wait'1' lucid
+  zplugin light kiurchv/asdf.plugin.zsh
 fi
-zplugin light kiurchv/asdf.plugin.zsh
 
 # colors
 ## pretty colors (using grc) for various commands; diff,mtr,netstat,ps,etc
@@ -233,6 +234,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
+# fzf
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
   . ${HOME}/.zsh/zshrc.local.osx
@@ -243,8 +245,6 @@ elif [ $SYSTEM_TYPE = "Linux" ]; then
   . /usr/share/fzf/completion.zsh
   . /usr/share/fzf/key-bindings.zsh
 fi
-
-# fzf
 # Setting fd as the default source for fzf
 export FZF_DEFAULT_COMMAND='fd --type f'
 # To apply the command to CTRL-T as well
