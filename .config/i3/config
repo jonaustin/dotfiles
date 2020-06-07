@@ -27,7 +27,7 @@ client.unfocused        #3c3836 #504945 #d5c4a1 #504945
 client.urgent           #7c6f64 #fabd2f #3c3836 #fabd2f
 
 # set default desktop layout (default is tiling)
-workspace_layout default # <default|stacking|tabbed>
+workspace_layout tabbed # <default|stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window pixel 1

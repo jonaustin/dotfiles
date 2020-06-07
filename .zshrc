@@ -36,7 +36,6 @@ zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuz
 
 zplugin snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 
-#zplug "mkokho/kubemrr" # kubectl completions (sourced below)
 #zplugin light "stevemcilwain/nonotes" # nmap zsh funcs
 
 # node
@@ -281,7 +280,7 @@ typeset -U PATH # remove duplicate paths
 #[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
 
 ### ZSH Completions ###
-#source $ZPLUG_REPOS/mkokho/kubemrr/kubectl_zsh_completions
+source ~/.zsh_kubectl_completion # adds ~70ms to zsh startup
 
 # go
 export GOPATH=$HOME/opt/_go
@@ -336,3 +335,5 @@ source ~/.bash-my-aws/bash_completion.sh
 
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 #export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+
+source /home/jon/.config/broot/launcher/bash/br
