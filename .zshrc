@@ -13,7 +13,7 @@ autoload -U bashcompinit && bashcompinit # support bash completions
 
 if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/bin/i3/i3-completion/i3_completion.sh # must come after bashcompinit
-  fpath=(/usr/local/share/zsh-completions $fpath)
+  #fpath=($HOME/.zsh/completion $fpath) # huh, should load completions under dir, doesn't work?
 
   # init XDG dirs
   export XDG_CONFIG_HOME=$HOME/.config
@@ -279,9 +279,6 @@ typeset -U PATH # remove duplicate paths
 # load avn
 #[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
 
-### ZSH Completions ###
-source ~/.zsh_kubectl_completion # adds ~70ms to zsh startup
-
 # go
 export GOPATH=$HOME/opt/_go
 export GOBIN=$GOPATH/bin
@@ -337,3 +334,12 @@ export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 #export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
 source /home/jon/.config/broot/launcher/bash/br
+
+### ZSH Completions ###
+zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
+# FIXME: lazy load these
+source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
+source ~/.zsh/completion/_eksctl
+export PYTHON_VERSION=3.7.3
+source ~/.asdf/installs/python/$PYTHON_VERSION/bin/aws_zsh_completer.sh
+
