@@ -50,7 +50,7 @@ else
 fi;
 if [[ -d $asdf_dir ]]; then
   #source $asdf_dir/asdf.sh
-  #source $asdf_dir/completions/asdf.bash
+  source $asdf_dir/etc/bash_completion.d/asdf.bash
   zplugin ice wait'1' lucid
   zplugin light kiurchv/asdf.plugin.zsh
 fi
@@ -311,6 +311,10 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   export BROWSER='open'
   export EDITOR='/usr/local/bin/nvim' # homebrew
   export SHELL='/usr/local/bin/zsh'
+
+  # mac paths
+  export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
+  export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 else
   export EDITOR='/usr/bin/nvim'
   export SYSTEMD_EDITOR=$EDITOR
@@ -330,9 +334,6 @@ export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
 source ~/.bash-my-aws/bash_completion.sh
 
-export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
-#export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-
 source /home/jon/.config/broot/launcher/bash/br
 
 ### ZSH Completions ###
@@ -342,4 +343,3 @@ source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
 export PYTHON_VERSION=3.7.3
 source ~/.asdf/installs/python/$PYTHON_VERSION/bin/aws_zsh_completer.sh
-

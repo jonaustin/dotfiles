@@ -126,7 +126,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
 Plug 'mileszs/ack.vim'                " :Ack <search>
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --vimgrep --smart-case'
 endif
 "Plug 'Wraul/vim-easytags'
 Plug 'jsfaint/gen_tags.vim'
@@ -138,6 +138,7 @@ Plug 'justinmk/vim-sneak'
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
 "Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
 "Plug 't9md/vim-choosewin'             " -
+Plug 'severin-lemaignan/vim-minimap' " sublimetext like mini overview of text in file
 
 " REPL
 "Plug 'kassio/neoterm'                 " :T <cmd> - open new or use existing terminal; :TREPLSend; :TREPLSendFile (to e.g. pry, node)
