@@ -114,10 +114,10 @@ au BufNewFile,BufRead *.prisma setfiletype graphql
 
 " typescript
 Plug 'leafgarland/typescript-vim'    " syntax
+Plug 'HerringtonDarkholme/yats.vim'  " yet another typescript syntax
 Plug 'Quramy/vim-js-pretty-template' " template strings coloring
 Plug 'jason0x43/vim-js-indent'
 "Plug 'Quramy/tsuquyomi'              " tsserver (or nvim-typescript)
-"Plug 'HerringtonDarkholme/yats.vim' " yet another typescript syntax
 
 " Navigation
 Plug 'kien/ctrlp.vim'
