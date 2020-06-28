@@ -33,7 +33,7 @@ alias mv='mv -i'
 alias rm='rm -f' # don't ask
 alias rmrf='rm -rf'
 alias tree='tree -I "node_modules"' # add more with ignorethis|andthis
-alias ip='ip -br -c a' # ip -brief -color address
+alias ipb='ip -br -c a' # ip -brief -color address
 
 #ls
 #alias l='ls -CF'
