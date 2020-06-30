@@ -334,7 +334,7 @@ export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
 source ~/.bash-my-aws/bash_completion.sh
 
-source /home/jon/.config/broot/launcher/bash/br
+source $HOME/.config/broot/launcher/bash/br
 
 ### ZSH Completions ###
 zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
