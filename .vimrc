@@ -215,7 +215,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Misc
 "Plug 'wakatime/vim-wakatime'
-Plug 'AD7six/vim-activity-log'
+"Plug 'AD7six/vim-activity-log'
 Plug 'fidian/hexmode'
 
 " Embedded neovim

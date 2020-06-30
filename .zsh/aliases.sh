@@ -90,7 +90,6 @@ alias findwindow="python ~/bin/i3/i3-wm-scripts/nextmatch.py"
 alias igrep='grep -i'
 alias g="googler "
 alias hist='cat ~/.zsh_history* | grep -i'
-alias gh='cat ~/.zsh_history* | grep -i'
 pg() { ps aux | grep -v grep | grep -i ${1}; }
 howlong() { ps -p ${1} -o etime=; }
 sport() { lsof -P -iTCP:${1}; }

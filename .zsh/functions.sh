@@ -326,3 +326,14 @@ EOD
 diffstr() {
   diff <(echo $1) <(echo $2)
 }
+
+# proxy through jump host
+setup-proxy() {
+  local_port=$1
+  target_host=$2
+  remote_port=$3
+  jump_host=$4
+  # e.g. ssh -v -N -L 54321:puppetdb-jon.cq4yztl3y2cz.us-east-1.rds.amazonaws.com:5432 jon@10.11.1.97
+  # setup-proxy 54321 puppetdb-jon.cq4yztl3y2cz.us-east-1.rds.amazonaws.com 5432 jon@10.11.1.97
+  ssh -v -N -L ${local_port}:${target_host}:${remote_port} $jump_host
+}
