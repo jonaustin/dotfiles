@@ -1,6 +1,7 @@
 ## SHORTCUTS
 
 # overrides
+alias less=nvimpager
 #alias cat=bat
 alias ll=k; alias lsl='ls -l'
 alias calibre='asdf shell python system && calibre'
