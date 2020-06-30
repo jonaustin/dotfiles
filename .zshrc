@@ -8,18 +8,21 @@ export DOTFILES=$HOME/.config
 
 source ~/.zinit/bin/zinit.zsh
 
-autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
-autoload -U bashcompinit && bashcompinit # support bash completions
-
 if [ $SYSTEM_TYPE = "Linux" ]; then
-  source $HOME/bin/i3/i3-completion/i3_completion.sh # must come after bashcompinit
-  #fpath=($HOME/.zsh/completion $fpath) # huh, should load completions under dir, doesn't work?
+  fpath=($HOME/.zsh/completion $fpath)
 
   # init XDG dirs
   export XDG_CONFIG_HOME=$HOME/.config
   export XDG_CACHE_HOME=$HOME/.cache
   export XDG_DATA_HOME=$HOME/.local/share
   export XDG_CONFIG_DIRS=/etc/xdg
+fi
+
+# completions
+autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
+autoload -U bashcompinit && bashcompinit # support bash completions
+if [ $SYSTEM_TYPE = "Linux" ]; then
+  source $HOME/bin/i3/i3-completion/i3_completion.sh # must come after bashcompinit
 fi
 
 #zplugin OMZ::plugins/command-not-found/command-not-found.zsh
@@ -49,10 +52,8 @@ else
   export asdf_dir=/opt/asdf-vm/
 fi;
 if [[ -d $asdf_dir ]]; then
-  #source $asdf_dir/asdf.sh
-  source $asdf_dir/etc/bash_completion.d/asdf.bash
-  zplugin ice wait'1' lucid
-  zplugin light kiurchv/asdf.plugin.zsh
+  source $asdf_dir/asdf.sh
+  fpath=(${ASDF_DIR}/completions $fpath)
 fi
 
 # colors
@@ -209,7 +210,7 @@ ulimit -S -c 0 # Don't want any coredumps from segfaults
 # }}}
 
 # Exports {{{
-export PAGER='less'
+export PAGER='nvimpager'
 # --RAW-CONTROL-CHARS for coloring with external app
 # --squeeze-blank-lines  -- no more than one blank line in a row
 # --quit-on-intr -- quit on interrupt, e.g. C-c
@@ -259,7 +260,6 @@ source ${HOME}/.zsh/zshrc.local.private
 #unalias run-help
 #alias help=run-help
 
-fpath+=~/.zfunc # for poetry (python)
 
 
 #if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
