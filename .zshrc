@@ -328,6 +328,8 @@ else
   export TERMINAL=termite
   export DISABLE_AUTO_TITLE=true
 fi
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # bash-my-aws
 export PATH="$PATH:$HOME/.bash-my-aws/bin"
