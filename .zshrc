@@ -344,4 +344,6 @@ zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of R
 source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
 export PYTHON_VERSION=3.7.3
+# aws
 source ~/.asdf/installs/python/$PYTHON_VERSION/bin/aws_zsh_completer.sh
+complete -C $(which aws_completer) aws2

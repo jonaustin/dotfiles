@@ -282,3 +282,6 @@ alias blarchls="sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u"
 # bluetooth
 alias trekz="bluetoothctl connect 20:74:CF:1C:8C:9B"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
+
+# cheatsheets
+cheat() { curl http://cht.sh/$1 }
