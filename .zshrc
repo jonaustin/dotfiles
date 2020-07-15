@@ -336,6 +336,8 @@ fi
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+# aws
+complete -C $(which aws_completer) aws2
 # bash-my-aws
 export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
@@ -343,12 +345,14 @@ source ~/.bash-my-aws/bash_completion.sh
 
 source $HOME/.config/broot/launcher/bash/br
 
+jG
 ### ZSH Completions ###
 zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 # FIXME: lazy load these
 source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
 export PYTHON_VERSION=3.7.3
+# aws
 source ~/.asdf/installs/python/$PYTHON_VERSION/bin/aws_zsh_completer.sh
 
 # ruby
