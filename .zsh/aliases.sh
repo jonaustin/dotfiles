@@ -141,7 +141,7 @@ alias it='iotop'
 ## Git
 alias gs='git status --ignore-submodules'
 alias gsl='git status --ignore-submodules | less'
-alias ga='git add '
+#alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
 alias gcv='git commit --no-verify'

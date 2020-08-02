@@ -52,8 +52,15 @@ else
   export asdf_dir=/opt/asdf-vm/
 fi;
 if [[ -d $asdf_dir ]]; then
+<<<<<<< HEAD
+  #source $asdf_dir/asdf.sh
+  source $asdf_dir/etc/bash_completion.d/asdf.bash
+  zplugin ice wait'1' lucid
+  zplugin light kiurchv/asdf.plugin.zsh
+=======
   source $asdf_dir/asdf.sh
   fpath=(${ASDF_DIR}/completions $fpath)
+>>>>>>> 561abdc... hopefully fix zsh completions, add broot, bat, use nvimpager
 fi
 
 # colors
@@ -103,7 +110,6 @@ zplugin light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, 
 zplugin light "supercrabtree/k" # pretty directory listings
 zplugin light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclean
 zplugin light "hlohm/mfunc" # dynamically define and use shell functions
-zplugin light "b4b4r07/emoji-cli"
 #zplugin light "amstrad/oh-my-matrix"
 
 # Prompt
@@ -326,18 +332,16 @@ else
   export GDK_SCALE=2
   export GDK_DPI_SCALE=0.5
   export XCURSOR_SIZE=48
-  export TERMINAL=alacritty
+  export TERMINAL=termite
   export DISABLE_AUTO_TITLE=true
 fi
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
 # bash-my-aws
 export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
 source ~/.bash-my-aws/bash_completion.sh
 
-source $HOME/.config/broot/launcher/bash/br
+source /home/jon/.config/broot/launcher/bash/br
 
 ### ZSH Completions ###
 zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
@@ -346,6 +350,3 @@ source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
 export PYTHON_VERSION=3.7.3
 source ~/.asdf/installs/python/$PYTHON_VERSION/bin/aws_zsh_completer.sh
-
-# ruby
-export RUBYOPT='-W:no-deprecated -W:no-experimental'
