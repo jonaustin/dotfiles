@@ -31,6 +31,7 @@ endif
 " https://stackoverflow.com/a/22253548/617320
 "Plug 'Valloric/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
 "Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
@@ -146,6 +147,7 @@ Plug 'metakirby5/codi.vim'            " amazing repl
 Plug 'jalvesaq/vimcmdline'            " Send code to repl <leader>i, then Space
 
 " Integrations
+Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
 Plug 'skywind3000/asyncrun.vim'       " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
 Plug 'janko-m/vim-test'
 Plug 'rizzatti/dash.vim'              " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
