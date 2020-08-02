@@ -127,6 +127,7 @@ bindsym $mod+e layout toggle split; exec notify-send 'split layout toggle'
 
 # toggle tiling / floating
 bindsym $mod+Ctrl+Return floating toggle
+bindsym $mod+c exec "i3-plus smart_center 1830x2120,2030x2120,2230x2120"
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle

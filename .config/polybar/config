@@ -98,7 +98,7 @@ font-9 = Noto Color Emoji:size=24;1
 
 modules-left = i3
 modules-center = spotify pulseaudio-internal system-bluetooth-bluetoothctl
-modules-right = filesystem xbacklight wifi battery memory cpu openweathermap-fullfeatured gmail date 
+modules-right = filesystem xbacklight wifi battery memory cpu openweathermap-fullfeatured date
 
 tray-position = right
 tray-padding = 4
@@ -338,7 +338,7 @@ ramp-signal-foreground = #666
 accumulate-stats = true
 
 ; Consider an `UNKNOWN` interface state as up.
-; Some devices like USB network adapters have 
+; Some devices like USB network adapters have
 ; an unknown state, even when they're running
 ; Default: false
 unknown-as-up = true
@@ -659,7 +659,7 @@ interval = 0.1
 type = internal/pulseaudio
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
 ; If not, uses default sink
-sink = 
+sink =
 ; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
 ; Default: true
 use-ui-max = true
