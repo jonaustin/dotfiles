@@ -25,10 +25,7 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/bin/i3/i3-completion/i3_completion.sh # must come after bashcompinit
 fi
 
-# dotbare: dotfile versioning
-export DOTBARE_DIR="$HOME/configs"
 zplugin light kazhala/dotbare
-
 #zplugin OMZ::plugins/command-not-found/command-not-found.zsh
 zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 # built-ins - until they get muscle memory
@@ -256,9 +253,9 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 #source ${HOME}/.zsh/initializers.sh
-source ${HOME}/.zsh/initializers_private.sh
-source ${HOME}/.zsh/zshrc.local.work
-source ${HOME}/.zsh/zshrc.local.private
+source ${HOME}/configs_private/initializers_private.sh
+source ${HOME}/configs_private/zshrc.local.work
+source ${HOME}/configs_private/zshrc.local.private
 
 # FIXME: why did i put this here?
 #autoload -Uz run-help
