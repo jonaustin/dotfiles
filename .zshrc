@@ -25,6 +25,10 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/bin/i3/i3-completion/i3_completion.sh # must come after bashcompinit
 fi
 
+# dotbare: dotfile versioning
+#export DOTBARE_DIR="$HOME/configs"
+zplugin light kazhala/dotbare
+
 #zplugin OMZ::plugins/command-not-found/command-not-found.zsh
 zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 # built-ins - until they get muscle memory
