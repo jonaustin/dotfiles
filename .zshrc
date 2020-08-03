@@ -26,7 +26,7 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
 fi
 
 # dotbare: dotfile versioning
-#export DOTBARE_DIR="$HOME/configs"
+export DOTBARE_DIR="$HOME/configs"
 zplugin light kazhala/dotbare
 
 #zplugin OMZ::plugins/command-not-found/command-not-found.zsh
