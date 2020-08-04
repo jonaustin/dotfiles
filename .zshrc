@@ -355,9 +355,6 @@ zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of R
 # FIXME: lazy load these
 source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
-# aws
-<<<<<<< HEAD
-source ~/.asdf/installs/python/$PYTHON_VERSION/bin/aws_zsh_completer.sh
 
 # ruby
 export RUBYOPT='-W:no-deprecated -W:no-experimental'
