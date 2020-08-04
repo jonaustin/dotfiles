@@ -40,7 +40,7 @@ Plug 'honza/vim-snippets'
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim' " div<c-y>,
 
 " Asynchronous execution library
 Plug 'Shougo/vimproc.vim', {
@@ -172,7 +172,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
 Plug 'myusuf3/numbers.vim'
-Plug 'w0rp/ale' " asynchronous linter FIXME: is this causing stalls?
+Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
@@ -460,8 +460,11 @@ let g:ale_fixers = {}
 let g:ale_linters = {}
 
 "if has('mac') " e.g. 'work'
-  let g:ale_fixers['javascript'] = ['prettier', 'eslint']
-  let g:ale_fixers['typescript'] = ['prettier', 'tslint']
+  let b:ale_fixers = ['prettier', 'eslint'] " ft specific ones below don't work??
+  let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+  let b:ale_fixers = {'typescript': ['prettier', 'eslint']}
+
+
   let g:ale_fix_on_save = 0
 "else
 "  let g:ale_linters['javascript'] = ['prettier_standard'] " npm i -g prettier-standard

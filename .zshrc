@@ -2,6 +2,7 @@
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
 #zmodload zsh/zprof
 #for n in `seq 0 10`; do time zsh -i -c exit; done
+#hyperfine --warmup 3 --min-runs 10 "zsh -i -c exit"
 
 export SYSTEM_TYPE=`uname`
 export DOTFILES=$HOME/.config
@@ -170,7 +171,7 @@ export VISUAL=$EDITOR
 autoload edit-command-line; zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-# history search (fzf overrides this, but may as well keep it for fallbac)
+# history search (fzf overrides this, but may as well keep it for fallback)
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 
@@ -228,14 +229,14 @@ export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 #export http_proxy=http://127.0.0.1:8118
 # }}}
 
-# Colourful manpages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+# Colourful manpages (are these actually needed nowadays??)
+#export LESS_TERMCAP_mb=$'\E[01;31m'
+#export LESS_TERMCAP_md=$'\E[01;31m'
+#export LESS_TERMCAP_me=$'\E[0m'
+#export LESS_TERMCAP_se=$'\E[0m'
+#export LESS_TERMCAP_so=$'\E[01;44;33m'
+#export LESS_TERMCAP_ue=$'\E[0m'
+#export LESS_TERMCAP_us=$'\E[01;32m'
 
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
@@ -338,21 +339,24 @@ export LANG=en_US.UTF-8
 
 # aws
 complete -C $(which aws_completer) aws2
+# unfortunately the below is required: https://github.com/ohmyzsh/ohmyzsh/issues/7822#issuecomment-490143345
+source ~/.asdf/installs/python/$(asdf current python | cut -d' ' -f1)/bin/aws_zsh_completer.sh
 # bash-my-aws
 export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
 source ~/.bash-my-aws/bash_completion.sh
 
-source $HOME/.config/broot/launcher/bash/br
+if [ $SYSTEM_TYPE = "Linux" ]; then
+  source $HOME/.config/broot/launcher/bash/br
+fi;
 
-jG
 ### ZSH Completions ###
 zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 # FIXME: lazy load these
 source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
-export PYTHON_VERSION=3.7.3
 # aws
+<<<<<<< HEAD
 source ~/.asdf/installs/python/$PYTHON_VERSION/bin/aws_zsh_completer.sh
 
 # ruby
