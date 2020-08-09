@@ -1,6 +1,8 @@
 ## SHORTCUTS
 
 # overrides
+alias db=dotbare
+alias dbs='dotbare status'
 alias less=nvimpager
 #alias cat=bat
 alias ll=k; alias lsl='ls -l'
