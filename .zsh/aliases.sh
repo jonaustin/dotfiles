@@ -4,8 +4,8 @@
 alias db=dotbare
 alias dbs='dotbare status'
 alias less=nvimpager
-#alias cat=bat
-alias ll=k; alias lsl='ls -l'
+alias cat=bat
+alias ls=exa; alias ll='exa -l'; alias lsl='ls -l'
 alias calibre='asdf shell python system && calibre'
 
 # remembering to reshim asdf is a pain

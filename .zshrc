@@ -102,7 +102,6 @@ zplugin light "zdharma/zsh-diff-so-fancy" # $ git dsf
 #zplugin light djui/alias-tips # alias reminders; ugh adds 300ms to load time
 zplugin light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
 #zplugin light StackExchange/blackbox # gpg encrypt secrets in git repos
-zplugin light "supercrabtree/k" # pretty directory listings
 zplugin light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclean
 zplugin light "hlohm/mfunc" # dynamically define and use shell functions
 zplugin light "b4b4r07/emoji-cli"
@@ -237,21 +236,21 @@ export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
-# fzf
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
   . ${HOME}/.zsh/zshrc.local.osx
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 elif [ $SYSTEM_TYPE = "Linux" ]; then
-  export PATH=/home/jon/Android/Sdk:$PATH
   . ${HOME}/.zsh/zshrc.local.linux
   . /usr/share/fzf/completion.zsh
   . /usr/share/fzf/key-bindings.zsh
 fi
-# Setting fd as the default source for fzf
-export FZF_DEFAULT_COMMAND='fd --type f'
-# To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules"
+# fixme: alias pbcopy for linux
+export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-info --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300' --preview-window='right:hidden:wrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort'"
+export FZF_DEFAULT_COMMAND="fd --type f --type l $FD_OPTIONS"
+export FZF_CTRL_T_COMMAND="fd $FD_OPTIONS"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 
 #source ${HOME}/.zsh/initializers.sh
 source ${HOME}/configs_private/initializers_private.sh
@@ -348,7 +347,7 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
 fi;
 
 ### ZSH Completions ###
-zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
+#zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 # FIXME: lazy load these
 source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
