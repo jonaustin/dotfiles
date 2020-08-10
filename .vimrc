@@ -123,17 +123,16 @@ Plug 'jason0x43/vim-js-indent'
 "Plug 'Quramy/tsuquyomi'              " tsserver
 
 " Navigation
-Plug 'kien/ctrlp.vim'
-Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
-Plug 'mileszs/ack.vim'                " :Ack <search>
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
+"Plug 'kien/ctrlp.vim'
+"Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
+Plug 'mileszs/ack.vim'                " :Ack <search> (better; use '\' binding below)
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --smart-case --hidden --follow'
 endif
 "Plug 'Wraul/vim-easytags'
 Plug 'jsfaint/gen_tags.vim'
 let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim' " :FZF, :Files, :BFiles, :BLines, :Lines -- note: only need this, as fzf itself is installed via pkg mgr
 Plug 'justinmk/vim-sneak'
 "Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
@@ -661,14 +660,14 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
 " https://thoughtbot.com/blog/faster-grepping-in-vim
 " The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+if executable('rg')
+  " Use rg over grep
+  set grepprg=rg\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " Use rg in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'rg %s -l --nocolor -g ""'
 
-  " ag is fast enough that CtrlP doesn't need to cache
+  " rg is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
 
@@ -676,9 +675,14 @@ endif
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " This defines a new command Ag to search for the provided text and open a “quickfix” window:
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+"command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 " bind \ (backward slash) to grep shortcut
-nnoremap \ :Ag<SPACE>
+nnoremap \ :Ack<SPACE>
+
+" FZF
+nnoremap <C-T> :Files<cr>
+nnoremap <C-P> :Files<cr>
+nnoremap <C-B> :BLines<cr>
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
