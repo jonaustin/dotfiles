@@ -21,7 +21,7 @@ alias -s txt=vim
 
 #sane defaults
 alias sudo='sudo ' # so aliases work
-alias fd='fd -HI' # search all files
+#alias fd='fd -HI' # search all files
 alias vi='vim'
 alias spacemacs='emacs'
 alias mkdir='mkdir -p'

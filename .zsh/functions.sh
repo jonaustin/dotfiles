@@ -307,13 +307,19 @@ watch-reload() {
 }
 
 # notes
-vf() { $EDITOR -p `fd ".*$1.*" ${2:-.}` }
-enote() { $EDITOR -p `fd "$1*" $HOME/notes` }
-note() { less `fd "$1*" $HOME/notes` }
+vf() {
+  $EDITOR -p `fd ".*$1.*" ${2:-.}`
+}
+enote() {
+  $EDITOR -p `fd "$1*" $HOME/notes`
+}
+note() {
+  $PAGER `fd "$1*" $HOME/notes`
+}
 
 # bluetooth
-btstr() {  
-  cat << EOD                                                                                                                                           2019-02-09 15:
+btstr() {
+  cat << EOD
   [bluetooth]# power on
   [bluetooth]# agent on
   [bluetooth]# default-agent
@@ -343,4 +349,11 @@ walbg-info() {
   file $curbg
   identify $curbg
   mediainfo $curbg
+}
+
+zsh-available-completions() {
+  for command completion in ${(kv)_comps:#-*(-|-,*)}
+  do
+    printf "%-32s %s\n" $command $completion
+  done | sort
 }
