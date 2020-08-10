@@ -245,7 +245,8 @@ elif [ $SYSTEM_TYPE = "Linux" ]; then
   . /usr/share/fzf/completion.zsh
   . /usr/share/fzf/key-bindings.zsh
 fi
-FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules"
+# note for some unknown reason --follow (symlinks) causes it not to find anything under ~/.zsh (which is not a symlink dir regardless). fd bug?
+FD_OPTIONS="--no-ignore --hidden --exclude .git --exclude node_modules --exclude .cache --exclude .asdf"
 # fixme: alias pbcopy for linux
 # notes:
 #   -1: automatically select the only match
