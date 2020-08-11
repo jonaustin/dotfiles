@@ -2,7 +2,11 @@ alias y='yay -S '
 alias r='yay -R '
 alias R='yay -R '
 alias yy='aurman -S '
-alias s='yay -Ss'
+#alias s='yay -Ss'
+unalias s
+s() {
+  yay -Slq | fzf -q "$1" --ansi -m --preview 'bat <(yay -Si {1}) <(pacman -Fl {1} | awk "{print \$2}") | grep --color -z Description' --preview-window='right:wrap' | xargs -ro  yay -S
+}
 alias ss='/usr/bin/s' # override
 alias agu='yay -Syu'
 #alias y='sudo aura -S '
