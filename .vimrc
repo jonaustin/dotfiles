@@ -681,7 +681,7 @@ nnoremap \ :Ack<SPACE>
 
 " FZF
 nnoremap <C-T> :Files<cr>
-nnoremap <C-P> :Files<cr>
+nnoremap <C-P> :Rg<cr>
 nnoremap <C-B> :BLines<cr>
 
 " Tips I always forget
