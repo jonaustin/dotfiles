@@ -132,7 +132,8 @@ endif
 "Plug 'Wraul/vim-easytags'
 Plug 'jsfaint/gen_tags.vim'
 let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
-Plug 'junegunn/fzf.vim' " :FZF, :Files, :BFiles, :BLines, :Lines -- note: only need this, as fzf itself is installed via pkg mgr
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim' " :FZF, :Files, :BFiles, :BLines, :Lines
 Plug 'justinmk/vim-sneak'
 "Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
@@ -173,6 +174,7 @@ Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
 Plug 'myusuf3/numbers.vim'
 Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
+let g:session_autosave = 'no'
 Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
