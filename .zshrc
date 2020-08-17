@@ -240,6 +240,7 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
   . ${HOME}/.zsh/zshrc.local.osx
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  bindkey "ç" fzf-cd-widget # fix alt-c for `cd` fzf for osx
 elif [ $SYSTEM_TYPE = "Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
   . /usr/share/fzf/completion.zsh
@@ -255,6 +256,7 @@ export FZF_DEFAULT_OPTS="--no-mouse --height=50% -1 --reverse --multi --info=inl
 export FZF_DEFAULT_COMMAND="fd --type f --type l $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="fd --type f --type l $FD_OPTIONS"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+
 
 #source ${HOME}/.zsh/initializers.sh
 source ${HOME}/configs_private/initializers_private.sh
@@ -357,4 +359,6 @@ source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
 
 # ruby
-export RUBYOPT='-W:no-deprecated -W:no-experimental'
+if [ $SYSTEM_TYPE = "Linux" ]; then # being lazy...not linux-specific, just mac/work is on 2.5.3 still
+  export RUBYOPT='-W:no-deprecated -W:no-experimental'
+fi;
