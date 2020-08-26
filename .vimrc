@@ -569,8 +569,6 @@ augroup filetypedetect
   autocmd BufNewFile,BufRead *.md setfiletype markdown
   autocmd BufNewFile,BufRead *.mkd setfiletype markdown
   autocmd BufNewFile,BufRead *.markdown setfiletype markdown
-  " Don't syntax highlight markdown because it's often wrong
-  autocmd FileType markdown setlocal syn=off
   " shell
   autocmd BufNewFile,BufRead *.zsh-theme setfiletype zsh
   " javascript

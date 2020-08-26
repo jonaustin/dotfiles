@@ -5,6 +5,7 @@ alias db=dotbare
 alias dbs='dotbare status'
 alias less=nvimpager
 alias cat=bat
+alias catnp='bat --paging never'
 alias ls=exa; alias ll='exa -l'; alias lsl='ls -l'
 alias calibre='asdf shell python system && calibre'
 
