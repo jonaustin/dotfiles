@@ -212,13 +212,15 @@ ulimit -S -c 0 # Don't want any coredumps from segfaults
 # }}}
 
 # Exports {{{
-export PAGER='nvimpager'
+export PAGER='less'
 # --RAW-CONTROL-CHARS for coloring with external app
 # --squeeze-blank-lines  -- no more than one blank line in a row
 # --quit-on-intr -- quit on interrupt, e.g. C-c
 # --quit-if-one-screen -- quit if content fills less than the screen
-export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --quit-on-intr --quit-if-one-screen --no-init' # no-init: don't clear screen on exit
-#export LESSOPEN="| src-hilite-lesspipe.sh %s"
+# --no-init: don't clear screen on exit
+# --mouse -- support mouse - only >=551 (brew install less)
+export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --quit-on-intr --quit-if-one-screen --no-init --mouse'
+export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
 #export HTTP_PROXY=http://127.0.0.1:8118

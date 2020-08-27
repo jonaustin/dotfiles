@@ -36,3 +36,6 @@ bindkey '^[OB' down-line-or-search
 
 # z
 . `brew --prefix`/etc/profile.d/z.sh
+
+# netstat sucks on osx
+alias listening="sudo lsof -i -P | grep -i 'listen'"
