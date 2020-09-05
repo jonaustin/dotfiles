@@ -105,13 +105,10 @@ bindsym $mod+Shift+l move right;exec notify-send 'move right'
 #bindsym $mod+Shift+Down move down
 #bindsym $mod+Shift+Up move up
 #bindsym $mod+Shift+Right move right
-#
-#bindsym $mod+h split h;exec notify-send 'tile horizontally'
-bindsym $mod+Shift+v split h;exec notify-send 'tile horizontally'
-bindsym $mod+v split v;exec notify-send 'tile vertically'
-#bindsym $mod+q split toggle
-# split in horizontal orientation
-#bindsym $mod+h split h
+# note: my hor/vert is opposite of i3 defaults; makes more intuitive sense
+bindsym $mod+v split h
+bindsym $mod+Shift+v split v
+bindsym $mod+Ctrl+q split toggle
 
 # split in vertical orientation
 #bindsym $mod+Shift+h split v
@@ -462,6 +459,7 @@ exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput 
 exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput Accel Speed' 1.0
 exec --no-startup-id xinput set-button-map "Logitech Trackball" 1 3 3
 exec --no-startup-id start-pulseaudio-x11 # change to pulseaudio --start?
+exec --no-startup-id spotpris2 # fix spotify's broken mpris
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

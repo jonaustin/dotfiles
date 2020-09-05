@@ -5,7 +5,9 @@ alias yy='aurman -S '
 #alias s='yay -Ss'
 unalias s
 s() {
-  yay -Slq | fzf -q "$1" --ansi -m --preview 'bat <(yay -Si {1}) <(pacman -Fl {1} | awk "{print \$2}") | grep --color -z Description' --preview-window='right:wrap' | xargs -ro  yay -S
+  yay -Slq | fzf -q "$1" --ansi -m --preview 'bat <(yay -Si {1}) | grep --color -z Description' --preview-window='right:wrap' | xargs -ro  yay -S
+  # with files (slow)
+  #yay -Slq | fzf -q "$1" --ansi -m --preview 'bat <(yay -Si {1}) <(pacman -Fl {1} | awk "{print \$2}") | grep --color -z Description' --preview-window='right:wrap' | xargs -ro  yay -S
 }
 alias ss='/usr/bin/s' # override
 alias agu='yay -Syu'
@@ -44,27 +46,27 @@ alias am='alsamixer'
 alias pt='sudo powertop'
 
 # general cli
-alias xclipp='xclip -selection clipboard' # pipe into clipboard
+alias xclipp='xclip -selection clipboard' # pipe into clipboard (may not be necessary now; eg `echo foo | xclip` seems to work fine)
 
 
 # ssh
 SSH_ENV="$HOME/.ssh/environment"
 function start_agent {
-        echo "Initialising new SSH agent..."
-        /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-        echo succeeded
-        chmod 600 "${SSH_ENV}"
-        . "${SSH_ENV}" > /dev/null
-        /usr/bin/ssh-add -t 432000 ;
+  echo "Initialising new SSH agent..."
+  /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+  echo succeeded
+  chmod 600 "${SSH_ENV}"
+  . "${SSH_ENV}" > /dev/null
+  /usr/bin/ssh-add -t 432000 ;
 }
 
 if [ -f "${SSH_ENV}" ]; then
-        . "${SSH_ENV}" > /dev/null
-        ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-                start_agent;
-        }
+  . "${SSH_ENV}" > /dev/null
+  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+    start_agent;
+  }
 else
-        start_agent;
+  start_agent;
 fi
 
 # docker

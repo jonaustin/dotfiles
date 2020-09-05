@@ -357,3 +357,8 @@ zsh-available-completions() {
     printf "%-32s %s\n" $command $completion
   done | sort
 }
+
+# incantations
+sed-recurse() {
+  grep -rl $1 . | parallel sed -i "s/$1/$2/g" {}
+}
