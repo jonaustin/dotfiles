@@ -130,7 +130,8 @@ alias mine='sudo chown -R $USER:$USER *; sudo chmod -R 775 *;'
 alias lsfuncbody='declare -f'
 alias lsfunc='declare -F'
 alias reset='reset; vr'
-alias fdays='find . -mtime '
+alias fdays='find . -mtime'
+alias mimetype='file --mime-type -b'
 
 ## network
 alias pgoo='ping -c2 google.com'

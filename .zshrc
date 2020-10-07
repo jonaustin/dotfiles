@@ -43,6 +43,8 @@ zplugin snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 
 #zplugin light "stevemcilwain/nonotes" # nmap zsh funcs
 
+zplugin light "macunha1/zsh-terraform"
+
 # node
 #export NVM_LAZY_LOAD=true
 #zplug "lukechilds/zsh-nvm" # even with lazy loading adds ~0.1 to zsh startup
@@ -359,6 +361,7 @@ fi;
 # FIXME: lazy load these
 source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 source ~/.zsh/completion/_eksctl
+zplugin light  hanjunlee/terragrunt-oh-my-zsh-plugin
 
 # ruby
 if [ $SYSTEM_TYPE = "Linux" ]; then # being lazy...not linux-specific, just mac/work is on 2.5.3 still

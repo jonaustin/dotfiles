@@ -87,9 +87,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses of that var
 let g:go_fmt_command = "goimports" " automatically import dependencies after safe
-" Error and warning signs.
-"let g:ale_sign_error = '⤫'
-"let g:ale_sign_warning = '⚠'
 au FileType go nmap <leader>gt :GoDeclsDir<cr> " show all funcs in file
 au FileType go nmap <F12> <Plug>(go-def) " go to definition of func
 " switch between file and tests
@@ -97,6 +94,13 @@ au FileType go nmap <F12> <Plug>(go-def) " go to definition of func
 " au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 " au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 "au FileType go nmap <F9> :GoCoverageToggle -short<cr> " test coverage
+
+" ALE
+" CoC.nvim integration (must come before ale is loaded)
+let g:ale_disable_lsp = 1
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 
