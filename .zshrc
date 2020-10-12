@@ -134,24 +134,25 @@ setopt auto_cd              # type bare dir name and cd to it e.g. `$ /`
 setopt complete_in_word     # don't move cursor to end of line on completion
 setopt interactive_comments # allow comments even in interactive shells.
 unsetopt beep               # don't bloody beep
+unsetopt list_beep          # don't beep on ambiguous completions
 unsetopt bg_nice            # don't re-nice bg procs to lower priority
 unsetopt correct            # don't autocorrect spelling for args
 unsetopt correct_all        # don't autocorrect spelling for args
 unsetopt flow_control       # disable ^S/^Q flow control
 unsetopt hup                # don't send the HUP signal to running jobs when the shell exits.
-unsetopt list_beep          # don't beep on ambiguous completions
 unsetopt local_options      # allow funcs to have their own setopts (i.e. don't change globally)
 unsetopt local_traps        # allow funcs to have their own signal trap opts (i.e. don't change globally)
 
 
 # history
-setopt append_history       # appends history file instead of replacing it
-setopt extended_history     # add timestamps to history
-setopt hist_ignore_all_dups # don't record dupes in history
-setopt hist_ignore_space    # remove command line from history list when first character on the line is a space
-setopt hist_reduce_blanks   # remove superflous blanks
-setopt hist_verify          # don't execute, just expand history
-setopt inc_append_history share_history  # adds history incrementally and share it across sessions
+#setopt append_history        # appends history file instead of replacing it (not needed if share_history is enabled)
+setopt extended_history       # add timestamps to history
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_all_dups   # don't record dupes in history
+setopt hist_ignore_space      # remove command line from history list when first character on the line is a space
+setopt hist_reduce_blanks     # remove superflous blanks
+setopt hist_verify            # when interpolating history into commands (e.g. `$ echo !!`; require another press of enter to actually execute after expanding the last command with `!!`)
+setopt share_history          # adds history incrementally and share it across sessions
 
 # zstyles
 # case insensitive completion
@@ -193,7 +194,7 @@ bindkey '^r' history-incremental-search-backward # ctrl-r starts searching histo
 # zsh-notes
 bindkey '^N' notes-edit-widget
 
-# FIXME: why did i add this?
+# https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 key=(
     BackSpace  "${terminfo[kbs]}"
     Home       "${terminfo[khome]}"
@@ -215,28 +216,16 @@ ulimit -S -c 0 # Don't want any coredumps from segfaults
 
 # Exports {{{
 export PAGER='less'
-# --RAW-CONTROL-CHARS for coloring with external app
-# --squeeze-blank-lines  -- no more than one blank line in a row
-# --quit-on-intr -- quit on interrupt, e.g. C-c
-# --quit-if-one-screen -- quit if content fills less than the screen
-# --no-init: don't clear screen on exit
-# --mouse -- support mouse - only >=551 (brew install less)
+# --RAW-CONTROL-CHARS:   translate raw escape sequences to colors
+# --squeeze-blank-lines: no more than one blank line in a row
+# --quit-on-intr:        quit on interrupt, e.g. C-c
+# --quit-if-one-screen:  quit if content fills less than the screen
+# --no-init:             don't clear screen on exit
+# --mouse:               support mouse - only >=551 (brew install less on mac)
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --quit-on-intr --quit-if-one-screen --no-init --mouse'
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
-
-#export HTTP_PROXY=http://127.0.0.1:8118
-#export http_proxy=http://127.0.0.1:8118
 # }}}
-
-# Colourful manpages (are these actually needed nowadays??)
-#export LESS_TERMCAP_mb=$'\E[01;31m'
-#export LESS_TERMCAP_md=$'\E[01;31m'
-#export LESS_TERMCAP_me=$'\E[0m'
-#export LESS_TERMCAP_se=$'\E[0m'
-#export LESS_TERMCAP_so=$'\E[01;44;33m'
-#export LESS_TERMCAP_ue=$'\E[0m'
-#export LESS_TERMCAP_us=$'\E[01;32m'
 
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
@@ -278,7 +267,7 @@ source ${HOME}/configs_private/zshrc.local.private
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export HISTFILE=$HOME/.zsh_historyw
 else
-  export HISTFILE=$HOME/.zsh_history
+  export HISTFILE=$HOME/configs_private/zsh_history
 fi
 export HISTSIZE=100000
 export SAVEHIST=100000

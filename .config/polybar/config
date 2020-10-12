@@ -666,7 +666,8 @@ use-ui-max = true
 ; Interval for volume increase/decrease (in percent points) (unreleased)
 ; Default: 5
 interval = 5
-format-volume = <ramp-volume> <label-volume>
+;format-volume = <ramp-volume> <label-volume>
+format-volume = <label-volume>
 ; Available tags:
 ;   <label-muted> (default)
 ;   <ramp-volume>
@@ -680,10 +681,10 @@ format-volume = <ramp-volume> <label-volume>
 label-muted =  muted
 label-muted-foreground = #666
 ; Only applies if <ramp-volume> is used
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-volume-3 = 
+ramp-volume-0 = |
+ramp-volume-1 = ||
+ramp-volume-2 = |||
+ramp-volume-3 = ||||
 
 [module/pulseaudio-oppo]
 type = internal/pulseaudio

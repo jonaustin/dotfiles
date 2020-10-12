@@ -2,7 +2,8 @@ alias y='yay -S '
 alias r='yay -R '
 alias R='yay -R '
 alias yy='aurman -S '
-#alias s='yay -Ss'
+alias x='yay -Ss'
+alias ss='yay -Ss'
 unalias s
 s() {
   yay -Slq | fzf -q "$1" --ansi -m --preview 'bat <(yay -Si {1}) | grep --color -z Description' --preview-window='right:wrap' | xargs -ro  yay -S
