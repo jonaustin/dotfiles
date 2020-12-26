@@ -60,8 +60,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Shift+Return exec "USE_HOME='true' termite"
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
