@@ -147,8 +147,9 @@ Plug 'severin-lemaignan/vim-minimap' " sublimetext like mini overview of text in
 
 " REPL
 "Plug 'kassio/neoterm'                 " :T <cmd> - open new or use existing terminal; :TREPLSend; :TREPLSendFile (to e.g. pry, node)
-Plug 'metakirby5/codi.vim'            " amazing repl
-Plug 'jalvesaq/vimcmdline'            " Send code to repl <leader>i, then Space
+"Plug 'metakirby5/codi.vim'            " amazing repl
+"Plug 'jalvesaq/vimcmdline'            " Send code to repl <leader>i, then Space
+Plug 'voldikss/vim-floaterm'
 
 " Integrations
 Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
@@ -501,8 +502,7 @@ map <S-q> :NERDTreeToggle<cr>
 
 " Ctrl-p
 let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
-nnoremap <silent><leader>/ :CtrlPBuffer<CR>
-
+"nnoremap <silent><leader>/ :CtrlPBuffer<CR>
 
 " Vim-session
 let g:session_autoload = 'no'
@@ -687,6 +687,8 @@ nnoremap \ :Ack<SPACE>
 nnoremap <C-T> :Files<cr>
 nnoremap <C-P> :Rg<cr>
 nnoremap <C-B> :BLines<cr>
+nnoremap <silent><leader>/ :Buffers<CR>
+nnoremap <C-C> :Colors<cr>
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J

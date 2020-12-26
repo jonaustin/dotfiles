@@ -44,6 +44,7 @@ zplugin snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 #zplugin light "stevemcilwain/nonotes" # nmap zsh funcs
 
 zplugin light "macunha1/zsh-terraform"
+#zplugin light hanjunlee/terragrunt-oh-my-zsh-plugin
 
 # node
 #export NVM_LAZY_LOAD=true
@@ -63,9 +64,8 @@ fi
 # colors
 ## pretty colors (using grc) for various commands; diff,mtr,netstat,ps,etc
 zplugin light unixorn/warhol.plugin.zsh
-### I like these for ls
 #export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43" # https://geoff.greer.fm/lscolors/
-zplugin light zdharma/fast-syntax-highlighting
+zplugin light zdharma/fast-syntax-highlighting # better than zsh-users/zsh-syntax-highlighting
 # Base16 Shell
 #zplugin light "chriskempson/base16-shell" # base16<tab> # color themes
 # trapd00r
@@ -112,6 +112,9 @@ zplugin light "b4b4r07/emoji-cli"
 # Prompt
 zplugin light "romkatv/powerlevel10k"
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
+# Show prompt segment "kubecontext" only when the command you are typing
+# invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
+typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
 [[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
 
 zplugin ice wait'1' lucid
@@ -209,6 +212,10 @@ key=(
     PageDown   "${terminfo[knp]}"
 )
 
+# built in mass rename
+# -n -- dry run
+autoload -U zmv # zmv '* *' '$f:gs/ /_' Replace all spaces in filenames with underscores.
+
 export KEYTIMEOUT=1 # reduce lag between hitting esc and entering normal mode - https://dougblack.io/words/zsh-vi-mode.html, https://superuser.com/a/648046
 
 ulimit -S -c 0 # Don't want any coredumps from segfaults
@@ -229,6 +236,7 @@ export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
+# OS configs and fzf
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
   . ${HOME}/.zsh/zshrc.local.osx
@@ -236,8 +244,10 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   bindkey "ç" fzf-cd-widget # fix alt-c for `cd` fzf for osx
 elif [ $SYSTEM_TYPE = "Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
-  . /usr/share/fzf/completion.zsh
-  . /usr/share/fzf/key-bindings.zsh
+  #. /usr/share/fzf/completion.zsh
+  . /usr/share/zsh/site-functions/_fzf
+  #. /usr/share/fzf/key-bindings.zsh
+  . /etc/profile.d/fzf.zsh
 fi
 # note for some unknown reason --follow (symlinks) causes it not to find anything under ~/.zsh (which is not a symlink dir regardless). fd bug?
 FD_OPTIONS="--no-ignore --hidden --exclude .git --exclude node_modules --exclude .cache --exclude .asdf"
@@ -250,18 +260,16 @@ export FZF_DEFAULT_COMMAND="fd --type f --type l $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="fd --type f --type l $FD_OPTIONS"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 
-
+# Private configs
 #source ${HOME}/.zsh/initializers.sh
 source ${HOME}/configs_private/initializers_private.sh
 source ${HOME}/configs_private/zshrc.local.work
 source ${HOME}/configs_private/zshrc.local.private
 
-# FIXME: why did i put this here?
-#autoload -Uz run-help
-#unalias run-help
-#alias help=run-help
-
-
+# type in any command, then hit alt-? to bring up man page (eg $ lso ALT-shift-/)
+unalias run-help
+autoload -Uz run-help
+bindkey '\e?' run-help
 
 #if [ -z $USE_HOME ] && ([ `cat /tmp/ip` = `cat $HOME/work/ipw` ] || [ `cat /tmp/ip` = `cat $HOME/work/ipe` ]); then
 if [ $SYSTEM_TYPE = "Darwin" ]; then
@@ -334,8 +342,6 @@ export LANG=en_US.UTF-8
 
 # aws
 complete -C $(which aws_completer) aws2
-# unfortunately the below is required: https://github.com/ohmyzsh/ohmyzsh/issues/7822#issuecomment-490143345
-source ~/.asdf/installs/python/$(asdf current python | cut -d' ' -f1)/bin/aws_zsh_completer.sh
 # bash-my-aws
 export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
@@ -346,13 +352,20 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
 fi;
 
 ### ZSH Completions ###
+#zplugin light marlonrichert/zsh-autocomplete # must come after fzf
 #zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 # FIXME: lazy load these
-source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
-source ~/.zsh/completion/_eksctl
-zplugin light  hanjunlee/terragrunt-oh-my-zsh-plugin
+#source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
+#source ~/.zsh/completion/_eksctl
 
 # ruby
 if [ $SYSTEM_TYPE = "Linux" ]; then # being lazy...not linux-specific, just mac/work is on 2.5.3 still
   export RUBYOPT='-W:no-deprecated -W:no-experimental'
 fi;
+
+zinit light "vifon/deer"
+zle -N deer
+bindkey '\ek' deer
+
+# pretty colors for df, etc
+source /etc/grc.zsh

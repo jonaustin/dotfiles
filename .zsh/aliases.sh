@@ -270,15 +270,15 @@ alias sw='/usr/bin/s -p wikipedia'
 
 # fasd
 # these are largely the same as the aliases defined in /usr/bin/fasd script
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-alias j='fasd_cd -d'     # cd, same functionality as j in autojump
-alias zz='fasd_cd -d -i' # cd with interactive selection
+#alias a='fasd -a'        # any
+#alias s='fasd -si'       # show / search / select
+#alias d='fasd -d'        # directory
+#alias f='fasd -f'        # file
+#alias sd='fasd -sid'     # interactive directory selection
+#alias sf='fasd -sif'     # interactive file selection
+#alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+#alias j='fasd_cd -d'     # cd, same functionality as j in autojump
+#alias zz='fasd_cd -d -i' # cd with interactive selection
 
 # blackarch
 alias blarchls="sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u"
@@ -286,6 +286,9 @@ alias blarchls="sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u"
 # bluetooth
 alias trekz="bluetoothctl connect 20:74:CF:1C:8C:9B"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
+
+# battery
+alias battery="inxi -Bxxx"
 
 # cheatsheets
 cheat() { curl http://cht.sh/$1 }

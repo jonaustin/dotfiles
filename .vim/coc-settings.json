@@ -41,6 +41,9 @@
       "args": ["--stdio"]
     }
   },
+  "markdownlint.config": {
+    "line_length": false 
+  },
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true
 }

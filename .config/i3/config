@@ -459,8 +459,8 @@ exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput 
 exec --no-startup-id xinput --set-prop 'jonathan austin’s Trackpad' 'libinput Accel Speed' 1.0
 exec --no-startup-id xinput set-button-map "Logitech Trackball" 1 3 3
 exec --no-startup-id start-pulseaudio-x11 # change to pulseaudio --start?
-exec --no-startup-id spotpris2 # fix spotify's broken mpris
-exec_always --no-startup-id autotiling # try out autotiling script https://github.com/nwg-piotr/autotiling
+exec --no-startup-id /home/jon/.local/bin/spotpris2 # fix spotify's broken mpris
+exec_always --no-startup-id /home/jon/.asdf/shims/autotiling # try out autotiling script https://github.com/nwg-piotr/autotiling
 exec --no-startup-id dunst # instead of notify-osd
 
 # from default config
