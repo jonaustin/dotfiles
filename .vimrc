@@ -127,8 +127,6 @@ Plug 'jason0x43/vim-js-indent'
 "Plug 'Quramy/tsuquyomi'              " tsserver
 
 " Navigation
-"Plug 'kien/ctrlp.vim'
-"Plug 'FelikZ/ctrlp-py-matcher'        " Exact filename matches!
 Plug 'mileszs/ack.vim'                " :Ack <search> (better; use '\' binding below)
 if executable('rg')
   let g:ackprg = 'rg --vimgrep --smart-case --hidden --follow'
@@ -138,7 +136,7 @@ Plug 'jsfaint/gen_tags.vim'
 let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' " :FZF, :Files, :BFiles, :BLines, :Lines
-Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
 "Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
@@ -150,6 +148,13 @@ Plug 'severin-lemaignan/vim-minimap' " sublimetext like mini overview of text in
 "Plug 'metakirby5/codi.vim'            " amazing repl
 "Plug 'jalvesaq/vimcmdline'            " Send code to repl <leader>i, then Space
 Plug 'voldikss/vim-floaterm'
+let g:floaterm_position = 'bottom'
+let g:floaterm_width = 0.98
+let g:floaterm_autoclose = 2
+let g:floaterm_height = 0.4
+let g:floaterm_keymap_toggle = '<leader>ft'
+nnoremap <C-c><C-s> :FloatermSend<CR>
+vnoremap <C-c><C-s> :FloatermSend<CR>
 
 " Integrations
 Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
@@ -185,7 +190,7 @@ Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vim
 
 " Colors
 Plug 'dylanaraps/wal.vim'
-Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
+"Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
 Plug 'rakr/vim-one' " true color
 Plug 'joshdick/onedark.vim'
 Plug 'arcticicestudio/nord-vim' " arctic, north-bluish
@@ -500,10 +505,6 @@ let g:NERDDefaultAlign = 'left' " put comments at col 0
 " NERDTree
 map <S-q> :NERDTreeToggle<cr>
 
-" Ctrl-p
-let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
-"nnoremap <silent><leader>/ :CtrlPBuffer<CR>
-
 " Vim-session
 let g:session_autoload = 'no'
 
@@ -663,16 +664,9 @@ endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
 " https://thoughtbot.com/blog/faster-grepping-in-vim
-" The Silver Searcher
 if executable('rg')
   " Use rg over grep
   set grepprg=rg\ --nogroup\ --nocolor
-
-  " Use rg in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'rg %s -l --nocolor -g ""'
-
-  " rg is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
 
 " bind K to grep word under cursor
@@ -684,11 +678,45 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap \ :Ack<SPACE>
 
 " FZF
-nnoremap <C-T> :Files<cr>
-nnoremap <C-P> :Rg<cr>
-nnoremap <C-B> :BLines<cr>
+nnoremap <C-t> :Files<cr>
+nnoremap <C-p> :Rg<cr>
+nnoremap <C-b> :BLines<cr>
 nnoremap <silent><leader>/ :Buffers<CR>
-nnoremap <C-C> :Colors<cr>
+"nnoremap <C-c> :Colors<cr>
+
+" Fix window switching for terminal
+" https://www.reddit.com/r/neovim/comments/9sm1bp/how_to_switch_between_windows_in_terminal_mode/
+" vim bug: this doesn't work reason when switching TO a floating window;
+"     have to use the toggle floaterm command for that (e.g. ',ft')
+"     https://github.com/voldikss/vim-floaterm/issues/134
+"         You can not because neovim/vim doesn't support wincmd h/j/k/l for floating windows.
+if has('nvim')
+  augroup vimrc_term
+    autocmd!
+    autocmd WinEnter term://* nohlsearch
+    autocmd WinEnter term://* startinsert
+
+    autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
+    autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
+    autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
+    autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
+    autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
+  augroup END
+endif
+
+" using https://github.com/junegunn/fzf.vim & fzf installed.
+augroup vimrc_term_fzf
+  autocmd!
+  " Do some other stuff independent of nvim.
+  if has('nvim')
+    autocmd FileType fzf tunmap <buffer> <Esc>
+    autocmd FileType fzf tunmap <buffer> <C-h>
+    autocmd FileType fzf tunmap <buffer> <C-j>
+    autocmd FileType fzf tunmap <buffer> <C-k>
+    autocmd FileType fzf tunmap <buffer> <C-l>
+  endif
+augroup END
+
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
