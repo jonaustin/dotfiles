@@ -7,6 +7,7 @@ alias cat=bat
 alias catnp='bat --paging never'
 alias ls=exa; alias ll='exa -l'; alias lsl='ls -l'
 alias calibre='asdf shell python system && calibre'
+alias fd='fd -I' # don't ignore things in gitignore
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
@@ -70,6 +71,7 @@ alias lp='lesspipe.sh '
 alias loc='locate'
 alias nd="ncdu ."
 alias vnode='NODE_NO_READLINE=1 rlwrap node' # vim node repl
+alias kc=kubectl
 
 # config files
 alias zc='source $HOME/.zshrc'

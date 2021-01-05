@@ -6,6 +6,7 @@
 
 alias top='top -o cpu'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
+alias sed='gsed' # non-gnu sed cannot use \n
 
 # network
 alias lxs='ssh lxs'

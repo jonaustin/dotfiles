@@ -181,7 +181,7 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
-Plug 'myusuf3/numbers.vim'
+Plug 'myusuf3/numbers.vim' " can probably just use `:set relativenumber` now: https://til.hashrocket.com/posts/c1767dc3bc-absolute-and-relative-line-numbers
 Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 let g:session_autosave = 'no'
@@ -505,6 +505,11 @@ let g:NERDDefaultAlign = 'left' " put comments at col 0
 " NERDTree
 map <S-q> :NERDTreeToggle<cr>
 
+" Ctrl-p
+let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
+"nnoremap <silent><leader>/ :CtrlPBuffer<CR>
+nnoremap <silent><leader>/ :Buffers<CR>
+
 " Vim-session
 let g:session_autoload = 'no'
 
@@ -736,3 +741,5 @@ augroup END
 " c-a / c-x -- increment / decrement number
 " delete blank lines -> :g/^$/d
 "       or :%s/\n\n/\r/
+
+set eol " for some reason this is getting turned off for k8s yamls

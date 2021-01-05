@@ -369,3 +369,11 @@ bindkey '\ek' deer
 
 # pretty colors for df, etc
 source /etc/grc.zsh
+
+# kubernetes
+#zplugin light superbrothers/zsh-kubectl-prompt
+#zplugin snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+#zplugin light "bonnefoa/kubectl-fzf"
+
+# ripgrep
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
