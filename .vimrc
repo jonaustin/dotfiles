@@ -89,6 +89,7 @@ let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses o
 let g:go_fmt_command = "goimports" " automatically import dependencies after safe
 au FileType go nmap <leader>gt :GoDeclsDir<cr> " show all funcs in file
 au FileType go nmap <F12> <Plug>(go-def) " go to definition of func
+au FileType go nmap <leader>r :GoRun<cr>
 " switch between file and tests
 " au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 " au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
@@ -413,7 +414,7 @@ map <leader>q   :q<cr>
 map <leader>qq  :q!<cr>
 map <leader>qqa :qall!<cr>
 map <leader>w   :w<cr>
-map <leader>wq  :wq<cr>
+map <leader>qw  :wq<cr>
 
 " quickfix
 map <leader>qf :cope<cr> " open
@@ -468,7 +469,9 @@ nmap <silent> <leader>g :TestVisit<CR>
 " ALE asynchronous linter
 " clear all fixers and linters
 let g:ale_fixers = {}
-let g:ale_linters = {}
+let g:ale_linters = {
+			\ 'go': ['gopls'],
+			\}
 
 "if has('mac') " e.g. 'work'
   let b:ale_fixers = ['prettier', 'eslint'] " ft specific ones below don't work??
