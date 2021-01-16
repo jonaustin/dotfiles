@@ -8,7 +8,7 @@
       "initializationOptions": {
         "usePlaceholders": true
       }
-    }
+    },
     //"sorbet": {
     //  "command": "srb",
     //  "args": ["tc", "--lsp", "--enable-all-experimental-lsp-features"],
