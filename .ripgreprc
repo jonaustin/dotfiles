@@ -1,0 +1,6 @@
+--smart-case
+--hidden
+--no-ignore-vcs
+
+# Using glob patterns to include/exclude files or folders
+--glob=!node_modules/*
