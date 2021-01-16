@@ -157,6 +157,9 @@ setopt hist_reduce_blanks     # remove superflous blanks
 setopt hist_verify            # when interpolating history into commands (e.g. `$ echo !!`; require another press of enter to actually execute after expanding the last command with `!!`)
 setopt share_history          # adds history incrementally and share it across sessions
 
+# ehhh, this results in no history getting added...
+# zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 } # do not add failed commands to history - https://superuser.com/a/902508
+
 # zstyles
 # case insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'

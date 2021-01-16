@@ -744,5 +744,6 @@ augroup END
 " c-a / c-x -- increment / decrement number
 " delete blank lines -> :g/^$/d
 "       or :%s/\n\n/\r/
+" delete multiple blank lines: :%!cat -s
 
 set eol " for some reason this is getting turned off for k8s yamls
