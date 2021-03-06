@@ -39,8 +39,6 @@ zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuz
 #alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 #alias zz='fasd_cd -d -i' # cd with interactive selection
 
-zplugin snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
-
 #zplugin light "stevemcilwain/nonotes" # nmap zsh funcs
 
 zplugin light "macunha1/zsh-terraform"
@@ -295,6 +293,8 @@ typeset -U PATH # remove duplicate paths
 export GOPATH=$HOME/opt/_go
 export GOBIN=$GOPATH/bin
 export PATH=$HOME/opt/_go/bin:$PATH
+export GO111MODULE=on # this can go away with 1.16 - https://tip.golang.org/doc/go1.16
+zplugin snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 
 # python
 ## pyenv

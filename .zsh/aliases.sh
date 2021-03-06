@@ -288,9 +288,14 @@ alias blarchls="sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u"
 # bluetooth
 alias trekz="bluetoothctl connect 20:74:CF:1C:8C:9B"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
+alias deva="bluetoothctl connect CC:39:8C:01:DB:2D"
 
 # battery
-alias battery="inxi -Bxxx"
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0" # "inxi -Bxxx"
 
 # cheatsheets
 cheat() { curl http://cht.sh/$1 }
+
+# noteair
+alias na=' . ~/bin/noteair.sh'
+alias vvim="vim +'source ~/vimrcnoteair'"

@@ -60,7 +60,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec termite
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu

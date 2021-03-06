@@ -73,9 +73,10 @@ Plug 'sebdah/vim-delve'
 "  [[ takes you to the previous function or method
 "  shift-K to get docs for a func
 au FileType go set noexpandtab
-au FileType go set shiftwidth=4
-au FileType go set softtabstop=4
-au FileType go set tabstop=4
+au FileType go set shiftwidth=2
+au FileType go set softtabstop=2
+au FileType go set tabstop=2
+" note: :GoCoverageClear to clear highlights
 let g:go_auto_type_info = 1 " show actual data type in status line when hovered
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -90,6 +91,13 @@ let g:go_fmt_command = "goimports" " automatically import dependencies after saf
 au FileType go nmap <leader>gt :GoDeclsDir<cr> " show all funcs in file
 au FileType go nmap <F12> <Plug>(go-def) " go to definition of func
 au FileType go nmap <leader>r :GoRun<cr>
+" highlighting
+hi def goCoverageCovered ctermfg=green guifg=#A6E22E
+hi def goCoverageUncover ctermfg=red guifg=#F92672
+"hi def GoDebugBreakpoint term=standout ctermbg=117 ctermfg=0 guibg=#BAD4F5  guifg=Black
+"hi def GoDebugCurrent term=reverse  ctermbg=12  ctermfg=7 guibg=DarkBlue guifg=White
+hi def GoDebugBreakpoint term=standout ctermbg=117 ctermfg=0 guibg=#BAD4F5  guifg=Black
+hi def GoDebugCurrent term=reverse  ctermbg=12  ctermfg=7 guibg=DarkBlue guifg=White
 " switch between file and tests
 " au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 " au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
@@ -142,7 +150,7 @@ Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
 "Plug 'jeetsukumaran/vim-buffergator'  " <leader>b
 "Plug 't9md/vim-choosewin'             " -
-Plug 'severin-lemaignan/vim-minimap' " sublimetext like mini overview of text in file
+"Plug 'severin-lemaignan/vim-minimap' " sublimetext like mini overview of text in file
 
 " REPL
 "Plug 'kassio/neoterm'                 " :T <cmd> - open new or use existing terminal; :TREPLSend; :TREPLSendFile (to e.g. pry, node)
@@ -190,6 +198,7 @@ Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
+Plug 'pgdouyon/vim-ying-yang' " black white (yin)
 Plug 'dylanaraps/wal.vim'
 "Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
 Plug 'rakr/vim-one' " true color
@@ -200,7 +209,8 @@ Plug 'ajmwagar/vim-deus' " 'A better color scheme for the late night coder'
 Plug 'haishanh/night-owl.vim' " 'A 24bit dark Vim colorscheme based on sdras/night-owl-vscode-theme'
 Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
 Plug 'w0ng/vim-hybrid'
-Plug 'kristijanhusak/vim-hybrid-material'
+"Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'jonaustin/vim-hybrid-material'
 Plug 'justinmk/molokai'          " true color fork
 Plug 'nanotech/jellybeans.vim'   " true colors
 Plug 'lifepillar/vim-solarized8' " true color fork
@@ -221,6 +231,7 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
 "Plug 'morhetz/gruvbox'
 
 " UI
+Plug 'romainl/vim-cool' " disable highlighting after search
 Plug 'reedes/vim-pencil'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -272,6 +283,7 @@ set autowrite
 set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
+
 " When you type the first tab, it will complete as much as possible, the second
 " tab hit will provide a list, the third and subsequent tabs will cycle through
 " completion options so you can complete the file without further keys
@@ -283,8 +295,10 @@ set wildignorecase " case insensitive :filename completion
 set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
 set autoread " If a file is changed outside of vim, automatically reload it without asking
 
-" ONLY disable this when (py)wal colorscheme is used!
-"set termguicolors " true colors (colorscheme must have gui colors)
+" only disable this for (py)wal colorscheme or one that doesn't support 24-bit
+if (has("termguicolors"))
+  set termguicolors " true colors (colorscheme must have gui colors)
+endif
 
 " cursorline only visible in the current window and not in insert mode
 autocmd InsertLeave,WinEnter * set cursorline
@@ -340,6 +354,7 @@ silent execute '!mkdir -p $HOME/.vimundo'
 set background=dark                 " Assume a dark background
 "colo vim-material
 colo hybrid_material
+let g:hybrid_transparent_background = 1
 "colorscheme wal    " change scheme when background changes (pywal)
 set incsearch      " find as you type search
 set hlsearch       " highlight search terms
@@ -724,6 +739,15 @@ augroup vimrc_term_fzf
     autocmd FileType fzf tunmap <buffer> <C-l>
   endif
 augroup END
+
+" show what highlight group is used for highlight under cursor
+nmap <leader>hl :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 
 " Tips I always forget
