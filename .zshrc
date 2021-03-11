@@ -169,6 +169,13 @@ zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
 
 # bindkeys
 bindkey -v # vi mode
+
+#export ZVM_VI_ESCAPE_BINDKEY='jk'
+#zinit ice depth=1
+#zinit light jeffreytse/zsh-vi-mode
+# eh...wish i could just disable in zsh-vi-mode whatever's breaking fzf
+#zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+
 ## open current command in vim; esc to visual mode and hit 'v'
 export VISUAL=$EDITOR
 autoload edit-command-line; zle -N edit-command-line
