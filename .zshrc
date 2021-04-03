@@ -41,7 +41,7 @@ zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuz
 
 #zplugin light "stevemcilwain/nonotes" # nmap zsh funcs
 
-zplugin light "macunha1/zsh-terraform"
+#zplugin light "macunha1/zsh-terraform"
 #zplugin light hanjunlee/terragrunt-oh-my-zsh-plugin
 
 # node
@@ -99,6 +99,7 @@ zplugin light "zdharma/zsh-diff-so-fancy" # $ git dsf
 # after zsh-completions
 # before zsh-autosuggestions/fast-syntax-highlighting
 zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
+zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
 
 # and see bindkey below
 #zplugin light "aperezdc/zsh-notes"
