@@ -94,6 +94,12 @@ zplugin light fcambus/ansiweather # $ weather <zip>
 zplugin light "zdharma/zsh-diff-so-fancy" # $ git dsf
 #zplugin light h3poteto/zsh-ec2ssh
 
+# fzf-tab
+# order matters a lot:
+# after zsh-completions
+# before zsh-autosuggestions/fast-syntax-highlighting
+zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
+
 # and see bindkey below
 #zplugin light "aperezdc/zsh-notes"
 #zstyle :notes home  $HOME/notes/
@@ -351,7 +357,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # aws
-complete -C $(which aws_completer) aws2
+complete -C $(which aws_completer) aws
 # bash-my-aws
 export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
@@ -363,7 +369,6 @@ fi;
 
 ### ZSH Completions ###
 #zplugin light marlonrichert/zsh-autocomplete # must come after fzf
-#zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 # FIXME: lazy load these
 #source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
 #source ~/.zsh/completion/_eksctl
