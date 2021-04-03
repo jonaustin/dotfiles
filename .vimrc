@@ -67,6 +67,7 @@ Plug 'tpope/vim-rails'
 
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+hi def goSameId  ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
 Plug 'sebdah/vim-delve'
 " https://hackernoon.com/my-neovim-setup-for-go-7f7b6e805876
 "  ]] takes you to the next function or method
@@ -86,8 +87,8 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses of that var
-let g:go_fmt_command = "goimports" " automatically import dependencies after safe
+"let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses of that var
+let g:go_fmt_command = "goimports" " automatically import dependencies after save
 au FileType go nmap <leader>gt :GoDeclsDir<cr> " show all funcs in file
 au FileType go nmap <F12> <Plug>(go-def) " go to definition of func
 au FileType go nmap <leader>r :GoRun<cr>
@@ -623,9 +624,9 @@ augroup filetypedetect
   " puppet
   autocmd BufRead,BufNewFile *.pp set filetype=puppet
   autocmd FileType js UltiSnipsAddFiletypes puppet
-  au FileType puppet set shiftwidth=4
-  au FileType puppet set softtabstop=4
-  au FileType puppet set tabstop=4
+  "au FileType puppet set shiftwidth=4
+  "au FileType puppet set softtabstop=4
+  "au FileType puppet set tabstop=4
   " eyaml
   autocmd BufRead,BufNewFile *.eyaml set filetype=yaml
   autocmd BufRead,BufNewFile *.yaml set filetype=yaml.cloudformation

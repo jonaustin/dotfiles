@@ -362,3 +362,13 @@ zsh-available-completions() {
 sed-recurse() {
   grep -rl $1 . | parallel sed -i "s/$1/$2/g" {}
 }
+
+# fzf
+gco() {
+ git checkout "$(git branch -a | sed 's@remotes/origin/@@' | fzf | tr -d '[:space:]' | uniq )"
+}
+
+# git
+git-diff-dir-names() {
+  git diff --name-only $1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
+}

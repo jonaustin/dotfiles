@@ -1,5 +1,7 @@
+# custom overrides (for ranger mostly)
 text/x-typescript ts
 text/x-terraform tf
+text/json tmpl
 
 # IANA types
 application/1d-interleaved-parityfec
