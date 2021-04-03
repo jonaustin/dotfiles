@@ -289,7 +289,7 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 " tab hit will provide a list, the third and subsequent tabs will cycle through
 " completion options so you can complete the file without further keys
 set wildmode=longest,list,full
-set wildmenu " make tab completion for files,buffers act like bash
+set wildmenu " provide navigable list of suggestions (tab, C-n, right; S-tab, C-p, left)
 
 set wildignorecase " case insensitive :filename completion
 
