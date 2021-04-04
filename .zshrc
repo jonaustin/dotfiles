@@ -252,10 +252,8 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   bindkey "ç" fzf-cd-widget # fix alt-c for `cd` fzf for osx
 elif [ $SYSTEM_TYPE = "Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
-  #. /usr/share/fzf/completion.zsh
-  . /usr/share/zsh/site-functions/_fzf
-  #. /usr/share/fzf/key-bindings.zsh
-  . /etc/profile.d/fzf.zsh
+  . /usr/share/fzf/completion.zsh
+  . /usr/share/fzf/key-bindings.zsh
 fi
 # note for some unknown reason --follow (symlinks) causes it not to find anything under ~/.zsh (which is not a symlink dir regardless). fd bug?
 FD_OPTIONS="--no-ignore --hidden --exclude .git --exclude node_modules --exclude .cache --exclude .asdf"
@@ -263,6 +261,12 @@ FD_OPTIONS="--no-ignore --hidden --exclude .git --exclude node_modules --exclude
 # notes:
 #   -1: automatically select the only match
 #   open in vim: https://github.com/junegunn/fzf/issues/1593
+#   --no-mouse: otherwise can't copy from terminal with mouse (gets locked to fzf)
+#   --reverse: put prompt at top
+#   --height=50%: only take up 50% of the terminal screen
+#   --multi: enables multi-select with shift-tab
+#   --info=inline: save space my showing on same line
+#   --preview: preview files with e.g. bat (syntax highlighted); toggle with F2
 export FZF_DEFAULT_OPTS="--no-mouse --height=50% -1 --reverse --multi --info=inline --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300' --preview-window='right:hidden:wrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-e:execute(nvim -p {+} < /dev/tty > /dev/tty 2>&1),ctrl-x:execute(rm -i {+})+abort'"
 export FZF_DEFAULT_COMMAND="fd --type f --type l $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="fd --type f --type l $FD_OPTIONS"
