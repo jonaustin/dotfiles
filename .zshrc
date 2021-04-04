@@ -94,13 +94,6 @@ zplugin light fcambus/ansiweather # $ weather <zip>
 zplugin light "zdharma/zsh-diff-so-fancy" # $ git dsf
 #zplugin light h3poteto/zsh-ec2ssh
 
-# fzf-tab
-# order matters a lot:
-# after zsh-completions
-# before zsh-autosuggestions/fast-syntax-highlighting
-zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
-zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
-
 # and see bindkey below
 #zplugin light "aperezdc/zsh-notes"
 #zstyle :notes home  $HOME/notes/
@@ -393,3 +386,8 @@ source /etc/grc.zsh
 
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
+# fzf-tab
+# order matters: just put it last
+zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
+zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
