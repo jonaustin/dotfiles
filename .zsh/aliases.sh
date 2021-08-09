@@ -1,6 +1,7 @@
 ## SHORTCUTS
 
 # overrides
+alias emacs='TERM=xterm-24bit emacs -nw'
 alias db=dotbare
 alias dbs='dotbare status'
 alias cat=bat
@@ -8,6 +9,9 @@ alias catnp='bat --paging never'
 alias ls=exa; alias ll='exa -l'; alias lsl='ls -l'
 alias calibre='asdf shell python system && calibre'
 alias fd='fd -I' # don't ignore things in gitignore
+alias locate='plocate'
+alias rename='perl-rename'
+alias prename='perl-rename'
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
@@ -111,8 +115,8 @@ alias rmmac='find . -iname "__MACOSX" -print0 | xargs -0 rm -rf'
 alias retag='find . -type f -print0|xargs -0 id3tag '
 
 # Vim
-alias vim='dntw_edit'
-#alias vim='nvim'
+#alias vim='dntw_edit'
+alias vim='nvim'
 alias vimdiff='$EDITOR -d'
 alias svi='sudo $EDITOR'
 alias svdi='sudo vimdiff'

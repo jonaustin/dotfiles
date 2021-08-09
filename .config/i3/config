@@ -445,7 +445,7 @@ exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
 exec --no-startup-id sh ~/.fehbg    # use my feh bg script
 exec --no-startup-id parcellite  # dead simple clipboard management (switch to clipit fork?)
 #exec --no-startup-id pamac-tray     # pacman tray
-exec --no-startup-id dropbox
+#exec --no-startup-id dropbox
 # exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id tmux start-server
 exec --no-startup-id blueman-applet

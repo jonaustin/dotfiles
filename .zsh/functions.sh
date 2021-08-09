@@ -372,3 +372,25 @@ gco() {
 git-diff-dir-names() {
   git diff --name-only $1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
 }
+
+# copy changed within x time
+# cpch 30m ~/dl/ `pwd`/books/
+cpch() {
+  # handle spaces
+  OIFS="$IFS"
+  IFS=$'\n'
+
+ within=${1:-15m}
+ wherefrom=${2:-$HOME/downloads/}
+ whereto=${3:-$HOME/sync/ereader/}
+
+ for file in `fd --changed-within $within . "$wherefrom"`; do
+  if [[ -z "${DRY}" ]]; then
+     rsync -aP "$file" "${whereto}/"
+  else
+    echo "$file" "${whereto}/"
+  fi
+ done
+
+ IFS="$OIFS"
+}

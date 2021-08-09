@@ -244,6 +244,9 @@ export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
+# doom emacs
+export PATH=$PATH:$HOME/.emacs.d/bin/
+
 # OS configs and fzf
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
@@ -327,8 +330,8 @@ zplugin snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 # load avn
 #[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
 
-eval "$(direnv hook zsh)"
-. $HOME/opt/dntw/dntw.sh # dedicated neovim tmux window; start tmux with `dntw`
+#eval "$(direnv hook zsh)"
+#. $HOME/opt/dntw/dntw.sh # dedicated neovim tmux window; start tmux with `dntw`
 
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export BROWSER='open'
@@ -395,3 +398,12 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # order matters: just put it last
 zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
+
+if [ $SYSTEM_TYPE = "Linux" ]; then
+  # perl
+  PATH="/home/jon/perl5/bin${PATH:+:${PATH}}"; export PATH;
+  PERL5LIB="/home/jon/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+  PERL_LOCAL_LIB_ROOT="/home/jon/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+  PERL_MB_OPT="--install_base \"/home/jon/perl5\""; export PERL_MB_OPT;
+  PERL_MM_OPT="INSTALL_BASE=/home/jon/perl5"; export PERL_MM_OPT;
+fi
