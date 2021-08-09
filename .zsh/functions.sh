@@ -77,7 +77,7 @@ nh()
 
 # define - fetch word defnition from google
 # usage: define <word>
-define()
+gdefine()
 {
   lynx -dump "http://www.google.com/search?hl=en&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -w "*"  | sed 's/;/ -/g' | cut -d- -f5 > /tmp/templookup.txt
   if [[ -s  /tmp/templookup.txt ]] ;then

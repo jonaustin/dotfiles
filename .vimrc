@@ -57,6 +57,7 @@ Plug 'rodjek/vim-puppet'
 Plug 'pearofducks/ansible-vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'hashivim/vim-terraform'
+au BufNewFile,BufRead *.hcl setfiletype terraform
 
 " Ruby
 Plug 'tpope/vim-haml'

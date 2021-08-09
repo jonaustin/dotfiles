@@ -12,6 +12,7 @@ alias fd='fd -I' # don't ignore things in gitignore
 alias locate='plocate'
 alias rename='perl-rename'
 alias prename='perl-rename'
+alias tg='terragrunt'
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
@@ -148,6 +149,9 @@ alias syn='ssh root@10.0.1.8'
 alias it='iotop'
 
 ## Git
+git-diff-uniq-dirs() {
+  git diff --name-only HEAD~1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
+}
 alias gs='git status --ignore-submodules'
 alias gsl='git status --ignore-submodules | less'
 #alias ga='git add '
@@ -294,7 +298,7 @@ alias trekz="bluetoothctl connect 20:74:CF:1C:8C:9B"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
 alias deva="bluetoothctl connect CC:39:8C:01:DB:2D"
 
-# battery
+# battery (thinkpad)
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0" # "inxi -Bxxx"
 
 # cheatsheets
