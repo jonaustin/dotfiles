@@ -69,13 +69,8 @@ bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c kill
 
-# start dmenu (a program launcher)
-#bindsym $mod+d exec rofi -show run -display-run '❯ ' #dmenu_run
-bindsym Ctrl+space exec rofi -show run -display-run '❯ ' #dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# start rofi (a program launcher)
+bindsym Ctrl+space exec rofi -show run -display-run '❯ '
 
 # change focus
 bindsym $mod+h focus left
@@ -152,7 +147,7 @@ workspace_auto_back_and_forth yes
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
-# workspaces with icons
+# workspaces
 set $w1  "1"
 set $w2  "2"
 set $w3  "3"
@@ -200,41 +195,6 @@ bindsym $mod+Shift+0 move container to workspace $w10
 
 # Move workspace to other monitor
 # bindsym $mod+Shift+s exec $HOME/bin/i3/switch-workspace.py # fixme: broken; see https://i3ipc-python.readthedocs.io/en/latest/ or maybe https://fmos.at/2016/06/30/my-i3-dual-screen-workflow/
-
-# Open applications on specific workspaces
-# assign [class="Thunderbird"] $ws1
-# assign [class="Pale moon"] $ws2
-assign [class="Pcmanfm"] $w9
-assign [class="Spotify"] $w7 # doesn't work
-# assign [class="Skype"] $ws5
-
-# Open specific applications in floating mode
-#for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="Calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
-for_window [title="File Transfer*"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
-for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
-for_window [class="Lightdm-gtk-greeter-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [class="Manjaro Welcome"] floating enable
-for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
-for_window [class="Pamac-manager"] floating enable
-#for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-for_window [class="Thus"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-#for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -429,7 +389,7 @@ bindsym $mod+mod1+Shift+s exec "kill `cat $HOME/.cache/mpvbg.pid`"
 
 # misc
 bindsym $mod+Ctrl+s exec scrot
-bindsym $mod+Ctrl+i exec i3lock -c "000000"
+bindsym $mod+Ctrl+i exec i3lock -c "000000" # maybe add xss-lock?
 bindsym $mod+Mod1+l exec "xinput --set-prop 'Logitech Rechargeable Touchpad T650' 'libinput Tapping Enabled' 1"
 # &> /tmp/i3-quickterm; python -V > /tmp/pyv" --- if it doesn't work, su to root and pip install i3ipc (system python)
 #bindsym mod1+grave exec "i3-quickterm shell"
@@ -441,7 +401,7 @@ exec --no-startup-id xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_
 exec --no-startup-id keynav         # control cursor with keyboard
 exec --no-startup-id guake          # drop down terminal ala quake console
 exec --no-startup-id xflux -z 97203 # less blue light at night
-exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term
+exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term # perhaps switch to picom?
 exec --no-startup-id sh ~/.fehbg    # use my feh bg script
 exec --no-startup-id parcellite  # dead simple clipboard management (switch to clipit fork?)
 #exec --no-startup-id pamac-tray     # pacman tray
