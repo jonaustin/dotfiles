@@ -374,10 +374,6 @@ bindsym $mod+Shift+Down exec "$HOME/bin/audio/yamaha -m"
 bindsym $mod+Up exec "$HOME/bin/audio/yamaha -u"
 bindsym $mod+Shift+Up exec "$HOME/bin/audio/yamaha -U"
 
-# keyboards
-bindsym $mod+mod1+m exec "xmodmap $HOME/.xmodmap; exec notify-send 'laptop'; pkill xcape; xcape -e 'Control_L=Escape' -t 200"
-bindsym $mod+mod1+Shift+m exec "xmodmap $HOME/configs/linux/xmodmap_kinesis; exec notify-send 'kinesis'; pkill xcape; xcape -e 'Control_L=Escape' -t 200"
-
 # lights
 # movie room lights
 bindsym $mod+o exec "lampe -s 10 y; lampe -s 9 y"
@@ -430,6 +426,10 @@ exec_always --no-startup-id setcursor
 
 # GUI apps on startup
 #exec --no-startup-id $HOME/bin/i3/i3_restore_hack.sh # my hack to restore usual apps on startup
+
+# keyboards
+#bindsym $mod+mod1+Shift+m exec "xmodmap $HOME/configs/linux/xmodmap_kinesis; exec notify-send 'kinesis'; pkill xcape; xcape -e 'Control_L=Escape' -t 200"
+
 
 # i3-gaps
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
