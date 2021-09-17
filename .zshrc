@@ -27,6 +27,8 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
 fi
 
 zplugin light kazhala/dotbare
+_dotbare_completion_cmd
+
 #zplugin OMZ::plugins/command-not-found/command-not-found.zsh
 zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 # built-ins - until they get muscle memory
