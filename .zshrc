@@ -407,10 +407,18 @@ source /etc/grc.zsh
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
+# cod -- automatic command completions
+# just run <cmd> --help and it'll add it
+# then `<cmd> -<tab>`
+# i.e. it _only_ works if you put a `-` before tab'ing!
+# go get -u github.com/dim-an/cod
+zinit wait lucid for dim-an/cod
+
 # fzf-tab
 # order matters: just put it last
 zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
+
 
 if [ $SYSTEM_TYPE = "Linux" ]; then
   # perl
