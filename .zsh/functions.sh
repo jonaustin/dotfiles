@@ -394,3 +394,11 @@ cpch() {
 
  IFS="$OIFS"
 }
+
+sysz() {
+  # or just use fzf's built in completion e.g. systemctl status <tab>
+  FZF_DEFAULT_OPTS_OLD=$FZF_DEFAULT_OPTS
+  export FZF_DEFAULT_OPTS=$(echo $FZF_DEFAULT_OPTS | sed 's/right:hidden/right/')
+  /usr/bin/sysz
+  export FZF_DEFAULT_OPTS=$(echo $FZF_DEFAULT_OPTS | sed 's/right:wrap/right:hidden:wrap/')
+}

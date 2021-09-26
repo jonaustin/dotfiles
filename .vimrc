@@ -34,7 +34,7 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
-"Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
+Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
 Plug 'honza/vim-snippets'
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
@@ -570,7 +570,8 @@ let cmdline_auto_scroll = 1      " Keep the cursor at the end of terminal (nvim)
 "let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
+"let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger = "<c-y>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 """ END PLUGINS """

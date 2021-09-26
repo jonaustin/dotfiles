@@ -105,6 +105,19 @@ zplugin light "zdharma/zsh-diff-so-fancy" # $ git dsf
 zplugin light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
 #zplugin light StackExchange/blackbox # gpg encrypt secrets in git repos
 zplugin light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclean
+forgit_log=glo
+forgit_diff=gd
+forgit_add=ga
+forgit_reset_head=grh
+forgit_ignore=gi
+forgit_checkout_file=gcf
+forgit_checkout_branch=gcb
+forgit_checkout_commit=gco
+forgit_clean=gclean
+forgit_stash_show=gss
+forgit_cherry_pick=gcp
+forgit_rebase=grb
+forgit_fixup=gfu
 zplugin light "hlohm/mfunc" # dynamically define and use shell functions
 zplugin light "b4b4r07/emoji-cli"
 #zplugin light "amstrad/oh-my-matrix"
@@ -371,10 +384,8 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
 fi;
 
 ### ZSH Completions ###
+# this won't work with zinit due to a bug: https://github.com/marlonrichert/zsh-autocomplete/issues/335
 #zplugin light marlonrichert/zsh-autocomplete # must come after fzf
-# FIXME: lazy load these
-#source ~/.zsh/completion/_kubectl # adds ~70ms to zsh startup
-#source ~/.zsh/completion/_eksctl
 
 # ruby
 if [ $SYSTEM_TYPE = "Linux" ]; then # being lazy...not linux-specific, just mac/work is on 2.5.3 still
