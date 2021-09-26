@@ -364,9 +364,9 @@ sed-recurse() {
 }
 
 # fzf
-gco() {
- git checkout "$(git branch -a | sed 's@remotes/origin/@@' | fzf | tr -d '[:space:]' | uniq )"
-}
+#gco() {
+# git checkout "$(git branch -a | sed 's@remotes/origin/@@' | fzf | tr -d '[:space:]' | uniq )"
+#}
 
 # git
 git-diff-dir-names() {
