@@ -364,9 +364,14 @@ sed-recurse() {
 }
 
 # fzf
-#gco() {
-# git checkout "$(git branch -a | sed 's@remotes/origin/@@' | fzf | tr -d '[:space:]' | uniq )"
-#}
+# checkout git branch
+# https://junegunn.kr/2015/03/fzf-tmux/
+gcob() {
+  local branches branch
+  branches=$(git branch) &&
+  branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //")
+}
 
 # git
 git-diff-dir-names() {

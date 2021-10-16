@@ -65,7 +65,7 @@ fi
 ## pretty colors (using grc) for various commands; diff,mtr,netstat,ps,etc
 zplugin light unixorn/warhol.plugin.zsh
 #export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43" # https://geoff.greer.fm/lscolors/
-zplugin light zdharma/fast-syntax-highlighting # better than zsh-users/zsh-syntax-highlighting
+
 # Base16 Shell
 #zplugin light "chriskempson/base16-shell" # base16<tab> # color themes
 # trapd00r
@@ -75,9 +75,13 @@ zplugin light zdharma/fast-syntax-highlighting # better than zsh-users/zsh-synta
 #zplugin light trapd00r/LS_COLORS
 
 # pywal; automatic colors from current wallpaper
-if [ ! $SYSTEM_TYPE = "Darwin" ]; then
-  (cat ~/.cache/wal/sequences &) # async
-fi;
+#if [ ! $SYSTEM_TYPE = "Darwin" ]; then
+#  (cat ~/.cache/wal/sequences &) # async
+#fi;
+
+
+
+##################################################
 
 # navi
 #zplugin light denisidoro/navi/navi.plugin.zsh # ^g
@@ -89,8 +93,6 @@ zplugin light zsh-users/zaw
   zplugin light termoshtt/zaw-systemd
   zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
   zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
-zplugin light zsh-users/zsh-autosuggestions # fish-like autosuggestions for zsh
-zplugin light zsh-users/zsh-completions # just various completions
 # zplugin light mafredri/zsh-async # cool, but haven't needed it: https://github.com/mafredri/zsh-async#example-code
 zplugin light fcambus/ansiweather # $ weather <zip>
 zplugin light "zdharma/zsh-diff-so-fancy" # $ git dsf
@@ -218,7 +220,7 @@ bindkey '^h' backward-delete-char # ctrl-h also deletes chars
 bindkey '^r' history-incremental-search-backward # ctrl-r starts searching history backward (note: doesn't work in vi mode)
 
 # zsh-notes
-bindkey '^N' notes-edit-widget
+#bindkey '^N' notes-edit-widget
 
 # https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 key=(
@@ -392,9 +394,9 @@ if [ $SYSTEM_TYPE = "Linux" ]; then # being lazy...not linux-specific, just mac/
   export RUBYOPT='-W:no-deprecated -W:no-experimental'
 fi;
 
-zinit light "vifon/deer"
-zle -N deer
-bindkey '\ek' deer
+#zinit light "vifon/deer"
+#zle -N deer
+#bindkey '\ek' deer # alt-k
 
 # pretty colors for df, etc
 source /etc/grc.zsh
@@ -415,9 +417,17 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 zinit wait lucid for dim-an/cod
 
 # fzf-tab
-# order matters: just put it last
+# needs to be loaded after compinit, but before plugins which will wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
 zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
+
+# syntax coloring
+# Unfortunately has a super weird bug where it hangs reliably with: git checkout $(git branch -a | grep -v remotes | fzf)
+# zplugin light zdharma/fast-syntax-highlighting
+
+zplugin light zsh-users/zsh-syntax-highlighting
+zplugin light zsh-users/zsh-autosuggestions # fish-like autosuggestions for zsh
+zplugin light zsh-users/zsh-completions # just various completions
 
 
 if [ $SYSTEM_TYPE = "Linux" ]; then

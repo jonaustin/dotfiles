@@ -146,8 +146,9 @@ endif
 "Plug 'Wraul/vim-easytags'
 Plug 'jsfaint/gen_tags.vim'
 let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim' " :FZF, :Files, :BFiles, :BLines, :Lines
+Plug 'junegunn/fzf.vim' " :FZF, :Files, :BLines, :Lines
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+
 Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
 "Plug 'Lokaltog/vim-easymotion'        " <leader><leader>w
