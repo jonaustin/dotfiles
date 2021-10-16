@@ -338,12 +338,12 @@ bindsym Pause exec $HOME/bin/audio/pavolume.sh --up
 bindsym $mod+Shift+s exec paswitch # switch output device for all sources
 
 # Media player controls
-bindsym XF86AudioPlay exec "playerctl play-pause"
-bindsym $mod+space exec "playerctl play-pause"
-bindsym XF86AudioNext exec "playerctl next"
-bindsym $mod+Right exec "playerctl next"
-bindsym XF86AudioPrev exec "playerctl previous"
-bindsym $mod+Left exec "playerctl previous"
+bindsym XF86AudioPlay exec "playerctl -a play-pause"
+bindsym $mod+space exec "playerctl -a play-pause"
+bindsym XF86AudioNext exec "playerctl -a next"
+bindsym $mod+Right exec "playerctl -a next"
+bindsym XF86AudioPrev exec "playerctl -a previous"
+bindsym $mod+Left exec "playerctl -a previous"
 
 # firetv  # FIXME: for osmc
 bindsym $mod+p exec "$HOME/bin/firetv play_pause"
