@@ -26,11 +26,11 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/bin/i3/i3-completion/i3_completion.sh # must come after bashcompinit
 fi
 
-zplugin light kazhala/dotbare
+zinit light kazhala/dotbare
 _dotbare_completion_cmd
 
-#zplugin OMZ::plugins/command-not-found/command-not-found.zsh
-zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
+#zinit OMZ::plugins/command-not-found/command-not-found.zsh
+zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
 # built-ins - until they get muscle memory
 #alias a='fasd -a'        # any
 #alias s='fasd -si'       # show / search / select
@@ -41,10 +41,10 @@ zplugin snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuz
 #alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 #alias zz='fasd_cd -d -i' # cd with interactive selection
 
-#zplugin light "stevemcilwain/nonotes" # nmap zsh funcs
+#zinit light "stevemcilwain/nonotes" # nmap zsh funcs
 
-#zplugin light "macunha1/zsh-terraform"
-#zplugin light hanjunlee/terragrunt-oh-my-zsh-plugin
+#zinit light "macunha1/zsh-terraform"
+#zinit light hanjunlee/terragrunt-oh-my-zsh-plugin
 
 # node
 #export NVM_LAZY_LOAD=true
@@ -63,16 +63,16 @@ fi
 
 # colors
 ## pretty colors (using grc) for various commands; diff,mtr,netstat,ps,etc
-zplugin light unixorn/warhol.plugin.zsh
+zinit light unixorn/warhol.plugin.zsh
 #export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43" # https://geoff.greer.fm/lscolors/
 
 # Base16 Shell
-#zplugin light "chriskempson/base16-shell" # base16<tab> # color themes
+#zinit light "chriskempson/base16-shell" # base16<tab> # color themes
 # trapd00r
-#zplugin ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
+#zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
 #    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
 #    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-#zplugin light trapd00r/LS_COLORS
+#zinit light trapd00r/LS_COLORS
 
 # pywal; automatic colors from current wallpaper
 #if [ ! $SYSTEM_TYPE = "Darwin" ]; then
@@ -84,29 +84,29 @@ zplugin light unixorn/warhol.plugin.zsh
 ##################################################
 
 # navi
-#zplugin light denisidoro/navi/navi.plugin.zsh # ^g
-#zplugin light "denisidoro/navi", as:command, use:"navi"
+#zinit light denisidoro/navi/navi.plugin.zsh # ^g
+#zinit light "denisidoro/navi", as:command, use:"navi"
 
 # https://github.com/unixorn/awesome-zsh-plugins#plugins
 # zaw
-zplugin light zsh-users/zaw
-  zplugin light termoshtt/zaw-systemd
+zinit light zsh-users/zaw
+  zinit light termoshtt/zaw-systemd
   zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
   zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
-# zplugin light mafredri/zsh-async # cool, but haven't needed it: https://github.com/mafredri/zsh-async#example-code
-zplugin light fcambus/ansiweather # $ weather <zip>
-zplugin light "zdharma/zsh-diff-so-fancy" # $ git dsf
-#zplugin light h3poteto/zsh-ec2ssh
+# zinit light mafredri/zsh-async # cool, but haven't needed it: https://github.com/mafredri/zsh-async#example-code
+zinit light fcambus/ansiweather # $ weather <zip>
+zinit light "zdharma/zsh-diff-so-fancy" # $ git dsf
+#zinit light h3poteto/zsh-ec2ssh
 
 # and see bindkey below
-#zplugin light "aperezdc/zsh-notes"
+#zinit light "aperezdc/zsh-notes"
 #zstyle :notes home  $HOME/notes/
 
-#zplugin light MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
-#zplugin light djui/alias-tips # alias reminders; ugh adds 300ms to load time
-zplugin light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
-#zplugin light StackExchange/blackbox # gpg encrypt secrets in git repos
-zplugin light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclean
+#zinit light MichaelAquilina/zsh-you-should-use # alias reminders; meh, no whitelists
+#zinit light djui/alias-tips # alias reminders; ugh adds 300ms to load time
+zinit light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
+#zinit light StackExchange/blackbox # gpg encrypt secrets in git repos
+zinit light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclean
 forgit_log=glo
 forgit_diff=gd
 forgit_add=ga
@@ -120,23 +120,23 @@ forgit_stash_show=gss
 forgit_cherry_pick=gcp
 forgit_rebase=grb
 forgit_fixup=gfu
-zplugin light "hlohm/mfunc" # dynamically define and use shell functions
-zplugin light "b4b4r07/emoji-cli"
-#zplugin light "amstrad/oh-my-matrix"
+zinit light "hlohm/mfunc" # dynamically define and use shell functions
+zinit light "b4b4r07/emoji-cli" # ctrl-s
+#zinit light "amstrad/oh-my-matrix"
 
 # Prompt
-zplugin light "romkatv/powerlevel10k"
+zinit light "romkatv/powerlevel10k"
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 # Show prompt segment "kubecontext" only when the command you are typing
 # invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
 typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
 [[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
 
-zplugin ice wait'1' lucid
-zplugin light laggardkernel/zsh-thefuck
+zinit ice wait'1' lucid
+zinit light laggardkernel/zsh-thefuck
 
-zplugin ice wait'1' lucid
-zplugin light "buonomo/yarn-completion"
+zinit ice wait'1' lucid
+zinit light "buonomo/yarn-completion"
 
 # zsh
 
@@ -387,7 +387,7 @@ fi;
 
 ### ZSH Completions ###
 # this won't work with zinit due to a bug: https://github.com/marlonrichert/zsh-autocomplete/issues/335
-#zplugin light marlonrichert/zsh-autocomplete # must come after fzf
+#zinit light marlonrichert/zsh-autocomplete # must come after fzf
 
 # ruby
 if [ $SYSTEM_TYPE = "Linux" ]; then # being lazy...not linux-specific, just mac/work is on 2.5.3 still
@@ -402,9 +402,9 @@ fi;
 source /etc/grc.zsh
 
 # kubernetes
-#zplugin light superbrothers/zsh-kubectl-prompt
-#zplugin snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
-#zplugin light "bonnefoa/kubectl-fzf"
+#zinit light superbrothers/zsh-kubectl-prompt
+#zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+#zinit light "bonnefoa/kubectl-fzf"
 
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
@@ -418,16 +418,16 @@ zinit wait lucid for dim-an/cod
 
 # fzf-tab
 # needs to be loaded after compinit, but before plugins which will wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
-zplugin light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
+zinit light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
 
 # syntax coloring
 # Unfortunately has a super weird bug where it hangs reliably with: git checkout $(git branch -a | grep -v remotes | fzf)
-# zplugin light zdharma/fast-syntax-highlighting
+# zinit light zdharma/fast-syntax-highlighting
 
-zplugin light zsh-users/zsh-syntax-highlighting
-zplugin light zsh-users/zsh-autosuggestions # fish-like autosuggestions for zsh
-zplugin light zsh-users/zsh-completions # just various completions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions # fish-like autosuggestions for zsh
+zinit light zsh-users/zsh-completions # just various completions
 
 
 if [ $SYSTEM_TYPE = "Linux" ]; then
