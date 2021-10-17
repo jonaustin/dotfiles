@@ -727,14 +727,14 @@ scroll-down = ~/.config/polybar/scripts/pulseaudio-tail.sh --down
 
 [module/openweathermap-fullfeatured]
 type = custom/script
-exec = ~/.config/polybar/polybar-scripts/polybar-scripts/openweathermap-fullfeatured/openweathermap-fullfeatured.sh
+exec = sh ~/.config/polybar/polybar-scripts/polybar-scripts/openweathermap-fullfeatured/openweathermap-fullfeatured.sh
 interval = 600
 label-font = 9
 
 [module/system-bluetooth-bluetoothctl]
 type = custom/script
-exec = ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetooth-bluetoothctl/system-bluetooth-bluetoothctl.sh
+exec = sh ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetooth-bluetoothctl/system-bluetooth-bluetoothctl.sh
 tail = true
-click-left = ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetooth-bluetoothctl/system-bluetooth-bluetoothctl.sh --toggle &
+click-left = sh ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetooth-bluetoothctl/system-bluetooth-bluetoothctl.sh --toggle &
 
 ; vim:ft=dosini

@@ -329,12 +329,12 @@ bindsym $mod+Mod1+bracketleft exec "xbacklight -dec 1; notify-send $(xbacklight 
 #bindsym Ctrl+Print exec "xbacklight -set 3"
 
 # volume
-bindsym $mod+Print exec $HOME/bin/audio/pavolume.sh --togmute # mute toggle
-bindsym $mod+minus exec $HOME/bin/audio/pavolume.sh --down
-bindsym $mod+Shift+minus exec $HOME/bin/audio/pavolume.sh --down
-bindsym $mod+equal exec $HOME/bin/audio/pavolume.sh --up
-bindsym $mod+Shift+equal exec $HOME/bin/audio/pavolume.sh --up
-bindsym Pause exec $HOME/bin/audio/pavolume.sh --up
+bindsym $mod+Print exec $HOME/bin/audio/pulseaudio.sh --mute # mute toggle
+bindsym $mod+minus exec $HOME/bin/audio/pulseaudio.sh --down
+bindsym $mod+Shift+minus exec $HOME/bin/audio/pulseaudio.sh --down
+bindsym $mod+equal exec $HOME/bin/audio/pulseaudio.sh --up
+bindsym $mod+Shift+equal exec $HOME/bin/audio/pulseaudio.sh --up
+bindsym Pause exec $HOME/bin/audio/pulseaudio.sh --up
 bindsym $mod+Shift+s exec paswitch # switch output device for all sources
 
 # Media player controls
