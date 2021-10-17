@@ -325,7 +325,14 @@ export GOPATH=$HOME/opt/_go
 export GOBIN=$GOPATH/bin
 export PATH=$HOME/opt/_go/bin:$PATH
 export GO111MODULE=on # this can go away with 1.16 - https://tip.golang.org/doc/go1.16
-zplugin snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
+zinit snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
+
+# shell enhancements
+# cd - <enter> -- recent dirs
+# cd .. <enter>
+# cd <enter> fzf search dirs
+zinit light "b4b4r07/enhancd"
+export ENHANCD_FILTER=fzf-tmux
 
 # python
 ## pyenv
