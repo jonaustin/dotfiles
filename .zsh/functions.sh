@@ -407,3 +407,9 @@ sysz() {
   /usr/bin/sysz
   export FZF_DEFAULT_OPTS=$(echo $FZF_DEFAULT_OPTS | sed 's/right:wrap/right:hidden:wrap/')
 }
+
+curljson() {
+  curl $1 \
+    --header "Content-Type: application/json" \
+    --request "${2:-GET}"
+  }
