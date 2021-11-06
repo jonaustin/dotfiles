@@ -44,8 +44,7 @@ margin-bottom = 0
 bottom = false
 enable-ipc = true
 monitor = ${env:MONITOR:eDP1}
-monitor-fallback = DP1
-width = 100%
+monitor-fallback = DP1 width = 100%
 height = 28
 ;radius = 5.0
 ;fixed-center = false
@@ -97,8 +96,10 @@ font-8 = Weather Icons:size=12;1
 font-9 = Noto Color Emoji:size=24;1
 
 modules-left = i3
+;modules-center = spotify pulseaudio-internal system-bluetooth-bluetoothctl
 modules-center = spotify pulseaudio-internal system-bluetooth-bluetoothctl
-modules-right = filesystem xbacklight wifi battery memory cpu openweathermap-fullfeatured date
+;modules-right = filesystem xbacklight wifi battery memory cpu openweathermap-fullfeatured date
+modules-right = filesystem xbacklight wifi battery cpu memory date
 
 tray-position = right
 tray-padding = 4
@@ -303,7 +304,7 @@ ramp-free-7 = █
 
 [module/wifi]
 type = internal/network
-interface = wlp4s0
+interface = wlp0s20f3
 interval = 3.0
 ;udspeed-minwidth = 0
 
@@ -361,8 +362,10 @@ label-connected = %local_ip%
 
 [module/date]
 type = internal/date
-format = 🕓 <label>
-label = %{F#666}%{F-} %date%  %{F#e60053}%{F-} %time%
+;format = 🕓 <label>
+format = <label>
+;label = %{F#666}%{F-} %date%  %{F#e60053}%{F-} %time%
+label = %{F#666}%{F-} %date% %time%
 date = %m-%d
 time = %H:%M
 interval = 5
@@ -405,18 +408,18 @@ click-left = xdg-open https://mail.google.com
 [module/xbacklight]
 type = internal/xbacklight
 format = <ramp> <label>
-ramp-0 = 🌕
-ramp-1 = 🌔
+ramp-4 = 🌕
+ramp-3 = 🌔
 ramp-2 = 🌓
-ramp-3 = 🌒
-ramp-4 = 🌑
+ramp-1 = 🌒
+ramp-0 = 🌑
 ramp-foreground = #666
 label-foreground = ${root.foreground}
 
 [module/volume]
 type = internal/volume
 ;speaker-mixer = Speaker
-speaker-mixer = 'OPPO HA-1 USB AUDIO 2.0 DAC Input Playback  1'
+;speaker-mixer = 'OPPO HA-1 USB AUDIO 2.0 DAC Input Playback  1'
 ;headphone-mixer = Headphone
 ;headphone-id = 9
 
@@ -440,7 +443,9 @@ ramp-volume-foreground = #666
 
 [module/battery]
 type = internal/battery
-full-at = 90
+full-at = 98
+battery = BAT1
+adapter = ACAD
 
 ; see "man date" for details on how to format the time string
 ; NOTE: if you want to use syntax tags here you need to use %%{...}
@@ -472,14 +477,14 @@ format-discharging = <ramp-capacity> <label-discharging>
 ;   %percentage_raw%
 ;   %time%
 ;   %consumption% (shows current charge rate in watts)
-label-charging = %percentage%%
+label-charging = %percentage%% %time%
 
 ; Available tokens:
 ;   %percentage% (default) - is set to 100 if full-at is reached
 ;   %percentage_raw%
 ;   %time%
 ;   %consumption% (shows current discharge rate in watts)
-label-discharging = %percentage%%
+label-discharging = %percentage%% %time%
 
 ; Available tokens:
 ;   %percentage% (default) - is set to 100 if full-at is reached

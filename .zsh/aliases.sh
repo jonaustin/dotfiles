@@ -118,9 +118,9 @@ alias retag='find . -type f -print0|xargs -0 id3tag '
 # Vim
 #alias vim='dntw_edit'
 alias vim='nvim'
-alias vimdiff='$EDITOR -d'
-alias svi='sudo $EDITOR'
-alias svdi='sudo vimdiff'
+alias vimdiff='nvim -d' # neovim changes this for some reason
+alias svi='sudo -E $EDITOR'
+alias svdi='sudo -E vim -d'
 alias vvc='$EDITOR ~/.vimrc'
 alias vvcl='$EDITOR ~/.vimrc.local'
 alias vvh='$EDITOR ~/.hyper.js'
@@ -294,12 +294,14 @@ alias sw='/usr/bin/s -p wikipedia'
 alias blarchls="sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u"
 
 # bluetooth
-alias trekz="bluetoothctl connect 20:74:CF:1C:8C:9B"
+alias trekz="bluetoothctl connect 20:74:CF:ED:64:E5"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
 alias deva="bluetoothctl connect CC:39:8C:01:DB:2D"
 
 # battery (thinkpad)
-alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0" # "inxi -Bxxx"
+#alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0" # "inxi -Bxxx"
+# battery (framework)
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT1" # "inxi -Bxxx"
 
 # cheatsheets
 cheat() { curl http://cht.sh/$1 }
@@ -307,3 +309,4 @@ cheat() { curl http://cht.sh/$1 }
 # noteair
 alias na=' . ~/bin/noteair.sh'
 alias vvim="vim +'source ~/vimrcnoteair'"
+alias temp="cpu-x -D 2>/dev/null|grep 'Temp\.'"

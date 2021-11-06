@@ -4,7 +4,6 @@ alias R='yay -R '
 alias yy='aurman -S '
 alias x='yay -Ss'
 alias ss='yay -Ss'
-unalias s
 s() {
   # stupid hack because --preview-window override no longer seems to work
   FZF_DEFAULT_OPTS_OLD=$FZF_DEFAULT_OPTS

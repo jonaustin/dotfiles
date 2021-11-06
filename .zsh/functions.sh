@@ -412,4 +412,14 @@ curljson() {
   curl $1 \
     --header "Content-Type: application/json" \
     --request "${2:-GET}"
-  }
+}
+
+bluetooth_init() {
+  bluetoothctl power on
+  bluetoothctl agent on
+  bluetoothctl default-agent
+  bluetoothctl scan on
+  #bluetoothctl pair $1
+  #bluetoothctl trust $1
+  bluetoothctl connect $1
+}
