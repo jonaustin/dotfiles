@@ -3,7 +3,7 @@
   "languageserver": {
     "golang": {
       "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "rootPatterns": ["go.mod", ".vim", ".git"],
       "filetypes": ["go"],
       "initializationOptions": {
         "usePlaceholders": true
@@ -47,6 +47,13 @@
   "markdownlint.config": {
     "line_length": false 
   },
-  "python.linting.pylintEnabled": true,
-  "python.linting.enabled": true
+  "crystal": {
+    "command": "crystalline",
+    "args": [
+      "--stdio"
+      ],
+      "filetypes": [
+        "crystal"
+      ]
+  }
 }

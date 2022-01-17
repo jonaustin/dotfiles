@@ -99,7 +99,7 @@ modules-left = i3
 ;modules-center = spotify pulseaudio-internal system-bluetooth-bluetoothctl
 modules-center = spotify pulseaudio-internal system-bluetooth-bluetoothctl
 ;modules-right = filesystem xbacklight wifi battery memory cpu openweathermap-fullfeatured date
-modules-right = filesystem xbacklight wifi battery cpu memory date
+modules-right = ip-status filesystem xbacklight wifi battery cpu memory date
 
 tray-position = right
 tray-padding = 4
@@ -312,7 +312,7 @@ format-connected = <ramp-signal> <label-connected>
 format-connected-prefix = " "
 format-connected-prefix-foreground = #666
 format-connected-prefix-offset = -6
-label-connected = %downspeed:8%
+label-connected = ▼%downspeed:8% ▲%upspeed:8%
 
 format-disconnected = <label-disconnected>
 format-disconnected-prefix = " "
@@ -741,5 +741,10 @@ type = custom/script
 exec = sh ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetooth-bluetoothctl/system-bluetooth-bluetoothctl.sh
 tail = true
 click-left = sh ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetooth-bluetoothctl/system-bluetooth-bluetoothctl.sh --toggle &
+
+[module/ip-status]
+type = custom/script
+exec = curl -s https://icanhazip.com
+interval = 10
 
 ; vim:ft=dosini

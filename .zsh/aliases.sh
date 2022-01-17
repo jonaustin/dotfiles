@@ -13,6 +13,7 @@ alias locate='plocate'
 alias rename='perl-rename'
 alias prename='perl-rename'
 alias tg='terragrunt'
+alias b2='/usr/local/bin/b2' # backblaze
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
@@ -296,7 +297,7 @@ alias blarchls="sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u"
 # bluetooth
 alias trekz="bluetoothctl connect 20:74:CF:ED:64:E5"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
-alias deva="bluetoothctl connect CC:39:8C:01:DB:2D"
+alias hifi="bluetoothctl connect CC:39:8C:01:DB:2D"
 
 # battery (thinkpad)
 #alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0" # "inxi -Bxxx"

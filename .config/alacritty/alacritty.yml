@@ -705,3 +705,6 @@ cursor:
 
   # Print all received window events.
   #print_events: false
+  
+
+# vim: ft=yaml cms=#%s

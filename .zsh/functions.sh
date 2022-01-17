@@ -385,19 +385,19 @@ cpch() {
   OIFS="$IFS"
   IFS=$'\n'
 
- within=${1:-15m}
- wherefrom=${2:-$HOME/downloads/}
- whereto=${3:-$HOME/sync/ereader/}
+  within=${1:-15m}
+  wherefrom=${2:-$HOME/downloads/}
+  whereto=${3:-$HOME/sync/ereader/}
 
- for file in `fd --changed-within $within . "$wherefrom"`; do
-  if [[ -z "${DRY}" ]]; then
-     rsync -aP "$file" "${whereto}/"
-  else
-    echo "$file" "${whereto}/"
-  fi
- done
+  for file in `fd -t f --changed-within $within . "$wherefrom"`; do
+    if [[ -z "${DRY}" ]]; then
+      rsync -aP "$file" "${whereto}/"
+    else
+      echo "$file" "${whereto}/"
+    fi
+  done
 
- IFS="$OIFS"
+  IFS="$OIFS"
 }
 
 sysz() {
@@ -422,4 +422,9 @@ bluetooth_init() {
   #bluetoothctl pair $1
   #bluetoothctl trust $1
   bluetoothctl connect $1
+}
+
+cpfd() {
+  # cp "`fd sleep |fzf`" ../sync/ereader/health
+  cp "$(fd $1 | fzf )" $2
 }

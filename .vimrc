@@ -35,7 +35,7 @@ Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
-Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets' " note: there is no way to disable individual snippets in ultisnips/snipmate - only 'solution' is to clone e.g. this repo and customize and pull in upstream as needed.
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
@@ -278,22 +278,38 @@ set hidden         " allow unsaved background buffers and remember marks/undo fo
 set showtabline=2  " always show tab bar
 syntax on          " syntax highlighting
 set mouse=a
-set signcolumn=yes " Otherwise realtime linter gets annoying
 " not every vim is compiled with this, use the following line instead
 "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 scriptencoding utf-8
 set encoding=utf-8
 set autowrite
-set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
+set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
+" Don't pass messages to |ins-completion-menu|.
+" https://github.com/neoclide/coc.nvim/#example-vim-configuration
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Having longer updatetime (default is 4000 ms) leads to noticeable delays and poor user experience
+set updatetime=300
 
 " When you type the first tab, it will complete as much as possible, the second
 " tab hit will provide a list, the third and subsequent tabs will cycle through
 " completion options so you can complete the file without further keys
-set wildmode=longest,list,full
+"set wildmode=longest,list,full
+" try this instead
+set wildmode=list,longest
+set wildchar
 set wildmenu " provide navigable list of suggestions (tab, C-n, right; S-tab, C-p, left)
-
 set wildignorecase " case insensitive :filename completion
 
 set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts

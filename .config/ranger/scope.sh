@@ -64,6 +64,10 @@ handle_extension() {
             7z l -p -- "${FILE_PATH}" && exit 5
             exit 1;;
 
+        ## markdown
+        #md)
+        #    glow -- "${FILE_PATH}" && exit 5
+        #    exit 1;;
         ## PDF
         pdf)
             ## Preview as text conversion

@@ -23,11 +23,12 @@ fi
 autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
 autoload -U bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "Linux" ]; then
-  source $HOME/bin/i3/i3-completion/i3_completion.sh # must come after bashcompinit
+  source $HOME/bin/i3/i3-completion/i3_completion.sh # i3-msg completions; must come after bashcompinit
+  source $HOME/.config/doctl/doctl.zsh; compdef _doctl doctl # $ doctl completion zsh
 fi
 
-zinit light kazhala/dotbare
-_dotbare_completion_cmd
+###zinit light kazhala/dotbare
+###_dotbare_completion_cmd
 
 #zinit OMZ::plugins/command-not-found/command-not-found.zsh
 zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
@@ -135,8 +136,8 @@ typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx
 zinit ice wait'1' lucid
 zinit light laggardkernel/zsh-thefuck
 
-zinit ice wait'1' lucid
-zinit light "buonomo/yarn-completion"
+#zinit ice wait'1' lucid
+#zinit light "buonomo/yarn-completion"
 
 # zsh
 
@@ -176,11 +177,14 @@ setopt share_history          # adds history incrementally and share it across s
 # zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 } # do not add failed commands to history - https://superuser.com/a/902508
 
 # zstyles
-# case insensitive completion
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-# Make new commands immediately visible to zsh
+## case insensitive path completion
+#zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*' # FIXME: weird this freezes everything when trying to tab complete a dir that doesn't exist
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+
+## Make new commands immediately visible to zsh
 zstyle ':completion:*' rehash true
-# Use caching so that commands like apt and dpkg complete are useable
+
+## Use caching so that commands like apt and dpkg complete are useable
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
 
@@ -378,7 +382,7 @@ else
   export QT_SCALE_FACTOR=0.7
   export QT_AUTO_SCREEN_SCALE_FACTOR=1.0
   export XCURSOR_SIZE=32
-  export TERMINAL=termite
+  export TERMINAL=alacritty
   export DISABLE_AUTO_TITLE=true
 fi
 export LC_ALL=en_US.UTF-8

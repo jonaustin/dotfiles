@@ -60,7 +60,7 @@ font pango:monospace 9
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -353,10 +353,10 @@ bindsym $mod+Shift+Left exec "$HOME/bin/firetv rewind"
 bindsym $mod+Shift+Right exec "$HOME/bin/firetv fast_forward"
 
 # monitors
-bindsym $mod+n exec "xrandr --output HDMI1 --auto"
+bindsym $mod+n exec "xrandr --output DP4 --auto"
 bindsym $mod+Shift+n exec "xrandr --output eDP1 --auto --output HDMI1 --off --output HDMI2 --off --output DP1 --off"
-bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --auto"
-bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --output DP1 --off"
+bindsym $mod+m exec "xrandr --output eDP1 --off --output DP4 --auto"
+bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --output DP4 --off"
 # move windows to other monitor
 bindsym $mod+Shift+greater move container to output right
 bindsym $mod+Shift+less move container to output left
@@ -392,6 +392,7 @@ bindsym $mod+Mod1+l exec "xinput --set-prop 'Logitech Rechargeable Touchpad T650
 #bindsym mod1+grave exec "i3-quickterm shell"
 
 # inits
+exec --no-startup-id mullvad connect
 exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap $HOME/.xmodmap
 exec --no-startup-id xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200 # tap ctrl for escape; tap l/r shift for ( and )
@@ -424,9 +425,8 @@ exec --no-startup-id sudo -E auto-cpufreq --daemon
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id xscreensaver
-exec_always --no-startup-id setcursor
+#exec --no-startup-id xscreensaver
+#exec_always --no-startup-id setcursor
 
 # GUI apps on startup
 #exec --no-startup-id $HOME/bin/i3/i3_restore_hack.sh # my hack to restore usual apps on startup
@@ -562,4 +562,4 @@ smart_gaps on
 # Activate smart borders (only when there are effectively no gaps)
 smart_borders no_gaps
 
-gaps inner 3
+gaps inner 0
