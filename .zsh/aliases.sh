@@ -64,8 +64,8 @@ alias lsd="ls -l $1 | grep '^d'" # only dirs
 alias lsd-names="ls -F $1 | grep \/ | sed -e 's/\/$//g'" # bare dir names for looping and such
 
 # other
-alias ..='cd ..'
-alias -- -='cd -' # -- treats next chars as operand
+alias ..='/usr/bin/cd ..'
+alias -- -='/usr/bin/cd -' # -- treats next chars as operand
 
 ## App shortcuts (GUI/Curses)
 alias ff='firefox'

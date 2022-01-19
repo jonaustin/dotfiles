@@ -126,7 +126,7 @@ zinit light "b4b4r07/emoji-cli" # ctrl-s
 #zinit light "amstrad/oh-my-matrix"
 
 # Prompt
-zinit light "romkatv/powerlevel10k"
+zinit light "jonaustin/powerlevel10k"
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 # Show prompt segment "kubecontext" only when the command you are typing
 # invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
@@ -335,8 +335,8 @@ zinit snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 # cd - <enter> -- recent dirs
 # cd .. <enter>
 # cd <enter> fzf search dirs
-zinit light "b4b4r07/enhancd"
-export ENHANCD_FILTER=fzf-tmux
+#zinit light "b4b4r07/enhancd"
+#export ENHANCD_FILTER=fzf-tmux
 
 # python
 ## pyenv
