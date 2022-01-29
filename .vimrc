@@ -35,7 +35,7 @@ Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
-Plug 'honza/vim-snippets' " note: there is no way to disable individual snippets in ultisnips/snipmate - only 'solution' is to clone e.g. this repo and customize and pull in upstream as needed.
+Plug 'jonaustin/vim-snippets' " note: there is no way to disable individual snippets in ultisnips/snipmate - only 'solution' is to clone e.g. this repo and customize and pull in upstream as needed.
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
