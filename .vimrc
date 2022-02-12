@@ -147,8 +147,24 @@ endif
 "Plug 'Wraul/vim-easytags'
 Plug 'jsfaint/gen_tags.vim'
 let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
-Plug 'junegunn/fzf.vim' " :FZF, :Files, :BLines, :Lines
-Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+
+" FZF
+"nnoremap <C-t> :Files<cr>
+"nnoremap <C-p> :Rg<cr>
+"nnoremap <C-b> :BLines<cr>
+"nnoremap <silent><leader>/ :Buffers<CR>
+"nnoremap <C-c> :Colors<cr>
+"Plug 'junegunn/fzf.vim' " :FZF, :Files, :BLines, :Lines
+"Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " greatly speeds up telescope
+nnoremap <C-t> <cmd>Telescope find_files<cr>
+nnoremap <C-p> <cmd>Telescope live_grep<cr>
+nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
@@ -727,13 +743,6 @@ endif
 "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 " bind \ (backward slash) to grep shortcut
 nnoremap \ :Ack<SPACE>
-
-" FZF
-nnoremap <C-t> :Files<cr>
-nnoremap <C-p> :Rg<cr>
-nnoremap <C-b> :BLines<cr>
-nnoremap <silent><leader>/ :Buffers<CR>
-"nnoremap <C-c> :Colors<cr>
 
 " Fix window switching for terminal
 " https://www.reddit.com/r/neovim/comments/9sm1bp/how_to_switch_between_windows_in_terminal_mode/
