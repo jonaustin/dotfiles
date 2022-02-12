@@ -30,10 +30,9 @@ endif
 " Completions
 " https://stackoverflow.com/a/22253548/617320
 "Plug 'Valloric/YouCompleteMe'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
-Plug 'reedes/vim-lexical' " spelling/dictionary completion
-Plug 'metalelf0/supertab' " Plug 'ervandew/supertab'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
+"Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
 Plug 'jonaustin/vim-snippets' " note: there is no way to disable individual snippets in ultisnips/snipmate - only 'solution' is to clone e.g. this repo and customize and pull in upstream as needed.
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
@@ -41,6 +40,7 @@ Plug 'jonaustin/vim-snippets' " note: there is no way to disable individual snip
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
 Plug 'mattn/emmet-vim' " div<c-y>,
+Plug 'jiangmiao/auto-pairs' " auto-close e.g. {}
 
 " Asynchronous execution library
 Plug 'Shougo/vimproc.vim', {
@@ -171,10 +171,10 @@ nnoremap <C-c><C-s> :FloatermSend<CR>
 vnoremap <C-c><C-s> :FloatermSend<CR>
 
 " Integrations
-Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
+"Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
 Plug 'skywind3000/asyncrun.vim'       " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
-Plug 'janko-m/vim-test'
-Plug 'rizzatti/dash.vim'              " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
+"Plug 'janko-m/vim-test'
+"Plug 'rizzatti/dash.vim'              " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'              " Gbrowse for fugitive
@@ -187,6 +187,7 @@ Plug 'christoomey/vim-tmux-navigator' " or use https://gist.github.com/mislav/51
 " Plug 'tbabej/taskwiki'
 " Plug 'vimwiki/vimwiki', { 'branch': 'dev' } " required by taskwiki (taskwarrior)
 Plug 'mboughaba/i3config.vim'
+Plug 'rhysd/git-messenger.vim' " show commit message in floating window :GitMessenger / <leader>gm
 
 " Commands
 Plug 'scrooloose/nerdcommenter'
@@ -195,11 +196,10 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
-Plug 'myusuf3/numbers.vim' " can probably just use `:set relativenumber` now: https://til.hashrocket.com/posts/c1767dc3bc-absolute-and-relative-line-numbers
 Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 let g:session_autosave = 'no'
-Plug 'xolox/vim-misc' " required by vim-session
+  Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
@@ -237,7 +237,7 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
 
 " UI
 Plug 'romainl/vim-cool' " disable highlighting after search
-Plug 'reedes/vim-pencil'
+Plug 'reedes/vim-pencil' " focused writing :Pencil
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'zefei/vim-wintabs'
@@ -299,18 +299,26 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+set relativenumber
 
 " Having longer updatetime (default is 4000 ms) leads to noticeable delays and poor user experience
 set updatetime=300
 
+" CoC COMPLETION
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" colon/command completion
 " When you type the first tab, it will complete as much as possible, the second
 " tab hit will provide a list, the third and subsequent tabs will cycle through
 " completion options so you can complete the file without further keys
-"set wildmode=longest,list,full
-" try this instead
-set wildmode=list,longest
-set wildchar
-set wildmenu " provide navigable list of suggestions (tab, C-n, right; S-tab, C-p, left)
+set wildmode=longest,list,full
+set wildchar=<Tab>
+set wildmenu       " provide navigable list of suggestions (tab, C-n, right; S-tab, C-p, left)
 set wildignorecase " case insensitive :filename completion
 
 set timeout timeoutlen=1000 ttimeoutlen=100 " Fix slow O inserts
@@ -582,10 +590,8 @@ let cmdline_auto_scroll = 1      " Keep the cursor at the end of terminal (nvim)
 "let g:UltiSnipsExpandTrigger="<c-w>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-x>"
-" make YCM compatible with UltiSnips (using supertab)
 "let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 "let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 "let g:UltiSnipsExpandTrigger = "<tab>"
@@ -715,7 +721,7 @@ if executable('rg')
 endif
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> (fixme: don't use K; that's for viewing keyword docs
 
 " This defines a new command Ag to search for the provided text and open a “quickfix” window:
 "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
