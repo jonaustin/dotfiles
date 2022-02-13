@@ -148,24 +148,26 @@ endif
 Plug 'jsfaint/gen_tags.vim'
 let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
 
-" FZF
-"nnoremap <C-t> :Files<cr>
-"nnoremap <C-p> :Rg<cr>
-"nnoremap <C-b> :BLines<cr>
-"nnoremap <silent><leader>/ :Buffers<CR>
-"nnoremap <C-c> :Colors<cr>
-"Plug 'junegunn/fzf.vim' " :FZF, :Files, :BLines, :Lines
-"Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
-
 " Telescope
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " greatly speeds up telescope
-nnoremap <C-t> <cmd>Telescope find_files<cr>
-nnoremap <C-p> <cmd>Telescope live_grep<cr>
-nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
+if has('nvim')
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " greatly speeds up telescope
+  nnoremap <C-t> <cmd>Telescope find_files<cr>
+  nnoremap <C-p> <cmd>Telescope live_grep<cr>
+  nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
+else
+  " FZF
+  nnoremap <C-t> :Files<cr>
+  nnoremap <C-p> :Rg<cr>
+  nnoremap <C-b> :BLines<cr>
+  nnoremap <silent><leader>/ :Buffers<CR>
+  nnoremap <C-c> :Colors<cr>
+  Plug 'junegunn/fzf.vim' " :FZF, :Files, :BLines, :Lines
+  Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+endif
 
 Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
@@ -207,12 +209,15 @@ Plug 'mboughaba/i3config.vim'
 Plug 'rhysd/git-messenger.vim' " show commit message in floating window :GitMessenger / <leader>gm
 
 " Commands
-"Plug 'scrooloose/nerdcommenter'
-Plug 'numToStr/Comment.nvim' 
-" FIXME: figure out why my lua runtimepaths are b0rked (I had to manually symlink Comment.nvim/lua/Comment -> ~/.config/nvim/lua/Comment)
+if has('nvim')
+  " FIXME: figure out why my lua runtimepaths are b0rked (I had to manually symlink Comment.nvim/lua/Comment -> ~/.config/nvim/lua/Comment)
+  Plug 'numToStr/Comment.nvim' 
 lua << EOF
 require('Comment').setup()
 EOF
+else 
+  Plug 'scrooloose/nerdcommenter'
+endif
 Plug 'mbbill/undotree'
 "Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-repeat'
