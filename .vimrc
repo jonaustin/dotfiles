@@ -27,6 +27,7 @@ else
 endif
 
 "Plug 'lambdalisue/vim-pyenv'
+Plug 'majutsushi/tagbar' " :Tagbar
 
 " Completions
 " https://stackoverflow.com/a/22253548/617320
@@ -54,6 +55,7 @@ endif
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -101,15 +103,15 @@ nmap <leader>cl  <Plug>(coc-codelens-action)
 " END COC
 
 "Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
-"Plug 'reedes/vim-lexical' " spelling/dictionary completion
-Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
+Plug 'reedes/vim-lexical' " spelling/dictionary completion
+" Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
 Plug 'jonaustin/vim-snippets' " note: there is no way to disable individual snippets in ultisnips/snipmate - only 'solution' is to clone e.g. this repo and customize and pull in upstream as needed.
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
 Plug 'mattn/emmet-vim' " div<c-y>,
-Plug 'jiangmiao/auto-pairs' " auto-close e.g. {}
+" Plug 'jiangmiao/auto-pairs' " auto-close e.g. {} -- fixme: figure out how to make less obnoxious
 
 " Asynchronous execution library
 Plug 'Shougo/vimproc.vim', {
@@ -139,6 +141,9 @@ Plug 'tpope/vim-rails'
 
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" https://github.com/fatih/vim-go/issues/3237#issuecomment-853037821
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
 hi def goSameId  ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
 Plug 'sebdah/vim-delve'
 " https://hackernoon.com/my-neovim-setup-for-go-7f7b6e805876
@@ -150,6 +155,7 @@ au FileType go set shiftwidth=2
 au FileType go set softtabstop=2
 au FileType go set tabstop=2
 " note: :GoCoverageClear to clear highlights
+let g:go_doc_keywordprg_enabled = 0 " use coc.nvim's much prettier floating window
 let g:go_auto_type_info = 1 " show actual data type in status line when hovered
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -553,6 +559,8 @@ map <leader>qw  :wq<cr>
 " quickfix
 map <leader>qf :cope<cr> " open
 map <leader>cf :cclose<cr> " close
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
 
 " remove search highlights
 map <silent><leader>. :nohl<cr>
