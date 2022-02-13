@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/bundle')
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
   set pyx=3
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
   Plug 'Shougo/denite.nvim'
   Plug 'roxma/nvim-yarp'
@@ -31,6 +32,74 @@ endif
 " https://stackoverflow.com/a/22253548/617320
 "Plug 'Valloric/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" CoC COMPLETION
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+" END COC
+
 "Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 "Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
@@ -154,6 +223,7 @@ if has('nvim')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " greatly speeds up telescope
   nnoremap <C-t> <cmd>Telescope find_files<cr>
+  nnoremap <silent><leader>ff <cmd>Telescope find_files<cr>
   nnoremap <C-p> <cmd>Telescope live_grep<cr>
   nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
   nnoremap <leader>fh <cmd>Telescope help_tags<cr>
@@ -180,14 +250,14 @@ Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'kassio/neoterm'                 " :T <cmd> - open new or use existing terminal; :TREPLSend; :TREPLSendFile (to e.g. pry, node)
 "Plug 'metakirby5/codi.vim'            " amazing repl
 "Plug 'jalvesaq/vimcmdline'            " Send code to repl <leader>i, then Space
-Plug 'voldikss/vim-floaterm'
-let g:floaterm_position = 'bottom'
-let g:floaterm_width = 0.98
-let g:floaterm_autoclose = 2
-let g:floaterm_height = 0.4
-let g:floaterm_keymap_toggle = '<leader>ft'
-nnoremap <C-c><C-s> :FloatermSend<CR>
-vnoremap <C-c><C-s> :FloatermSend<CR>
+" Plug 'voldikss/vim-floaterm'
+" let g:floaterm_position = 'bottom'
+" let g:floaterm_width = 0.98
+" let g:floaterm_autoclose = 2
+" let g:floaterm_height = 0.4
+" let g:floaterm_keymap_toggle = '<leader>ft'
+" nnoremap <C-c><C-s> :FloatermSend<CR>
+" vnoremap <C-c><C-s> :FloatermSend<CR>
 
 " Integrations
 "Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
@@ -331,14 +401,6 @@ set relativenumber
 
 " Having longer updatetime (default is 4000 ms) leads to noticeable delays and poor user experience
 set updatetime=300
-
-" CoC COMPLETION
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " colon/command completion
 " When you type the first tab, it will complete as much as possible, the second
@@ -580,11 +642,6 @@ let g:NERDDefaultAlign = 'left' " put comments at col 0
 " NERDTree
 map <S-q> :NERDTreeToggle<cr>
 
-" Ctrl-p
-let g:ctrlp_custom_ignore = '\v[\/]node_modules$'
-"nnoremap <silent><leader>/ :CtrlPBuffer<CR>
-nnoremap <silent><leader>/ :Buffers<CR>
-
 " Vim-session
 let g:session_autoload = 'no'
 
@@ -633,12 +690,10 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "set completeopt+=noinsert " autoselect
 "set completeopt=menu,longest,preview
 " ^n/^p if popup menu shows up (multiple completions); else just tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" c-y (complete) on enter
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" make <cr> complete with first completion without selecting a completion
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" " c-y (complete) on enter
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " File Types {
 "" Filetype detection
@@ -820,3 +875,6 @@ endfunc
 " delete multiple blank lines: :%!cat -s
 
 set eol " for some reason this is getting turned off for k8s yamls
+
+" arrrrgh fixme
+nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
