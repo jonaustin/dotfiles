@@ -16,16 +16,6 @@ endif
 
 call plug#begin('~/.config/nvim/bundle')
 
-if has('nvim')
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-  set pyx=3
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-else
-  Plug 'Shougo/denite.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
 "Plug 'lambdalisue/vim-pyenv'
 Plug 'majutsushi/tagbar' " :Tagbar
 
