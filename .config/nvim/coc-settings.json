@@ -1,0 +1,61 @@
+{
+  "diagnostic.displayByAle": true,
+  "suggest.enablePreview": true,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim", ".git"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    },
+    //"sorbet": {
+    //  "command": "srb",
+    //  "args": ["tc", "--lsp", "--enable-all-experimental-lsp-features"],
+    //  "filetypes": ["ruby"],
+    //  "rootPatterns": ["sorbet/config"],
+    //  "initializationOptions": {},
+    //  "settings": {}
+    //},
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "clojure-lsp"],
+      "filetypes": ["clojure"],
+      "rootPatterns": ["project.clj"],
+      "additionalSchemes": ["jar", "zipfile"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+      }
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {}
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh","zsh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    }
+  },
+  "markdownlint.config": {
+    "line_length": false 
+  },
+  "crystal": {
+    "command": "crystalline",
+    "args": [
+      "--stdio"
+      ],
+      "filetypes": [
+        "crystal"
+      ]
+  }
+}
