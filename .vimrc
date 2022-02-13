@@ -16,7 +16,7 @@ endif
 
 call plug#begin('~/.config/nvim/bundle')
 
-"Plug 'lambdalisue/vim-pyenv'
+" General Coding
 Plug 'majutsushi/tagbar' " :Tagbar
 
 " Completions
@@ -43,7 +43,7 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 " Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
+" format on enter
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " Use `[g` and `]g` to navigate diagnostics
@@ -94,7 +94,7 @@ nmap <leader>cl  <Plug>(coc-codelens-action)
 
 "Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
-" Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
+Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
 Plug 'jonaustin/vim-snippets' " note: there is no way to disable individual snippets in ultisnips/snipmate - only 'solution' is to clone e.g. this repo and customize and pull in upstream as needed.
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
@@ -291,7 +291,7 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align' " :EasyAlign /<regex>/
 Plug 'w0rp/ale' " asynchronous linter
 Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
-let g:session_autosave = 'no'
+  let g:session_autosave = 'no'
   Plug 'xolox/vim-misc' " required by vim-session
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
@@ -377,7 +377,7 @@ set mouse=a
 "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 scriptencoding utf-8
 set encoding=utf-8
-set autowrite
+set autowrite                  " save the file when :make is called (and related like vim-go/GoBuild)
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
@@ -422,11 +422,9 @@ autocmd InsertEnter,WinLeave * set nocursorline
 " underline cursor (terminal as well)
 set guicursor=a:hor20-Cursor
 
-" If folding is too slow, possibly add https://github.com/Konfekt/FastFold
-set foldmethod=manual
-set foldlevelstart=99
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
+" note: let treesitter handle folding
+" nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+" vnoremap <Space> zf
 
 " Prevent Vim from clobbering the scrollback buffer (i.e. don't clear the
 " screen on exit). See http://www.shallowsky.com/linux/noaltscreen.html
@@ -453,11 +451,11 @@ set nolist         " Hide invisibles
 map Q <Nop>
 
 " Setting up the directories {
-set backup " backups are nice ...
+set backup " backups are nice
 set backupdir=$HOME/.vimbackup " but not when they clog .
 set directory=$HOME/.vimswap " Same for swap files
 set viewdir=$HOME/.vimviews " same but for view files
-set undodir=$HOME/.vimundo
+set undodir=$HOME/.vimundo " ditto
 
 " Creating directories if they don't exist
 silent execute '!mkdir -p $HOME/.vimbackup'
@@ -571,16 +569,16 @@ let g:lexical#spell = 0 " 0=disabled, 1=enabled
 let g:lexical#thesaurus = ['~/.config/nvim/thesaurus/mthesaur.txt',]
 
 " EasyTag
-let g:easytags_async=1 " compile ctags asynchronously
-let g:easytags_languages = {
-\   'javascript': {
-\     'cmd': 'jsctags',
-\	    'args': [],
-\	    'fileoutput_opt': '-f',
-\	    'stdout_opt': '-f-',
-\	    'recurse_flag': '-R'
-\   }
-\}
+" let g:easytags_async=1 " compile ctags asynchronously
+" let g:easytags_languages = {
+" \   'javascript': {
+" \     'cmd': 'jsctags',
+" \	    'args': [],
+" \	    'fileoutput_opt': '-f',
+" \	    'stdout_opt': '-f-',
+" \	    'recurse_flag': '-R'
+" \   }
+" \}
 
 " Airline/Powerline
 let g:airline_powerline_fonts = 1
@@ -588,15 +586,15 @@ let g:airline_theme='minimalist'
 let g:airline#extensions#tabline#enabled = 1
 
 " vim-test
-let g:test#javascript#jasmine#file_pattern = '\v.*/.*spec\.(js|jsx|coffee)$'
-let g:test#ruby#rspec#executable = 'bundle exec rspec'
-"let g:test#ruby#rspec#executable = 'zeus rspec'
-let test#strategy = 'neovim' "'neoterm'
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-"nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+" let g:test#javascript#jasmine#file_pattern = '\v.*/.*spec\.(js|jsx|coffee)$'
+" let g:test#ruby#rspec#executable = 'bundle exec rspec'
+" "let g:test#ruby#rspec#executable = 'zeus rspec'
+" let test#strategy = 'neovim' "'neoterm'
+" nmap <silent> <leader>t :TestNearest<CR>
+" nmap <silent> <leader>T :TestFile<CR>
+" "nmap <silent> <leader>a :TestSuite<CR>
+" nmap <silent> <leader>l :TestLast<CR>
+" nmap <silent> <leader>g :TestVisit<CR>
 
 " ALE asynchronous linter
 " clear all fixers and linters
@@ -643,40 +641,28 @@ map <S-q> :NERDTreeToggle<cr>
 " Vim-session
 let g:session_autoload = 'no'
 
-" Vim-maximizer
-nnoremap <silent><F5> :MaximizerToggle<CR>
-vnoremap <silent><F5> :MaximizerToggle<CR>
-inoremap <silent><F5> <C-o>:MaximizerToggle<CR>
-
-" vimcmdline mappings
-let cmdline_map_start          = '<leader>i'
-let cmdline_map_send           = '<Space>'
-let cmdline_map_send_and_stay  = '<leader><Space>'
-"let cmdline_map_source_fun     = '<LocalLeader>f'
-"let cmdline_map_send_paragraph = '<LocalLeader>p'
-"let cmdline_map_send_block     = '<LocalLeader>b'
-"let cmdline_map_quit           = '<LocalLeader>q'
-
-" vimcmdline options
-let cmdline_app         = {}
-let cmdline_app['ruby'] = 'pry'
-let cmdline_vsplit      = 1      " Split the window vertically
-let cmdline_esc_term    = 1      " Remap <Esc> to :stopinsert in Neovim's terminal
-let cmdline_in_buffer   = 1      " Start the interpreter in a Neovim's terminal
-let cmdline_term_height = 15     " Initial height of interpreter window or pane
-let cmdline_term_width  = 80     " Initial width of interpreter window or pane
-let cmdline_tmp_dir     = '/tmp' " Temporary directory to save files
-let cmdline_outhl       = 1      " Syntax highlight the output
-let cmdline_auto_scroll = 1      " Keep the cursor at the end of terminal (nvim)
+" " vimcmdline mappings
+" let cmdline_map_start          = '<leader>i'
+" let cmdline_map_send           = '<Space>'
+" let cmdline_map_send_and_stay  = '<leader><Space>'
+" "let cmdline_map_source_fun     = '<LocalLeader>f'
+" "let cmdline_map_send_paragraph = '<LocalLeader>p'
+" "let cmdline_map_send_block     = '<LocalLeader>b'
+" "let cmdline_map_quit           = '<LocalLeader>q'
+"
+" " vimcmdline options
+" let cmdline_app         = {}
+" let cmdline_app['ruby'] = 'pry'
+" let cmdline_vsplit      = 1      " Split the window vertically
+" let cmdline_esc_term    = 1      " Remap <Esc> to :stopinsert in Neovim's terminal
+" let cmdline_in_buffer   = 1      " Start the interpreter in a Neovim's terminal
+" let cmdline_term_height = 15     " Initial height of interpreter window or pane
+" let cmdline_term_width  = 80     " Initial width of interpreter window or pane
+" let cmdline_tmp_dir     = '/tmp' " Temporary directory to save files
+" let cmdline_outhl       = 1      " Syntax highlight the output
+" let cmdline_auto_scroll = 1      " Keep the cursor at the end of terminal (nvim)
 
 " Ultisnips
-"let g:UltiSnipsExpandTrigger="<c-w>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-x>"
-"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-
-" better key bindings for UltiSnipsExpandTrigger
 "let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsExpandTrigger = "<c-y>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
@@ -731,7 +717,6 @@ augroup filetypedetect
   autocmd BufRead,BufNewFile *.ino set filetype=arduino
   " puppet
   autocmd BufRead,BufNewFile *.pp set filetype=puppet
-  autocmd FileType js UltiSnipsAddFiletypes puppet
   "au FileType puppet set shiftwidth=4
   "au FileType puppet set softtabstop=4
   "au FileType puppet set tabstop=4
@@ -811,7 +796,7 @@ nnoremap \ :Ack<SPACE>
 
 " Fix window switching for terminal
 " https://www.reddit.com/r/neovim/comments/9sm1bp/how_to_switch_between_windows_in_terminal_mode/
-" vim bug: this doesn't work reason when switching TO a floating window;
+" vim bug: this doesn't work for some reason when switching TO a floating window;
 "     have to use the toggle floaterm command for that (e.g. ',ft')
 "     https://github.com/voldikss/vim-floaterm/issues/134
 "         You can not because neovim/vim doesn't support wincmd h/j/k/l for floating windows.
