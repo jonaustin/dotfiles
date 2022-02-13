@@ -4,9 +4,6 @@
 .zsh/zshrc.local.private
 keyrings
 blog.vim
-.vim/tmp
-.vim/doc/tags
-.vim/autoload
 .netrwhist
 *.pyo
 *.pyc
@@ -31,8 +28,11 @@ blog.vim
 .zsh/zshrc_local
 .zsh/zshrc.local.work
 .DS_Store
-.vim/bundle
-.vim/sessions
+.config/nvim/bundle
+.config/nvim/sessions
+.config/nvim/tmp
+.config/nvim/doc/tags
+.config/nvim/autoload
 initializers_private.sh
 tags
 tags.*

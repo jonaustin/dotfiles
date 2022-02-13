@@ -8,13 +8,13 @@
 " - For Neovim: ~/.local/share/nvim/plugged
 
 " Auto-install
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/.config/nvim/bundle')
 
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -165,6 +165,7 @@ nnoremap <C-t> <cmd>Telescope find_files<cr>
 nnoremap <C-p> <cmd>Telescope live_grep<cr>
 nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
 
 Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'goldfeld/vim-seek'              " <leader>s<2 chars>
@@ -206,7 +207,12 @@ Plug 'mboughaba/i3config.vim'
 Plug 'rhysd/git-messenger.vim' " show commit message in floating window :GitMessenger / <leader>gm
 
 " Commands
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
+Plug 'numToStr/Comment.nvim' 
+" FIXME: figure out why my lua runtimepaths are b0rked (I had to manually symlink Comment.nvim/lua/Comment -> ~/.config/nvim/lua/Comment)
+lua << EOF
+require('Comment').setup()
+EOF
 Plug 'mbbill/undotree'
 "Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-repeat'
@@ -219,6 +225,7 @@ let g:session_autosave = 'no'
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
+" TODO: switch to treesitter and use colorscheme compatible with TS
 "Plug 'pgdouyon/vim-ying-yang' " black white (yin)
 Plug 'dylanaraps/wal.vim'
 "Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
@@ -496,7 +503,7 @@ augroup lexical
   autocmd FileType text call lexical#init() "({ 'spell': 0 })
 augroup END
 let g:lexical#spell = 0 " 0=disabled, 1=enabled
-let g:lexical#thesaurus = ['~/.vim/thesaurus/mthesaur.txt',]
+let g:lexical#thesaurus = ['~/.config/nvim/thesaurus/mthesaur.txt',]
 
 " EasyTag
 let g:easytags_async=1 " compile ctags asynchronously
