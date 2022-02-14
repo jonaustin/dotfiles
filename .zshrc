@@ -53,9 +53,7 @@ zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy
 
 # asdf: multi-lang version mgr
 if [ $SYSTEM_TYPE = "Darwin" ]; then
-  export asdf_dir=/usr/local/opt/asdf
-else
-  export asdf_dir=/opt/asdf-vm/
+  export asdf_dir=/usr/local/Cellar/asdf/0.9.0
 fi;
 if [[ -d $asdf_dir ]]; then
   source $asdf_dir/asdf.sh
