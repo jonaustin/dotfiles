@@ -24,77 +24,82 @@ Plug 'majutsushi/tagbar' " :Tagbar
 "Plug 'Valloric/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " CoC COMPLETION
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+  " Use <c-space> to trigger completion.
+  if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    inoremap <silent><expr> <c-@> coc#refresh()
   endif
-endfunction
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-" Run the Code Lens action on the current line.
-nmap <leader>cl  <Plug>(coc-codelens-action)
+  " Make <CR> auto-select the first completion item and notify coc.nvim to
+  " format on enter
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  " Use `[g` and `]g` to navigate diagnostics
+  " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+  " GoTo code navigation.
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  " Use K to show documentation in preview window.
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+      call CocActionAsync('doHover')
+    else
+      execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+  endfunction
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Symbol renaming.
+  nmap <leader>rn <Plug>(coc-rename)
+  " Formatting selected code.
+  xmap <leader>f  <Plug>(coc-format-selected)
+  nmap <leader>f  <Plug>(coc-format-selected)
+  augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  augroup end
+  " Applying codeAction to the selected region.
+  " Example: `<leader>aap` for current paragraph
+  xmap <leader>a  <Plug>(coc-codeaction-selected)
+  nmap <leader>a  <Plug>(coc-codeaction-selected)
+  " Remap keys for applying codeAction to the current buffer.
+  nmap <leader>ac  <Plug>(coc-codeaction)
+  " Apply AutoFix to problem on the current line.
+  nmap <leader>qf  <Plug>(coc-fix-current)
+  " Run the Code Lens action on the current line.
+  nmap <leader>cl  <Plug>(coc-codelens-action)
 " END COC
 
 "Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
+  " Ultisnips
+  "let g:UltiSnipsExpandTrigger = "<tab>"
+  let g:UltiSnipsExpandTrigger = "<c-y>"
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+  let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 Plug 'jonaustin/vim-snippets' " note: there is no way to disable individual snippets in ultisnips/snipmate - only 'solution' is to clone e.g. this repo and customize and pull in upstream as needed.
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
@@ -131,47 +136,82 @@ Plug 'tpope/vim-rails'
 
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" https://github.com/fatih/vim-go/issues/3237#issuecomment-853037821
+  " Notes:
+    " ]] and [[ to jump to next/prev function (can also use motions like 3[[
+    " and d]])
+    " C-] / gd and C-t to jump forward backward in GoDef stack (GoDefStack)
+  " https://github.com/fatih/vim-go/issues/3237#issuecomment-853037821
+	
+	" To play with more:
+	" :GoFillStruct -- `j := play{}` will fill out the struct with default values from play declaration
+	" :GoKeyify -- `j2 := play{"me", 42, true} -- expand out the struct with keys
+	" :GoReferrers - find all the references to a function, method, type, or variable in your source code.
+	" :GoImplements -- list of all interfaces that are implemented
+	" :GoFiles -- list of files in the current package
+	" :GoMetaLinter -- run all linters
+	" :GoTest, :GoFunction, :GoTestCompile, :GoAlternate, :GoTestFunc
+	" :GoCoverageToggle, GoCoverageBrowser
+	" :GoChannelPeers
+	" :TagBar - list entities in file (`?` to see keys)
+
+  Plug 'sebdah/vim-delve'
+
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
-hi def goSameId  ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
-Plug 'sebdah/vim-delve'
-" https://hackernoon.com/my-neovim-setup-for-go-7f7b6e805876
-"  ]] takes you to the next function or method
-"  [[ takes you to the previous function or method
-"  shift-K to get docs for a func
-au FileType go set noexpandtab
-au FileType go set shiftwidth=2
-au FileType go set softtabstop=2
-au FileType go set tabstop=2
-" note: :GoCoverageClear to clear highlights
-let g:go_doc_keywordprg_enabled = 0 " use coc.nvim's much prettier floating window
-let g:go_auto_type_info = 1 " show actual data type in status line when hovered
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-"let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses of that var
-let g:go_fmt_command = "goimports" " automatically import dependencies after save
-au FileType go nmap <leader>gt :GoDeclsDir<cr> " show all funcs in file
-au FileType go nmap <F12> <Plug>(go-def) " go to definition of func
-au FileType go nmap <leader>r :GoRun<cr>
-" highlighting
-hi def goCoverageCovered ctermfg=green guifg=#A6E22E
-hi def goCoverageUncover ctermfg=red guifg=#F92672
-"hi def GoDebugBreakpoint term=standout ctermbg=117 ctermfg=0 guibg=#BAD4F5  guifg=Black
-"hi def GoDebugCurrent term=reverse  ctermbg=12  ctermfg=7 guibg=DarkBlue guifg=White
-hi def GoDebugBreakpoint term=standout ctermbg=117 ctermfg=0 guibg=#BAD4F5  guifg=Black
-hi def GoDebugCurrent term=reverse  ctermbg=12  ctermfg=7 guibg=DarkBlue guifg=White
-" switch between file and tests
-" au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
-" au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
-" au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
-"au FileType go nmap <F9> :GoCoverageToggle -short<cr> " test coverage
+
+  " https://hackernoon.com/my-neovim-setup-for-go-7f7b6e805876
+  "  ]] takes you to the next function or method
+  "  [[ takes you to the previous function or method
+  "  shift-K to get docs for a func
+  let g:go_addtags_transform = "snakecase" " for json struct tags
+  au FileType go set noexpandtab
+  au FileType go set shiftwidth=2
+  au FileType go set softtabstop=2
+  au FileType go set tabstop=2
+  " note: :GoCoverageClear to clear highlights
+  let g:go_doc_keywordprg_enabled = 0 " use coc.nvim's much prettier floating window
+  let g:go_auto_type_info = 1 " show actual data type in status line when hovered
+  let g:go_highlight_build_constraints = 1
+  let g:go_highlight_extra_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_structs = 1
+  let g:go_highlight_types = 1
+	let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gosec'] " :GoMetaLinter (or GoLint or GoVet)
+  let g:go_fmt_command = "goimports" " automatically import dependencies after save
+
+  "let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses of that var
+	" hack to make this less annoying
+  hi def goSameId  ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
+
+	" mappings
+  au FileType go nmap <leader>gt :Tagbar<cr>
+  au FileType go nmap <leader>tb :Tagbar<cr>
+  au FileType go nmap <leader>r :GoRun<cr>
+  au FileType go nmap <leader>b :GoBuild<cr>
+  au FileType go nmap <leader>c <Plug>(go-coverage-toggle)
+  au FileType go nmap <leader>gd :GoDeclsDir<cr>
+	" delve mappings
+	au FileType go nmap <leader>bp :DlvToggleBreakpoint<cr>
+	au FileType go nmap <leader>d :DlvDebug<cr>
+	au FileType go nmap <leader>db :DlvDebug<cr>
+	  " tracepoint (doesn't stop execution, just prints a note the tracepoint was hit
+		au FileType go nmap <leader>db :DlvToggleTracepoint<cr>
+
+  " highlighting
+  hi def goCoverageCovered ctermfg=green guifg=#A6E22E
+  hi def goCoverageUncover ctermfg=red guifg=#F92672
+  "hi def GoDebugBreakpoint term=standout ctermbg=117 ctermfg=0 guibg=#BAD4F5  guifg=Black
+  "hi def GoDebugCurrent term=reverse  ctermbg=12  ctermfg=7 guibg=DarkBlue guifg=White
+  hi def GoDebugBreakpoint term=standout ctermbg=117 ctermfg=0 guibg=#BAD4F5  guifg=Black
+  hi def GoDebugCurrent term=reverse  ctermbg=12  ctermfg=7 guibg=DarkBlue guifg=White
+  " switch between file and tests
+  au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+  au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+  au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+  au FileType go nmap <F9> :GoCoverageToggle -short<cr> " test coverage
 
 " ALE
 " CoC.nvim integration (must come before ale is loaded)
@@ -205,12 +245,16 @@ Plug 'jason0x43/vim-js-indent'
 "Plug 'Quramy/tsuquyomi'              " tsserver
 
 " Navigation
-Plug 'mileszs/ack.vim'                " :Ack <search> (better; use '\' binding below)
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep --smart-case --hidden --follow'
-endif
+Plug 'wincent/ferret' " Ack and Acks (multi-file search/replace)
+  " First `:Ack something` then Acks to replace `:Acks /something/or other/`
+  " (use `dd` in qf window to undo anything you don't want to replace)
+  " bind \ (backward slash) to grep shortcut
+  nnoremap \ :Ack<SPACE>
+          let g:FerretExecutableArguments = {
+                                  \   'rg': '--vimgrep --smart-case --hidden --follow'
+                                  \ }
 "Plug 'Wraul/vim-easytags'
-Plug 'jsfaint/gen_tags.vim'
+Plug 'jsfaint/gen_tags.vim' " :GenCtags C-]
 let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
 
 " Telescope
@@ -343,7 +387,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'fidian/hexmode'
 
 " Embedded neovim
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+"Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 
 " Initialize plugin system
@@ -487,7 +531,7 @@ set expandtab    " tabs should be spaces for sanity
 
 " Key Mappings {
 
-" Aliases {
+" Typo aliases {
 command! Wq wq
 command! WQ wq
 command! W w
@@ -633,7 +677,7 @@ let g:codi#rightalign=0
 let g:codi#width=80
 
 " NERDCommenter
-let g:NERDDefaultAlign = 'left' " put comments at col 0
+" let g:NERDDefaultAlign = 'left' " put comments at col 0
 
 " NERDTree
 map <S-q> :NERDTreeToggle<cr>
@@ -662,11 +706,6 @@ let g:session_autoload = 'no'
 " let cmdline_outhl       = 1      " Syntax highlight the output
 " let cmdline_auto_scroll = 1      " Keep the cursor at the end of terminal (nvim)
 
-" Ultisnips
-"let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsExpandTrigger = "<c-y>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 """ END PLUGINS """
 
 
@@ -789,11 +828,6 @@ endif
 " bind K to grep word under cursor
 "nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR> (fixme: don't use K; that's for viewing keyword docs
 
-" This defines a new command Ag to search for the provided text and open a “quickfix” window:
-"command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-" bind \ (backward slash) to grep shortcut
-nnoremap \ :Ack<SPACE>
-
 " Fix window switching for terminal
 " https://www.reddit.com/r/neovim/comments/9sm1bp/how_to_switch_between_windows_in_terminal_mode/
 " vim bug: this doesn't work for some reason when switching TO a floating window;
@@ -814,18 +848,18 @@ if has('nvim')
   augroup END
 endif
 
-" using https://github.com/junegunn/fzf.vim & fzf installed.
-augroup vimrc_term_fzf
-  autocmd!
-  " Do some other stuff independent of nvim.
-  if has('nvim')
-    autocmd FileType fzf tunmap <buffer> <Esc>
-    autocmd FileType fzf tunmap <buffer> <C-h>
-    autocmd FileType fzf tunmap <buffer> <C-j>
-    autocmd FileType fzf tunmap <buffer> <C-k>
-    autocmd FileType fzf tunmap <buffer> <C-l>
-  endif
-augroup END
+" " using https://github.com/junegunn/fzf.vim & fzf installed.
+" augroup vimrc_term_fzf
+"   autocmd!
+"   " Do some other stuff independent of nvim.
+"   if has('nvim')
+"     autocmd FileType fzf tunmap <buffer> <Esc>
+"     autocmd FileType fzf tunmap <buffer> <C-h>
+"     autocmd FileType fzf tunmap <buffer> <C-j>
+"     autocmd FileType fzf tunmap <buffer> <C-k>
+"     autocmd FileType fzf tunmap <buffer> <C-l>
+"   endif
+" augroup END
 
 " show what highlight group is used for highlight under cursor
 nmap <leader>hl :call <SID>SynStack()<CR>
@@ -856,8 +890,10 @@ endfunc
 " delete blank lines -> :g/^$/d
 "       or :%s/\n\n/\r/
 " delete multiple blank lines: :%!cat -s
+" verbose Xmap <leader>c # show imap/nmap/map/etc for <leader>c or whatnot
+" show value of set var with e.g. `set modeline?`; let is just the var `let g:plugin_var`
 
 set eol " for some reason this is getting turned off for k8s yamls
 
-" arrrrgh fixme
+" arrrrgh fixme 
 nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>

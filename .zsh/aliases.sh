@@ -14,6 +14,7 @@ alias rename='perl-rename'
 alias prename='perl-rename'
 alias tg='terragrunt'
 alias b2='/usr/local/bin/b2' # backblaze
+alias pbcopy='xclip'
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
