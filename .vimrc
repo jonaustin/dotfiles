@@ -22,6 +22,15 @@ Plug 'nvim-lua/plenary.nvim' " lua convenience library (needed by null-ls)
 " General Coding
 Plug 'majutsushi/tagbar' " :Tagbar
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+lua <<EOD
+local treesitter = require('nvim-treesitter.configs')
+
+treesitter.setup {
+    highlight = {
+        enable = true
+    }
+}
+EOD
 
 " LSP 
 Plug 'jose-elias-alvarez/null-ls.nvim'
@@ -39,7 +48,7 @@ require("null-ls").setup({
         require("null-ls").builtins.formatting.terrafmt,
         require("null-ls").builtins.formatting.trim_whitespace,
 
-        require("null-ls").builtins.diagnostics.checkmate,
+        require("null-ls").builtins.diagnostics.checkmake,
         require("null-ls").builtins.diagnostics.eslint,
         require("null-ls").builtins.diagnostics.flake8,
         require("null-ls").builtins.diagnostics.hadolint,
@@ -190,6 +199,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
+  set nofoldenable
 
   " https://hackernoon.com/my-neovim-setup-for-go-7f7b6e805876
   "  ]] takes you to the next function or method
