@@ -18,6 +18,7 @@ call plug#begin('~/.config/nvim/bundle')
 
 " General Coding
 Plug 'majutsushi/tagbar' " :Tagbar
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Completions
 " https://stackoverflow.com/a/22253548/617320
@@ -374,6 +375,8 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
 "Plug 'morhetz/gruvbox'
 
 " UI
+Plug 'folke/which-key.nvim'
+  lua require("which-key").setup {}
 Plug 'romainl/vim-cool' " disable highlighting after search
 Plug 'reedes/vim-pencil' " focused writing :Pencil
 Plug 'vim-airline/vim-airline'
@@ -892,6 +895,7 @@ endfunc
 " delete multiple blank lines: :%!cat -s
 " verbose Xmap <leader>c # show imap/nmap/map/etc for <leader>c or whatnot
 " show value of set var with e.g. `set modeline?`; let is just the var `let g:plugin_var`
+" :enew|pu=execute('<colon command>') " copy the output of any :colon command to a new buffer
 
 set eol " for some reason this is getting turned off for k8s yamls
 
