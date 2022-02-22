@@ -16,9 +16,42 @@ endif
 
 call plug#begin('~/.config/nvim/bundle')
 
+" Utility
+Plug 'nvim-lua/plenary.nvim' " lua convenience library (needed by null-ls)
+
 " General Coding
 Plug 'majutsushi/tagbar' " :Tagbar
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" LSP 
+Plug 'jose-elias-alvarez/null-ls.nvim'
+" hadolint: docker
+lua <<EOD
+require("null-ls").setup({
+    sources = {
+        require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.formatting.cljstyle,
+        require("null-ls").builtins.formatting.crystal_format,
+        require("null-ls").builtins.formatting.prettier,
+        require("null-ls").builtins.formatting.rubocop,
+        require("null-ls").builtins.formatting.shfmt,
+        require("null-ls").builtins.formatting.stylua,
+        require("null-ls").builtins.formatting.terrafmt,
+        require("null-ls").builtins.formatting.trim_whitespace,
+
+        require("null-ls").builtins.diagnostics.checkmate,
+        require("null-ls").builtins.diagnostics.eslint,
+        require("null-ls").builtins.diagnostics.flake8,
+        require("null-ls").builtins.diagnostics.hadolint,
+        require("null-ls").builtins.diagnostics.rubocop,
+        require("null-ls").builtins.diagnostics.shellcheck,
+        require("null-ls").builtins.diagnostics.write_good,
+        require("null-ls").builtins.diagnostics.yamllint,
+        require("null-ls").builtins.diagnostics.zsh,
+    },
+})
+EOD
+"Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 
 " Completions
 " https://stackoverflow.com/a/22253548/617320
@@ -92,8 +125,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Run the Code Lens action on the current line.
   nmap <leader>cl  <Plug>(coc-codelens-action)
 " END COC
-
-"Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
   " Ultisnips
@@ -125,8 +156,8 @@ Plug 'pearofducks/ansible-vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'earthly/earthly.vim', { 'branch': 'main' }
 Plug 'hashivim/vim-terraform'
-let g:terraform_fmt_on_save=1
-au BufNewFile,BufRead *.hcl setfiletype terraform
+  let g:terraform_fmt_on_save=1
+  au BufNewFile,BufRead *.hcl setfiletype terraform
 
 " Ruby
 Plug 'tpope/vim-haml'
@@ -225,25 +256,21 @@ let g:airline#extensions#ale#enabled = 1
 
 " Javascript
 Plug 'pangloss/vim-javascript'
-Plug 'mmalecki/vim-node.js'                   " kind of rails.vim for node - gf,gF,etc
 Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, react, etc
 "Plug 'jelera/vim-javascript-syntax'
 "Plug 'othree/yajs.vim' " yet another javascript syntax
 "Plug 'vim-scripts/JavaScript-Indent'
 "Plug 'kchmck/vim-coffee-script'
 Plug 'MaxMEllon/vim-jsx-pretty'
-let g:vim_jsx_pretty_colorful_config = 1 " requires vim-javascript
+  let g:vim_jsx_pretty_colorful_config = 1 " requires vim-javascript
 Plug 'jparise/vim-graphql'
-au BufNewFile,BufRead *.prisma setfiletype graphql
+  au BufNewFile,BufRead *.prisma setfiletype graphql
 
 " typescript
 Plug 'leafgarland/typescript-vim'    " syntax
 Plug 'HerringtonDarkholme/yats.vim'  " yet another typescript syntax
 Plug 'Quramy/vim-js-pretty-template' " template strings coloring
 Plug 'jason0x43/vim-js-indent'
-" lsp
-"Plug 'mhartington/nvim-typescript', {'do': './install.sh'} " LSP plugin
-"Plug 'Quramy/tsuquyomi'              " tsserver
 
 " Navigation
 Plug 'wincent/ferret' " Ack and Acks (multi-file search/replace)
@@ -260,15 +287,12 @@ let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
 
 " Telescope
 if has('nvim')
-  Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-lua/popup.nvim'   " api compatible with vim's popup_* (needed by telescope-media-files.nvim)
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " greatly speeds up telescope
-  nnoremap <C-t> <cmd>Telescope find_files<cr>
-  nnoremap <silent><leader>ff <cmd>Telescope find_files<cr>
-  nnoremap <C-p> <cmd>Telescope live_grep<cr>
-  nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
-  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-  nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
+  " Plug 'nvim-telescope/telescope-media-files.nvim' " preview images and such
+  " lua require('telescope').extensions.media_files.media_files()
+  " fixme: see bottom of vimrc
 else
   " FZF
   nnoremap <C-t> :Files<cr>
@@ -900,4 +924,10 @@ endfunc
 set eol " for some reason this is getting turned off for k8s yamls
 
 " arrrrgh fixme 
-nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
+if has('nvim')
+  nnoremap <C-t> <cmd>Telescope find_files<cr>
+  nnoremap <C-p> <cmd>Telescope live_grep<cr>
+  nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
+endif
