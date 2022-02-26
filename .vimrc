@@ -32,7 +32,7 @@ treesitter.setup {
 }
 EOD
 
-" LSP 
+" LSP
 Plug 'jose-elias-alvarez/null-ls.nvim'
 " hadolint: docker
 lua <<EOD
@@ -66,7 +66,12 @@ EOD
 " https://stackoverflow.com/a/22253548/617320
 "Plug 'Valloric/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" CoC COMPLETION
+  " Tips:
+  "   :CocRestart If changes aren't available (e.g. editing snippets)
+
+  " FIXME:
+  "g:coc_global_extensions = [] " since i constantly forget what ext are in use
+
   " Use tab for trigger completion with characters ahead and navigate.
   " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
   " other plugin before putting this into your config.
@@ -149,16 +154,6 @@ Plug 'jonaustin/vim-snippets' " note: there is no way to disable individual snip
 Plug 'mattn/emmet-vim' " div<c-y>,
 " Plug 'jiangmiao/auto-pairs' " auto-close e.g. {} -- fixme: figure out how to make less obnoxious
 
-" Asynchronous execution library
-Plug 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
 " General syntax
 Plug 'rodjek/vim-puppet'
 Plug 'pearofducks/ansible-vim'
@@ -176,13 +171,14 @@ Plug 'tpope/vim-rails'
 "Plug 'ecomba/vim-ruby-refactoring'
 
 " Golang
+Plug 'sebdah/vim-delve'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   " Notes:
     " ]] and [[ to jump to next/prev function (can also use motions like 3[[
     " and d]])
     " C-] / gd and C-t to jump forward backward in GoDef stack (GoDefStack)
   " https://github.com/fatih/vim-go/issues/3237#issuecomment-853037821
-	
+
 	" To play with more:
 	" :GoFillStruct -- `j := play{}` will fill out the struct with default values from play declaration
 	" :GoKeyify -- `j2 := play{"me", 42, true} -- expand out the struct with keys
@@ -195,8 +191,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 	" :GoChannelPeers
 	" :TagBar - list entities in file (`?` to see keys)
 
-  Plug 'sebdah/vim-delve'
-
+  " folding
+  " needed due to some bug
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
   set nofoldenable
@@ -211,7 +207,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   au FileType go set softtabstop=2
   au FileType go set tabstop=2
   " note: :GoCoverageClear to clear highlights
-  let g:go_doc_keywordprg_enabled = 0 " use coc.nvim's much prettier floating window
   let g:go_auto_type_info = 1 " show actual data type in status line when hovered
   let g:go_highlight_build_constraints = 1
   let g:go_highlight_extra_types = 1
@@ -221,26 +216,41 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_highlight_operators = 1
   let g:go_highlight_structs = 1
   let g:go_highlight_types = 1
-	let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gosec'] " :GoMetaLinter (or GoLint or GoVet)
+  let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gosec'] " :GoMetaLinter (or GoLint or GoVet)
   let g:go_fmt_command = "goimports" " automatically import dependencies after save
 
-  "let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses of that var
-	" hack to make this less annoying
-  hi def goSameId  ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
+  " coc.nvim integration
+    let g:go_diagnostics_level = 0 " let coc handle diagnostics
+  " let g:go_metalinter_enabled = []
+  let g:go_doc_keywordprg_enabled = 0 " use coc.nvim's much prettier floating window
 
-	" mappings
+  "let g:go_auto_sameids = 1 " cursor over one variable will highlight other uses of that var
+    " hack to make this less annoying
+    hi def goSameId  ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
+
+  " mappings
   au FileType go nmap <leader>gt :Tagbar<cr>
-  au FileType go nmap <leader>tb :Tagbar<cr>
+  " au FileType go nmap <leader>tb :Tagbar<cr>
+  au FileType go nmap <leader>ga :GoAlternate<cr>
+  au FileType go nmap <leader>gd :GoDeclsDir<cr>
+  au FileType go nmap <leader>gr :GoRename
   au FileType go nmap <leader>r :GoRun<cr>
+  au FileType go nmap <leader>t :GoTest<cr>
   au FileType go nmap <leader>b :GoBuild<cr>
   au FileType go nmap <leader>c <Plug>(go-coverage-toggle)
-  au FileType go nmap <leader>gd :GoDeclsDir<cr>
-	" delve mappings
-	au FileType go nmap <leader>bp :DlvToggleBreakpoint<cr>
-	au FileType go nmap <leader>d :DlvDebug<cr>
-	au FileType go nmap <leader>db :DlvDebug<cr>
-	  " tracepoint (doesn't stop execution, just prints a note the tracepoint was hit
-		au FileType go nmap <leader>db :DlvToggleTracepoint<cr>
+  " delve mappings
+  au FileType go nmap <leader>bp :DlvToggleBreakpoint<cr>
+  au FileType go nmap <leader>d :DlvDebug<cr>
+  au FileType go nmap <leader>db :DlvDebug<cr>
+  " have to use a different command for tests and non-main packages for some reason
+  au FileType go nmap <leader>dtb :DlvTest<cr>
+  " tracepoint (doesn't stop execution, just prints a note the tracepoint was hit
+  au FileType go nmap <leader>db :DlvToggleTracepoint<cr>
+  " switch between file and tests
+  au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+  au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+  au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+  au FileType go nmap <F9> :GoCoverageToggle -short<cr> " test coverage
 
   " highlighting
   hi def goCoverageCovered ctermfg=green guifg=#A6E22E
@@ -249,15 +259,13 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   "hi def GoDebugCurrent term=reverse  ctermbg=12  ctermfg=7 guibg=DarkBlue guifg=White
   hi def GoDebugBreakpoint term=standout ctermbg=117 ctermfg=0 guibg=#BAD4F5  guifg=Black
   hi def GoDebugCurrent term=reverse  ctermbg=12  ctermfg=7 guibg=DarkBlue guifg=White
-  " switch between file and tests
-  au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
-  au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
-  au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
-  au FileType go nmap <F9> :GoCoverageToggle -short<cr> " test coverage
 
 " ALE
 " CoC.nvim integration (must come before ale is loaded)
 let g:ale_disable_lsp = 1
+" Just use quickfix for everything (for existing key mappings; maybe change back later)
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
 " Error and warning signs.
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
@@ -356,11 +364,11 @@ Plug 'rhysd/git-messenger.vim' " show commit message in floating window :GitMess
 " Commands
 if has('nvim')
   " FIXME: figure out why my lua runtimepaths are b0rked (I had to manually symlink Comment.nvim/lua/Comment -> ~/.config/nvim/lua/Comment)
-  Plug 'numToStr/Comment.nvim' 
+  Plug 'numToStr/Comment.nvim'
 lua << EOF
 require('Comment').setup()
 EOF
-else 
+else
   Plug 'scrooloose/nerdcommenter'
 endif
 Plug 'mbbill/undotree'
@@ -799,7 +807,11 @@ augroup filetypedetect
   " eyaml
   autocmd BufRead,BufNewFile *.eyaml set filetype=yaml
   autocmd BufRead,BufNewFile *.yaml set filetype=yaml.cloudformation
+
+  " wrap quickfix window
+  autocmd FileType qf setlocal wrap
 augroup END
+
 " }
 
 " Jump to previous line of file after closing and re-opening
@@ -907,6 +919,17 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+set eol " for some reason this is getting turned off for k8s yamls
+
+" arrrrgh fixme; can't have these right under telescope as they don't work;
+" but they don't seem to be getting overwritten either...wtf.
+if has('nvim')
+  nnoremap <C-t> <cmd>Telescope find_files<cr>
+  nnoremap <C-p> <cmd>Telescope live_grep<cr>
+  nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
+endif
 
 " Tips I always forget
 " vertical split -> horizontal: ctrl+w then J
@@ -930,14 +953,3 @@ endfunc
 " verbose Xmap <leader>c # show imap/nmap/map/etc for <leader>c or whatnot
 " show value of set var with e.g. `set modeline?`; let is just the var `let g:plugin_var`
 " :enew|pu=execute('<colon command>') " copy the output of any :colon command to a new buffer
-
-set eol " for some reason this is getting turned off for k8s yamls
-
-" arrrrgh fixme 
-if has('nvim')
-  nnoremap <C-t> <cmd>Telescope find_files<cr>
-  nnoremap <C-p> <cmd>Telescope live_grep<cr>
-  nnoremap <silent><leader>/ <cmd>Telescope buffers<cr>
-  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-  nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
-endif
