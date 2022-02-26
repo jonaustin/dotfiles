@@ -299,6 +299,7 @@ alias blarchls="sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u"
 alias trekz="bluetoothctl connect 20:74:CF:ED:64:E5"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
 alias hifi="bluetoothctl connect CC:39:8C:01:DB:2D"
+alias sony="bluetoothctl connect F8:4E:17:53:98:92"
 
 # battery (thinkpad)
 #alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0" # "inxi -Bxxx"
