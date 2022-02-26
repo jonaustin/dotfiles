@@ -10,14 +10,6 @@
         "usePlaceholders": true
       }
     },
-    //"sorbet": {
-    //  "command": "srb",
-    //  "args": ["tc", "--lsp", "--enable-all-experimental-lsp-features"],
-    //  "filetypes": ["ruby"],
-    //  "rootPatterns": ["sorbet/config"],
-    //  "initializationOptions": {},
-    //  "settings": {}
-    //},
     "clojure-lsp": {
       "command": "bash",
       "args": ["-c", "clojure-lsp"],

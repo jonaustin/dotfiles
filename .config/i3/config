@@ -331,9 +331,9 @@ bindsym $mod+XF86MonBrightnessDown  exec "brightnessctl s 1%-; notify-send $(bri
 
 # volume
 bindsym $mod+Print exec $HOME/bin/audio/pulseaudio.sh --mute # mute toggle
-bindsym $mod+minus exec $HOME/bin/audio/pulseaudio.sh --down
+bindsym $mod+minus exec $HOME/bin/audio/pulseaudio.sh --down3
 bindsym $mod+Shift+minus exec $HOME/bin/audio/pulseaudio.sh --down
-bindsym $mod+equal exec $HOME/bin/audio/pulseaudio.sh --up
+bindsym $mod+equal exec $HOME/bin/audio/pulseaudio.sh --up3
 bindsym $mod+Shift+equal exec $HOME/bin/audio/pulseaudio.sh --up
 bindsym Pause exec $HOME/bin/audio/pulseaudio.sh --up
 bindsym $mod+Shift+s exec paswitch # switch output device for all sources
