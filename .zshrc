@@ -27,8 +27,8 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/.config/doctl/doctl.zsh; compdef _doctl doctl # $ doctl completion zsh
 fi
 
-###zinit light kazhala/dotbare
-###_dotbare_completion_cmd
+zinit light kazhala/dotbare
+_dotbare_completion_cmd
 
 #zinit OMZ::plugins/command-not-found/command-not-found.zsh
 zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
