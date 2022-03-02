@@ -37,6 +37,9 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 " hadolint: docker
 lua <<EOD
 require("null-ls").setup({
+    debug = false,
+    diagnostics_format = "#{m}",
+    fallback_severity = vim.diagnostic.severity.INFO,
     sources = {
         require("null-ls").builtins.formatting.black,
         require("null-ls").builtins.formatting.cljstyle,
