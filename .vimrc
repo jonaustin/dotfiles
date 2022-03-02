@@ -222,6 +222,13 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gosec'] " :GoMetaLinter (or GoLint or GoVet)
   let g:go_fmt_command = "goimports" " automatically import dependencies after save
 
+	" Let coc.nvim handle LSP
+	" also, just to note somewhere: having the coc-go extension installed was
+	" resulting in 2 go lsp servers (:CocList services); uninstalling coc-go
+	" fixed it
+	let g:go_def_mapping_enabled=0
+	let g:go_gopls_enabled=1 " still needed for GoInfo hover (g:go_auto_type_info)
+
   " coc.nvim integration
     let g:go_diagnostics_level = 0 " let coc handle diagnostics
   " let g:go_metalinter_enabled = []
@@ -243,12 +250,12 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   au FileType go nmap <leader>c <Plug>(go-coverage-toggle)
   " delve mappings
   au FileType go nmap <leader>bp :DlvToggleBreakpoint<cr>
-  au FileType go nmap <leader>d :DlvDebug<cr>
+	" Note: have to exec delve explicitly for BPs and such to be triggered
+  au FileType go nmap <leader>dt :DlvTest<cr>
   au FileType go nmap <leader>db :DlvDebug<cr>
-  " have to use a different command for tests and non-main packages for some reason
-  au FileType go nmap <leader>dtb :DlvTest<cr>
+	" 
   " tracepoint (doesn't stop execution, just prints a note the tracepoint was hit
-  au FileType go nmap <leader>db :DlvToggleTracepoint<cr>
+  au FileType go nmap <leader>tp :DlvToggleTracepoint<cr>
   " switch between file and tests
   au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
   au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
@@ -477,15 +484,13 @@ set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
 " https://github.com/neoclide/coc.nvim/#example-vim-configuration
 set shortmess+=c
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-set relativenumber
+" Always show the signcolumn, otherwise it would shift the text each time diagnostics appear/become resolved.
+" Also do not overwrite the number column as that just gets confusing
+set signcolumn=yes
+
+" trick to show relative, but with the current line showing the current line number (instead of 0)
+" note: use `:set nornu` to see only absolute
+set number relativenumber
 
 " Having longer updatetime (default is 4000 ms) leads to noticeable delays and poor user experience
 set updatetime=300
