@@ -220,20 +220,13 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_highlight_structs = 1
   let g:go_highlight_types = 1
   let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gosec'] " :GoMetaLinter (or GoLint or GoVet)
-  "let g:go_fmt_command = "goimports" " automatically import dependencies after save -- this randomly breaks everything for some reason
-    " reproduce
-    " 1. add fmt.
-    " 2. run test
-    " 3. del fmt.
-    " 4. run tests 
-    " 5. fmt.<tab> fails (and shift-k, etc)
 
-	" Let coc.nvim handle LSP
-	" also, just to note somewhere: having the coc-go extension installed was
-	" resulting in 2 go lsp servers (:CocList services); uninstalling coc-go
-	" fixed it
-	let g:go_def_mapping_enabled=0
-	let g:go_gopls_enabled=1 " still needed for GoInfo hover (g:go_auto_type_info)
+    " Let coc.nvim handle LSP
+    " also, just to note somewhere: having the coc-go extension installed was
+    " resulting in 2 go lsp servers (:CocList services); uninstalling coc-go
+    " fixed it
+    let g:go_def_mapping_enabled=0
+    let g:go_gopls_enabled=1 " still needed for GoInfo hover (g:go_auto_type_info)
 
   " coc.nvim integration
     let g:go_diagnostics_level = 0 " let coc handle diagnostics
