@@ -220,7 +220,13 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_highlight_structs = 1
   let g:go_highlight_types = 1
   let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gosec'] " :GoMetaLinter (or GoLint or GoVet)
-  let g:go_fmt_command = "goimports" " automatically import dependencies after save
+  "let g:go_fmt_command = "goimports" " automatically import dependencies after save -- this randomly breaks everything for some reason
+    " reproduce
+    " 1. add fmt.
+    " 2. run test
+    " 3. del fmt.
+    " 4. run tests 
+    " 5. fmt.<tab> fails (and shift-k, etc)
 
 	" Let coc.nvim handle LSP
 	" also, just to note somewhere: having the coc-go extension installed was
@@ -241,6 +247,13 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   " mappings
   au FileType go nmap <leader>gt :Tagbar<cr>
   " au FileType go nmap <leader>tb :Tagbar<cr>
+	 "    augroup go
+    "   autocmd!
+    "   autocmd Filetype go
+    "     \  command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+    "     \| command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+    "     \| command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+    " augroup END
   au FileType go nmap <leader>ga :GoAlternate<cr>
   au FileType go nmap <leader>gd :GoDeclsDir<cr>
   au FileType go nmap <leader>gr :GoRename
@@ -253,7 +266,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 	" Note: have to exec delve explicitly for BPs and such to be triggered
   au FileType go nmap <leader>dt :DlvTest<cr>
   au FileType go nmap <leader>db :DlvDebug<cr>
-	" 
+	"
   " tracepoint (doesn't stop execution, just prints a note the tracepoint was hit
   au FileType go nmap <leader>tp :DlvToggleTracepoint<cr>
   " switch between file and tests
