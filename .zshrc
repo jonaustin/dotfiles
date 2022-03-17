@@ -25,6 +25,9 @@ autoload -U bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/bin/i3/i3-completion/i3_completion.sh # i3-msg completions; must come after bashcompinit
   source $HOME/.config/doctl/doctl.zsh; compdef _doctl doctl # $ doctl completion zsh
+else # osx
+  source $HOME/opt/completions/docker.zsh-completion;         compdef _docker         docker
+  source $HOME/opt/completions/docker-compose.zsh-completion; compdef _docker-compose docker-compose
 fi
 
 zinit light kazhala/dotbare
