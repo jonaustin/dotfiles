@@ -63,42 +63,93 @@ cursor_shape = underline
 # "off", "left" or "right"
 #scrollbar = off
 
+### Apprenctice Colors
 [colors]
-# If both of these are unset, cursor falls back to the foreground color,
-# and cursor_foreground falls back to the background color.
-#cursor = #dcdccc
-#cursor_foreground = #dcdccc
-
-#foreground = #dcdccc
-#foreground_bold = #ffffff
-#background = #3f3f3f
-
-# 20% background transparency (requires a compositor)
-;background = rgba(0, 0, 0, 0.75)
 background = rgba(0, 0, 0, 0.85)
-;background = rgba(0, 0, 0, 0.50)
-;background = rgba(0, 0, 0, 0.95)
+foreground = #BCBCBC
+# background: #262626
+color0  = #1C1C1C
+color8  = #444444
+color1  = #AF5F5F
+color9  = #FF8700
+color2  = #5F875F
+color10 = #87AF87
+color3  = #87875F
+color11 = #FFFFAF
+color4  = #5F87AF
+color12 = #87AFD7
+color5  = #5F5F87
+color13 = #8787AF
+color6  = #5F8787
+color14 = #5FAFAF
+color7  = #6C6C6C
+color15 = #FFFFFF
 
-# If unset, will reverse foreground and background
-highlight = #2f2f2f
+### NORD Colors
+# [colors]
+# cursor = #d8dee9
+# cursor_foreground = #2e3440
+#
+# foreground = #d8dee9
+# foreground_bold = #d8dee9
+# background = rgba(0, 0, 0, 0.85)
+# # background = #2e3440
+#
+# highlight = #4c566a
+#
+# color0  = #3b4252
+# color1  = #bf616a
+# color2  = #a3be8c
+# color3  = #ebcb8b
+# color4  = #81a1c1
+# color5  = #b48ead
+# color6  = #88c0d0
+# color7  = #e5e9f0
+# color8  = #4c566a
+# color9  = #bf616a
+# color10 = #a3be8c
+# color11 = #ebcb8b
+# color12 = #81a1c1
+# color13 = #b48ead
+# color14 = #8fbcbb
+# color15 = #eceff4
 
-# Colors from color0 to color254 can be set
-color0 = #3f3f3f
-color1 = #705050
-color2 = #60b48a
-color3 = #dfaf8f
-color4 = #506070
-color5 = #dc8cc3
-color6 = #8cd0d3
-color7 = #dcdccc
-color8 = #709080
-color9 = #dca3a3
-color10 = #c3bf9f
-color11 = #f0dfaf
-color12 = #94bff3
-color13 = #ec93d3
-color14 = #93e0e3
-color15 = #ffffff
+# [colors]
+# # If both of these are unset, cursor falls back to the foreground color,
+# # and cursor_foreground falls back to the background color.
+# #cursor = #dcdccc
+# #cursor_foreground = #dcdccc
+#
+# #foreground = #dcdccc
+# #foreground_bold = #ffffff
+# #background = #3f3f3f
+#
+# # 20% background transparency (requires a compositor)
+# ;background = rgba(0, 0, 0, 0.75)
+# background = rgba(0, 0, 0, 0.85)
+# ;background = rgba(0, 0, 0, 0.50)
+# ;background = rgba(0, 0, 0, 0.95)
+#
+# # If unset, will reverse foreground and background
+# highlight = #2f2f2f
+#
+# # Colors from color0 to color254 can be set
+# color0 = #3f3f3f
+# color1 = #705050
+# color2 = #60b48a
+# color3 = #dfaf8f
+# color4 = #506070
+# color5 = #dc8cc3
+# color6 = #8cd0d3
+# color7 = #dcdccc
+# color8 = #709080
+# color9 = #dca3a3
+# color10 = #c3bf9f
+# color11 = #f0dfaf
+# color12 = #94bff3
+# color13 = #ec93d3
+# color14 = #93e0e3
+# color15 = #ffffff
 
 [hints]
 #font = Monospace 12

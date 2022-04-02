@@ -35,35 +35,35 @@ EOD
 " LSP
 Plug 'jose-elias-alvarez/null-ls.nvim'
 " hadolint: docker
-" lua <<EOD
-" require("null-ls").setup({
-"     -- note: to disable on the fly - `:lua require("null-ls").disable("<source>")`
-"     debug = false,
-"     diagnostics_format = "#{m}",
-"     fallback_severity = vim.diagnostic.severity.INFO,
-"     sources = {
-"         require("null-ls").builtins.formatting.black,
-"         require("null-ls").builtins.formatting.cljstyle,
-"         require("null-ls").builtins.formatting.crystal_format,
-"         require("null-ls").builtins.formatting.prettier,
-"         require("null-ls").builtins.formatting.rubocop,
-"         require("null-ls").builtins.formatting.shfmt,
-"         require("null-ls").builtins.formatting.stylua,
-"         require("null-ls").builtins.formatting.terrafmt,
-"         require("null-ls").builtins.formatting.trim_whitespace,
-"
-"         require("null-ls").builtins.diagnostics.checkmake,
-"         require("null-ls").builtins.diagnostics.eslint,
-"         require("null-ls").builtins.diagnostics.flake8,
-"         require("null-ls").builtins.diagnostics.hadolint,
-"         require("null-ls").builtins.diagnostics.rubocop,
-"         require("null-ls").builtins.diagnostics.shellcheck,
-"         require("null-ls").builtins.diagnostics.write_good,
-"         require("null-ls").builtins.diagnostics.yamllint,
-"         require("null-ls").builtins.diagnostics.zsh,
-"     },
-" })
-" EOD
+lua <<EOD
+require("null-ls").setup({
+    -- note: to disable on the fly - `:lua require("null-ls").disable("<source>")`
+    debug = false,
+    diagnostics_format = "#{m}",
+    fallback_severity = vim.diagnostic.severity.INFO,
+    sources = {
+        require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.formatting.cljstyle,
+        require("null-ls").builtins.formatting.crystal_format,
+        require("null-ls").builtins.formatting.prettier,
+        require("null-ls").builtins.formatting.rubocop,
+        require("null-ls").builtins.formatting.shfmt,
+        require("null-ls").builtins.formatting.stylua,
+        require("null-ls").builtins.formatting.terrafmt,
+        require("null-ls").builtins.formatting.trim_whitespace,
+
+        require("null-ls").builtins.diagnostics.checkmake,
+        require("null-ls").builtins.diagnostics.eslint,
+        require("null-ls").builtins.diagnostics.flake8,
+        require("null-ls").builtins.diagnostics.hadolint,
+        require("null-ls").builtins.diagnostics.rubocop,
+        require("null-ls").builtins.diagnostics.shellcheck,
+        -- require("null-ls").builtins.diagnostics.write_good,
+        require("null-ls").builtins.diagnostics.yamllint,
+        require("null-ls").builtins.diagnostics.zsh,
+    },
+})
+EOD
 "Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 
 " Completions
@@ -400,16 +400,14 @@ Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
+Plug 'tribela/vim-transparent' " force transparency.. :TransparentToggle
+Plug 'romainl/Apprentice'
 " TODO: switch to treesitter and use colorscheme compatible with TS
 "Plug 'pgdouyon/vim-ying-yang' " black white (yin)
 Plug 'dylanaraps/wal.vim'
 "Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
-Plug 'rakr/vim-one' " true color
-Plug 'joshdick/onedark.vim'
 Plug 'arcticicestudio/nord-vim' " arctic, north-bluish
 Plug 'cocopon/iceberg.vim' " Dark blue
-Plug 'ajmwagar/vim-deus' " 'A better color scheme for the late night coder'
-Plug 'haishanh/night-owl.vim' " 'A 24bit dark Vim colorscheme based on sdras/night-owl-vscode-theme'
 Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
 Plug 'w0ng/vim-hybrid'
 "Plug 'kristijanhusak/vim-hybrid-material'
@@ -434,6 +432,9 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
 "Plug 'morhetz/gruvbox'
 
 " UI
+Plug 'APZelos/blamer.nvim'
+  let g:blamer_enabled = 1
+  highlight Blamer guifg=lightgrey
 Plug 'folke/which-key.nvim'
   lua require("which-key").setup {}
 Plug 'romainl/vim-cool' " disable highlighting after search
@@ -570,8 +571,10 @@ silent execute '!mkdir -p $HOME/.vimundo'
 " Vim UI {
 set background=dark                 " Assume a dark background
 "colo vim-material
-colo hybrid_material
-let g:hybrid_transparent_background = 1
+"colo hybrid_material
+  let g:hybrid_transparent_background = 1
+" colo nord
+colo apprentice
 "colorscheme wal    " change scheme when background changes (pywal)
 set incsearch      " find as you type search
 set hlsearch       " highlight search terms
@@ -837,16 +840,6 @@ autocmd BufReadPost *
       \ endif
 
 " Hacks
-
-" force transparency
-hi Normal ctermbg=none guibg=none
-hi NonText ctermbg=none guibg=none
-hi LineNr ctermbg=none guibg=none
-hi CursorLine ctermbg=none guibg=none
-hi clear CursorLine
-hi clear CursorLineNr
-" always use dark grey colorscheme for status line
-"autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
 
 
 " Functions
