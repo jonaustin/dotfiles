@@ -57,10 +57,8 @@ zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy
 # asdf: multi-lang version mgr
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export asdf_dir=/usr/local/Cellar/asdf/0.9.0
-fi;
-if [[ -d $asdf_dir ]]; then
-  source $asdf_dir/asdf.sh
-  fpath=(${ASDF_DIR}/completions $fpath)
+else
+  . /opt/asdf-vm/asdf.sh
 fi
 
 # colors
@@ -379,13 +377,13 @@ else
   export SHELL='/usr/bin/zsh'
   export PATH=${PATH}:$HOME/.local/bin
   # gtk3 hidpi
-  #export GDK_SCALE=2
+  export GDK_SCALE=1
   #export GDK_DPI_SCALE=0.5
-  export GDK_DPI_SCALE=1.0
+  export GDK_DPI_SCALE=1
   export QT_SCALE_FACTOR=0.7
   export QT_AUTO_SCREEN_SCALE_FACTOR=1.0
   export XCURSOR_SIZE=32
-  export TERMINAL=alacritty
+  export TERMINAL=termite
   export DISABLE_AUTO_TITLE=true
 fi
 export LC_ALL=en_US.UTF-8
@@ -407,9 +405,10 @@ fi;
 #zinit light marlonrichert/zsh-autocomplete # must come after fzf
 
 # ruby
-if [ $SYSTEM_TYPE = "Linux" ]; then # being lazy...not linux-specific, just mac/work is on 2.5.3 still
-  export RUBYOPT='-W:no-deprecated -W:no-experimental'
-fi;
+# eh, add this back when i'm not on 2.5.3 at work
+# if [ ASDF_RUBY_VERSION = "2.5.3" ]; then # will cause super weird error on 2.5.3
+#   export RUBYOPT='-W:no-deprecated -W:no-experimental'
+# fi;
 
 #zinit light "vifon/deer"
 #zle -N deer
@@ -446,6 +445,8 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions # fish-like autosuggestions for zsh
 zinit light zsh-users/zsh-completions # just various completions
 
+# calibre
+export PATH=$PATH:$HOME/opt/calibre/ # bin/ doesn't work for some reason
 
 if [ $SYSTEM_TYPE = "Linux" ]; then
   # perl

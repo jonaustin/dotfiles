@@ -2,7 +2,11 @@ Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
 Xft.hintstyle: hintslight
-Xft.dpi:       200
+! use multiples of 96
+! verify dpi is still set correctly with
+! xdpyinfo | grep -B 2 resolution
+Xft.dpi:       192
+! Xft.dpi:       108
 Xft.autohint: false
 Xft.lcdfilter: lcddefault
 

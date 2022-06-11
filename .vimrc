@@ -35,35 +35,35 @@ EOD
 " LSP
 Plug 'jose-elias-alvarez/null-ls.nvim'
 " hadolint: docker
-lua <<EOD
-require("null-ls").setup({
-    -- note: to disable on the fly - `:lua require("null-ls").disable("<source>")`
-    debug = false,
-    diagnostics_format = "#{m}",
-    fallback_severity = vim.diagnostic.severity.INFO,
-    sources = {
-        require("null-ls").builtins.formatting.black,
-        require("null-ls").builtins.formatting.cljstyle,
-        require("null-ls").builtins.formatting.crystal_format,
-        require("null-ls").builtins.formatting.prettier,
-        require("null-ls").builtins.formatting.rubocop,
-        require("null-ls").builtins.formatting.shfmt,
-        require("null-ls").builtins.formatting.stylua,
-        require("null-ls").builtins.formatting.terrafmt,
-        require("null-ls").builtins.formatting.trim_whitespace,
-
-        require("null-ls").builtins.diagnostics.checkmake,
-        require("null-ls").builtins.diagnostics.eslint,
-        require("null-ls").builtins.diagnostics.flake8,
-        require("null-ls").builtins.diagnostics.hadolint,
-        require("null-ls").builtins.diagnostics.rubocop,
-        require("null-ls").builtins.diagnostics.shellcheck,
-        -- require("null-ls").builtins.diagnostics.write_good,
-        require("null-ls").builtins.diagnostics.yamllint,
-        require("null-ls").builtins.diagnostics.zsh,
-    },
-})
-EOD
+" lua <<EOD
+" require("null-ls").setup({
+"     -- note: to disable on the fly - `:lua require("null-ls").disable("<source>")`
+"     debug = false,
+"     diagnostics_format = "#{m}",
+"     fallback_severity = vim.diagnostic.severity.INFO,
+"     sources = {
+"         require("null-ls").builtins.formatting.black,
+"         require("null-ls").builtins.formatting.cljstyle,
+"         require("null-ls").builtins.formatting.crystal_format,
+"         require("null-ls").builtins.formatting.prettier,
+"         require("null-ls").builtins.formatting.rubocop,
+"         require("null-ls").builtins.formatting.shfmt,
+"         require("null-ls").builtins.formatting.stylua,
+"         require("null-ls").builtins.formatting.terrafmt,
+"         require("null-ls").builtins.formatting.trim_whitespace,
+"
+"         require("null-ls").builtins.diagnostics.checkmake,
+"         require("null-ls").builtins.diagnostics.eslint,
+"         require("null-ls").builtins.diagnostics.flake8,
+"         require("null-ls").builtins.diagnostics.hadolint,
+"         require("null-ls").builtins.diagnostics.rubocop,
+"         require("null-ls").builtins.diagnostics.shellcheck,
+"         -- require("null-ls").builtins.diagnostics.write_good,
+"         require("null-ls").builtins.diagnostics.yamllint,
+"         require("null-ls").builtins.diagnostics.zsh,
+"     },
+" })
+" EOD
 "Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 
 " Completions
@@ -144,13 +144,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <leader>cl  <Plug>(coc-codelens-action)
 " END COC
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
-Plug 'SirVer/ultisnips' " C-w, c-b, c-x -- <leader><tab>; c-y to trigger?
+Plug 'SirVer/ultisnips'
   " Ultisnips
-  "let g:UltiSnipsExpandTrigger = "<tab>"
-  let g:UltiSnipsExpandTrigger = "<c-y>"
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-  let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-Plug 'jonaustin/vim-snippets' " note: there is no way to disable individual snippets in ultisnips/snipmate - only 'solution' is to clone e.g. this repo and customize and pull in upstream as needed.
+  let g:UltiSnipsExpandTrigger = "<c-y>" " mainly so ultisnips doesn't clobber tab; just hit enter or c-y
+
+  " Important: these get overridden by coc.nvim argh
+  " let g:UltiSnipsJumpForwardTrigger = "<c-k>"
+  " let g:UltiSnipsJumpBackwardTrigger = "<c-j>"
+  let g:coc_snippet_next="<tab>"
+  let g:coc_snippet_prev="<s-tab>"
+Plug 'jonaustin/vim-snippets' " fixme: use custom snippets files with priority>0 to override all built-in snippets rather than forking the repo?
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " also `npm i -g tern` ### Not needed with youcompleteme: https://github.com/Valloric/YouCompleteMe/pull/1849
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
@@ -257,10 +260,10 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   au FileType go nmap <leader>c <Plug>(go-coverage-toggle)
   " delve mappings
   au FileType go nmap <leader>bp :DlvToggleBreakpoint<cr>
-	" Note: have to exec delve explicitly for BPs and such to be triggered
+	" Note: During a test -- have to exec delve explicitly for BPs and such to be triggered:
   au FileType go nmap <leader>dt :DlvTest<cr>
   au FileType go nmap <leader>db :DlvDebug<cr>
-	"
+
   " tracepoint (doesn't stop execution, just prints a note the tracepoint was hit
   au FileType go nmap <leader>tp :DlvToggleTracepoint<cr>
   " switch between file and tests

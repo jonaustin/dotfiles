@@ -7,7 +7,7 @@ alias dbs='dotbare status'
 alias cat=bat
 alias catnp='bat --paging never'
 alias ls=exa; alias ll='exa -l'; alias lsl='ls -l'
-alias calibre='asdf shell python system && calibre'
+#alias calibre='asdf shell python system && calibre'
 alias fd='fd -I' # don't ignore things in gitignore
 alias locate='plocate'
 alias tg='terragrunt'
@@ -316,3 +316,9 @@ cheat() { curl http://cht.sh/$1 }
 alias na=' . ~/bin/noteair.sh'
 alias vvim="vim +'source ~/vimrcnoteair'"
 alias temp="cpu-x -D 2>/dev/null|grep 'Temp\.'"
+
+# aws
+alias assume="~/bin/assume"
+
+# kasina
+alias kasina-sync='rsync -aPz ~/avs/kasina/ /run/media/jon/6923-A037/ --include="*/" --include "*.mp3" --include "*.kbs" --exclude "*" --delete; find /run/media/jon/6923-A037/ -empty -delete'
