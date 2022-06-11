@@ -10,8 +10,6 @@ alias ls=exa; alias ll='exa -l'; alias lsl='ls -l'
 alias calibre='asdf shell python system && calibre'
 alias fd='fd -I' # don't ignore things in gitignore
 alias locate='plocate'
-alias rename='perl-rename'
-alias prename='perl-rename'
 alias tg='terragrunt'
 alias b2='/usr/local/bin/b2' # backblaze
 
@@ -150,8 +148,14 @@ alias syn='ssh root@10.0.1.8'
 alias it='iotop'
 
 ## Git
+git-diff-make-patch() {
+  git diff -p --no-color $1 > patch
+}
 git-diff-uniq-dirs() {
   git diff --name-only HEAD~1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
+}
+git-lines-by-author() {
+  git ls-tree -r -z --name-only HEAD -- */* | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD |grep -ae "^author "|sort|uniq -c|sort -nr
 }
 alias gs='git status --ignore-submodules'
 alias gsl='git status --ignore-submodules | less'

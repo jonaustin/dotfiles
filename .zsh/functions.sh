@@ -428,3 +428,9 @@ cpfd() {
   # cp "`fd sleep |fzf`" ../sync/ereader/health
   cp "$(fd $1 | fzf )" $2
 }
+
+# Git
+## find all branches that have a particular file (note: this may only find branches that _change_ a particular, haven't tested)
+git-find-file-in-branches() {
+  git log --all --source -- "**/$1"|grep commit|awk '{print $3}'|sort -u
+}
