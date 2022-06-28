@@ -118,7 +118,7 @@ zinit light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclea
 #  forgit_branch_delet=gbd
 #  forgit_checkout_tag=gct
 #  forgit_checkout_commit=gco
-unalias grc # grc breaks...grc
+# unalias grc # grc breaks...grc
 #  forgit_clean=gclean
 #  forgit_stash_show=gss
 #  forgit_cherry_pick=gcp
@@ -262,7 +262,8 @@ export PAGER='less'
 # --mouse:               support mouse - only >=551 (brew install less on mac)
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --quit-on-intr --quit-if-one-screen --no-init --mouse'
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
-export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
+# remove: let the terminal set the TERM var; pint xterm-256color
+# export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 # }}}
 
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
@@ -320,6 +321,9 @@ export SAVEHIST=100000
 
 # nodejs
 export PATH=$PATH:./node_modules/.bin
+
+# rust
+export PATH=$PATH:$HOME/.cargo/bin
 
 typeset -U PATH # remove duplicate paths
 
@@ -384,7 +388,7 @@ else
   export QT_SCALE_FACTOR=0.7
   export QT_AUTO_SCREEN_SCALE_FACTOR=1.0
   export XCURSOR_SIZE=32
-  export TERMINAL=termite
+  export TERMINAL=alacritty
   export DISABLE_AUTO_TITLE=true
 fi
 export LC_ALL=en_US.UTF-8
