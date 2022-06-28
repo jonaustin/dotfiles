@@ -275,8 +275,8 @@ alias statusu='systemctl --user status '
 alias cur-monitor="xrandr | grep -C 3 '*' | grep DP | awk '{print \$1}'"
 
 # work
-alias novpn='nmcli con down "mullvad_us"'
-alias hvpn='nmcli con up "mullvad_us"'
+alias novpn='nmcli con down "mullvad_us_sea"'
+alias hvpn='nmcli con up "mullvad_us_sea"'
 
 # s (web-cli search)
 alias ss='/usr/bin/s' # override s aliased to yay
@@ -310,7 +310,9 @@ alias sony="bluetoothctl connect F8:4E:17:53:98:92"
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT1" # "inxi -Bxxx"
 
 # cheatsheets
-cheat() { curl http://cht.sh/$1 }
+cheat() { 
+  curl http://cht.sh/$1 
+}
 
 # noteair
 alias na=' . ~/bin/noteair.sh'
@@ -322,3 +324,15 @@ alias assume="~/bin/assume"
 
 # kasina
 alias kasina-sync='rsync -aPz ~/avs/kasina/ /run/media/jon/6923-A037/ --include="*/" --include "*.mp3" --include "*.kbs" --exclude "*" --delete; find /run/media/jon/6923-A037/ -empty -delete'
+
+# golang
+alias gos=go-search
+
+# conversion
+md2pdf() {
+  # or https://www.mscharhag.com/software-development/pandoc-markdown-to-pdf
+  pandoc --pdf-engine=xelatex ${1} -o ${1}.pdf
+}
+
+# kill
+alias kill-windows="IFS=$'\n'; for n in `ps aux|grep windows`; do kill $(echo $n | awk '{print $2}'); done"

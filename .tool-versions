@@ -1,9 +1,9 @@
 nodejs 16.15.0
 clojure 1.10.1
-python 3.7.3
+python 3.9.10
 crystal 0.31.1
 elixir 1.9.2
 elm 0.19.0
 php 7.3.10
-golang 1.17
-ruby 2.7.0
+golang 1.18
+ruby 3.1.2

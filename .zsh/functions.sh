@@ -429,8 +429,47 @@ cpfd() {
   cp "$(fd $1 | fzf )" $2
 }
 
+rga-fzf() {
+  RG_PREFIX="~/.cargo/bin/rga --files-with-matches"
+  local file
+  file="$(FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+    fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+    --phony -q "$1" \
+    --bind "change:reload:$RG_PREFIX {q}" \
+    --preview-window="70%:wrap"
+    )" &&
+    echo "opening $file" &&
+    xdg-open "$file"
+}
+
+# Note: Arch version 0.9.6 has a bug where poppler breaks: https://github.com/phiresky/ripgrep-all/issues/113
+# Whereas `master` version was refactored i guess and no longer includes Page Numbers
+#  so hack it to use master for search, but 0.9.6 for display: https://github.com/phiresky/ripgrep-all/issues/113#issuecomment-1167861526
+rga-fzf-pdf() {
+  RG_PREFIX="~/.cargo/bin/rga --files-with-matches --rga-adapters=poppler"
+  local file
+  file="$(FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+    fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+    --phony -q "$1" \
+    --bind "change:reload:$RG_PREFIX {q}" \
+    --preview-window="70%:wrap"
+    )" &&
+    echo "opening $file" &&
+    xdg-open "$file"
+}
+
 # Git
 ## find all branches that have a particular file (note: this may only find branches that _change_ a particular, haven't tested)
 git-find-file-in-branches() {
   git log --all --source -- "**/$1"|grep commit|awk '{print $3}'|sort -u
+}
+
+# conversion
+html2pdf() {
+  pandoc --pdf-engine=prince $1 -o $2
+}
+
+## dns toys
+dy() { 
+  dig +noall +answer +additional "$1" @dns.toys; 
 }
