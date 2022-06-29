@@ -92,8 +92,6 @@ zinit light unixorn/warhol.plugin.zsh
 # zaw
 zinit light zsh-users/zaw
   zinit light termoshtt/zaw-systemd
-  zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
-  zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
 # zinit light mafredri/zsh-async # cool, but haven't needed it: https://github.com/mafredri/zsh-async#example-code
 zinit light fcambus/ansiweather # $ weather <zip>
 zinit light "zdharma/zsh-diff-so-fancy" # $ git dsf
@@ -179,9 +177,10 @@ setopt share_history          # adds history incrementally and share it across s
 # zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 } # do not add failed commands to history - https://superuser.com/a/902508
 
 # zstyles
+zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
+zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
 ## case insensitive path completion
-#zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*' # FIXME: weird this freezes everything when trying to tab complete a dir that doesn't exist
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' '+r:|?=**' 
 
 ## Make new commands immediately visible to zsh
 zstyle ':completion:*' rehash true
