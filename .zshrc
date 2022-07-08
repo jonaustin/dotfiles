@@ -94,7 +94,7 @@ zinit light zsh-users/zaw
   zinit light termoshtt/zaw-systemd
 # zinit light mafredri/zsh-async # cool, but haven't needed it: https://github.com/mafredri/zsh-async#example-code
 zinit light fcambus/ansiweather # $ weather <zip>
-zinit light "zdharma/zsh-diff-so-fancy" # $ git dsf
+zinit light "z-shell/zsh-diff-so-fancy" # $ git dsf
 #zinit light h3poteto/zsh-ec2ssh
 
 # and see bindkey below
@@ -105,7 +105,9 @@ zinit light "zdharma/zsh-diff-so-fancy" # $ git dsf
 #zinit light djui/alias-tips # alias reminders; ugh adds 300ms to load time
 zinit light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
 #zinit light StackExchange/blackbox # gpg encrypt secrets in git repos
-zinit light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclean
+
+# argh; i'll just make my own mappings; latest update overrode `ps` for fuck's sake
+#zinit light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclean
 #  forgit_log=glo
 #  forgit_diff=gd
 #  forgit_add=ga
@@ -151,6 +153,8 @@ source ~/.zsh/aliases.sh
 # setopts
 setopt auto_cd              # type bare dir name and cd to it e.g. `$ /`
 setopt complete_in_word     # don't move cursor to end of line on completion
+setopt extendedglob         # extended globbing. Allows using regular expressions with *
+setopt nocaseglob           # case insensitive globbing
 setopt interactive_comments # allow comments even in interactive shells.
 unsetopt beep               # don't bloody beep
 unsetopt list_beep          # don't beep on ambiguous completions
@@ -161,12 +165,12 @@ unsetopt flow_control       # disable ^S/^Q flow control
 unsetopt hup                # don't send the HUP signal to running jobs when the shell exits.
 unsetopt local_options      # allow funcs to have their own setopts (i.e. don't change globally)
 unsetopt local_traps        # allow funcs to have their own signal trap opts (i.e. don't change globally)
+# todo: maybe grab some from https://github.com/arp242/dotfiles/blob/master/zsh/zshrc#L145
 
 
 # history
 #setopt append_history        # appends history file instead of replacing it (not needed if share_history is enabled)
 setopt extended_history       # add timestamps to history
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_all_dups   # don't record dupes in history
 setopt hist_ignore_space      # remove command line from history list when first character on the line is a space
 setopt hist_reduce_blanks     # remove superflous blanks
@@ -177,6 +181,7 @@ setopt share_history          # adds history incrementally and share it across s
 # zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 } # do not add failed commands to history - https://superuser.com/a/902508
 
 # zstyles
+# todo: organize completion section; steal from https://github.com/arp242/dotfiles/blob/master/zsh/zshrc#L201
 zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
 zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
 ## case insensitive path completion
@@ -204,6 +209,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
 # history search (fzf overrides this, but may as well keep it for fallback)
+# beginning-of-search: e.g. if you type ls and press up it will only find history entries that start with ls
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 
@@ -222,7 +228,7 @@ bindkey "^N" history-beginning-search-forward
 
 bindkey '^?' backward-delete-char # backspace on chars before start of insert mode (after leaving cmd mode) - https://www.zsh.org/mla/users/2009/msg00812.html
 bindkey '^h' backward-delete-char # ctrl-h also deletes chars
-bindkey '^r' history-incremental-search-backward # ctrl-r starts searching history backward (note: doesn't work in vi mode)
+bindkey '^r' history-incremental-search-backward # ctrl-r starts searching history backward (note: fzf fuzzy search makes this waaay better)
 
 # zsh-notes
 #bindkey '^N' notes-edit-widget
@@ -246,7 +252,7 @@ key=(
 # -n -- dry run
 autoload -U zmv # zmv '* *' '$f:gs/ /_' Replace all spaces in filenames with underscores.
 
-export KEYTIMEOUT=1 # reduce lag between hitting esc and entering normal mode - https://dougblack.io/words/zsh-vi-mode.html, https://superuser.com/a/648046
+export KEYTIMEOUT=1 # vi-mode: reduce lag between hitting esc and entering normal mode - https://dougblack.io/words/zsh-vi-mode.html, https://superuser.com/a/648046
 
 ulimit -S -c 0 # Don't want any coredumps from segfaults
 # }}}

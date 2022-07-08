@@ -12,6 +12,14 @@ alias fd='fd -I' # don't ignore things in gitignore
 alias locate='plocate'
 alias tg='terragrunt'
 alias b2='/usr/local/bin/b2' # backblaze
+alias free='free -m'
+
+# typos
+alias cd..='cd ..'
+
+# general convenience
+alias td='echo $(date +%Y-%m-%d)'
+alias now='echo $(date +%Y-%m-%d\ %T)'
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
@@ -245,7 +253,7 @@ alias myip="curl https://canhazip.com/" #"curl ifconfig.me"
 alias fuck='$(thefuck $(fc -ln -1))'
 
 # Python
-alias pip-upgrade-all=' pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U' # no, really: https://github.com/pypa/pip/issues/59
+alias pip-upgrade-all='pip freeze --local | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 pip install -U' # no, really: https://github.com/pypa/pip/issues/59
 
 ### Apps
 alias mpsyt="PYENV_VERSION=3.6.1 mpsyt" # youtube cli player
@@ -270,6 +278,8 @@ alias startu='systemctl --user start '
 alias stopu='systemctl --user stop '
 alias statusu='systemctl --user status '
 #alias reloadu='systemctl --user daemon-reload'
+alias hibernate='echo "Hibernate" && sudo systemctl hibernate'
+alias suspend='echo "Suspend then Hibernate" && sudo systemctl suspend-then-hibernate'
 
 # i3
 alias cur-monitor="xrandr | grep -C 3 '*' | grep DP | awk '{print \$1}'"
@@ -336,3 +346,10 @@ md2pdf() {
 
 # kill
 alias kill-windows="IFS=$'\n'; for n in `ps aux|grep windows`; do kill $(echo $n | awk '{print $2}'); done"
+
+# keyboard
+xm() {
+  xmodmap ~/.xmodmap # laptop keyboard
+  xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200
+}
+alias xm-reset='setxkbmap -layout us'
