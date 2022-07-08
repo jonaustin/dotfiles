@@ -590,7 +590,6 @@ set switchbuf=usetab " If included, jump to the first open window or tab that co
 
 " Formatting {
 set wrap         " wrap long lines
-set showbreak=↪  " prettier line wrap
 set autoindent   " indent at the same level of the previous line
 set shiftwidth=2 " use indents of 2 spaces
 set expandtab    " tabs should be spaces for sanity
