@@ -34,16 +34,6 @@ zinit light kazhala/dotbare
 _dotbare_completion_cmd
 
 #zinit OMZ::plugins/command-not-found/command-not-found.zsh
-zinit snippet OMZ::plugins/fasd/fasd.plugin.zsh # v <fuzzy path> (vim); j <fuzzy path> (cd)
-# built-ins - until they get muscle memory
-#alias a='fasd -a'        # any
-#alias s='fasd -si'       # show / search / select
-#alias d='fasd -d'        # directory
-#alias f='fasd -f'        # file
-#alias sd='fasd -sid'     # interactive directory selection
-#alias sf='fasd -sif'     # interactive file selection
-#alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-#alias zz='fasd_cd -d -i' # cd with interactive selection
 
 #zinit light "stevemcilwain/nonotes" # nmap zsh funcs
 
@@ -128,7 +118,7 @@ zinit light "b4b4r07/emoji-cli" # ctrl-s
 #zinit light "amstrad/oh-my-matrix"
 
 # Prompt
-zinit light "jonaustin/powerlevel10k"
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 # Show prompt segment "kubecontext" only when the command you are typing
 # invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
