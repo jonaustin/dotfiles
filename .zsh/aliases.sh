@@ -20,6 +20,7 @@ alias cd..='cd ..'
 # general convenience
 alias td='echo $(date +%Y-%m-%d)'
 alias now='echo $(date +%Y-%m-%d\ %T)'
+alias ignore-blank='grep -Ev "^#|^$"'
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
@@ -165,9 +166,10 @@ git-diff-uniq-dirs() {
 git-lines-by-author() {
   git ls-tree -r -z --name-only HEAD -- */* | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD |grep -ae "^author "|sort|uniq -c|sort -nr
 }
+alias ga='git add'
+alias gau'git add -u'
 alias gs='git status --ignore-submodules'
 alias gsl='git status --ignore-submodules | less'
-#alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
 alias gcv='git commit --no-verify'

@@ -14,7 +14,8 @@ fi
 export SYSTEM_TYPE=`uname`
 export DOTFILES=$HOME/.config
 
-source ~/.zinit/bin/zinit.zsh
+ZINIT_HOME=$HOME/.zinit/
+source $ZINIT_HOME/bin/zinit.zsh
 
 if [ $SYSTEM_TYPE = "Linux" ]; then
   fpath=($HOME/.zsh/completion $fpath)
@@ -37,8 +38,7 @@ else # osx
   source $HOME/opt/completions/docker-compose.zsh-completion; compdef _docker-compose docker-compose
 fi
 
-zinit light kazhala/dotbare
-_dotbare_completion_cmd
+zinit light kazhala/dotbare && _dotbare_completion_cmd
 
 #zinit OMZ::plugins/command-not-found/command-not-found.zsh
 
@@ -86,9 +86,6 @@ zinit light unixorn/warhol.plugin.zsh
 #zinit light "denisidoro/navi", as:command, use:"navi"
 
 # https://github.com/unixorn/awesome-zsh-plugins#plugins
-# zaw
-zinit light zsh-users/zaw
-  zinit light termoshtt/zaw-systemd
 # zinit light mafredri/zsh-async # cool, but haven't needed it: https://github.com/mafredri/zsh-async#example-code
 zinit light fcambus/ansiweather # $ weather <zip>
 zinit light "z-shell/zsh-diff-so-fancy" # $ git dsf
@@ -103,25 +100,7 @@ zinit light "z-shell/zsh-diff-so-fancy" # $ git dsf
 zinit light "peterhurford/git-it-on.zsh" # gitit -- open your current folder, on your current branch, in GitHub or GitLab
 #zinit light StackExchange/blackbox # gpg encrypt secrets in git repos
 
-# argh; i'll just make my own mappings; latest update overrode `ps` for fuck's sake
-#zinit light "wfxr/forgit" # fzf for git -- ga; glo; gi; gd; grh; gcf; gss; gclean
-#  forgit_log=glo
-#  forgit_diff=gd
-#  forgit_add=ga
-#  forgit_reset_head=grh
-#  forgit_ignore=gi
-#  forgit_checkout_file=gcf
-#  forgit_checkout_branch=gcb
-#  forgit_branch_delet=gbd
-#  forgit_checkout_tag=gct
-#  forgit_checkout_commit=gco
-# unalias grc # grc breaks...grc
-#  forgit_clean=gclean
-#  forgit_stash_show=gss
-#  forgit_cherry_pick=gcp
-#  forgit_rebase=grb
-#  forgit_fixup=gfu
-zinit light "b4b4r07/emoji-cli" # ctrl-s
+zinit light "b4b4r07/emoji-cli" # ctrl-s `echo :shrug: | emojify`
 #zinit light "amstrad/oh-my-matrix"
 
 # Prompt
@@ -130,7 +109,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # Show prompt segment "kubecontext" only when the command you are typing
 # invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
 typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
-[[ -f ~/.zsh/p10k.zsh ]] && source ~/.zsh/p10k.zsh
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 zinit ice wait'1' lucid
 zinit light laggardkernel/zsh-thefuck
@@ -403,13 +382,8 @@ export PATH="$PATH:$HOME/.bash-my-aws/bin"
 source ~/.bash-my-aws/aliases
 source ~/.bash-my-aws/bash_completion.sh
 
-if [ $SYSTEM_TYPE = "Linux" ]; then
-  source $HOME/.config/broot/launcher/bash/br
-fi;
-
 ### ZSH Completions ###
-# this won't work with zinit due to a bug: https://github.com/marlonrichert/zsh-autocomplete/issues/335
-#zinit light marlonrichert/zsh-autocomplete # must come after fzf
+#zinit light marlonrichert/zsh-autocomplete # must come after fzf; revisit later maybe
 
 # ruby
 # eh, add this back when i'm not on 2.5.3 at work
@@ -417,9 +391,12 @@ fi;
 #   export RUBYOPT='-W:no-deprecated -W:no-experimental'
 # fi;
 
-#zinit light "vifon/deer"
-#zle -N deer
-#bindkey '\ek' deer # alt-k
+zinit light "vifon/deer" # 'e'dit; 'q'uit; /search; 'f'ilter
+# eh, just hack it for now
+export FPATH=$FPATH:$ZINIT_HOME/plugins/vifon---deer
+autoload -U deer
+zle -N deer
+bindkey '\ek' deer # alt-k
 
 # pretty colors for df, etc
 source /etc/grc.zsh
@@ -437,17 +414,15 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # then `<cmd> -<tab>`
 # i.e. it _only_ works if you put a `-` before tab'ing!
 # go get -u github.com/dim-an/cod
-zinit wait lucid for dim-an/cod
+# zinit wait lucid for dim-an/cod # revisit; still not sure if this reliably works
 
-# fzf-tab
+# fzf-tab: Replace zsh's default completion selection menu with fzf!
 # needs to be loaded after compinit, but before plugins which will wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
 zinit light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of README)
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
 
 # syntax coloring
-# Unfortunately has a super weird bug where it hangs reliably with: git checkout $(git branch -a | grep -v remotes | fzf)
-# zinit light zdharma/fast-syntax-highlighting
-
+zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions # fish-like autosuggestions for zsh
 zinit light zsh-users/zsh-completions # just various completions
@@ -466,6 +441,3 @@ fi
 
 # Things I always forget 
 # FOO="${VARIABLE:-default}"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
