@@ -4,6 +4,13 @@
 #for n in `seq 0 10`; do time zsh -i -c exit; done
 #hyperfine --warmup 3 --min-runs 10 "zsh -i -c exit"
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export SYSTEM_TYPE=`uname`
 export DOTFILES=$HOME/.config
 
@@ -459,3 +466,6 @@ fi
 
 # Things I always forget 
 # FOO="${VARIABLE:-default}"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
