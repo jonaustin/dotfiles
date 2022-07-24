@@ -404,6 +404,8 @@ Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vim
 
 " Colors
 Plug 'tribela/vim-transparent' " force transparency.. :TransparentToggle
+let g:tokyonight_style = "night"
+Plug 'folke/tokyonight.nvim'
 Plug 'romainl/Apprentice'
 " TODO: switch to treesitter and use colorscheme compatible with TS
 "Plug 'pgdouyon/vim-ying-yang' " black white (yin)
@@ -573,11 +575,12 @@ silent execute '!mkdir -p $HOME/.vimundo'
 
 " Vim UI {
 set background=dark                 " Assume a dark background
+colo tokyonight
 "colo vim-material
 "colo hybrid_material
-  let g:hybrid_transparent_background = 1
+  " let g:hybrid_transparent_background = 1
 " colo nord
-colo apprentice
+" colo apprentice
 "colorscheme wal    " change scheme when background changes (pywal)
 set incsearch      " find as you type search
 set hlsearch       " highlight search terms
@@ -691,7 +694,7 @@ let g:lexical#thesaurus = ['~/.config/nvim/thesaurus/mthesaur.txt',]
 
 " Airline/Powerline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='minimalist'
+let g:airline_theme='tokyonight'
 let g:airline#extensions#tabline#enabled = 1
 
 " vim-test
