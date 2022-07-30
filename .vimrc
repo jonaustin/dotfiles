@@ -17,7 +17,7 @@ endif
 call plug#begin('~/.config/nvim/bundle')
 
 " Utility
-Plug 'nvim-lua/plenary.nvim' " lua convenience library (needed by null-ls)
+Plug 'skywind3000/asyncrun.vim' " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
 
 " General Coding
 Plug 'majutsushi/tagbar' " :Tagbar
@@ -33,7 +33,8 @@ treesitter.setup {
 EOD
 
 " LSP
-Plug 'jose-elias-alvarez/null-ls.nvim'
+"Plug 'jose-elias-alvarez/null-ls.nvim'
+"Plug 'nvim-lua/plenary.nvim' " lua convenience library (needed by null-ls)
 " hadolint: docker
 " lua <<EOD
 " require("null-ls").setup({
@@ -141,7 +142,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Apply AutoFix to problem on the current line.
   nmap <leader>qf  <Plug>(coc-fix-current)
   " Run the Code Lens action on the current line.
-  nmap <leader>cl  <Plug>(coc-codelens-action)
+  " nmap <leader>cl  <Plug>(coc-codelens-action)
 " END COC
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'SirVer/ultisnips'
@@ -158,7 +159,7 @@ Plug 'jonaustin/vim-snippets' " fixme: use custom snippets files with priority>0
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
-Plug 'mattn/emmet-vim' " div<c-y>,
+" Plug 'mattn/emmet-vim' " html helpers e.g. div<c-y>,
 " Plug 'jiangmiao/auto-pairs' " auto-close e.g. {} -- fixme: figure out how to make less obnoxious
 
 " General syntax
@@ -294,15 +295,14 @@ let g:airline#extensions#ale#enabled = 1
 
 " Javascript
 Plug 'pangloss/vim-javascript'
-Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, react, etc
-"Plug 'jelera/vim-javascript-syntax'
-"Plug 'othree/yajs.vim' " yet another javascript syntax
-"Plug 'vim-scripts/JavaScript-Indent'
-"Plug 'kchmck/vim-coffee-script'
-Plug 'MaxMEllon/vim-jsx-pretty'
-  let g:vim_jsx_pretty_colorful_config = 1 " requires vim-javascript
-Plug 'jparise/vim-graphql'
-  au BufNewFile,BufRead *.prisma setfiletype graphql
+"Plug 'othree/javascript-libraries-syntax.vim' " syntax highlighting for lodash, react, etc
+""Plug 'jelera/vim-javascript-syntax'
+""Plug 'othree/yajs.vim' " yet another javascript syntax
+""Plug 'vim-scripts/JavaScript-Indent'
+"Plug 'MaxMEllon/vim-jsx-pretty'
+"  let g:vim_jsx_pretty_colorful_config = 1 " requires vim-javascript
+"Plug 'jparise/vim-graphql'
+"  au BufNewFile,BufRead *.prisma setfiletype graphql
 
 " typescript
 Plug 'leafgarland/typescript-vim'    " syntax
@@ -364,7 +364,6 @@ Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 
 " Integrations
 "Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
-Plug 'skywind3000/asyncrun.vim'       " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
 "Plug 'janko-m/vim-test'
 "Plug 'rizzatti/dash.vim'              " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
 Plug 'scrooloose/nerdtree'
@@ -406,25 +405,25 @@ Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vim
 Plug 'tribela/vim-transparent' " force transparency.. :TransparentToggle
 let g:tokyonight_style = "night"
 Plug 'folke/tokyonight.nvim'
-Plug 'romainl/Apprentice'
+" Plug 'romainl/Apprentice'
 " TODO: switch to treesitter and use colorscheme compatible with TS
 "Plug 'pgdouyon/vim-ying-yang' " black white (yin)
-Plug 'dylanaraps/wal.vim'
+" Plug 'dylanaraps/wal.vim'
 "Plug 'jonaustin/vim-colorscheme-switcher', { 'branch': 'transparent-bg' } " my fork that keeps transparent bg -- F8/Shift-F8
-Plug 'arcticicestudio/nord-vim' " arctic, north-bluish
-Plug 'cocopon/iceberg.vim' " Dark blue
-Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
-Plug 'w0ng/vim-hybrid'
+" Plug 'arcticicestudio/nord-vim' " arctic, north-bluish
+" Plug 'cocopon/iceberg.vim' " Dark blue
+" Plug 'tyrannicaltoucan/vim-deep-space' " hybrid fork, true color
+" Plug 'w0ng/vim-hybrid'
 "Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'jonaustin/vim-hybrid-material'
-Plug 'justinmk/molokai'          " true color fork
-Plug 'nanotech/jellybeans.vim'   " true colors
-Plug 'lifepillar/vim-solarized8' " true color fork
-Plug 'hzchirs/vim-material'      " true colors
-Plug 'romainl/flattened'         " solarized 'without the bullshit'
-Plug 'dikiaap/minimalist'        " dark material theme
+" Plug 'jonaustin/vim-hybrid-material'
+" Plug 'justinmk/molokai'          " true color fork
+" Plug 'nanotech/jellybeans.vim'   " true colors
+" Plug 'lifepillar/vim-solarized8' " true color fork
+" Plug 'hzchirs/vim-material'      " true colors
+" Plug 'romainl/flattened'         " solarized 'without the bullshit'
+" Plug 'dikiaap/minimalist'        " dark material theme
 "Plug 'chriskempson/base16-vim'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
+" Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
 "Plug 'sk1418/last256' " based on hybrid
 "Plug 'Lokaltog/vim-distinguished'
 ""Plug 'jonaustin/vim-colors'
@@ -437,13 +436,15 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' } " true colors
 "Plug 'morhetz/gruvbox'
 
 " UI
-Plug 'APZelos/blamer.nvim'
-  let g:blamer_enabled = 1
-  highlight Blamer guifg=lightgrey
-Plug 'folke/which-key.nvim'
+Plug 'APZelos/blamer.nvim' " codelens for vim
+  let g:blamer_show_in_visual_modes = 0
+  nnoremap <leader>cl :BlamerToggle<cr>
+"   let g:blamer_enabled = 1
+"   highlight Blamer guifg=lightgrey
+Plug 'folke/which-key.nvim'  " show keypresses and options for discovery and presentations
   lua require("which-key").setup {}
 Plug 'romainl/vim-cool' " disable highlighting after search
-Plug 'reedes/vim-pencil' " focused writing :Pencil
+" Plug 'reedes/vim-pencil' " focused writing :Pencil
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'zefei/vim-wintabs'
@@ -452,7 +453,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Misc
 "Plug 'wakatime/vim-wakatime'
 "Plug 'AD7six/vim-activity-log'
-Plug 'fidian/hexmode'
+" Plug 'fidian/hexmode'
 
 " Embedded neovim
 "Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
