@@ -373,31 +373,17 @@ gcob() {
   git checkout $(echo "$branch" | sed "s/.* //")
 }
 
-# git
-git-diff-dir-names() {
-  git diff --name-only $1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
-}
-
-# copy changed within x time
-# cpch 30m ~/dl/ `pwd`/books/
-cpch() {
-  # handle spaces
-  OIFS="$IFS"
-  IFS=$'\n'
-
-  within=${1:-15m}
-  wherefrom=${2:-$HOME/downloads/}
-  whereto=${3:-$HOME/sync/ereader/}
-
-  for file in `fd -t f --changed-within $within . "$wherefrom"`; do
-    if [[ -z "${DRY}" ]]; then
-      rsync -aP "$file" "${whereto}/"
+fcd() {
+  local dir;   
+  while true; do
+    # exit with ^D
+    dir="$(/bin/ls -a1p | grep '/$' | grep -v '^./$' | fzf --height 40% --reverse --no-multi --preview 'pwd' --preview-window=up,1,border-none --no-info)"
+    if [[ -z "${dir}" ]]; then
+      break
     else
-      echo "$file" "${whereto}/"
+      cd "${dir}"
     fi
   done
-
-  IFS="$OIFS"
 }
 
 sysz() {
@@ -406,22 +392,6 @@ sysz() {
   export FZF_DEFAULT_OPTS=$(echo $FZF_DEFAULT_OPTS | sed 's/right:hidden/right/')
   /usr/bin/sysz
   export FZF_DEFAULT_OPTS=$(echo $FZF_DEFAULT_OPTS | sed 's/right:wrap/right:hidden:wrap/')
-}
-
-curljson() {
-  curl $1 \
-    --header "Content-Type: application/json" \
-    --request "${2:-GET}"
-}
-
-bluetooth_init() {
-  bluetoothctl power on
-  bluetoothctl agent on
-  bluetoothctl default-agent
-  bluetoothctl scan on
-  #bluetoothctl pair $1
-  #bluetoothctl trust $1
-  bluetoothctl connect $1
 }
 
 cpfd() {
@@ -456,6 +426,49 @@ rga-fzf-pdf() {
     )" &&
     echo "opening $file" &&
     xdg-open "$file"
+}
+
+# git
+git-diff-dir-names() {
+  git diff --name-only $1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
+}
+
+# copy changed within x time
+# cpch 30m ~/dl/ `pwd`/books/
+cpch() {
+  # handle spaces
+  OIFS="$IFS"
+  IFS=$'\n'
+
+  within=${1:-15m}
+  wherefrom=${2:-$HOME/downloads/}
+  whereto=${3:-$HOME/sync/ereader/}
+
+  for file in `fd -t f --changed-within $within . "$wherefrom"`; do
+    if [[ -z "${DRY}" ]]; then
+      rsync -aP "$file" "${whereto}/"
+    else
+      echo "$file" "${whereto}/"
+    fi
+  done
+
+  IFS="$OIFS"
+}
+
+curljson() {
+  curl $1 \
+    --header "Content-Type: application/json" \
+    --request "${2:-GET}"
+}
+
+bluetooth_init() {
+  bluetoothctl power on
+  bluetoothctl agent on
+  bluetoothctl default-agent
+  bluetoothctl scan on
+  #bluetoothctl pair $1
+  #bluetoothctl trust $1
+  bluetoothctl connect $1
 }
 
 # Git

@@ -306,7 +306,6 @@ set $green     #859900
 #bindsym $mod+Shift+s exec "$HOME/bin/audio/spotify"
 #bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
 #bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
-bindsym $mod+Shift+x exec "firefox"
 bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
 bindsym $mod+Shift+w exec "~/bin/walbg"
 bindsym $mod+Ctrl+w exec "~/bin/walbg 4k > /tmp/wat" 
@@ -315,7 +314,7 @@ bindsym $mod+Mod1+Ctrl+w exec ~/bin/i3/bg-delete.sh
 
 # find windows (i3-wm-scripts)
 bindsym $mod+s exec python ~/bin/i3/i3-wm-scripts/nextmatch.py spotify
-bindsym $mod+x exec python ~/bin/i3/i3-wm-scripts/nextmatch.py '(chromium|firefox)'
+bindsym $mod+Shift+x exec python ~/bin/i3/i3-wm-scripts/nextmatch.py '(chromium|firefox)'
 #bindsym $mod+p exec python ~/bin/i3/i3-wm-scripts/nextmatch.py '(mupdf)'
 
 # Screen brightness controls
@@ -363,7 +362,6 @@ bindsym $mod+Shift+less move container to output left
 
 bindsym $mod+b exec "$HOME/bin/brightness.sh"
 
-
 # home automation
 # node-avcontrol for yamaha
 bindsym $mod+bracketleft exec "$HOME/bin/audio/yamaha -d"
@@ -374,6 +372,11 @@ bindsym $mod+Down exec "$HOME/bin/audio/yamaha -d"
 bindsym $mod+Shift+Down exec "$HOME/bin/audio/yamaha -m"
 bindsym $mod+Up exec "$HOME/bin/audio/yamaha -u"
 bindsym $mod+Shift+Up exec "$HOME/bin/audio/yamaha -U"
+
+# warpd
+bindsym $mod+x exec warpd --hint
+bindsym $mod+c exec warpd --normal
+bindsym $mod+g exec warpd --grid
 
 # lights
 # movie room lights
@@ -422,6 +425,7 @@ exec --no-startup-id /home/jon/.local/bin/spotpris2 # fix spotify's broken mpris
 exec_always --no-startup-id /home/jon/.asdf/shims/autotiling # try out autotiling script https://github.com/nwg-piotr/autotiling
 exec --no-startup-id dunst # instead of notify-osd
 exec --no-startup-id sudo -E auto-cpufreq --daemon
+exec --no-startup-id warpd
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

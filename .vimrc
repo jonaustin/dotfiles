@@ -18,6 +18,7 @@ call plug#begin('~/.config/nvim/bundle')
 
 " Utility
 Plug 'skywind3000/asyncrun.vim' " used by other plugins to run things asynchronously (or :AsyncRun) Note: not compatible with vim-dispatch as it overrides :make
+Plug 'nvim-lua/plenary.nvim' " lua convenience library
 
 " General Coding
 Plug 'majutsushi/tagbar' " :Tagbar
@@ -34,7 +35,6 @@ EOD
 
 " LSP
 "Plug 'jose-elias-alvarez/null-ls.nvim'
-"Plug 'nvim-lua/plenary.nvim' " lua convenience library (needed by null-ls)
 " hadolint: docker
 " lua <<EOD
 " require("null-ls").setup({

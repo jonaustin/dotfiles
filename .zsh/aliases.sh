@@ -352,12 +352,17 @@ alias kill-windows="IFS=$'\n'; for n in `ps aux|grep windows`; do kill $(echo $n
 # keyboard
 xm() {
   xmodmap ~/.xmodmap # laptop keyboard
+  pkill xcape
   xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200
 }
 xk() {
   xmodmap ~/configs_misc/linux/xmodmap_kinesis # kinesis keyboard
+  pkill xcape
   xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200
 }
 alias xm-reset='setxkbmap -layout us'
 
 alias performance='echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+
+# fzf
+alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
