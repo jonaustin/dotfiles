@@ -11,3 +11,18 @@ cmd open ${{
         *) for f in $fx; do setsid $OPENER $f > /dev/null 3> /dev/null & done;;
     esac
 }}
+
+# Combining fzf with ripgrep, you can interactively search in the contents of files 
+# under the current directory and select a file from the results:
+cmd fzf_search ${{
+    res="$( \
+        RG_PREFIX="rg --column --line-number --no-heading --color=always \
+            --smart-case "
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --ansi --layout=reverse --header 'Search in files' \
+            | cut -d':' -f1
+    )"
+    [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
+}}
+map gs :fzf_search

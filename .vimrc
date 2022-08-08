@@ -3,6 +3,11 @@
 "
 " }
 
+
+" Put at beginning so we can group mappings with plugins
+let mapleader = ','
+let maplocalleader = ','
+
 " vim-plug {{{
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -34,37 +39,36 @@ treesitter.setup {
 EOD
 
 " LSP
-"Plug 'jose-elias-alvarez/null-ls.nvim'
-" hadolint: docker
-" lua <<EOD
-" require("null-ls").setup({
-"     -- note: to disable on the fly - `:lua require("null-ls").disable("<source>")`
-"     debug = false,
-"     diagnostics_format = "#{m}",
-"     fallback_severity = vim.diagnostic.severity.INFO,
-"     sources = {
-"         require("null-ls").builtins.formatting.black,
-"         require("null-ls").builtins.formatting.cljstyle,
-"         require("null-ls").builtins.formatting.crystal_format,
-"         require("null-ls").builtins.formatting.prettier,
-"         require("null-ls").builtins.formatting.rubocop,
-"         require("null-ls").builtins.formatting.shfmt,
-"         require("null-ls").builtins.formatting.stylua,
-"         require("null-ls").builtins.formatting.terrafmt,
-"         require("null-ls").builtins.formatting.trim_whitespace,
-"
-"         require("null-ls").builtins.diagnostics.checkmake,
-"         require("null-ls").builtins.diagnostics.eslint,
-"         require("null-ls").builtins.diagnostics.flake8,
-"         require("null-ls").builtins.diagnostics.hadolint,
-"         require("null-ls").builtins.diagnostics.rubocop,
-"         require("null-ls").builtins.diagnostics.shellcheck,
-"         -- require("null-ls").builtins.diagnostics.write_good,
-"         require("null-ls").builtins.diagnostics.yamllint,
-"         require("null-ls").builtins.diagnostics.zsh,
-"     },
-" })
-" EOD
+Plug 'jose-elias-alvarez/null-ls.nvim'
+lua <<EOD
+require("null-ls").setup({
+    -- note: to disable on the fly - `:lua require("null-ls").disable("<source>")`
+    debug = false,
+    diagnostics_format = "#{m}",
+    fallback_severity = vim.diagnostic.severity.INFO,
+    sources = {
+        require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.formatting.cljstyle,
+        require("null-ls").builtins.formatting.crystal_format,
+        require("null-ls").builtins.formatting.prettier,
+        require("null-ls").builtins.formatting.rubocop,
+        require("null-ls").builtins.formatting.shfmt,
+        require("null-ls").builtins.formatting.stylua,
+        require("null-ls").builtins.formatting.terrafmt,
+        require("null-ls").builtins.formatting.trim_whitespace,
+
+        require("null-ls").builtins.diagnostics.checkmake,
+        require("null-ls").builtins.diagnostics.eslint,
+        require("null-ls").builtins.diagnostics.flake8,
+        require("null-ls").builtins.diagnostics.hadolint,
+        require("null-ls").builtins.diagnostics.rubocop,
+        require("null-ls").builtins.diagnostics.shellcheck,
+        -- require("null-ls").builtins.diagnostics.write_good,
+        require("null-ls").builtins.diagnostics.yamllint,
+        require("null-ls").builtins.diagnostics.zsh,
+    },
+})
+EOD
 "Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 
 " Completions
@@ -349,16 +353,18 @@ Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'kassio/neoterm'                 " :T <cmd> - open new or use existing terminal; :TREPLSend; :TREPLSendFile (to e.g. pry, node)
 "Plug 'metakirby5/codi.vim'            " amazing repl
 "Plug 'jalvesaq/vimcmdline'            " Send code to repl <leader>i, then Space
-" Plug 'voldikss/vim-floaterm'
-" let g:floaterm_position = 'bottom'
-" let g:floaterm_width = 0.98
-" let g:floaterm_autoclose = 2
-" let g:floaterm_height = 0.4
-" let g:floaterm_keymap_toggle = '<leader>ft'
-" nnoremap <C-c><C-s> :FloatermSend<CR>
-" vnoremap <C-c><C-s> :FloatermSend<CR>
+Plug 'voldikss/vim-floaterm'
+let g:floaterm_position = 'bottom'
+let g:floaterm_width = 0.98
+let g:floaterm_autoclose = 2
+let g:floaterm_height = 0.4
+let g:floaterm_keymap_toggle = '<leader>ft'
+nnoremap <C-c><C-s> :FloatermSend<CR>
+vnoremap <C-c><C-s> :FloatermSend<CR>
 
 " Integrations
+Plug 'ptzz/lf.vim'
+  let g:lf_map_keys = 0
 "Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
 "Plug 'janko-m/vim-test'
 "Plug 'rizzatti/dash.vim'              " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
@@ -431,6 +437,7 @@ Plug 'folke/tokyonight.nvim'
 "Plug 'sjl/badwolf' " clojure
 "Plug 'morhetz/gruvbox'
 
+  map <leader>lf :Lf<cr>
 " UI
 Plug 'APZelos/blamer.nvim' " codelens for vim
   let g:blamer_show_in_visual_modes = 0
@@ -462,8 +469,6 @@ call plug#end()
 " Basics {
 set nocompatible
 filetype plugin indent on " Automatically detect file types.
-let mapleader = ','
-let maplocalleader = ','
 
 if has('unix')
   if has('mac') " osx
@@ -892,7 +897,7 @@ endif
 " vim bug: this doesn't work for some reason when switching TO a floating window;
 "     have to use the toggle floaterm command for that (e.g. ',ft')
 "     https://github.com/voldikss/vim-floaterm/issues/134
-"         You can not because neovim/vim doesn't support wincmd h/j/k/l for floating windows.
+"         "You can not because neovim/vim doesn't support wincmd h/j/k/l for floating windows."
 if has('nvim')
   augroup vimrc_term
     autocmd!
