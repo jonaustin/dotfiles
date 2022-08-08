@@ -366,3 +366,7 @@ alias performance='echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cp
 
 # fzf
 alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
+
+# archlinux
+alias ql='pacman -Ql '
+alias q='pacman -Q|grep '
