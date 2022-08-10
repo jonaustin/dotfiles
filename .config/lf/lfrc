@@ -12,7 +12,7 @@ cmd open ${{
     esac
 }}
 
-# Combining fzf with ripgrep, you can interactively search in the contents of files 
+# Combining fzf with ripgrep, you can interactively search in the contents of files
 # under the current directory and select a file from the results:
 cmd fzf_search ${{
     res="$( \
@@ -26,3 +26,27 @@ cmd fzf_search ${{
     [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
 }}
 map gs :fzf_search
+
+# show borders
+set drawbox
+
+# zsh - split words by default
+# zsh does not split words by default as described http://zsh.sourceforge.net/FAQ/zshfaq03.html, which makes it difficult to work with $fs and $fx variables, but a compatibility option named shwordsplit (-y or --sh-word-split) is provided for this purpose. You can set this option for all commands as such:
+set shell zsh
+set shellopts '-euy'
+set ifs "\n"
+set filesep "\n"  # default already
+
+# allow c-z to work
+map <c-z> $ kill -STOP $PPID
+
+# open with
+cmd open-with %"$@" "$fx"
+map ` push :open-with<space>
+
+# preview toggle
+# set preview
+# set previewer "less -k ~/.config/lf/less.lesskey"
+
+set previewer ~/opt/_go/bin/pistol
+

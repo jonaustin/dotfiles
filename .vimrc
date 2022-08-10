@@ -353,18 +353,19 @@ Plug 'justinmk/vim-sneak'              " <leader>s<2 chars>
 "Plug 'kassio/neoterm'                 " :T <cmd> - open new or use existing terminal; :TREPLSend; :TREPLSendFile (to e.g. pry, node)
 "Plug 'metakirby5/codi.vim'            " amazing repl
 "Plug 'jalvesaq/vimcmdline'            " Send code to repl <leader>i, then Space
-Plug 'voldikss/vim-floaterm'
-let g:floaterm_position = 'bottom'
-let g:floaterm_width = 0.98
-let g:floaterm_autoclose = 2
-let g:floaterm_height = 0.4
-let g:floaterm_keymap_toggle = '<leader>ft'
-nnoremap <C-c><C-s> :FloatermSend<CR>
-vnoremap <C-c><C-s> :FloatermSend<CR>
 
 " Integrations
-Plug 'ptzz/lf.vim'
+Plug 'ptzz/lf.vim' " note: should come before floaterm
   let g:lf_map_keys = 0
+  map <leader>lf :Lf<cr>
+Plug 'voldikss/vim-floaterm'
+  let g:floaterm_position = 'bottom'
+  let g:floaterm_width = 0.98
+  let g:floaterm_autoclose = 2
+  let g:floaterm_height = 0.4
+  let g:floaterm_keymap_toggle = '<leader>ft'
+  nnoremap <C-c><C-s> :FloatermSend<CR>
+  vnoremap <C-c><C-s> :FloatermSend<CR>
 "Plug 'chrisbra/csv.vim'               " make csvs easier to read and interact with; :CSVTabularize (pretty format)
 "Plug 'janko-m/vim-test'
 "Plug 'rizzatti/dash.vim'              " Dash.app integration - :<leader>d / :Dash (word under cursor), :Dash printf, :Dash setTimeout javascript, :DashKeywords backbone underscore javascript
@@ -437,7 +438,6 @@ Plug 'folke/tokyonight.nvim'
 "Plug 'sjl/badwolf' " clojure
 "Plug 'morhetz/gruvbox'
 
-  map <leader>lf :Lf<cr>
 " UI
 Plug 'APZelos/blamer.nvim' " codelens for vim
   let g:blamer_show_in_visual_modes = 0

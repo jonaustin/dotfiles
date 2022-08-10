@@ -243,7 +243,11 @@ export PAGER='less'
 # --no-init:             don't clear screen on exit
 # --mouse:               support mouse - only >=551 (brew install less on mac)
 export LESS='--RAW-CONTROL-CHARS --squeeze-blank-lines --quit-on-intr --quit-if-one-screen --no-init --mouse'
-export LESSOPEN="| src-hilite-lesspipe.sh %s"
+if [ $SYSTEM_TYPE = "Linux" ]; then
+  export LESSOPEN='| p() { chroma --style="solarized-dark" --fail "$1" || cat "$1"; }; p "%s"'
+else
+  export LESSOPEN="| src-hilite-lesspipe.sh %s"
+fi
 # remove: let the terminal set the TERM var; pint xterm-256color
 # export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 # }}}
@@ -439,6 +443,11 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
   PERL_MB_OPT="--install_base \"/home/jon/perl5\""; export PERL_MB_OPT;
   PERL_MM_OPT="INSTALL_BASE=/home/jon/perl5"; export PERL_MM_OPT;
 fi
+
+# Pistol syntax highlighter
+export PISTOL_CHROMA_FORMATTER=terminal16m # 24 bit
+# export PISTOL_CHROMA_STYLE=monokai
+export PISTOL_CHROMA_STYLE=solarized-dark
 
 # Things I always forget 
 # FOO="${VARIABLE:-default}"
