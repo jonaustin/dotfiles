@@ -15,6 +15,13 @@
     "terraform": {
       "command": "terraform-ls",
       "args": ["serve"],
+      "filetypes": [ "terraform", "tf" ],
+      "initializationOptions": {},
+      "settings": {}
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
     },
