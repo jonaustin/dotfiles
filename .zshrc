@@ -17,9 +17,8 @@ export DOTFILES=$HOME/.config
 ZINIT_HOME=$HOME/.zinit/
 source $ZINIT_HOME/bin/zinit.zsh
 
+fpath=($HOME/.zsh/completion /usr/ $fpath)
 if [ $SYSTEM_TYPE = "Linux" ]; then
-  fpath=($HOME/.zsh/completion $fpath)
-
   # init XDG dirs
   export XDG_CONFIG_HOME=$HOME/.config
   export XDG_CACHE_HOME=$HOME/.cache
@@ -31,6 +30,7 @@ fi
 autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
 autoload -U bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "Linux" ]; then
+  # for n in /usr/share/bash-completion/completions/*; do . $n &> /dev/null; done # there has _got_ to be a better way to do this...(adding to fpath doesnt work) -- see fallback stuff at bottom; can't bloody get it to do anything though
   source $HOME/bin/i3/i3-completion/i3_completion.sh # i3-msg completions; must come after bashcompinit
   source $HOME/.config/doctl/doctl.zsh; compdef _doctl doctl # $ doctl completion zsh
 else # osx
@@ -50,7 +50,7 @@ zinit light kazhala/dotbare && _dotbare_completion_cmd
 
 # node
 #export NVM_LAZY_LOAD=true
-#zplug "lukechilds/zsh-nvm" # even with lazy loading adds ~0.1 to zsh startup
+#zinit "lukechilds/zsh-nvm" # even with lazy loading adds ~0.1 to zsh startup
 
 # asdf: multi-lang version mgr
 if [ $SYSTEM_TYPE = "Darwin" ]; then
@@ -448,6 +448,13 @@ fi
 export PISTOL_CHROMA_FORMATTER=terminal16m # 24 bit
 # export PISTOL_CHROMA_STYLE=monokai
 export PISTOL_CHROMA_STYLE=solarized-dark
+
+# cannot for the life of me get this to load anything
+# export ZSH_BASH_COMPLETIONS_FALLBACK_PATH=/usr/share/bash-completion
+# # zinit ice depth=1 # optional, but avoids downloading the full history
+# export ZSH_BASH_COMPLETIONS_FALLBACK_REPLACE_ALL=true
+# export ZSH_BASH_COMPLETIONS_FALLBACK_LAZYLOAD_DISABLE=true
+# zinit light 3v1n0/zsh-bash-completions-fallback
 
 # Things I always forget 
 # FOO="${VARIABLE:-default}"
