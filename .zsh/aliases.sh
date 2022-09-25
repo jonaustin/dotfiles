@@ -13,6 +13,7 @@ alias locate='plocate'
 alias tg='terragrunt'
 alias b2='/usr/local/bin/b2' # backblaze
 alias free='free -m'
+alias ranger=lf
 
 # typos
 alias cd..='cd ..'
@@ -21,6 +22,7 @@ alias cd..='cd ..'
 alias td='echo $(date +%Y-%m-%d)'
 alias now='echo $(date +%Y-%m-%d\ %T)'
 alias ignore-blank='grep -Ev "^#|^$"'
+alias bash-completions='for n in /usr/share/bash-completion/completions/*; do . $n &> /dev/null; done' # ugh
 
 # remembering to reshim asdf is a pain
 #alias pip="pip $@ ; asdf reshim"
@@ -352,17 +354,20 @@ alias kill-windows="IFS=$'\n'; for n in `ps aux|grep windows`; do kill $(echo $n
 # keyboard
 xm() {
   xmodmap ~/.xmodmap # laptop keyboard
-  pkill xcape
-  xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200
+  sudo systemctl restart keyd
+  # pkill xcape
+  # xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200
 }
 xk() {
   xmodmap ~/configs_misc/linux/xmodmap_kinesis # kinesis keyboard
-  pkill xcape
-  xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200
+  sudo systemctl restart keyd
+  # pkill xcape
+  # xcape -e "Control_L=Escape;Shift_L=Shift_L|9;Shift_R=Shift_R|0;Super_R=Shift_R|bracketright;Super_L=Shift_L|bracketleft;Print=Shift_R|bracketright;Alt_L=Shift_L|bracketleft" -t 200
 }
 alias xm-reset='setxkbmap -layout us'
 
 alias performance='echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+alias powersave='echo "powersave" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
 
 # fzf
 alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
@@ -370,3 +375,6 @@ alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:pre
 # archlinux
 alias ql='pacman -Ql '
 alias q='pacman -Q|grep '
+
+# docker containers
+alias unifi='cd ~/opt/docker-unifi-controller && docker compose up' # https://0.0.0.0:8443 

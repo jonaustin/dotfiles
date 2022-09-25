@@ -30,7 +30,6 @@ fi
 autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
 autoload -U bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "Linux" ]; then
-  # for n in /usr/share/bash-completion/completions/*; do . $n &> /dev/null; done # there has _got_ to be a better way to do this...(adding to fpath doesnt work) -- see fallback stuff at bottom; can't bloody get it to do anything though
   source $HOME/bin/i3/i3-completion/i3_completion.sh # i3-msg completions; must come after bashcompinit
   source $HOME/.config/doctl/doctl.zsh; compdef _doctl doctl # $ doctl completion zsh
 else # osx

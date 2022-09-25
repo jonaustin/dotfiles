@@ -32,9 +32,9 @@ lua <<EOD
 local treesitter = require('nvim-treesitter.configs')
 
 treesitter.setup {
-    highlight = {
-        enable = true
-    }
+  highlight = {
+    enable = true
+  }
 }
 EOD
 
@@ -92,7 +92,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
         \ <SID>check_back_space() ? "\<Tab>" :
         \ coc#refresh()
   inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-  inoremap <silent><expr> <c-space> coc#refresh()
+  inoremap <silent><expr> <c-l> coc#refresh()
 
   hi CocSearch ctermfg=12 guifg=#18A3FF
   hi CocMenuSel ctermbg=109 guibg=#13354A
@@ -143,7 +143,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <leader>qf  <Plug>(coc-fix-current)
   " Run the Code Lens action on the current line.
   " nmap <leader>cl  <Plug>(coc-codelens-action)
-" END COC
+" End CoC
+"
 Plug 'reedes/vim-lexical' " spelling/dictionary completion
 Plug 'SirVer/ultisnips'
   " Ultisnips
@@ -308,7 +309,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'    " syntax
 Plug 'HerringtonDarkholme/yats.vim'  " yet another typescript syntax
 Plug 'Quramy/vim-js-pretty-template' " template strings coloring
-Plug 'jason0x43/vim-js-indent'
 
 " Navigation
 Plug 'wincent/ferret' " Ack and Acks (multi-file search/replace)
@@ -326,7 +326,7 @@ let g:loaded_gentags#gtags=1 " only use ctags (disable gtags)
 " Telescope
 if has('nvim')
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-lua/popup.nvim'   " api compatible with vim's popup_* (needed by telescope-media-files.nvim)
+  " Plug 'nvim-lua/popup.nvim'   " api compatible with vim's popup_* (needed by telescope-media-files.nvim)
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " greatly speeds up telescope
   " Plug 'nvim-telescope/telescope-media-files.nvim' " preview images and such
   " lua require('telescope').extensions.media_files.media_files()
@@ -679,7 +679,7 @@ augroup lexical
   autocmd FileType textile call lexical#init()
   autocmd FileType text call lexical#init() "({ 'spell': 0 })
 augroup END
-let g:lexical#spell = 0 " 0=disabled, 1=enabled
+let g:lexical#spell = 1 " 0=disabled, 1=enabled
 let g:lexical#thesaurus = ['~/.config/nvim/thesaurus/mthesaur.txt',]
 
 " EasyTag
