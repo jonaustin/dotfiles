@@ -405,9 +405,16 @@ Plug 'xolox/vim-session' " e.g. :OpenSession :SaveSession
 Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vimrc: https://stackoverflow.com/a/26551079/617320 ) or ':tabe %, which allows you to pop out into a new tab temporarily (unlike CTRL-W T which actually moves the current window out into a new tab). When you’re done, just close the tab.'
 
 " Colors
-Plug 'tribela/vim-transparent' " force transparency.. :TransparentToggle
-let g:tokyonight_style = "night"
+" Plug 'tribela/vim-transparent' " force transparency.. :TransparentToggle
 Plug 'folke/tokyonight.nvim'
+lua << EOD
+require("tokyonight").setup({
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+  transparent = true, -- Enable this to disable setting the background color
+})
+EOD
 " Plug 'romainl/Apprentice'
 " TODO: switch to treesitter and use colorscheme compatible with TS
 "Plug 'pgdouyon/vim-ying-yang' " black white (yin)
