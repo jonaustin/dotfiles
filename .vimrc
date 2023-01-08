@@ -446,6 +446,7 @@ EOD
 "Plug 'morhetz/gruvbox'
 
 " UI
+Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
 Plug 'APZelos/blamer.nvim' " codelens for vim
   let g:blamer_show_in_visual_modes = 0
   nnoremap <leader>cl :BlamerToggle<cr>

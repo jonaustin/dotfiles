@@ -116,8 +116,8 @@ sport() { lsof -P -iTCP:${1}; }
 alias cdb='cd ..; cd -' # cd back (sometimes needed to reload dotfiles)
 
 # http://stackoverflow.com/a/15012788
-rename-spaces-to-underscores() { 
-  find . -type f -exec rename 's/ /_/' '{}' \; 
+rename-spaces-to-underscores() {
+  find . -type f -exec rename 's/ /_/' '{}' \;
 }
 
 ## Music
@@ -272,6 +272,7 @@ alias ytv='youtube-dl -f bestvideo+bestaudio --prefer-free-formats -i --output "
 alias ytcast='youtube-dl -o - https://youtu.be/BaW_jenozKc | castnow --quiet -' # cast to chromecast
 
 ### Systemd
+alias update-pacman-keys='sudo pacman -Sy archlinux-keyring && sudo pacman -Su'
 alias restart='sudo systemctl restart '
 alias start='sudo systemctl start '
 alias stop='sudo systemctl stop '
@@ -293,7 +294,6 @@ alias novpn='nmcli con down "mullvad_us_sea"'
 alias hvpn='nmcli con up "mullvad_us_sea"'
 
 # s (web-cli search)
-alias ss='/usr/bin/s' # override s aliased to yay
 alias sa='/usr/bin/s -p amazon'
 alias sw='/usr/bin/s -p wikipedia'
 
@@ -317,6 +317,7 @@ alias trekz="bluetoothctl connect 20:74:CF:ED:64:E5"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
 alias hifi="bluetoothctl connect CC:39:8C:01:DB:2D"
 alias sony="bluetoothctl connect F8:4E:17:53:98:92"
+alias bt-codec='pw-cli info all | grep codec'
 
 # battery (thinkpad)
 #alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0" # "inxi -Bxxx"
@@ -324,8 +325,11 @@ alias sony="bluetoothctl connect F8:4E:17:53:98:92"
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT1" # "inxi -Bxxx"
 
 # cheatsheets
-cheat() { 
-  curl http://cht.sh/$1 
+cheat() {
+  curl http://cht.sh/$1
+}
+cht() {
+  cheat $1
 }
 
 # noteair
@@ -377,4 +381,5 @@ alias ql='pacman -Ql '
 alias q='pacman -Q|grep '
 
 # docker containers
-alias unifi='cd ~/opt/docker-unifi-controller && docker compose up' # https://0.0.0.0:8443 
+alias unifi='cd ~/opt/docker-unifi-controller && docker compose up' # https://0.0.0.0:8443
+alias calibre-web='docker run linuxserver/calibre-web'

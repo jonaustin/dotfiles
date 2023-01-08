@@ -374,7 +374,7 @@ gcob() {
 }
 
 fcd() {
-  local dir;   
+  local dir;
   while true; do
     # exit with ^D
     dir="$(/bin/ls -a1p | grep '/$' | grep -v '^./$' | fzf --height 40% --reverse --no-multi --preview 'pwd' --preview-window=up,1,border-none --no-info)"
@@ -483,6 +483,15 @@ html2pdf() {
 }
 
 ## dns toys
-dy() { 
-  dig +noall +answer +additional "$1" @dns.toys; 
+dy() {
+  dig +noall +answer +additional "$1" @dns.toys;
+}
+
+# tea
+teatime() {
+  secs=$1
+  for n in {1..${secs}}; do
+    echo $n; sleep 1;
+  done
+  notify-send "tea done" -u critical
 }
