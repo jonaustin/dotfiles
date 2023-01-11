@@ -466,8 +466,9 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'AD7six/vim-activity-log'
 " Plug 'fidian/hexmode'
 
-" Embedded neovim
-"Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Embedded neovim in firefox
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+set guifont=Inconsolata:h12
 
 
 " Initialize plugin system
@@ -600,6 +601,17 @@ set smartcase      " become temporarily case sensitive when any uppercase letter
 set undofile       " undo even after closing and re-opening a file!
 set switchbuf=usetab " If included, jump to the first open window or tab that contains the specified buffer (if there is one).  Otherwise: Do not examine other windows or tabs.
 
+" Niceties
+"" Keep things vertically centered
+" note: could always just use scrolloff
+  " Center screen on next/previous selection.
+  nnoremap n nzz
+  nnoremap N Nzz
+  " Last and next jump should center too.
+  nnoremap <C-o> <C-o>zz
+  nnoremap <C-i> <C-i>zz
+  nnoremap <C-d> <C-d>zz
+  nnoremap <C-u> <C-u>zz
 
 " Formatting {
 set wrap         " wrap long lines
@@ -976,3 +988,4 @@ endif
 " verbose Xmap <leader>c # show imap/nmap/map/etc for <leader>c or whatnot
 " show value of set var with e.g. `set modeline?`; let is just the var `let g:plugin_var`
 " :enew|pu=execute('<colon command>') " copy the output of any :colon command to a new buffer
+" zz/. - center current liner horizontally on the screen (z -/+ or b/t to put current line at bottom/top)

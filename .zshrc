@@ -172,6 +172,15 @@ zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
 
 # bindkeys
 bindkey -v # vi mode
+# Allow Ctrl-z to toggle between suspend and resume
+function Resume {
+  fg
+  zle push-input
+  BUFFER=""
+  zle accept-line
+}
+zle -N Resume
+bindkey "^Z" Resume
 
 #export ZVM_VI_ESCAPE_BINDKEY='jk'
 #zinit ice depth=1
