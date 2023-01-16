@@ -160,7 +160,7 @@ Plug 'jonaustin/vim-snippets' " fixme: use custom snippets files with priority>0
 "Plug 'mhartington/nvim-typescript', { 'do': 'npm install -g typescript' } " or tsuquyomi
 "Plug 'roxma/ncm-rct-complete', { 'do': 'gem install rcodetools' }
 "Plug 'Shougo/neco-syntax' " syntax completion
-" Plug 'mattn/emmet-vim' " html helpers e.g. div<c-y>,
+Plug 'mattn/emmet-vim' " html helpers e.g. div<c-y>,
 " Plug 'jiangmiao/auto-pairs' " auto-close e.g. {} -- fixme: figure out how to make less obnoxious
 
 " General syntax
@@ -227,10 +227,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_highlight_types = 1
   let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gosec'] " :GoMetaLinter (or GoLint or GoVet)
 
-    " Let coc.nvim handle LSP
-    " also, just to note somewhere: having the coc-go extension installed was
-    " resulting in 2 go lsp servers (:CocList services); uninstalling coc-go
-    " fixed it
+    " Let coc.nvim handle LSP with :CocInstall coc-go
     let g:go_def_mapping_enabled=0
     let g:go_gopls_enabled=1 " still needed for GoInfo hover (g:go_auto_type_info)
 
@@ -468,7 +465,18 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Embedded neovim in firefox
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-set guifont=Inconsolata:h12
+if exists('g:started_by_firenvim')
+  set guifont=Inconsolata:h12
+  set laststatus=0
+
+  let g:firenvim_config = {
+        \ 'localSettings': {
+        \ '.*': {
+        \ 'takeover': 'never',
+        \ },
+        \ }
+        \ }
+endif
 
 
 " Initialize plugin system
