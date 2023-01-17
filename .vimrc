@@ -43,29 +43,37 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 lua <<EOD
 require("null-ls").setup({
     -- note: to disable on the fly - `:lua require("null-ls").disable("<source>")`
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
     debug = false,
     diagnostics_format = "#{m}",
     fallback_severity = vim.diagnostic.severity.INFO,
     sources = {
+        -- require("null-ls").builtins.diagnostics.proselint,
+        -- require("null-ls").builtins.diagnostics.write_good,
+        require("null-ls").builtins.diagnostics.checkmake,
+        require("null-ls").builtins.diagnostics.eslint,
+        require("null-ls").builtins.diagnostics.flake8,
+        require("null-ls").builtins.diagnostics.golangci_lint,
+        require("null-ls").builtins.diagnostics.hadolint,
+        require("null-ls").builtins.diagnostics.luacheck,
+        require("null-ls").builtins.diagnostics.rubocop,
+        require("null-ls").builtins.diagnostics.tfsec,
+        require("null-ls").builtins.diagnostics.shellcheck,
+        require("null-ls").builtins.diagnostics.sqlfluff.with({extra_args = { "--dialect", "mysql" }}),
+        require("null-ls").builtins.diagnostics.yamllint,
+        require("null-ls").builtins.diagnostics.zsh,
+        require("null-ls").builtins.diagnostics.ansiblelint,
         require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.diagnostics.cfn_lint,
         require("null-ls").builtins.formatting.cljstyle,
         require("null-ls").builtins.formatting.crystal_format,
+        require("null-ls").builtins.diagnostics.cspell,
         require("null-ls").builtins.formatting.prettier,
         require("null-ls").builtins.formatting.rubocop,
         require("null-ls").builtins.formatting.shfmt,
         require("null-ls").builtins.formatting.stylua,
         require("null-ls").builtins.formatting.terrafmt,
         require("null-ls").builtins.formatting.trim_whitespace,
-
-        require("null-ls").builtins.diagnostics.checkmake,
-        require("null-ls").builtins.diagnostics.eslint,
-        require("null-ls").builtins.diagnostics.flake8,
-        require("null-ls").builtins.diagnostics.hadolint,
-        require("null-ls").builtins.diagnostics.rubocop,
-        require("null-ls").builtins.diagnostics.shellcheck,
-        -- require("null-ls").builtins.diagnostics.write_good,
-        require("null-ls").builtins.diagnostics.yamllint,
-        require("null-ls").builtins.diagnostics.zsh,
     },
 })
 EOD

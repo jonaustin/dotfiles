@@ -235,6 +235,7 @@ key=(
 
 # built in mass rename
 # -n -- dry run
+# just keep running until it finishes..recursive replace all spaces in filenames with underscores: zmv -n '(**/)(* *)' '$1${2//( #_## #| ##)/_}'
 autoload -U zmv # zmv '* *' '$f:gs/ /_' Replace all spaces in filenames with underscores.
 
 export KEYTIMEOUT=1 # vi-mode: reduce lag between hitting esc and entering normal mode - https://dougblack.io/words/zsh-vi-mode.html, https://superuser.com/a/648046
