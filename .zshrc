@@ -53,6 +53,7 @@ zinit light kazhala/dotbare && _dotbare_completion_cmd
 
 # asdf: multi-lang version mgr
 if [ $SYSTEM_TYPE = "Darwin" ]; then
+  export PATH=$PATH:/opt/homebrew/bin
   export ASDF_DIR="$(brew --prefix asdf)/libexec"
   . "$ASDF_DIR/asdf.sh"
 else
@@ -270,7 +271,8 @@ export PATH=$PATH:$HOME/.emacs.d/bin/
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
   . ${HOME}/.zsh/zshrc.local.osx
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  . /opt/homebrew/Cellar/fzf/0.35.1/shell/key-bindings.zsh
   bindkey "ç" fzf-cd-widget # fix alt-c for `cd` fzf for osx
 elif [ $SYSTEM_TYPE = "Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
@@ -392,9 +394,9 @@ export LANG=en_US.UTF-8
 # aws
 complete -C $(which aws_completer) aws
 # bash-my-aws
-export PATH="$PATH:$HOME/.bash-my-aws/bin"
-source ~/.bash-my-aws/aliases
-source ~/.bash-my-aws/bash_completion.sh
+# export PATH="$PATH:$HOME/.bash-my-aws/bin"
+# source ~/.bash-my-aws/aliases
+# source ~/.bash-my-aws/bash_completion.sh
 
 ### ZSH Completions ###
 #zinit light marlonrichert/zsh-autocomplete # must come after fzf; revisit later maybe

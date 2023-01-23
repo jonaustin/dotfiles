@@ -4,6 +4,7 @@
   #z --add "$(pwd -P)"
 #}
 
+export PATH=$PATH:/opt/homebrew/bin
 alias top='top -o cpu'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias sed='gsed' # non-gnu sed cannot use \n
@@ -36,7 +37,7 @@ bindkey '^[OA' up-line-or-search
 bindkey '^[OB' down-line-or-search
 
 # z
-. `brew --prefix`/etc/profile.d/z.sh
+# . `brew --prefix`/etc/profile.d/z.sh
 
 # netstat sucks on osx
 alias listening="sudo lsof -i -P | grep -i 'listen'"
