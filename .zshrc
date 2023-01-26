@@ -460,6 +460,9 @@ export PISTOL_CHROMA_FORMATTER=terminal16m # 24 bit
 # export PISTOL_CHROMA_STYLE=monokai
 export PISTOL_CHROMA_STYLE=solarized-dark
 
+# secrets
+source ~/configs_private/secrets.sh
+
 # cannot for the life of me get this to load anything
 # export ZSH_BASH_COMPLETIONS_FALLBACK_PATH=/usr/share/bash-completion
 # # zinit ice depth=1 # optional, but avoids downloading the full history

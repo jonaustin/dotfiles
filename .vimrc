@@ -50,24 +50,24 @@ require("null-ls").setup({
     sources = {
         -- require("null-ls").builtins.diagnostics.proselint,
         -- require("null-ls").builtins.diagnostics.write_good,
+        require("null-ls").builtins.diagnostics.ansiblelint,
+        require("null-ls").builtins.diagnostics.cfn_lint,
         require("null-ls").builtins.diagnostics.checkmake,
+        -- require("null-ls").builtins.diagnostics.cspell,
         require("null-ls").builtins.diagnostics.eslint,
         require("null-ls").builtins.diagnostics.flake8,
         require("null-ls").builtins.diagnostics.golangci_lint,
         require("null-ls").builtins.diagnostics.hadolint,
         require("null-ls").builtins.diagnostics.luacheck,
         require("null-ls").builtins.diagnostics.rubocop,
-        require("null-ls").builtins.diagnostics.tfsec,
         require("null-ls").builtins.diagnostics.shellcheck,
         require("null-ls").builtins.diagnostics.sqlfluff.with({extra_args = { "--dialect", "mysql" }}),
+        require("null-ls").builtins.diagnostics.tfsec,
         require("null-ls").builtins.diagnostics.yamllint,
         require("null-ls").builtins.diagnostics.zsh,
-        require("null-ls").builtins.diagnostics.ansiblelint,
         require("null-ls").builtins.formatting.black,
-        require("null-ls").builtins.diagnostics.cfn_lint,
         require("null-ls").builtins.formatting.cljstyle,
         require("null-ls").builtins.formatting.crystal_format,
-        require("null-ls").builtins.diagnostics.cspell,
         require("null-ls").builtins.formatting.prettier,
         require("null-ls").builtins.formatting.rubocop,
         require("null-ls").builtins.formatting.shfmt,
@@ -392,9 +392,12 @@ Plug 'rhysd/git-messenger.vim' " show commit message in floating window :GitMess
 if has('nvim')
   " FIXME: figure out why my lua runtimepaths are b0rked (I had to manually symlink Comment.nvim/lua/Comment -> ~/.config/nvim/lua/Comment)
   Plug 'numToStr/Comment.nvim'
-lua << EOF
-require('Comment').setup()
-EOF
+  lua require('Comment').setup()
+
+  " chatgpt
+  Plug 'muniftanjim/nui.nvim'
+  Plug 'jackmort/chatgpt.nvim'
+  lua require('chatgpt').setup()
 else
   Plug 'scrooloose/nerdcommenter'
 endif
@@ -414,8 +417,6 @@ Plug 'szw/vim-maximizer' " F3; temporarily maximize a window (or put this in vim
 Plug 'folke/tokyonight.nvim'
 lua << EOD
 require("tokyonight").setup({
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
   style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
   transparent = true, -- Enable this to disable setting the background color
 })
