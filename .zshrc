@@ -407,12 +407,12 @@ complete -C $(which aws_completer) aws
 #   export RUBYOPT='-W:no-deprecated -W:no-experimental'
 # fi;
 
-zinit light "vifon/deer" # 'e'dit; 'q'uit; /search; 'f'ilter
+#zinit light "vifon/deer" # 'e'dit; 'q'uit; /search; 'f'ilter
 # eh, just hack it for now
-export FPATH=$FPATH:$ZINIT_HOME/plugins/vifon---deer
-autoload -U deer
-zle -N deer
-bindkey '\ek' deer # alt-k
+#export FPATH=$FPATH:$ZINIT_HOME/plugins/vifon---deer
+#autoload -U deer
+#zle -N deer
+#bindkey '\ek' deer # alt-k
 
 # pretty colors for df, etc
 source /etc/grc.zsh

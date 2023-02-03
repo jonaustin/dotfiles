@@ -452,14 +452,15 @@ EOD
 "Plug 'morhetz/gruvbox'
 
 " UI
+Plug 'stevearc/dressing.nvim'
 Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
 Plug 'APZelos/blamer.nvim' " codelens for vim
   let g:blamer_show_in_visual_modes = 0
   nnoremap <leader>cl :BlamerToggle<cr>
 "   let g:blamer_enabled = 1
 "   highlight Blamer guifg=lightgrey
-Plug 'folke/which-key.nvim'  " show keypresses and options for discovery and presentations
-  lua require("which-key").setup {}
+" Plug 'folke/which-key.nvim'  " show keypresses and options for discovery and presentations
+  " lua require("which-key").setup {}
 Plug 'romainl/vim-cool' " disable highlighting after search
 " Plug 'reedes/vim-pencil' " focused writing :Pencil
 Plug 'vim-airline/vim-airline'
