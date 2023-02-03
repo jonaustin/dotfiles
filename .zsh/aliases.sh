@@ -23,6 +23,7 @@ alias td='echo $(date +%Y-%m-%d)'
 alias now='echo $(date +%Y-%m-%d\ %T)'
 alias ignore-blank='grep -Ev "^#|^$"'
 alias bash-completions='for n in /usr/share/bash-completion/completions/*; do . $n &> /dev/null; done' # ugh
+alias img='wezterm imgcat'
 epoch-to-date() {
   date --date="@${1}"
 }

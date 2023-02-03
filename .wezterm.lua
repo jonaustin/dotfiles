@@ -138,9 +138,15 @@ return {
       args = {"pcmanfm"},
     },
   },
-  disable_default_key_bindings = true,
+  -- disable_default_key_bindings = true,
   leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 1000 },
   keys = {
+    -- fixme: use super key; change i3
+    { key = 'V', mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
+    { key = 'v', mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
+    { key = 'C', mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
+    { key = 'c', mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
+
     { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
     { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
     { key = 't', mods = 'SUPER', action = act.SpawnTab 'CurrentPaneDomain' },
