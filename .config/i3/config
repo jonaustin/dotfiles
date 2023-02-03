@@ -60,7 +60,7 @@ font pango:monospace 9
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -167,15 +167,15 @@ bindsym $mod+7 workspace $w7
 bindsym $mod+8 workspace $w8
 bindsym $mod+9 workspace $w9
 bindsym $mod+0 workspace $w10
-bindsym Ctrl+1 workspace $w1
-bindsym Ctrl+2 workspace $w2
-bindsym Ctrl+3 workspace $w3
-bindsym Ctrl+4 workspace $w4
-bindsym Ctrl+5 workspace $w5
-bindsym Ctrl+6 workspace $w6
-bindsym Ctrl+7 workspace $w7
-bindsym Ctrl+8 workspace $w8
-bindsym Ctrl+9 workspace $w9
+# bindsym Ctrl+1 workspace $w1
+# bindsym Ctrl+2 workspace $w2
+# bindsym Ctrl+3 workspace $w3
+# bindsym Ctrl+4 workspace $w4
+# bindsym Ctrl+5 workspace $w5
+# bindsym Ctrl+6 workspace $w6
+# bindsym Ctrl+7 workspace $w7
+# bindsym Ctrl+8 workspace $w8
+# bindsym Ctrl+9 workspace $w9
 #bindsym Ctrl+0 workspace $w10
 
 # move focused container to workspace
@@ -306,7 +306,7 @@ set $green     #859900
 #bindsym $mod+Shift+s exec "$HOME/bin/audio/spotify"
 #bindsym $mod+Shift+x exec "chromium --force-device-scale-factor=1.4"
 #bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
-bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
+# bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
 bindsym $mod+Shift+w exec "~/bin/walbg"
 bindsym $mod+Ctrl+w exec "~/bin/walbg 4k > /tmp/wat" 
 bindsym $mod+Mod1+w exec ~/bin/i3/bg-best.sh
@@ -352,7 +352,7 @@ bindsym $mod+Shift+Right exec "$HOME/bin/firetv fast_forward"
 # maybe use --scale instead of --dpi
 # bindsym $mod+n exec "xrandr --output DP4 --auto; ~/.fehbg"
 # bindsym $mod+Shift+n exec "xrandr --output eDP1 --auto --output HDMI1 --off --output HDMI2 --off --output DP1 --off --dpi 193; ~/.fehbg"
-bindsym $mod+n exec "xrandr --output eDP1 --auto --dpi 193 --output DP1 --auto --rate 29.98 --dpi 163 --right-of eDP1; ~/.fehbg"
+#bindsym $mod+n exec "xrandr --output eDP1 --auto --dpi 193 --output DP1 --auto --rate 29.98 --dpi 163 --right-of eDP1; ~/.fehbg"
 # bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --auto --dpi 163; ~/.fehbg"
 # bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --auto --dpi 163; ~/.fehbg"
 # use 30hz to fix horrible screen tearing bug

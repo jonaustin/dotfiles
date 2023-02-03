@@ -385,7 +385,7 @@ else
   export QT_SCALE_FACTOR=1.0
   export QT_AUTO_SCREEN_SCALE_FACTOR=1.0
   export XCURSOR_SIZE=32
-  export TERMINAL=alacritty
+  export TERMINAL=wezterm
   export DISABLE_AUTO_TITLE=true
 fi
 export LC_ALL=en_US.UTF-8
