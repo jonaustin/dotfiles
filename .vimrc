@@ -53,7 +53,7 @@ require("null-ls").setup({
         require("null-ls").builtins.diagnostics.ansiblelint,
         require("null-ls").builtins.diagnostics.cfn_lint,
         require("null-ls").builtins.diagnostics.checkmake,
-        -- require("null-ls").builtins.diagnostics.cspell,
+        -- require("null-ls").builtins.diagnostics.cspell, -- ugh, this is the worst: `W: Unknown word` _everywhere_
         require("null-ls").builtins.diagnostics.eslint,
         require("null-ls").builtins.diagnostics.flake8,
         require("null-ls").builtins.diagnostics.golangci_lint,
