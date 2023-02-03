@@ -11,6 +11,7 @@ local SOLID_LEFT_MOST = utf8.char(0x2588)
 local SOLID_RIGHT_ARROW = utf8.char(0xe0bc)
 
 local SH_ICON = ""
+local TMUX_ICON = ""
 local VIM_ICON = utf8.char(0xe62b)
 local PAGER_ICON = utf8.char(0xf718)
 local FUZZY_ICON = utf8.char(0xf0b0)
@@ -55,6 +56,8 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     title_with_icon = NODE_ICON .. " " .. exec_name:upper()
   elseif exec_name == "zsh" then
     title_with_icon = SH_ICON -- .. " " .. exec_name
+  elseif exec_name == "tmux" then
+    title_with_icon = TMUX_ICON -- .. " " .. exec_name
   else
     title_with_icon = HOURGLASS_ICON .. " " .. exec_name
   end
