@@ -133,6 +133,7 @@ setopt complete_in_word     # don't move cursor to end of line on completion
 setopt extendedglob         # extended globbing. Allows using regular expressions with *
 setopt nocaseglob           # case insensitive globbing
 setopt interactive_comments # allow comments even in interactive shells.
+setopt combining_chars      # unicode chars - https://wezfurlong.org/wezterm/faq.html
 unsetopt beep               # don't bloody beep
 unsetopt list_beep          # don't beep on ambiguous completions
 unsetopt bg_nice            # don't re-nice bg procs to lower priority
@@ -415,7 +416,8 @@ complete -C $(which aws_completer) aws
 #bindkey '\ek' deer # alt-k
 
 # pretty colors for df, etc
-source /etc/grc.zsh
+# disable; causes too many problems (e.g. `ps -ef` now fails with a vmstat: invalid option -- 'e' error...)
+#source /etc/grc.zsh
 
 # kubernetes
 #zinit light superbrothers/zsh-kubectl-prompt

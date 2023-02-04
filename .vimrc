@@ -56,7 +56,7 @@ require("null-ls").setup({
         -- require("null-ls").builtins.diagnostics.cspell, -- ugh, this is the worst: `W: Unknown word` _everywhere_
         require("null-ls").builtins.diagnostics.eslint,
         require("null-ls").builtins.diagnostics.flake8,
-        require("null-ls").builtins.diagnostics.golangci_lint,
+        -- require("null-ls").builtins.diagnostics.golangci_lint, -- ugh, takes like 10GB memory and tons of cpu for some reason
         require("null-ls").builtins.diagnostics.hadolint,
         require("null-ls").builtins.diagnostics.luacheck,
         require("null-ls").builtins.diagnostics.rubocop,

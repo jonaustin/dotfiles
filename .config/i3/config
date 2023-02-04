@@ -167,15 +167,15 @@ bindsym $mod+7 workspace $w7
 bindsym $mod+8 workspace $w8
 bindsym $mod+9 workspace $w9
 bindsym $mod+0 workspace $w10
-# bindsym Ctrl+1 workspace $w1
-# bindsym Ctrl+2 workspace $w2
-# bindsym Ctrl+3 workspace $w3
-# bindsym Ctrl+4 workspace $w4
-# bindsym Ctrl+5 workspace $w5
-# bindsym Ctrl+6 workspace $w6
-# bindsym Ctrl+7 workspace $w7
-# bindsym Ctrl+8 workspace $w8
-# bindsym Ctrl+9 workspace $w9
+bindsym Ctrl+1 workspace $w1
+bindsym Ctrl+2 workspace $w2
+bindsym Ctrl+3 workspace $w3
+bindsym Ctrl+4 workspace $w4
+bindsym Ctrl+5 workspace $w5
+bindsym Ctrl+6 workspace $w6
+bindsym Ctrl+7 workspace $w7
+bindsym Ctrl+8 workspace $w8
+bindsym Ctrl+9 workspace $w9
 #bindsym Ctrl+0 workspace $w10
 
 # move focused container to workspace
