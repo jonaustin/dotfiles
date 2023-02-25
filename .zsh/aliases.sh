@@ -269,11 +269,11 @@ alias mpsyt="PYENV_VERSION=3.6.1 mpsyt" # youtube cli player
 ### Database
 alias mys='mycli -uroot '
 
-# Youtube-dl
-alias ytmp3='youtube-dl -x -f bestaudio --audio-quality 0 --audio-format mp3'
-alias yta='youtube-dl -x -f bestaudio --prefer-free-formats -i --output "%(title)s.%(ext)s" '
-alias ytv='youtube-dl -f bestvideo+bestaudio --prefer-free-formats -i --output "%(title)s.%(ext)s"'
-alias ytcast='youtube-dl -o - https://youtu.be/BaW_jenozKc | castnow --quiet -' # cast to chromecast
+# yt-dlp
+alias ytmp3='yt-dlp -x -f bestaudio --audio-quality 0 --audio-format mp3'
+alias yta='yt-dlp -x -f bestaudio --prefer-free-formats -i --output "%(title)s.%(ext)s" '
+alias ytv='yt-dlp -f bestvideo+bestaudio --prefer-free-formats -i --output "%(title)s.%(ext)s"'
+alias ytcast='yt-dlp -o - https://youtu.be/BaW_jenozKc | castnow --quiet -' # cast to chromecast
 
 ### Systemd
 alias update-pacman-keys='sudo pacman -Sy archlinux-keyring && sudo pacman -Su'
@@ -386,4 +386,7 @@ alias q='pacman -Q|grep '
 
 # docker containers
 alias unifi='cd ~/opt/docker-unifi-controller && docker compose up' # https://0.0.0.0:8443
-alias calibre-web='docker run linuxserver/calibre-web'
+alias calibre-web='cd ~/opt/calibre-web && docker compose up'
+
+# misc
+alias chatgpt='go run ~/opt/chatgpt/chatgpt-cli'

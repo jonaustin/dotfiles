@@ -43,6 +43,7 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 lua <<EOD
 require("null-ls").setup({
     -- note: to disable on the fly - `:lua require("null-ls").disable("<source>")`
+    -- also ALEToggleBuffer
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
     debug = false,
     diagnostics_format = "#{m}",
@@ -56,7 +57,7 @@ require("null-ls").setup({
         -- require("null-ls").builtins.diagnostics.cspell, -- ugh, this is the worst: `W: Unknown word` _everywhere_
         require("null-ls").builtins.diagnostics.eslint,
         require("null-ls").builtins.diagnostics.flake8,
-        -- require("null-ls").builtins.diagnostics.golangci_lint, -- ugh, takes like 10GB memory and tons of cpu for some reason
+        -- require("null-ls").builtins.diagnostics.golangci_lint, -- ugh, takes like 10GB memory and tons of cpu: https://github.com/golangci/golangci-lint/pull/3414
         require("null-ls").builtins.diagnostics.hadolint,
         require("null-ls").builtins.diagnostics.luacheck,
         require("null-ls").builtins.diagnostics.rubocop,
@@ -80,6 +81,7 @@ EOD
 "Plug 'liuchengxu/vista.vim' " LSP viewer/finder :Vista
 
 " Completions
+Plug 'github/copilot.vim'
 " https://stackoverflow.com/a/22253548/617320
 "Plug 'Valloric/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -777,6 +779,7 @@ let g:ale_sign_warning = '◦'
 let g:ale_lint_on_enter = 0 " 0=don't lint on file open; 1=do lint on file open
 let g:airline#extensions#ale#enabled = 1
 let g:ale_set_highlights = 0 " Less distracting
+let g:ale_enabled = 0
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 
