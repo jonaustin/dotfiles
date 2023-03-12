@@ -498,3 +498,37 @@ teatime() {
   done
   notify-send "tea done" -u critical
 }
+
+# notes with fzf
+# Summary: run `note <title>` to make a new note
+# run `notes` to get a fuzzy finder (if available) to view all notes
+note() {
+  NOTE_DIR=~/notes/jots
+  mkdir -p $NOTE_DIR || true
+  NOTE_NAME="$1"
+  if [[ -z $NOTE_NAME ]]; then
+    NOTE_NAME="$(date +%Y-%m-%d)"
+  else
+    NOTE_NAME="$(date +%Y-%m-%d)-$NOTE_NAME"
+  fi
+  nvim $NOTE_DIR/$NOTE_NAME.txt
+}
+jot() { note $1 }
+
+notes() {
+  NOTE_DIR=~/notes/jots
+  mkdir -p $NOTE_DIR || true
+  pushd $NOTE_DIR > /dev/null
+  # Use the fuzzy finder if available
+  if command -v fzf; then
+    # Only open the selection if one was actually chosen
+    NOTEFILE=$(find * -maxdepth 0 -type f | fzf)
+    if [[ -n $NOTEFILE ]]; then
+      nvim $NOTEFILE
+    fi
+  else
+    vim .
+    fi
+    popd > /dev/null
+  }
+jots() { notes }
