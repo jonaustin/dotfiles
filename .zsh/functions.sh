@@ -428,11 +428,6 @@ rga-fzf-pdf() {
     xdg-open "$file"
 }
 
-# git
-git-diff-dir-names() {
-  git diff --name-only $1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
-}
-
 # copy changed within x time
 # cpch 30m ~/dl/ `pwd`/books/
 cpch() {
@@ -476,6 +471,14 @@ bluetooth_init() {
 git-find-file-in-branches() {
   git log --all --source -- "**/$1"|grep commit|awk '{print $3}'|sort -u
 }
+git-diff-dir-names() {
+  git diff --name-only $1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
+}
+gcp() {
+  git commit -m "$1"
+  git push
+}
+
 
 # conversion
 html2pdf() {
