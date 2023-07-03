@@ -515,7 +515,7 @@ note() {
 }
 jot() { note $1 }
 
-notes() {
+jots() {
   NOTE_DIR=~/notes/jots
   mkdir -p $NOTE_DIR || true
   pushd $NOTE_DIR > /dev/null
@@ -528,7 +528,18 @@ notes() {
     fi
   else
     vim .
-    fi
-    popd > /dev/null
-  }
-jots() { notes }
+  fi
+  popd > /dev/null
+}
+
+diff-grepv() {
+  local grepv="$1"
+  local file1="$2"
+  local file2="$3"
+  local tmp1="$(mktemp)"
+  local tmp2="$(mktemp)"
+  grep -v "${grepv}" "$file1" > "$tmp1"
+  grep -v "${grepv}" "$file2" > "$tmp2"
+  vim -d "$tmp1" "$tmp2"
+  rm "$tmp1" "$tmp2"
+}

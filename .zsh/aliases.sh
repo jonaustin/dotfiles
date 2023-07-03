@@ -25,7 +25,7 @@ alias ignore-blank='grep -Ev "^#|^$"'
 alias bash-completions='for n in /usr/share/bash-completion/completions/*; do . $n &> /dev/null; done' # ugh
 alias img='wezterm imgcat'
 epoch-to-date() {
-  date --date="@${1}"
+  date --date="@${1}" +%F
 }
 
 # remembering to reshim asdf is a pain

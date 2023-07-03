@@ -4,6 +4,7 @@
 #for n in `seq 0 10`; do time zsh -i -c exit; done
 #hyperfine --warmup 3 --min-runs 10 "zsh -i -c exit"
 
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -474,6 +475,7 @@ source ~/configs_private/secrets.sh
 
 # Things I always forget 
 # FOO="${VARIABLE:-default}"
+# fd -0 -t file $1 | while read -d $'\0' file; do echo "$file"; done # loop over files with spaces
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
