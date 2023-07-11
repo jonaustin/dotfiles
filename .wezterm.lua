@@ -31,7 +31,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   local dim_foreground = "#3A3A3A"
 
   if tab.is_active then
-    background = "#1A6985"
+    background = "#0c1259"
     foreground = "#1C1B19"
   elseif hover then
     background = "#FF8700"
@@ -91,7 +91,7 @@ end)
 return {
   color_scheme = "tokyonight",
   font_dirs = {"fonts"},
-  font_size = 10.0,
+  font_size = 16.0,
   dpi = 192.0,
   freetype_load_target = "Normal",
   font = wezterm.font_with_fallback({
@@ -111,7 +111,7 @@ return {
       background = "#121212",
       new_tab = {bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold"},
       new_tab_hover = {bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold"},
-      active_tab = {bg_color = "#121212", fg_color = "#FCE8C3"},
+      active_tab = {bg_color = "#121212", fg_color = "#5156f5"},
     }
   },
   window_background_gradient = {
