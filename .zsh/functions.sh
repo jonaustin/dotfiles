@@ -543,3 +543,14 @@ diff-grepv() {
   vim -d "$tmp1" "$tmp2"
   rm "$tmp1" "$tmp2"
 }
+
+# the art of the cli random tips
+function taocli() {
+  RAND=$RANDOM # otherwise just says the same thing on every invocation for the same shell session
+  curl -s https://raw.githubusercontent.com/jlevy/the-art-of-command-line/master/README.md |
+    sed '/cowsay[.]png/d' |
+    pandoc -f markdown -t html |
+    xmlstarlet fo --html --dropdtd |
+    xmlstarlet sel -t -v "(html/body/ul/li[count(p)>0])[$RAND mod last()+1]" |
+    xmlstarlet unesc | fmt -80 | iconv -t US
+  }

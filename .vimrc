@@ -83,7 +83,6 @@ EOD
 " Completions
 Plug 'github/copilot.vim'
 " https://stackoverflow.com/a/22253548/617320
-"Plug 'Valloric/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Tips:
   "   :CocRestart If changes aren't available (e.g. editing snippets)
@@ -454,8 +453,8 @@ EOD
 "Plug 'morhetz/gruvbox'
 
 " UI
-Plug 'stevearc/dressing.nvim'
-Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
+Plug 'stevearc/dressing.nvim' " subtle ui improvements
+Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' } " :NoNeckPain (center window)
 Plug 'APZelos/blamer.nvim' " codelens for vim
   let g:blamer_show_in_visual_modes = 0
   nnoremap <leader>cl :BlamerToggle<cr>

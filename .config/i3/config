@@ -357,8 +357,9 @@ bindsym $mod+Shift+Right exec "$HOME/bin/firetv fast_forward"
 # bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --auto --dpi 163; ~/.fehbg"
 # use 30hz to fix horrible screen tearing bug
 # bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --mode 3840x2160 --dpi 163 --rate 29.98; ~/.fehbg"
-bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --mode 3840x2160 --rate 30.00 --dpi 185; ~/.fehbg" # 23.8"
-bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --dpi 193 --output DP1 --off; ~/.fehbg"
+# xset -dpms --- disable display power management system as its janky to wake ext monitor from sleep
+bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --mode 3840x2160 --rate 30.00 --dpi 185; xset -dpms; pkill polybar; polybar-ext; ~/.fehbg"
+bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --dpi 192 --output DP1 --off; xset +dpms; pkill polybar; polybar top; ~/.fehbg"
 # move windows to other monitor
 # xrandr --output eDP1 --auto --output DP4 --auto --right-of eDP1
 bindsym $mod+Shift+greater move container to output right
@@ -409,7 +410,7 @@ exec --no-startup-id tilda          # drop down terminal ala quake console
 exec --no-startup-id xflux -z 97203 # less blue light at night
 exec --no-startup-id xcompmgr -c -n # compositing manager - transparent term # perhaps switch to picom?
 exec --no-startup-id sh ~/.fehbg    # use my feh bg script
-exec --no-startup-id parcellite  # dead simple clipboard management (switch to clipit fork?)
+exec --no-startup-id clipit  # dead simple clipboard management (switch to clipit fork?)
 #exec --no-startup-id pamac-tray     # pacman tray
 #exec --no-startup-id dropbox
 # exec --no-startup-id xautolock -time 10 -locker blurlock
@@ -434,6 +435,11 @@ exec --no-startup-id warpd
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# hmm, so even though I have dpi set in Xresources, and `xrdb -query -all` shows that; 
+# `xdpyinfo | grep -B 2 resolution` still show 96 dpi...seems fine visually; but i guess force it shrug
+exec --no-startup-id xrandr --dpi 192
+
 #exec --no-startup-id xscreensaver
 #exec_always --no-startup-id setcursor
 

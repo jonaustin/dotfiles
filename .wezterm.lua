@@ -91,7 +91,7 @@ end)
 return {
   color_scheme = "tokyonight",
   font_dirs = {"fonts"},
-  font_size = 16.0,
+  font_size = 10.0,
   dpi = 192.0,
   freetype_load_target = "Normal",
   font = wezterm.font_with_fallback({
