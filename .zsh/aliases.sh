@@ -390,3 +390,5 @@ alias calibre-web='cd ~/opt/calibre-web && docker compose up'
 
 # misc
 alias chatgpt='go run ~/opt/chatgpt/chatgpt-cli'
+alias ghe="gh copilot explain"
+alias ghs="gh copilot suggest"

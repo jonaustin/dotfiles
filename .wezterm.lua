@@ -102,6 +102,7 @@ return {
   enable_scroll_bar = false,
   use_fancy_tab_bar = false,
   window_background_opacity = 0.94,
+  default_cursor_style="BlinkingUnderline",
   set_environment_variables = {
     LANG = "en_US.UTF-8",
     PATH = wezterm.executable_dir .. ";" .. os.getenv("PATH"),

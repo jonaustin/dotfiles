@@ -395,6 +395,10 @@ export LANG=en_US.UTF-8
 
 # aws
 complete -C $(which aws_completer) aws
+
+# copilot
+eval "$(github-copilot-cli alias -- "$0")"
+
 # bash-my-aws
 # export PATH="$PATH:$HOME/.bash-my-aws/bin"
 # source ~/.bash-my-aws/aliases
