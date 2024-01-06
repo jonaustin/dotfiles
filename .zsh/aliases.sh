@@ -389,6 +389,5 @@ alias unifi='cd ~/opt/docker-unifi-controller && docker compose up' # https://0.
 alias calibre-web='cd ~/opt/calibre-web && docker compose up'
 
 # misc
-alias chatgpt='go run ~/opt/chatgpt/chatgpt-cli'
 alias ghe="gh copilot explain"
 alias ghs="gh copilot suggest"

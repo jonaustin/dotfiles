@@ -392,10 +392,27 @@ Plug 'rhysd/git-messenger.vim' " show commit message in floating window :GitMess
 " Commands
 if has('nvim')
   " FIXME: figure out why my lua runtimepaths are b0rked (I had to manually symlink Comment.nvim/lua/Comment -> ~/.config/nvim/lua/Comment)
-  Plug 'numToStr/Comment.nvim'
-  lua require('Comment').setup()
+  Plug 'tpope/vim-commentary'
 
   " chatgpt
+  Plug 'bakks/butterfish.nvim' " requires vim-commentary
+  lua <<EOD
+  local butterfish = require('butterfish')
+  local opts = {noremap = true, silent = true}
+  -- vim.keymap.set('n', ',p', ':BFFilePrompt ',   opts)
+  -- vim.keymap.set('n', ',r', ':BFRewrite ',      opts)
+  -- vim.keymap.set('v', ',r', ':BFRewrite ',      opts)
+  -- vim.keymap.set('n', ',c', ':BFComment<CR>',   opts)
+  -- vim.keymap.set('v', ',c', ':BFComment<CR>',   opts)
+  -- vim.keymap.set('n', ',e', ':BFExplain<CR>',   opts)
+  -- vim.keymap.set('v', ',e', ':BFExplain<CR>',   opts)
+  -- vim.keymap.set('n', ',f', ':BFFix<CR>',       opts)
+  -- vim.keymap.set('n', ',i', ':BFImplement<CR>', opts)
+  -- vim.keymap.set('n', ',d', ':BFEdit ',         opts)
+  -- vim.keymap.set('n', ',h', ':BFHammer<CR>',    opts)
+  -- vim.keymap.set('n', ',q', ':BFQuestion ',     opts)
+  -- vim.keymap.set('v', ',q', ':BFQuestion ',     opts)
+EOD
   Plug 'muniftanjim/nui.nvim'
   Plug 'Bryley/neoai.nvim'
   lua <<EOD
@@ -484,8 +501,8 @@ if has('nvim')
     },
 })
 EOD
-  " Plug 'jackmort/chatgpt.nvim'
-  " lua require('chatgpt').setup()
+  Plug 'jackmort/chatgpt.nvim'
+  lua require('chatgpt').setup()
 else
   Plug 'scrooloose/nerdcommenter'
 endif
