@@ -136,6 +136,7 @@ alias vimdiff='nvim -d' # neovim changes this for some reason
 alias svi='sudo -E $EDITOR'
 alias svdi='sudo -E vim -d'
 alias vvc='$EDITOR ~/.vimrc'
+alias vvl='$EDITOR ~/.config/nvim/init.lua'
 alias vvcl='$EDITOR ~/.vimrc.local'
 alias vvh='$EDITOR ~/.hyper.js'
 alias vvj='$EDITOR ~/.hyper.js'
