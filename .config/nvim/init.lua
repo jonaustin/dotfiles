@@ -142,6 +142,7 @@ lazy.setup({
   -- coding
   'fatih/vim-go',
   'vim-ruby/vim-ruby',
+  'tpope/vim-rails',
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb', -- :GBrowse
