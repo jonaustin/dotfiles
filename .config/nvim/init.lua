@@ -17,6 +17,14 @@ vim.wo.relativenumber = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.autoindent = true -- indent at the same level of the previous line
 vim.o.wrap = true -- wrap long lines
+vim.o.autoread = true -- auto reload file if it changes outside of vim
+vim.o.guicursor='a:hor20-Cursor'
+
+
+-- Speed
+vim.opt.lazyredraw = true -- fix slowdown issues when moving cursor with syntax on
+vim.opt.ttyfast = true -- assume fast connection (smoother redraw)
+vim.opt.synmaxcol=1024 -- Syntax coloring lines that are too long just slows down the world
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -140,6 +148,13 @@ lazy.setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+	{'tpope/vim-repeat'},
+	{'tpope/vim-surround'}, -- use treesitter instead?
+	{'mbbill/undotree'},
+	{'junegunn/vim-easy-align'}, -- :EasyAlign /<regex>/
+	{'xolox/vim-session', dependencies = {'xolox/vim-misc'}},
+	{'szw/vim-maximizer'}, -- F3
+
   -- colorschemes
   'folke/tokyonight.nvim',
 
@@ -148,6 +163,25 @@ lazy.setup({
   'nvim-lua/plenary.nvim',
   'majutsushi/tagbar',
   'github/copilot.vim',
+	'tpope/vim-commentary',
+	{'bakks/butterfish.nvim', dependencies = {'tpope/vim-commentary'}},
+	{'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", }},
+	{"jellydn/CopilotChat.nvim",
+    opts = {
+      mode = "split", -- newbuffer or split  , default: newbuffer
+    },
+    build = function()
+      vim.defer_fn(function()
+        vim.cmd("UpdateRemotePlugins")
+        vim.notify("CopilotChat - Updated remote plugins. Please restart Neovim.")
+      end, 3000)
+    end,
+    event = "VeryLazy",
+    keys = {
+      { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+      { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+    },
+  },
 
   -- kickstart
 
@@ -263,13 +297,10 @@ lazy.setup({
     },
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    branch = '0.1.x', -- update this
     dependencies = {
       'nvim-lua/plenary.nvim',
       {
@@ -405,6 +436,9 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<C-t>', require('telescope.builtin').find_files, { desc = 'Find files' })
+vim.keymap.set('n', '<C-p>', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>fc', require('telescope.builtin').colorscheme, { desc = 'Find Colorschemes' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -662,7 +696,6 @@ cmp.setup {
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('tokyonight-night')
 
-
 ---
 -- lualine.nvim (statusline)
 ---
@@ -675,3 +708,129 @@ require('lualine').setup({
     section_separators = '',
   },
 })
+
+local butterfish = require('butterfish')
+local opts = {noremap = true, silent = true}
+vim.keymap.set('n', ',p', ':BFFilePrompt ',   opts)
+vim.keymap.set('n', ',r', ':BFRewrite ',      opts)
+vim.keymap.set('v', ',r', ':BFRewrite ',      opts)
+vim.keymap.set('n', ',c', ':BFComment<CR>',   opts)
+vim.keymap.set('v', ',c', ':BFComment<CR>',   opts)
+vim.keymap.set('n', ',e', ':BFExplain<CR>',   opts)
+vim.keymap.set('v', ',e', ':BFExplain<CR>',   opts)
+vim.keymap.set('n', ',f', ':BFFix<CR>',       opts)
+vim.keymap.set('n', ',i', ':BFImplement<CR>', opts)
+vim.keymap.set('n', ',d', ':BFEdit ',         opts)
+vim.keymap.set('n', ',h', ':BFHammer<CR>',    opts)
+vim.keymap.set('n', ',q', ':BFQuestion ',     opts)
+vim.keymap.set('v', ',q', ':BFQuestion ',     opts)
+
+require("neoai").setup({
+	ui = {
+		output_popup_text = "NeoAI",
+		input_popup_text = "Prompt",
+		width = 30, -- As percentage eg. 30%
+		output_popup_height = 80, -- As percentage eg. 80%
+		submit = "<Enter>", -- Key binding to submit the prompt
+	},
+	models = {
+		{
+			name = "openai",
+			model = "gpt-3.5-turbo",
+			params = nil,
+		},
+	},
+	register_output = {
+		["g"] = function(output)
+			return output
+		end,
+		["c"] = require("neoai.utils").extract_code_snippets,
+	},
+	inject = {
+		cutoff_width = 75,
+	},
+	prompts = {
+		context_prompt = function(context)
+			return "Hey, I'd like to provide some context for future "
+				.. "messages. Here is the code/text that I want to refer "
+				.. "to in our upcoming conversations:\n\n"
+				.. context
+		end,
+	},
+	mappings = {
+		["select_up"] = "<C-k>",
+		["select_down"] = "<C-j>",
+	},
+	open_ai = {
+		api_key = {
+			env = "OPENAI_API_KEY",
+			value = nil,
+			-- `get` is is a function that retrieves an API key, can be used to override the default method.
+			-- get = function() ... end
+
+			-- Here is some code for a function that retrieves an API key. You can use it with
+			-- the Linux 'pass' application.
+			-- get = function()
+			--     local key = vim.fn.system("pass show openai/mytestkey")
+			--     key = string.gsub(key, "\n", "")
+			--     return key
+			-- end,
+		},
+	},
+	shortcuts = {
+		{
+			name = "textify",
+			key = "<leader>as",
+			desc = "fix text with AI",
+			use_context = true,
+			prompt = [[
+								Please rewrite the text to make it more readable, clear,
+								concise, and fix any grammatical, punctuation, or spelling
+								errors
+						]],
+			modes = { "v" },
+			strip_function = nil,
+		},
+		{
+			name = "gitcommit",
+			key = "<leader>ag",
+			desc = "generate git commit message",
+			use_context = false,
+			prompt = function()
+				return [[
+										Using the following git diff generate a consise and
+										clear git commit message, with a short title summary
+										that is 75 characters or less:
+								]] .. vim.fn.system("git diff --cached")
+			end,
+			modes = { "n" },
+			strip_function = nil,
+		},
+	},
+})
+
+
+
+-- Tips I always forget
+-- vertical split -> horizontal: ctrl+w then J
+-- horizontal split -> vertical: ctrl+w H or ctrl+w L
+-- reload all buffers - :bufdo e
+-- :w !sudo tee %
+-- gx - open link in browser
+-- :Ack <C-R><C-W> " use c-r/c-w to paste word under cursor into ex command prompt
+-- `. - go to last line edited / '' - go to start of last line edited
+-- g; / g, - jump through changelist (:help changelist)
+-- change all buffers to tabs - :tab sball
+-- gf in new tab: <c-w>gF - open in a new tab (Ctrl-w gF)
+-- verbose <cmd/func> - debug info
+-- vim --startuptime /tmp/startup.log +q && vim /tmp/startup.log
+-- :messages if a message scrolls by too fast (e.g. error on startup)
+-- C-wL vertical (top/bot) split to horiz (left/right) split (C-wJ to go back)
+-- c-a / c-x -- increment / decrement number
+-- delete blank lines -> :g/^$/d
+--       or :%s/\n\n/\r/
+-- delete multiple blank lines: :%!cat -s
+-- verbose Xmap <leader>c # show imap/nmap/map/etc for <leader>c or whatnot
+-- show value of set var with e.g. `set modeline?`; let is just the var `let g:plugin_var`
+-- :enew|pu=execute('<colon command>') " copy the output of any :colon command to a new buffer
+-- zz/. - center current liner horizontally on the screen (z -/+ or b/t to put current line at bottom/top)
