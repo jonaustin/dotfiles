@@ -164,6 +164,7 @@ lazy.setup({
 
   -- integrations
   'christoomey/vim-tmux-navigator',
+  'scrooloose/nerdtree',
 
   'kyazdani42/nvim-web-devicons',
   'nvim-lualine/lualine.nvim',
@@ -361,7 +362,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure Telescope ]]
@@ -718,6 +719,10 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
         vim.cmd("setfiletype terraform")
     end
 })
+
+-- nerdtree
+map("n", "<S-q>", "<cmd>NERDTreeToggle<cr>", { desc = "Toggle NERDTree"})
+map("n", "<C-q>", "<cmd>quit<cr>", { desc = "Quit vim"})
 
 -- lualine.nvim (statusline)
 vim.opt.showmode = false
