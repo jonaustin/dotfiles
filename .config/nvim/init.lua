@@ -16,7 +16,6 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.o.autoindent = true -- indent at the same level of the previous line
-vim.o.clipboard = 'unnamedplus' -- set to unnamed on mac
 vim.o.wrap = true -- wrap long lines
 vim.o.autoread = true -- auto reload file if it changes outside of vim
 vim.o.guicursor='a:hor20-Cursor' -- underline cursor
@@ -51,6 +50,17 @@ vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+-- deal with mac vs linux clipboard
+if vim.fn.has('unix') == 1 then
+    if vim.fn.has('mac') == 1 then
+        -- macOS
+        vim.o.clipboard = 'unnamed'
+    else
+        -- Linux, BSD, etc.
+        vim.o.clipboard = 'unnamedplus'
+    end
+end
 
 -- ========================================================================== --
 -- ==                             KEYBINDINGS                              == --
@@ -207,6 +217,7 @@ lazy.setup({
   --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
+    -- vim.lsp.set_log_level("DEBUG")
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
