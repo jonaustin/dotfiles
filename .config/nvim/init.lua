@@ -2,7 +2,10 @@
 -- ==                           EDITOR SETTINGS                            == --
 -- ========================================================================== --
 
+local home = os.getenv('HOME')
+
 vim.opt.number = true
+vim.wo.relativenumber = true
 vim.opt.mouse = 'a'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -13,12 +16,11 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.o.autoindent = true -- indent at the same level of the previous line
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamedplus' -- set to unnamed on mac
 vim.o.wrap = true -- wrap long lines
 vim.o.autoread = true -- auto reload file if it changes outside of vim
-vim.o.guicursor='a:hor20-Cursor'
+vim.o.guicursor='a:hor20-Cursor' -- underline cursor
+vim.o.termguicolors = true -- 24bit (true) colors
 
 
 -- Speed
@@ -26,15 +28,15 @@ vim.opt.lazyredraw = true -- fix slowdown issues when moving cursor with syntax 
 vim.opt.ttyfast = true -- assume fast connection (smoother redraw)
 vim.opt.synmaxcol=1024 -- Syntax coloring lines that are too long just slows down the world
 
--- Enable break indent
-vim.o.breakindent = true
+vim.o.breakindent = true -- wrap lines with same indent
 
+-- give in to my muscle memory
 vim.o.undofile = true
 vim.o.backup = true
-vim.o.backupdir="$HOME/.vimbackup"
-vim.o.directory="$HOME/.vimswap"
-vim.o.viewdir="$HOME/.vimviews"
-vim.o.undodir="$HOME/.vimundo"
+vim.o.backupdir = home .. "/.vimbackup"
+vim.o.directory = home .. "/.vimswap"
+vim.o.viewdir   = home .. "/.vimviews"
+vim.o.undodir   = home .. "/.vimundo"
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
@@ -49,10 +51,6 @@ vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
-
 
 -- ========================================================================== --
 -- ==                             KEYBINDINGS                              == --
@@ -78,6 +76,7 @@ map("n", "<S-l>", "gt", { desc = "Next tab" })
 -- QoL
 map("i", "jk", "<esc>")
 map("i", "jj", "<esc>")
+map("n", "<C-q>", "<cmd>quit<cr>", { desc = "Quit vim"})
 --map("<leader>W", "<cmd>%s/\s\+$//<cr><cmd>let @/=''<CR>")
 -- map("<leader>.", "<cmd>nohl<cr>")
 
@@ -144,6 +143,7 @@ lazy.setup({
   'vim-ruby/vim-ruby',
   'tpope/vim-rails',
   'hashivim/vim-terraform',
+  'vim-vaultproject',
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -721,6 +721,9 @@ cmp.setup {
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('tokyonight-night')
 
+-- misc
+vim.g.session_autoload = 'no'
+
 -- terraform
 vim.g.terraform_fmt_on_save=1
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
@@ -731,7 +734,14 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
 })
 
 map("n", "<S-q>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File tree"})
-map("n", "<C-q>", "<cmd>quit<cr>", { desc = "Quit vim"})
+
+-- Golang
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "go",
+    callback = function()
+        vim.api.nvim_set_keymap("n", "<leader>gt", ":Tagbar<CR>", { noremap = true, silent = true })
+    end,
+})
 
 -- lualine.nvim (statusline)
 vim.opt.showmode = false
@@ -747,19 +757,19 @@ require('lualine').setup({
 -- butterfish
 local butterfish = require('butterfish')
 local opts = {noremap = true, silent = true}
-vim.keymap.set('n', '<leader>p', ':BFFilePrompt ',   opts)
-vim.keymap.set('n', '<leader>r', ':BFRewrite ',      opts)
-vim.keymap.set('v', '<leader>r', ':BFRewrite ',      opts)
-vim.keymap.set('n', '<leader>c', ':BFComment<CR>',   opts)
-vim.keymap.set('v', '<leader>c', ':BFComment<CR>',   opts)
-vim.keymap.set('n', '<leader>e', ':BFExplain<CR>',   opts)
-vim.keymap.set('v', '<leader>e', ':BFExplain<CR>',   opts)
-vim.keymap.set('n', '<leader>f', ':BFFix<CR>',       opts)
-vim.keymap.set('n', '<leader>i', ':BFImplement<CR>', opts)
-vim.keymap.set('n', '<leader>d', ':BFEdit ',         opts)
-vim.keymap.set('n', '<leader>h', ':BFHammer<CR>',    opts)
-vim.keymap.set('n', '<leader>q', ':BFQuestion ',     opts)
-vim.keymap.set('v', '<leader>q', ':BFQuestion ',     opts)
+-- vim.keymap.set('n', '<leader>p', ':BFFilePrompt ',   opts)
+-- vim.keymap.set('n', '<leader>r', ':BFRewrite ',      opts)
+-- vim.keymap.set('v', '<leader>r', ':BFRewrite ',      opts)
+-- vim.keymap.set('n', '<leader>c', ':BFComment<CR>',   opts)
+-- vim.keymap.set('v', '<leader>c', ':BFComment<CR>',   opts)
+-- vim.keymap.set('n', '<leader>e', ':BFExplain<CR>',   opts)
+-- vim.keymap.set('v', '<leader>e', ':BFExplain<CR>',   opts)
+-- vim.keymap.set('n', '<leader>f', ':BFFix<CR>',       opts)
+-- vim.keymap.set('n', '<leader>i', ':BFImplement<CR>', opts)
+-- vim.keymap.set('n', '<leader>d', ':BFEdit ',         opts)
+-- vim.keymap.set('n', '<leader>h', ':BFHammer<CR>',    opts)
+-- vim.keymap.set('n', '<leader>q', ':BFQuestion ',     opts)
+-- vim.keymap.set('v', '<leader>q', ':BFQuestion ',     opts)
 
 -- neoai
 require("neoai").setup({
