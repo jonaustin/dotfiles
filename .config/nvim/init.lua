@@ -143,6 +143,8 @@ lazy.setup({
   'fatih/vim-go',
   'vim-ruby/vim-ruby',
   'tpope/vim-rails',
+  'hashivim/vim-terraform',
+
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb', -- :GBrowse
@@ -589,9 +591,11 @@ local servers = {
   gopls = {},
   pyright = {},
   ruby_ls = {},
+  solargraph = {},
   -- rust_analyzer = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
+  terraformls = {},
 
   lua_ls = {
     Lua = {
@@ -688,6 +692,15 @@ cmp.setup {
 -- Colorscheme
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('tokyonight-night')
+
+-- terraform
+vim.g.terraform_fmt_on_save=1
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+    pattern = "*.hcl",
+    callback = function()
+        vim.cmd("setfiletype terraform")
+    end
+})
 
 -- lualine.nvim (statusline)
 vim.opt.showmode = false
