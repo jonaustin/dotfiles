@@ -162,6 +162,9 @@ lazy.setup({
   -- colorschemes
   'folke/tokyonight.nvim',
 
+  -- integrations
+  'christoomey/vim-tmux-navigator',
+
   'kyazdani42/nvim-web-devicons',
   'nvim-lualine/lualine.nvim',
   'nvim-lua/plenary.nvim',
@@ -591,7 +594,21 @@ local servers = {
   gopls = {},
   pyright = {},
   ruby_ls = {},
-  solargraph = {},
+  solargraph = {
+    cmd = { os.getenv( "HOME" ) .. "/.rbenv/shims/solargraph", 'stdio' },
+    -- root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
+    settings = {
+      solargraph = {
+        autoformat = true,
+        completion = true,
+        diagnostic = true,
+        folding = true,
+        references = true,
+        rename = true,
+        symbols = true
+      }
+    }
+  },
   -- rust_analyzer = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
