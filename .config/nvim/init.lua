@@ -164,7 +164,17 @@ lazy.setup({
 
   -- integrations
   'christoomey/vim-tmux-navigator',
-  'scrooloose/nerdtree',
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
 
   'kyazdani42/nvim-web-devicons',
   'nvim-lualine/lualine.nvim',
@@ -720,8 +730,7 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     end
 })
 
--- nerdtree
-map("n", "<S-q>", "<cmd>NERDTreeToggle<cr>", { desc = "Toggle NERDTree"})
+map("n", "<S-q>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File tree"})
 map("n", "<C-q>", "<cmd>quit<cr>", { desc = "Quit vim"})
 
 -- lualine.nvim (statusline)
