@@ -124,7 +124,7 @@ function lazy.install(path)
       'clone',
       '--filter=blob:none',
       'https://github.com/folke/lazy.nvim.git',
-      '--branch=stable', -- latest stable release
+      '--branch=stable',
       path,
     })
   end
@@ -135,7 +135,6 @@ function lazy.setup(plugins)
     return
   end
 
-  -- You can "comment out" the line below after lazy.nvim is installed
   lazy.install(lazy.path)
 
   vim.opt.rtp:prepend(lazy.path)
@@ -152,7 +151,6 @@ lazy.setup({
   'fatih/vim-go',
   'vim-ruby/vim-ruby',
   'tpope/vim-rails',
-  'hashivim/vim-terraform',
   'vim-vaultproject',
 
   -- Git related plugins
@@ -173,6 +171,7 @@ lazy.setup({
   'folke/tokyonight.nvim',
 
   -- integrations
+  -- 'stevearc/oil.nvim', -- edit your filesystem like a buffer
   'christoomey/vim-tmux-navigator',
   {
     "nvim-tree/nvim-tree.lua",
@@ -475,7 +474,7 @@ vim.keymap.set('n', '<leader>fc', require('telescope.builtin').colorscheme, { de
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'ruby' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'ruby', 'hcl', 'terraform' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -546,12 +545,7 @@ end, 0)
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
+  -- For LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -613,6 +607,13 @@ require('mason-lspconfig').setup()
 --  https://github.com/williamboman/mason-lspconfig.nvim
 local servers = {
   -- clangd = {},
+  -- snyk_ls = {},
+  bashls = {},
+  htmx = {},
+  jsonls = {},
+  eslint = {},
+  dockerls = {},
+  docker_compose_language_service = {},
   gopls = {},
   pyright = {},
   ruby_ls = {},
@@ -632,10 +633,11 @@ local servers = {
     }
   },
   -- rust_analyzer = {},
-  tsserver = {},
+  tsserver = {}, -- note: must run terrafor/terragrunt init first for lsp to work
   html = { filetypes = { 'html', 'twig', 'hbs'} },
   terraformls = {},
-
+  tflint = {},
+  sqls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -737,12 +739,33 @@ vim.g.session_autoload = 'no'
 
 -- terraform
 vim.g.terraform_fmt_on_save=1
+vim.g.terraform_align=1
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     pattern = "*.hcl",
     callback = function()
         vim.cmd("setfiletype terraform")
     end
 })
+-- fixme: convert this
+-- vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
+-- vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
+-- vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
+-- vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
+-- vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
+-- Define a function to set filetype based on file pattern
+local function set_filetype(pattern, filetype)
+  vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = pattern,
+    command = "set filetype="..filetype,
+  })
+end
+
+-- Set filetype for various file patterns
+set_filetype("*.tf", "terraform") -- No longer silent for *.tf
+set_filetype("*.hcl", "hcl")
+set_filetype({".terraformrc", "terraform.rc"}, "hcl")
+set_filetype("*.tfvars", "terraform")
+set_filetype({"*.tfstate", "*.tfstate.backup"}, "json")
 
 map("n", "<S-q>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File tree"})
 
