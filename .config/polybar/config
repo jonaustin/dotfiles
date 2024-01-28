@@ -44,7 +44,8 @@ margin-bottom = 0
 bottom = false
 enable-ipc = true
 monitor = ${env:MONITOR:eDP1}
-monitor-fallback = DP1 width = 100%
+monitor-fallback = eDP1 
+width = 100%
 height = 28
 ;radius = 5.0
 ;fixed-center = false
@@ -111,16 +112,16 @@ scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
 
-[module/github]
-type = internal/github
-token = ${file:/home/jon/.git-token}
-
-;empty-notifications = true
-
-label = %{A1:web --new-window https\://github.com/notifications&:}%notifications%%{A}
-label-padding = 2
-label-background = #f0c209
-label-foreground = #000
+; [module/github]
+; type = internal/github
+; token = ${file:/home/jon/.git-token}
+;
+; ;empty-notifications = true
+;
+; label = %{A1:web --new-window https\://github.com/notifications&:}%notifications%%{A}
+; label-padding = 2
+; label-background = #f0c209
+; label-foreground = #000
 
 [module/fs-root]
 type = internal/fs

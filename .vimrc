@@ -417,7 +417,6 @@ EOD
   Plug 'Bryley/neoai.nvim'
   lua <<EOD
   require("neoai").setup({
-    -- Below are the default options, feel free to override what you would like changed
     ui = {
         output_popup_text = "NeoAI",
         input_popup_text = "Prompt",
@@ -711,7 +710,7 @@ silent execute '!mkdir -p $HOME/.vimundo'
 set background=dark                 " Assume a dark background
 colo tokyonight
 "colo vim-material
-"colo hybrid_material
+"colo htrybrid_material
   " let g:hybrid_transparent_background = 1
 " colo nord
 " colo apprentice

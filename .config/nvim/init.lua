@@ -20,14 +20,12 @@ vim.o.wrap = true -- wrap long lines
 vim.o.autoread = true -- auto reload file if it changes outside of vim
 vim.o.guicursor='a:hor20-Cursor' -- underline cursor
 vim.o.termguicolors = true -- 24bit (true) colors
-
+vim.o.breakindent = true -- wrap lines with same indent
 
 -- Speed
 vim.opt.lazyredraw = true -- fix slowdown issues when moving cursor with syntax on
 vim.opt.ttyfast = true -- assume fast connection (smoother redraw)
 vim.opt.synmaxcol=1024 -- Syntax coloring lines that are too long just slows down the world
-
-vim.o.breakindent = true -- wrap lines with same indent
 
 -- give in to my muscle memory
 vim.o.undofile = true
@@ -37,7 +35,7 @@ vim.o.directory = home .. "/.vimswap"
 vim.o.viewdir   = home .. "/.vimviews"
 vim.o.undodir   = home .. "/.vimundo"
 
--- Case-insensitive searching UNLESS \C or capital in search
+-- Case-insensitive searching UNLESS \C or Capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
@@ -160,12 +158,13 @@ lazy.setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  {'tpope/vim-repeat'},
-  {'tpope/vim-surround'}, -- use treesitter instead?
-  {'mbbill/undotree'},
-  {'junegunn/vim-easy-align'}, -- :EasyAlign /<regex>/
+  'tpope/vim-repeat',
+  'tpope/vim-surround', -- use treesitter instead?
+  'mbbill/undotree',
+  'junegunn/vim-easy-align', -- :EasyAlign /<regex>/
   {'xolox/vim-session', dependencies = {'xolox/vim-misc'}},
-  {'szw/vim-maximizer'}, -- F3
+  'szw/vim-maximizer', -- F3
+  'justinmk/vim-sneak', -- <leader>s<2 chars>
 
   -- colorschemes
   'folke/tokyonight.nvim',
