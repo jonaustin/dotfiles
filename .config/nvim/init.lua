@@ -14,7 +14,7 @@ vim.opt.wrap = true
 vim.opt.breakindent = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
+vim.opt.expandtab = false
 vim.o.autoindent = true -- indent at the same level of the previous line
 vim.o.wrap = true -- wrap long lines
 vim.o.autoread = true -- auto reload file if it changes outside of vim
@@ -51,13 +51,13 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- deal with mac vs linux clipboard
 if vim.fn.has('unix') == 1 then
-    if vim.fn.has('mac') == 1 then
-        -- macOS
-        vim.o.clipboard = 'unnamed'
-    else
-        -- Linux, BSD, etc.
-        vim.o.clipboard = 'unnamedplus'
-    end
+  if vim.fn.has('mac') == 1 then
+    -- macOS
+    vim.o.clipboard = 'unnamed'
+  else
+    -- Linux, BSD, etc.
+    vim.o.clipboard = 'unnamedplus'
+  end
 end
 
 -- ========================================================================== --
@@ -177,22 +177,22 @@ lazy.setup({
     version = "*",
     lazy = false,
     -- dependencies = {
-    --   "nvim-tree/nvim-web-devicons",
-    -- },
-    config = function()
-      require("nvim-tree").setup {}
-    end,
-  },
+      --   "nvim-tree/nvim-web-devicons",
+      -- },
+      config = function()
+        require("nvim-tree").setup {}
+      end,
+    },
 
-  'kyazdani42/nvim-web-devicons',
-  'nvim-lualine/lualine.nvim',
-  'nvim-lua/plenary.nvim',
-  'majutsushi/tagbar',
-  'github/copilot.vim',
-  'tpope/vim-commentary',
-  {'bakks/butterfish.nvim', dependencies = {'tpope/vim-commentary'}},
-  {'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", }},
-  {"jellydn/CopilotChat.nvim",
+    'kyazdani42/nvim-web-devicons',
+    'nvim-lualine/lualine.nvim',
+    'nvim-lua/plenary.nvim',
+    'majutsushi/tagbar',
+    'github/copilot.vim',
+    'tpope/vim-commentary',
+    {'bakks/butterfish.nvim', dependencies = {'tpope/vim-commentary'}},
+    {'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", }},
+    {"jellydn/CopilotChat.nvim",
     opts = {
       mode = "split", -- newbuffer or split  , default: newbuffer
     },
@@ -484,7 +484,7 @@ vim.defer_fn(function()
     -- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
     modules = {},
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = { enable = false }, -- true screws up indents with custom tabstop (e.g. tabstop=2 in go files)
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -740,10 +740,10 @@ vim.g.session_autoload = 'no'
 vim.g.terraform_fmt_on_save=1
 vim.g.terraform_align=1
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-    pattern = "*.hcl",
-    callback = function()
-        vim.cmd("setfiletype terraform")
-    end
+  pattern = "*.hcl",
+  callback = function()
+    vim.cmd("setfiletype terraform")
+  end
 })
 -- fixme: convert this
 -- vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
@@ -770,10 +770,15 @@ map("n", "<S-q>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File tree"})
 
 -- Golang
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "go",
-    callback = function()
-        vim.api.nvim_set_keymap("n", "<leader>gt", ":Tagbar<CR>", { noremap = true, silent = true })
-    end,
+  pattern = "go",
+  callback = function()
+    vim.api.nvim_set_keymap("n", "<leader>gt", ":Tagbar<CR>", { noremap = true, silent = true })
+    -- why do none of these actually work??
+    vim.opt.expandtab = false
+    vim.opt.shiftwidth = 2
+    vim.opt.softtabstop = 2
+    vim.opt.tabstop = 2 -- why the hell doesn't vim-go respect my tabstop? i.e. this does nothing (works fine in old vimrc though..)
+  end,
 })
 
 -- lualine.nvim (statusline)
@@ -832,8 +837,8 @@ require("neoai").setup({
   prompts = {
     context_prompt = function(context)
       return "Hey, I'd like to provide some context for future "
-        .. "messages. Here is the code/text that I want to refer "
-        .. "to in our upcoming conversations:\n\n"
+      .. "messages. Here is the code/text that I want to refer "
+      .. "to in our upcoming conversations:\n\n"
       .. context
     end,
   },
@@ -851,44 +856,43 @@ require("neoai").setup({
       -- Here is some code for a function that retrieves an API key. You can use it with
       -- the Linux 'pass' application.
       -- get = function()
-      --     local key = vim.fn.system("pass show openai/mytestkey")
-      --     key = string.gsub(key, "\n", "")
-      --     return key
-      -- end,
+        --     local key = vim.fn.system("pass show openai/mytestkey")
+        --     key = string.gsub(key, "\n", "")
+        --     return key
+        -- end,
+      },
     },
-  },
-  shortcuts = {
-    {
-      name = "textify",
-      key = "<leader>as",
-      desc = "fix text with AI",
-      use_context = true,
-      prompt = [[
+    shortcuts = {
+      {
+        name = "textify",
+        key = "<leader>as",
+        desc = "fix text with AI",
+        use_context = true,
+        prompt = [[
         Please rewrite the text to make it more readable, clear,
         concise, and fix any grammatical, punctuation, or spelling
         errors
-      ]],
-      modes = { "v" },
-      strip_function = nil,
-    },
-    {
-      name = "gitcommit",
-      key = "<leader>ag",
-      desc = "generate git commit message",
-      use_context = false,
-      prompt = function()
-        return [[
+        ]],
+        modes = { "v" },
+        strip_function = nil,
+      },
+      {
+        name = "gitcommit",
+        key = "<leader>ag",
+        desc = "generate git commit message",
+        use_context = false,
+        prompt = function()
+          return [[
           Using the following git diff generate a consise and
           clear git commit message, with a short title summary
           that is 75 characters or less:
-        ]] .. vim.fn.system("git diff --cached")
-      end,
-      modes = { "n" },
-      strip_function = nil,
+          ]] .. vim.fn.system("git diff --cached")
+        end,
+        modes = { "n" },
+        strip_function = nil,
+      },
     },
-  },
-})
-
+  })
 
 -- Tips I always forget
 -- vertical split -> horizontal: ctrl+w then J
