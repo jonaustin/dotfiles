@@ -358,8 +358,8 @@ bindsym $mod+Shift+Right exec "$HOME/bin/firetv fast_forward"
 # use 30hz to fix horrible screen tearing bug
 # bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --mode 3840x2160 --dpi 163 --rate 29.98; ~/.fehbg"
 # xset -dpms --- disable display power management system as its janky to wake ext monitor from sleep
-bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --mode 3840x2160 --rate 30.00 --dpi 185; xset -dpms; pkill polybar; polybar-ext; ~/.fehbg"
-bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --dpi 192 --output DP1 --off; xset +dpms; pkill polybar; polybar top; ~/.fehbg"
+bindsym $mod+m exec "xrandr --output eDP1 --off --output DP1 --mode 3840x2160 --rate 30.00 --dpi 185; xset -dpms; ~/.fehbg"
+bindsym $mod+Shift+m exec "xrandr --output eDP1 --auto --dpi 192 --output DP1 --off; xset +dpms; ~/.fehbg"
 # move windows to other monitor
 # xrandr --output eDP1 --auto --output DP4 --auto --right-of eDP1
 bindsym $mod+Shift+greater move container to output right

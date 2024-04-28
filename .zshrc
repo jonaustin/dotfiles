@@ -52,14 +52,15 @@ zinit light kazhala/dotbare && _dotbare_completion_cmd
 #export NVM_LAZY_LOAD=true
 #zinit "lukechilds/zsh-nvm" # even with lazy loading adds ~0.1 to zsh startup
 
-# asdf: multi-lang version mgr
-if [ $SYSTEM_TYPE = "Darwin" ]; then
-  export PATH=$PATH:/opt/homebrew/bin
-  export ASDF_DIR="$(brew --prefix asdf)/libexec"
-  . "$ASDF_DIR/asdf.sh"
-else
-  . /opt/asdf-vm/asdf.sh
-fi
+# # asdf: multi-lang version mgr
+# if [ $SYSTEM_TYPE = "Darwin" ]; then
+#   export PATH=$PATH:/opt/homebrew/bin
+#   export ASDF_DIR="$(brew --prefix asdf)/libexec"
+#   . "$ASDF_DIR/asdf.sh"
+# else
+#   . /opt/asdf-vm/asdf.sh
+# fi
+eval "$(mise activate zsh)"
 
 # colors
 ## pretty colors (using grc) for various commands; diff,mtr,netstat,ps,etc

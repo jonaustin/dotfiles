@@ -1,3 +1,6 @@
+# things I forget
+# \ls -- ignore ls alias override
+
 ## SHORTCUTS
 
 # overrides
@@ -322,6 +325,7 @@ alias trekz="bluetoothctl connect 20:74:CF:ED:64:E5"
 alias q2="bluetoothctl connect 28:11:A5:48:19:A5"
 alias hifi="bluetoothctl connect CC:39:8C:01:DB:2D"
 alias sony="bluetoothctl connect F8:4E:17:53:98:92"
+alias shokz='bluetoothctl connect 20:74:CF:8E:0E:66'
 alias bt-codec='pw-cli info all | grep codec'
 
 # battery (thinkpad)

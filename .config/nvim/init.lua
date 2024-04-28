@@ -2,6 +2,17 @@
 -- ==                           EDITOR SETTINGS                            == --
 -- ========================================================================== --
 
+-- ### things to fix / figure out:
+-- easy/quick folding
+-- autoformat on save - https://github.com/stevearc/conform.nvim
+-- https://github.com/mfussenegger/nvim-lint
+-- " Jump to previous line of file after closing and re-opening
+-- " :help last-position-jump
+-- autocmd BufReadPost *
+--       \ if line("'\"") > 0 && line("'\"") <= line("$") |
+--         \ exe "normal g`\"" |
+--       \ endif
+
 local home = os.getenv('HOME')
 
 vim.opt.number = true
@@ -150,6 +161,7 @@ lazy.setup({
   'vim-ruby/vim-ruby',
   'tpope/vim-rails',
   'vim-vaultproject',
+  { 'SmiteshP/nvim-navic', dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, }},-- show current code context
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -163,17 +175,17 @@ lazy.setup({
   'mbbill/undotree',
   'junegunn/vim-easy-align', -- :EasyAlign /<regex>/
   {'xolox/vim-session', dependencies = {'xolox/vim-misc'}},
-  'szw/vim-maximizer', -- F3
-  'justinmk/vim-sneak', -- <leader>s<2 chars>
+  'szw/vim-maximizer', -- F3 to fullscreen current pane
+  'justinmk/vim-sneak', -- s<2 chars>
 
   -- colorschemes
   'folke/tokyonight.nvim',
 
   -- integrations
   -- 'stevearc/oil.nvim', -- edit your filesystem like a buffer
-  'christoomey/vim-tmux-navigator',
+  'christoomey/vim-tmux-navigator', -- seamless navigation between vim and tmux splits
   {
-    "nvim-tree/nvim-tree.lua",
+    "nvim-tree/nvim-tree.lua", -- file explorer
     version = "*",
     lazy = false,
     -- dependencies = {
@@ -184,17 +196,25 @@ lazy.setup({
       end,
     },
 
-    'kyazdani42/nvim-web-devicons',
+    'kyazdani42/nvim-web-devicons', -- for nvim-tree
     'nvim-lualine/lualine.nvim',
-    'nvim-lua/plenary.nvim',
-    'majutsushi/tagbar',
-    'github/copilot.vim',
+    'nvim-lua/plenary.nvim', -- base lib used by other plugins
+    'majutsushi/tagbar', -- side pane with list of functions,etc
     'tpope/vim-commentary',
+
+    -- AI
+    'github/copilot.vim',
     {'bakks/butterfish.nvim', dependencies = {'tpope/vim-commentary'}},
     {'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", }},
-    {"jellydn/CopilotChat.nvim",
+    {"CopilotC-Nvim/CopilotChat.nvim",
     opts = {
-      mode = "split", -- newbuffer or split  , default: newbuffer
+      show_help = "yes",         -- Show help text for CopilotChatInPlace, default: yes
+      debug = false,             -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
+      disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
+      language = "English",      -- Copilot answer language settings when using default prompts. Default language is English.
+      mode = "split",            -- newbuffer or split  , default: newbuffer
+      -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
+      -- temperature = 0.1,
     },
     build = function()
       vim.defer_fn(function()
@@ -204,15 +224,39 @@ lazy.setup({
     end,
     event = "VeryLazy",
     keys = {
+      { "<leader>ccb", "<cmd>CopilotChatBuffer<cr>", desc = "CopilotChat - Chat with current buffer" },
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+      {
+        "<leader>ccT",
+        "<cmd>CopilotChatVsplitToggle<cr>",
+        desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
+      },
+      {
+        "<leader>ccv",
+        ":CopilotChatVisual",
+        mode = "x",
+        desc = "CopilotChat - Open in vertical split",
+      },
+      {
+        "<leader>ccx",
+        ":CopilotChatInPlace<cr>",
+        mode = "x",
+        desc = "CopilotChat - Run in-place code",
+      },
+      {
+        "<leader>ccf",
+        "<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
+        desc = "CopilotChat - Fix diagnostic",
+      },
+      {
+        "<leader>ccr",
+        "<cmd>CopilotChatReset<cr>", -- Reset chat history and clear buffer.
+        desc = "CopilotChat - Reset chat history and clear buffer",
+      }
     },
   },
-
-  -- kickstart
-
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
+  -- LSP
   {
     -- LSP Configuration & Plugins
     -- vim.lsp.set_log_level("DEBUG")
@@ -224,7 +268,7 @@ lazy.setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} }, -- notifications in lower right corner
 
       'folke/neodev.nvim', -- nvim lua development stuff
     },
@@ -240,7 +284,8 @@ lazy.setup({
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path', -- completion for local files
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
@@ -463,7 +508,7 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<C-t>', require('telescope.builtin').find_files, { desc = 'Find files' })
+vim.keymap.set('n', '<C-t>', require('telescope.builtin').find_files, { noremap = true, desc = 'Find files' })
 vim.keymap.set('n', '<C-p>', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>fc', require('telescope.builtin').colorscheme, { desc = 'Find Colorschemes' })
 
@@ -615,7 +660,7 @@ local servers = {
   docker_compose_language_service = {},
   gopls = {},
   pyright = {},
-  ruby_ls = {},
+  ruby_lsp = {},
   solargraph = {
     cmd = { os.getenv( "HOME" ) .. "/.rbenv/shims/solargraph", 'stdio' },
     -- root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
@@ -639,8 +684,28 @@ local servers = {
   sqls = {},
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = false },
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {
+          'vim',
+          'require'
+        },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+        -- checkThirdParty = false
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      -- is this still needed?
       telemetry = { enable = false },
+
+      -- telemetry = { enable = false },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
     },
@@ -768,7 +833,7 @@ set_filetype({"*.tfstate", "*.tfstate.backup"}, "json")
 
 map("n", "<S-q>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File tree"})
 
--- Golang
+-- Golang / vim-go
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "go",
   callback = function()
@@ -777,9 +842,15 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.expandtab = false
     vim.opt.shiftwidth = 2
     vim.opt.softtabstop = 2
-    vim.opt.tabstop = 2 -- why the hell doesn't vim-go respect my tabstop? i.e. this does nothing (works fine in old vimrc though..)
+    vim.opt.tabstop = 2
   end,
 })
+vim.g.go_def_mapping_enabled = 0 -- keep my ctrl-t
+
+
+-- must be before lualine
+require('nvim-navic').setup{lsp = { auto_attach = true, }}
+local navic = require("nvim-navic")
 
 -- lualine.nvim (statusline)
 vim.opt.showmode = false
@@ -790,6 +861,18 @@ require('lualine').setup({
     component_separators = '|',
     section_separators = '',
   },
+  winbar = {
+    lualine_c = {
+      {
+        function()
+          return navic.get_location()
+        end,
+        cond = function()
+          return navic.is_available()
+        end
+      },
+    }
+  }
 })
 
 -- butterfish
