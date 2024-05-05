@@ -1,7 +1,3 @@
--- ========================================================================== --
--- ==                           EDITOR SETTINGS                            == --
--- ========================================================================== --
-
 -- ### things to fix / figure out:
 -- easy/quick folding
 -- autoformat on save - https://github.com/stevearc/conform.nvim
@@ -100,7 +96,7 @@ map("n", "<C-q>", "<cmd>quit<cr>", { desc = "Quit vim"})
 -- map("<leader>.", "<cmd>nohl<cr>")
 
 -- clipboard
-map("n", "<leader>ya", "<cmd>%y+<cr>")
+map("n", "<leader>ya", "<cmd>%y+<cr>") -- yank entire buffer
 
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
@@ -175,11 +171,12 @@ lazy.setup({
   'mbbill/undotree',
   'junegunn/vim-easy-align', -- :EasyAlign /<regex>/
   {'xolox/vim-session', dependencies = {'xolox/vim-misc'}},
-  'szw/vim-maximizer', -- F3 to fullscreen current pane
+  'szw/vim-maximizer', -- F3 to fullscreen current pane (FIXME: f3)
   'justinmk/vim-sneak', -- s<2 chars>
 
   -- colorschemes
   'folke/tokyonight.nvim',
+  'xiyaowong/transparent.nvim',
 
   -- integrations
   -- 'stevearc/oil.nvim', -- edit your filesystem like a buffer
@@ -372,7 +369,6 @@ lazy.setup({
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x', -- update this
     dependencies = {
       'nvim-lua/plenary.nvim',
       {
@@ -394,12 +390,6 @@ lazy.setup({
     build = ':TSUpdate',
   },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
@@ -407,7 +397,7 @@ lazy.setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
-}, {})
+})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -977,6 +967,8 @@ require("neoai").setup({
     },
   })
 
+require("tokyonight").setup{ transparent = vim.g.transparent_enabled }
+
 -- Tips I always forget
 -- vertical split -> horizontal: ctrl+w then J
 -- horizontal split -> vertical: ctrl+w H or ctrl+w L
@@ -1000,3 +992,4 @@ require("neoai").setup({
 -- show value of set var with e.g. `set modeline?`; let is just the var `let g:plugin_var`
 -- :enew|pu=execute('<colon command>') " copy the output of any :colon command to a new buffer
 -- zz/. - center current liner horizontally on the screen (z -/+ or b/t to put current line at bottom/top)
+-- LSPStop - brute force way to disable annoying inline linting messages
