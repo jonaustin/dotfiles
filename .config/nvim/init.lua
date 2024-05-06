@@ -1,4 +1,6 @@
 -- ### things to fix / figure out:
+-- read through https://github.com/nvim-lua/kickstart.nvim
+-- move separate .setup plugin calls to be inline with config=?
 -- easy/quick folding
 -- autoformat on save - https://github.com/stevearc/conform.nvim
 -- https://github.com/mfussenegger/nvim-lint
@@ -28,6 +30,13 @@ vim.o.autoread = true -- auto reload file if it changes outside of vim
 vim.o.guicursor='a:hor20-Cursor' -- underline cursor
 vim.o.termguicolors = true -- 24bit (true) colors
 vim.o.breakindent = true -- wrap lines with same indent
+
+-- LSP
+-- disable noisy linting messages my default
+vim.diagnostic.config({
+  virtual_text = false
+})
+
 
 -- Speed
 vim.opt.lazyredraw = true -- fix slowdown issues when moving cursor with syntax on
@@ -111,7 +120,7 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {})
 
-local group = vim.api.nvim_create_augroup('user_cmds', {clear = true})
+-- local group = vim.api.nvim_create_augroup('user_cmds', {clear = true})
 
 
 
@@ -150,6 +159,7 @@ end
 
 lazy.path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 lazy.opts = {}
+vim.g.maximizer_set_default_mapping = 0 -- vim-maximizer; disable F3 since it stomps on nvim-dap
 
 lazy.setup({
   -- coding
@@ -158,6 +168,7 @@ lazy.setup({
   'tpope/vim-rails',
   'vim-vaultproject',
   { 'SmiteshP/nvim-navic', dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, }},-- show current code context
+  {'RaafatTurki/corn.nvim', opts = {}}, -- put annoying lsp linter messages in their place
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -171,11 +182,18 @@ lazy.setup({
   'mbbill/undotree',
   'junegunn/vim-easy-align', -- :EasyAlign /<regex>/
   {'xolox/vim-session', dependencies = {'xolox/vim-misc'}},
-  'szw/vim-maximizer', -- F3 to fullscreen current pane (FIXME: f3)
+	{'szw/vim-maximizer', 
+		config = function ()
+		end 
+	},
   'justinmk/vim-sneak', -- s<2 chars>
 
   -- colorschemes
-  'folke/tokyonight.nvim',
+  {'folke/tokyonight.nvim',
+    config = function()
+      require("tokyonight").setup{ transparent = vim.g.transparent_enabled }
+    end
+  },
   'xiyaowong/transparent.nvim',
 
   -- integrations
@@ -201,7 +219,12 @@ lazy.setup({
 
     -- AI
     'github/copilot.vim',
-    {'bakks/butterfish.nvim', dependencies = {'tpope/vim-commentary'}},
+    {'bakks/butterfish.nvim',
+      dependencies = {'tpope/vim-commentary'},
+      config = function()
+        require('butterfish')
+      end
+    },
     {'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", }},
     {"CopilotC-Nvim/CopilotChat.nvim",
     opts = {
@@ -289,8 +312,8 @@ lazy.setup({
     },
   },
 
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  
+  { 'folke/which-key.nvim', opts = {} }, -- Useful plugin to show pending keybinds.
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -389,6 +412,7 @@ lazy.setup({
     },
     build = ':TSUpdate',
   },
+  require 'plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -510,7 +534,7 @@ vim.defer_fn(function()
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'ruby', 'hcl', 'terraform' },
 
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+    -- Autoinstall languages that are not installed.
     auto_install = false,
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -865,23 +889,6 @@ require('lualine').setup({
   }
 })
 
--- butterfish
-local butterfish = require('butterfish')
-local opts = {noremap = true, silent = true}
--- vim.keymap.set('n', '<leader>p', ':BFFilePrompt ',   opts)
--- vim.keymap.set('n', '<leader>r', ':BFRewrite ',      opts)
--- vim.keymap.set('v', '<leader>r', ':BFRewrite ',      opts)
--- vim.keymap.set('n', '<leader>c', ':BFComment<CR>',   opts)
--- vim.keymap.set('v', '<leader>c', ':BFComment<CR>',   opts)
--- vim.keymap.set('n', '<leader>e', ':BFExplain<CR>',   opts)
--- vim.keymap.set('v', '<leader>e', ':BFExplain<CR>',   opts)
--- vim.keymap.set('n', '<leader>f', ':BFFix<CR>',       opts)
--- vim.keymap.set('n', '<leader>i', ':BFImplement<CR>', opts)
--- vim.keymap.set('n', '<leader>d', ':BFEdit ',         opts)
--- vim.keymap.set('n', '<leader>h', ':BFHammer<CR>',    opts)
--- vim.keymap.set('n', '<leader>q', ':BFQuestion ',     opts)
--- vim.keymap.set('v', '<leader>q', ':BFQuestion ',     opts)
-
 -- neoai
 require("neoai").setup({
   ui = {
@@ -967,7 +974,14 @@ require("neoai").setup({
     },
   })
 
-require("tokyonight").setup{ transparent = vim.g.transparent_enabled }
+-- [[ Custom Commands ]]
+vim.api.nvim_create_user_command('DiagnosticToggle', function()
+    local current_state = vim.diagnostic.config().virtual_text
+    vim.diagnostic.config({
+        virtual_text = not current_state
+    })
+end, {})
+
 
 -- Tips I always forget
 -- vertical split -> horizontal: ctrl+w then J
@@ -993,3 +1007,6 @@ require("tokyonight").setup{ transparent = vim.g.transparent_enabled }
 -- :enew|pu=execute('<colon command>') " copy the output of any :colon command to a new buffer
 -- zz/. - center current liner horizontally on the screen (z -/+ or b/t to put current line at bottom/top)
 -- LSPStop - brute force way to disable annoying inline linting messages
+-- Telescope
+--   commands 
+--   command_history
