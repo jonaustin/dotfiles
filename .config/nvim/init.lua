@@ -24,12 +24,12 @@ vim.opt.breakindent = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = false
-vim.o.autoindent = true -- indent at the same level of the previous line
-vim.o.wrap = true -- wrap long lines
-vim.o.autoread = true -- auto reload file if it changes outside of vim
-vim.o.guicursor='a:hor20-Cursor' -- underline cursor
-vim.o.termguicolors = true -- 24bit (true) colors
-vim.o.breakindent = true -- wrap lines with same indent
+vim.o.autoindent = true          -- indent at the same level of the previous line
+vim.o.wrap = true                -- wrap long lines
+vim.o.autoread = true            -- auto reload file if it changes outside of vim
+vim.o.guicursor = 'a:hor20-Cursor' -- underline cursor
+vim.o.termguicolors = true       -- 24bit (true) colors
+vim.o.breakindent = true         -- wrap lines with same indent
 
 -- LSP
 -- disable noisy linting messages my default
@@ -40,30 +40,30 @@ vim.diagnostic.config({
 
 -- Speed
 vim.opt.lazyredraw = true -- fix slowdown issues when moving cursor with syntax on
-vim.opt.ttyfast = true -- assume fast connection (smoother redraw)
-vim.opt.synmaxcol=1024 -- Syntax coloring lines that are too long just slows down the world
+vim.opt.ttyfast    = true -- assume fast connection (smoother redraw)
+vim.opt.synmaxcol  = 1024 -- Syntax coloring lines that are too long just slows down the world
 
 -- give in to my muscle memory
-vim.o.undofile = true
-vim.o.backup = true
-vim.o.backupdir = home .. "/.vimbackup"
-vim.o.directory = home .. "/.vimswap"
-vim.o.viewdir   = home .. "/.vimviews"
-vim.o.undodir   = home .. "/.vimundo"
+vim.o.undofile     = true
+vim.o.backup       = true
+vim.o.backupdir    = home .. "/.vimbackup"
+vim.o.directory    = home .. "/.vimswap"
+vim.o.viewdir      = home .. "/.vimviews"
+vim.o.undodir      = home .. "/.vimundo"
 
 -- Case-insensitive searching UNLESS \C or Capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.o.ignorecase   = true
+vim.o.smartcase    = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn  = 'yes'
 
 -- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+vim.o.updatetime   = 250
+vim.o.timeoutlen   = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt  = 'menuone,noselect'
 
 -- deal with mac vs linux clipboard
 if vim.fn.has('unix') == 1 then
@@ -100,7 +100,7 @@ map("n", "<S-l>", "gt", { desc = "Next tab" })
 -- QoL
 map("i", "jk", "<esc>")
 map("i", "jj", "<esc>")
-map("n", "<C-q>", "<cmd>quit<cr>", { desc = "Quit vim"})
+map("n", "<C-q>", "<cmd>quit<cr>", { desc = "Quit vim" })
 --map("<leader>W", "<cmd>%s/\s\+$//<cr><cmd>let @/=''<CR>")
 -- map("<leader>.", "<cmd>nohl<cr>")
 
@@ -167,8 +167,8 @@ lazy.setup({
   'vim-ruby/vim-ruby',
   'tpope/vim-rails',
   'vim-vaultproject',
-  { 'SmiteshP/nvim-navic', dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, }},-- show current code context
-  {'RaafatTurki/corn.nvim', opts = {}}, -- put annoying lsp linter messages in their place
+  { 'SmiteshP/nvim-navic',   dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, } }, -- show current code context
+  { 'RaafatTurki/corn.nvim', opts = {} },                                                              -- put annoying lsp linter messages in their place
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -178,20 +178,22 @@ lazy.setup({
   'tpope/vim-sleuth',
 
   'tpope/vim-repeat',
-  'tpope/vim-surround', -- use treesitter instead?
+  'tpope/vim-surround',      -- use treesitter instead?
   'mbbill/undotree',
   'junegunn/vim-easy-align', -- :EasyAlign /<regex>/
-  {'xolox/vim-session', dependencies = {'xolox/vim-misc'}},
-	{'szw/vim-maximizer', 
-		config = function ()
-		end 
-	},
+  { 'xolox/vim-session', dependencies = { 'xolox/vim-misc' } },
+  {
+    'szw/vim-maximizer',
+    config = function()
+    end
+  },
   'justinmk/vim-sneak', -- s<2 chars>
 
   -- colorschemes
-  {'folke/tokyonight.nvim',
+  {
+    'folke/tokyonight.nvim',
     config = function()
-      require("tokyonight").setup{ transparent = vim.g.transparent_enabled }
+      require("tokyonight").setup { transparent = vim.g.transparent_enabled }
     end
   },
   'xiyaowong/transparent.nvim',
@@ -200,33 +202,35 @@ lazy.setup({
   -- 'stevearc/oil.nvim', -- edit your filesystem like a buffer
   'christoomey/vim-tmux-navigator', -- seamless navigation between vim and tmux splits
   {
-    "nvim-tree/nvim-tree.lua", -- file explorer
+    "nvim-tree/nvim-tree.lua",      -- file explorer
     version = "*",
     lazy = false,
     -- dependencies = {
-      --   "nvim-tree/nvim-web-devicons",
-      -- },
-      config = function()
-        require("nvim-tree").setup {}
-      end,
-    },
+    --   "nvim-tree/nvim-web-devicons",
+    -- },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
 
-    'kyazdani42/nvim-web-devicons', -- for nvim-tree
-    'nvim-lualine/lualine.nvim',
-    'nvim-lua/plenary.nvim', -- base lib used by other plugins
-    'majutsushi/tagbar', -- side pane with list of functions,etc
-    'tpope/vim-commentary',
+  'kyazdani42/nvim-web-devicons',   -- for nvim-tree
+  'nvim-lualine/lualine.nvim',
+  'nvim-lua/plenary.nvim',          -- base lib used by other plugins
+  'majutsushi/tagbar',              -- side pane with list of functions,etc
+  'tpope/vim-commentary',
 
-    -- AI
-    'github/copilot.vim',
-    {'bakks/butterfish.nvim',
-      dependencies = {'tpope/vim-commentary'},
-      config = function()
-        require('butterfish')
-      end
-    },
-    {'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", }},
-    {"CopilotC-Nvim/CopilotChat.nvim",
+  -- AI
+  'github/copilot.vim',
+  {
+    'bakks/butterfish.nvim',
+    dependencies = { 'tpope/vim-commentary' },
+    config = function()
+      require('butterfish')
+    end
+  },
+  { 'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", } },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
     opts = {
       show_help = "yes",         -- Show help text for CopilotChatInPlace, default: yes
       debug = false,             -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
@@ -244,9 +248,9 @@ lazy.setup({
     end,
     event = "VeryLazy",
     keys = {
-      { "<leader>ccb", "<cmd>CopilotChatBuffer<cr>", desc = "CopilotChat - Chat with current buffer" },
+      { "<leader>ccb", "<cmd>CopilotChatBuffer<cr>",  desc = "CopilotChat - Chat with current buffer" },
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-      { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+      { "<leader>cct", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
       {
         "<leader>ccT",
         "<cmd>CopilotChatVsplitToggle<cr>",
@@ -288,9 +292,9 @@ lazy.setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} }, -- notifications in lower right corner
+      { 'j-hui/fidget.nvim',       opts = {} }, -- notifications in lower right corner
 
-      'folke/neodev.nvim', -- nvim lua development stuff
+      'folke/neodev.nvim',                -- nvim lua development stuff
     },
   },
 
@@ -312,7 +316,141 @@ lazy.setup({
     },
   },
 
-  
+  {
+    "mfussenegger/nvim-lint",
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
+    config = function()
+      local lint = require("lint")
+
+      lint.linters_by_ft = {
+        javascript = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        kotlin = { "ktlint" },
+        puppet = { "puppet-lint" },
+        ruby = { "rubocop" },
+        svelte = { "eslint_d" },
+        terraform = { "tflint", "tfsec" },
+        typescript = { "eslint_d" },
+        zsh = { "shellcheck" },
+        j
+      }
+
+      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+
+      vim.keymap.set("n", "<leader>ll", function()
+        lint.try_lint()
+      end, { desc = "Trigger linting for current file" })
+    end,
+  },
+
+  {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          bash = { "beautysh" },
+          css = { { "prettierd", "prettier" } },
+          erb = { "htmlbeautifier" },
+          graphql = { { "prettierd", "prettier" } },
+          go = { "gofmt", "goimports", "golines" },
+          html = { "htmlbeautifier" },
+          java = { "google-java-format" },
+          javascript = { { "prettierd", "prettier" } },
+          javascriptreact = { { "prettierd", "prettier" } },
+          json = { { "prettierd", "prettier" } },
+          -- lua = { "stylua" }, -- ugh fix way too much indenting
+          markdown = { { "prettierd", "prettier" } },
+          proto = { "buf" },
+          python = { "black", "isort" },
+          ruby = { "rufo" }, -- from the creator of Crystal
+          rust = { "rustfmt" },
+          scss = { { "prettierd", "prettier" } },
+          svelte = { { "prettierd", "prettier" } },
+          terraform = { "terraform_fmt" },
+          hcl = { "terragrunt_hclfmt" },
+          toml = { "taplo" },
+          typescript = { { "prettierd", "prettier" } },
+          typescriptreact = { { "prettierd", "prettier" } },
+          yaml = { "yamlfix" },
+          ["_"] = { "trim_whitespace" },
+        },
+        format_on_save = {
+          lsp_fallback = true,
+          timeout_ms = 500,
+        },
+      })
+
+      vim.keymap.set({ "n", "v" }, "<leader>cl", function()
+        conform.format({
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 500,
+        })
+      end, { desc = "Format file or range (in visual mode)" })
+    end,
+  },
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    config = {
+
+      -- a list of all tools you want to ensure are installed upon
+      -- start
+      ensure_installed = {
+
+        -- you can pin a tool to a particular version
+        -- { 'golangci-lint', version = 'v1.47.0' },
+
+        -- you can turn off/on auto_update per tool
+        { 'bash-language-server', auto_update = true },
+
+        'black',
+        'editorconfig-checker',
+        'gofumpt',
+        'golangci-lint',
+        'golines',
+        'gomodifytags',
+        'gopls',
+        'gotests',
+        'impl',
+        'isort',
+        'json-to-struct',
+        'lua-language-server',
+        'luacheck',
+        'misspell',
+        'revive',
+        'rubocop',
+        'rufo',
+        'shellcheck',
+        'shfmt',
+        'staticcheck',
+        'stylua',
+        'vim-language-server',
+        'vint',
+      },
+
+      -- Disable integration with other Mason plugins. This removes
+      -- the ability to to use the alternative names of packages provided
+      -- by these plugins but disables them from immediately becoming loaded
+      integrations = {
+        ["mason-lspconfig"] = true,
+        ["mason-null-ls"] = true,
+        ["mason-nvim-dap"] = true,
+      }
+    }
+  },
+
+
   { 'folke/which-key.nvim', opts = {} }, -- Useful plugin to show pending keybinds.
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -676,13 +814,13 @@ local servers = {
   pyright = {},
   ruby_lsp = {},
   solargraph = {
-    cmd = { os.getenv( "HOME" ) .. "/.rbenv/shims/solargraph", 'stdio' },
+    cmd = { os.getenv("HOME") .. "/.rbenv/shims/solargraph", 'stdio' },
     -- root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
     settings = {
       solargraph = {
-        autoformat = true,
+        autoformat = false,
         completion = true,
-        diagnostic = true,
+        diagnostic = false,
         folding = true,
         references = true,
         rename = true,
@@ -692,7 +830,7 @@ local servers = {
   },
   -- rust_analyzer = {},
   tsserver = {}, -- note: must run terrafor/terragrunt init first for lsp to work
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
   terraformls = {},
   tflint = {},
   sqls = {},
@@ -816,14 +954,6 @@ vim.cmd.colorscheme('tokyonight-night')
 vim.g.session_autoload = 'no'
 
 -- terraform
-vim.g.terraform_fmt_on_save=1
-vim.g.terraform_align=1
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-  pattern = "*.hcl",
-  callback = function()
-    vim.cmd("setfiletype terraform")
-  end
-})
 -- fixme: convert this
 -- vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
 -- vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
@@ -832,20 +962,20 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
 -- vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
 -- Define a function to set filetype based on file pattern
 local function set_filetype(pattern, filetype)
-  vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = pattern,
-    command = "set filetype="..filetype,
+    command = "set filetype=" .. filetype,
   })
 end
 
 -- Set filetype for various file patterns
 set_filetype("*.tf", "terraform") -- No longer silent for *.tf
 set_filetype("*.hcl", "hcl")
-set_filetype({".terraformrc", "terraform.rc"}, "hcl")
+set_filetype({ ".terraformrc", "terraform.rc" }, "hcl")
 set_filetype("*.tfvars", "terraform")
-set_filetype({"*.tfstate", "*.tfstate.backup"}, "json")
+set_filetype({ "*.tfstate", "*.tfstate.backup" }, "json")
 
-map("n", "<S-q>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File tree"})
+map("n", "<S-q>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File tree" })
 
 -- Golang / vim-go
 vim.api.nvim_create_autocmd("FileType", {
@@ -863,7 +993,7 @@ vim.g.go_def_mapping_enabled = 0 -- keep my ctrl-t
 
 
 -- must be before lualine
-require('nvim-navic').setup{lsp = { auto_attach = true, }}
+require('nvim-navic').setup { lsp = { auto_attach = true, } }
 local navic = require("nvim-navic")
 
 -- lualine.nvim (statusline)
@@ -894,9 +1024,9 @@ require("neoai").setup({
   ui = {
     output_popup_text = "NeoAI",
     input_popup_text = "Prompt",
-    width = 30, -- As percentage eg. 30%
+    width = 30,               -- As percentage eg. 30%
     output_popup_height = 80, -- As percentage eg. 80%
-    submit = "<Enter>", -- Key binding to submit the prompt
+    submit = "<Enter>",       -- Key binding to submit the prompt
   },
   models = {
     {
@@ -917,9 +1047,9 @@ require("neoai").setup({
   prompts = {
     context_prompt = function(context)
       return "Hey, I'd like to provide some context for future "
-      .. "messages. Here is the code/text that I want to refer "
-      .. "to in our upcoming conversations:\n\n"
-      .. context
+          .. "messages. Here is the code/text that I want to refer "
+          .. "to in our upcoming conversations:\n\n"
+          .. context
     end,
   },
   mappings = {
@@ -936,51 +1066,52 @@ require("neoai").setup({
       -- Here is some code for a function that retrieves an API key. You can use it with
       -- the Linux 'pass' application.
       -- get = function()
-        --     local key = vim.fn.system("pass show openai/mytestkey")
-        --     key = string.gsub(key, "\n", "")
-        --     return key
-        -- end,
-      },
+      --     local key = vim.fn.system("pass show openai/mytestkey")
+      --     key = string.gsub(key, "\n", "")
+      --     return key
+      -- end,
     },
-    shortcuts = {
-      {
-        name = "textify",
-        key = "<leader>as",
-        desc = "fix text with AI",
-        use_context = true,
-        prompt = [[
+  },
+  shortcuts = {
+    {
+      name = "textify",
+      key = "<leader>as",
+      desc = "fix text with AI",
+      use_context = true,
+      prompt = [[
         Please rewrite the text to make it more readable, clear,
         concise, and fix any grammatical, punctuation, or spelling
         errors
         ]],
-        modes = { "v" },
-        strip_function = nil,
-      },
-      {
-        name = "gitcommit",
-        key = "<leader>ag",
-        desc = "generate git commit message",
-        use_context = false,
-        prompt = function()
-          return [[
+      modes = { "v" },
+      strip_function = nil,
+    },
+    {
+      name = "gitcommit",
+      key = "<leader>ag",
+      desc = "generate git commit message",
+      use_context = false,
+      prompt = function()
+        return [[
           Using the following git diff generate a consise and
           clear git commit message, with a short title summary
           that is 75 characters or less:
           ]] .. vim.fn.system("git diff --cached")
-        end,
-        modes = { "n" },
-        strip_function = nil,
-      },
+      end,
+      modes = { "n" },
+      strip_function = nil,
     },
-  })
+  },
+})
 
 -- [[ Custom Commands ]]
 vim.api.nvim_create_user_command('DiagnosticToggle', function()
-    local current_state = vim.diagnostic.config().virtual_text
-    vim.diagnostic.config({
-        virtual_text = not current_state
-    })
+  local current_state = vim.diagnostic.config().virtual_text
+  vim.diagnostic.config({
+    virtual_text = not current_state
+  })
 end, {})
+
 
 
 -- Tips I always forget
@@ -1008,5 +1139,5 @@ end, {})
 -- zz/. - center current liner horizontally on the screen (z -/+ or b/t to put current line at bottom/top)
 -- LSPStop - brute force way to disable annoying inline linting messages
 -- Telescope
---   commands 
+--   commands
 --   command_history
