@@ -2,7 +2,6 @@
 -- read through https://github.com/nvim-lua/kickstart.nvim
 -- move separate .setup plugin calls to be inline with config=?
 -- easy/quick folding
--- autoformat on save - https://github.com/stevearc/conform.nvim
 -- https://github.com/mfussenegger/nvim-lint
 -- " Jump to previous line of file after closing and re-opening
 -- " :help last-position-jump
@@ -24,12 +23,12 @@ vim.opt.breakindent = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = false
-vim.o.autoindent = true          -- indent at the same level of the previous line
-vim.o.wrap = true                -- wrap long lines
-vim.o.autoread = true            -- auto reload file if it changes outside of vim
+vim.o.autoindent = true            -- indent at the same level of the previous line
+vim.o.wrap = true                  -- wrap long lines
+vim.o.autoread = true              -- auto reload file if it changes outside of vim
 vim.o.guicursor = 'a:hor20-Cursor' -- underline cursor
-vim.o.termguicolors = true       -- 24bit (true) colors
-vim.o.breakindent = true         -- wrap lines with same indent
+vim.o.termguicolors = true         -- 24bit (true) colors
+vim.o.breakindent = true           -- wrap lines with same indent
 
 -- LSP
 -- disable noisy linting messages my default
@@ -168,7 +167,7 @@ lazy.setup({
   'tpope/vim-rails',
   'vim-vaultproject',
   { 'SmiteshP/nvim-navic',   dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, } }, -- show current code context
-  { 'RaafatTurki/corn.nvim', opts = {} },                                                              -- put annoying lsp linter messages in their place
+  { 'RaafatTurki/corn.nvim', opts = {} },                                                                 -- put annoying lsp linter messages in their place
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -213,10 +212,10 @@ lazy.setup({
     end,
   },
 
-  'kyazdani42/nvim-web-devicons',   -- for nvim-tree
+  'kyazdani42/nvim-web-devicons', -- for nvim-tree
   'nvim-lualine/lualine.nvim',
-  'nvim-lua/plenary.nvim',          -- base lib used by other plugins
-  'majutsushi/tagbar',              -- side pane with list of functions,etc
+  'nvim-lua/plenary.nvim',        -- base lib used by other plugins
+  'majutsushi/tagbar',            -- side pane with list of functions,etc
   'tpope/vim-commentary',
 
   -- AI
@@ -294,7 +293,7 @@ lazy.setup({
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim',       opts = {} }, -- notifications in lower right corner
 
-      'folke/neodev.nvim',                -- nvim lua development stuff
+      'folke/neodev.nvim',                      -- nvim lua development stuff
     },
   },
 
@@ -335,7 +334,6 @@ lazy.setup({
         terraform = { "tflint", "tfsec" },
         typescript = { "eslint_d" },
         zsh = { "shellcheck" },
-        j
       }
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -370,7 +368,7 @@ lazy.setup({
           javascriptreact = { { "prettierd", "prettier" } },
           json = { { "prettierd", "prettier" } },
           -- lua = { "stylua" }, -- ugh fix way too much indenting
-          markdown = { { "prettierd", "prettier" } },
+          markdown = { "markdownlint", "markdown-toc" },
           proto = { "buf" },
           python = { "black", "isort" },
           ruby = { "rufo" }, -- from the creator of Crystal
@@ -384,6 +382,7 @@ lazy.setup({
           typescriptreact = { { "prettierd", "prettier" } },
           yaml = { "yamlfix" },
           ["_"] = { "trim_whitespace" },
+          ["*"] = { "codespell" },
         },
         format_on_save = {
           lsp_fallback = true,
@@ -415,6 +414,7 @@ lazy.setup({
         { 'bash-language-server', auto_update = true },
 
         'black',
+        'codespell',
         'editorconfig-checker',
         'gofumpt',
         'golangci-lint',
@@ -427,6 +427,7 @@ lazy.setup({
         'json-to-struct',
         'lua-language-server',
         'luacheck',
+        'markdown-toc',
         'misspell',
         'revive',
         'rubocop',
