@@ -386,7 +386,7 @@ lazy.setup({
 			})
 
 			vim.keymap.set({ "n", "v" }, "<leader>cl", function()
-				conform.format({
+				require("conform").format({
 					lsp_fallback = true,
 					async = false,
 					timeout_ms = 500,
@@ -397,11 +397,9 @@ lazy.setup({
 	{
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 		config = {
-
 			-- a list of all tools you want to ensure are installed upon
 			-- start
 			ensure_installed = {
-
 				-- you can pin a tool to a particular version
 				-- { 'golangci-lint', version = 'v1.47.0' },
 
@@ -411,6 +409,7 @@ lazy.setup({
 				'black',
 				'codespell',
 				'editorconfig-checker',
+				'eslint_d',
 				'gofumpt',
 				'golangci-lint',
 				'golines',
@@ -545,6 +544,15 @@ lazy.setup({
 			'nvim-treesitter/nvim-treesitter-textobjects',
 		},
 		build = ':TSUpdate',
+	},
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
 	},
 	require 'plugins.debug',
 
@@ -900,14 +908,15 @@ cmp.setup {
 		end,
 	},
 	completion = {
-		completeopt = 'menu,menuone,noinsert',
+		completeopt = 'menu,menuone,noinsert', -- display completion men even if there is only one item and don't autoinsert
 	},
 	mapping = cmp.mapping.preset.insert {
 		['<C-n>'] = cmp.mapping.select_next_item(),
 		['<C-p>'] = cmp.mapping.select_prev_item(),
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete {},
+		-- ['<C-Space>'] = cmp.mapping.complete {},
+		['<C-y>'] = cmp.mapping.complete {}, -- c-space is currently set to treesitter select node
 		['<CR>'] = cmp.mapping.confirm {
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
