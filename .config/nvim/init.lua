@@ -215,7 +215,19 @@ lazy.setup({
 	'tpope/vim-commentary',
 
 	-- AI
-	'github/copilot.vim',
+	-- 'github/copilot.vim',
+	{
+		"zbirenbaum/copilot.lua",
+		opts = {
+			filetypes = { ["*"] = true },
+		},
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end
+	},
 	{
 		'bakks/butterfish.nvim',
 		dependencies = { 'tpope/vim-commentary' },
@@ -944,6 +956,7 @@ cmp.setup {
 		end, { 'i', 's' }),
 	},
 	sources = {
+		{ name = 'copilot' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'path' },
