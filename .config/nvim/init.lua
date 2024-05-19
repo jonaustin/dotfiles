@@ -1,6 +1,7 @@
 -- ### things to fix / figure out:
 -- read through https://github.com/nvim-lua/kickstart.nvim
 -- easy/quick folding
+--	za - toggle fold under cursor
 -- autocmd BufReadPost *
 --       \ if line("'\"") > 0 && line("'\"") <= line("$") |
 --         \ exe "normal g`\"" |
@@ -356,7 +357,7 @@ lazy.setup({
 					css = { { "prettierd", "prettier" } },
 					erb = { "htmlbeautifier" },
 					graphql = { { "prettierd", "prettier" } },
-					go = { "gofmt", "goimports", "golines" },
+					go = { "gofmt", "goimports" },
 					html = { "htmlbeautifier" },
 					java = { "google-java-format" },
 					javascript = { { "prettierd", "prettier" } },
@@ -521,6 +522,8 @@ lazy.setup({
 			end,
 		},
 	},
+
+	{ 'kevinhwang91/nvim-ufo', dependencies = { 'kevinhwang91/promise-async' } },
 
 	-- Fuzzy Finder (files, lsp, etc)
 	{
@@ -1129,6 +1132,29 @@ autocmd("BufReadPost", {
 	end,
 })
 
+
+-- folding / https://github.com/kevinhwang91/nvim-ufo
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true
+}
+local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+for _, ls in ipairs(language_servers) do
+	require('lspconfig')[ls].setup({
+		capabilities = capabilities
+		-- you can add other fields for setting up lsp server in this table
+	})
+end
+require('ufo').setup()
 
 -- Tips I always forget
 -- vertical split -> horizontal: ctrl+w then J
