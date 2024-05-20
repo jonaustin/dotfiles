@@ -1,11 +1,10 @@
 -- ### things to fix / figure out:
 -- read through https://github.com/nvim-lua/kickstart.nvim
--- easy/quick folding
+-- easy/quick folding nvim-ufo
 --	za - toggle fold under cursor
--- autocmd BufReadPost *
---       \ if line("'\"") > 0 && line("'\"") <= line("$") |
---         \ exe "normal g`\"" |
---       \ endif
+-- https://github.com/cshuaimin/ssr.nvim - structural search and replace
+-- https://github.com/folke/flash.nvim - maybe replace sneak
+-- https://github.com/sindrets/diffview.nvim - better diff viewer
 
 local home = os.getenv('HOME')
 
@@ -331,15 +330,17 @@ lazy.setup({
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
-				javascript = { "eslint_d" },
+				javascript      = { "eslint_d" },
 				javascriptreact = { "eslint_d" },
-				kotlin = { "ktlint" },
-				puppet = { "puppet-lint" },
-				ruby = { "rubocop" },
-				svelte = { "eslint_d" },
-				terraform = { "tflint", "tfsec" },
-				typescript = { "eslint_d" },
-				zsh = { "shellcheck" },
+				kotlin          = { "ktlint" },
+				-- lua = { "luacheck" },
+				markdown        = { "markdownlint" },
+				puppet          = { "puppet-lint" },
+				ruby            = { "rubocop" },
+				svelte          = { "eslint_d" },
+				terraform       = { "tflint", "tfsec" },
+				typescript      = { "eslint_d" },
+				zsh             = { "shellcheck" },
 			}
 
 			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -363,7 +364,7 @@ lazy.setup({
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
-					bash = { "beautysh" },
+					bash = { "shfmt" },
 					css = { { "prettierd", "prettier" } },
 					erb = { "htmlbeautifier" },
 					graphql = { { "prettierd", "prettier" } },
@@ -1057,6 +1058,7 @@ require("neoai").setup({
 		{
 			name = "openai",
 			model = "gpt-3.5-turbo",
+			-- model = "gpt-4o", -- expensive
 			params = nil,
 		},
 	},
@@ -1152,12 +1154,12 @@ autocmd("BufReadPost", {
 
 
 -- folding / https://github.com/kevinhwang91/nvim-ufo
-vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldcolumn = '0' -- '1' to show folding in left gutter
 vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
--- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+-- Using ufo provider need remap `zR` and `zM`
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
