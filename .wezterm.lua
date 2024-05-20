@@ -19,10 +19,10 @@ local PYTHON_ICON = utf8.char(0xf820)
 local NODE_ICON = utf8.char(0xe74e)
 local HOURGLASS_ICON = utf8.char(0xf252)
 
-local SUP_IDX = {"¹","²","³","⁴","⁵","⁶","⁷","⁸","⁹","¹⁰",
-"¹¹","¹²","¹³","¹⁴","¹⁵","¹⁶","¹⁷","¹⁸","¹⁹","²⁰"}
-local SUB_IDX = {"₁","₂","₃","₄","₅","₆","₇","₈","₉","₁₀",
-"₁₁","₁₂","₁₃","₁₄","₁₅","₁₆","₁₇","₁₈","₁₉","₂₀"}
+local SUP_IDX = { "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰",
+  "¹¹", "¹²", "¹³", "¹⁴", "¹⁵", "¹⁶", "¹⁷", "¹⁸", "¹⁹", "²⁰" }
+local SUB_IDX = { "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉", "₁₀",
+  "₁₁", "₁₂", "₁₃", "₁₄", "₁₅", "₁₆", "₁₇", "₁₈", "₁₉", "₂₀" }
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
   local edge_background = "#121212"
@@ -55,7 +55,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   elseif exec_name == "node" then
     title_with_icon = NODE_ICON .. " " .. exec_name:upper()
   elseif exec_name == "zsh" then
-    title_with_icon = SH_ICON -- .. " " .. exec_name
+    title_with_icon = SH_ICON   -- .. " " .. exec_name
   elseif exec_name == "tmux" then
     title_with_icon = TMUX_ICON -- .. " " .. exec_name
   else
@@ -65,32 +65,56 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   if tab.tab_index == 0 then
     left_arrow = SOLID_LEFT_MOST
   end
-  local id = SUB_IDX[tab.tab_index+1]
-  local pid = SUP_IDX[tab.active_pane.pane_index+1]
-  local title = " " .. wezterm.truncate_right(title_with_icon, max_width-6) .. " "
+  local id = SUB_IDX[tab.tab_index + 1]
+  local pid = SUP_IDX[tab.active_pane.pane_index + 1]
+  local title = " " .. wezterm.truncate_right(title_with_icon, max_width - 6) .. " "
 
   return {
-    {Attribute={Intensity="Bold"}},
-    {Background={Color=edge_background}},
-    {Foreground={Color=edge_foreground}},
-    {Text=left_arrow},
-    {Background={Color=background}},
-    {Foreground={Color=foreground}},
-    {Text=id},
-    {Text=title},
-    {Foreground={Color=dim_foreground}},
-    {Text=pid},
-    {Background={Color=edge_background}},
-    {Foreground={Color=edge_foreground}},
-    {Text=SOLID_RIGHT_ARROW},
-    {Attribute={Intensity="Normal"}},
+    { Attribute = { Intensity = "Bold" } },
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = left_arrow },
+    { Background = { Color = background } },
+    { Foreground = { Color = foreground } },
+    { Text = id },
+    { Text = title },
+    { Foreground = { Color = dim_foreground } },
+    { Text = pid },
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = SOLID_RIGHT_ARROW },
+    { Attribute = { Intensity = "Normal" } },
   }
 end)
 
+-- for neovim zen mode--
+-- https://github.com/folke/zen-mode.nvim?tab=readme-ov-file#wezterm
+wezterm.on('user-var-changed', function(window, pane, name, value)
+  local overrides = window:get_config_overrides() or {}
+  if name == "ZEN_MODE" then
+    local incremental = value:find("+")
+    local number_value = tonumber(value)
+    if incremental ~= nil then
+      while (number_value > 0) do
+        window:perform_action(wezterm.action.IncreaseFontSize, pane)
+        number_value = number_value - 1
+      end
+      overrides.enable_tab_bar = false
+    elseif number_value < 0 then
+      window:perform_action(wezterm.action.ResetFontSize, pane)
+      overrides.font_size = nil
+      overrides.enable_tab_bar = true
+    else
+      overrides.font_size = number_value
+      overrides.enable_tab_bar = false
+    end
+  end
+  window:set_config_overrides(overrides)
+end)
 
 return {
   color_scheme = "tokyonight",
-  font_dirs = {"fonts"},
+  font_dirs = { "fonts" },
   font_size = 10.0,
   dpi = 192.0,
   freetype_load_target = "Normal",
@@ -102,7 +126,7 @@ return {
   enable_scroll_bar = false,
   use_fancy_tab_bar = false,
   window_background_opacity = 0.94,
-  default_cursor_style="BlinkingUnderline",
+  default_cursor_style = "BlinkingUnderline",
   set_environment_variables = {
     LANG = "en_US.UTF-8",
     PATH = wezterm.executable_dir .. ";" .. os.getenv("PATH"),
@@ -110,9 +134,9 @@ return {
   colors = {
     tab_bar = {
       background = "#121212",
-      new_tab = {bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold"},
-      new_tab_hover = {bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold"},
-      active_tab = {bg_color = "#121212", fg_color = "#5156f5"},
+      new_tab = { bg_color = "#121212", fg_color = "#FCE8C3", intensity = "Bold" },
+      new_tab_hover = { bg_color = "#121212", fg_color = "#FBB829", intensity = "Bold" },
+      active_tab = { bg_color = "#121212", fg_color = "#5156f5" },
     }
   },
   window_background_gradient = {
@@ -132,45 +156,45 @@ return {
   launch_menu = {
     {
       label = "firefox",
-      args = {"firefox"},
+      args = { "firefox" },
     },
     {
       label = "pcmanfm",
-      args = {"pcmanfm"},
+      args = { "pcmanfm" },
     },
   },
   -- disable_default_key_bindings = true,
   leader = { key = 'q', mods = 'SHIFT|CTRL', timeout_milliseconds = 1000 },
   keys = {
     -- fixme: use super key; change i3
-    { key = 'V', mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
-    { key = 'v', mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
-    { key = 'C', mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
-    { key = 'c', mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
+    { key = 'V',   mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
+    { key = 'v',   mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
+    { key = 'C',   mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
+    { key = 'c',   mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
 
-    { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
+    { key = 'Tab', mods = 'CTRL',       action = act.ActivateTabRelative(1) },
     { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
-    { key = 't', mods = 'SUPER', action = act.SpawnTab 'CurrentPaneDomain' },
-    { key = '1', mods = 'SHIFT|CTRL', action = act.ActivateTab(0) },
-    { key = '2', mods = 'SHIFT|CTRL', action = act.ActivateTab(1) },
-    { key = '3', mods = 'SHIFT|CTRL', action = act.ActivateTab(2) },
-    { key = '4', mods = 'SHIFT|CTRL', action = act.ActivateTab(3) },
-    { key = '5', mods = 'SHIFT|CTRL', action = act.ActivateTab(4) },
-    { key = '6', mods = 'SHIFT|CTRL', action = act.ActivateTab(5) },
-    { key = '7', mods = 'SHIFT|CTRL', action = act.ActivateTab(6) },
-    { key = '8', mods = 'SHIFT|CTRL', action = act.ActivateTab(7) },
-    { key = '9', mods = 'SHIFT|CTRL', action = act.ActivateTab(-1) },
+    { key = 't',   mods = 'SUPER',      action = act.SpawnTab 'CurrentPaneDomain' },
+    { key = '1',   mods = 'SHIFT|CTRL', action = act.ActivateTab(0) },
+    { key = '2',   mods = 'SHIFT|CTRL', action = act.ActivateTab(1) },
+    { key = '3',   mods = 'SHIFT|CTRL', action = act.ActivateTab(2) },
+    { key = '4',   mods = 'SHIFT|CTRL', action = act.ActivateTab(3) },
+    { key = '5',   mods = 'SHIFT|CTRL', action = act.ActivateTab(4) },
+    { key = '6',   mods = 'SHIFT|CTRL', action = act.ActivateTab(5) },
+    { key = '7',   mods = 'SHIFT|CTRL', action = act.ActivateTab(6) },
+    { key = '8',   mods = 'SHIFT|CTRL', action = act.ActivateTab(7) },
+    { key = '9',   mods = 'SHIFT|CTRL', action = act.ActivateTab(-1) },
 
-    { key = '0', mods = 'CTRL', action = act.ResetFontSize },
-    { key = '0', mods = 'SHIFT|CTRL', action = act.ResetFontSize },
-    { key = '+', mods = 'CTRL', action = act.IncreaseFontSize },
-    { key = '+', mods = 'SHIFT|CTRL', action = act.IncreaseFontSize },
-    { key = '=', mods = 'CTRL', action = act.IncreaseFontSize },
-    { key = '=', mods = 'SHIFT|CTRL', action = act.IncreaseFontSize },
-    { key = '=', mods = 'SUPER', action = act.IncreaseFontSize },
-    { key = '-', mods = 'CTRL', action = act.DecreaseFontSize },
-    { key = '-', mods = 'SHIFT|CTRL', action = act.DecreaseFontSize },
-    { key = '-', mods = 'SUPER', action = act.DecreaseFontSize },
+    { key = '0',   mods = 'CTRL',       action = act.ResetFontSize },
+    { key = '0',   mods = 'SHIFT|CTRL', action = act.ResetFontSize },
+    { key = '+',   mods = 'CTRL',       action = act.IncreaseFontSize },
+    { key = '+',   mods = 'SHIFT|CTRL', action = act.IncreaseFontSize },
+    { key = '=',   mods = 'CTRL',       action = act.IncreaseFontSize },
+    { key = '=',   mods = 'SHIFT|CTRL', action = act.IncreaseFontSize },
+    { key = '=',   mods = 'SUPER',      action = act.IncreaseFontSize },
+    { key = '-',   mods = 'CTRL',       action = act.DecreaseFontSize },
+    { key = '-',   mods = 'SHIFT|CTRL', action = act.DecreaseFontSize },
+    { key = '-',   mods = 'SUPER',      action = act.DecreaseFontSize },
     -- {key="g", mods="LEADER", action="ShowTabNavigator"},
     -- {key="c", mods="LEADER", action="ShowLauncher"},
     -- {key="r", mods="LEADER", action="ReloadConfiguration"},
