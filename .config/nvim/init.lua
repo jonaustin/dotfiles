@@ -154,7 +154,6 @@ end
 
 lazy.path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 lazy.opts = {}
-vim.g.maximizer_set_default_mapping = 0 -- vim-maximizer; disable F3 since it stomps on nvim-dap
 
 lazy.setup({
 	-- coding
@@ -175,11 +174,12 @@ lazy.setup({
 	'tpope/vim-repeat',
 	'tpope/vim-surround',     -- use treesitter instead?
 	'mbbill/undotree',
-	'junegunn/vim-easy-align', -- :EasyAlign /<regex>/
+	'junegunn/vim-easy-align', -- :EasyAlign /<regex>/ ---- note: maybe replace with mini.align ---- note: maybe replace with mini.align
 	{ 'xolox/vim-session', dependencies = { 'xolox/vim-misc' } },
 	{
 		'szw/vim-maximizer',
-		config = function()
+		init = function()
+			vim.g.maximizer_set_default_mapping = 0 -- vim-maximizer; disable F3 since it stomps on nvim-dap
 		end
 	},
 	'justinmk/vim-sneak', -- s<2 chars>
@@ -187,9 +187,7 @@ lazy.setup({
 	-- colorschemes
 	{
 		'folke/tokyonight.nvim',
-		config = function()
-			require("tokyonight").setup { transparent = vim.g.transparent_enabled }
-		end
+		opts = { transparent = vim.g.transparent_enabled },
 	},
 	'xiyaowong/transparent.nvim',
 
@@ -459,7 +457,7 @@ lazy.setup({
 	},
 
 
-	{ 'folke/which-key.nvim', opts = {} }, -- Useful plugin to show pending keybinds.
+	{ 'folke/which-key.nvim',  opts = {} }, -- Useful plugin to show pending keybinds.
 	{
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
 		'lewis6991/gitsigns.nvim',
@@ -563,12 +561,19 @@ lazy.setup({
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
+		opts = {},
 	},
+	{
+		'Wansmer/treesj',
+		keys = { '<space>m', '<space>j', '<space>s' },
+		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		config = function()
+			require('treesj').setup({})
+		end,
+	},
+	{ 'dstein64/vim-startuptime' },                   -- :StartupTime
+	{ "stevearc/dressing.nvim",  event = "VeryLazy" }, -- purtify
+
 	require 'plugins.debug',
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
