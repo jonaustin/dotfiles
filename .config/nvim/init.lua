@@ -5,6 +5,8 @@
 -- https://github.com/cshuaimin/ssr.nvim - structural search and replace
 -- https://github.com/folke/flash.nvim - maybe replace sneak
 -- https://github.com/sindrets/diffview.nvim - better diff viewer
+-- https://github.com/VonHeikemen/lazy-template
+-- replace maximize maybe with https://github.com/folke/dot/blob/master/nvim/lua/plugins/ui.lua#L29C6-L29C29
 
 local home = os.getenv('HOME')
 
@@ -574,6 +576,21 @@ lazy.setup({
 	},
 	{ 'dstein64/vim-startuptime' },                   -- :StartupTime
 	{ "stevearc/dressing.nvim",  event = "VeryLazy" }, -- purtify
+
+	-- <leader>z - focus mode
+	"folke/twilight.nvim",
+	{
+		"folke/zen-mode.nvim",
+		cmd = "ZenMode",
+		opts = {
+			plugins = {
+				gitsigns = true,
+				tmux = true,
+				kitty = { enabled = false, font = "+2" },
+			},
+		},
+		keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
+	},
 
 	require 'plugins.debug',
 
