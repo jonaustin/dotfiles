@@ -591,6 +591,21 @@ lazy.setup({
 		},
 		keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
 	},
+	{
+		'pwntester/octo.nvim',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope.nvim',
+			'nvim-tree/nvim-web-devicons',
+		},
+		config = function()
+			require("octo").setup({ enable_builtin = true })
+			vim.cmd([[hi OctoEditable guibg=none]])
+		end,
+		keys = {
+			{ "<leader>O", "<cmd>Octo<cr>", desc = "Octo" },
+		}
+	},
 
 	require 'plugins.debug',
 
@@ -953,6 +968,7 @@ cmp.setup {
 		['<C-p>'] = cmp.mapping.select_prev_item(),
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-e>'] = cmp.mapping.abort(),
 		-- ['<C-Space>'] = cmp.mapping.complete {},
 		['<C-y>'] = cmp.mapping.complete {}, -- c-space is currently set to treesitter select node
 		['<CR>'] = cmp.mapping.confirm {
@@ -978,7 +994,7 @@ cmp.setup {
 			end
 		end, { 'i', 's' }),
 	},
-	sources = {
+	sources = { -- note: order matters; determines which show up first in completion menu
 		{ name = 'copilot' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
