@@ -302,11 +302,12 @@ return {
   },
 
 
-  { 'folke/which-key.nvim',
-      config = function()
-        require("whichkey").setup()
-      end,
-		},
+  {
+    'folke/which-key.nvim',
+    config = function()
+      require("whichkey").setup()
+    end,
+  },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -382,13 +383,14 @@ return {
     },
   },
 
-  { 'kevinhwang91/nvim-ufo', dependencies = { 'kevinhwang91/promise-async' } },
+  { 'kevinhwang91/nvim-ufo',   dependencies = { 'kevinhwang91/promise-async' } },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-dap.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
