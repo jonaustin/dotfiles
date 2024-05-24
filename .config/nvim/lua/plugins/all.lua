@@ -302,7 +302,11 @@ return {
   },
 
 
-  { 'folke/which-key.nvim',  opts = {} }, -- Useful plugin to show pending keybinds.
+  { 'folke/which-key.nvim',
+      config = function()
+        require("whichkey").setup()
+      end,
+		},
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -447,6 +451,35 @@ return {
     keys = {
       { "<leader>O", "<cmd>Octo<cr>", desc = "Octo" },
     }
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      -- adapters
+      "nvim-neotest/neotest-go",
+    },
+    config = function()
+      -- get neotest namespace (api call creates or returns namespace)
+      local neotest_ns = vim.api.nvim_create_namespace("neotest")
+      vim.diagnostic.config({
+        virtual_text = {
+          format = function(diagnostic)
+            local message =
+                diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+            return message
+          end,
+        },
+      }, neotest_ns)
+      require("neotest").setup({
+        adapters = {
+          require("neotest-go"),
+        },
+      })
+    end,
   },
 
   -- require 'plugins.debug',
