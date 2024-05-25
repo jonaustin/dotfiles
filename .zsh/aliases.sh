@@ -9,7 +9,9 @@ alias db=dotbare
 alias dbs='dotbare status'
 alias cat=bat
 alias catnp='bat --paging never'
-alias ls=exa; alias ll='exa -l'; alias lsl='ls -l'
+alias ls=exa
+alias ll='exa -l'
+alias lsl='ls -l'
 #alias calibre='asdf shell python system && calibre'
 alias fd='fd -I' # don't ignore things in gitignore
 alias locate='plocate'
@@ -50,7 +52,7 @@ alias spacemacs='emacs'
 alias mkdir='mkdir -p'
 alias grep="grep --color"
 #alias gi="|grep -i"
-alias Grep="grep" # when hitting shift for pipe
+alias Grep="grep"    # when hitting shift for pipe
 alias wget='wget -c' #auto continue files
 alias df='df -Th'
 #alias rm='rm -i' #ask before overwriting
@@ -59,7 +61,7 @@ alias mv='mv -i'
 # alias rm='rm -f' # don't ask
 alias rmrf='rm -rf'
 alias tree='tree -I "node_modules"' # add more with ignorethis|andthis
-alias ipb='ip -br -c a' # ip -brief -color address
+alias ipb='ip -br -c a'             # ip -brief -color address
 
 #ls
 #alias l='ls -CF'
@@ -74,8 +76,8 @@ alias lthn='ls -lt|head -n'
 #alias ltr='ls -ltr'
 alias ltr='exa -l -s newest'
 alias ltrn='ltr | tail -n'
-alias lh='ls -lhS' # sort by filesize
-alias lsd="ls -l $1 | grep '^d'" # only dirs
+alias lh='ls -lhS'                                       # sort by filesize
+alias lsd="ls -l $1 | grep '^d'"                         # only dirs
 alias lsd-names="ls -F $1 | grep \/ | sed -e 's/\/$//g'" # bare dir names for looping and such
 
 # other
@@ -110,7 +112,7 @@ alias vnlog='$EDITOR ~/.config/configstore/nlog.json'
 
 ## sys
 alias u='uptime'
-have() { type "$1" &> /dev/null; }
+have() { type "$1" &>/dev/null; }
 
 ## shortcut-TRICKS
 alias findwindow="python ~/bin/i3/i3-wm-scripts/nextmatch.py"
@@ -140,10 +142,10 @@ alias svi='sudo -E $EDITOR'
 alias svdi='sudo -E vim -d'
 alias vvc='$EDITOR ~/.vimrc'
 alias vvl='$EDITOR ~/.config/nvim/init.lua'
+alias vvp='$EDITOR ~/.config/nvim/lua/plugins/all.lua'
 alias vvcl='$EDITOR ~/.vimrc.local'
 alias vvh='$EDITOR ~/.hyper.js'
 alias vvj='$EDITOR ~/.hyper.js'
-
 
 ## Other
 alias aunpackall='for n in *{rar,zip}; do aunpack $n; done'
@@ -168,13 +170,13 @@ alias it='iotop'
 
 ## Git
 git-diff-make-patch() {
-  git diff -p --no-color $1 > patch
+  git diff -p --no-color $1 >patch
 }
 git-diff-uniq-dirs() {
   git diff --name-only HEAD~1 | awk -F "/*[^/]*/*$" '{ print ($1 == "" ? "." : $1); }' | sort | uniq
 }
 git-lines-by-author() {
-  git ls-tree -r -z --name-only HEAD -- */* | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD |grep -ae "^author "|sort|uniq -c|sort -nr
+  git ls-tree -r -z --name-only HEAD -- */* | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD | grep -ae "^author " | sort | uniq -c | sort -nr
 }
 alias ga='git add'
 alias gau'git add -u'
@@ -193,7 +195,7 @@ alias gsdl='git ds|less'
 alias got='git '
 alias get='git '
 alias gpo='git push origin'
-  alias gpom='gpo'
+alias gpom='gpo'
 alias gp='git pull'
 alias gpp='git-up'
 alias gclone='git clone '
@@ -211,17 +213,17 @@ function ggh() {
 function git-blame-all() {
   git ls-files -z | xargs -0n1 git blame -w --show-email | perl -n -e '/^.*?\((.*?)\s+[\d]{4}/; print $1,"\n"' | sort -f | uniq -c | sort -n
 }
-vimgd() { vim -p `git status --short | awk '{print $2}'`; }
-vimgdm() { vim -p `git diff master --numstat | awk '{print $3}'`; }
-vimgdbr() { vim -p `git diff $1 --numstat | awk '{print $3}'`; }
-gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@' } # git branches sorted by date desc
+vimgd() { vim -p $(git status --short | awk '{print $2}'); }
+vimgdm() { vim -p $(git diff master --numstat | awk '{print $3}'); }
+vimgdbr() { vim -p $(git diff $1 --numstat | awk '{print $3}'); }
+gitbr() { git for-each-ref --sort=-committerdate refs/heads/ | head -n 10 | awk '{print $3}' | sed 's@refs/heads/@@'; } # git branches sorted by date desc
 
 ## ruby
 alias be='bundle exec'
 alias gems='gem search -r '
 alias gspec='gem spec -r '
 alias gdep='gem dep -r '
-function cdgem() { cd ${GEMO_HOME}/gems/$1*; }
+function cdgem() { cd ${GEM_HOME}/gems/$1*; }
 
 # list largest files
 alias bigfiles='find . -type f -ls | sort -nrk7 | head -10'
@@ -255,7 +257,7 @@ npmd() {
   npm view $1 description
 }
 npm-list() { #'npm list -g --depth=0' # list globally installed modules
-  npm -g ls --parseable --depth=0 | awk '{gsub(/\/.*\//,"",$1); print}'| sort -u
+  npm -g ls --parseable --depth=0 | awk '{gsub(/\/.*\//,"",$1); print}' | sort -u
 }
 
 # get remote ip
@@ -284,7 +286,7 @@ alias update-pacman-keys='sudo pacman -Sy archlinux-keyring && sudo pacman -Su'
 alias restart='sudo systemctl restart '
 alias start='sudo systemctl start '
 alias stop='sudo systemctl stop '
-alias status='sudo systemctl status '
+alias status='systemctl status '
 alias reload='sudo systemctl daemon-reload'
 alias restartu='systemctl --user restart '
 alias startu='systemctl --user start '
@@ -362,7 +364,7 @@ md2pdf() {
 }
 
 # kill
-alias kill-windows="IFS=$'\n'; for n in `ps aux|grep windows`; do kill $(echo $n | awk '{print $2}'); done"
+alias kill-windows="IFS=$'\n'; for n in $(ps aux | grep windows); do kill $(echo $n | awk '{print $2}'); done"
 
 # keyboard
 xm() {

@@ -33,7 +33,7 @@ autoload -U bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/bin/i3/i3-completion/i3_completion.sh # i3-msg completions; must come after bashcompinit
   source $HOME/.config/doctl/doctl.zsh; compdef _doctl doctl # $ doctl completion zsh
-else # osx
+# else # osx
 fi
 # move these into ~/.zsh/completion/ which is already in fpath..
 # source $HOME/opt/completions/docker.zsh-completion;         compdef _docker         docker
@@ -153,7 +153,7 @@ unsetopt local_traps        # allow funcs to have their own signal trap opts (i.
 setopt extended_history       # add timestamps to history
 setopt hist_ignore_all_dups   # don't record dupes in history
 setopt hist_ignore_space      # remove command line from history list when first character on the line is a space
-setopt hist_reduce_blanks     # remove superflous blanks
+setopt hist_reduce_blanks     # remove superfluous blanks
 setopt hist_verify            # when interpolating history into commands (e.g. `$ echo !!`; require another press of enter to actually execute after expanding the last command with `!!`)
 setopt share_history          # adds history incrementally and share it across sessions
 
@@ -165,12 +165,12 @@ setopt share_history          # adds history incrementally and share it across s
 zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
 zstyle ':filter-select' hist-find-no-dups yes # ignore duplicates in history source
 ## case insensitive path completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' '+r:|?=**' 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' '+r:|?=**'
 
 ## Make new commands immediately visible to zsh
 zstyle ':completion:*' rehash true
 
-## Use caching so that commands like apt and dpkg complete are useable
+## Use caching so that commands like apt and dpkg complete are usable
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
 
@@ -398,7 +398,7 @@ export LANG=en_US.UTF-8
 complete -C $(which aws_completer) aws
 
 # copilot
-eval "$(github-copilot-cli alias -- "$0")"
+#eval "$(github-copilot-cli alias -- "$0")"
 
 # bash-my-aws
 # export PATH="$PATH:$HOME/.bash-my-aws/bin"
@@ -478,7 +478,7 @@ source ~/configs_private/secrets.sh
 # export ZSH_BASH_COMPLETIONS_FALLBACK_LAZYLOAD_DISABLE=true
 # zinit light 3v1n0/zsh-bash-completions-fallback
 
-# Things I always forget 
+# Things I always forget
 # FOO="${VARIABLE:-default}"
 # fd -0 -t file $1 | while read -d $'\0' file; do echo "$file"; done # loop over files with spaces
 

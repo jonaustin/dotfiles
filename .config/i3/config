@@ -212,7 +212,7 @@ for_window [urgent=latest] focus
 
 # Set shut down, restart and locking features
 bindsym $mod+Ctrl+0 mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system (l)ock, (e)xit, switch_(u)set, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
@@ -308,7 +308,7 @@ set $green     #859900
 #bindsym $mod+Shift+f exec "chromium --force-device-scale-factor=0.9"
 # bindsym --release $mod+t exec --no-startup-id xdotool key --clearmodifiers ctrl+t # open new tab
 bindsym $mod+Shift+w exec "~/bin/walbg"
-bindsym $mod+Ctrl+w exec "~/bin/walbg 4k > /tmp/wat" 
+bindsym $mod+Ctrl+w exec "~/bin/walbg 4k > /tmp/wat"
 bindsym $mod+Mod1+w exec ~/bin/i3/bg-best.sh
 bindsym $mod+Mod1+Ctrl+w exec ~/bin/i3/bg-delete.sh
 
@@ -431,12 +431,14 @@ exec --no-startup-id /home/jon/.local/bin/spotpris2 # fix spotify's broken mpris
 exec_always --no-startup-id /home/jon/.asdf/shims/autotiling # try out autotiling script https://github.com/nwg-piotr/autotiling
 exec --no-startup-id dunst # instead of notify-osd
 exec --no-startup-id sudo -E auto-cpufreq --daemon
+
+# mod-c; e,r to scroll; v to select/drag
 exec --no-startup-id warpd
 
 # from default config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# hmm, so even though I have dpi set in Xresources, and `xrdb -query -all` shows that; 
+# hmm, so even though I have dpi set in Xresources, and `xrdb -query -all` shows that;
 # `xdpyinfo | grep -B 2 resolution` still show 96 dpi...seems fine visually; but i guess force it shrug
 exec --no-startup-id xrandr --dpi 192
 
