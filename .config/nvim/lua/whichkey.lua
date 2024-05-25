@@ -28,14 +28,14 @@ function M.setup()
 		['h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
 		['r'] = { name = '[R]ename', _ = 'which_key_ignore' },
 		['s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-		['t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-		['w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+		-- ['t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+		-- ['w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 
-		b = {
-			name = "Buffer",
-			c = { "<Cmd>bd!<Cr>", "Close current buffer" },
-			D = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
-		},
+		-- b = {
+		-- 	name = "Buffer",
+		-- 	c = { "<Cmd>bd!<Cr>", "Close current buffer" },
+		-- 	D = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+		-- },
 
 		n = {
 			name = "Neotest",
@@ -49,6 +49,14 @@ function M.setup()
 			o = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Output" },
 			S = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop" },
 			s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary" },
+			d = {
+				name = "DAP",
+				u = { "<cmd>lua require('dapui').toggle()<CR>", "DAP UI" },
+				c = { "<cmd>lua require('dap').continue()<cr>", 'Debug: Start/Continue' },
+				i = { "<cmd>lua require('dap').step_into()<cr>", 'Debug: Step Into' },
+				o = { "<cmd>lua require('dap').step_over()<cr>", 'Debug: Step Over' },
+				b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", 'Debug: Toggle Breakpoint' },
+			},
 		},
 	}
 

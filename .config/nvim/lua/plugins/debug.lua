@@ -20,6 +20,7 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'suketa/nvim-dap-ruby',
   },
   config = function()
     local dap = require 'dap'
@@ -83,5 +84,6 @@ return {
 
     -- Install golang specific config
     require('dap-go').setup()
+    require('dap-ruby').setup()
   end,
 }

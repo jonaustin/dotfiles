@@ -461,8 +461,11 @@ return {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
+      'stevearc/overseer.nvim',
       -- adapters
       "nvim-neotest/neotest-go",
+      "nvim-neotest/neotest-python",
+      'olimorris/neotest-rspec',
     },
     config = function()
       -- get neotest namespace (api call creates or returns namespace)
@@ -479,12 +482,29 @@ return {
       require("neotest").setup({
         adapters = {
           require("neotest-go"),
+          require("neotest-rspec"),
+          require("neotest-python"),
         },
       })
     end,
   },
-
-  -- require 'plugins.debug',
+  {
+    "stevearc/overseer.nvim",
+    keys = {
+      { "<leader>ttR", "<cmd>OverseerRunCmd<cr>",       desc = "Run Command" },
+      { "<leader>tta", "<cmd>OverseerTaskAction<cr>",   desc = "Task Action" },
+      { "<leader>ttb", "<cmd>OverseerBuild<cr>",        desc = "Build" },
+      { "<leader>ttc", "<cmd>OverseerClose<cr>",        desc = "Close" },
+      { "<leader>ttd", "<cmd>OverseerDeleteBundle<cr>", desc = "Delete Bundle" },
+      { "<leader>ttl", "<cmd>OverseerLoadBundle<cr>",   desc = "Load Bundle" },
+      { "<leader>tto", "<cmd>OverseerOpen<cr>",         desc = "Open" },
+      { "<leader>ttq", "<cmd>OverseerQuickAction<cr>",  desc = "Quick Action" },
+      { "<leader>ttr", "<cmd>OverseerRun<cr>",          desc = "Run" },
+      { "<leader>tts", "<cmd>OverseerSaveBundle<cr>",   desc = "Save Bundle" },
+      { "<leader>ttt", "<cmd>OverseerToggle<cr>",       desc = "Toggle" },
+    },
+    opts = {},
+  }
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping

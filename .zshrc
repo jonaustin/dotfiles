@@ -341,7 +341,7 @@ zinit snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 # cd - <enter> -- recent dirs
 # cd .. <enter>
 # cd <enter> fzf search dirs
-#zinit light "b4b4r07/enhancd"
+#zinit light "b4b4r07/enhanced"
 #export ENHANCD_FILTER=fzf-tmux
 
 # python
