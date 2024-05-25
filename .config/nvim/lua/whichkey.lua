@@ -58,6 +58,22 @@ function M.setup()
 				b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", 'Debug: Toggle Breakpoint' },
 			},
 		},
+
+		o = {
+			name = "Overseer",
+			C = { "<cmd>OverseerClose<cr>", "OverseerClose" },
+			a = { "<cmd>OverseerTaskAction<cr>", "OverseerTaskAction" },
+			b = { "<cmd>OverseerBuild<cr>", "OverseerBuild" },
+			c = { "<cmd>OverseerRunCmd<cr>", "OverseerRunCmd" },
+			d = { "<cmd>OverseerDeleteBundle<cr>", "OverseerDeleteBundle" },
+			l = { "<cmd>OverseerLoadBundle<cr>", "OverseerLoadBundle" },
+			o = { "<cmd>OverseerOpen!<cr>", "OverseerOpen" },
+			q = { "<cmd>OverseerQuickAction<cr>", "OverseerQuickAction" },
+			r = { "<cmd>OverseerRun<cr>", "OverseerRun" },
+			s = { "<cmd>OverseerSaveBundle<cr>", "OverseerSaveBundle" },
+			t = { "<cmd>OverseerToggle!<cr>", "OverseerToggle" },
+			n = { "<cmd>lua require('neotest').overseer.run({})<cr>", "neotest" },
+		},
 	}
 
 	whichkey.setup(conf)

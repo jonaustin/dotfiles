@@ -485,6 +485,14 @@ return {
           require("neotest-rspec"),
           require("neotest-python"),
         },
+        consumers = {
+          overseer = require("neotest.consumers.overseer"),
+        },
+        overseer = {
+          enabled = true,
+          -- don't run with overseer by default because it just break egh
+          force_default = false, -- to run tests with overseer use neotest.overseer.run({}) -- this still doesn't populate neotest summary correct egh.
+        },
       })
     end,
   },
@@ -504,6 +512,18 @@ return {
       { "<leader>ttt", "<cmd>OverseerToggle<cr>",       desc = "Toggle" },
     },
     opts = {},
+    config = function()
+      require('overseer').setup({
+        component_aliases = {
+          default = {
+            "on_output_summarize",
+            "on_exit_set_status",
+            "on_complete_notify",
+            "on_complete_dispose",
+          },
+        }
+      })
+    end,
   }
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
