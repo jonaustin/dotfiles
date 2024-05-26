@@ -411,7 +411,10 @@ return {
   },
   {
     "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'b0o/nvim-tree-preview.lua',
+    },
     opts = {},
   },
   {
@@ -525,7 +528,16 @@ return {
       })
     end,
   },
-  { 'sindrets/diffview.nvim' }
+  { 'sindrets/diffview.nvim' },
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+  }
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
