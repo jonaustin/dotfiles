@@ -9,7 +9,8 @@
 -- https://github.com/VonHeikemen/lazy-template
 -- replace maximize maybe with https://github.com/folke/dot/blob/master/nvim/lua/plugins/ui.lua#L29C6-L29C29
 -- https://github.com/AckslD/nvim-neoclip.lua
--- https://github.com/nvim-neotest/neotest
+-- https://github.com/ThePrimeagen/refactoring.nvim
+-- https://github.com/DNLHC/glance.nvim
 
 require 'opts'
 require 'keys'
@@ -76,6 +77,12 @@ require('telescope').setup {
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+require("telescope").load_extension("refactoring")
+vim.keymap.set(
+	{ "n", "x" },
+	"<leader>rr",
+	function() require('telescope').extensions.refactoring.refactors() end
+)
 require('telescope').load_extension('dap')
 
 -- Telescope live_grep in git root
@@ -283,26 +290,27 @@ local servers = {
 	docker_compose_language_service = {},
 	gopls = {},
 	pyright = {},
-	ruby_lsp = {},
-	solargraph = {
-		cmd = { os.getenv("HOME") .. "/.rbenv/shims/solargraph", 'stdio' },
-		-- root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
-		settings = {
-			solargraph = {
-				autoformat = false,
-				completion = true,
-				diagnostic = false,
-				folding = true,
-				references = true,
-				rename = true,
-				symbols = true
-			}
-		}
-	},
+	-- sorbet = {}, -- doesnt seem to work
+	-- ruby_lsp = {},
+	-- solargraph = {
+	-- 	cmd = { os.getenv("HOME") .. "/.local/share/mise/installs/ruby/2.7.8/bin/solargraph", 'stdio' },
+	-- 	-- root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
+	-- 	settings = {
+	-- 		solargraph = {
+	-- 			autoformat = false,
+	-- 			completion = true,
+	-- 			diagnostic = false,
+	-- 			folding = true,
+	-- 			references = true,
+	-- 			rename = true,
+	-- 			symbols = true
+	-- 		}
+	-- 	}
+	-- },
 	-- rust_analyzer = {},
-	tsserver = {}, -- note: must run terrafor/terragrunt init first for lsp to work
+	tsserver = {},
 	html = { filetypes = { 'html', 'twig', 'hbs' } },
-	terraformls = {},
+	terraformls = {}, -- note: must run terrafor/terragrunt init first for lsp to work
 	tflint = {},
 	sqls = {},
 	lua_ls = {
@@ -453,31 +461,31 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.g.go_def_mapping_enabled = 0 -- keep my ctrl-t
 
 -- must be before lualine
-require('nvim-navic').setup { lsp = { auto_attach = true, } }
-local navic = require("nvim-navic")
+-- require('nvim-navic').setup { lsp = { auto_attach = true, } }
+-- local navic = require("nvim-navic")
 
--- lualine.nvim (statusline)
-vim.opt.showmode = false
-require('lualine').setup({
-	options = {
-		icons_enabled = false,
-		theme = 'tokyonight',
-		component_separators = '|',
-		section_separators = '',
-	},
-	winbar = {
-		lualine_c = {
-			{
-				function()
-					return navic.get_location()
-				end,
-				cond = function()
-					return navic.is_available()
-				end
-			},
-		}
-	}
-})
+-- -- lualine.nvim (statusline)
+-- vim.opt.showmode = false
+-- require('lualine').setup({
+-- 	options = {
+-- 		icons_enabled = false,
+-- 		theme = 'tokyonight',
+-- 		component_separators = '|',
+-- 		section_separators = '',
+-- 	},
+-- 	winbar = {
+-- 		lualine_c = {
+-- 			{
+-- 				function()
+-- 					return navic.get_location()
+-- 				end,
+-- 				cond = function()
+-- 					return navic.is_available()
+-- 				end
+-- 			},
+-- 		}
+-- 	}
+-- })
 
 -- neoai
 require("neoai").setup({

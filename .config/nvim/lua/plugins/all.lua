@@ -4,8 +4,8 @@ return {
   'vim-ruby/vim-ruby',
   'tpope/vim-rails',
   'vim-vaultproject',
-  { 'SmiteshP/nvim-navic',   dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, } }, -- show current code context
-  { 'RaafatTurki/corn.nvim', opts = {} },                                                                 -- put annoying lsp linter messages in their place
+  -- { 'SmiteshP/nvim-navic',   dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, } }, -- show current code context
+  { 'RaafatTurki/corn.nvim', opts = {} }, -- put annoying lsp linter messages in their place
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -18,7 +18,7 @@ return {
   'tpope/vim-surround',      -- use treesitter instead?
   'mbbill/undotree',
   'junegunn/vim-easy-align', -- :EasyAlign /<regex>/ ---- note: maybe replace with mini.align ---- note: maybe replace with mini.align
-  { 'xolox/vim-session', dependencies = { 'xolox/vim-misc' } },
+  { 'xolox/vim-session',     dependencies = { 'xolox/vim-misc' } },
   {
     'szw/vim-maximizer',
     init = function()
@@ -55,79 +55,6 @@ return {
   'majutsushi/tagbar',            -- side pane with list of functions,etc
   'tpope/vim-commentary',
 
-  -- AI
-  -- 'github/copilot.vim',
-  {
-    "zbirenbaum/copilot.lua",
-    opts = {
-      filetypes = { ["*"] = true },
-    },
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup()
-    end
-  },
-  {
-    'bakks/butterfish.nvim',
-    dependencies = { 'tpope/vim-commentary' },
-    config = function()
-      require('butterfish')
-    end
-  },
-  { 'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", } },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    opts = {
-      show_help = "yes",         -- Show help text for CopilotChatInPlace, default: yes
-      debug = false,             -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
-      disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
-      language = "English",      -- Copilot answer language settings when using default prompts. Default language is English.
-      mode = "split",            -- newbuffer or split  , default: newbuffer
-      -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
-      -- temperature = 0.1,
-    },
-    build = function()
-      vim.defer_fn(function()
-        vim.cmd("UpdateRemotePlugins")
-        vim.notify("CopilotChat - Updated remote plugins. Please restart Neovim.")
-      end, 3000)
-    end,
-    event = "VeryLazy",
-    keys = {
-      { "<leader>ccb", "<cmd>CopilotChatBuffer<cr>",  desc = "CopilotChat - Chat with current buffer" },
-      { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-      { "<leader>cct", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
-      {
-        "<leader>ccT",
-        "<cmd>CopilotChatVsplitToggle<cr>",
-        desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
-      },
-      {
-        "<leader>ccv",
-        ":CopilotChatVisual",
-        mode = "x",
-        desc = "CopilotChat - Open in vertical split",
-      },
-      {
-        "<leader>ccx",
-        ":CopilotChatInPlace<cr>",
-        mode = "x",
-        desc = "CopilotChat - Run in-place code",
-      },
-      {
-        "<leader>ccf",
-        "<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
-        desc = "CopilotChat - Fix diagnostic",
-      },
-      {
-        "<leader>ccr",
-        "<cmd>CopilotChatReset<cr>", -- Reset chat history and clear buffer.
-        desc = "CopilotChat - Reset chat history and clear buffer",
-      }
-    },
-  },
   -- LSP
   {
     -- LSP Configuration & Plugins
@@ -180,7 +107,7 @@ return {
         -- lua = { "luacheck" },
         markdown        = { "markdownlint" },
         puppet          = { "puppet-lint" },
-        ruby            = { "rubocop" },
+        ruby            = { "rubocop" }, -- { "rufo" }, -- needs ruby 3.0
         svelte          = { "eslint_d" },
         terraform       = { "tflint", "tfsec" },
         typescript      = { "eslint_d" },
@@ -235,10 +162,10 @@ return {
           ["_"] = { "trim_whitespace" },
           ["*"] = { "codespell" },
         },
-        format_on_save = {
-          lsp_fallback = true,
-          timeout_ms = 500,
-        },
+        -- format_on_save = {
+        --   lsp_fallback = true,
+        --   timeout_ms = 500,
+        -- },
       })
 
       vim.keymap.set({ "n", "v" }, "<leader>cl", function()
@@ -264,28 +191,40 @@ return {
 
         'black',
         'codespell',
+        'delve',
+        'dockerls',
         'editorconfig-checker',
         'eslint_d',
+        'eslint',
         'gofumpt',
         'golangci-lint',
         'golines',
         'gomodifytags',
         'gopls',
         'gotests',
+        'htmx',
+        'html',
         'impl',
         'isort',
         'json-to-struct',
+        'jsonls',
         'lua-language-server',
         'luacheck',
         'markdown-toc',
         'misspell',
+        'pyright',
         'revive',
         'rubocop',
         'rufo',
         'shellcheck',
         'shfmt',
+        -- 'sorbet',
+        'sqls',
         'staticcheck',
         'stylua',
+        'tflint',
+        'terraformls',
+        'tsserver',
         'vim-language-server',
         'vint',
       },
@@ -530,14 +469,26 @@ return {
   },
   { 'sindrets/diffview.nvim' },
   {
-    'stevearc/aerial.nvim',
+    'stevearc/aerial.nvim', -- tagBar like panel
     opts = {},
     -- Optional dependencies
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons"
     },
-  }
+  },
+  { 'theHamsta/nvim-dap-virtual-text', opts = {} },
+  { 'ThePrimeagen/refactoring.nvim',   opts = {} },
+  {
+    "amitds1997/remote-nvim.nvim",
+    version = "*",                     -- Pin to GitHub releases
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- For standard functions
+      "MunifTanjim/nui.nvim",          -- To build the plugin UI
+      "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+    },
+    config = true,
+  },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
