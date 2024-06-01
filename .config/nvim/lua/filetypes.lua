@@ -9,3 +9,4 @@ end
 set_filetype({ "*.tf", "*.tfvars" }, "terraform")
 set_filetype({ "*.hcl", ".terraformrc", "terraform.rc" }, "hcl")
 set_filetype({ "*.tfstate", "*.tfstate.backup" }, "json")
+set_filetype({ "docker-compose.yml" }, "yaml.docker-compose")
