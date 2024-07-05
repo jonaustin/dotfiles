@@ -215,6 +215,7 @@ return {
         'pyright',
         'revive',
         'rubocop',
+        'ruby-lsp',
         'rufo',
         'shellcheck',
         'shfmt',
@@ -357,11 +358,13 @@ return {
     opts = {},
   },
   {
-    'Wansmer/treesj',
+    'Wansmer/treesj', -- split/join
     keys = { '<space>m', '<space>j', '<space>s' },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
-      require('treesj').setup({})
+      require('treesj').setup({
+        max_join_length = 500,
+      })
     end,
   },
   { 'dstein64/vim-startuptime' },                    -- :StartupTime

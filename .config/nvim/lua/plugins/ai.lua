@@ -2,13 +2,14 @@ return {
   -- AI
   -- 'github/copilot.vim',
   {
-    "zbirenbaum/copilot.lua",
+    "zbirenbaum/copilot.lua", -- enables copilot as a normal completion option with copilot-cmp
     opts = {
       filetypes = { ["*"] = true },
     },
   },
   {
     "zbirenbaum/copilot-cmp",
+    dependencies = { 'zbirenbaum/copilot.lua' },
     config = function()
       require("copilot_cmp").setup()
     end
@@ -22,13 +23,15 @@ return {
   },
   { 'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", } },
   {
+    -- see for inspirado: https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/copilot-chat-v2.lua
     "CopilotC-Nvim/CopilotChat.nvim",
     opts = {
       show_help = "yes",         -- Show help text for CopilotChatInPlace, default: yes
-      debug = false,             -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
+      debug = true,              -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
       disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
       language = "English",      -- Copilot answer language settings when using default prompts. Default language is English.
       mode = "split",            -- newbuffer or split  , default: newbuffer
+      model = 'gpt-4',
       -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
       -- temperature = 0.1,
     },

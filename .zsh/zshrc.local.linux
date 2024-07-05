@@ -19,7 +19,7 @@ s() {
   #echo $FZF_DEFAULT_OPTS;
 }
 # alias ss='/usr/bin/s' # override
-alias agu='yay -Syu'
+alias agu='mise deactivate; yay -Syu' # trying to install system python tools with mise == pain
 #alias y='sudo aura -S '
 #alias y='sudo pacman -S '
 #alias r='sudo pacman -R '

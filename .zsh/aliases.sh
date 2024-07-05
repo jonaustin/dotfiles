@@ -395,6 +395,10 @@ alias q='pacman -Q|grep '
 alias unifi='cd ~/opt/docker-unifi-controller && docker compose up' # https://0.0.0.0:8443
 alias calibre-web='cd ~/opt/calibre-web && docker compose up'
 
+# docker
+alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
+alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+
 # misc
 alias ghe="gh copilot explain"
 alias ghs="gh copilot suggest"

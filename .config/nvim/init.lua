@@ -158,7 +158,7 @@ vim.keymap.set('n', '<leader>fc', require('telescope.builtin').colorscheme, { de
 vim.defer_fn(function()
 	require('nvim-treesitter.configs').setup {
 		-- Add languages to be installed here that you want installed for treesitter
-		ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'ruby', 'hcl', 'terraform' },
+		ensure_installed = { 'astro', 'bash', 'c', 'cpp', 'c_sharp', 'css', 'diff', 'dockerfile', 'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'gomod', 'gosum', 'gowork', 'hcl', 'html', 'htmldjango', 'java', 'javascript', 'jsdoc', 'json', 'jsonc', 'kdl', 'lua', 'luadoc', 'luap', 'luau', 'markdown', 'markdown_inline', 'ocaml', 'ocaml_interface', 'python', 'query', 'regex', 'requirements', 'rust', 'scheme', 'sql', 'svelte', 'terraform', 'toml', 'tsx', 'typescript', 'vim', 'vimdoc', 'vue', 'xml', 'yaml', },
 
 		-- Autoinstall languages that are not installed.
 		auto_install = false,
@@ -291,7 +291,7 @@ local servers = {
 	gopls = {},
 	pyright = {},
 	-- sorbet = {}, -- doesnt seem to work
-	-- ruby_lsp = {},
+	ruby_lsp = {}, -- annoyingly doesnt support go to definition; just use vim-rails gf
 	-- solargraph = {
 	-- 	cmd = { os.getenv("HOME") .. "/.local/share/mise/installs/ruby/2.7.8/bin/solargraph", 'stdio' },
 	-- 	-- root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
@@ -580,6 +580,11 @@ vim.api.nvim_create_user_command('DiagnosticToggle', function()
 		virtual_text = not current_state
 	})
 end, {})
+
+-- typos
+vim.api.nvim_create_user_command('Q', 'quit', {})
+vim.api.nvim_create_user_command('Qa', 'quitall', {})
+vim.api.nvim_create_user_command('Wq', 'wq', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 
