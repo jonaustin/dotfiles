@@ -2,13 +2,26 @@ return {
   -- AI
   -- 'github/copilot.vim',
   {
-    "zbirenbaum/copilot.lua", -- enables copilot as a normal completion option with copilot-cmp
+    "zbirenbaum/copilot.lua",
     opts = {
-      filetypes = { ["*"] = true },
+      suggestion = {
+        enabled = true,
+        auto_trigger = false,
+        hide_during_completion = true,
+        debounce = 75,
+        keymap = {
+          -- insert mode only!
+          accept = "<M-l>",
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
+      },
+      filetypes = { ["*"] = true, markdown = false },
     },
   },
   {
-    "zbirenbaum/copilot-cmp",
+    "zbirenbaum/copilot-cmp", -- enables copilot as a normal completion option with copilot-cmp
     dependencies = { 'zbirenbaum/copilot.lua' },
     config = function()
       require("copilot_cmp").setup()
@@ -32,9 +45,17 @@ return {
       language = "English",      -- Copilot answer language settings when using default prompts. Default language is English.
       mode = "split",            -- newbuffer or split  , default: newbuffer
       model = 'gpt-4',
+      mappings = {
+        reset = { 
+          normal = "<C-x>",
+          insert = "<C-x>",
+        },
+      },
+
       -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
       -- temperature = 0.1,
     },
+    branch = 'canary',
     build = function()
       vim.defer_fn(function()
         vim.cmd("UpdateRemotePlugins")
@@ -43,7 +64,8 @@ return {
     end,
     event = "VeryLazy",
     keys = {
-      { "<leader>ccb", "<cmd>CopilotChatBuffer<cr>",  desc = "CopilotChat - Chat with current buffer" },
+      -- { "<leader>ccb", "<cmd>CopilotChatBuffer<cr>",  desc = "CopilotChat - Chat with current buffer" },
+      { "<leader>ccb", "<cmd>lua require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer})<cr>", desc = "Chat with buffer" },
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
       {
@@ -54,7 +76,7 @@ return {
       {
         "<leader>ccv",
         ":CopilotChatVisual",
-        mode = "x",
+        mode = "x", -- x == line-wise visual mode (shift-v); v == character-wise visual mode (ctrl-v)
         desc = "CopilotChat - Open in vertical split",
       },
       {

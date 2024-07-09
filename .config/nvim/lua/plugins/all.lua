@@ -3,7 +3,7 @@ return {
   'fatih/vim-go',
   'vim-ruby/vim-ruby',
   'tpope/vim-rails',
-  'vim-vaultproject',
+  -- 'vim-vaultproject',
   -- { 'SmiteshP/nvim-navic',   dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, } }, -- show current code context
   { 'RaafatTurki/corn.nvim', opts = {} }, -- put annoying lsp linter messages in their place
 
@@ -68,8 +68,7 @@ return {
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim',       opts = {} }, -- notifications in lower right corner
-
-      'folke/neodev.nvim',                      -- nvim lua development stuff
+      'folke/neodev.nvim',                -- nvim lua development stuff
     },
   },
 
@@ -92,7 +91,7 @@ return {
   },
 
   {
-    "mfussenegger/nvim-lint",
+    "mfussenegger/nvim-lint", -- linter
     event = {
       "BufReadPre",
       "BufNewFile",
@@ -106,6 +105,7 @@ return {
         kotlin          = { "ktlint" },
         -- lua = { "luacheck" },
         markdown        = { "markdownlint" },
+        python = { "ruff" },
         puppet          = { "puppet-lint" },
         ruby            = { "rubocop" }, -- { "rufo" }, -- needs ruby 3.0
         svelte          = { "eslint_d" },
@@ -123,14 +123,14 @@ return {
         end,
       })
 
-      vim.keymap.set("n", "<leader>ll", function()
+      vim.keymap.set("n", "<leader>cL", function()
         lint.try_lint()
       end, { desc = "Trigger linting for current file" })
     end,
   },
 
   {
-    "stevearc/conform.nvim",
+    "stevearc/conform.nvim", -- formatter
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("conform").setup({
@@ -145,7 +145,7 @@ return {
           javascript = { { "prettierd", "prettier" } },
           javascriptreact = { { "prettierd", "prettier" } },
           json = { { "prettierd", "prettier" } },
-          -- lua = { "stylua" }, -- ugh fix way too much indenting
+          lua = { "stylua" }, -- ugh fix way too much indenting
           markdown = { "markdownlint", "markdown-toc" },
           proto = { "buf" },
           python = { "black", "isort" },
@@ -216,6 +216,7 @@ return {
         'revive',
         'rubocop',
         'ruby-lsp',
+        'ruff',
         'rufo',
         'shellcheck',
         'shfmt',
@@ -398,48 +399,6 @@ return {
     keys = {
       { "<leader>O", "<cmd>Octo<cr>", desc = "Octo" },
     }
-  },
-  {
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      'stevearc/overseer.nvim',
-      -- adapters
-      "nvim-neotest/neotest-go",
-      "nvim-neotest/neotest-python",
-      'olimorris/neotest-rspec',
-    },
-    config = function()
-      -- get neotest namespace (api call creates or returns namespace)
-      local neotest_ns = vim.api.nvim_create_namespace("neotest")
-      vim.diagnostic.config({
-        virtual_text = {
-          format = function(diagnostic)
-            local message =
-                diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
-            return message
-          end,
-        },
-      }, neotest_ns)
-      require("neotest").setup({
-        adapters = {
-          require("neotest-go"),
-          require("neotest-rspec"),
-          require("neotest-python"),
-        },
-        consumers = {
-          overseer = require("neotest.consumers.overseer"),
-        },
-        overseer = {
-          enabled = true,
-          -- don't run with overseer by default because it just break egh
-          force_default = false, -- to run tests with overseer use neotest.overseer.run({}) -- this still doesn't populate neotest summary correct egh.
-        },
-      })
-    end,
   },
   {
     "stevearc/overseer.nvim",

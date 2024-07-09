@@ -158,7 +158,7 @@ vim.keymap.set('n', '<leader>fc', require('telescope.builtin').colorscheme, { de
 vim.defer_fn(function()
 	require('nvim-treesitter.configs').setup {
 		-- Add languages to be installed here that you want installed for treesitter
-		ensure_installed = { 'astro', 'bash', 'c', 'cpp', 'c_sharp', 'css', 'diff', 'dockerfile', 'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'gomod', 'gosum', 'gowork', 'hcl', 'html', 'htmldjango', 'java', 'javascript', 'jsdoc', 'json', 'jsonc', 'kdl', 'lua', 'luadoc', 'luap', 'luau', 'markdown', 'markdown_inline', 'ocaml', 'ocaml_interface', 'python', 'query', 'regex', 'requirements', 'rust', 'scheme', 'sql', 'svelte', 'terraform', 'toml', 'tsx', 'typescript', 'vim', 'vimdoc', 'vue', 'xml', 'yaml', },
+		ensure_installed = { 'asm', 'astro', 'bash', 'c', 'cpp', 'c_sharp', 'css', 'diff', 'dockerfile', 'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'gomod', 'gosum', 'gowork', 'hcl', 'html', 'htmldjango', 'java', 'javascript', 'jsdoc', 'json', 'jsonc', 'kdl', 'lua', 'luadoc', 'luap', 'luau', 'markdown', 'markdown_inline', 'ocaml', 'ocaml_interface', 'python', 'query', 'regex', 'requirements', 'rust', 'scheme', 'sql', 'svelte', 'terraform', 'toml', 'tsx', 'typescript', 'vim', 'vimdoc', 'vue', 'xml', 'yaml', },
 
 		-- Autoinstall languages that are not installed.
 		auto_install = false,
@@ -344,7 +344,10 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+require('neodev').setup({
+	-- enable type checking, docs, and autocompletion for all api functions
+  library = { plugins = { "nvim-dap-ui" }, types = true }, -- https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#installation
+})
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -417,8 +420,8 @@ cmp.setup {
 		end, { 'i', 's' }),
 	},
 	sources = { -- note: order matters; determines which show up first in completion menu
-		{ name = 'copilot' },
 		{ name = 'nvim_lsp' },
+		{ name = 'copilot' },
 		{ name = 'luasnip' },
 		{ name = 'path' },
 		{ name = 'buffer' },
@@ -458,7 +461,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt.tabstop = 2
 	end,
 })
-vim.g.go_def_mapping_enabled = 0 -- keep my ctrl-t
+vim.g.go_def_mapping_enabled = 0 -- keep my ctrl-t; just use :GoDef or C-]
 
 -- must be before lualine
 -- require('nvim-navic').setup { lsp = { auto_attach = true, } }
@@ -705,6 +708,18 @@ local on_attach = function(bufnr)
 end
 require('nvim-tree').setup { on_attach = on_attach }
 
+vim.api.nvim_create_user_command("Format", function(args)
+  local range = nil
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    range = {
+      start = { args.line1, 0 },
+      ["end"] = { args.line2, end_line:len() },
+    }
+  end
+  require("conform").format({ async = true, lsp_format = "fallback", range = range })
+end, { range = true })
+
 -- Tips I always forget
 -- vertical split -> horizontal: ctrl+w then J
 -- horizontal split -> vertical: ctrl+w H or ctrl+w L
@@ -728,7 +743,7 @@ require('nvim-tree').setup { on_attach = on_attach }
 -- show value of set var with e.g. `set modeline?`; let is just the var `let g:plugin_var`
 -- :enew|pu=execute('<colon command>') " copy the output of any :colon command to a new buffer
 -- zz/. - center current liner horizontally on the screen (z -/+ or b/t to put current line at bottom/top)
--- LSPStop - brute force way to disable annoying inline linting messages
+-- LSPStop - brute force way to disable annoying inline linting messages; just use :DiagnosticToggle though
 -- Telescope
 --   commands
 --   command_history

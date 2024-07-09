@@ -1,16 +1,19 @@
--- F4 to show debug start menu
+-- ,nd to get to dap menu
+-- basically
+-- 1. set a breakpoint in either testfile or main code with ,b
+-- 2. go to test file and run a _debug_ test that'll hit the BP with e.g. ,nN
+-- 3. debug per usual with nvim-dap
+-- F5 to show debug start menu
 --
 -- todo
 -- nmap <silent> <leader>td :lua require('dap-go').debug_test()<CR>
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
-  'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
+  {'mfussenegger/nvim-dap',
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-    'theHamsta/nvim-dap-virtual-text',
+    'theHamsta/nvim-dap-virtual-text', -- decorates code with current values
 
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
@@ -21,6 +24,7 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    -- 'nvim-dap-python', -- fix this...or maybe not needed for python?
     'suketa/nvim-dap-ruby',
   },
   config = function()
@@ -83,8 +87,51 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
     require('dap-go').setup()
     require('dap-ruby').setup()
-  end,
+    -- require('dap-python').setup()
+  end
+  },
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'stevearc/overseer.nvim',
+      -- adapters
+      'nvim-neotest/neotest-go', -- seems fine, but maybe consider https://github.com/fredrikaverpil/neotest-golang
+      'nvim-neotest/neotest-python',
+      'olimorris/neotest-rspec',
+    },
+    config = function()
+      -- get neotest namespace (api call creates or returns namespace)
+      local neotest_ns = vim.api.nvim_create_namespace("neotest")
+      vim.diagnostic.config({
+        virtual_text = {
+          format = function(diagnostic)
+            local message =
+                diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+            return message
+          end,
+        },
+      }, neotest_ns)
+      require("neotest").setup({
+        adapters = {
+          require("neotest-go"),
+          require("neotest-python"),
+          require("neotest-rspec"),
+        },
+        consumers = {
+          overseer = require("neotest.consumers.overseer"),
+        },
+        overseer = {
+          enabled = true,
+          -- don't run with overseer by default because it just break egh
+          force_default = false, -- to run tests with overseer use neotest.overseer.run({}) -- this still doesn't populate neotest summary correct egh.
+        },
+      })
+    end,
+  },
 }
