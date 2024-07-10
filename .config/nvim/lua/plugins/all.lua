@@ -15,15 +15,15 @@ return {
   'tpope/vim-sleuth',
 
   'tpope/vim-repeat',
-  'tpope/vim-surround',      -- use treesitter instead?
+  'tpope/vim-surround', -- use treesitter instead?
   'mbbill/undotree',
   'junegunn/vim-easy-align', -- :EasyAlign /<regex>/ ---- note: maybe replace with mini.align ---- note: maybe replace with mini.align
-  { 'xolox/vim-session',     dependencies = { 'xolox/vim-misc' } },
+  { 'xolox/vim-session', dependencies = { 'xolox/vim-misc' } },
   {
     'szw/vim-maximizer',
     init = function()
       vim.g.maximizer_set_default_mapping = 0 -- vim-maximizer; disable F3 since it stomps on nvim-dap
-    end
+    end,
   },
   'justinmk/vim-sneak', -- s<2 chars>
 
@@ -38,21 +38,21 @@ return {
   -- 'stevearc/oil.nvim', -- edit your filesystem like a buffer
   'christoomey/vim-tmux-navigator', -- seamless navigation between vim and tmux splits
   {
-    "nvim-tree/nvim-tree.lua",      -- file explorer
-    version = "*",
+    'nvim-tree/nvim-tree.lua', -- file explorer
+    version = '*',
     lazy = false,
     -- dependencies = {
     --   "nvim-tree/nvim-web-devicons",
     -- },
     config = function()
-      require("nvim-tree").setup {}
+      require('nvim-tree').setup({})
     end,
   },
 
   'kyazdani42/nvim-web-devicons', -- for nvim-tree
   'nvim-lualine/lualine.nvim',
-  'nvim-lua/plenary.nvim',        -- base lib used by other plugins
-  'majutsushi/tagbar',            -- side pane with list of functions,etc
+  'nvim-lua/plenary.nvim', -- base lib used by other plugins
+  'majutsushi/tagbar', -- side pane with list of functions,etc
   'tpope/vim-commentary',
 
   -- LSP
@@ -67,8 +67,8 @@ return {
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} }, -- notifications in lower right corner
-      'folke/neodev.nvim',                -- nvim lua development stuff
+      { 'j-hui/fidget.nvim', opts = {} }, -- notifications in lower right corner
+      'folke/neodev.nvim', -- nvim lua development stuff
     },
   },
 
@@ -91,76 +91,86 @@ return {
   },
 
   {
-    "mfussenegger/nvim-lint", -- linter
+    'mfussenegger/nvim-lint', -- linter
     event = {
-      "BufReadPre",
-      "BufNewFile",
+      'BufReadPre',
+      'BufNewFile',
     },
     config = function()
-      local lint = require("lint")
+      local lint = require 'lint'
 
       lint.linters_by_ft = {
-        javascript      = { "eslint_d" },
-        javascriptreact = { "eslint_d" },
-        kotlin          = { "ktlint" },
+        javascript = { 'eslint_d' },
+        javascriptreact = { 'eslint_d' },
+        kotlin = { 'ktlint' },
         -- lua = { "luacheck" },
-        markdown        = { "markdownlint" },
-        python = { "ruff" },
-        puppet          = { "puppet-lint" },
-        ruby            = { "rubocop" }, -- { "rufo" }, -- needs ruby 3.0
-        svelte          = { "eslint_d" },
-        terraform       = { "tflint", "tfsec" },
-        typescript      = { "eslint_d" },
-        zsh             = { "shellcheck" },
+        markdown = { 'markdownlint' },
+        python = { 'ruff' },
+        puppet = { 'puppet-lint' },
+        ruby = { 'rubocop' }, -- { "rufo" }, -- needs ruby 3.0
+        svelte = { 'eslint_d' },
+        terraform = { 'tflint', 'tfsec' },
+        typescript = { 'eslint_d' },
+        zsh = { 'shellcheck' },
       }
 
-      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+      local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
         group = lint_augroup,
         callback = function()
           lint.try_lint()
         end,
       })
 
-      vim.keymap.set("n", "<leader>cL", function()
+      vim.keymap.set('n', '<leader>cL', function()
         lint.try_lint()
-      end, { desc = "Trigger linting for current file" })
+      end, { desc = 'Trigger linting for current file' })
     end,
   },
 
   {
-    "stevearc/conform.nvim", -- formatter
-    event = { "BufReadPre", "BufNewFile" },
+    'stevearc/conform.nvim', -- formatter
+    keys = {
+      {
+        '<leader>cf',
+        function()
+          require('conform').format({ async = true, lsp_format = 'fallback' })
+        end,
+        mode = '',
+        desc = 'Format buffer',
+      },
+    },
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-      require("conform").setup({
+      require('conform').setup({
         formatters_by_ft = {
-          bash = { "shfmt" },
-          css = { { "prettierd", "prettier" } },
-          erb = { "htmlbeautifier" },
-          graphql = { { "prettierd", "prettier" } },
-          go = { "gofmt", "goimports" },
-          html = { "htmlbeautifier" },
-          java = { "google-java-format" },
-          javascript = { { "prettierd", "prettier" } },
-          javascriptreact = { { "prettierd", "prettier" } },
-          json = { { "prettierd", "prettier" } },
-          lua = { "stylua" }, -- ugh fix way too much indenting
-          markdown = { "markdownlint", "markdown-toc" },
-          proto = { "buf" },
-          python = { "black", "isort" },
-          ruby = { "rufo" }, -- from the creator of Crystal
-          rust = { "rustfmt" },
-          scss = { { "prettierd", "prettier" } },
-          svelte = { { "prettierd", "prettier" } },
-          terraform = { "terraform_fmt" },
-          hcl = { "terragrunt_hclfmt" },
-          toml = { "taplo" },
-          typescript = { { "prettierd", "prettier" } },
-          typescriptreact = { { "prettierd", "prettier" } },
-          yaml = { "yamlfix" },
-          ["_"] = { "trim_whitespace" },
-          ["*"] = { "codespell" },
+          bash = { 'shfmt' },
+          css = { { 'prettierd', 'prettier' } },
+          erb = { 'htmlbeautifier' },
+          graphql = { { 'prettierd', 'prettier' } },
+          go = { 'gofmt', 'goimports' },
+          html = { 'htmlbeautifier' },
+          -- java = { 'google-java-format' },
+          javascript = { { 'prettierd', 'prettier' } },
+          javascriptreact = { { 'prettierd', 'prettier' } },
+          json = { { 'prettierd', 'prettier' } },
+          lua = { 'stylua' }, -- ugh fix way too much indenting
+          markdown = { 'markdownlint', 'markdown-toc' },
+          proto = { 'buf' },
+          python = { 'black', 'isort' },
+          -- ruby = { 'rufo' }, -- from the creator of Crystal
+          rust = { 'rustfmt' },
+          scss = { { 'prettierd', 'prettier' } },
+          svelte = { { 'prettierd', 'prettier' } },
+          terraform = { 'terraform_fmt' },
+          hcl = { 'terragrunt_hclfmt' },
+          toml = { 'taplo' },
+          typescript = { { 'prettierd', 'prettier' } },
+          typescriptreact = { { 'prettierd', 'prettier' } },
+          yaml = { 'yamlfix' },
+          ['_'] = { 'trim_whitespace' },
+          -- ['*'] = { 'codespell' },
         },
         -- format_on_save = {
         --   lsp_fallback = true,
@@ -168,13 +178,13 @@ return {
         -- },
       })
 
-      vim.keymap.set({ "n", "v" }, "<leader>cl", function()
-        require("conform").format({
+      vim.keymap.set({ 'n', 'v' }, '<leader>cl', function()
+        require('conform').format({
           lsp_fallback = true,
           async = false,
           timeout_ms = 500,
         })
-      end, { desc = "Format file or range (in visual mode)" })
+      end, { desc = 'Format file or range (in visual mode)' })
     end,
   },
   {
@@ -235,18 +245,17 @@ return {
       -- the ability to to use the alternative names of packages provided
       -- by these plugins but disables them from immediately becoming loaded
       integrations = {
-        ["mason-lspconfig"] = true,
-        ["mason-null-ls"] = true,
-        ["mason-nvim-dap"] = true,
-      }
-    }
+        ['mason-lspconfig'] = true,
+        ['mason-null-ls'] = true,
+        ['mason-nvim-dap'] = true,
+      },
+    },
   },
-
 
   {
     'folke/which-key.nvim',
     config = function()
-      require("whichkey").setup()
+      require('whichkey').setup()
     end,
   },
   {
@@ -294,10 +303,10 @@ return {
         -- Actions
         -- visual mode
         map('v', '<leader>hs', function()
-          gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          gs.stage_hunk({ vim.fn.line '.', vim.fn.line 'v' })
         end, { desc = 'stage git hunk' })
         map('v', '<leader>hr', function()
-          gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          gs.reset_hunk({ vim.fn.line '.', vim.fn.line 'v' })
         end, { desc = 'reset git hunk' })
         -- normal mode
         map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
@@ -307,7 +316,7 @@ return {
         map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
         map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
         map('n', '<leader>hb', function()
-          gs.blame_line { full = false }
+          gs.blame_line({ full = false })
         end, { desc = 'git blame line' })
         map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
         map('n', '<leader>hD', function()
@@ -324,7 +333,7 @@ return {
     },
   },
 
-  { 'kevinhwang91/nvim-ufo',   dependencies = { 'kevinhwang91/promise-async' } },
+  { 'kevinhwang91/nvim-ufo', dependencies = { 'kevinhwang91/promise-async' } },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -351,7 +360,7 @@ return {
     build = ':TSUpdate',
   },
   {
-    "folke/trouble.nvim",
+    'folke/trouble.nvim',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
       'b0o/nvim-tree-preview.lua',
@@ -368,22 +377,22 @@ return {
       })
     end,
   },
-  { 'dstein64/vim-startuptime' },                    -- :StartupTime
-  { "stevearc/dressing.nvim",  event = "VeryLazy" }, -- purtify
+  { 'dstein64/vim-startuptime' }, -- :StartupTime
+  { 'stevearc/dressing.nvim', event = 'VeryLazy' }, -- purtify
 
   -- <leader>z - focus mode
-  "folke/twilight.nvim",
+  'folke/twilight.nvim',
   {
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
+    'folke/zen-mode.nvim',
+    cmd = 'ZenMode',
     opts = {
       plugins = {
         gitsigns = true,
         tmux = true,
-        kitty = { enabled = false, font = "+2" },
+        kitty = { enabled = false, font = '+2' },
       },
     },
-    keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
+    keys = { { '<leader>z', '<cmd>ZenMode<cr>', desc = 'Zen Mode' } },
   },
   {
     'pwntester/octo.nvim',
@@ -393,39 +402,39 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require("octo").setup({ enable_builtin = true })
-      vim.cmd([[hi OctoEditable guibg=none]])
+      require('octo').setup({ enable_builtin = true })
+      vim.cmd [[hi OctoEditable guibg=none]]
     end,
     keys = {
-      { "<leader>O", "<cmd>Octo<cr>", desc = "Octo" },
-    }
+      { '<leader>O', '<cmd>Octo<cr>', desc = 'Octo' },
+    },
   },
   {
-    "stevearc/overseer.nvim",
+    'stevearc/overseer.nvim',
     keys = {
-      { "<leader>ttR", "<cmd>OverseerRunCmd<cr>",       desc = "Run Command" },
-      { "<leader>tta", "<cmd>OverseerTaskAction<cr>",   desc = "Task Action" },
-      { "<leader>ttb", "<cmd>OverseerBuild<cr>",        desc = "Build" },
-      { "<leader>ttc", "<cmd>OverseerClose<cr>",        desc = "Close" },
-      { "<leader>ttd", "<cmd>OverseerDeleteBundle<cr>", desc = "Delete Bundle" },
-      { "<leader>ttl", "<cmd>OverseerLoadBundle<cr>",   desc = "Load Bundle" },
-      { "<leader>tto", "<cmd>OverseerOpen<cr>",         desc = "Open" },
-      { "<leader>ttq", "<cmd>OverseerQuickAction<cr>",  desc = "Quick Action" },
-      { "<leader>ttr", "<cmd>OverseerRun<cr>",          desc = "Run" },
-      { "<leader>tts", "<cmd>OverseerSaveBundle<cr>",   desc = "Save Bundle" },
-      { "<leader>ttt", "<cmd>OverseerToggle<cr>",       desc = "Toggle" },
+      { '<leader>ttR', '<cmd>OverseerRunCmd<cr>', desc = 'Run Command' },
+      { '<leader>tta', '<cmd>OverseerTaskAction<cr>', desc = 'Task Action' },
+      { '<leader>ttb', '<cmd>OverseerBuild<cr>', desc = 'Build' },
+      { '<leader>ttc', '<cmd>OverseerClose<cr>', desc = 'Close' },
+      { '<leader>ttd', '<cmd>OverseerDeleteBundle<cr>', desc = 'Delete Bundle' },
+      { '<leader>ttl', '<cmd>OverseerLoadBundle<cr>', desc = 'Load Bundle' },
+      { '<leader>tto', '<cmd>OverseerOpen<cr>', desc = 'Open' },
+      { '<leader>ttq', '<cmd>OverseerQuickAction<cr>', desc = 'Quick Action' },
+      { '<leader>ttr', '<cmd>OverseerRun<cr>', desc = 'Run' },
+      { '<leader>tts', '<cmd>OverseerSaveBundle<cr>', desc = 'Save Bundle' },
+      { '<leader>ttt', '<cmd>OverseerToggle<cr>', desc = 'Toggle' },
     },
     opts = {},
     config = function()
       require('overseer').setup({
         component_aliases = {
           default = {
-            "on_output_summarize",
-            "on_exit_set_status",
-            "on_complete_notify",
-            "on_complete_dispose",
+            'on_output_summarize',
+            'on_exit_set_status',
+            'on_complete_notify',
+            'on_complete_dispose',
           },
-        }
+        },
       })
     end,
   },
@@ -435,19 +444,19 @@ return {
     opts = {},
     -- Optional dependencies
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
     },
   },
   { 'theHamsta/nvim-dap-virtual-text', opts = {} },
-  { 'ThePrimeagen/refactoring.nvim',   opts = {} },
+  { 'ThePrimeagen/refactoring.nvim', opts = {} },
   {
-    "amitds1997/remote-nvim.nvim",
-    version = "*",                     -- Pin to GitHub releases
+    'amitds1997/remote-nvim.nvim',
+    version = '*', -- Pin to GitHub releases
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- For standard functions
-      "MunifTanjim/nui.nvim",          -- To build the plugin UI
-      "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+      'nvim-lua/plenary.nvim', -- For standard functions
+      'MunifTanjim/nui.nvim', -- To build the plugin UI
+      'nvim-telescope/telescope.nvim', -- For picking b/w different remote methods
     },
     config = true,
   },
