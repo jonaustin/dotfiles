@@ -402,3 +402,11 @@ alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=sta
 # misc
 alias ghe="gh copilot explain"
 alias ghs="gh copilot suggest"
+
+# hue
+alias hue-br-off="openhue set room Bedroom --off"
+alias hue-br-on="openhue set room Bedroom --on"
+alias hue-bath-off="openhue set room Bathroom --off"
+alias hue-bath-on="openhue set room Bathroom --on"
+alias hue-office-off="openhue set room Office --off"
+alias hue-office-on="openhue set room Office --on"
