@@ -155,7 +155,7 @@ return {
           javascript = { { 'prettierd', 'prettier' } },
           javascriptreact = { { 'prettierd', 'prettier' } },
           json = { { 'prettierd', 'prettier' } },
-          lua = { 'stylua' }, -- ugh fix way too much indenting
+          lua = { 'stylua' },
           markdown = { 'markdownlint', 'markdown-toc' },
           proto = { 'buf' },
           python = { 'black', 'isort' },

@@ -64,37 +64,12 @@ return {
     end,
     event = "VeryLazy",
     keys = {
-      -- { "<leader>ccb", "<cmd>CopilotChatBuffer<cr>",  desc = "CopilotChat - Chat with current buffer" },
       { "<leader>ccb", "<cmd>lua require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer})<cr>", desc = "Chat with buffer" },
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
-      {
-        "<leader>ccT",
-        "<cmd>CopilotChatVsplitToggle<cr>",
-        desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
-      },
-      {
-        "<leader>ccv",
-        ":CopilotChatVisual",
-        mode = "x", -- x == line-wise visual mode (shift-v); v == character-wise visual mode (ctrl-v)
-        desc = "CopilotChat - Open in vertical split",
-      },
-      {
-        "<leader>ccx",
-        ":CopilotChatInPlace<cr>",
-        mode = "x",
-        desc = "CopilotChat - Run in-place code",
-      },
-      {
-        "<leader>ccf",
-        "<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
-        desc = "CopilotChat - Fix diagnostic",
-      },
-      {
-        "<leader>ccr",
-        "<cmd>CopilotChatReset<cr>", -- Reset chat history and clear buffer.
-        desc = "CopilotChat - Reset chat history and clear buffer",
-      }
+      { "<leader>ccT", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChatToggle" },
+      { "<leader>ccf", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix diagnostic" }, -- Get a fix for the diagnostic message under the cursor.
+      { "<leader>ccr", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Reset chat history and clear buffer" } -- Reset chat history and clear buffer.
     },
   },
   {
