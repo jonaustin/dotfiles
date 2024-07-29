@@ -491,3 +491,9 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
+
+. "$HOME/.cargo/env"
+
+# ai
+source ~/bin/please.bash
+zinit light likai-hust/chat-zsh
