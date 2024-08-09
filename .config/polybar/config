@@ -98,7 +98,7 @@ font-9 = Noto Color Emoji:size=24;1
 
 modules-left = i3
 ;modules-center = spotify pulseaudio-internal system-bluetooth-bluetoothctl
-modules-center = spotify launch_rotp pulseaudio-internal system-bluetooth-bluetoothctl
+modules-center = spotify launch_rotp launch_fm pulseaudio-internal system-bluetooth-bluetoothctl
 ;modules-right = filesystem xbacklight wifi battery memory cpu openweathermap-fullfeatured date
 modules-right = ip-status filesystem xbacklight wifi battery cpu memory date
 
@@ -747,6 +747,12 @@ click-left = sh ~/.config/polybar/polybar-scripts/polybar-scripts/system-bluetoo
 type = custom/script
 exec = curl -s https://icanhazip.com
 interval = 10
+
+[module/launch_fm]
+type = custom/script
+exec = echo "FM"
+click-left = /usr/bin/thunar
+interval = 600
 
 [module/launch_rotp]
 type = custom/script

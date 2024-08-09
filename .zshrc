@@ -496,4 +496,7 @@ zinit light-mode for \
 
 # ai
 source ~/bin/please.bash
+# source ~/.zsh/ask.sh
 zinit light likai-hust/chat-zsh
+zinit light Licheam/zsh-ask
+export OPENAI_MODEL=gpt-4o-mini

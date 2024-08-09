@@ -20,8 +20,6 @@ require 'filetypes'
 -- ==                               COMMANDS                               == --
 -- ========================================================================== --
 
-vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {})
-
 -- local group = vim.api.nvim_create_augroup('user_cmds', {clear = true})
 
 -- ========================================================================== --
@@ -757,6 +755,8 @@ local on_attach = function(bufnr)
   -- END_DEFAULT_ON_ATTACH
 end
 require('nvim-tree').setup({ on_attach = on_attach })
+
+vim.api.nvim_set_option('guicursor', vim.o.guicursor .. ',n:block')
 
 -- Tips I always forget
 -- vertical split -> horizontal: ctrl+w then J
