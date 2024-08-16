@@ -410,3 +410,15 @@ alias hue-bath-off="openhue set room Bathroom --off"
 alias hue-bath-on="openhue set room Bathroom --on"
 alias hue-office-off="openhue set room Office --off"
 alias hue-office-on="openhue set room Office --on"
+
+# aws
+find-lambda() {
+  aws lambda list-functions| grep $1
+}
+open-lambda() {
+  open "https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/$(aws lambda get-function --function-name $1 --query 'Configuration.FunctionName' --output text)"
+}
+sam-tail-logs() {
+  # sam logs -n HelloWorldFunction --stack-name mystack --tail
+  sam logs -n $1 --stack-name $2 --tail #--include-traces
+}

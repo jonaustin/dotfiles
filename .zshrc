@@ -275,7 +275,7 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   export PATH="$PATH:/sbin:/usr/sbin:$HOME/.local/bin"
   . ${HOME}/.zsh/zshrc.local.osx
   # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  . /opt/homebrew/Cellar/fzf/0.35.1/shell/key-bindings.zsh
+  . /opt/homebrew/Cellar/fzf/0.54.0/shell/key-bindings.zsh
   bindkey "ç" fzf-cd-widget # fix alt-c for `cd` fzf for osx
 elif [ $SYSTEM_TYPE = "Linux" ]; then
   . ${HOME}/.zsh/zshrc.local.linux
