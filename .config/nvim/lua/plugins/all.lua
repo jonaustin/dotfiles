@@ -246,7 +246,6 @@ return {
       -- by these plugins but disables them from immediately becoming loaded
       integrations = {
         ['mason-lspconfig'] = true,
-        ['mason-null-ls'] = true,
         ['mason-nvim-dap'] = true,
       },
     },
