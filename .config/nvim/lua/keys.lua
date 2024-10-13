@@ -47,3 +47,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+
+-- Trim whitespace
+vim.keymap.set('n', '<leader>W', ':%s/\\s\\+$//e<CR>', { noremap = true, silent = true })

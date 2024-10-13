@@ -107,7 +107,7 @@ return {
         markdown = { 'markdownlint' },
         python = { 'ruff' },
         puppet = { 'puppet-lint' },
-        ruby = { 'rubocop' }, -- { "rufo" }, -- needs ruby 3.0
+        -- ruby = { 'rubocop' }, -- { "rufo" }, -- needs ruby 3.0
         svelte = { 'eslint_d' },
         terraform = { 'tflint', 'tfsec' },
         typescript = { 'eslint_d' },
@@ -219,7 +219,7 @@ return {
         'json-to-struct',
         'jsonls',
         'lua-language-server',
-        'luacheck',
+        -- 'luacheck',
         'markdown-toc',
         'misspell',
         'pyright',

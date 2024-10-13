@@ -1,5 +1,3 @@
--- ### things to fix / figure out:
--- read through https://github.com/nvim-lua/kickstart.nvim
 -- easy/quick folding nvim-ufo
 --	za - toggle fold under cursor; zM close all, zR open all
 -- https://github.com/cshuaimin/ssr.nvim - structural search and replace
@@ -785,3 +783,4 @@ vim.api.nvim_set_option('guicursor', vim.o.guicursor .. ',n:block')
 -- Telescope
 --   commands
 --   command_history
+-- gf in new tab -- c-w gf

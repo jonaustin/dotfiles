@@ -9,8 +9,8 @@ alias db=dotbare
 alias dbs='dotbare status'
 alias cat=bat
 alias catnp='bat --paging never'
-alias ls=exa
-alias ll='exa -l'
+alias ls=eza
+alias ll='eza -l'
 alias lsl='ls -l'
 #alias calibre='asdf shell python system && calibre'
 alias fd='fd -I' # don't ignore things in gitignore
@@ -74,7 +74,7 @@ alias lt='ls -lt'
 alias lth='ls -lt|head'
 alias lthn='ls -lt|head -n'
 #alias ltr='ls -ltr'
-alias ltr='exa -l -s newest'
+alias ltr='eza -l -s newest'
 alias ltrn='ltr | tail -n'
 alias lh='ls -lhS'                                       # sort by filesize
 alias lsd="ls -l $1 | grep '^d'"                         # only dirs
@@ -364,7 +364,8 @@ md2pdf() {
 }
 
 # kill
-alias kill-windows="IFS=$'\n'; for n in $(ps aux | grep windows); do kill $(echo $n | awk '{print $2}'); done"
+# weird, this is stalling out shell startup all of a sudden
+#alias kill-windows="IFS=$'\n'; for n in `ps aux|grep windows`; do kill $(echo $n | awk '{print $2}'); done"
 
 # keyboard
 xm() {

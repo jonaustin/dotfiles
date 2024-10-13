@@ -1,6 +1,6 @@
 # zsh profiling
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
-#zmodload zsh/zprof
+# zmodload zsh/zprof
 #for n in `seq 0 10`; do time zsh -i -c exit; done
 #hyperfine --warmup 3 --min-runs 10 "zsh -i -c exit"
 
@@ -446,9 +446,15 @@ zinit light Aloxaf/fzf-tab # make sure its after zsh-completions (see end of REA
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept' # hit space (instead of enter) to accept completion
 
 # syntax coloring
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-syntax-highlighting
+if [ $SYSTEM_TYPE = "Linux" ]; then
+  # ugh; both of these cause this bug if enabled (only macos; fine in arch): https://github.com/zsh-users/zsh-autosuggestions/issues/746
+  zinit light zdharma-continuum/fast-syntax-highlighting
+  zinit light zsh-users/zsh-syntax-highlighting
+fi
+
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#586e75"
 zinit light zsh-users/zsh-autosuggestions # fish-like autosuggestions for zsh
+
 zinit light zsh-users/zsh-completions # just various completions
 
 # calibre
