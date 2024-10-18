@@ -170,8 +170,10 @@ vim.defer_fn(function()
       'go',
       'gomod',
       'gosum',
+      'gotmpl',
       'gowork',
       'hcl',
+      'helm',
       'html',
       'htmldjango',
       'java',
@@ -755,6 +757,7 @@ end
 require('nvim-tree').setup({ on_attach = on_attach })
 
 vim.api.nvim_set_option('guicursor', vim.o.guicursor .. ',n:block')
+require'lspconfig'.pyright.setup{}
 
 -- Tips I always forget
 -- vertical split -> horizontal: ctrl+w then J

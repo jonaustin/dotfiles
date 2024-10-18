@@ -27,13 +27,13 @@ return {
       require("copilot_cmp").setup()
     end
   },
-  {
-    'bakks/butterfish.nvim',
-    dependencies = { 'tpope/vim-commentary' },
-    config = function()
-      require('butterfish')
-    end
-  },
+  -- {
+  --   'bakks/butterfish.nvim',
+  --   dependencies = { 'tpope/vim-commentary' },
+  --   config = function()
+  --     require('butterfish')
+  --   end
+  -- },
   { 'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", } },
   {
     -- see for inspirado: https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/copilot-chat-v2.lua
@@ -45,7 +45,7 @@ return {
         disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
         language = "English",      -- Copilot answer language settings when using default prompts. Default language is English.
         mode = "split",            -- newbuffer or split  , default: newbuffer
-        model = 'gpt-4',
+        model = 'gpt-4o',
         mappings = {
           reset = { 
             normal = "<C-x>",
@@ -53,7 +53,7 @@ return {
           },
         },
         -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
-        -- temperature = 0.1,
+        temperature = 0.1,
       }
 
       --- nvim-cmp integration

@@ -1,4 +1,8 @@
 return {
+  -- mini
+  -- { 'echasnovski/mini.nvim', version = false },
+  { 'echasnovski/mini.comment', version = false },
+
   -- coding
   'fatih/vim-go',
   'vim-ruby/vim-ruby',
@@ -53,7 +57,6 @@ return {
   'nvim-lualine/lualine.nvim',
   'nvim-lua/plenary.nvim', -- base lib used by other plugins
   'majutsushi/tagbar', -- side pane with list of functions,etc
-  'tpope/vim-commentary',
 
   -- LSP
   {
@@ -189,7 +192,7 @@ return {
   },
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    config = {
+    opts = {
       -- a list of all tools you want to ensure are installed upon
       -- start
       ensure_installed = {
@@ -236,7 +239,6 @@ return {
         'stylua',
         'tflint',
         'terraformls',
-        'tsserver',
         'vim-language-server',
         'vint',
       },
