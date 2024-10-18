@@ -1,7 +1,6 @@
 return {
   -- mini
   -- { 'echasnovski/mini.nvim', version = false },
-  { 'echasnovski/mini.comment', version = false },
 
   -- coding
   'fatih/vim-go',
@@ -239,6 +238,7 @@ return {
         'stylua',
         'tflint',
         'terraformls',
+        'ts_ls',
         'vim-language-server',
         'vint',
       },

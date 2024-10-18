@@ -357,7 +357,7 @@ local servers = {
   -- 	}
   -- },
   -- rust_analyzer = {},
-  tsserver = {},
+  ts_ls = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   terraformls = {}, -- note: must run terrafor/terragrunt init first for lsp to work
   tflint = {},
