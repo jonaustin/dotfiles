@@ -45,7 +45,7 @@ return {
         disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
         language = "English",      -- Copilot answer language settings when using default prompts. Default language is English.
         mode = "split",            -- newbuffer or split  , default: newbuffer
-        model = 'gpt-4o',
+        model = 'gpt-4o', --'claude-3.5-sonnet'
         mappings = {
           reset = { 
             normal = "<C-x>",
@@ -96,24 +96,26 @@ return {
     },
   },
   {
-    -- note: i've got copilot so not sure how useful this is
-    --:Chat with text selection will trigger the completion command, ChatGPT will try to complete the selected code snippet. 
-    --:Chat some instructions with text selection and command args will invoke the code_edit command. This will treat the command args as instructions on what to do with the code snippet. e.g. :Chat refactor to use iteration
-    "dpayne/CodeGPT.nvim",
+    "olimorris/codecompanion.nvim",
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
+      "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
+      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
+      { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
     },
     config = function()
-      opts = {
-        model = "gpt-4o-mini",
-        max_tokens = 4096,
-        temperature = 0.6,
-        number_of_choices = 1,
-        system_message_template = "",
-        user_message_template = "",
-        callback_type = "replace_lines",
-      }
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = "copilot", --"anthropic",
+          },
+          inline = {
+            adapter = "copilot",
+          },
+        },
+      })
     end
   }
 }

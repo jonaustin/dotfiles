@@ -507,3 +507,4 @@ zinit light likai-hust/chat-zsh
 zinit light Licheam/zsh-ask
 export OPENAI_MODEL=gpt-4o-mini
 zinit light tom-doerr/zsh_codex
+export AI_PROVIDER=openai # tgpt

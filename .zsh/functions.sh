@@ -295,6 +295,17 @@ today() {
   fi;
 }
 
+todayt() {
+  DIR=$HOME/notes/daily_goals
+  FILE=$DIR/$(date -I).md
+  mkdir -p $DIR
+  if [ -e $FILE ]; then
+    $EDITOR $FILE
+  else
+    cp $DIR/template-with-time.md $FILE
+    $EDITOR $FILE
+  fi;
+}
 
 ## rsync
 rsynconly() {
