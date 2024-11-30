@@ -265,7 +265,7 @@ fi
 # export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 # }}}
 
-export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH:$HOME/.local/share/mise/shims
 
 # doom emacs
 export PATH=$PATH:$HOME/.emacs.d/bin/
