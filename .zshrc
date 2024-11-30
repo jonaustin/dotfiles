@@ -61,6 +61,7 @@ zinit light kazhala/dotbare && _dotbare_completion_cmd
 #   . /opt/asdf-vm/asdf.sh
 # fi
 eval "$(mise activate zsh)"
+export MISE_LIBGIT2=false # fix for: https://github.com/jdx/mise/issues/3099
 
 # colors
 ## pretty colors (using grc) for various commands; diff,mtr,netstat,ps,etc
