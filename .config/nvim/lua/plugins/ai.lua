@@ -45,7 +45,7 @@ return {
         disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
         language = "English",      -- Copilot answer language settings when using default prompts. Default language is English.
         mode = "split",            -- newbuffer or split  , default: newbuffer
-        model = 'gpt-4o', --'claude-3.5-sonnet'
+        model = 'gpt-4o', --'claude-3.5-sonnet'; need to enable in github org
         mappings = {
           reset = { 
             normal = "<C-x>",
@@ -54,15 +54,14 @@ return {
         },
         -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
         temperature = 0.1,
+        chat_autocomplete=true -- nvim-cmp/blink/etc integration
       }
 
-      --- nvim-cmp integration
-      require("CopilotChat.integrations.cmp").setup()
       -- disable default <tab> complete mapping for copilot chat when doing this
       require('CopilotChat').setup(opts)
       ---
     end,
-    branch = 'canary',
+    branch = 'main',
     build = function()
       vim.defer_fn(function()
         vim.cmd("UpdateRemotePlugins")
@@ -116,6 +115,10 @@ return {
           },
         },
       })
-    end
+    end,
+    keys = {
+      { "<leader>cca", ":CodeCompanionActions<CR>", desc = "CodeCompanion - Actions" },
+      { "<leader>ccc", ":CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
+    },
   }
 }

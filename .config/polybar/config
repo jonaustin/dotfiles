@@ -43,8 +43,8 @@ margin-bottom = 0
 [bar/top]
 bottom = false
 enable-ipc = true
-monitor = ${env:MONITOR:eDP1}
-monitor-fallback = eDP1
+monitor = ${env:MONITOR:eDP-1}
+monitor-fallback = DP-1
 width = 100%
 height = 28
 ;radius = 5.0
