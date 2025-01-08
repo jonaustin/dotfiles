@@ -36,6 +36,7 @@ return {
   -- },
   { 'Bryley/neoai.nvim', dependencies = { "MunifTanjim/nui.nvim", } },
   {
+    -- Best ai plugin i've found so far
     -- see for inspirado: https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/copilot-chat-v2.lua
     "CopilotC-Nvim/CopilotChat.nvim",
     config = function()
@@ -95,30 +96,81 @@ return {
     },
   },
   {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
-      "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
-      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
-      { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- set this if you want to always pull the latest change
+    opts = {
+      ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+      provider = "claude", -- note: change this to copilot and just use claude in copilot
+      auto_suggestions_provider = "claude", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      claude = {
+        endpoint = "https://api.anthropic.com",
+        model = "claude-3-5-sonnet-20241022",
+        temperature = 0,
+        max_tokens = 4096,
+      },
     },
-    config = function()
-      require("codecompanion").setup({
-        strategies = {
-          chat = {
-            adapter = "copilot", --"anthropic",
-          },
-          inline = {
-            adapter = "copilot",
+    build = "make",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
           },
         },
-      })
-    end,
-    keys = {
-      { "<leader>cca", ":CodeCompanionActions<CR>", desc = "CodeCompanion - Actions" },
-      { "<leader>ccc", ":CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
     },
+  },
+  {
+    -- i want to like this, but it's practically unusable (i.e. try asking it to delete the neoai plugin line from this file, jeez.
+    -- "olimorris/codecompanion.nvim",
+    -- dependencies = {
+    --   "nvim-lua/plenary.nvim",
+    --   "nvim-treesitter/nvim-treesitter",
+    --   "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
+    --   "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
+    --   { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
+    --   { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
+    -- },
+    -- config = function()
+    --   require("codecompanion").setup({
+    --     strategies = {
+    --       chat = {
+    --         adapter = "copilot", --"anthropic",
+    --       },
+    --       inline = {
+    --         adapter = "copilot",
+    --       },
+    --     },
+    --   })
+    -- end,
+    -- keys = {
+    --   { "<leader>cca", ":CodeCompanionActions<CR>", desc = "CodeCompanion - Actions" },
+    --   { "<leader>ccc", ":CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
+    -- },
   }
 }

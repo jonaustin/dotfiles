@@ -56,7 +56,10 @@ vim.o.updatetime   = 250
 vim.o.timeoutlen   = 300
 
 -- Set completeopt to have a better completion experience
+-- note: overridden by nvim-cmp
 vim.o.completeopt  = 'menuone,noselect'
+
+vim.o.laststatus   = 3 -- avante needs 3
 
 -- deal with mac vs linux clipboard
 if vim.fn.has('unix') == 1 then

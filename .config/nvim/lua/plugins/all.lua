@@ -8,7 +8,7 @@ return {
   'tpope/vim-rails',
   -- 'vim-vaultproject',
   -- { 'SmiteshP/nvim-navic',   dependencies = { 'neovim/nvim-lspconfig' }, lsp = { auto_attach = true, } }, -- show current code context
-  { 'RaafatTurki/corn.nvim', opts = {} }, -- put annoying lsp linter messages in their place
+  -- { 'RaafatTurki/corn.nvim', opts = {} }, -- put annoying lsp linter messages in their place
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -48,7 +48,9 @@ return {
     --   "nvim-tree/nvim-web-devicons",
     -- },
     config = function()
-      require('nvim-tree').setup({})
+      require('nvim-tree').setup({
+        on_attach = on_attach
+      })
     end,
   },
 
@@ -259,6 +261,15 @@ return {
     config = function()
       require('whichkey').setup()
     end,
+  },
+  {
+    'mrjones2014/legendary.nvim',
+    -- since legendary.nvim handles all your keymaps/commands,
+    -- its recommended to load legendary.nvim before other plugins
+    priority = 10000,
+    lazy = false,
+    -- sqlite is only needed if you want to use frecency sorting
+    dependencies = { 'kkharji/sqlite.lua' }
   },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes

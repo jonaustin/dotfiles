@@ -53,7 +53,9 @@ function lazy.setup(plugins)
 end
 
 lazy.path = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-lazy.opts = {}
+lazy.opts = {
+  change_detection = { enabled = false } -- disable as it's annoying and doesn't really work
+}
 
 -- https://github.com/folke/lazy.nvim#-structuring-your-plugins
 lazy.setup 'plugins'
@@ -435,7 +437,7 @@ cmp.setup({
     end,
   },
   completion = {
-    completeopt = 'menu,menuone,noinsert', -- display completion men even if there is only one item and don't autoinsert
+    completeopt = 'menu,menuone,noinsert,popup', -- display completion men even if there is only one item and don't autoinsert
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -758,6 +760,11 @@ require('nvim-tree').setup({ on_attach = on_attach })
 
 vim.api.nvim_set_option('guicursor', vim.o.guicursor .. ',n:block')
 require'lspconfig'.pyright.setup{}
+-- require("codecompanion").setup{
+--   opts = {
+--     log_level = "DEBUG",
+--   },
+-- }
 
 -- Tips I always forget
 -- vertical split -> horizontal: ctrl+w then J

@@ -74,10 +74,10 @@ function M.setup()
 			t = { "<cmd>OverseerToggle!<cr>", "OverseerToggle" },
 			n = { "<cmd>lua require('neotest').overseer.run({})<cr>", "neotest" },
 		},
-		l = {
-			name = "LLM Chat",
-			b = { "<cmd>lua require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer})<cr>", "Chat with buffer" },
-		},
+		-- l = { -- don't use l as that's what lazy uses
+		-- 	name = "LLM Chat",
+		-- 	b = { "<cmd>lua require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer})<cr>", "Chat with buffer" },
+		-- },
 	}
 
 	whichkey.setup(conf)
