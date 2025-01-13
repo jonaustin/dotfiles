@@ -41,14 +41,14 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     config = function()
       local opts = {
-        show_help = "yes",         -- Show help text for CopilotChatInPlace, default: yes
-        debug = true,              -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
-        disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
-        language = "English",      -- Copilot answer language settings when using default prompts. Default language is English.
-        mode = "split",            -- newbuffer or split  , default: newbuffer
-        model = 'gpt-4o', --'claude-3.5-sonnet'; need to enable in github org
+        show_help = "yes",           -- Show help text for CopilotChatInPlace, default: yes
+        debug = true,                -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
+        disable_extra_info = 'no',   -- Disable extra information (e.g: system prompt) in the response.
+        language = "English",        -- Copilot answer language settings when using default prompts. Default language is English.
+        mode = "split",              -- newbuffer or split  , default: newbuffer
+        model = 'claude-3.5-sonnet', -- 'gpt-4o', --'claude-3.5-sonnet'
         mappings = {
-          reset = { 
+          reset = {
             normal = "<C-x>",
             insert = "<C-x>",
           },
@@ -96,20 +96,47 @@ return {
     },
   },
   {
-    "yetone/avante.nvim",
+    "jonaustin/avante.nvim", -- use my fork
     event = "VeryLazy",
     lazy = false,
-    version = false, -- set this if you want to always pull the latest change
+    version = false,
+    branch = "debounce-config",
     opts = {
-      ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-      provider = "claude", -- note: change this to copilot and just use claude in copilot
-      auto_suggestions_provider = "claude", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      -- @alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+      debug = true,
+      provider = "copilot",
+      auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      behaviour = {
+        auto_suggestions = false, -- don't use this if already using copilot:
+        auto_suggestions_debounce = 500,
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        support_paste_from_clipboard = false,
+        minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
+      },
       claude = {
         endpoint = "https://api.anthropic.com",
         model = "claude-3-5-sonnet-20241022",
-        temperature = 0,
+        temperature = 0.1, -- kinda creative
         max_tokens = 4096,
       },
+      copilot = {
+        endpoint = "https://api.githubcopilot.com/",
+        model = "claude-3.5-sonnet",
+        proxy = nil, -- [protocol://]host[:port] Use this proxy
+        allow_insecure = false, -- Do not allow insecure server connections
+        timeout = 30000, -- Timeout in milliseconds
+        temperature = 0.1, -- kinda creative
+        max_tokens = 8192,
+      },
+      windows = {
+        position = "left",
+        width = 45, -- %
+      },
+    },
+    keys = {
+      { "<leader>cca", "<cmd>AvanteToggle<cr>", desc = "Avante - Toggle window" },
     },
     build = "make",
     dependencies = {
@@ -122,7 +149,7 @@ return {
       "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
         -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
+        "HakonHarnes/img-clip.nvim", -- :PasteImage from clipboard and it'll write it to assets/... and paste the path
         event = "VeryLazy",
         opts = {
           -- recommended settings

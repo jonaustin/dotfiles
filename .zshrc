@@ -509,3 +509,5 @@ zinit light Licheam/zsh-ask
 export OPENAI_MODEL=gpt-4o-mini
 zinit light tom-doerr/zsh_codex
 export AI_PROVIDER=openai # tgpt
+export AIDER_DARK_MODE=true
+export AIDER_VIM=true
