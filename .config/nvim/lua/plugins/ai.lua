@@ -96,18 +96,19 @@ return {
     },
   },
   {
-    "jonaustin/avante.nvim", -- use my fork
+    -- "jonaustin/avante.nvim", -- use my fork
+    "yetone/avante.nvim",
     event = "VeryLazy",
     lazy = false,
     version = false,
-    branch = "debounce-config",
+    -- branch = "trigger-suggestions",
     opts = {
       -- @alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
       debug = true,
       provider = "copilot",
-      auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      auto_suggestions_provider = "claude", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
       behaviour = {
-        auto_suggestions = false, -- don't use this if already using copilot:
+        auto_suggestions = false, -- don't use this if already using copilot
         auto_suggestions_debounce = 500,
         auto_set_highlight_group = true,
         auto_set_keymaps = true,
