@@ -511,3 +511,4 @@ zinit light tom-doerr/zsh_codex
 export AI_PROVIDER=openai # tgpt
 export AIDER_DARK_MODE=true
 export AIDER_VIM=true
+export OLLAMA_HOST="http://192.168.1.174:11434"

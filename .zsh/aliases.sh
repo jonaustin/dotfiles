@@ -423,3 +423,8 @@ sam-tail-logs() {
   # sam logs -n HelloWorldFunction --stack-name mystack --tail
   sam logs -n $1 --stack-name $2 --tail #--include-traces
 }
+
+# ai
+alias llml="llm -m llama3.2:3b "
+alias ld7="llm -m deepseek-r1:7b"
+alias ld8="llm -m deepseek-r1:8b"
