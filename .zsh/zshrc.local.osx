@@ -4,7 +4,7 @@
   #z --add "$(pwd -P)"
 #}
 
-export PATH=$PATH:/opt/homebrew/bin
+export PATH=/opt/homebrew/bin:$PATH
 alias top='top -o cpu'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias sed='gsed' # non-gnu sed cannot use \n
@@ -41,3 +41,7 @@ bindkey '^[OB' down-line-or-search
 
 # netstat sucks on osx
 alias listening="sudo lsof -i -P | grep -i 'listen'"
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :

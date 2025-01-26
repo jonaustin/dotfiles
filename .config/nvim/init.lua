@@ -359,7 +359,7 @@ local servers = {
   -- 	}
   -- },
   -- rust_analyzer = {},
-  ts_ls = {},
+  -- ts_ls = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   terraformls = {}, -- note: must run terrafor/terragrunt init first for lsp to work
   tflint = {},
@@ -667,7 +667,9 @@ capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
-local language_servers = require('lspconfig').util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+
+-- fixme: for some reason they made this method private: https://github.com/neovim/nvim-lspconfig/issues/3588
+local language_servers = require('lspconfig').util._available_servers() -- or list servers manually like {'gopls', 'clangd'}
 for _, ls in ipairs(language_servers) do
   require('lspconfig')[ls].setup({
     capabilities = capabilities,
