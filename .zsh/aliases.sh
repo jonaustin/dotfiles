@@ -428,3 +428,9 @@ sam-tail-logs() {
 alias llml="llm -m llama3.2:3b "
 alias ld7="llm -m deepseek-r1:7b"
 alias ld8="llm -m deepseek-r1:8b"
+alias gdllm="git diff | llm -s 'Describe these changes'"
+aidero() {
+  aider --model "ollama_chat/${1}"
+}
+alias aiderords="aider --architect --model openrouter/deepseek/deepseek-r1 --editor-model openrouter/anthropic/claude-3.5-sonnet"
+alias aiderds="aider --architect --model r1 --editor-model sonnet"
