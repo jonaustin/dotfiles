@@ -159,6 +159,7 @@ alias lsfunc='declare -F'
 alias reset='reset; vr'
 alias fdays='find . -mtime'
 alias mimetype='file --mime-type -b'
+alias screenshot='ffmpeg -f x11grab  -s 3840x2160 -i :0.0 -r 25 -vcodec libx264  output.mp4'
 
 ## network
 alias pgoo='ping -c2 google.com'
@@ -234,6 +235,10 @@ alias ogv2avi='for n in `ls *`; do mencoder $n -ovc lavc -oac mp3lame -o $(echo 
 alias ogv2mp4="mencoder out.ogg -of lavf -lavfopts format=mp4 -oac mp3lame -lameopts cbr:br=128 -ovc x264 -x264encopts bitrate=1000 -o final.mp4"
 alias ogv23gp='for n in `ls *.ogv`; do sudo ffmpeg -i $n -r 15 -b 64kb -ac 1 -s 176x132 -padtop 6 -padbottom 6 -ar 16000 -ab 32kb -acodec libfaac -vcodec h263 $(echo $n | cut -d "." -f 1).3gp; done'
 alias mp423gp='for n in `ls *.mp4`; do mencoder $n -vf scale=176:144 -oac mp3lame -ovc lavc -o $(echo $n | cut -d "." -f 1).3gp; done'
+alias ddjvu2pdf='ddjvu --format=pdf input.djvu output.pdf'
+ocrpdf() {
+  TESSDATA_PREFIX=/usr/share/tessdata/ ocrmypdf ${1} ocr-${1}
+}
 
 # terminal window
 alias vr='for n in `seq 0 99`; do echo; done'
@@ -400,10 +405,6 @@ alias calibre-web='cd ~/opt/calibre-web && docker compose up'
 alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
 alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
 
-# misc
-alias ghe="gh copilot explain"
-alias ghs="gh copilot suggest"
-
 # hue
 alias hue-br-off="openhue set room Bedroom --off"
 alias hue-br-on="openhue set room Bedroom --on"
@@ -434,3 +435,5 @@ aidero() {
 }
 alias aiderords="aider --architect --model openrouter/deepseek/deepseek-r1 --editor-model openrouter/anthropic/claude-3.5-sonnet"
 alias aiderds="aider --architect --model r1 --editor-model sonnet"
+alias ghe="gh copilot explain"
+alias ghs="gh copilot suggest"

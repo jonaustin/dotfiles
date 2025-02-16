@@ -669,7 +669,7 @@ capabilities.textDocument.foldingRange = {
 }
 
 -- fixme: for some reason they made this method private: https://github.com/neovim/nvim-lspconfig/issues/3588
-local language_servers = require('lspconfig').util._available_servers() -- or list servers manually like {'gopls', 'clangd'}
+local language_servers = require('lspconfig').util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
 for _, ls in ipairs(language_servers) do
   require('lspconfig')[ls].setup({
     capabilities = capabilities,
