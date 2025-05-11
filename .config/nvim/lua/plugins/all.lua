@@ -230,7 +230,7 @@ return {
         -- 'luacheck',
         'markdown-toc',
         'misspell',
-        'pyright', -- FIXME: 'pyrightbased',
+        'basedpyright',
         'revive',
         'rubocop',
         'ruby-lsp',
