@@ -49,4 +49,5 @@ map ` push :open-with<space>
 # set preview
 # set previewer "less -k ~/.config/lf/less.lesskey"
 
-set previewer ~/opt/_go/bin/pistol
+# set previewer ~/opt/_go/bin/pistol
+set previewer /Users/jon/.local/share/mise/installs/go/1.22.6/bin/pistol

@@ -83,7 +83,7 @@ status_widgets=$(get "@tokyonight_widgets")
 time_format=$(get "@tokyonight_time_format" "%R")
 date_format=$(get "@tokyonight_date_format" "%m-%d")
 
-set "status-right" " #[fg=$tokyonight_white,bg=$tokyonight_black,nounderscore,noitalics]#{playerctl_full} ${date_format} ${time_format} #[fg=$tokyonight_visual_grey,bg=$tokyonight_black]#[fg=$tokyonight_visual_grey,bg=$tokyonight_visual_grey]#[fg=$tokyonight_white, bg=$tokyonight_visual_grey]${status_widgets} #[fg=$tokyonight_blue,bg=$tokyonight_visual_grey,nobold,nounderscore,noitalics]#[fg=$tokyonight_black,bg=$tokyonight_blue,bold] #h #[fg=$tokyonight_yellow, bg=$tokyonight_blue]#[fg=$tokyonight_black,bg=$tokyonight_yellow]#{pomodoro_status}"
+set "status-right" " #[fg=$tokyonight_white,bg=$tokyonight_black,nounderscore,noitalics]#{playerctl_full} ${date_format} ${time_format} #[fg=$tokyonight_visual_grey,bg=$tokyonight_black]#[fg=$tokyonight_visual_grey,bg=$tokyonight_visual_grey]#[fg=$tokyonight_white, bg=$tokyonight_visual_grey]${status_widgets} #[fg=$tokyonight_blue,bg=$tokyonight_visual_grey,nobold,nounderscore,noitalics]#[fg=$tokyonight_black,bg=$tokyonight_blue,bold] #h #[fg=$tokyonight_yellow, bg=$tokyonight_blue]#[fg=$tokyonight_black,bg=$tokyonight_yellow]#{pomodoro_status}#[fg=green]#($TMUX_PLUGIN_MANAGER_PATH/tmux-mem-cpu-load/tmux-mem-cpu-load --colors --powerline-right --interval 2)"
 # set "status-left" "#[fg=$tokyonight_black,bg=$tokyonight_red,bold] #S #{prefix_highlight}#[fg=$tokyonight_red,bg=$tokyonight_black,nobold,nounderscore,noitalics]"
 set "status-left" "#[fg=$tokyonight_black,bg=$tokyonight_blue,bold] #S #{prefix_highlight}#[fg=$tokyonight_blue,bg=$tokyonight_black,nobold,nounderscore,noitalics]"
 

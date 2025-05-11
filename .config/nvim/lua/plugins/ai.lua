@@ -46,7 +46,7 @@ return {
         disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
         language = 'English', -- Copilot answer language settings when using default prompts. Default language is English.
         mode = 'split', -- newbuffer or split  , default: newbuffer
-        model = 'claude-3.5-sonnet', -- 'gpt-4o', --'claude-3.5-sonnet'
+        model = 'claude-3.7-sonnet', -- 'gpt-4o', --'claude-3.5-sonnet'
         mappings = {
           reset = {
             normal = '<C-x>',
@@ -56,6 +56,97 @@ return {
         -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
         temperature = 0.1,
         chat_autocomplete = true, -- nvim-cmp/blink/etc integration
+        providers = {
+          lmstudio = {
+            prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
+            prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
+
+            get_models = function(headers)
+              local response, err = require('CopilotChat.utils').curl_get('http://localhost:1234/v1/models', {
+                headers = headers,
+                json_response = true
+              })
+
+              if err then
+                error(err)
+              end
+
+              return vim.tbl_map(function(model)
+                return {
+                  id = model.id,
+                  name = model.id,
+                }
+              end, response.body.data)
+            end,
+
+            embed = function(inputs, headers)
+              local response, err = require('CopilotChat.utils').curl_post('http://localhost:1234/v1/embeddings', {
+                headers = headers,
+                json_request = true,
+                json_response = true,
+                body = {
+                  dimensions = 512,
+                  input = inputs,
+                  model = 'text-embedding-nomic-embed-text-v1.5',
+                },
+              })
+
+              if err then
+                error(err)
+              end
+
+              return response.body.data
+            end,
+
+            get_url = function()
+              return 'http://localhost:1234/v1/chat/completions'
+            end,
+          },
+          ollama = {
+            prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
+            prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
+
+            get_models = function(headers)
+              local response, err = require('CopilotChat.utils').curl_get('http://localhost:11434/v1/models', {
+                headers = headers,
+                json_response = true,
+              })
+
+              if err then
+                error(err)
+              end
+
+              return vim.tbl_map(function(model)
+                return {
+                  id = model.id,
+                  name = model.id,
+                }
+              end, response.body.data)
+            end,
+
+            embed = function(inputs, headers)
+              local response, err = require('CopilotChat.utils').curl_post('http://localhost:11434/v1/embeddings', {
+                headers = headers,
+                json_request = true,
+                json_response = true,
+                body = {
+                  input = inputs,
+                  model = 'all-minilm',
+                },
+              })
+
+              if err then
+                error(err)
+              end
+
+              return response.body.data
+            end,
+
+            get_url = function()
+              return 'http://localhost:11434/v1/chat/completions'
+            end,
+          },
+        }
       }
 
       -- disable default <tab> complete mapping for copilot chat when doing this
@@ -71,14 +162,15 @@ return {
     end,
     event = 'VeryLazy',
     keys = {
-      {
-        '<leader>ccb',
-        "<cmd>lua require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer})<cr>",
-        desc = 'Chat with buffer',
-      },
-      { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code' },
+      -- {
+      --   '<leader>ccb',
+      --   "<cmd>lua require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer})<cr>",
+      --   desc = 'Chat with buffer',
+      -- },
+      { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code', mode = { 'n', 'v' } },
       { '<leader>cct', '<cmd>CopilotChatTests<cr>', desc = 'CopilotChat - Generate tests' },
-      { '<leader>ccT', '<cmd>CopilotChatToggle<cr>', desc = 'CopilotChatToggle' },
+      { '<leader>ccb', '<cmd>CopilotChatToggle<cr>', desc = 'CopilotChatToggle' },
+      { '<leader>ccm', '<cmd>CopilotChatModels<cr>', desc = 'CopilotChatModels' },
       { '<leader>ccf', '<cmd>CopilotChatFixDiagnostic<cr>', desc = 'CopilotChat - Fix diagnostic' }, -- Get a fix for the diagnostic message under the cursor.
       { '<leader>ccr', '<cmd>CopilotChatReset<cr>', desc = 'CopilotChat - Reset chat history and clear buffer' }, -- Reset chat history and clear buffer.
       {
@@ -101,6 +193,47 @@ return {
     },
   },
   {
+    'piersolenski/wtf.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+    },
+    opts = {},
+    keys = {
+      {
+        '<leader>wa',
+        mode = { 'n', 'x' },
+        function()
+          require('wtf').ai()
+        end,
+        desc = 'Debug diagnostic with AI',
+      },
+      {
+        mode = { 'n' },
+        '<leader>ws',
+        function()
+          require('wtf').search()
+        end,
+        desc = 'Search diagnostic with Google',
+      },
+      {
+        mode = { 'n' },
+        '<leader>wh',
+        function()
+          require('wtf').history()
+        end,
+        desc = 'Populate the quickfix list with previous chat history',
+      },
+      {
+        mode = { 'n' },
+        '<leader>wg',
+        function()
+          require('wtf').grep_history()
+        end,
+        desc = 'Grep previous chat history with Telescope',
+      },
+    },
+  },
+  {
     -- "jonaustin/avante.nvim", -- use my fork
     'yetone/avante.nvim',
     event = 'VeryLazy',
@@ -109,10 +242,12 @@ return {
     -- branch = "trigger-suggestions",
     opts = {
       -- @alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-      debug = true,
-      provider = 'copilot',
-      auto_suggestions_provider = 'claude', -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      debug = false,
+      provider = 'lmstudioQwen', --'copilot',
+      -- auto_suggestions_provider = 'claude', -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      cursor_applying_provider = 'lmstudioQwen', --''lmstudioLlama33', -- he suggests llama-3.3-70b
       behaviour = {
+        enable_cursor_planning_mode = true,
         auto_suggestions = false, -- don't use this if already using copilot
         auto_suggestions_debounce = 500,
         auto_set_highlight_group = true,
@@ -120,6 +255,22 @@ return {
         auto_apply_diff_after_generation = false,
         support_paste_from_clipboard = false,
         minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
+      },
+      -- https://github.com/yetone/avante.nvim/discussions/687#discussioncomment-12275680
+      vendors = {
+        ---@type AvanteProvider
+        lmstudioQwen = {
+          __inherited_from = 'openai',
+          api_key_name = '',
+          endpoint = 'http://127.0.0.1:1234/v1',
+          model = 'qwen2.5-coder-32b-instruct-mlx@4bit',
+        },
+        lmstudioLlama33 = {
+          __inherited_from = 'openai',
+          api_key_name = '',
+          endpoint = 'http://127.0.0.1:1234/v1',
+          model = 'llama-3.3-70b-instruct',
+        },
       },
       claude = {
         endpoint = 'https://api.anthropic.com',
@@ -179,72 +330,30 @@ return {
     },
   },
   {
-    'piersolenski/wtf.nvim',
+    "olimorris/codecompanion.nvim",
     dependencies = {
-      'MunifTanjim/nui.nvim',
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
+      "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
+      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
+      { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
     },
-    opts = {},
+    config = function()
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = "copilot", --"anthropic",
+          },
+          inline = {
+            adapter = "copilot",
+          },
+        },
+      })
+    end,
     keys = {
-      {
-        '<leader>wa',
-        mode = { 'n', 'x' },
-        function()
-          require('wtf').ai()
-        end,
-        desc = 'Debug diagnostic with AI',
-      },
-      {
-        mode = { 'n' },
-        '<leader>ws',
-        function()
-          require('wtf').search()
-        end,
-        desc = 'Search diagnostic with Google',
-      },
-      {
-        mode = { 'n' },
-        '<leader>wh',
-        function()
-          require('wtf').history()
-        end,
-        desc = 'Populate the quickfix list with previous chat history',
-      },
-      {
-        mode = { 'n' },
-        '<leader>wg',
-        function()
-          require('wtf').grep_history()
-        end,
-        desc = 'Grep previous chat history with Telescope',
-      },
+      { "<leader>cca", ":CodeCompanionActions<CR>", desc = "CodeCompanion - Actions" },
+      { "<leader>ccc", ":CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
     },
-  },
-  {
-    -- i want to like this, but it's practically unusable (i.e. try asking it to delete the neoai plugin line from this file, jeez.
-    -- "olimorris/codecompanion.nvim",
-    -- dependencies = {
-    --   "nvim-lua/plenary.nvim",
-    --   "nvim-treesitter/nvim-treesitter",
-    --   "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
-    --   "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
-    --   { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
-    --   { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
-    -- },
-    -- config = function()
-    --   require("codecompanion").setup({
-    --     strategies = {
-    --       chat = {
-    --         adapter = "copilot", --"anthropic",
-    --       },
-    --       inline = {
-    --         adapter = "copilot",
-    --       },
-    --     },
-    --   })
-    -- end,
-    -- keys = {
-    --   { "<leader>cca", ":CodeCompanionActions<CR>", desc = "CodeCompanion - Actions" },
-    --   { "<leader>ccc", ":CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
-    -- },
   },
 }

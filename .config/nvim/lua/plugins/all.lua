@@ -64,10 +64,13 @@ return {
     -- LSP Configuration & Plugins
     -- vim.lsp.set_log_level("DEBUG")
     'neovim/nvim-lspconfig',
+    commit = "cb33dea",
+    -- tag = 'v1.8.0',
+    -- tag = 'v1.8.0',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
+      { 'williamboman/mason-lspconfig.nvim', branch = 'v1.x' },
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -191,69 +194,69 @@ return {
       end, { desc = 'Format file or range (in visual mode)' })
     end,
   },
-  {
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    opts = {
-      -- a list of all tools you want to ensure are installed upon
-      -- start
-      ensure_installed = {
-        -- you can pin a tool to a particular version
-        -- { 'golangci-lint', version = 'v1.47.0' },
-
-        -- you can turn off/on auto_update per tool
-        { 'bash-language-server', auto_update = true },
-
-        'black',
-        'codespell',
-        'delve',
-        'dockerls',
-        'editorconfig-checker',
-        'eslint_d',
-        'eslint',
-        'gofumpt',
-        'golangci-lint',
-        'golines',
-        'gomodifytags',
-        'gopls',
-        'gotests',
-        'htmx',
-        'html',
-        'impl',
-        'isort',
-        'json-to-struct',
-        'jsonls',
-        'lua-language-server',
-        -- 'luacheck',
-        'markdown-toc',
-        'misspell',
-        'pyright',
-        'revive',
-        'rubocop',
-        'ruby-lsp',
-        'ruff',
-        'rufo',
-        'shellcheck',
-        'shfmt',
-        -- 'sorbet',
-        'sqls',
-        'staticcheck',
-        'stylua',
-        'tflint',
-        'terraformls',
-        'ts_ls',
-        'vim-language-server',
-        'vint',
-      },
-
-      -- Disable integration with other Mason plugins. This removes
-      -- the ability to to use the alternative names of packages provided
-      -- by these plugins but disables them from immediately becoming loaded
-      integrations = {
-        ['mason-lspconfig'] = true,
-        ['mason-nvim-dap'] = true,
-      },
-    },
-  },
+  -- {
+  --   'WhoIsSethDaniel/mason-tool-installer.nvim',
+  --   opts = {
+  --     -- a list of all tools you want to ensure are installed upon
+  --     -- start
+  --     ensure_installed = {
+  --       -- you can pin a tool to a particular version
+  --       -- { 'golangci-lint', version = 'v1.47.0' },
+  --
+  --       -- you can turn off/on auto_update per tool
+  --       { 'bash-language-server', auto_update = true },
+  --
+  --       'black',
+  --       'codespell',
+  --       'delve',
+  --       'dockerls',
+  --       'editorconfig-checker',
+  --       'eslint_d',
+  --       'eslint',
+  --       'gofumpt',
+  --       'golangci-lint',
+  --       'golines',
+  --       'gomodifytags',
+  --       'gopls',
+  --       'gotests',
+  --       'htmx',
+  --       'html',
+  --       'impl',
+  --       'isort',
+  --       'json-to-struct',
+  --       'jsonls',
+  --       'lua-language-server',
+  --       -- 'luacheck',
+  --       'markdown-toc',
+  --       'misspell',
+  --       'pyright',
+  --       'revive',
+  --       'rubocop',
+  --       'ruby-lsp',
+  --       'ruff',
+  --       'rufo',
+  --       'shellcheck',
+  --       'shfmt',
+  --       -- 'sorbet',
+  --       'sqls',
+  --       'staticcheck',
+  --       'stylua',
+  --       'tflint',
+  --       'terraformls',
+  --       'ts_ls',
+  --       'vim-language-server',
+  --       'vint',
+  --     },
+  --
+  --     -- Disable integration with other Mason plugins. This removes
+  --     -- the ability to to use the alternative names of packages provided
+  --     -- by these plugins but disables them from immediately becoming loaded
+  --     integrations = {
+  --       ['mason-lspconfig'] = true,
+  --       ['mason-nvim-dap'] = true,
+  --     },
+  --   },
+  -- },
 
   {
     'folke/which-key.nvim',

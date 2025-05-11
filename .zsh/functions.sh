@@ -565,3 +565,42 @@ function taocli() {
     xmlstarlet sel -t -v "(html/body/ul/li[count(p)>0])[$RAND mod last()+1]" |
     xmlstarlet unesc | fmt -80 | iconv -t US
   }
+
+yt() {
+    if [ "$#" -eq 0 ] || [ "$#" -gt 2 ]; then
+        echo "Usage: yt [-t | --timestamps] youtube-link"
+        echo "Use the '-t' flag to get the transcript with timestamps."
+        return 1
+    fi
+
+    transcript_flag="--transcript"
+    if [ "$1" = "-t" ] || [ "$1" = "--timestamps" ]; then
+        transcript_flag="--transcript-with-timestamps"
+        shift
+    fi
+    local video_link="$1"
+    fabric-ai -y "$video_link" $transcript_flag
+}
+
+function update-llm-lm() {
+  for n in $(lms ls|awk '{print $1}'|grep -v '^$'|grep -vi Embedding|grep -vi you|grep -v LLMs); do cat <<EOD
+  - model_id: "lm_${n}"
+    model_name: $n
+    api_base: "http://localhost:1234/v1"
+EOD
+  done > ~/ai/llm-all/io.datasette.llm/extra-openai-models.yaml
+}
+  
+curl2summarize() {
+    if [ -z "$1" ]; then
+        echo "Usage: curl2summarize <url> [model]"
+        return 1
+    fi
+    
+    local model_param=""
+    if [ -n "$2" ]; then
+        model_param="-m $2"
+    fi
+    
+    curl -s "$1" | html2markdown | llm $model_param -s "summarize"
+}

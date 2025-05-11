@@ -113,9 +113,10 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
 end)
 
 return {
+  window_decorations = "RESIZE", -- https://wezterm.org/config/lua/config/window_decorations.html
   color_scheme = "tokyonight",
   font_dirs = { "fonts" },
-  font_size = 10.0,
+  font_size = 13.0,
   dpi = 192.0,
   freetype_load_target = "Normal",
   font = wezterm.font_with_fallback({
@@ -153,40 +154,31 @@ return {
     fade_out_duration_ms = 75,
     target = "CursorColor",
   },
-  launch_menu = {
-    {
-      label = "firefox",
-      args = { "firefox" },
-    },
-    {
-      label = "pcmanfm",
-      args = { "pcmanfm" },
-    },
-  },
   -- disable_default_key_bindings = true,
-  leader = { key = 'q', mods = 'SHIFT|CTRL', timeout_milliseconds = 1000 },
+  leader = { key = 'q', mods = 'SUPER', timeout_milliseconds = 1000 },
   keys = {
     -- fixme: use super key; change i3
-    { key = 'V',   mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
-    { key = 'v',   mods = 'CTRL', action = act.PasteFrom 'Clipboard' },
+    -- { key = 'V',   mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
+    -- { key = 'v',   mods = 'CTRL', action = act.PasteFrom 'Clipboard' },
     { key = 'C',   mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
     { key = 'c',   mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
+    { key = 'c',   mods = 'SUPER', action = act.CopyTo 'Clipboard' },
+    { key = 'v',   mods = 'SUPER', action = act.PasteFrom 'Clipboard' },
 
-    { key = 'Tab', mods = 'CTRL',       action = act.ActivateTabRelative(1) },
-    { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
+    { key = ']', mods = 'SUPER|SHIFT',       action = act.ActivateTabRelative(1) },
+    { key = '[', mods = 'SUPER|SHIFT', action = act.ActivateTabRelative(-1) },
     { key = 't',   mods = 'SUPER',      action = act.SpawnTab 'CurrentPaneDomain' },
-    { key = '1',   mods = 'SHIFT|CTRL', action = act.ActivateTab(0) },
-    { key = '2',   mods = 'SHIFT|CTRL', action = act.ActivateTab(1) },
-    { key = '3',   mods = 'SHIFT|CTRL', action = act.ActivateTab(2) },
-    { key = '4',   mods = 'SHIFT|CTRL', action = act.ActivateTab(3) },
-    { key = '5',   mods = 'SHIFT|CTRL', action = act.ActivateTab(4) },
-    { key = '6',   mods = 'SHIFT|CTRL', action = act.ActivateTab(5) },
-    { key = '7',   mods = 'SHIFT|CTRL', action = act.ActivateTab(6) },
-    { key = '8',   mods = 'SHIFT|CTRL', action = act.ActivateTab(7) },
-    { key = '9',   mods = 'SHIFT|CTRL', action = act.ActivateTab(-1) },
+    { key = '1',   mods = 'SUPER', action = act.ActivateTab(0) },
+    { key = '2',   mods = 'SUPER', action = act.ActivateTab(1) },
+    { key = '3',   mods = 'SUPER', action = act.ActivateTab(2) },
+    { key = '4',   mods = 'SUPER', action = act.ActivateTab(3) },
+    { key = '5',   mods = 'SUPER', action = act.ActivateTab(4) },
+    { key = '6',   mods = 'SUPER', action = act.ActivateTab(5) },
+    { key = '7',   mods = 'SUPER', action = act.ActivateTab(6) },
+    { key = '8',   mods = 'SUPER', action = act.ActivateTab(7) },
+    { key = '9',   mods = 'SUPER', action = act.ActivateTab(-1) },
 
     { key = '0',   mods = 'CTRL',       action = act.ResetFontSize },
-    { key = '0',   mods = 'SHIFT|CTRL', action = act.ResetFontSize },
     { key = '+',   mods = 'CTRL',       action = act.IncreaseFontSize },
     { key = '+',   mods = 'SHIFT|CTRL', action = act.IncreaseFontSize },
     { key = '=',   mods = 'CTRL',       action = act.IncreaseFontSize },
@@ -195,11 +187,14 @@ return {
     { key = '-',   mods = 'CTRL',       action = act.DecreaseFontSize },
     { key = '-',   mods = 'SHIFT|CTRL', action = act.DecreaseFontSize },
     { key = '-',   mods = 'SUPER',      action = act.DecreaseFontSize },
+    { key = 'n',   mods = 'SUPER',      action = act.SpawnWindow },
+    { key = 'w',   mods = 'SUPER',      action = act.CloseCurrentTab({ confirm = true }) },
     -- {key="g", mods="LEADER", action="ShowTabNavigator"},
     -- {key="c", mods="LEADER", action="ShowLauncher"},
-    -- {key="r", mods="LEADER", action="ReloadConfiguration"},
+    {key="r", mods="LEADER", action="ReloadConfiguration"},
     -- {key="x", mods="LEADER", action=wezterm.action{CloseCurrentPane={confirm=true}}},
     -- {key="x", mods="LEADER|SHIFT", action=wezterm.action{CloseCurrentTab={confirm=true}}},
     -- {key="`", mods="LEADER", action=wezterm.action{SendString="`"}},
-  }
+  },
+  disable_default_key_bindings = true
 }

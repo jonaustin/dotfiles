@@ -18,13 +18,16 @@ export DOTFILES=$HOME/.config
 ZINIT_HOME=$HOME/.zinit/
 source $ZINIT_HOME/bin/zinit.zsh
 
-fpath=($HOME/.zsh/completion /usr/ $fpath)
 if [ $SYSTEM_TYPE = "Linux" ]; then
+  fpath=($HOME/.zsh/completion /usr/ $fpath)
   # init XDG dirs
   export XDG_CONFIG_HOME=$HOME/.config
   export XDG_CACHE_HOME=$HOME/.cache
   export XDG_DATA_HOME=$HOME/.local/share
   export XDG_CONFIG_DIRS=/etc/xdg
+else
+  export HOMEBREW_PREFIX=/opt/homebrew
+  fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $HOME/.zsh/completion /usr/ $fpath)
 fi
 
 # completions
@@ -511,5 +514,18 @@ zinit light tom-doerr/zsh_codex
 export AI_PROVIDER=openai # tgpt
 export AIDER_DARK_MODE=true
 export AIDER_VIM=true
-export OLLAMA_HOST="http://192.168.1.174:11434" # for ollama-llm
-export OLLAMA_API_BASE="http://192.168.1.174:11434" # for aider
+# export OLLAMA_HOST="http://192.168.1.174:11434" # for ollama-llm
+# export OLLAMA_API_BASE="http://192.168.1.174:11434" # for aider
+export OLLAMA_HOST="http://127.0.0.1:11434" # for ollama-llm
+export OLLAMA_API_BASE=http://127.0.0.1:11434 # aider
+export PYTORCH_ENABLE_MPS_FALLBACK=1
+# export PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.8 # https://github.com/Wan-Video/Wan2.1/pull/69#issuecomment-2688077656
+export LM_STUDIO_API_BASE=http://localhost:1234/v1 # for aider
+export LM_STUDIO_API_KEY=dummy-api-key # for aider
+export OLLAMA_CONTEXT_LENGTH=8192 # only when running ollama serve manually (i.e. brew service won't use this)
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/jon/.lmstudio/bin"
+
+# export TF_PRODUCT="opentofu"
+export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"

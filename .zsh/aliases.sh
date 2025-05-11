@@ -165,6 +165,8 @@ alias screenshot='ffmpeg -f x11grab  -s 3840x2160 -i :0.0 -r 25 -vcodec libx264 
 alias pgoo='ping -c2 google.com'
 alias wgetnc='wget --no-check-certificate'
 alias syn='ssh root@10.0.1.8'
+alias listeners="sudo lsof -i -P -n | grep LISTEN"
+alias listener="sudo lsof -i -P -n | grep LISTEN | grep "
 
 ## Monitoring
 alias it='iotop'
@@ -426,14 +428,58 @@ sam-tail-logs() {
 }
 
 # ai
-alias llml="llm -m llama3.2:3b "
+alias llml="llm -m Llama-3.3-70B-Instruct-4bit "
+alias llmc="llm -m claude-3.7-sonnet "
 alias ld7="llm -m deepseek-r1:7b"
 alias ld8="llm -m deepseek-r1:8b"
 alias gdllm="git diff | llm -s 'Describe these changes'"
+llmcnt() {
+  llm "cliffnotes for $1"
+}
 aidero() {
   aider --model "ollama_chat/${1}"
 }
+aiderl() {
+  aider --model "lm_studio/${1}"
+}
 alias aiderords="aider --architect --model openrouter/deepseek/deepseek-r1 --editor-model openrouter/anthropic/claude-3.5-sonnet"
+alias aiderqwen="aider --notifications --watch-files --model ollama_chat/qwen2.5-coder:32b"
+alias aiderqwqqwen="aider --notifications --watch-files --architect --model ollama_chat/qwq:32b --editor-model ollama_chat/qwen2.5-coder:32b"
+alias aiderqwqqwenmlx="aider --notifications --watch-files --no-show-model-warnings --architect --model lm_studio/qwq-32b@8bit --editor-model lm_studio/qwen2.5-coder-32b-instruct-mlx@8bit"
+alias aiderqwqmistral="aider --notifications --watch-files --architect --model ollama_chat/qwq:32b --editor-model ollama_chat/hf.co/bartowski/mistralai_Mistral-Small-3.1-24B-Instruct-2503-GGUF:Q4_K_M"
+# note: k6_K overheats m4 max too much (225* F)
+alias aidermistral8="aider --notifications --watch-files --model ollama_chat/hf.co/bartowski/mistralai_Mistral-Small-3.1-24B-Instruct-2503-GGUF:Q6_K"
+alias aidermistral="aider --notifications --watch-files --model ollama_chat/hf.co/bartowski/mistralai_Mistral-Small-3.1-24B-Instruct-2503-GGUF:Q4_K_M"
 alias aiderds="aider --architect --model r1 --editor-model sonnet"
 alias ghe="gh copilot explain"
 alias ghs="gh copilot suggest"
+alias fabric='fabric-ai'
+
+## ollama 
+ollamastopall() { for n in $(ollama ps | grep -v NAME | awk '{print $1}'); do ollama stop $n; done }
+ollamapull() { for n in $(grep -v '^#' ~/exp/ai/models.txt); do echo $n; ollama pull $n; done }
+alias ol='ollama'
+llmtest() { 
+  llm -m $1 "delete a model from ollama" 
+}
+ollamatemps() { 
+  for MODEL in $(ollama ls | grep -v NAME | awk '{print $1}'); do echo $MODEL; ollama show --parameters $MODEL | grep temperature; done
+}
+
+# mac
+stupidmacallow() { 
+  xattr -d 'com.apple.quarantine' $1 
+}
+
+alias ddocker="~/.docker/bin/docker"
+yt-summarize() {
+  pattern=${2:-"summarize"}
+  fabric-ai --transcript-with-timestamps -y $1 --stream --pattern $pattern
+}
+
+# Mac
+if [ $SYSTEM_TYPE = "Darwin" ]; then
+  alias agu='brew doctor; brew update && brew upgrade'
+  alias r="brew uninstall"
+  alias bs="brew services"
+fi;

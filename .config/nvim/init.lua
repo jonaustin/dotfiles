@@ -630,9 +630,7 @@ require('neoai').setup({
 -- [[ Custom Commands ]]
 vim.api.nvim_create_user_command('DiagnosticToggle', function()
   local current_state = vim.diagnostic.config().virtual_text
-  vim.diagnostic.config({
-    virtual_text = not current_state,
-  })
+  vim.diagnostic.config({ virtual_text = not current_state, })
 end, {})
 
 -- typos

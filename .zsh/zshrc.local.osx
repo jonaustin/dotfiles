@@ -4,10 +4,11 @@
   #z --add "$(pwd -P)"
 #}
 
-export PATH=/opt/homebrew/bin:$PATH
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 alias top='top -o cpu'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias sed='gsed' # non-gnu sed cannot use \n
+alias agu='brew doctor; brew update && brew upgrade'
 
 # network
 alias lxs='ssh lxs'
@@ -45,3 +46,7 @@ alias listening="sudo lsof -i -P | grep -i 'listen'"
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+alias tfree="top -l 1 | grep PhysMem"
+alias free="free -h" # https://github.com/zfdang/free-for-macOS
+alias df='duf --only-mp /'
