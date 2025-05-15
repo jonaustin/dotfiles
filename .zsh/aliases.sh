@@ -428,6 +428,7 @@ sam-tail-logs() {
 }
 
 # ai
+alias llm="llm -o unlimited 1"
 alias llml="llm -m Llama-3.3-70B-Instruct-4bit "
 alias llmc="llm -m claude-3.7-sonnet "
 alias ld7="llm -m deepseek-r1:7b"
