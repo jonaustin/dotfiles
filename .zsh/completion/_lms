@@ -1,0 +1,221 @@
+#compdef lms
+
+# Purpose:
+# This script file `_lms` should be placed in your fpath to provide zsh completions functionality for LMS commands.
+# It makes use of zsh's completion system by defining completion behaviors for specific commands.
+
+# Installation:
+# 1. Check your current fpath by running: `echo $fpath` in your zsh shell.
+# 2. To add a new directory to fpath, modify your .zshrc file:
+#    Example: `fpath=($HOME/.zsh_completions $fpath)`
+# 3. Place this script in the directory you added to your fpath.
+# 4. For system-wide installation on Linux:
+#    Download and save this script using:
+#    sudo wget -O /usr/share/zsh/site-functions/_lms https://gist.githubusercontent.com/obeone/e090762d683f1e666caf12902aa74c75/raw/_lms.zsh
+
+# Contributions:
+# Major contributions by:
+# - ChatGPT [ZSH Expert](https://chatgpt.com/g/g-XczdbjXSW-zsh-expert) as the primary author.
+# - Minor contributions, Guidance and revisions by [obeone](https://github.com/obeone).
+
+# Note:
+# - This file requires that you are using Zsh as your shell.
+# - Ensure that you restart your zsh session after making changes to the fpath.
+
+# Function to fetch models from 'lms ls --json'
+function _fetch_models_from_lms_ls {
+  local -a model_paths
+  model_paths=("${(@f)$(lms ls --json | jq -r '.[].path')}")
+  _describe -t models 'available models' model_paths
+}
+
+# Function to fetch loaded models from 'lms ps --json'
+function _fetch_loaded_models_from_lms_ps {
+  local -a model_identifiers
+  model_identifiers=("${(@f)$(lms ps --json | jq -r '.[].identifier')}")
+  _describe -t models 'loaded models' model_identifiers
+}
+
+# Main function for handling completions
+function _lms {
+  local -a commands
+  local -a options
+
+  _arguments -C \
+    '1: :->command' \
+    '*:: :->option'
+
+  case $state in
+    command)
+      commands=(
+        'status:Prints the status of LM Studio'
+        'server:Commands for managing the local server'
+        'ls:List all downloaded models'
+        'ps:List all loaded models'
+        'load:Load a model'
+        'unload:Unload a model'
+        'create:Create a new project with scaffolding'
+        'log:Log operations'
+        'version:Prints the version of the CLI'
+        'bootstrap:Bootstrap the CLI'
+      )
+      _describe -t commands 'lms subcommands' commands
+      ;;
+    option)
+      case $words[1] in
+        status)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--yes[Suppress all confirmations and warnings]'
+            '--no-launch[Do not launch LM Studio if it is not running]'
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+        server)
+          local -a subcommands
+          subcommands=(
+            'start:Starts the local server'
+            'status:Displays the status of the local server'
+            'stop:Stops the local server'
+          )
+          _describe -t commands 'lms server subcommands' subcommands
+          ;;
+        start)
+          options=(
+            '--port[Port to run the server on]:port:'
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--no-launch[Do not launch LM Studio]'
+            '--yes[Suppress all confirmations and warnings]'
+            '--cors[Enable CORS]'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+        status)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--json[Outputs the status in JSON format]'
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+        stop)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+        ls)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--yes[Suppress all confirmations and warnings]'
+            '--no-launch[Do not launch LM Studio if it is not running]'
+            '--llm[Show only LLM models]'
+            '--embedding[Show only embedding models]'
+            '--json[Outputs in JSON format]'
+            '--detailed[Show detailed information]'
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+        ps)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--yes[Suppress all confirmations and warnings]'
+            '--no-launch[Do not launch LM Studio if it is not running]'
+            '--json[Outputs in JSON format]'
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+        load)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--gpu[GPU offloading level]:GPU level:(off auto max)'
+            '--context-length[Number of tokens as context]:context length:'
+            '--identifier[Identifier for the model]:identifier:'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--yes[Suppress all confirmations and warnings]'
+            '--no-launch[Do not launch LM Studio if it is not running]'
+            '--exact[Match the model path exactly]'
+            '--help[Show help]'
+            '*:model path:_fetch_models_from_lms_ls'
+          )
+          _arguments $options
+          ;;
+        unload)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--yes[Suppress all confirmations and warnings]'
+            '--no-launch[Do not launch LM Studio if it is not running]'
+            '--all[Unload all models]'
+            '--help[Show help]'
+            '*:model identifier:_fetch_loaded_models_from_lms_ps'
+          )
+          _arguments $options
+          ;;
+        create)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--help[Show help]'
+            ':scaffold type:'
+          )
+          _arguments $options
+          ;;
+        log)
+          subcommands=(
+            'stream:Stream logs from LM Studio'
+          )
+          _describe -t commands 'lms log subcommands' subcommands
+          ;;
+        stream)
+          options=(
+            '--log-level[Specify log level]:log level:(debug info warning error)'
+            '--json[Outputs in JSON format]'
+            '--verbose[Enable verbose logging]'
+            '--quiet[Suppress all logging]'
+            '--yes[Suppress all confirmations and warnings]'
+            '--no-launch[Do not launch LM Studio if it is not running]'
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+        version)
+          options=(
+            '--json[Prints the version in JSON format]'
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+        bootstrap)
+          options=(
+            '--help[Show help]'
+          )
+          _arguments $options
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_lms
+
