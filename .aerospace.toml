@@ -18,11 +18,23 @@ accordion-padding = 0
 
 [mode.main.binding]
     # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
-    # doesn't work
+    alt-shift-enter = '''exec-and-forget osascript -e '
+    tell application "Terminal"
+        do script
+        activate
+    end tell'
+    '''
+
+    alt-enter = '''exec-and-forget osascript -e '
+    do shell script "open -n /Applications/Ghostty.app"'
+    '''
+
     # alt-enter = '''exec-and-forget osascript -e '
-    # tell application "WezTerm"
-    #     do script
-    #     activate
+    # tell application "Ghostty" to activate
+    # tell application "System Events"
+    #     tell process "Ghostty"
+    #         keystroke "n" using {command down}
+    #     end tell
     # end tell'
     # '''
 
