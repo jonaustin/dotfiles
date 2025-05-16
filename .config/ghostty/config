@@ -6,3 +6,4 @@ font-family = "InconsolataGo Nerd Font Mono"
 font-size = 18
 shell-integration-features = no-cursor
 cursor-style = underline
+quit-after-last-window-closed=true
