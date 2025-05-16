@@ -455,6 +455,8 @@ alias aiderds="aider --architect --model r1 --editor-model sonnet"
 alias ghe="gh copilot explain"
 alias ghs="gh copilot suggest"
 alias fabric='fabric-ai'
+alias fabricp='fabric --pattern $(fabric --listpatterns --shell-complete-list | fzf)'
+alias fp='fabric --pattern $(fabric --listpatterns --shell-complete-list | fzf)'
 
 ## ollama 
 ollamastopall() { for n in $(ollama ps | grep -v NAME | awk '{print $1}'); do ollama stop $n; done }
