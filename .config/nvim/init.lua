@@ -437,8 +437,10 @@ cmp.setup({
     end,
   },
   completion = {
+    autocomplete = false,
     completeopt = 'menu,menuone,noinsert,popup', -- display completion men even if there is only one item and don't autoinsert
   },
+  preselect = cmp.PreselectMode.Item, -- Always preselect the first item
   mapping = cmp.mapping.preset.insert({
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -452,7 +454,9 @@ cmp.setup({
       select = true,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
+      if not cmp.visible() then
+        cmp.complete()
+      elseif cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
@@ -471,8 +475,8 @@ cmp.setup({
     end, { 'i', 's' }),
   }),
   sources = { -- note: order matters; determines which show up first in completion menu
-    { name = 'nvim_lsp' },
     { name = 'copilot' },
+    { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer' },
