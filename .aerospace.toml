@@ -16,6 +16,16 @@ enable-normalization-opposite-orientation-for-nested-containers = false
 # You can set 0 to disable the padding feature
 accordion-padding = 0
 
+# Run Sketchybar together with AeroSpace
+# sketchbar has a built-in detection of already running process,
+# so it won't be run twice on AeroSpace restart
+after-startup-command = ['exec-and-forget sketchybar']
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
+]
+
 [mode.main.binding]
     # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
     alt-shift-enter = '''exec-and-forget osascript -e '
@@ -28,6 +38,10 @@ accordion-padding = 0
     alt-enter = '''exec-and-forget osascript -e '
     do shell script "open -n /Applications/Ghostty.app"'
     '''
+
+    # hide application is useless in a tiling window manager
+    cmd-h = [] # Disable "hide application"
+    cmd-alt-h = [] # Disable "hide others"
 
     # alt-enter = '''exec-and-forget osascript -e '
     # tell application "Ghostty" to activate
@@ -81,16 +95,17 @@ accordion-padding = 0
     ctrl-alt-9 = 'workspace 9'
     ctrl-alt-0 = 'workspace 10'
 
-    ctrl-alt-shift-1 = 'move-node-to-workspace 1'
-    ctrl-alt-shift-2 = 'move-node-to-workspace 2'
-    ctrl-alt-shift-3 = 'move-node-to-workspace 3'
-    ctrl-alt-shift-4 = 'move-node-to-workspace 4'
-    ctrl-alt-shift-5 = 'move-node-to-workspace 5'
-    ctrl-alt-shift-6 = 'move-node-to-workspace 6'
-    ctrl-alt-shift-7 = 'move-node-to-workspace 7'
-    ctrl-alt-shift-8 = 'move-node-to-workspace 8'
-    ctrl-alt-shift-9 = 'move-node-to-workspace 9'
-    ctrl-alt-shift-0 = 'move-node-to-workspace 10'
+    # --focus-follows-window is used to ensure workspace changes to trigger the callback for sketchybar to update
+    ctrl-alt-shift-1 = 'move-node-to-workspace 1  --focus-follows-window'
+    ctrl-alt-shift-2 = 'move-node-to-workspace 2  --focus-follows-window'
+    ctrl-alt-shift-3 = 'move-node-to-workspace 3  --focus-follows-window'
+    ctrl-alt-shift-4 = 'move-node-to-workspace 4  --focus-follows-window'
+    ctrl-alt-shift-5 = 'move-node-to-workspace 5  --focus-follows-window'
+    ctrl-alt-shift-6 = 'move-node-to-workspace 6  --focus-follows-window'
+    ctrl-alt-shift-7 = 'move-node-to-workspace 7  --focus-follows-window'
+    ctrl-alt-shift-8 = 'move-node-to-workspace 8  --focus-follows-window'
+    ctrl-alt-shift-9 = 'move-node-to-workspace 9  --focus-follows-window'
+    ctrl-alt-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
 
     alt-shift-c = 'reload-config'
 
@@ -109,6 +124,12 @@ accordion-padding = 0
     if.app-id = 'com.googlecode.iterm2'
     if.window-title-regex-substring = "quaketerm" # set profile -> General -> Title - to only Name
     run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id="com.mitchellh.ghostty"
+    run= [
+      "layout tiling",
+    ]
 
 # [[on-window-detected]]
 #     # just hit ctrl-f when it starts (or make it do that automatically in here)
@@ -130,4 +151,3 @@ accordion-padding = 0
     outer.bottom =     0
     outer.top =        0
     outer.right =      0
-
