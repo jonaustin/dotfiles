@@ -428,7 +428,9 @@ sam-tail-logs() {
 }
 
 # ai
-alias llm="llm -o unlimited 1"
+# llm() {
+#  command llm -o unlimited 1 "$@"
+# }
 alias llml="llm -m Llama-3.3-70B-Instruct-4bit "
 alias llmc="llm -m claude-3.7-sonnet "
 alias ld7="llm -m deepseek-r1:7b"
@@ -457,6 +459,7 @@ alias ghs="gh copilot suggest"
 alias fabric='fabric-ai'
 alias fabricp='fabric --pattern $(fabric --listpatterns --shell-complete-list | fzf)'
 alias fp='fabric --pattern $(fabric --listpatterns --shell-complete-list | fzf)'
+alias claude="${HOME}/.claude/local/claude"
 
 ## ollama 
 ollamastopall() { for n in $(ollama ps | grep -v NAME | awk '{print $1}'); do ollama stop $n; done }
@@ -486,3 +489,13 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   alias r="brew uninstall"
   alias bs="brew services"
 fi;
+
+# get my shit togetha
+alias todo='nvim ~/notes/todo.md'
+
+# Set up zen aliases
+alias breath='zenta now --quick'
+alias breathe='zenta now'
+alias reflect='zenta reflect'
+
+alias unrar='keka unrar'

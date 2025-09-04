@@ -27,7 +27,7 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
   export XDG_CONFIG_DIRS=/etc/xdg
 else
   export HOMEBREW_PREFIX=/opt/homebrew
-  fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $HOME/.zsh/completion /usr/ $fpath)
+  fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $HOME/.zsh/completion /usr/ $HOME/.local/share/zsh/generated_man_completions $fpath)
 fi
 
 # completions
@@ -529,3 +529,11 @@ export PATH="$PATH:/Users/jon/.lmstudio/bin"
 
 # export TF_PRODUCT="opentofu"
 export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+# command_not_found_handler() {
+#   local cmd="$*"
+#   echo "🪿:"
+#   goose run -t "can you try to run this command please: $cmd"
+# }

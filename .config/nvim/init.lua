@@ -340,7 +340,8 @@ local servers = {
   dockerls = {},
   docker_compose_language_service = {},
   gopls = {},
-  pyright = {},
+  basedpyright = {},
+  -- pyright = {},
   -- sorbet = {}, -- doesnt seem to work
   ruby_lsp = {}, -- annoyingly doesnt support go to definition; just use vim-rails gf
   -- solargraph = {
@@ -763,7 +764,7 @@ end
 require('nvim-tree').setup({ on_attach = on_attach })
 
 vim.api.nvim_set_option('guicursor', vim.o.guicursor .. ',n:block')
-require'lspconfig'.pyright.setup{}
+-- require'lspconfig'.pyright.setup{}
 -- require("codecompanion").setup{
 --   opts = {
 --     log_level = "DEBUG",

@@ -176,5 +176,13 @@ sketchybar --add       event           spotify_change $SPOTIFY_EVENT      \
                                        script="$PLUGIN_DIR/spotify.sh"    \
            --subscribe spotify.repeat  mouse.clicked
 
+sketchybar --add item svim.mode right \
+           --set svim.mode popup.align=right \
+                           script="sketchybar --set svim.mode popup.drawing=off" \
+           --subscribe svim.mode front_app_switched window_focus \
+           --add item svim.cmdline popup.svim.mode \
+           --set svim.cmdline icon="Command: "
+
+
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
