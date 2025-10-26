@@ -12,3 +12,5 @@ background-opacity = 0.94
 mouse-hide-while-typing = true
 window-padding-x = 20
 window-padding-y = 15
+keybind = global:option+grave_accent=toggle_quick_terminal
+quick-terminal-animation-duration = 0.3
