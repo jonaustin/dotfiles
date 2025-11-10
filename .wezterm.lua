@@ -195,6 +195,9 @@ return {
     -- {key="x", mods="LEADER", action=wezterm.action{CloseCurrentPane={confirm=true}}},
     -- {key="x", mods="LEADER|SHIFT", action=wezterm.action{CloseCurrentTab={confirm=true}}},
     -- {key="`", mods="LEADER", action=wezterm.action{SendString="`"}},
+
+    -- for claude code
+    {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},
   },
   disable_default_key_bindings = true
 }
