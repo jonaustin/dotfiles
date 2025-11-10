@@ -269,8 +269,6 @@ fi
 # export TERM=xterm-256color # https://github.com/mhinz/vim-galore#true-colors
 # }}}
 
-export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH:$HOME/.local/share/mise/shims
-
 # doom emacs
 export PATH=$PATH:$HOME/.emacs.d/bin/
 
@@ -286,6 +284,9 @@ elif [ $SYSTEM_TYPE = "Linux" ]; then
   . /usr/share/fzf/completion.zsh
   . /usr/share/fzf/key-bindings.zsh
 fi
+
+export PATH=$HOME/.local/share/mise/shims:/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
+
 # note for some unknown reason --follow (symlinks) causes it not to find anything under ~/.zsh (which is not a symlink dir regardless). fd bug?
 FD_OPTIONS="--no-ignore --hidden --exclude .git --exclude node_modules --exclude .cache --exclude .asdf"
 # notes:
@@ -537,3 +538,4 @@ fpath+=~/.zfunc; autoload -Uz compinit; compinit
 #   echo "🪿:"
 #   goose run -t "can you try to run this command please: $cmd"
 # }
+export PATH="/opt/homebrew/opt/bc/bin:$PATH"
