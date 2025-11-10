@@ -529,7 +529,18 @@ export OLLAMA_CONTEXT_LENGTH=8192 # only when running ollama serve manually (i.e
 export PATH="$PATH:/Users/jon/.lmstudio/bin"
 
 # export TF_PRODUCT="opentofu"
+export TG_TF_FORWARD_STDOUT=true
 export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
+
+# claude code
+export DISABLE_TELEMETRY=1
+export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32000 # why is this max sigh; https://github.com/anthropics/claude-code/issues/4255
+export MAX_MCP_OUTPUT_TOKENS=50000
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/jon/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
@@ -539,3 +550,5 @@ fpath+=~/.zfunc; autoload -Uz compinit; compinit
 #   goose run -t "can you try to run this command please: $cmd"
 # }
 export PATH="/opt/homebrew/opt/bc/bin:$PATH"
+
+source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script

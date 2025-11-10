@@ -46,7 +46,7 @@ return {
         disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
         language = 'English', -- Copilot answer language settings when using default prompts. Default language is English.
         mode = 'split', -- newbuffer or split  , default: newbuffer
-        model = 'claude-3.7-sonnet', -- 'gpt-4o', --'claude-3.5-sonnet'
+        model = 'claude-sonnet-4.5', -- 'gpt-4o', --'claude-3.5-sonnet'
         mappings = {
           reset = {
             normal = '<C-x>',

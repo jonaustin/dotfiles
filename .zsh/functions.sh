@@ -507,7 +507,11 @@ teatime() {
   for n in {1..${secs}}; do
     echo $n; sleep 1;
   done
-  notify-send "tea done" -u critical
+  if [ $SYSTEM_TYPE = "Darwin" ]; then
+    terminal-notifier "tea done"
+  else
+    notify-send "tea done" -u critical
+  fi
 }
 
 # notes with fzf
