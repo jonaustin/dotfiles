@@ -604,3 +604,14 @@ curl2summarize() {
     
     curl -s "$1" | html2markdown | llm $model_param -s "summarize"
 }
+
+percent() {
+    # $1 = percent (e.g. 4)
+    # $2 = total   (e.g. 120)
+    # $3 = optional decimal places (default 0)
+    local pct=$1 total=$2 precision=${3:-0}
+    # Give bc a couple extra digits, then let printf round for us
+    local scale=$((precision + 2))
+    local raw=$(echo "scale=$scale; $pct * $total / 100" | bc -l)
+    printf "%.*f\n" "$precision" "$raw"
+}
