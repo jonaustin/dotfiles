@@ -84,16 +84,16 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
     # alt-a = 'focus parent'
 
-    ctrl-alt-1 = 'workspace 1'
-    ctrl-alt-2 = 'workspace 2'
-    ctrl-alt-3 = 'workspace 3'
-    ctrl-alt-4 = 'workspace 4'
-    ctrl-alt-5 = 'workspace 5'
-    ctrl-alt-6 = 'workspace 6'
-    ctrl-alt-7 = 'workspace 7'
-    ctrl-alt-8 = 'workspace 8'
-    ctrl-alt-9 = 'workspace 9'
-    ctrl-alt-0 = 'workspace 10'
+    ctrl-alt-1 = 'workspace 1 --auto-back-and-forth'
+    ctrl-alt-2 = 'workspace 2 --auto-back-and-forth'
+    ctrl-alt-3 = 'workspace 3 --auto-back-and-forth'
+    ctrl-alt-4 = 'workspace 4 --auto-back-and-forth'
+    ctrl-alt-5 = 'workspace 5 --auto-back-and-forth'
+    ctrl-alt-6 = 'workspace 6 --auto-back-and-forth'
+    ctrl-alt-7 = 'workspace 7 --auto-back-and-forth'
+    ctrl-alt-8 = 'workspace 8 --auto-back-and-forth'
+    ctrl-alt-9 = 'workspace 9 --auto-back-and-forth'
+    ctrl-alt-0 = 'workspace 10 --auto-back-and-forth'
 
     # --focus-follows-window is used to ensure workspace changes to trigger the callback for sketchybar to update
     ctrl-alt-shift-1 = 'move-node-to-workspace 1  --focus-follows-window'
