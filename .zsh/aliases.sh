@@ -431,6 +431,7 @@ sam-tail-logs() {
 # llm() {
 #  command llm -o unlimited 1 "$@"
 # }
+alias llms="llm -T web_search"
 alias llml="llm -m Llama-3.3-70B-Instruct-4bit "
 alias llmc="llm -m claude-3.7-sonnet "
 alias ld7="llm -m deepseek-r1:7b"
@@ -485,7 +486,7 @@ yt-summarize() {
 
 # Mac
 if [ $SYSTEM_TYPE = "Darwin" ]; then
-  alias agu='brew doctor; brew update && brew upgrade'
+  alias agu='brew doctor; brew update && brew upgrade; uv tool upgrade --all'
   alias r="brew uninstall"
   alias bs="brew services"
 fi;
