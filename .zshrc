@@ -197,7 +197,6 @@ bindkey "^Z" Resume
 #zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 ## open current command in vim; esc to visual mode and hit 'v'
-export VISUAL=$EDITOR
 autoload edit-command-line; zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
@@ -374,7 +373,7 @@ zinit snippet OMZ::plugins/golang/golang.plugin.zsh # completions/aliases
 
 if [ $SYSTEM_TYPE = "Darwin" ]; then
   export BROWSER='open'
-  export EDITOR='/usr/local/bin/nvim' # homebrew
+  export EDITOR='/opt/homebrew/bin/nvim' # homebrew
   export SHELL='/usr/local/bin/zsh'
 
   # mac paths
@@ -396,6 +395,7 @@ else
   export TERMINAL=wezterm
   export DISABLE_AUTO_TITLE=true
 fi
+export VISUAL=$EDITOR
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -524,9 +524,10 @@ export PYTORCH_ENABLE_MPS_FALLBACK=1
 export LM_STUDIO_API_BASE=http://localhost:1234/v1 # for aider
 export LM_STUDIO_API_KEY=dummy-api-key # for aider
 export OLLAMA_CONTEXT_LENGTH=8192 # only when running ollama serve manually (i.e. brew service won't use this)
-
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/jon/.lmstudio/bin"
+# claude
+export DISABLE_TELEMETRY=YES
 
 # export TF_PRODUCT="opentofu"
 export TG_TF_FORWARD_STDOUT=true
@@ -550,5 +551,3 @@ fpath+=~/.zfunc; autoload -Uz compinit; compinit
 #   goose run -t "can you try to run this command please: $cmd"
 # }
 export PATH="/opt/homebrew/opt/bc/bin:$PATH"
-
-source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
