@@ -1,0 +1,11 @@
+[model_providers.lms]
+name = "LM Studio"
+base_url = "http://localhost:1234/v1"
+
+[profiles.gpt-oss-120b-lms]
+model_provider = "lms"
+model = "openai/gpt-oss-120b"
+
+[profiles.qwen3-coder-30b-lms]
+model_provider = "lm_studio"
+model = "qwen/qwen3-coder-30b"
