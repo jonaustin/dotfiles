@@ -257,7 +257,7 @@ return {
         minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
       },
       -- https://github.com/yetone/avante.nvim/discussions/687#discussioncomment-12275680
-      vendors = {
+      providers = {
         ---@type AvanteProvider
         lmstudioQwen = {
           __inherited_from = 'openai',
@@ -271,21 +271,25 @@ return {
           endpoint = 'http://127.0.0.1:1234/v1',
           model = 'llama-3.3-70b-instruct',
         },
-      },
-      claude = {
-        endpoint = 'https://api.anthropic.com',
-        model = 'claude-3-5-sonnet-20241022',
-        temperature = 0.1, -- kinda creative
-        max_tokens = 4096,
-      },
-      copilot = {
-        endpoint = 'https://api.githubcopilot.com/',
-        model = 'claude-3.5-sonnet',
-        proxy = nil, -- [protocol://]host[:port] Use this proxy
-        allow_insecure = false, -- Do not allow insecure server connections
-        timeout = 30000, -- Timeout in milliseconds
-        temperature = 0.1, -- kinda creative
-        max_tokens = 8192,
+        claude = {
+          endpoint = 'https://api.anthropic.com',
+          model = 'claude-3-5-sonnet-20241022',
+          extra_request_body = {
+            temperature = 0.1, -- kinda creative
+            max_tokens = 4096,
+          }
+        },
+        copilot = {
+          endpoint = 'https://api.githubcopilot.com/',
+          model = 'claude-4-sonnet',
+          proxy = nil, -- [protocol://]host[:port] Use this proxy
+          allow_insecure = false, -- Do not allow insecure server connections
+          timeout = 30000, -- Timeout in milliseconds
+          extra_request_body = {
+            temperature = 0.1, -- kinda creative
+            max_tokens = 8192,
+          }
+        },
       },
       windows = {
         position = 'left',

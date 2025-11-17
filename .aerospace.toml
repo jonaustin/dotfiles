@@ -26,17 +26,46 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
 ]
 
+
 [mode.main.binding]
     # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
-    alt-shift-enter = '''exec-and-forget osascript -e '
-    tell application "Terminal"
-        do script
-        activate
+    # alt-shift-enter = '''exec-and-forget osascript -e '
+    # tell application "Terminal"
+    #     do script
+    #     activate
+    # end tell'
+    # '''
+
+    # This toggle the scratchpad window show/hide
+    alt-shift-f = "exec-and-forget aerospace-scratchpad show Finder"
+    ctrl-alt-backtick = "exec-and-forget aerospace-scratchpad show Ghostty"
+    alt-tab = "exec-and-forget aerospace-scratchpad show Ghostty"
+    alt-esc = "exec-and-forget aerospace-scratchpad show Obsidian"
+
+
+    # alt-enter = '''exec-and-forget osascript -e '
+    # do shell script "open -a /Applications/iTerm.app"'
+    # '''
+    alt-enter = '''exec-and-forget osascript -e '
+    tell application "iTerm"
+        create window with default profile
     end tell'
     '''
 
-    alt-enter = '''exec-and-forget osascript -e '
-    do shell script "open -n /Applications/Ghostty.app"'
+    # alt-shift-enter = '''exec-and-forget osascript -e '
+    # do shell script "open -a /Applications/Ghostty.app"'
+    # '''
+    #do shell script "open -n /Applications/Ghostty.app"'
+
+    alt-shift-enter = '''exec-and-forget osascript -e '
+    tell application "Ghostty"
+        activate
+    end tell
+    tell application "System Events"
+        tell process "Ghostty"
+            keystroke "n" using {command down}
+        end tell
+    end tell'
     '''
 
     # hide application is useless in a tiling window manager
@@ -120,21 +149,19 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     esc = 'mode main'
 
 # quaketerm fix: https://github.com/nikitabobko/AeroSpace/discussions/1139
-[[on-window-detected]]
-    if.app-id = 'com.googlecode.iterm2'
-    if.window-title-regex-substring = "quaketerm" # set profile -> General -> Title - to only Name
-    run = 'layout floating'
+# [[on-window-detected]]
+#     if.app-id = 'com.googlecode.iterm2'
+#     # if.window-title-regex-substring = "quaketerm" # set profile -> General -> Title - to only Name
+#     run = ['layout floating']
 
 [[on-window-detected]]
     if.app-id="com.mitchellh.ghostty"
-    run= [
-      "layout tiling",
-    ]
+    run= [ "layout tiling"]
 
 # [[on-window-detected]]
 #     # just hit ctrl-f when it starts (or make it do that automatically in here)
 #     if.app-id = 'com.github.wez.wezterm'
-#     run = 'layout floating'
+#     run = ['layout floating']
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:

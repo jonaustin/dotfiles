@@ -431,6 +431,7 @@ sam-tail-logs() {
 # llm() {
 #  command llm -o unlimited 1 "$@"
 # }
+llm-update-plugins() {  for n in $(llm plugins --all | jq -r '.[].name'); do llm install -U $n; done }
 alias llms="llm -T web_search"
 # alias llm="llm -o unlimited 1"
 alias llml="llm -m Llama-3.3-70B-Instruct-4bit "
@@ -500,3 +501,6 @@ alias breathe='zenta now'
 alias reflect='zenta reflect'
 
 alias unrar='keka unrar'
+
+# mac
+alias tope='top -stats pid,command,power -o power -s 3'

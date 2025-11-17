@@ -570,6 +570,7 @@ function taocli() {
     xmlstarlet unesc | fmt -80 | iconv -t US
   }
 
+# ai stuff
 yt() {
     if [ "$#" -eq 0 ] || [ "$#" -gt 2 ]; then
         echo "Usage: yt [-t | --timestamps] youtube-link"
@@ -586,14 +587,15 @@ yt() {
     fabric-ai -y "$video_link" $transcript_flag
 }
 
-function update-llm-lm() {
-  for n in $(lms ls|awk '{print $1}'|grep -v '^$'|grep -vi Embedding|grep -vi you|grep -v LLMs); do cat <<EOD
-  - model_id: "lm_${n}"
-    model_name: $n
-    api_base: "http://localhost:1234/v1"
-EOD
-  done > ~/ai/llm-all/io.datasette.llm/extra-openai-models.yaml
-}
+# delete
+# function update-llm-lm() {
+#   for n in $(lms ls|awk '{print $1}'|grep -v '^$'|grep -vi Embedding|grep -vi you|grep -v LLMs); do cat <<EOD
+#   - model_id: "lm_${n}"
+#     model_name: $n
+#     api_base: "http://localhost:1234/v1"
+# EOD
+#   done > ~/ai/llm-all/io.datasette.llm/extra-openai-models.yaml
+# }
   
 curl2summarize() {
     if [ -z "$1" ]; then
@@ -607,6 +609,27 @@ curl2summarize() {
     fi
     
     curl -s "$1" | html2markdown | llm $model_param -s "summarize"
+}
+
+synclaude() {
+  ANTHROPIC_BASE_URL=https://api.synthetic.new/anthropic \
+  ANTHROPIC_AUTH_TOKEN=${SYNTHETIC_API_KEY} \
+  ANTHROPIC_DEFAULT_OPUS_MODEL=hf:zai-org/GLM-4.6 \
+  ANTHROPIC_DEFAULT_SONNET_MODEL=hf:zai-org/GLM-4.6 \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL=hf:zai-org/GLM-4.6 \
+  CLAUDE_CODE_SUBAGENT_MODEL=hf:zai-org/GLM-4.6 \
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
+  claude "$@"
+}
+
+zclaude() {
+  ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic \
+  ANTHROPIC_AUTH_TOKEN=${ZAI_API_KEY} \
+  API_TIMEOUT_MS=3000000 \
+  ANTHROPIC_DEFAULT_OPUS_MODEL=glm-4.6 \
+  ANTHROPIC_DEFAULT_SONNET_MODEL=glm-4.6 \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL=glm-4.5-air \
+  claude "$@"
 }
 
 percent() {
