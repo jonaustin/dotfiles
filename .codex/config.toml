@@ -1,3 +1,10 @@
+model = "gpt-5.1-codex-max"
+
+# allow network access without approval
+network_access = "enabled"
+# allow writing to current dir (only)
+sandbox_mode = "workspace-write"
+
 [model_providers.lms]
 name = "LM Studio"
 base_url = "http://localhost:1234/v1"
@@ -9,3 +16,22 @@ model = "openai/gpt-oss-120b"
 [profiles.qwen3-coder-30b-lms]
 model_provider = "lm_studio"
 model = "qwen/qwen3-coder-30b"
+
+[projects."/Users/jon/exp/ai/codex"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,codex/snake"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,codex/tmp"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,codex"]
+trust_level = "trusted"
+
+[notice]
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+
+[features]
+web_search_request = true
+streamable_shell = true
