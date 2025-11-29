@@ -8,10 +8,6 @@ export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 alias top='top -o cpu'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias sed='gsed' # non-gnu sed cannot use \n
-alias agu='brew doctor; brew update && brew upgrade'
-
-# network
-alias lxs='ssh lxs'
 
 # tmux
 alias core='tmux attach -t core'

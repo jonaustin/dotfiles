@@ -125,15 +125,55 @@
                             "to": [{ "key_code": "left_command" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 866,
+                        "vendor_id": 10730
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "escape" },
+                            "to": [{ "key_code": "caps_lock" }]
+                        },
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "right_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_control" },
+                            "to": [{ "key_code": "right_command" }]
+                        },
+                        {
+                            "from": { "key_code": "right_control" },
+                            "to": [{ "key_code": "right_option" }]
+                        }
+                    ]
                 }
             ],
             "name": "internal",
-            "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
             "complex_modifications": {
                 "rules": [
+                    {
+                        "description": "Map Option+Tab to F18 (for Aerospace)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "tab",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f18" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
                     {
                         "description": "Change caps_lock to left_control if pressed with other keys, change caps_lock to escape if pressed alone.",
                         "manipulators": [
@@ -149,7 +189,7 @@
                         ]
                     },
                     {
-                        "description": "Ctrl key -> hyper key without shift (⌘⌥⌃)",
+                        "description": "left command key -> hyper key without shift (⌥⌃)",
                         "manipulators": [
                             {
                                 "from": { "key_code": "left_command" },
@@ -190,11 +230,16 @@
                         {
                             "from": { "key_code": "left_control" },
                             "to": [{ "key_code": "right_command" }]
+                        },
+                        {
+                            "from": { "key_code": "right_control" },
+                            "to": [{ "key_code": "left_command" }]
                         }
                     ]
                 }
             ],
             "name": "360",
+            "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
