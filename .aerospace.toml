@@ -39,7 +39,7 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     # This toggle the scratchpad window show/hide
     alt-shift-f = "exec-and-forget aerospace-scratchpad show Finder"
     ctrl-alt-backtick = "exec-and-forget aerospace-scratchpad show Ghostty"
-    alt-tab = "exec-and-forget aerospace-scratchpad show Ghostty"
+    f18 = "exec-and-forget aerospace-scratchpad show Ghostty"
     alt-esc = "exec-and-forget aerospace-scratchpad show Obsidian"
 
 

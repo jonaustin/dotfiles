@@ -1,0 +1,25 @@
+{
+  "title": "Use Option+Tab for Aerospace scratchpad",
+  "rules": [
+    {
+      "description": "Map Option+Tab to F18 (for Aerospace)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "tab",
+            "modifiers": {
+              "mandatory": ["option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f18"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
