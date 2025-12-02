@@ -15,3 +15,4 @@ window-padding-y = 5
 keybind = global:option+grave_accent=toggle_quick_terminal
 quick-terminal-animation-duration = 0.2
 link-url = true
+keybind = shift+enter=text:\x1b\r
