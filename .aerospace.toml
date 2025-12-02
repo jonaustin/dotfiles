@@ -37,6 +37,8 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     # '''
 
     # This toggle the scratchpad window show/hide
+    # note: for now, have to first manually run `aerospace-scratchpad move <app>` to move to scratchpad
+    # e.g. on reboot or aerospace restart
     alt-shift-f = "exec-and-forget aerospace-scratchpad show Finder"
     ctrl-alt-backtick = "exec-and-forget aerospace-scratchpad show Ghostty"
     f18 = "exec-and-forget aerospace-scratchpad show Ghostty"
@@ -176,5 +178,9 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     inner.vertical =   0
     outer.left =       0
     outer.bottom =     0
-    outer.top =        0
+    outer.top = [
+        { monitor."Built-in" = 0 },
+        { monitor."LG Ultra HD" = 36 },
+        0
+    ]
     outer.right =      0
