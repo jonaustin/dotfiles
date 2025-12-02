@@ -116,12 +116,6 @@ sketchybar --add item clock right \
   --add item battery right \
   --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
   --subscribe battery system_woke power_source_change \
-  # --add item swap e \
-  # --set swap update_freq=20 script="$PLUGIN_DIR/memswap.sh" \
-  # icon="" \
-  label.font="Hack Nerd Font:Italic:13.0" \
-  icon.color=0x44FFFFFF \
-  label.color=0x44FFFFFF
 
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
 POPUP_SCRIPT="sketchybar -m --set \$NAME popup.drawing=toggle"
@@ -176,7 +170,8 @@ sketchybar --add       event           spotify_change $SPOTIFY_EVENT      \
                                        script="$PLUGIN_DIR/spotify.sh"    \
            --subscribe spotify.repeat  mouse.clicked
 
-sketchybar --add item svim.mode right \
+sketchybar --add event window_focus \
+           --add item svim.mode right \
            --set svim.mode popup.align=right \
                            script="sketchybar --set svim.mode popup.drawing=off" \
            --subscribe svim.mode front_app_switched window_focus \
