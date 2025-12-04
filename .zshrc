@@ -1,6 +1,6 @@
 # zsh profiling
 #setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
-# zmodload zsh/zprof
+# zmodload zsh/zprof # uncomment the zprof line at bottom of file as well
 #for n in `seq 0 10`; do time zsh -i -c exit; done
 #hyperfine --warmup 3 --min-runs 10 "zsh -i -c exit"
 
@@ -36,7 +36,8 @@ fpath=(/Users/jon/.docker/completions $fpath)
 # Add any other fpath additions here...
 fpath+=~/.zfunc
 
-# completions - ONLY INITIALIZE ONCE with smart caching
+# Note: to force a refresh: rm ~/.zcompdump && exec zsh
+# completions - only initialize once with smart caching
 autoload -Uz compinit
 # Only regenerate compdump if it's older than 24 hours
 if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qNmh+24) ]]; then
@@ -50,9 +51,6 @@ if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/.config/doctl/doctl.zsh; compdef _doctl doctl # $ doctl completion zsh
 # else # osx
 fi
-# move these into ~/.zsh/completion/ which is already in fpath..
-# source $HOME/opt/completions/docker.zsh-completion;         compdef _docker         docker
-# source $HOME/opt/completions/docker-compose.zsh-completion; compdef _docker-compose docker-compose
 
 zinit light kazhala/dotbare && _dotbare_completion_cmd
 
