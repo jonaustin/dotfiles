@@ -30,8 +30,20 @@ else
   fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $HOME/.zsh/completion /usr/ $HOME/.local/share/zsh/generated_man_completions $fpath)
 fi
 
-# completions
-autoload -Uz compinit && compinit -du # -U suppress alias expansion, -z use zsh native (instead of ksh i guess); -d cache completion info
+# Docker completions fpath (moved here before compinit)
+fpath=(/Users/jon/.docker/completions $fpath)
+
+# Add any other fpath additions here...
+fpath+=~/.zfunc
+
+# completions - ONLY INITIALIZE ONCE with smart caching
+autoload -Uz compinit
+# Only regenerate compdump if it's older than 24 hours
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qNmh+24) ]]; then
+  compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
+else
+  compinit -C -d "${ZDOTDIR:-$HOME}/.zcompdump" # -C skips security check for speed
+fi
 autoload -U bashcompinit && bashcompinit # support bash completions
 if [ $SYSTEM_TYPE = "Linux" ]; then
   source $HOME/bin/i3/i3-completion/i3_completion.sh # i3-msg completions; must come after bashcompinit
@@ -537,13 +549,7 @@ export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
 export DISABLE_TELEMETRY=1
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32000 # why is this max sigh; https://github.com/anthropics/claude-code/issues/4255
 export MAX_MCP_OUTPUT_TOKENS=50000
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/jon/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
 
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
 # command_not_found_handler() {
 #   local cmd="$*"
@@ -551,3 +557,5 @@ fpath+=~/.zfunc; autoload -Uz compinit; compinit
 #   goose run -t "can you try to run this command please: $cmd"
 # }
 export PATH="/opt/homebrew/opt/bc/bin:$PATH"
+
+#zprof
