@@ -49,5 +49,6 @@
     "security-guidance@claude-code-plugins": true
   },
   "spinnerTipsEnabled": false,
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "autoCompactEnabled": false
 }
