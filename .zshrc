@@ -545,8 +545,8 @@ export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
 
 # claude code
 export DISABLE_TELEMETRY=1
-export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32000 # why is this max sigh; https://github.com/anthropics/claude-code/issues/4255
-export MAX_MCP_OUTPUT_TOKENS=50000
+# export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32000 # why is this max sigh; https://github.com/anthropics/claude-code/issues/4255
+# export MAX_MCP_OUTPUT_TOKENS=50000
 
 
 # command_not_found_handler() {

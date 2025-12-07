@@ -504,3 +504,9 @@ alias unrar='keka unrar'
 
 # mac
 alias tope='top -stats pid,command,power -o power -s 3'
+
+# claude
+claude-usage() {
+  TOKEN=$(security find-generic-password -s "Claude Code-credentials" -w | jq -r '.claudeAiOauth.accessToken')
+  curl -s "https://api.anthropic.com/api/oauth/usage" -H "Authorization: Bearer $TOKEN" -H "anthropic-beta: oauth-2025-04-20"|jq .five_hour.utilization
+}

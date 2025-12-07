@@ -622,14 +622,29 @@ synclaude() {
   claude "$@"
 }
 
+# zclaude() {
+#   ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic \
+#   ANTHROPIC_AUTH_TOKEN=${ZAI_API_KEY} \
+#   API_TIMEOUT_MS=3000000 \
+#   ANTHROPIC_DEFAULT_OPUS_MODEL=glm-4.6 \
+#   ANTHROPIC_DEFAULT_SONNET_MODEL=glm-4.6 \
+#   ANTHROPIC_DEFAULT_HAIKU_MODEL=glm-4.5-air \
+#   CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
+#
+#   claude "$@"
+# }
 zclaude() {
-  ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic \
-  ANTHROPIC_AUTH_TOKEN=${ZAI_API_KEY} \
-  API_TIMEOUT_MS=3000000 \
-  ANTHROPIC_DEFAULT_OPUS_MODEL=glm-4.6 \
-  ANTHROPIC_DEFAULT_SONNET_MODEL=glm-4.6 \
-  ANTHROPIC_DEFAULT_HAIKU_MODEL=glm-4.5-air \
-  claude "$@"
+  mkdir -p ~/.claude/settings-backups
+  cp ~/.claude/settings.json ~/.claude/settings-backups/settings.json.$(date +%Y-%m-%d-%H%M%S)
+  \cp -f ~/.claude/settings.json.zai ~/.claude/settings.json
+  \claude
+}
+
+cclaude() {
+  mkdir -p ~/.claude/settings-backups
+  cp ~/.claude/settings.json ~/.claude/settings-backups/settings.json.$(date +%Y-%m-%d-%H%M%S)
+  cp -f ~/.claude/settings.json.claude ~/.claude/settings.json
+  \claude
 }
 
 percent() {

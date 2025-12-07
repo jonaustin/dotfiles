@@ -35,3 +35,11 @@ trust_level = "trusted"
 [features]
 web_search_request = true
 streamable_shell = true
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[mcp_servers.wikipedia]
+command = "uvx"
+args = ["wikipedia-mcp"]
