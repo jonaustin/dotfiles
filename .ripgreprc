@@ -1,5 +1,5 @@
 --smart-case
---hidden
+# --hidden
 --no-ignore-vcs
 
 # Using glob patterns to include/exclude files or folders
