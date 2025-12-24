@@ -7,6 +7,7 @@
       "Bash(command:gh)"
     ]
   },
+  "model": "opus",
   "hooks": {
     "PreCompact": [
       {
@@ -28,6 +29,15 @@
             "command": "~/.claude-code-docs/claude-docs-helper.sh hook-check"
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-main-commits.sh"
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -37,15 +47,28 @@
           {
             "type": "command",
             "command": "bd prime"
+          },
+          {
+            "type": "command",
+            "command": "cat ~/.claude/CLAUDE.md"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -group 'PROJECT_NAME' -title 'Claude Code Stopped' -subtitle \"Event: $CLAUDE_EVENT_TYPE\" -message \"Last tool: ${CLAUDE_TOOL_NAME:-N/A} | Files: $(echo \"$CLAUDE_FILE_PATHS\" | wc -w | tr -d ' ')\" -sound Glass"
           }
         ]
       }
     ]
   },
   "enabledPlugins": {
-    "code-review@claude-code-plugins": true,
     "commit-commands@claude-code-plugins": true,
-    "pr-review-toolkit@claude-code-plugins": true,
     "security-guidance@claude-code-plugins": true
   },
   "spinnerTipsEnabled": false,
