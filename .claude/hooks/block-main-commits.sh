@@ -13,8 +13,8 @@ if [ "$tool_name" != "Bash" ]; then
   exit 0
 fi
 
-# Check if this is a git commit command
-if [[ "$command" =~ git[[:space:]]+commit ]]; then
+# Check if this is a git commit command or bd sync (which commits internally)
+if [[ "$command" =~ git[[:space:]]+commit ]] || [[ "$command" =~ ^bd[[:space:]]+sync ]]; then
   # Get current branch
   current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
