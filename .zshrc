@@ -171,8 +171,18 @@ setopt hist_reduce_blanks     # remove superfluous blanks
 setopt hist_verify            # when interpolating history into commands (e.g. `$ echo !!`; require another press of enter to actually execute after expanding the last command with `!!`)
 setopt share_history          # adds history incrementally and share it across sessions
 
-# ehhh, this results in no history getting added...
-# zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 } # do not add failed commands to history - https://superuser.com/a/902508
+# Don't save commands with nonzero exit codes to the history file.
+# zshaddhistory runs BEFORE execution so it can't check $?; instead it
+# returns 2 (keep in internal list for up-arrow, but don't write to file).
+# The precmd hook fires AFTER execution, checks $?, and manually appends
+# successful commands to $HISTFILE in extended_history format.
+zmodload -F zsh/datetime p:EPOCHSECONDS 2>/dev/null
+zshaddhistory() { __zhp="${1%%$'\n'}"; return 2 }
+__zsh_hist_ok() {
+  (( $? == 0 && $#__zhp )) && print -r -- ": $EPOCHSECONDS:0;$__zhp" >> $HISTFILE
+  __zhp=
+}
+add-zsh-hook precmd __zsh_hist_ok
 
 # zstyles
 # todo: organize completion section; steal from https://github.com/arp242/dotfiles/blob/master/zsh/zshrc#L201
@@ -536,15 +546,20 @@ export LM_STUDIO_API_KEY=dummy-api-key # for aider
 export OLLAMA_CONTEXT_LENGTH=8192 # only when running ollama serve manually (i.e. brew service won't use this)
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/jon/.lmstudio/bin"
+
 # claude
 export DISABLE_TELEMETRY=YES
+# export ENABLE_INCREMENTAL_TUI=true # fix flickering? https://github.com/anthropics/claude-code/issues/1913#issuecomment-3728773335 # aaarggh completely breaks tmux history
 
 # export TF_PRODUCT="opentofu"
 export TG_TF_FORWARD_STDOUT=true
 export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
 
 # claude code
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 export DISABLE_TELEMETRY=1
+export DO_NOT_TRACK=1 # vercel skills
+export DISABLE_ERROR_REPORTING=1
 # export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32000 # why is this max sigh; https://github.com/anthropics/claude-code/issues/4255
 # export MAX_MCP_OUTPUT_TOKENS=50000
 
