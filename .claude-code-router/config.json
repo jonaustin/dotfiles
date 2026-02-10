@@ -7,15 +7,15 @@
       "name": "lmstudio",
       "api_base_url": "http://localhost:1234/v1/chat/completions",
       "api_key": "lmstudio",
-      "models": ["openai/gpt-oss-120b","qwen/qwen3-coder-30b"]
+      "models": ["openai/gpt-oss-20b"]
     }
   ],
   "Router": {
-    "default": "lmstudio,openai/gpt-oss-120b",
-    "background": "lmstudio,qwen/qwen3-coder-30b",
-    "think": "lmstudio,openai/gpt-oss-120b",
-    "longContext": "lmstudio,openai/gpt-oss-120b",
+    "default": "lmstudio,openai/gpt-oss-20b",
+    "background": "lmstudio,openai/gpt-oss-20b",
+    "think": "lmstudio,openai/gpt-oss-20b",
+    "longContext": "lmstudio,openai/gpt-oss-20b",
     "longContextThreshold": 128000,
-    "webSearch": "lmstudio,qwen/qwen3-coder-30b"
+    "websearch": "lmstudio,openai/gpt-oss-20b"
   }
 }

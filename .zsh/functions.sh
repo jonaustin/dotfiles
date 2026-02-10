@@ -377,6 +377,16 @@ sed-recurse() {
 # fzf
 # checkout git branch
 # https://junegunn.kr/2015/03/fzf-tmux/
+gw() {
+  local dir
+  dir=$(git worktree list --porcelain | grep "^worktree " | sed 's/^worktree //' | fzf --query="$1" --select-1 --exit-0)
+  if [ -n "$dir" ]; then
+    cd "$dir"
+  else
+    echo "No worktree selected"
+  fi
+}
+
 gcob() {
   local branches branch
   branches=$(git branch) &&
@@ -508,7 +518,7 @@ teatime() {
     echo $n; sleep 1;
   done
   if [ $SYSTEM_TYPE = "Darwin" ]; then
-    terminal-notifier "tea done"
+    terminal-notifier -message "tea done"
   else
     notify-send "tea done" -u critical
   fi
@@ -633,18 +643,64 @@ synclaude() {
 #
 #   claude "$@"
 # }
+
+lclaude() {
+  local model
+  case "${1:-qwen}" in
+    120|120b)
+      model="openai/gpt-oss-120b"
+      ;;
+    120h)
+      model="gpt-oss-120b-heretic-v2-hi-mlx"
+      ;;
+    20|20b)
+      model="openai/gpt-oss-20b"
+      ;;
+    qwen|q)
+      model="qwen/qwen3-coder-next"
+      ;;
+    # step|step|s)
+    #     model="
+    #  ;;
+    *)
+      model="$1"
+      ;;
+  esac
+  
+  export ANTHROPIC_BASE_URL=http://localhost:1234 
+  export ANTHROPIC_AUTH_TOKEN=sk-lm-kcAjxar4:vZNy3sb4zkuXH2qvmSZY # local only so not really a secret
+
+  claude --model "$model"
+
+  unset ANTHROPIC_BASE_URL
+  unset ANTHROPIC_AUTH_TOKEN
+}
+
 zclaude() {
   mkdir -p ~/.claude/settings-backups
   cp ~/.claude/settings.json ~/.claude/settings-backups/settings.json.$(date +%Y-%m-%d-%H%M%S)
   \cp -f ~/.claude/settings.json.zai ~/.claude/settings.json
-  \claude
+  claude mcp add -s user -t http web-reader https://api.z.ai/api/mcp/web_reader/mcp --header "Authorization: $ZAI_API_KEY"
+  claude mcp add -s user -t http web-search-prime https://api.z.ai/api/mcp/web_search_prime/mcp --header "Authorization: Bearer $ZAI_API_KEY"
+  claude mcp add -s user zai-mcp-server --env Z_AI_API_KEY=$ZAI_API_KEY Z_AI_MODE=ZAI -- npx -y "@z_ai/mcp-server"
+  claude "$@"
+}
+
+dclaude() {
+  mkdir -p ~/.claude/settings-backups
+  cp ~/.claude/settings.json ~/.claude/settings-backups/settings.json.$(date +%Y-%m-%d-%H%M%S)
+  \cp -f ~/.claude/settings.json.ds ~/.claude/settings.json
+  claude "$@"
 }
 
 cclaude() {
   mkdir -p ~/.claude/settings-backups
   cp ~/.claude/settings.json ~/.claude/settings-backups/settings.json.$(date +%Y-%m-%d-%H%M%S)
-  cp -f ~/.claude/settings.json.claude ~/.claude/settings.json
-  \claude
+  \cp -f ~/.claude/settings.json.claude ~/.claude/settings.json
+  claude mcp remove web-reader
+  claude mcp remove web-search-prime
+  claude mcp remove zai-mcp-server
+  claude "$@"
 }
 
 percent() {

@@ -22,44 +22,46 @@ accordion-padding = 0
 after-startup-command = ['exec-and-forget sketchybar']
 
 # Notify Sketchybar about workspace change
-exec-on-workspace-change = ['/bin/bash', '-c',
-    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE',
 ]
 
 
 [mode.main.binding]
-    # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
-    # alt-shift-enter = '''exec-and-forget osascript -e '
-    # tell application "Terminal"
-    #     do script
-    #     activate
-    # end tell'
-    # '''
+# See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
+# alt-shift-enter = '''exec-and-forget osascript -e '
+# tell application "Terminal"
+#     do script
+#     activate
+# end tell'
+# '''
 
-    # This toggle the scratchpad window show/hide
-    # note: for now, have to first manually run `aerospace-scratchpad move <app>` to move to scratchpad
-    # e.g. on reboot or aerospace restart
-    alt-shift-f = "exec-and-forget aerospace-scratchpad show Finder"
-    ctrl-alt-backtick = "exec-and-forget aerospace-scratchpad show Ghostty"
-    f18 = "exec-and-forget aerospace-scratchpad show Ghostty"
-    alt-esc = "exec-and-forget aerospace-scratchpad show Obsidian"
+# This toggle the scratchpad window show/hide
+# note: for now, have to first manually run `aerospace-scratchpad move <app>` to move to scratchpad
+# e.g. on reboot or aerospace restart
+alt-shift-f = "exec-and-forget aerospace-scratchpad show Finder"
+ctrl-alt-backtick = "exec-and-forget aerospace-scratchpad show Ghostty"
+f18 = "exec-and-forget aerospace-scratchpad show Ghostty"
+alt-esc = "exec-and-forget aerospace-scratchpad show Obsidian"
 
 
-    # alt-enter = '''exec-and-forget osascript -e '
-    # do shell script "open -a /Applications/iTerm.app"'
-    # '''
-    alt-enter = '''exec-and-forget osascript -e '
+# alt-enter = '''exec-and-forget osascript -e '
+# do shell script "open -a /Applications/iTerm.app"'
+# '''
+alt-enter = '''exec-and-forget osascript -e '
     tell application "iTerm"
         create window with default profile
     end tell'
     '''
 
-    # alt-shift-enter = '''exec-and-forget osascript -e '
-    # do shell script "open -a /Applications/Ghostty.app"'
-    # '''
-    #do shell script "open -n /Applications/Ghostty.app"'
+# alt-shift-enter = '''exec-and-forget osascript -e '
+# do shell script "open -a /Applications/Ghostty.app"'
+# '''
+#do shell script "open -n /Applications/Ghostty.app"'
 
-    alt-shift-enter = '''exec-and-forget osascript -e '
+alt-shift-enter = '''exec-and-forget osascript -e '
     tell application "Ghostty"
         activate
     end tell
@@ -70,85 +72,85 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     end tell'
     '''
 
-    # hide application is useless in a tiling window manager
-    cmd-h = [] # Disable "hide application"
-    cmd-alt-h = [] # Disable "hide others"
+# hide application is useless in a tiling window manager
+cmd-h = []     # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
 
-    # alt-enter = '''exec-and-forget osascript -e '
-    # tell application "Ghostty" to activate
-    # tell application "System Events"
-    #     tell process "Ghostty"
-    #         keystroke "n" using {command down}
-    #     end tell
-    # end tell'
-    # '''
+# alt-enter = '''exec-and-forget osascript -e '
+# tell application "Ghostty" to activate
+# tell application "System Events"
+#     tell process "Ghostty"
+#         keystroke "n" using {command down}
+#     end tell
+# end tell'
+# '''
 
-    # i3 wraps focus by default
-    alt-j =         'focus --boundaries-action wrap-around-the-workspace left'
-    alt-k =         'focus --boundaries-action wrap-around-the-workspace down'
-    alt-l =         'focus --boundaries-action wrap-around-the-workspace up'
-    alt-semicolon = 'focus --boundaries-action wrap-around-the-workspace right'
+# i3 wraps focus by default
+ctrl-alt-j = 'focus --boundaries-action wrap-around-the-workspace left'
+ctrl-alt-k = 'focus --boundaries-action wrap-around-the-workspace down'
+ctrl-alt-l = 'focus --boundaries-action wrap-around-the-workspace up'
+ctrl-alt-semicolon = 'focus --boundaries-action wrap-around-the-workspace right'
 
-    alt-shift-j = 'move left'
-    alt-shift-k = 'move down'
-    alt-shift-l = 'move up'
-    alt-shift-semicolon = 'move right'
+alt-shift-j = 'move left'
+alt-shift-k = 'move down'
+alt-shift-l = 'move up'
+alt-shift-semicolon = 'move right'
 
-    # Consider using 'join-with' command as a 'split' replacement if you want to enable
-    # normalizations
-    alt-h = 'split horizontal'
-    alt-v = 'split vertical'
+# Consider using 'join-with' command as a 'split' replacement if you want to enable
+# normalizations
+alt-h = 'split horizontal'
+alt-v = 'split vertical'
 
-    alt-f = 'fullscreen'
+alt-f = 'fullscreen'
 
-    alt-s = 'layout v_accordion' # 'layout stacking' in i3
-    alt-w = 'layout h_accordion' # 'layout tabbed' in i3
-    alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+alt-s = 'layout v_accordion'               # 'layout stacking' in i3
+alt-w = 'layout h_accordion'               # 'layout tabbed' in i3
+alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 
-    alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 
-    # Not supported, because this command is redundant in AeroSpace mental model.
-    # See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
-    #alt-space = 'focus toggle_tiling_floating'
+# Not supported, because this command is redundant in AeroSpace mental model.
+# See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
+#alt-space = 'focus toggle_tiling_floating'
 
-    # `focus parent`/`focus child` are not yet supported, and it's not clear whether they
-    # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
-    # alt-a = 'focus parent'
+# `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+# should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+# alt-a = 'focus parent'
 
-    ctrl-alt-1 = 'workspace 1 --auto-back-and-forth'
-    ctrl-alt-2 = 'workspace 2 --auto-back-and-forth'
-    ctrl-alt-3 = 'workspace 3 --auto-back-and-forth'
-    ctrl-alt-4 = 'workspace 4 --auto-back-and-forth'
-    ctrl-alt-5 = 'workspace 5 --auto-back-and-forth'
-    ctrl-alt-6 = 'workspace 6 --auto-back-and-forth'
-    ctrl-alt-7 = 'workspace 7 --auto-back-and-forth'
-    ctrl-alt-8 = 'workspace 8 --auto-back-and-forth'
-    ctrl-alt-9 = 'workspace 9 --auto-back-and-forth'
-    ctrl-alt-0 = 'workspace 10 --auto-back-and-forth'
+ctrl-alt-1 = 'workspace 1 --auto-back-and-forth'
+ctrl-alt-2 = 'workspace 2 --auto-back-and-forth'
+ctrl-alt-3 = 'workspace 3 --auto-back-and-forth'
+ctrl-alt-4 = 'workspace 4 --auto-back-and-forth'
+ctrl-alt-5 = 'workspace 5 --auto-back-and-forth'
+ctrl-alt-6 = 'workspace 6 --auto-back-and-forth'
+ctrl-alt-7 = 'workspace 7 --auto-back-and-forth'
+ctrl-alt-8 = 'workspace 8 --auto-back-and-forth'
+ctrl-alt-9 = 'workspace 9 --auto-back-and-forth'
+ctrl-alt-0 = 'workspace 10 --auto-back-and-forth'
 
-    # --focus-follows-window is used to ensure workspace changes to trigger the callback for sketchybar to update
-    ctrl-alt-shift-1 = 'move-node-to-workspace 1  --focus-follows-window'
-    ctrl-alt-shift-2 = 'move-node-to-workspace 2  --focus-follows-window'
-    ctrl-alt-shift-3 = 'move-node-to-workspace 3  --focus-follows-window'
-    ctrl-alt-shift-4 = 'move-node-to-workspace 4  --focus-follows-window'
-    ctrl-alt-shift-5 = 'move-node-to-workspace 5  --focus-follows-window'
-    ctrl-alt-shift-6 = 'move-node-to-workspace 6  --focus-follows-window'
-    ctrl-alt-shift-7 = 'move-node-to-workspace 7  --focus-follows-window'
-    ctrl-alt-shift-8 = 'move-node-to-workspace 8  --focus-follows-window'
-    ctrl-alt-shift-9 = 'move-node-to-workspace 9  --focus-follows-window'
-    ctrl-alt-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
+# --focus-follows-window is used to ensure workspace changes to trigger the callback for sketchybar to update
+ctrl-alt-shift-1 = 'move-node-to-workspace 1  --focus-follows-window'
+ctrl-alt-shift-2 = 'move-node-to-workspace 2  --focus-follows-window'
+ctrl-alt-shift-3 = 'move-node-to-workspace 3  --focus-follows-window'
+ctrl-alt-shift-4 = 'move-node-to-workspace 4  --focus-follows-window'
+ctrl-alt-shift-5 = 'move-node-to-workspace 5  --focus-follows-window'
+ctrl-alt-shift-6 = 'move-node-to-workspace 6  --focus-follows-window'
+ctrl-alt-shift-7 = 'move-node-to-workspace 7  --focus-follows-window'
+ctrl-alt-shift-8 = 'move-node-to-workspace 8  --focus-follows-window'
+ctrl-alt-shift-9 = 'move-node-to-workspace 9  --focus-follows-window'
+ctrl-alt-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
 
-    alt-shift-c = 'reload-config'
+alt-shift-c = 'reload-config'
 
-    alt-r = 'mode resize'
+alt-r = 'mode resize'
 
 [mode.resize.binding]
-    h = 'resize width -50'
-    j = 'resize height +50'
-    k = 'resize height -50'
-    l = 'resize width +50'
-    enter = 'mode main'
-    esc = 'mode main'
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+enter = 'mode main'
+esc = 'mode main'
 
 # quaketerm fix: https://github.com/nikitabobko/AeroSpace/discussions/1139
 # [[on-window-detected]]
@@ -157,8 +159,8 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 #     run = ['layout floating']
 
 [[on-window-detected]]
-    if.app-id="com.mitchellh.ghostty"
-    run= [ "layout tiling"]
+if.app-id = "com.mitchellh.ghostty"
+run = ["layout tiling"]
 
 # [[on-window-detected]]
 #     # just hit ctrl-f when it starts (or make it do that automatically in here)
@@ -174,13 +176,14 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 0
-    inner.vertical =   0
-    outer.left =       0
-    outer.bottom =     0
-    outer.top = [
-        { monitor."Built-in" = 0 },
-        { monitor."LG Ultra HD" = 36 },
-        0
-    ]
-    outer.right =      0
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = [
+  { monitor."Built-in" = 0 },
+  { monitor."LG Ultra HD" = 36 },
+  { monitor."H24T27" = 36 },
+  0,
+]
+outer.right = 0

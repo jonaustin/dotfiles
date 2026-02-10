@@ -7,7 +7,11 @@
       "Bash(command:gh)"
     ]
   },
-  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/scripts/statusline.sh"
+  },
+  "cleanupPeriodDays": 99999,
   "hooks": {
     "PreCompact": [
       {
@@ -36,6 +40,19 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/block-main-commits.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/docs-before-commit.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -d 'claude question' ntfy.sh/jon"
           }
         ]
       }
@@ -55,21 +72,36 @@
         ]
       }
     ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); SID=$(echo \"$INPUT\" | jq -r '.session_id'); echo \"$INPUT\" | jq -r '.tool_name' >> /tmp/claude-tools-$SID"
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -group 'PROJECT_NAME' -title 'Claude Code Stopped' -subtitle \"Event: $CLAUDE_EVENT_TYPE\" -message \"Last tool: ${CLAUDE_TOOL_NAME:-N/A} | Files: $(echo \"$CLAUDE_FILE_PATHS\" | wc -w | tr -d ' ')\" -sound Glass"
+            "command": "INPUT=$(cat); SID=$(echo \"$INPUT\" | jq -r '.session_id'); F=/tmp/claude-tools-$SID; TOOLS=$(sort \"$F\" 2>/dev/null | uniq -c | sort -rn | awk '{print $2\"(\"$1\")\"}' | tr '\\n' ' '); terminal-notifier -group \"CLAUDE-$SID\" -title 'Claude Code is waiting' -subtitle \"Session: ${SID:0:8}\" -message \"Tools: ${TOOLS:-N/A}\" -sound Submerge; rm -f \"$F\""
+          },
+          {
+            "type": "command",
+            "command": "curl -d 'claude waiting' ntfy.sh/jon"
           }
         ]
       }
     ]
   },
   "enabledPlugins": {
-    "commit-commands@claude-code-plugins": true,
-    "security-guidance@claude-code-plugins": true
+    "security-guidance@claude-code-plugins": true,
+    "superpowers@superpowers-marketplace": true
   },
   "spinnerTipsEnabled": false,
   "alwaysThinkingEnabled": true,

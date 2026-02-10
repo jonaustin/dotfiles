@@ -1,9 +1,14 @@
-model = "gpt-5.1-codex-max"
+model = "gpt-5.3-codex"
 
 # allow network access without approval
-network_access = "enabled"
+network_access = "enabled"      # do these even do anything?
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+
 # allow writing to current dir (only)
 sandbox_mode = "workspace-write"
+[sandbox_workspace_write]
+network_access = true
 
 [model_providers.lms]
 name = "LM Studio"
@@ -29,12 +34,63 @@ trust_level = "trusted"
 [projects."/Users/jon/code/,codex"]
 trust_level = "trusted"
 
+[projects."/Users/jon/.config/nvim"]
+trust_level = "untrusted"
+
+[projects."/Users/jon/code/vpet"]
+trust_level = "trusted"
+
+[projects."/Users/jon"]
+trust_level = "untrusted"
+
+[projects."/Users/jon/Downloads"]
+trust_level = "untrusted"
+
+[projects."/Users/jon/code/game"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/soul"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,claude/beads"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/soul2"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,claude/claude-usage-tmux"]
+trust_level = "trusted"
+
+[projects."/Users/jon/.tmux"]
+trust_level = "untrusted"
+
+[projects."/Users/jon/code/,claude"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,ai/exp/snake"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,ai/exp/cthudoom"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,ai/exp/oura"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/,ai/exp/spotify"]
+trust_level = "untrusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
+hide_rate_limit_model_nudge = true
+
+[notice.model_migrations]
+"gpt-5.2" = "gpt-5.2-codex"
+
+web_search = "live"
 
 [features]
-web_search_request = true
 streamable_shell = true
+shell_snapshot = true
 
 [mcp_servers.context7]
 command = "npx"

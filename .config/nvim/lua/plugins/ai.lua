@@ -1,363 +1,381 @@
 return {
-  -- AI
-  -- 'github/copilot.vim',
+  -- GitHub Copilot
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   opts = {
+  --     suggestion = {
+  --       enabled = true,
+  --       auto_trigger = false,
+  --       hide_during_completion = true,
+  --       debounce = 75,
+  --       keymap = {
+  --         accept = "<M-l>",
+  --         next = "<M-]>",
+  --         prev = "<M-[>",
+  --         dismiss = "<C-]>",
+  --       },
+  --     },
+  --     filetypes = { ["*"] = true, markdown = false },
+  --   },
+  -- },
+  -- {
+  --   "giuxtaposition/blink-cmp-copilot",
+  --   dependencies = { "zbirenbaum/copilot.lua" },
+  --   specs = {
+  --     {
+  --       "saghen/blink.cmp",
+  --       optional = true,
+  --       opts = {
+  --         sources = {
+  --           default = { "copilot" },
+  --           providers = {
+  --             copilot = {
+  --               name = "copilot",
+  --               module = "blink-cmp-copilot",
+  --               score_offset = 100,
+  --               async = true,
+  --             },
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
+  --
+  -- ClaudeCode - custom keymaps extending LazyVim extra
   {
-    'zbirenbaum/copilot.lua',
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = false,
-        hide_during_completion = true,
-        debounce = 75,
-        keymap = {
-          -- insert mode only!
-          accept = '<M-l>',
-          next = '<M-]>',
-          prev = '<M-[>',
-          dismiss = '<C-]>',
-        },
-      },
-      filetypes = { ['*'] = true, markdown = false },
+    "coder/claudecode.nvim",
+    keys = {
+      { "<leader>ax", "", desc = "+ClaudeCode", mode = { "n", "v" } },
+      { "<leader>axx", "<cmd>ClaudeCode<cr>", desc = "Toggle Terminal" },
+      { "<leader>axf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Terminal" },
+      { "<leader>axm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Model" },
+      { "<leader>axs", "<cmd>ClaudeCodeSend<cr>", desc = "Send Selection", mode = "v" },
+      { "<leader>axa", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add Current File" },
+      { "<leader>axt", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add from Tree" },
+      { "<leader>axd", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept Diff" },
+      { "<leader>axD", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny Diff" },
     },
   },
+
+  -- CopilotChat - custom configuration extending LazyVim extra
   {
-    'zbirenbaum/copilot-cmp', -- enables copilot as a normal completion option with copilot-cmp
-    dependencies = { 'zbirenbaum/copilot.lua' },
-    config = function()
-      require('copilot_cmp').setup()
-    end,
-  },
-  -- {
-  --   'bakks/butterfish.nvim',
-  --   dependencies = { 'tpope/vim-commentary' },
-  --   config = function()
-  --     require('butterfish')
-  --   end
-  -- },
-  { 'Bryley/neoai.nvim', dependencies = { 'MunifTanjim/nui.nvim' } },
-  {
-    -- Best ai plugin i've found so far
-    -- see for inspirado: https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/copilot-chat-v2.lua
-    'CopilotC-Nvim/CopilotChat.nvim',
-    config = function()
-      local opts = {
-        show_help = 'yes', -- Show help text for CopilotChatInPlace, default: yes
-        debug = true, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
-        disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
-        language = 'English', -- Copilot answer language settings when using default prompts. Default language is English.
-        mode = 'split', -- newbuffer or split  , default: newbuffer
-        model = 'claude-sonnet-4.5', -- 'gpt-4o', --'claude-3.5-sonnet'
-        mappings = {
-          reset = {
-            normal = '<C-x>',
-            insert = '<C-x>',
-          },
-        },
-        -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
-        temperature = 0.1,
-        chat_autocomplete = true, -- nvim-cmp/blink/etc integration
-        providers = {
-          lmstudio = {
-            prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
-            prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
+    "CopilotC-Nvim/CopilotChat.nvim",
+    keys = {
+      { "<leader>az", "", desc = "+CopilotChat", mode = { "n", "v" } },
+      { "<leader>azz", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Chat" },
+      { "<leader>azq", "<cmd>CopilotChatClose<cr><cmd>CopilotChatReset<cr>", desc = "Reset & Close" },
+      {
+        "<leader>azc",
+        function()
+          local input = vim.fn.input("Quick Chat: ")
+          if input ~= "" then
+            require("CopilotChat").ask(input)
+          end
+        end,
+        desc = "Quick Chat",
+        mode = { "n", "v" },
+      },
+      { "<leader>aze", "<cmd>CopilotChatExplain<cr>", desc = "Explain", mode = { "n", "v" } },
+      { "<leader>azr", "<cmd>CopilotChatReview<cr>", desc = "Review", mode = { "n", "v" } },
+      { "<leader>azf", "<cmd>CopilotChatFix<cr>", desc = "Fix", mode = { "n", "v" } },
+      { "<leader>azo", "<cmd>CopilotChatOptimize<cr>", desc = "Optimize", mode = { "n", "v" } },
+      { "<leader>azd", "<cmd>CopilotChatDocs<cr>", desc = "Generate Docs", mode = { "n", "v" } },
+      { "<leader>azt", "<cmd>CopilotChatTests<cr>", desc = "Generate Tests", mode = { "n", "v" } },
+      { "<leader>azm", "<cmd>CopilotChatCommit<cr>", desc = "Commit Message" },
+      { "<leader>azs", "<cmd>CopilotChatModels<cr>", desc = "Select Model" },
+    },
+    opts = function(_, opts)
+      -- Add LM Studio provider
+      local config = require("CopilotChat.config")
 
-            get_models = function(headers)
-              local response, err = require('CopilotChat.utils').curl_get('http://localhost:1234/v1/models', {
-                headers = headers,
-                json_response = true
-              })
+      -- Cache for LM Studio models (fetched async)
+      local lmstudio_models = {}
 
-              if err then
-                error(err)
-              end
+      -- Fetch models async (deferred to escape fast event context)
+      vim.schedule(function()
+        vim.system({ "curl", "-s", "http://localhost:1234/v1/models" }, {}, function(result)
+          if result.code ~= 0 then
+            return
+          end
+          local ok, data = pcall(vim.json.decode, result.stdout)
+          if ok and data and data.data then
+            for _, model in ipairs(data.data) do
+              table.insert(lmstudio_models, { id = model.id, name = model.id })
+            end
+          end
+        end)
+      end)
 
-              return vim.tbl_map(function(model)
-                return {
-                  id = model.id,
-                  name = model.id,
-                }
-              end, response.body.data)
-            end,
-
-            embed = function(inputs, headers)
-              local response, err = require('CopilotChat.utils').curl_post('http://localhost:1234/v1/embeddings', {
-                headers = headers,
-                json_request = true,
-                json_response = true,
-                body = {
-                  dimensions = 512,
-                  input = inputs,
-                  model = 'text-embedding-nomic-embed-text-v1.5',
-                },
-              })
-
-              if err then
-                error(err)
-              end
-
-              return response.body.data
-            end,
-
-            get_url = function()
-              return 'http://localhost:1234/v1/chat/completions'
-            end,
-          },
-          ollama = {
-            prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
-            prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
-
-            get_models = function(headers)
-              local response, err = require('CopilotChat.utils').curl_get('http://localhost:11434/v1/models', {
-                headers = headers,
-                json_response = true,
-              })
-
-              if err then
-                error(err)
-              end
-
-              return vim.tbl_map(function(model)
-                return {
-                  id = model.id,
-                  name = model.id,
-                }
-              end, response.body.data)
-            end,
-
-            embed = function(inputs, headers)
-              local response, err = require('CopilotChat.utils').curl_post('http://localhost:11434/v1/embeddings', {
-                headers = headers,
-                json_request = true,
-                json_response = true,
-                body = {
-                  input = inputs,
-                  model = 'all-minilm',
-                },
-              })
-
-              if err then
-                error(err)
-              end
-
-              return response.body.data
-            end,
-
-            get_url = function()
-              return 'http://localhost:11434/v1/chat/completions'
-            end,
-          },
-        }
+      config.providers.lmstudio = {
+        prepare_input = config.providers.copilot.prepare_input,
+        prepare_output = config.providers.copilot.prepare_output,
+        get_models = function()
+          return lmstudio_models
+        end,
+        get_url = function()
+          return "http://localhost:1234/v1/chat/completions"
+        end,
       }
 
-      -- disable default <tab> complete mapping for copilot chat when doing this
-      require('CopilotChat').setup(opts)
-      ---
+      -- Apply custom options
+      return vim.tbl_deep_extend("force", opts, {
+        show_help = "yes",
+        debug = false,
+        disable_extra_info = "no",
+        language = "English",
+        mode = "split",
+        model = "claude-sonnet-4.5",
+        mappings = {
+          reset = {
+            normal = "<C-x>",
+            insert = "<C-x>",
+          },
+        },
+        temperature = 0.1,
+        chat_autocomplete = true,
+      })
     end,
-    branch = 'main',
-    build = function()
-      vim.defer_fn(function()
-        vim.cmd 'UpdateRemotePlugins'
-        vim.notify 'CopilotChat - Updated remote plugins. Please restart Neovim.'
-      end, 3000)
-    end,
-    event = 'VeryLazy',
-    keys = {
-      -- {
-      --   '<leader>ccb',
-      --   "<cmd>lua require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer})<cr>",
-      --   desc = 'Chat with buffer',
-      -- },
-      { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code', mode = { 'n', 'v' } },
-      { '<leader>cct', '<cmd>CopilotChatTests<cr>', desc = 'CopilotChat - Generate tests' },
-      { '<leader>ccb', '<cmd>CopilotChatToggle<cr>', desc = 'CopilotChatToggle' },
-      { '<leader>ccm', '<cmd>CopilotChatModels<cr>', desc = 'CopilotChatModels' },
-      { '<leader>ccf', '<cmd>CopilotChatFixDiagnostic<cr>', desc = 'CopilotChat - Fix diagnostic' }, -- Get a fix for the diagnostic message under the cursor.
-      { '<leader>ccr', '<cmd>CopilotChatReset<cr>', desc = 'CopilotChat - Reset chat history and clear buffer' }, -- Reset chat history and clear buffer.
-      {
-        '<leader>cch',
-        function()
-          local actions = require 'CopilotChat.actions'
-          require('CopilotChat.integrations.telescope').pick(actions.help_actions())
-        end,
-        desc = 'CopilotChat - Help actions',
-      },
-      -- Show prompts actions with telescope
-      {
-        '<leader>ccp',
-        function()
-          local actions = require 'CopilotChat.actions'
-          require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
-        end,
-        desc = 'CopilotChat - Prompt actions',
-      },
-    },
   },
+
+  -- Avante.nvim (disabled - using CopilotChat instead)
+  -- {
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   version = false,
+  --   opts = {
+  --     debug = false,
+  --     provider = "lmstudioQwen",
+  --     cursor_applying_provider = "lmstudioQwen",
+  --     behaviour = {
+  --       enable_cursor_planning_mode = true,
+  --       auto_suggestions = false,
+  --       auto_suggestions_debounce = 500,
+  --       auto_set_highlight_group = true,
+  --       auto_set_keymaps = true,
+  --       auto_apply_diff_after_generation = false,
+  --       support_paste_from_clipboard = false,
+  --       minimize_diff = true,
+  --     },
+  --     providers = {
+  --       lmstudioQwen = {
+  --         __inherited_from = "openai",
+  --         api_key_name = "",
+  --         endpoint = "http://127.0.0.1:1234/v1",
+  --         model = "qwen2.5-coder-32b-instruct-mlx@4bit",
+  --       },
+  --       lmstudioLlama33 = {
+  --         __inherited_from = "openai",
+  --         api_key_name = "",
+  --         endpoint = "http://127.0.0.1:1234/v1",
+  --         model = "llama-3.3-70b-instruct",
+  --       },
+  --       claude = {
+  --         endpoint = "https://api.anthropic.com",
+  --         model = "claude-3-5-sonnet-20241022",
+  --         extra_request_body = {
+  --           temperature = 0.1,
+  --           max_tokens = 4096,
+  --         },
+  --       },
+  --       copilot = {
+  --         endpoint = "https://api.githubcopilot.com/",
+  --         model = "claude-sonnet-4-5",
+  --         proxy = nil,
+  --         allow_insecure = false,
+  --         timeout = 30000,
+  --         extra_request_body = {
+  --           temperature = 0.1,
+  --           max_tokens = 8192,
+  --         },
+  --       },
+  --     },
+  --     windows = {
+  --       position = "left",
+  --       width = 45,
+  --     },
+  --   },
+  --   keys = {
+  --     { "<leader>cca", "<cmd>AvanteToggle<cr>", desc = "Avante - Toggle window" },
+  --   },
+  --   build = "make",
+  --   dependencies = {
+  --     "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-tree/nvim-web-devicons",
+  --     "zbirenbaum/copilot.lua",
+  --     {
+  --       "HakonHarnes/img-clip.nvim",
+  --       event = "VeryLazy",
+  --       opts = {
+  --         default = {
+  --           embed_image_as_base64 = false,
+  --           prompt_for_file_name = false,
+  --           drag_and_drop = {
+  --             insert_mode = true,
+  --           },
+  --         },
+  --       },
+  --     },
+  --     {
+  --       "MeanderingProgrammer/render-markdown.nvim",
+  --       opts = {
+  --         file_types = { "markdown", "Avante" },
+  --       },
+  --       ft = { "markdown", "Avante" },
+  --     },
+  --   },
+  -- },
+
+  -- CodeCompanion (disabled - using CopilotChat instead)
+  -- {
+  --   "olimorris/codecompanion.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-telescope/telescope.nvim",
+  --     { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
+  --     { "stevearc/dressing.nvim", opts = {} },
+  --   },
+  --   config = function()
+  --     require("codecompanion").setup({
+  --       strategies = {
+  --         chat = {
+  --           adapter = "copilot",
+  --         },
+  --         inline = {
+  --           adapter = "copilot",
+  --         },
+  --       },
+  --     })
+  --   end,
+  --   keys = {
+  --     { "<leader>ccc", ":CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
+  --   },
+  -- },
+
+  -- WTF.nvim - AI debugging assistant
   {
-    'piersolenski/wtf.nvim',
+    "piersolenski/wtf.nvim",
     dependencies = {
-      'MunifTanjim/nui.nvim',
+      "MunifTanjim/nui.nvim",
     },
     opts = {},
     keys = {
       {
-        '<leader>wa',
-        mode = { 'n', 'x' },
+        "<leader>wa",
+        mode = { "n", "x" },
         function()
-          require('wtf').ai()
+          require("wtf").ai()
         end,
-        desc = 'Debug diagnostic with AI',
+        desc = "Debug diagnostic with AI",
       },
       {
-        mode = { 'n' },
-        '<leader>ws',
+        mode = { "n" },
+        "<leader>ws",
         function()
-          require('wtf').search()
+          require("wtf").search()
         end,
-        desc = 'Search diagnostic with Google',
+        desc = "Search diagnostic with Google",
       },
       {
-        mode = { 'n' },
-        '<leader>wh',
+        mode = { "n" },
+        "<leader>wh",
         function()
-          require('wtf').history()
+          require("wtf").history()
         end,
-        desc = 'Populate the quickfix list with previous chat history',
+        desc = "Populate quickfix with chat history",
       },
       {
-        mode = { 'n' },
-        '<leader>wg',
+        mode = { "n" },
+        "<leader>wg",
         function()
-          require('wtf').grep_history()
+          require("wtf").grep_history()
         end,
-        desc = 'Grep previous chat history with Telescope',
+        desc = "Grep chat history with Telescope",
       },
     },
   },
-  {
-    -- "jonaustin/avante.nvim", -- use my fork
-    'yetone/avante.nvim',
-    event = 'VeryLazy',
-    lazy = false,
-    version = false,
-    -- branch = "trigger-suggestions",
-    opts = {
-      -- @alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-      debug = false,
-      provider = 'lmstudioQwen', --'copilot',
-      -- auto_suggestions_provider = 'claude', -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
-      cursor_applying_provider = 'lmstudioQwen', --''lmstudioLlama33', -- he suggests llama-3.3-70b
-      behaviour = {
-        enable_cursor_planning_mode = true,
-        auto_suggestions = false, -- don't use this if already using copilot
-        auto_suggestions_debounce = 500,
-        auto_set_highlight_group = true,
-        auto_set_keymaps = true,
-        auto_apply_diff_after_generation = false,
-        support_paste_from_clipboard = false,
-        minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
-      },
-      -- https://github.com/yetone/avante.nvim/discussions/687#discussioncomment-12275680
-      providers = {
-        ---@type AvanteProvider
-        lmstudioQwen = {
-          __inherited_from = 'openai',
-          api_key_name = '',
-          endpoint = 'http://127.0.0.1:1234/v1',
-          model = 'qwen2.5-coder-32b-instruct-mlx@4bit',
-        },
-        lmstudioLlama33 = {
-          __inherited_from = 'openai',
-          api_key_name = '',
-          endpoint = 'http://127.0.0.1:1234/v1',
-          model = 'llama-3.3-70b-instruct',
-        },
-        claude = {
-          endpoint = 'https://api.anthropic.com',
-          model = 'claude-3-5-sonnet-20241022',
-          extra_request_body = {
-            temperature = 0.1, -- kinda creative
-            max_tokens = 4096,
-          }
-        },
-        copilot = {
-          endpoint = 'https://api.githubcopilot.com/',
-          model = 'claude-4-sonnet',
-          proxy = nil, -- [protocol://]host[:port] Use this proxy
-          allow_insecure = false, -- Do not allow insecure server connections
-          timeout = 30000, -- Timeout in milliseconds
-          extra_request_body = {
-            temperature = 0.1, -- kinda creative
-            max_tokens = 8192,
-          }
-        },
-      },
-      windows = {
-        position = 'left',
-        width = 45, -- %
-      },
-    },
-    keys = {
-      { '<leader>cca', '<cmd>AvanteToggle<cr>', desc = 'Avante - Toggle window' },
-    },
-    build = 'make',
-    dependencies = {
-      'stevearc/dressing.nvim',
-      'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
-      --- The below dependencies are optional,
-      'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
-      'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
-      'zbirenbaum/copilot.lua', -- for providers='copilot'
-      {
-        -- support for image pasting
-        'HakonHarnes/img-clip.nvim', -- :PasteImage from clipboard and it'll write it to assets/... and paste the path
-        event = 'VeryLazy',
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { 'markdown', 'Avante' },
-        },
-        ft = { 'markdown', 'Avante' },
-      },
-    },
-  },
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
-      "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
-      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
-      { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
-    },
-    config = function()
-      require("codecompanion").setup({
-        strategies = {
-          chat = {
-            adapter = "copilot", --"anthropic",
-          },
-          inline = {
-            adapter = "copilot",
-          },
-        },
-      })
-    end,
-    keys = {
-      { "<leader>cca", ":CodeCompanionActions<CR>", desc = "CodeCompanion - Actions" },
-      { "<leader>ccc", ":CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
-    },
-  },
+
+  -- NeoAI (disabled - using CopilotChat instead)
+  -- {
+  --   "Bryley/neoai.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim" },
+  --   config = function()
+  --     require("neoai").setup({
+  --       ui = {
+  --         output_popup_text = "NeoAI",
+  --         input_popup_text = "Prompt",
+  --         width = 30,
+  --         output_popup_height = 80,
+  --         submit = "<Enter>",
+  --       },
+  --       models = {
+  --         {
+  --           name = "openai",
+  --           model = "gpt-3.5-turbo",
+  --           params = nil,
+  --         },
+  --       },
+  --       register_output = {
+  --         ["g"] = function(output)
+  --           return output
+  --         end,
+  --         ["c"] = require("neoai.utils").extract_code_snippets,
+  --       },
+  --       inject = {
+  --         cutoff_width = 75,
+  --       },
+  --       prompts = {
+  --         context_prompt = function(context)
+  --           return "Hey, I'd like to provide some context for future "
+  --             .. "messages. Here is the code/text that I want to refer "
+  --             .. "to in our upcoming conversations:\n\n"
+  --             .. context
+  --         end,
+  --       },
+  --       mappings = {
+  --         ["select_up"] = "<C-k>",
+  --         ["select_down"] = "<C-j>",
+  --       },
+  --       open_ai = {
+  --         api_key = {
+  --           env = "OPENAI_API_KEY",
+  --           value = nil,
+  --         },
+  --       },
+  --       shortcuts = {
+  --         {
+  --           name = "textify",
+  --           key = "<leader>as",
+  --           desc = "fix text with AI",
+  --           use_context = true,
+  --           prompt = [[
+  --             Please rewrite the text to make it more readable, clear,
+  --             concise, and fix any grammatical, punctuation, or spelling
+  --             errors
+  --           ]],
+  --           modes = { "v" },
+  --           strip_function = nil,
+  --         },
+  --         {
+  --           name = "gitcommit",
+  --           key = "<leader>ag",
+  --           desc = "generate git commit message",
+  --           use_context = false,
+  --           prompt = function()
+  --             return [[
+  --               Using the following git diff generate a concise and
+  --               clear git commit message, with a short title summary
+  --               that is 75 characters or less:
+  --             ]] .. vim.fn.system("git diff --cached")
+  --           end,
+  --           modes = { "n" },
+  --           strip_function = nil,
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
 }

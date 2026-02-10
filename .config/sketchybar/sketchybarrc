@@ -38,7 +38,7 @@ sketchybar --default "${default[@]}"
 sketchybar --add event aerospace_workspace_change
 
 # This only works for single monitor configs
-for sid in $(aerospace list-workspaces --monitor 1 | grep -v "^\.scratchpad$"); do
+for sid in $(aerospace list-workspaces --monitor 2 | grep -v "^\.scratchpad$"); do
   sketchybar --add item space.$sid left \
     --subscribe space.$sid aerospace_workspace_change \
     --set space.$sid \

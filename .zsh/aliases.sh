@@ -417,7 +417,7 @@ alias hue-office-on="openhue set room Office --on"
 
 # aws
 find-lambda() {
-  aws lambda list-functions| grep $1
+  aws lambda list-functions | grep $1
 }
 open-lambda() {
   open "https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/$(aws lambda get-function --function-name $1 --query 'Configuration.FunctionName' --output text)"
@@ -431,7 +431,7 @@ sam-tail-logs() {
 # llm() {
 #  command llm -o unlimited 1 "$@"
 # }
-llm-update-plugins() {  for n in $(llm plugins --all | jq -r '.[].name'); do llm install -U $n; done }
+llm-update-plugins() { for n in $(llm plugins --all | jq -r '.[].name'); do llm install -U $n; done; }
 alias llms="llm -T web_search"
 # alias llm="llm -o unlimited 1"
 alias llml="llm -m Llama-3.3-70B-Instruct-4bit "
@@ -463,20 +463,26 @@ alias fabric='fabric-ai'
 alias fabricp='fabric --pattern $(fabric --listpatterns --shell-complete-list | fzf)'
 alias fp='fabric --pattern $(fabric --listpatterns --shell-complete-list | fzf)'
 
-## ollama 
-ollamastopall() { for n in $(ollama ps | grep -v NAME | awk '{print $1}'); do ollama stop $n; done }
-ollamapull() { for n in $(grep -v '^#' ~/exp/ai/models.txt); do echo $n; ollama pull $n; done }
+## ollama
+ollamastopall() { for n in $(ollama ps | grep -v NAME | awk '{print $1}'); do ollama stop $n; done; }
+ollamapull() { for n in $(grep -v '^#' ~/exp/ai/models.txt); do
+  echo $n
+  ollama pull $n
+done; }
 alias ol='ollama'
-llmtest() { 
-  llm -m $1 "delete a model from ollama" 
+llmtest() {
+  llm -m $1 "delete a model from ollama"
 }
-ollamatemps() { 
-  for MODEL in $(ollama ls | grep -v NAME | awk '{print $1}'); do echo $MODEL; ollama show --parameters $MODEL | grep temperature; done
+ollamatemps() {
+  for MODEL in $(ollama ls | grep -v NAME | awk '{print $1}'); do
+    echo $MODEL
+    ollama show --parameters $MODEL | grep temperature
+  done
 }
 
 # mac
-stupidmacallow() { 
-  xattr -d 'com.apple.quarantine' $1 
+stupidmacallow() {
+  xattr -d 'com.apple.quarantine' $1
 }
 
 alias ddocker="~/.docker/bin/docker"
@@ -490,7 +496,7 @@ if [ $SYSTEM_TYPE = "Darwin" ]; then
   alias agu='brew doctor; brew update && brew upgrade; uv tool upgrade --all'
   alias r="brew uninstall"
   alias bs="brew services"
-fi;
+fi
 
 # get my shit togetha
 alias todo='nvim ~/notes/todo.md'
@@ -508,5 +514,5 @@ alias tope='top -stats pid,command,power -o power -s 3'
 # claude
 claude-usage() {
   TOKEN=$(security find-generic-password -s "Claude Code-credentials" -w | jq -r '.claudeAiOauth.accessToken')
-  curl -s "https://api.anthropic.com/api/oauth/usage" -H "Authorization: Bearer $TOKEN" -H "anthropic-beta: oauth-2025-04-20"|jq .five_hour.utilization
+  curl -s "https://api.anthropic.com/api/oauth/usage" -H "Authorization: Bearer $TOKEN" -H "anthropic-beta: oauth-2025-04-20" | jq .five_hour.utilization
 }

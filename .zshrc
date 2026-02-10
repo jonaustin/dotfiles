@@ -170,6 +170,7 @@ setopt hist_ignore_space      # remove command line from history list when first
 setopt hist_reduce_blanks     # remove superfluous blanks
 setopt hist_verify            # when interpolating history into commands (e.g. `$ echo !!`; require another press of enter to actually execute after expanding the last command with `!!`)
 setopt share_history          # adds history incrementally and share it across sessions
+setopt histignorespace        # don't add commands that start with space
 
 # Don't save commands with nonzero exit codes to the history file.
 # zshaddhistory runs BEFORE execution so it can't check $?; instead it
