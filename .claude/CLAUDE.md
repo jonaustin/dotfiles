@@ -68,6 +68,15 @@
   - If web fetch fails (bot-blocking): retry using dev-browser plugin
   - Always use gh cli for github
 
+# Bug Fixes: Root Cause Before Code
+
+When fixing bugs or test failures:
+
+1. **Explain the root cause first.** State what is actually causing the problem and why, with evidence. If you can't explain it clearly, you don't understand it yet — research more before proposing anything.
+2. **Explain why the fix addresses the root cause.** Connect the proposed change back to the cause.
+3. **Verify the fix against the actual failure environment.** If CI fails, don't assume a local pass means it's fixed. Check that the fix addresses the specific CI conditions.
+4. **NEVER propose speculative fixes.** No "try this and see if it works." No guessing. Understand first, fix second.
+
 # tmux-cli
 
   tmux-cli enables Claude Code to control CLI applications in separate tmux panes. Run tmux-cli --help for usage.

@@ -10,14 +10,16 @@ Apply best practices and conventions from the official [Effective Go guide](http
 ## When to Apply
 
 Use this skill automatically when:
+
 - Writing new Go code
 - Reviewing Go code
 - Refactoring existing Go implementations
 
 ## Key Reminders
 
-Follow the conventions and patterns documented at https://go.dev/doc/effective_go, with particular attention to:
+Follow the conventions and patterns documented at <https://go.dev/doc/effective_go>, with particular attention to:
 
+- Use `go doc` to look up documentation to verify the code is correct.
 - **Formatting**: Always use `gofmt` - this is non-negotiable
 - **Naming**: No underscores, use MixedCaps for exported names, mixedCaps for unexported
 - **Error handling**: Always check errors; return them, don't panic
@@ -27,6 +29,6 @@ Follow the conventions and patterns documented at https://go.dev/doc/effective_g
 
 ## References
 
-- Official Guide: https://go.dev/doc/effective_go
-- Code Review Comments: https://github.com/golang/go/wiki/CodeReviewComments
+- Official Guide: <https://go.dev/doc/effective_go>
+- Code Review Comments: <https://github.com/golang/go/wiki/CodeReviewComments>
 - Standard Library: Use as reference for idiomatic patterns
