@@ -1,11 +1,51 @@
 {
-  "cleanupPeriodDays": 99999,
+  "cleanupPeriodDays": 365,
+  "env": {
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "DISABLE_TELEMETRY": "1",
+    "DISABLE_ERROR_REPORTING": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  },
   "includeCoAuthoredBy": false,
+  "includeGitInstructions": false,
   "permissions": {
     "allow": [
       "WebFetch",
       "WebSearch",
       "Bash(command:gh)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
+      "Bash(sudo *)",
+      "Bash(mkfs *)",
+      "Bash(dd *)",
+      "Bash(wget *|bash*)",
+      "Bash(wget *| bash*)",
+      "Bash(git push --force*)",
+      "Bash(git push *--force*)",
+      "Bash(git reset --hard*)",
+      "Edit(~/.bashrc)",
+      "Edit(~/.zshrc)",
+      "Edit(~/.ssh/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.azure/**)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.git-credentials)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.kube/**)",
+      "Read(~/.npmrc)",
+      "Read(~/.npm/**)",
+      "Read(~/.pypirc)",
+      "Read(~/.gem/credentials)",
+      "Read(~/Library/Keychains/**)",
+      "Read(~/Library/Application Support/**/metamask*/**)",
+      "Read(~/Library/Application Support/**/electrum*/**)",
+      "Read(~/Library/Application Support/**/exodus*/**)",
+      "Read(~/Library/Application Support/**/phantom*/**)",
+      "Read(~/Library/Application Support/**/solflare*/**)"
     ]
   },
   "model": "opus",
@@ -91,10 +131,27 @@
   },
   "enabledPlugins": {
     "security-guidance@claude-code-plugins": true,
-    "superpowers@superpowers-marketplace": true,
-    "gopls-lsp@claude-plugins-official": true
+    "superpowers@superpowers-marketplace": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "allowWrite": [
+        "."
+      ],
+      "denyWrite": [
+        "/"
+      ],
+      "denyRead": [
+        "~/"
+      ],
+      "allowRead": [
+        ".",
+        "~/.local/share/mise",
+        "~/.gitconfig"
+      ]
+    }
   },
   "spinnerTipsEnabled": false,
-  "alwaysThinkingEnabled": true,
-  "autoCompactEnabled": false
+  "alwaysThinkingEnabled": true
 }

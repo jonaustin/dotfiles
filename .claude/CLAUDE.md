@@ -19,14 +19,16 @@
 - If I say 'no bd', ignore all bd instructions and don't use bd.
 - Otherwise:
   - make sure a remote git repo already exists; if not create a new private repo with the same name as the code directory.
-  - check if `bd init` has been run; if not then `bd init --branch beads-sync`
+  - check if `bd init` has been run; if not then setup the project for beads
     - This creates a .beads/ directory and configures beads to commit to beads-sync instead of main.
-  - Important: After initialization, you'll see some untracked files that should be committed to your protected branch; run:
-    - `git status`
-    - git add .beads/.gitignore .gitattributes
-    - git commit -m "Initialize beads issue tracker"
-    - git push origin main  # Or create a PR if required
-- run `db doctor --fix` if needed
+    - After init, remove any auto-created dolt remotes (solo dev, no Dolt remote):
+      - `bd dolt remote list` — if any remotes exist, remove them: `bd dolt remote remove <name>`
+    - Important: After initialization, you'll see some untracked files that should be committed to your protected branch; run:
+      - `git status`
+      - git add .beads/.gitignore .gitattributes
+      - git commit -m "Initialize beads issue tracker"
+      - git push origin main  # Or create a PR if required
+- run `bd doctor --fix` if needed
 - Run `bd quickstart` if you need help with bd.
 
 # Beads Workflow Customizations
@@ -38,8 +40,8 @@
 ## Worktree Workflow (Default)
 
   ```bash
-  git worktree add ../<repo>-<short-name> -b feature/<short-name>
-  cd ../<repo>-<short-name>
+  bd worktree create <short-name>
+  cd <short-name>
   bd create --title="..." --type=task
   bd update <id> --status=in_progress
   # Do work in worktree
@@ -51,10 +53,8 @@
   PR Closure Sequence (AFTER PR approval, BEFORE merge)
 
   1. bd close <id>
-  2. bd sync
-  3. Push the bd sync commit
-  4. Merge PR
-  5. Cleanup: git worktree remove, delete branch
+  2. Merge PR
+  3. Cleanup: git worktree remove, delete branch
 
   CRITICAL RULES
 
@@ -87,3 +87,15 @@ When fixing bugs or test failures:
 
 You have superpowers.
 Superpowers teach you new skills and capabilities. RIGHT NOW run: `~/.codex/superpowers/.codex/superpowers-codex bootstrap` and follow the instructions it returns.
+
+## PR Review Workflow
+
+- For pull-request reviews, always use the existing local worktree for the PR branch.
+- Start with `git worktree list`, then `cd` into the matching worktree before running `gh pr` commands.
+- Do not run `gh pr checkout` for reviews unless Sir Jolly Roger explicitly asks for it.
+
+## Diff-First Rule (Mandatory)
+
+- Always show the exact diff before making any file edit.
+- This applies to all files (repo files and global files), even when auto-accept/accept-edits is enabled.
+- Only apply edits after explicit user approval in chat.

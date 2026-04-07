@@ -177,13 +177,14 @@ setopt histignorespace        # don't add commands that start with space
 # returns 2 (keep in internal list for up-arrow, but don't write to file).
 # The precmd hook fires AFTER execution, checks $?, and manually appends
 # successful commands to $HISTFILE in extended_history format.
-zmodload -F zsh/datetime p:EPOCHSECONDS 2>/dev/null
-zshaddhistory() { __zhp="${1%%$'\n'}"; return 2 }
-__zsh_hist_ok() {
-  (( $? == 0 && $#__zhp )) && print -r -- ": $EPOCHSECONDS:0;$__zhp" >> $HISTFILE
-  __zhp=
-}
-add-zsh-hook precmd __zsh_hist_ok
+# EDIT: this doesn't log good things like tail -f ...
+# zmodload -F zsh/datetime p:EPOCHSECONDS 2>/dev/null
+# zshaddhistory() { __zhp="${1%%$'\n'}"; return 2 }
+# __zsh_hist_ok() {
+#   (( $? == 0 && $#__zhp )) && print -r -- ": $EPOCHSECONDS:0;$__zhp" >> $HISTFILE
+#   __zhp=
+# }
+# add-zsh-hook precmd __zsh_hist_ok
 
 # zstyles
 # todo: organize completion section; steal from https://github.com/arp242/dotfiles/blob/master/zsh/zshrc#L201
@@ -305,7 +306,7 @@ elif [ $SYSTEM_TYPE = "Linux" ]; then
   . /usr/share/fzf/key-bindings.zsh
 fi
 
-export PATH=$HOME/.local/share/mise/shims:/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/opt/bin:$PATH
 
 # note for some unknown reason --follow (symlinks) causes it not to find anything under ~/.zsh (which is not a symlink dir regardless). fd bug?
 FD_OPTIONS="--no-ignore --hidden --exclude .git --exclude node_modules --exclude .cache --exclude .asdf"
@@ -319,7 +320,7 @@ FD_OPTIONS="--no-ignore --hidden --exclude .git --exclude node_modules --exclude
 #   --info=inline: save space my showing on same line
 #   --preview: preview files with e.g. bat (syntax highlighted); toggle with F2
 #   --preview-window: attributes for preview window; add ':hidden:' to hide by default
-export FZF_DEFAULT_OPTS="--no-mouse --height=50% -1 --reverse --multi --info=inline --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300' --preview-window='right:wrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-e:execute(nvim -p {+} < /dev/tty > /dev/tty 2>&1),ctrl-x:execute(rm -i {+})+abort'"
+export FZF_DEFAULT_OPTS="--no-mouse --height=50% -1 --reverse --multi --info=inline --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300' --preview-window='right:wrap:hidden' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-e:execute(nvim -p {+} < /dev/tty > /dev/tty 2>&1),ctrl-x:execute(rm -i {+})+abort'"
 export FZF_DEFAULT_COMMAND="fd --type f --type l $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="fd --type f --type l $FD_OPTIONS"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
@@ -561,6 +562,7 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 export DISABLE_TELEMETRY=1
 export DO_NOT_TRACK=1 # vercel skills
 export DISABLE_ERROR_REPORTING=1
+export ENABLE_LSP_TOOL=1
 # export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32000 # why is this max sigh; https://github.com/anthropics/claude-code/issues/4255
 # export MAX_MCP_OUTPUT_TOKENS=50000
 
@@ -573,3 +575,5 @@ export DISABLE_ERROR_REPORTING=1
 export PATH="/opt/homebrew/opt/bc/bin:$PATH"
 
 #zprof
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit

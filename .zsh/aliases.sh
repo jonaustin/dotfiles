@@ -516,3 +516,4 @@ claude-usage() {
   TOKEN=$(security find-generic-password -s "Claude Code-credentials" -w | jq -r '.claudeAiOauth.accessToken')
   curl -s "https://api.anthropic.com/api/oauth/usage" -H "Authorization: Bearer $TOKEN" -H "anthropic-beta: oauth-2025-04-20" | jq .five_hour.utilization
 }
+alias claude-yolo="sbx run claude --dangerously-skip-permissions ."

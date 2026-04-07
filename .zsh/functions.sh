@@ -376,7 +376,7 @@ sed-recurse() {
 
 # fzf
 # checkout git branch
-# https://junegunn.kr/2015/03/fzf-tmux/
+# https://web.archive.org/web/20211208055547/https://junegunn.kr/2015/03/fzf-tmux/
 gw() {
   local dir
   dir=$(git worktree list --porcelain | grep "^worktree " | sed 's/^worktree //' | fzf --query="$1" --select-1 --exit-0)

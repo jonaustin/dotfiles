@@ -1,9 +1,9 @@
-model = "gpt-5.3-codex"
+model = "gpt-5.4"
 
 # allow network access without approval
 network_access = "enabled"      # do these even do anything?
-model_reasoning_effort = "xhigh"
-personality = "pragmatic"
+model_reasoning_effort = "high"
+personality = "friendly"
 
 # allow writing to current dir (only)
 sandbox_mode = "workspace-write"
@@ -79,6 +79,21 @@ trust_level = "trusted"
 [projects."/Users/jon/code/,ai/exp/spotify"]
 trust_level = "untrusted"
 
+[projects."/Users/jon/code/,ai/exp/your-spotify"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/_ai/exp/your-spotify"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/vanguard-scraper"]
+trust_level = "trusted"
+
+[projects."/Users/jon/exp/ai/exp/parlor"]
+trust_level = "trusted"
+
+[projects."/Users/jon/exp/ai/exp/apana"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 hide_rate_limit_model_nudge = true
@@ -87,6 +102,7 @@ hide_rate_limit_model_nudge = true
 "gpt-5.2" = "gpt-5.2-codex"
 
 web_search = "live"
+"gpt-5.3-codex" = "gpt-5.4"
 
 [features]
 streamable_shell = true
@@ -99,3 +115,6 @@ args = ["-y", "@upstash/context7-mcp"]
 [mcp_servers.wikipedia]
 command = "uvx"
 args = ["wikipedia-mcp"]
+
+[plugins."github@openai-curated"]
+enabled = true
