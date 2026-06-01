@@ -99,3 +99,46 @@ Superpowers teach you new skills and capabilities. RIGHT NOW run: `~/.codex/supe
 - Always show the exact diff before making any file edit.
 - This applies to all files (repo files and global files), even when auto-accept/accept-edits is enabled.
 - Only apply edits after explicit user approval in chat.
+
+<!-- codebase-memory-mcp:start -->
+# Codebase Knowledge Graph (codebase-memory-mcp)
+
+This project uses codebase-memory-mcp to maintain a knowledge graph of the codebase.
+ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
+
+## Priority Order
+1. `search_graph` — find functions, classes, routes, variables by pattern
+2. `trace_path` — trace who calls a function or what it calls
+3. `get_code_snippet` — read specific function/class source code
+4. `query_graph` — run Cypher queries for complex patterns
+5. `get_architecture` — high-level project summary
+
+## When to fall back to grep/glob
+- Searching for string literals, error messages, config values
+- Searching non-code files (Dockerfiles, shell scripts, configs)
+- When MCP tools return insufficient results
+
+## Examples
+- Find a handler: `search_graph(name_pattern=".*OrderHandler.*")`
+- Who calls it: `trace_path(function_name="OrderHandler", direction="inbound")`
+- Read source: `get_code_snippet(qualified_name="pkg/orders.OrderHandler")`
+<!-- codebase-memory-mcp:end -->
+
+# context7 MCP (Library Documentation)
+
+Use context7 MCP to fetch current documentation for ANY library, framework, SDK, or API.
+This includes well-known tools (React, Django, pygame, numpy, etc.) — training data may be stale.
+
+## When to use
+- API syntax, configuration, version migration
+- Library-specific debugging or setup
+- CLI tool usage documentation
+- Any time you'd otherwise guess at library behavior
+
+## When NOT to use
+- General programming concepts, refactoring, code review
+- Writing scripts from scratch, debugging business logic
+
+## Usage
+1. `resolve-library-id` — find the library's context7 ID
+2. `query-docs` — fetch relevant documentation sections

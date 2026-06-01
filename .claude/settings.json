@@ -92,6 +92,15 @@
             "command": "curl -d 'claude question' ntfy.sh/jon"
           }
         ]
+      },
+      {
+        "matcher": "Grep|Glob|Read|Search",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/cbm-code-discovery-gate"
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -105,6 +114,42 @@
           {
             "type": "command",
             "command": "cat ~/.claude/CLAUDE.md"
+          }
+        ]
+      },
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/cbm-session-reminder"
+          }
+        ]
+      },
+      {
+        "matcher": "resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/cbm-session-reminder"
+          }
+        ]
+      },
+      {
+        "matcher": "clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/cbm-session-reminder"
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/cbm-session-reminder"
           }
         ]
       }
@@ -131,13 +176,16 @@
   },
   "enabledPlugins": {
     "security-guidance@claude-code-plugins": true,
-    "superpowers@superpowers-marketplace": true
+    "superpowers@superpowers-marketplace": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
   },
   "sandbox": {
-    "enabled": true,
+    "enabled": false,
     "filesystem": {
       "allowWrite": [
-        "."
+        ".",
+        "/tmp/"
       ],
       "denyWrite": [
         "/"
@@ -148,10 +196,15 @@
       "allowRead": [
         ".",
         "~/.local/share/mise",
-        "~/.gitconfig"
+        "~/.gitconfig",
+        "/tmp/"
       ]
     }
   },
   "spinnerTipsEnabled": false,
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
+  "editorMode": "vim",
+  "autoCompactEnabled": false
 }
