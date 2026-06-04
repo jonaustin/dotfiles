@@ -91,34 +91,59 @@ return {
 
       -- Cache for LM Studio models (fetched async)
       local lmstudio_models = {}
+      local omlx_models = {}
 
       -- Fetch models async (deferred to escape fast event context)
       vim.schedule(function()
-        vim.system({ "curl", "-s", "http://localhost:1234/v1/models" }, {}, function(result)
+        -- vim.system({ "curl", "-s", "http://localhost:1234/v1/models" }, {}, function(result)
+        --   if result.code ~= 0 then
+        --     return
+        --   end
+        --   local ok, data = pcall(vim.json.decode, result.stdout)
+        --   if ok and data and data.data then
+        --     for _, model in ipairs(data.data) do
+        --       table.insert(lmstudio_models, { id = model.id, name = model.id })
+        --     end
+        --   end
+        -- end)
+        vim.system({ "curl", "-s", "http://localhost:8000/v1/models" }, {}, function(result)
           if result.code ~= 0 then
             return
           end
           local ok, data = pcall(vim.json.decode, result.stdout)
           if ok and data and data.data then
             for _, model in ipairs(data.data) do
-              table.insert(lmstudio_models, { id = model.id, name = model.id })
+              table.insert(omlx_models, { id = model.id, name = model.id })
             end
           end
         end)
       end)
 
-      config.providers.lmstudio = {
+      -- config.providers.lmstudio = {
+      --   prepare_input = config.providers.copilot.prepare_input,
+      --   prepare_output = config.providers.copilot.prepare_output,
+      --   get_models = function()
+      --     return lmstudio_models
+      --   end,
+      --   get_url = function()
+      --     return "http://localhost:1234/v1/chat/completions"
+      --   end,
+      -- }
+
+      config.providers.omlx = {
         prepare_input = config.providers.copilot.prepare_input,
         prepare_output = config.providers.copilot.prepare_output,
         get_models = function()
-          return lmstudio_models
+          return omlx_models
         end,
         get_url = function()
-          return "http://localhost:1234/v1/chat/completions"
+          return "http://localhost:8000/v1/chat/completions"
         end,
       }
 
-      -- Apply custom options
+      -- Apply custom options.
+      -- Function-form `opts` replaces (does not merge) the accumulated opts,
+      -- so we deep-extend manually to preserve what LazyVim's extra contributed.
       return vim.tbl_deep_extend("force", opts, {
         show_help = "yes",
         debug = false,
@@ -126,6 +151,7 @@ return {
         language = "English",
         mode = "split",
         model = "claude-sonnet-4.5",
+        sticky = { "#buffer:active" }, -- always load current buffer into context (dangerous with big files?)
         mappings = {
           reset = {
             normal = "<C-x>",
@@ -254,6 +280,49 @@ return {
   --     { "<leader>ccc", ":CodeCompanionChat<CR>", desc = "CodeCompanion - Chat" },
   --   },
   -- },
+
+  -- talk with the current buffer via CodeCompanionChat
+  -- #{buffer} explain
+  {
+    "olimorris/codecompanion.nvim",
+    version = "*", -- pin to a release; docs recommend this to avoid breaking changes
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" }, -- must follow master when pinning
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      adapters = {
+        http = {
+          omlx = function()
+            return require("codecompanion.adapters").extend("openai_compatible", {
+              env = {
+                url = "http://localhost:8000",
+                api_key = "test",
+                chat_url = "/v1/chat/completions",
+              },
+              schema = {
+                model = { default = "Qwen3.6-35B-A3B-MLX-8bit" },
+              },
+            })
+          end,
+        },
+      },
+      interactions = {
+        chat = { adapter = "omlx" },
+        inline = {
+          adapter = "omlx",
+        },
+      },
+      display = {
+        chat = {
+          window = {
+            layout = "vertical", -- vertical|horizontal|float|buffer
+            width = 0.4,
+          },
+        },
+      },
+    },
+  },
 
   -- WTF.nvim - AI debugging assistant
   {
