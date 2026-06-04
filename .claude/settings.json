@@ -9,11 +9,7 @@
   "includeCoAuthoredBy": false,
   "includeGitInstructions": false,
   "permissions": {
-    "allow": [
-      "WebFetch",
-      "WebSearch",
-      "Bash(command:gh)"
-    ],
+    "allow": ["Bash(command:gh)"],
     "deny": [
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
@@ -45,7 +41,9 @@
       "Read(~/Library/Application Support/**/electrum*/**)",
       "Read(~/Library/Application Support/**/exodus*/**)",
       "Read(~/Library/Application Support/**/phantom*/**)",
-      "Read(~/Library/Application Support/**/solflare*/**)"
+      "Read(~/Library/Application Support/**/solflare*/**)",
+      "WebFetch",
+      "WebSearch"
     ]
   },
   "model": "opus",
@@ -175,30 +173,33 @@
     "command": "~/.claude/scripts/statusline.sh"
   },
   "enabledPlugins": {
-    "security-guidance@claude-code-plugins": true,
-    "superpowers@superpowers-marketplace": true,
     "pyright-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "bash-language-server@claude-code-lsps": true,
+    "elixir-ls@claude-code-lsps": true,
+    "gopls@claude-code-lsps": true,
+    "ruby-lsp@claude-code-lsps": true,
+    "pyright@claude-code-lsps": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-code-lsps": {
+      "source": {
+        "source": "github",
+        "repo": "Piebald-AI/claude-code-lsps"
+      }
+    }
   },
   "sandbox": {
     "enabled": false,
     "filesystem": {
-      "allowWrite": [
-        ".",
-        "/tmp/"
-      ],
-      "denyWrite": [
-        "/"
-      ],
-      "denyRead": [
-        "~/"
-      ],
-      "allowRead": [
-        ".",
-        "~/.local/share/mise",
-        "~/.gitconfig",
-        "/tmp/"
-      ]
+      "allowWrite": [".", "/tmp/"],
+      "denyWrite": ["/"],
+      "denyRead": ["~/"],
+      "allowRead": [".", "~/.local/share/mise", "~/.gitconfig", "/tmp/"]
     }
   },
   "spinnerTipsEnabled": false,

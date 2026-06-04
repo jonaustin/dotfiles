@@ -64,7 +64,7 @@
   ---
   Fallback Instructions
 
-  - If Brave web search is rate limited: retry, but slow down requests
+  - If Exa web search is rate limited: retry, but slow down requests
   - If web fetch fails (bot-blocking): retry using dev-browser plugin
   - Always use gh cli for github
 
@@ -93,12 +93,6 @@ Superpowers teach you new skills and capabilities. RIGHT NOW run: `~/.codex/supe
 - For pull-request reviews, always use the existing local worktree for the PR branch.
 - Start with `git worktree list`, then `cd` into the matching worktree before running `gh pr` commands.
 - Do not run `gh pr checkout` for reviews unless Sir Jolly Roger explicitly asks for it.
-
-## Diff-First Rule (Mandatory)
-
-- Always show the exact diff before making any file edit.
-- This applies to all files (repo files and global files), even when auto-accept/accept-edits is enabled.
-- Only apply edits after explicit user approval in chat.
 
 <!-- codebase-memory-mcp:start -->
 # Codebase Knowledge Graph (codebase-memory-mcp)
