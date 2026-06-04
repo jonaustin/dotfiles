@@ -713,3 +713,169 @@ percent() {
     local raw=$(echo "scale=$scale; $pct * $total / 100" | bc -l)
     printf "%.*f\n" "$precision" "$raw"
 }
+
+# ai shizzle
+yt-summarize () {
+    local url="$1"
+    local extract_wisdom=false
+    if [[ "$2" == "--extract-wisdom" ]]; then
+        extract_wisdom=true
+    fi
+
+    tmpbase=$(mktemp -u /tmp/yt-XXXXXX)
+
+    title=$(yt-dlp --print "%(title)s" --no-download "$url" 2>/dev/null)
+    normalized=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/^-//;s/-$//')
+    outdir="$HOME/ai/_summaries"
+    mkdir -p "$outdir"
+    outfile="${outdir}/${normalized}.md"
+    transcriptfile="${outdir}/${normalized}.transcript.vtt"
+
+    yt-dlp --write-auto-subs --skip-download --sub-format vtt --sub-langs 'en' -o "$tmpbase" "$url" 2>/dev/null
+
+    vttfile=$(ls ${tmpbase}.en.vtt 2>/dev/null | head -1)
+
+    if [[ -z "$vttfile" ]]; then
+        echo "No transcript found" >&2
+        return 1
+    fi
+
+    cp "$vttfile" "$transcriptfile"
+
+    echo "# $title\n\nSource: $url\n" | tee "$outfile"
+
+    run_patterns () {
+        local input="$1"
+        echo "\n\n════════════════════════════════════════"
+        echo "  PATTERN: summarize"
+        echo "════════════════════════════════════════\n"
+        fabric-ai -p summarize --stream < "$input" | tee -a "$outfile"
+
+        if [[ "$extract_wisdom" == true ]]; then
+            echo "\n\n════════════════════════════════════════"
+            echo "  PATTERN: extract_wisdom"
+            echo "════════════════════════════════════════\n"
+            fabric-ai -p extract_wisdom --stream < "$input" | tee -a "$outfile"
+        fi
+    }
+
+    filesize=$(wc -c < "$vttfile")
+    if (( filesize > 200000 )); then
+        split -b 200000 "$vttfile" "${tmpbase}-chunk-"
+        i=1
+        for f in "${tmpbase}"-chunk-*; do
+            echo "\n\n████████████████████████████████████████"
+            echo "  CHUNK $i"
+            echo "████████████████████████████████████████\n" | tee -a "$outfile"
+            run_patterns "$f"
+            rm -f "$f"
+            (( i++ ))
+        done
+    else
+        run_patterns "$vttfile"
+    fi
+
+    rm -f "$vttfile"
+    echo "\n\nSummary saved to:    $outfile" >&2
+    echo "Transcript saved to: $transcriptfile" >&2
+}
+
+yt-summarize-omlx() {
+  local url="$1"
+  if [[ -z "$url" ]]; then
+    echo "usage: yt-summarize <youtube-url-or-id>" >&2
+    return 1
+  fi
+
+  local server="${MLX_SERVER:-http://localhost:8000}"
+  local model="${MLX_MODEL:-Qwen3.6-35B-A3B-MLX-8bit}"
+
+  # Derive a normalized filename from the video title
+  local title normalized
+  title=$(yt-dlp --print "%(title)s" --no-download "$url" 2>/dev/null)
+  if [[ -z "$title" ]]; then
+    echo "Could not fetch video title for: $url" >&2
+    return 1
+  fi
+  normalized=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/^-//;s/-$//')
+
+  local outdir="$HOME/ai/_summaries"
+  mkdir -p "$outdir"
+  local outfile="${outdir}/${normalized}.md"
+  local transcriptfile="${outdir}/${normalized}.transcript.vtt"
+
+  local tmp
+  tmp="$(mktemp -d)"
+
+  yt-dlp \
+    --skip-download \
+    --write-subs --write-auto-subs \
+    --sub-langs "en.*" \
+    --sub-format vtt \
+    --convert-subs vtt \
+    -o "$tmp/sub" \
+    "$url" >/dev/null 2>&1
+
+  local vtt
+  vtt="$(find "$tmp" -name '*.vtt' | head -n1)"
+  if [[ -z "$vtt" ]]; then
+    echo "No subtitles found for: $url" >&2
+    rm -rf "$tmp"
+    return 1
+  fi
+
+  # Save the raw subtitle file
+  cp "$vtt" "$transcriptfile"
+
+  local transcript
+  transcript="$(sed -e '/-->/d' \
+                    -e '/^WEBVTT/d' \
+                    -e '/^Kind:/d' \
+                    -e '/^Language:/d' \
+                    -e 's/<[^>]*>//g' \
+                    -e '/^[[:space:]]*$/d' \
+                    "$vtt" | awk '!seen[$0]++')"
+
+  rm -rf "$tmp"
+
+  local prompt
+  prompt="$(cat <<EOF
+You are summarizing a YouTube video transcript. Produce a clear, accurate summary that lets someone understand the video without watching it.
+
+Output the following:
+
+1. TL;DR — 2-3 sentences capturing the core point.
+2. Key Points — 5-10 bullets covering the main ideas in order.
+3. Notable Details — specific facts, data, names, tools, or short quotes (omit if none).
+4. Takeaways / Action Items — what the viewer should do or remember (omit if not applicable).
+
+Guidelines:
+- Be faithful to the transcript; do not add outside information.
+- Ignore filler, sponsor reads, intros/outros, and subscribe calls.
+- Keep it concise—summarize, don't transcribe.
+
+Transcript:
+$transcript
+EOF
+)"
+
+  # Write a header to the summary file, then stream the body in
+  printf '# %s\n\n_Source: %s_\n\n' "$title" "$url" > "$outfile"
+
+  jq -n --arg model "$model" --arg content "$prompt" \
+    '{model: $model, messages: [{role: "user", content: $content}], max_tokens: 1500, temperature: 0.3, stream: true}' \
+  | curl -sN "$server/v1/chat/completions" \
+      -H "Content-Type: application/json" \
+      -d @- \
+  | while IFS= read -r line; do
+      [[ "$line" == data:* ]] || continue
+      local data="${line#data:}"
+      data="${data# }"
+      [[ "$data" == "[DONE]" ]] && break
+      printf '%s' "$data" | jq -j 'try .choices[0].delta.content // empty'
+    done | tee -a "$outfile"
+
+  printf '\n'
+  echo "→ Summary:    $outfile" >&2
+  echo "→ Transcript: $transcriptfile" >&2
+}

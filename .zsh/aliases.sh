@@ -98,7 +98,7 @@ alias vnode='NODE_NO_READLINE=1 rlwrap node' # vim node repl
 alias kc=kubectl
 
 # config files
-alias zc='source $HOME/.zshrc'
+alias zc='exec zsh' # better than sourcing it due to cache issues
 alias vzc='$EDITOR $HOME/.zshrc'
 alias vzcl='$EDITOR $HOME/.zsh/zshrc_local'
 alias vlx='$EDITOR $HOME/.zsh/zshrc.local.linux'
@@ -486,10 +486,6 @@ stupidmacallow() {
 }
 
 alias ddocker="~/.docker/bin/docker"
-yt-summarize() {
-  pattern=${2:-"summarize"}
-  fabric-ai --transcript-with-timestamps -y $1 --stream --pattern $pattern
-}
 
 # Mac
 if [ $SYSTEM_TYPE = "Darwin" ]; then
@@ -502,9 +498,9 @@ fi
 alias todo='nvim ~/notes/todo.md'
 
 # Set up zen aliases
-alias breath='zenta now --quick'
-alias breathe='zenta now'
-alias reflect='zenta reflect'
+# alias breath='zenta now --quick'
+# alias breathe='zenta now'
+# alias reflect='zenta reflect'
 
 alias unrar='keka unrar'
 
