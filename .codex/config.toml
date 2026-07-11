@@ -52,9 +52,6 @@ trust_level = "trusted"
 [projects."/Users/jon/code/soul"]
 trust_level = "trusted"
 
-[projects."/Users/jon/code/,claude/beads"]
-trust_level = "trusted"
-
 [projects."/Users/jon/code/soul2"]
 trust_level = "trusted"
 
@@ -110,6 +107,9 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/jon/.pi"]
+trust_level = "trusted"
+
+[projects."/Users/jon/ai/_inference/ds4"]
 trust_level = "trusted"
 
 [notice]

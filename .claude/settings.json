@@ -44,17 +44,6 @@
     ]
   },
   "hooks": {
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bd prime"
-          }
-        ]
-      }
-    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -92,10 +81,6 @@
       {
         "matcher": "",
         "hooks": [
-          {
-            "type": "command",
-            "command": "bd prime"
-          },
           {
             "type": "command",
             "command": "cat ~/.claude/CLAUDE.md"

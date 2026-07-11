@@ -4,7 +4,7 @@
 
   **NEVER run `git push` to main/master branch.** Always:
 
-  1. Create a feature branch; always include the bd issue (e.g. `<project>-<abc>`)
+  1. Create a feature branch
   2. Push the feature branch
   3. Create a PR via `gh pr create`
 
@@ -14,51 +14,24 @@
 
   ---
 
-# Session Start
-
-- If I say 'no bd', ignore all bd instructions and don't use bd.
-- Otherwise:
-  - make sure a remote git repo already exists; if not create a new private repo with the same name as the code directory.
-  - check if `bd init` has been run; if not then setup the project for beads
-    - This creates a .beads/ directory and configures beads to commit to beads-sync instead of main.
-    - After init, remove any auto-created dolt remotes (solo dev, no Dolt remote):
-      - `bd dolt remote list` — if any remotes exist, remove them: `bd dolt remote remove <name>`
-    - Important: After initialization, you'll see some untracked files that should be committed to your protected branch; run:
-      - `git status`
-      - git add .beads/.gitignore .gitattributes
-      - git commit -m "Initialize beads issue tracker"
-      - git push origin main  # Or create a PR if required
-- run `bd doctor --fix` if needed
-- Run `bd quickstart` if you need help with bd.
-
-# Beads Workflow Customizations
-
-## Plan Sync
-
-  WHENEVER YOU UPDATE THE _PLAN_: ALWAYS also update the corresponding bd issue description (it should contain the entirety of the /plan)
+# Development Workflow
 
 ## Worktree Workflow (Default)
 
-  ```bash
-  bd worktree create <short-name>
-  cd <short-name>
-  bd create --title="..." --type=task
-  bd update <id> --status=in_progress
-  # Do work in worktree
+  Use a git worktree for feature work by default.
 
   Single Branch Workflow
 
   Only when I say "no worktree". Create feature branch from main, follow PR workflow.
 
-  PR Closure Sequence (AFTER PR approval, BEFORE merge)
+  PR Closure Sequence (AFTER PR approval)
 
-  1. bd close <id>
-  2. Merge PR
-  3. Cleanup: git worktree remove, delete branch
+  1. Merge PR
+  2. Cleanup: git worktree remove, delete branch
 
   CRITICAL RULES
 
-  - NEVER run bd close until PR is APPROVED
+  - NEVER merge the PR until it is APPROVED
   - ALWAYS ensure tests exist for changes
 
   ---

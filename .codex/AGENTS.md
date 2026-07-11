@@ -4,7 +4,7 @@
 
   **NEVER run `git push` to main/master branch.** Always:
 
-  1. Create a feature branch; always include the bd issue (e.g. `<project>-<abc>`)
+  1. Create a feature branch
   2. Push the feature branch
   3. Create a PR via `gh pr create`
 
@@ -14,40 +14,24 @@
 
   ---
 
-# Session Start
-
-- If I say 'no bd', ignore all bd instructions and don't use bd.
-- Otherwise:
-  - Use 'bd' for task tracking
-
-# Beads Workflow Customizations
-
-## Plan Sync
-
-  WHENEVER YOU UPDATE THE _PLAN_: ALWAYS also update the corresponding bd issue description (it should contain the entirety of the /plan)
+# Development Workflow
 
 ## Worktree Workflow (Default)
 
-  ```bash
-  bd worktree create <short-name>
-  cd <short-name>
-  bd create --title="..." --type=task
-  bd update <id> --status=in_progress
-  # Do work in worktree
+  Use a git worktree for feature work by default.
 
   Single Branch Workflow
 
   Only when I say "no worktree". Create feature branch from main, follow PR workflow.
 
-  PR Closure Sequence (AFTER PR approval, BEFORE merge)
+  PR Closure Sequence (AFTER PR approval)
 
-  1. bd close <id>
-  2. Merge PR
-  3. Cleanup: git worktree remove, delete branch
+  1. Merge PR
+  2. Cleanup: git worktree remove, delete branch
 
   CRITICAL RULES
 
-  - NEVER run bd close until PR is APPROVED
+  - NEVER merge the PR until it is APPROVED
   - ALWAYS ensure tests exist for changes
 
   ---
