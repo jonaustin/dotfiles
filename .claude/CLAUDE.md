@@ -65,8 +65,18 @@
   Fallback Instructions
 
   - If Exa web search is rate limited: retry, but slow down requests
-  - If web fetch fails (bot-blocking): retry using dev-browser plugin
+  - If web fetch fails (bot-blocking): retry using browser-use skill
   - Always use gh cli for github
+
+# 🚨 NEVER FABRICATE 🚨
+
+Do not invent specifics about external products, app UIs, web UIs, APIs, features, settings paths, button labels, or capabilities. Training data goes stale; UIs change. Confident bullshit wastes time and destroys trust.
+
+**The rule:** If I haven't verified it in *this session*, I either:
+1. Actually verify it (WebFetch, web search, docs, ask the user to check), OR
+2. Say "I don't know" plainly and offer to research.
+
+No hedging weasel-words, no embellishment, no pattern-matching from training data dressed up as fact. This applies *especially* to UI specifics (tab names, filter options, menu paths) which I am prone to inventing.
 
 # Bug Fixes: Root Cause Before Code
 

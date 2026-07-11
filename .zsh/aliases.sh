@@ -513,3 +513,6 @@ claude-usage() {
   curl -s "https://api.anthropic.com/api/oauth/usage" -H "Authorization: Bearer $TOKEN" -H "anthropic-beta: oauth-2025-04-20" | jq .five_hour.utilization
 }
 alias claude-yolo="sbx run claude --dangerously-skip-permissions ."
+
+# pi
+alias zpi="pi --provider zai --model glm-5.2"

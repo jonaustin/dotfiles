@@ -1,5 +1,5 @@
 # zsh profiling
-#setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
+# setopt prompt_subst; zmodload zsh/datetime; PS4='+[$EPOCHREALTIME]%N:%i> '; set -x
 # zmodload zsh/zprof # uncomment the zprof line at bottom of file as well
 #for n in `seq 0 10`; do time zsh -i -c exit; done
 #hyperfine --warmup 3 --min-runs 10 "zsh -i -c exit"
@@ -573,7 +573,16 @@ export ENABLE_LSP_TOOL=1
 #   goose run -t "can you try to run this command please: $cmd"
 # }
 export PATH="/opt/homebrew/opt/bc/bin:$PATH"
+export PATH="/Users/jon/.local/bin:$PATH"
 
-#zprof
+# zprof
+# oMLX: CLI shim path begin
+case ":$PATH:" in
+  *":$HOME/.omlx/bin:"*) ;;
+  *) export PATH="$HOME/.omlx/bin:$PATH" ;;
+esac
+# oMLX: CLI shim path end
 
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
+# Android SDK
+export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH

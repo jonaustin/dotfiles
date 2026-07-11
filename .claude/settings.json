@@ -9,7 +9,12 @@
   "includeCoAuthoredBy": false,
   "includeGitInstructions": false,
   "permissions": {
-    "allow": ["Bash(command:gh)"],
+    "allow": [
+      "Bash(command:gh)",
+      "mcp__searxng__searxng_web_search",
+      "mcp__searxng__web_url_read",
+      "mcp__codebase-memory-mcp"
+    ],
     "deny": [
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
@@ -24,7 +29,6 @@
       "Edit(~/.bashrc)",
       "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)",
-      "Read(~/.ssh/**)",
       "Read(~/.gnupg/**)",
       "Read(~/.aws/**)",
       "Read(~/.azure/**)",
@@ -36,17 +40,9 @@
       "Read(~/.npm/**)",
       "Read(~/.pypirc)",
       "Read(~/.gem/credentials)",
-      "Read(~/Library/Keychains/**)",
-      "Read(~/Library/Application Support/**/metamask*/**)",
-      "Read(~/Library/Application Support/**/electrum*/**)",
-      "Read(~/Library/Application Support/**/exodus*/**)",
-      "Read(~/Library/Application Support/**/phantom*/**)",
-      "Read(~/Library/Application Support/**/solflare*/**)",
-      "WebFetch",
-      "WebSearch"
+      "Read(~/Library/Keychains/**)"
     ]
   },
-  "model": "opus",
   "hooks": {
     "PreCompact": [
       {
@@ -60,15 +56,6 @@
       }
     ],
     "PreToolUse": [
-      {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude-code-docs/claude-docs-helper.sh hook-check"
-          }
-        ]
-      },
       {
         "matcher": "Bash",
         "hooks": [
@@ -92,11 +79,11 @@
         ]
       },
       {
-        "matcher": "Grep|Glob|Read|Search",
+        "matcher": "Read",
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/cbm-code-discovery-gate"
+            "command": "~/.claude-code-docs/claude-docs-helper.sh hook-check"
           }
         ]
       }
@@ -183,7 +170,8 @@
     "elixir-ls@claude-code-lsps": true,
     "gopls@claude-code-lsps": true,
     "ruby-lsp@claude-code-lsps": true,
-    "pyright@claude-code-lsps": true
+    "pyright@claude-code-lsps": true,
+    "basedpyright@claude-code-lsps": true
   },
   "extraKnownMarketplaces": {
     "claude-code-lsps": {
@@ -196,10 +184,22 @@
   "sandbox": {
     "enabled": false,
     "filesystem": {
-      "allowWrite": [".", "/tmp/"],
-      "denyWrite": ["/"],
-      "denyRead": ["~/"],
-      "allowRead": [".", "~/.local/share/mise", "~/.gitconfig", "/tmp/"]
+      "allowWrite": [
+        ".",
+        "/tmp/"
+      ],
+      "denyWrite": [
+        "/"
+      ],
+      "denyRead": [
+        "~/"
+      ],
+      "allowRead": [
+        ".",
+        "~/.local/share/mise",
+        "~/.gitconfig",
+        "/tmp/"
+      ]
     }
   },
   "spinnerTipsEnabled": false,
@@ -207,5 +207,6 @@
   "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
-  "autoCompactEnabled": false
+  "autoCompactEnabled": false,
+  "model": "opus"
 }

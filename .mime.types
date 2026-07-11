@@ -1850,3 +1850,15 @@ video/x-msvideo					avi
 video/x-sgi-movie				movie
 x-conference/x-cooltalk				ice
 x-epoc/x-sisx-app				sisx
+application/x-crossover-exe 
+# X-Created-By-mcap-CrossOver-0:application_x-crossover-exe=application_x-crossover-exe::install;application_x-crossover-exe::run
+x-content/win32-software 
+# X-Created-By-mcap-CrossOver-0:x-content_win32-software=application_x-crossover-exe::install
+application/x-crossover-lnk lnk
+# X-Created-By-mcap-CrossOver-0:application_x-crossover-lnk=application_x-crossover-lnk::run
+application/x-ms-shortcut 
+# X-Created-By-mcap-CrossOver-0:application_x-ms-shortcut=application_x-crossover-lnk::run
+application/x-win-lnk 
+# X-Created-By-mcap-CrossOver-0:application_x-win-lnk=application_x-crossover-lnk::run
+application/x-crossover-msi msi
+# X-Created-By-mcap-CrossOver-0:application_x-crossover-msi=application_x-crossover-msi::install

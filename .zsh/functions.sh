@@ -632,17 +632,16 @@ synclaude() {
   claude "$@"
 }
 
-# zclaude() {
-#   ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic \
-#   ANTHROPIC_AUTH_TOKEN=${ZAI_API_KEY} \
-#   API_TIMEOUT_MS=3000000 \
-#   ANTHROPIC_DEFAULT_OPUS_MODEL=glm-4.6 \
-#   ANTHROPIC_DEFAULT_SONNET_MODEL=glm-4.6 \
-#   ANTHROPIC_DEFAULT_HAIKU_MODEL=glm-4.5-air \
-#   CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
-#
-#   claude "$@"
-# }
+zclaude() {
+  ANTHROPIC_BASE_URL='https://api.z.ai/api/anthropic' \
+  ANTHROPIC_AUTH_TOKEN="$ZAI_API_KEY" \
+  ANTHROPIC_DEFAULT_OPUS_MODEL='glm-5.2[1m]' \
+  ANTHROPIC_DEFAULT_SONNET_MODEL='glm-5.2[1m]' \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL='GLM-4.7' \
+  API_TIMEOUT_MS=3000000 \
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
+  claude "$@"
+}
 
 lclaude() {
   local model
@@ -676,15 +675,15 @@ lclaude() {
   unset ANTHROPIC_AUTH_TOKEN
 }
 
-zclaude() {
-  mkdir -p ~/.claude/settings-backups
-  cp ~/.claude/settings.json ~/.claude/settings-backups/settings.json.$(date +%Y-%m-%d-%H%M%S)
-  \cp -f ~/.claude/settings.json.zai ~/.claude/settings.json
-  claude mcp add -s user -t http web-reader https://api.z.ai/api/mcp/web_reader/mcp --header "Authorization: $ZAI_API_KEY"
-  claude mcp add -s user -t http web-search-prime https://api.z.ai/api/mcp/web_search_prime/mcp --header "Authorization: Bearer $ZAI_API_KEY"
-  claude mcp add -s user zai-mcp-server --env Z_AI_API_KEY=$ZAI_API_KEY Z_AI_MODE=ZAI -- npx -y "@z_ai/mcp-server"
-  claude "$@"
-}
+# zclaude() {
+#   mkdir -p ~/.claude/settings-backups
+#   cp ~/.claude/settings.json ~/.claude/settings-backups/settings.json.$(date +%Y-%m-%d-%H%M%S)
+#   \cp -f ~/.claude/settings.json.zai ~/.claude/settings.json
+#   claude mcp add -s user -t http web-reader https://api.z.ai/api/mcp/web_reader/mcp --header "Authorization: $ZAI_API_KEY"
+#   claude mcp add -s user -t http web-search-prime https://api.z.ai/api/mcp/web_search_prime/mcp --header "Authorization: Bearer $ZAI_API_KEY"
+#   claude mcp add -s user zai-mcp-server --env Z_AI_API_KEY=$ZAI_API_KEY Z_AI_MODE=ZAI -- npx -y "@z_ai/mcp-server"
+#   claude "$@"
+# }
 
 dclaude() {
   mkdir -p ~/.claude/settings-backups
@@ -878,4 +877,9 @@ EOF
   printf '\n'
   echo "→ Summary:    $outfile" >&2
   echo "→ Transcript: $transcriptfile" >&2
+}
+
+# remarkable
+send-to-rm2() {
+  curl --fail --form "file=@${1}" 'http://10.11.99.1/upload'
 }

@@ -1,8 +1,8 @@
-model = "gpt-5.4"
+model = "gpt-5.6-sol"
 
 # allow network access without approval
 network_access = "enabled"      # do these even do anything?
-model_reasoning_effort = "high"
+model_reasoning_effort = "xhigh"
 personality = "friendly"
 
 # allow writing to current dir (only)
@@ -94,6 +94,24 @@ trust_level = "trusted"
 [projects."/Users/jon/exp/ai/exp/apana"]
 trust_level = "trusted"
 
+[projects."/Users/jon/backup/finances/wells-fargo"]
+trust_level = "trusted"
+
+[projects."/Users/jon/tmp/codex"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/audible-scrape"]
+trust_level = "trusted"
+
+[projects."/Users/jon/backup/finances/bank-credit-cards"]
+trust_level = "trusted"
+
+[projects."/Users/jon/code/_projects/_pi/_extensions/pi-codebase-memory"]
+trust_level = "trusted"
+
+[projects."/Users/jon/.pi"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 hide_rate_limit_model_nudge = true
@@ -116,5 +134,59 @@ args = ["-y", "@upstash/context7-mcp"]
 command = "uvx"
 args = ["wikipedia-mcp"]
 
+[mcp_servers.codebase-memory-mcp]
+command = "/Users/jon/.local/bin/codebase-memory-mcp"
+
+[mcp_servers.codebase-memory-mcp.tools.detect_changes]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.get_architecture]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.get_code_snippet]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.index_repository]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.index_status]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.list_projects]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.query_graph]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.search_code]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.search_graph]
+approval_mode = "approve"
+
+[mcp_servers.codebase-memory-mcp.tools.trace_path]
+approval_mode = "approve"
+
+[mcp_servers.exa]
+url = "https://mcp.exa.ai/mcp"
+
 [plugins."github@openai-curated"]
 enabled = true
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+"gpt-5.6-sol" = 4
+
+[hooks.state]
+
+[hooks.state."/Users/jon/code/audible-scrape/.codex/hooks.json:pre_compact:0:0"]
+trusted_hash = "sha256:1f647821c1b2d16b397ca09bb1c76c71f74b04e8e13abf4abcd044a1ae82e0f7"
+
+[hooks.state."/Users/jon/code/audible-scrape/.codex/hooks.json:post_compact:0:0"]
+trusted_hash = "sha256:53280fbd74d122ef0607f320dacf407b21cba0e448f2cf5982c6d5b1074933c8"
+
+[hooks.state."/Users/jon/code/audible-scrape/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:392a61a090ba7d6aab6ab0fb0f82f3df3d6a380ee81f60f00af3bd42025d51a9"
+
+[hooks.state."/Users/jon/code/audible-scrape/.codex/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:61bc468420addc4d83d288a4311e1409cc89cbbd9f44fec2e1039512d20fab86"
